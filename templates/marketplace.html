@@ -1,0 +1,236 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, Marketplace, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+        <header class="container-marketplace--topappbar mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button material-icons" aria-label="Filter">
+                        <div class="mdc-icon-button__ripple"></div>
+                        filter_list
+                    </button>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-middle" role="Search">
+                    <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon
+                                mdc-text-field--color-on-primary">
+                        <span class="mdc-notched-outline">
+                            <span class="mdc-notched-outline__leading"></span>
+                            <span class="mdc-notched-outline__notch">
+                            <span class="mdc-floating-label" id="m-search-bar-label">
+                                Buscar por servicio, habilidad, nombre o ubicación
+                            </span>
+                            </span>
+                            <span class="mdc-notched-outline__trailing"></span>
+                        </span>
+                        <input id="m-search-bar" class="mdc-text-field__input" type="text" aria-labelledby="m-search-bar-label"
+                                tabindex="0" maxlength="100">
+                        <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing">search</i>
+                    </label>
+                </section>
+            </div>
+        </header>
+        <aside class="container-marketplace--drawer mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust">
+            <div class="mdc-drawer__header">
+                <h3 class="mdc-drawer__title">Filtros</h3>
+                <h6 class="mdc-drawer__subtitle">Ordenar resultados</h6>
+            </div>
+            <div class="mdc-drawer__content">
+                <div class="mdc-deprecated-list">
+                <a class="mdc-deprecated-list-item mdc-deprecated-list-item--activated" href="#" aria-current="page">
+                    <span class="mdc-deprecated-list-item__ripple"></span>
+                    <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">person</i>
+                    <span class="mdc-deprecated-list-item__text">Nombre A-Z</span>
+                </a>
+                <a class="mdc-deprecated-list-item" href="#">
+                    <span class="mdc-deprecated-list-item__ripple"></span>
+                    <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">person</i>
+                    <span class="mdc-deprecated-list-item__text">Nombre Z-A</span>
+                </a>
+                <a class="mdc-deprecated-list-item" href="#">
+                    <span class="mdc-deprecated-list-item__ripple"></span>
+                    <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">star</i>
+                    <span class="mdc-deprecated-list-item__text">Rating</span>
+                </a>
+                <a class="mdc-deprecated-list-item" href="#">
+                    <span class="mdc-deprecated-list-item__ripple"></span>
+                    <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">verified</i>
+                    <span class="mdc-deprecated-list-item__text">Habilidades</span>
+                </a>
+                <a class="mdc-deprecated-list-item" href="#">
+                    <span class="mdc-deprecated-list-item__ripple"></span>
+                    <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">location_on</i>
+                    <span class="mdc-deprecated-list-item__text">Ubicación</span>
+                </a>
+                </div>
+            </div>
+        </aside>
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+            <div class="container-marketplace--main-content">
+                <div class="container-marketplace--search-result mdc-card mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" tabindex="0">
+                        <div class="search-result--profile mdc-card__media">
+                            <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                            <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                        </div>
+                        <div class="search-result--rating">
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star_half</i>
+                        </div>
+                        <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                            Érica Ramirez
+                        </div>
+                        <div class="search-result--service mdc-typography--headline6">
+                            Diseñadora de branding
+                        </div>
+                        <div class="search-result--description mdc-typography--body1">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                        </div>
+                        <div class="search-result--hours mdc-typography--subtitle2">
+                            <i class="material-icons s-font-color-secondary">schedule</i>
+                            Lun-Vie, 8am-5pm.
+                        </div>
+                        <div class="search-result--location mdc-typography--subtitle2">
+                            <i class="material-icons s-font-color-secondary">place</i>
+                            Tegucigalpa, Honduras.
+                        </div>
+                        <span class="search-result--skills mdc-evolution-chip-set" role="grid">
+                            <span class="mdc-evolution-chip-set__chips" role="presentation">
+                                <span class="mdc-evolution-chip" role="row" id="c0">
+                                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                    <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0">
+                                    <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
+                                    <span class="mdc-evolution-chip__text-label">Habilidad 1</span>
+                                    </button>
+                                </span>
+                                </span>
+                                <span class="mdc-evolution-chip" role="row" id="c1">
+                                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                    <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="-1">
+                                    <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
+                                    <span class="mdc-evolution-chip__text-label">Habilidad 2</span>
+                                    </button>
+                                </span>
+                                </span>
+                            </span>
+                        </span>
+                        <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__content">
+                    </div>
+                    <div class="mdc-card__actions">
+                        <div class="mdc-card__actions-buttons"></div>
+                        <div class="mdc-card__action-icons">
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                <div class="mdc-icon-button__ripple"></div>
+                                edit
+                            </button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                <div class="mdc-icon-button__ripple"></div>
+                                more_vert
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-marketplace--search-result mdc-card mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" tabindex="0">
+                        <div class="search-result--profile mdc-card__media">
+                            <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                            <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                        </div>
+                        <div class="search-result--rating">
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star</i>
+                            <i class="material-icons s-font-color-satisfied">star_half</i>
+                        </div>
+                        <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                            Daniela Magaña
+                        </div>
+                        <div class="search-result--service mdc-typography--headline6">
+                            Ingeniera Eléctrica
+                        </div>
+                        <div class="search-result--description mdc-typography--body1">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                            unde odio atque? Totam, aspernatur.
+                        </div>
+                        <div class="search-result--hours mdc-typography--subtitle2">
+                            <i class="material-icons s-font-color-secondary">schedule</i>
+                            Lun-Mar-Jue, 10am-2pm.
+                        </div>
+                        <div class="search-result--location mdc-typography--subtitle2">
+                            <i class="material-icons s-font-color-secondary">place</i>
+                            San Pedro Sula, Honduras.
+                        </div>
+                        <span class="search-result--skills mdc-evolution-chip-set" role="grid">
+                            <span class="mdc-evolution-chip-set__chips" role="presentation">
+                                <span class="mdc-evolution-chip" role="row" id="c0">
+                                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                    <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0">
+                                    <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
+                                    <span class="mdc-evolution-chip__text-label">Habilidad 1</span>
+                                    </button>
+                                </span>
+                                </span>
+                                <span class="mdc-evolution-chip" role="row" id="c1">
+                                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                    <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="-1">
+                                    <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
+                                    <span class="mdc-evolution-chip__text-label">Habilidad 2</span>
+                                    </button>
+                                </span>
+                                </span>
+                            </span>
+                        </span>
+                        <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__content">
+                    </div>
+                    <div class="mdc-card__actions">
+                        <div class="mdc-card__actions-buttons"></div>
+                        <div class="mdc-card__action-icons">
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                <div class="mdc-icon-button__ripple"></div>
+                                edit
+                            </button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                <div class="mdc-icon-button__ripple"></div>
+                                more_vert
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+{% endblock %}
