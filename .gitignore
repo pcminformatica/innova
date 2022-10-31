@@ -178,3 +178,5 @@ static/js/bundle/
 
 # Migrate-Alembic ini file
 alembic.ini
+#
+package-lock.json
