@@ -230,3 +230,57 @@ def verifyFirebaseCookieCreateSession():
         app.logger.error('** SWING_CMS ** - VerifyFirebaseCookieCreateSession Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
 
+
+
+# Verifies if User has any Session and Redirects
+def isUserLoggedInRedirectDC(origin, responseType):
+    try:
+        # Validate if the user has a Valid Session
+        if current_user.is_authenticated:
+            # If it has a valid Session, verifies the Firebase Cookie Session
+            if isFirebaseCookieSessionValid():
+                # Set URL depending on role
+                url = getUserRedirectURLDC(current_user, origin)
+
+                if responseType == 'redirect':
+                    return redirect(url)
+                elif responseType == 'jsonResponse':
+                    return createJsonResponse('success', 'redirectURL', url)
+            else:
+                # If the Firebase Cookie Session is invalid, user is logged out and Login Process continues
+                logout_user()
+        else:
+            url = '/login/'
+            return createJsonResponse('success', 'redirectURL', url)
+        
+        return None
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - IsUserLoggedIn Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+    
+# Get User Redirect URL
+def getUserRedirectURLDC(user, origin):
+    try:
+        redirectURL = '/'
+
+        # Validate Try Chat Redirect URL
+        if origin == '/digitalcenter/chat/':
+            # Set URL for regular registered user
+            redirectURL = '/digitalcenter/chat/home/'
+
+            # Iterate through the user's roles
+            for role in user.roles:
+                # Check if user has a different role than user
+                if role.user_role.name_short != 'usr':
+                    redirectURL = '/digitalcenter/chat/admin/'
+        
+        # Validate User Login Redirect URL
+        elif origin == 'login' or origin == 'loginuser':
+            # Set URL for regular registered user
+            redirectURL = '/home/'
+
+        
+        return redirectURL
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - GetUserRedirectURL Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })

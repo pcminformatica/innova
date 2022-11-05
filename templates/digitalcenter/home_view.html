@@ -1,0 +1,375 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, Digital Center, Centro de Atención{% endblock %}
+{% block page_title %}Digital Center - Innova{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <div class="mdc-typography--headline3">
+                        Digitaliza tu negocio 2
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <div class="mdc-typography--headline4 s-font-color-support">
+                        Asesorate con nuestros expertos
+                    </div>
+                    <p class="mdc-typography--body1">
+                        Habla con nuestros expertos para que podamos asesorarte sobre como potenciar tu negocio. Tu nos cuentas
+                        tus necesidades y nosotros te proveemos una solución que a la medida para ti. 
+                    </p>
+                    <button class="mdc-button mdc-button--raised" aria-label="Chat" alt="Chat"
+                            data-action-type="redirect" data-action-val="/digitalcenter/chat/">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Comienza ahora</span>
+                    </button>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-card__media mdc-card__media--16-9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/wAbJtnwfU0I"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="mdc-typography--headline5 s-font-color-secondary">¡Digitalízate!</div>
+                            <div class="mdc-typography--subtitle2">Potencia tu negocio con nuestros servicios</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-on-primary">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <div class="mdc-typography--headline4 s-font-color-secondary">
+                        O, selecciona una de nuestras soluciones
+                    </div>
+                    <p class="mdc-typography--body1">
+                        Escoge una de las soluciones siguientes que será personalizada de acuerdo a tus necesidades empresariales.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <div class="container-scroll-h">
+                        <div id="serv-f--social" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/social.svg" alt="Redes Sociales" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Promoción en redes</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary" 
+                                            onclick="showDetailsCard('social','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--social" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Promoción en redes</p>
+                                <p class="mdc-typography--body2">
+                                    Te ayudamos a implementar soluciones y estrategias de promoción sobre las diferentes redes sociales que existen:
+                                    Facebook, Instagram, Twitter, TikTok, etc.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('social','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--logos" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/logos.svg" alt="Logos" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Diseño de logos</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('logos','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--logos" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Diseño de logos</p>
+                                <p class="mdc-typography--body2">
+                                    Te diseñamos un logo moderno y amigable para tu empresa en base a lo que tu nos cuentes de ella.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('logos','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--graphics" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/infografias.svg" alt="Infografías" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Diseño de infográfico</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('graphics','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--graphics" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Diseño de infográficos</p>
+                                <p class="mdc-typography--body2">
+                                    Diseñamos banners, avatars, íconos, templates, fondos u otro recurso infográfico de acuerdo a tus necesidades.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('graphics','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--web" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/websites.svg" alt="Paginas Web" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Páginas web</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('web','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--web" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Páginas web</p>
+                                <p class="mdc-typography--body2">
+                                    Desarrollamos e implementamos una página web promocional para tu empresa, en base a las necesidades que posees.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 5 a 10 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('web','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--pay" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/pagos.svg" alt="Pagos online" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Pagos online</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('pay','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--pay" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Pagos online</p>
+                                <p class="mdc-typography--body2">
+                                    Te brindamos asesoría para la implementación y los requisitos para que tu empresa permita recibir pagos online.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 5 a 10 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('pay','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--seo" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/google.svg" alt="SEO" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Aparece en Google</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('seo','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--seo" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Aparece en Google</p>
+                                <p class="mdc-typography--body2">
+                                    Te ayudamos a realizar los cambios necesarios para que tu sitio web se publique en buscadores en línea como Google.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 3 a 5 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('seo','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-f--support" class="mdc-card container-elevation-s s-font-align-center">
+                            <a href="/chat/">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-70" src="../static/images/assets/digitalcenter/soporte.svg" alt="Soporte" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Soporte técnico</div>
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </a>
+                            <div class="mdc-card__content">
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('support','b')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="serv-b--support" class="mdc-card container-elevation-s container--hidden">
+                            <div class="mdc-card__content">
+                                <p class="mdc-typography--headline5 s-font-color-secondary">Soporte técnico</p>
+                                <p class="mdc-typography--body2">
+                                    Te brindamos ayuda y soporte a todas tus necesidades tecnológicas.
+                                </p>
+                                <p class="mdc-typography--body2">
+                                    <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
+                                </p>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon s-font-color-primary"
+                                            onclick="showDetailsCard('support','f')">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        sync
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/digitalcenter.min.js') }}"></script>
+{% endblock %}

@@ -19,6 +19,9 @@ with app.app_context():
     from views.home import home as home_view
     from views.seo import seo as seo_view
     from views.socketio import sio as sio_view
+    #   
+    from views.digitalcenter import digitalcenter as digitalcenter_view
+    
     # from views.siortc import siortc as siortc_view
 
     # API Fetchs
@@ -26,7 +29,8 @@ with app.app_context():
 
     # Home
     app.register_blueprint(home_view)
-
+    # digital
+    app.register_blueprint(digitalcenter_view)
     # Search Engine Optimization - SEO
     app.register_blueprint(seo_view)
 
