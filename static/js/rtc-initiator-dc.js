@@ -1091,11 +1091,11 @@ function showConversationUI(showOrHide, usrElem) {
 function showRTCUserList(userlist) {
     let rtcULID = [];
     let rtcUTID = [];
-    // Iterate through Anonymous users
+    /* Iterate through Anonymous users
     userlist.rtc_online_users.anon_users.forEach((user) => {
         appendRTCUser(user.r_id, user, 'anon');
         rtcULID.push('l_' + user.r_id);
-    });
+    });*/
     // Iterate through Employees users
     userlist.rtc_online_users.emp_users.forEach((user) => {
         if (user.id != swcms.advStreams.myUserInfo.id) {
@@ -1116,11 +1116,11 @@ function showRTCUserList(userlist) {
             setUserStatusColor(accStatEl, user.userInfo.status);
         }
     });
-    // Iterate through Registered users
+    /* Iterate through Registered users
     userlist.rtc_online_users.reg_users.forEach((user) => {
         appendRTCUser(user.r_id, user, 'reg');
         rtcULID.push('l_' + user.id);
-    });
+    });*/
     // Remove users not Online unless focused
     document.querySelectorAll('#transfer-list > li').forEach((elm) => {
         if (!rtcUTID.includes(elm.id)) {

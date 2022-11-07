@@ -48,6 +48,12 @@ def _connect():
         if current_user.is_authenticated:
             if current_user.is_user_role(['adm', 'emp']):
                 new_oul.userlist.get('rtc_online_users', {}).get('emp_users').append(rtc_user)
+            elif current_user.is_user_role(['itc']):
+                new_oul.userlist.get('rtc_online_users', {}).get('itc_users').append(rtc_user)
+            elif current_user.is_user_role(['mkt']):
+                new_oul.userlist.get('rtc_online_users', {}).get('mkt_users').append(rtc_user)
+            elif current_user.is_user_role(['dis']):
+                new_oul.userlist.get('rtc_online_users', {}).get('dis_users').append(rtc_user)
             else:
                 new_oul.userlist.get('rtc_online_users', {}).get('reg_users').append(rtc_user)
         else:
@@ -80,7 +86,7 @@ def _connect():
 
         # Add Employee to Room and Send User List
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'emp','usr','itc','mkt','dis']):
                 join_room('INNO-EMPS')
         
         socketio.emit('userIsConnected', { 'status' : 'success', 'id' : user.id, 'roles' : user.get_user_roles() }, room=request.sid)
@@ -109,6 +115,54 @@ def _disconnect():
         if current_user.is_authenticated:
             if current_user.is_user_role(['adm', 'emp']):
                 removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', user.id)
+                
+                # Update all users assigned status back to default
+                new_usr_status = 'Disponible'
+
+                # Depending on the type of User, update it's status
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+                
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+            elif current_user.is_user_role(['itc']):
+                removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('itc_users'), 'id', user.id)
+                
+                # Update all users assigned status back to default
+                new_usr_status = 'Disponible'
+
+                # Depending on the type of User, update it's status
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+                
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+            elif current_user.is_user_role(['mkt']):
+                removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('mkt_users'), 'id', user.id)
+                
+                # Update all users assigned status back to default
+                new_usr_status = 'Disponible'
+
+                # Depending on the type of User, update it's status
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+                
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'activity', int(int(dt_now.strftime('%s%f'))/1000), 'userInfo')
+            elif current_user.is_user_role(['dis']):
+                removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('dis_users'), 'id', user.id)
                 
                 # Update all users assigned status back to default
                 new_usr_status = 'Disponible'
@@ -155,7 +209,7 @@ def _disconnect():
 
         # Remove Employee to Room
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'emp','usr','itc','mkt','dis']):
                 leave_room('INNO-EMPS')
         
         socketio.emit('RTCUserList', new_userlist, room='INNO-EMPS')

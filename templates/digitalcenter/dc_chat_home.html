@@ -2,6 +2,15 @@
 {% block page_description %}Innova Chat, Mensajes de Texto por Chat, Mensajes{% endblock %}
 {% block page_title %}Innova Chat{% endblock %}
 {% block body %}
+<style>
+    #anon-active-rooms{
+        display: none;
+    }
+    #reg-active-rooms{
+        display: none;
+    }
+
+</style>
 <main class="s-main-content s-main-content--extend-tab-color-primary">
     <div class="container-avcalls container--hidden">
         <div class="container-avcalls--canvas">
@@ -130,28 +139,11 @@
                             </div>
                             <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth" role="listbox" tabindex="0">
                                 <ul class="mdc-deprecated-list mdc-select__list">
-                                    <li class="mdc-deprecated-list-item" data-value="anon">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            Anonim@s
-                                        </span>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" data-value="mine">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            Asignados a mí
-                                        </span>
-                                    </li>
+
                                     <li class="mdc-deprecated-list-item" data-value="emp">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                         <span class="mdc-deprecated-list-item__text">
-                                            Funcionari@s
-                                        </span>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" data-value="reg">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            Registrad@s
+                                            Asesoras
                                         </span>
                                     </li>
                                     <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" data-value="all">
@@ -197,10 +189,55 @@
                             <ul id="emp-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-deprecated-list mdc-deprecated-list--avatar-list mdc-deprecated-list--two-line">
                                 <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
                                     <span class="container-chat--sidemenu-rooms-usertype-text">
-                                        Funcionari@s
+                                        Asesoras
                                     </span>
                                 </li>
                                 <li id="emp-no-active-room" class="mdc-deprecated-list-item container-chat--sidemenu-rooms-usertype-empty">
+                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-deprecated-list-item__text">
+                                        <span class="mdc-deprecated-list-item__primary-text">0 contactos.</span>
+                                        <span class="mdc-deprecated-list-item__secondary-text">No hay actividad.</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul id="itc-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-deprecated-list mdc-deprecated-list--avatar-list mdc-deprecated-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Especialista en informática
+                                    </span>
+                                </li>
+                                <li id="itc-no-active-room" class="mdc-deprecated-list-item container-chat--sidemenu-rooms-usertype-empty">
+                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-deprecated-list-item__text">
+                                        <span class="mdc-deprecated-list-item__primary-text">0 contactos.</span>
+                                        <span class="mdc-deprecated-list-item__secondary-text">No hay actividad.</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul id="mkt-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-deprecated-list mdc-deprecated-list--avatar-list mdc-deprecated-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Especialista en Mercadeo
+                                    </span>
+                                </li>
+                                <li id="mkt-no-active-room" class="mdc-deprecated-list-item container-chat--sidemenu-rooms-usertype-empty">
+                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-deprecated-list-item__text">
+                                        <span class="mdc-deprecated-list-item__primary-text">0 contactos.</span>
+                                        <span class="mdc-deprecated-list-item__secondary-text">No hay actividad.</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul id="dis-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-deprecated-list mdc-deprecated-list--avatar-list mdc-deprecated-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Especialista en Diseño Gráfico
+                                    </span>
+                                </li>
+                                <li id="dis-no-active-room" class="mdc-deprecated-list-item container-chat--sidemenu-rooms-usertype-empty">
                                     <span class="mdc-deprecated-list-item__ripple"></span>
                                     <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
                                     <span class="mdc-deprecated-list-item__text">

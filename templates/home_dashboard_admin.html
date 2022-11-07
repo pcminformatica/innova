@@ -1,6 +1,9 @@
 {% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
+{% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+{% endblock %}
 {% block body %}
 <main class="s-main-content">
     <div class="container-color-background">
@@ -78,7 +81,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Mensajes</span>
+                                                    <span class="mdc-tab__text-label">Herramientas</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -101,24 +104,28 @@
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                     <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <a target="_blank" href="https://ee.kobotoolbox.org/x/gG31mMNd">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                             <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
                                         </span>
                                         <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Hola! Tal como acordamos, acá le comparto el logo para CompraNow</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">Rebeca Linares</span>
+                                            <span class="mdc-deprecated-list-item__primary-text">Responder diagnostico empresarial</span>
                                         </span>
                                         <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                        </a>
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Recuerda usar los créditos de tu Wallet para gozar de mayores beneficios en Innova Mujer.</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">Notificación Innova</span>
-                                        </span>
+                                        <a target="_blank" href="https://app.powerbi.com/groups/me/reports/c349ed84-4d69-4f98-b099-b74252b7dc6d?ctid=91ed43f6-c29f-4fbc-a3b0-0d0e6865d0e8&pbi_source=linkShare&bookmarkGuid=5b28c4dd-aece-4c28-873f-786a46033b7b">
+                                        
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Resultados del diagnostico empresarial</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Notificación Innova</span>
+                                            </span>
+                                        </a>
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
@@ -127,11 +134,23 @@
                                             <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
                                         </span>
                                         <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Cualquier otra duda o consulta quedo a sus órdenes. Saludos!</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">René Navarrete</span>
+                                            <span class="mdc-deprecated-list-item__primary-text">Laboratoria</span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                            <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                        </span>
+                                        <span class="mdc-deprecated-list-item__text">
+                                            <span class="mdc-deprecated-list-item__primary-text">construir planes de mejora</span>
+                                        </span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                    
                                 </ul>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
@@ -167,146 +186,80 @@
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                    <div class="container-dashboard--card-info">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
-                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 1</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 2</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 3</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                </ul>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <div class="mdc-card__actions-buttons"></div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        more_vert
-                                    </button>
+                    <div class="mdc-card s-mdc-card__stats-size-s">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="s-mdc-card__stats-title">
+                                <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                <div class="mdc-typography--subtitle2">
+                                    Atenciones exitosas
                                 </div>
                             </div>
+                            <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                350
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                    <div class="container-dashboard--card-info">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Billera</div>
-                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">2,500</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">Créditos disponibles</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">2,500</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">3,300 (-800)</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">17/11/2021 - Digital Center</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">2,500</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">3,800 (-500)</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Marketplace</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">3,300</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                </ul>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <div class="mdc-card__actions-buttons">
-                                    <button class="mdc-button mdc-button--raised mdc-button--color-secondary mdc-card__action
-                                                mdc-card__action--button">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+                    <div class="mdc-layout-grid container-stats">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet
+                                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                    Filtra por fecha:
+                                </p>
+                                <div>
+                                    <label class="mdc-text-field mdc-text-field--filled mdc-text-field--label-floating" id="filter-date" data-assigned-var>
+                                        <span class="mdc-text-field__ripple"></span>
+                                        <input id="f-filter-date-input" class="mdc-text-field__input" type="text"
+                                                aria-labelledby="f-filter-date-label" tabindex="0" value="mm/dd/yyyy">
+                                        <span class="mdc-floating-label mdc-floating-label--float-above" id="f-filter-date-label">Filtra por fecha</span>
+                                        <span class="mdc-line-ripple"></span>
+                                    </label>
+                                </div>
+                                <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                    Exportar datos:
+                                </p>
+                                <div class="container-stats-export">
+                                    <button id="exportExcelButton" class="mdc-button mdc-button--raised button-stats-export--excel"
+                                            aria-label="Export to Excel" alt="Export to Excel">
                                         <div class="mdc-button__ripple"></div>
-                                        <span class="mdc-button__label">Redimir</span>
+                                        <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
+                                        <span class="mdc-button__label">Excel</span>
                                     </button>
-                                </div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        receipt
-                                    </button>
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        add_circle
+                                    <button id="exportPDFButton" class="mdc-button mdc-button--raised button-stats-export--pdf"
+                                            aria-label="Export to PDF" alt="Export to PDF">
+                                        <div class="mdc-button__ripple"></div>
+                                        <i class="mdc-button__icon far fa-file-pdf" aria-hidden="true"></i>
+                                        <span class="mdc-button__label">PDF</span>
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                    <div class="container-dashboard--card-info">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Gestiones</div>
-                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
-                                        <span class="mdc-deprecated-list-item__text">Solicitar más créditos</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">group</span>
-                                        <span class="mdc-deprecated-list-item__text">Solicitar permisos de acceso</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">Solicitar rol de oferente</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                </ul>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <div class="mdc-card__actions-buttons"></div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        more_vert
-                                    </button>
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet
+                                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-stats-list">
+
+
+                                <div class="mdc-card s-mdc-card__stats-size-l">
+                                    <div class="mdc-card__primary-action" tabindex="0">
+                                        <div class="s-mdc-card__stats-title">
+                                            <i class="material-icons s-font-color-secondary">query_stats</i>
+                                            <div class="mdc-typography--subtitle2">
+                                                Atenciones
+                                            </div>
+                                        </div>
+                                        <canvas id="graph-stats--visits" class="s-mdc-card__stats-result">
+                                        </canvas>
+                                        <div class="mdc-typography--caption s-font-color-secondary s-mdc-card__stats-comment">
+                                            Atenciones en la semana
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                </div>
+
             </div>
         </div>
     </div>
@@ -314,4 +267,5 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
 {% endblock %}

@@ -195,7 +195,14 @@ def _digitalcenter():
 @login_required
 def _home():
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    return render_template('home_dashboard.html')
+    if current_user.is_authenticated:
+        if current_user.is_user_role(['usr']):
+            return render_template('home_dashboard.html')
+        else:
+            return render_template('home_dashboard_admin.html')
+    else:
+        return render_template('home_dashboard.html')
+    
 
 
 @home.route('/login/')
