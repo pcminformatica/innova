@@ -626,7 +626,7 @@ class User(ElasticMixin, UserMixin, db.Model):
 
 # User Additional Information
 class UserExtraInfo(db.Model):
-    __tablename__ = 'user_extra_info'
+    __tablename__ = 'UserExtraInfo'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     national_id_type = db.Column(db.Integer, db.ForeignKey('catalog_id_document_types.id'), nullable=True)
     national_id = db.Column(db.String(30), unique=False, nullable=True)
@@ -639,8 +639,8 @@ class UserExtraInfo(db.Model):
     city = db.Column(db.JSON, unique=False, nullable=True)
     user = db.relationship('User', lazy='subquery', back_populates='extra_info')
     acceptterms = db.Column(db.Boolean, unique=False, nullable=True, default=False)
-    company_id = db.Column(db.Integer, db.ForeignKey("Company.id"))
-    companys = db.relationship("Company", backref="Companys")
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -665,6 +665,7 @@ class Company(db.Model):
     social_networks = db.Column(db.JSON, unique=False, nullable=True)
     phones = db.Column(db.JSON, unique=False, nullable=True)
     public = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    users = db.relationship("UserExtraInfo", back_populates="company")
     def __init__(self,name,avatar,description,address,social_networks,phones,public):
         self.name = name
         self.avatar = avatar
