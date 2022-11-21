@@ -203,7 +203,11 @@ def _home():
     else:
         return render_template('home_dashboard.html')
     
-
+@home.route('/pre/')
+#@login_required
+def _preStart():
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return render_template('prelogin.html')
 
 @home.route('/login/')
 def _login():
@@ -347,4 +351,9 @@ def _terminosdelservicio():
 @home.route('/welcome/')
 def _welcome():
     app.logger.debug('** SWING_CMS ** - Welcome')
-    return render_template('welcome.html')
+    return render_template('welcome2.html')
+
+@home.route('/base/')
+def _base():
+    app.logger.debug('** SWING_CMS ** - Welcome')
+    return render_template('components.html')

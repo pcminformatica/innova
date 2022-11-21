@@ -71,7 +71,10 @@ def populateDefaultRTC_OUL():
                 'id': str(nowdt),
                 'anon_users': [],
                 'emp_users': [],
-                'reg_users': []
+                'reg_users': [],
+                'itc_users': [], 
+                'dis_users': [],
+                'mkt_users': []
             }
         }
         rtc_oul.enabled = True

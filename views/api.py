@@ -352,3 +352,27 @@ def _u_userinfo(js):
         app.logger.error('** SWING_CMS ** - API Save User Info Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+# Set the Appointment's Details
+@api.route('/api/accept/terminos/', methods = ['POST'])
+# @login_required
+def _d_accept_terms():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            usr_id = request.json['uid']
+            emp_id = request.json['eid']
+            srv_id = request.json['sid']
+            sch_date = request.json['sch']
+            usr_data = request.json['udata']
+            app.logger.debug('****',usr_id,emp_id,srv_id,sch_date,usr_data)
+            app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+            app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+            # Update User information
+
+            return jsonify({ 'status': 200, 'msg': 'Cita creada' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

@@ -638,7 +638,9 @@ class UserExtraInfo(db.Model):
     state = db.Column(db.JSON, unique=False, nullable=True)
     city = db.Column(db.JSON, unique=False, nullable=True)
     user = db.relationship('User', lazy='subquery', back_populates='extra_info')
-
+    acceptterms = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    company_id = db.Column(db.Integer, db.ForeignKey("Company.id"))
+    companys = db.relationship("Company", backref="Companys")
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -648,7 +650,42 @@ class UserExtraInfo(db.Model):
             avatar = self.avatar,
             country = self.country,
             state = self.state,
-            city = self.city
+            city = self.city,
+            acceptterms = self.acceptterms
+        )
+
+# Company
+class Company(db.Model):
+    _tablename__ = 'company'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(300), unique=False, nullable=True)
+    avatar = db.Column(db.String(50), unique=False, nullable=True)
+    description = db.Column(db.Text, unique=False, nullable=False)
+    address = db.Column(db.String(300), unique=False, nullable=True)
+    social_networks = db.Column(db.JSON, unique=False, nullable=True)
+    phones = db.Column(db.JSON, unique=False, nullable=True)
+    public = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    def __init__(self,name,avatar,description,address,social_networks,phones,public):
+        self.name = name
+        self.avatar = avatar
+        self.description = description
+        self.address = address
+        self.social_networks = social_networks
+        self.phones = phones
+        self.public = public
+
+
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+            avatar = self.avatar,
+            description = self.description,
+            address = self.address,
+            social_networks = self.social_networks,
+            state = self.state,
+            phones = self.phones,
+            acceptterms = self.acceptterms
         )
 
 

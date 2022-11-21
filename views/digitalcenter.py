@@ -11,6 +11,13 @@ from models.models import Appointments, CatalogIDDocumentTypes, CatalogServices,
 from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User
 digitalcenter = Blueprint('digitalcenter', __name__, template_folder='templates', static_folder='static')
 
+
+@digitalcenter.route('/form/perfil/')
+def __form_perfil_emp():
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+    return render_template('/digitalcenter/form_perfil_emp.html')
+
+
 @digitalcenter.route('/digitalcenter/')
 def _home_view():
     cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()

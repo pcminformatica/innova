@@ -26,7 +26,14 @@ import { MDCTextFieldHelperText } from '@material/textfield/helper-text';
 import { MDCTextFieldIcon } from '@material/textfield/icon';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { Workbox } from 'workbox-window/Workbox.mjs';
+import {MDCCheckbox} from '@material/checkbox';
+import {MDCFormField} from '@material/form-field';
+// ES6 Modules or TypeScript
 
+import Swal from 'sweetalert2'
+export function returnSwal(){
+    return Swal
+}
 
 /************************** FUNCTIONS **************************/
 

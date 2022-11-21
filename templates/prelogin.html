@@ -1,0 +1,176 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
+                mdc-layout-grid__cell--align-middle">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                </div>
+                                <div class="mdc-card__ripple"></div>
+                            </div>
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">
+                                    
+                                    Bienvenida, 
+                                    {{ current_user.name }}
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+
+                            <div class="mdc-card__content container-dashboard--messages-cnt">
+                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                    Bienvenida INNOVA MUJER
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dignissimos! Consectetur perferendis sapiente facilis ab minus rerum deleniti voluptas odio, quisquam fugiat laborum aliquam non excepturi. Quaerat velit fuga similique.
+                                </p>
+
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <div class="mdc-form-field">
+                                        <div class="mdc-checkbox">
+                                          <input type="checkbox"
+                                                 class="mdc-checkbox__native-control"
+                                                 name="cxb_accept"
+                                                 id="checkbox-1"/>
+                                          <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark"
+                                                 viewBox="0 0 24 24">
+                                              <path class="mdc-checkbox__checkmark-path"
+                                                    fill="none"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                          </div>
+                                          <div class="mdc-checkbox__ripple"></div>
+                                          <div class="mdc-checkbox__focus-ring"></div>
+                                        </div>
+                                        <label for="checkbox-1">
+                                            Ser dueña del negocio o poseer al menos el 51% de la empresa, o tener un cargo de liderazgo en la empresa. 
+                                        </label>
+                                    </div>
+                                      <br>
+                                      <div class="mdc-form-field">
+                                        <div class="mdc-checkbox">
+                                          <input type="checkbox"
+                                                 class="mdc-checkbox__native-control"
+                                                 name="cxb_accept"
+                                                 id="checkbox-1"/>
+                                          <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark"
+                                                 viewBox="0 0 24 24">
+                                              <path class="mdc-checkbox__checkmark-path"
+                                                    fill="none"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                          </div>
+                                          <div class="mdc-checkbox__ripple"></div>
+                                          <div class="mdc-checkbox__focus-ring"></div>
+                                        </div>
+                                        <label for="checkbox-1">
+                                            Generar al menos 5 empleos, incluyendo a la dueña del negocio. 
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <div class="mdc-form-field">
+                                        <div class="mdc-checkbox">
+                                          <input type="checkbox"
+                                                 class="mdc-checkbox__native-control"
+                                                name="cxb_accept"
+                                                 id="checkbox-1"/>
+                                          <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark"
+                                                 viewBox="0 0 24 24">
+                                              <path class="mdc-checkbox__checkmark-path"
+                                                    fill="none"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                          </div>
+                                          <div class="mdc-checkbox__ripple"></div>
+                                          <div class="mdc-checkbox__focus-ring"></div>
+                                        </div>
+                                        <label for="checkbox-1">
+                                            La empresa debe tener al menos un (1) año de operación, no necesariamente tiene que estar legalizada. 
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <div class="mdc-form-field">
+                                        <div class="mdc-checkbox">
+                                          <input type="checkbox"
+                                          name="cxb_accept"
+                                                 class="mdc-checkbox__native-control"
+                                                 id="checkbox-4"/>
+                                          <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark"
+                                                 viewBox="0 0 24 24">
+                                              <path class="mdc-checkbox__checkmark-path"
+                                                    fill="none"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                          </div>
+                                          <div class="mdc-checkbox__ripple"></div>
+                                          <div class="mdc-checkbox__focus-ring"></div>
+                                        </div>
+                                        <label for="checkbox-4">
+                                            Ser mayor de 18 años. 
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mdc-card__actions" style="margin: auto">
+                                <div class="mdc-card__action-buttons">
+                                <center>
+
+                                  <button class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="acceptterms()">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">Aceptar  </span>
+                      
+                                  </button>
+                                  <button class="mdc-button mdc-button--outlined">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <span class="mdc-button__label">Cancelar  </span>
+                                  </button>
+                                </center>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
+
