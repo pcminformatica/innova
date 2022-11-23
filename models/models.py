@@ -658,23 +658,15 @@ class UserExtraInfo(db.Model):
 class Company(db.Model):
     _tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    rtn = db.Column(db.String(50), unique=True, nullable=True)
     name = db.Column(db.String(300), unique=False, nullable=True)
     avatar = db.Column(db.String(50), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=False)
-    address = db.Column(db.String(300), unique=False, nullable=True)
+    address = db.Column(db.String(400), unique=False, nullable=True)
     social_networks = db.Column(db.JSON, unique=False, nullable=True)
     phones = db.Column(db.JSON, unique=False, nullable=True)
     public = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     users = db.relationship("UserExtraInfo", back_populates="company")
-    def __init__(self,name,avatar,description,address,social_networks,phones,public):
-        self.name = name
-        self.avatar = avatar
-        self.description = description
-        self.address = address
-        self.social_networks = social_networks
-        self.phones = phones
-        self.public = public
-
 
     def __repr__(self):
         return jsonify(

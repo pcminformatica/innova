@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole
+from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
@@ -362,17 +362,79 @@ def _d_accept_terms():
     try:
         # POST: Save Appointment
         if request.method == 'POST':
-            usr_id = request.json['uid']
-            emp_id = request.json['eid']
-            srv_id = request.json['sid']
-            sch_date = request.json['sch']
-            usr_data = request.json['udata']
-            app.logger.debug('****',usr_id,emp_id,srv_id,sch_date,usr_data)
-            app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-            app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+            user = User.query.filter_by(id = current_user.id).first()
+        
+            if user.extra_info is None:
+                user_extra = UserExtraInfo()
+                user_extra.id = user.id
+                user_extra.acceptterms = True
+                db.session.add(user_extra)
+                db.session.commit()
+                db.session.refresh(user)
+                app.logger.debug('** nooooo ** - API Appointment Detail')
+                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+            else:
+                app.logger.debug('** yaaaa ** - API Appointment Detail')
             # Update User information
 
             return jsonify({ 'status': 200, 'msg': 'Cita creada' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/save/perfil/', methods = ['POST'])
+# @login_required
+def _d_():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            user = User.query.filter_by(id = current_user.id).first()
+        
+            if user.extra_info is None:
+                user_extra = UserExtraInfo()
+                user_extra.id = user.id
+                user_extra.acceptterms = True
+                db.session.add(user_extra)
+                db.session.commit()
+                db.session.refresh(user)
+                app.logger.debug('** nooooo ** - API Appointment Detail')
+                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+ 
+ 
+            if user.extra_info.company_id is None:
+                company = Company()
+            else:
+                company = Company.query.filter_by(id = user.extra_info.company_id).first()
+
+            company_phone = request.json['txt_company_phone']
+            company_facebook = request.json['txt_company_facebook']
+            company_instagram = request.json['txt_company_instagram']
+            jsPhones = {
+                'phone':company_phone
+            }
+            jsSocial = {
+                'facebook':company_facebook,
+                'instagram':company_instagram
+            }
+            company.name = request.json['txt_company_name']
+            company.rtn = request.json['txt_company_rtn']
+            company.address = request.json['txt_company_address']
+            company.description = request.json['txt_company_description']
+            company.phones = jsPhones
+            company.social_networks = jsSocial
+            company.public = request.json['txt_company_public']
+            db.session.add(company)
+            db.session.commit()
+            user.extra_info.national_id = request.json['txt_dni']
+            user.extra_info.names = request.json['txt_name']
+            user.extra_info.last_names = request.json['txt_last']
+            user.extra_info.company = company
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })

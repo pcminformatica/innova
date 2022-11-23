@@ -197,7 +197,12 @@ def _home():
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     if current_user.is_authenticated:
         if current_user.is_user_role(['usr']):
-            return render_template('home_dashboard.html')
+            if current_user.extra_info is None or current_user.extra_info.acceptterms == False:
+                return redirect(url_for('home._preStart'))
+            elif current_user.extra_info.company_id is None:
+                return redirect(url_for('digitalcenter.__form_perfil_emp'))
+            else:
+                return render_template('home_dashboard.html')
         else:
             return render_template('home_dashboard_admin.html')
     else:
