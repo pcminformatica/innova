@@ -56,7 +56,11 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                                {%if ctx.user.extra_info.names %}
+                                                  value="{{ctx.user.extra_info.names}}"
+                                                {% endif %}
+                                                >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                           </div>
@@ -67,7 +71,11 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_last" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id">Escribe tu apellidos</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                                {%if ctx.user.extra_info.last_names %}
+                                                  value="{{ctx.user.extra_info.last_names}}"
+                                                {% endif %}
+                                                >
                                                 <span class="mdc-line-ripple"></span>
                                             </label>
                                           </div>
@@ -78,7 +86,11 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_dni" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id">DNI</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                                {%if ctx.user.extra_info.national_id %}
+                                                  value="{{ctx.user.extra_info.national_id}}"
+                                                {% endif %}
+                                                >
                                                 <span class="mdc-line-ripple"></span>
                                             </label>
                                           </div>
@@ -230,7 +242,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_name" data-assigned-var> 
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">Nombre de la empresa</span>
-                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.name %}
+                                              value="{{ctx.user.extra_info.company.name}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -241,7 +257,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">RTN</span>
-                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.rtn %}
+                                              value="{{ctx.user.extra_info.company.rtn}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -252,7 +272,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_phone" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">Teléfono</span>
-                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.phones %}
+                                              value="{{ctx.user.extra_info.company.phones.phone}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -263,7 +287,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_facebook" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">Facebook</span>
-                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.social_networks %}
+                                              value="{{ctx.user.extra_info.company.social_networks.facebook}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -274,7 +302,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_instagram" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">Instagram</span>
-                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.social_networks %}
+                                              value="{{ctx.user.extra_info.company.social_networks.instagram}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -285,7 +317,11 @@
                                           <label class="mdc-text-field mdc-text-field--filled" id="txt_company_address" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                               <span class="mdc-floating-label" id="my-label-id">Dirección</span>
-                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                              <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                              {%if ctx.user.extra_info.company.address %}
+                                              value="{{ctx.user.extra_info.company.address}}"
+                                              {% endif %}
+                                              >
                                               <span class="mdc-line-ripple"></span>
                                           </label>
                                         </div>
@@ -300,7 +336,7 @@
                                               <span class="mdc-notched-outline__trailing"></span>
                                             </span>
                                             <span class="mdc-text-field__resizer">
-                                              <textarea required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
+                                              <textarea required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140">{%if ctx.user.extra_info.company.description %}{{ctx.user.extra_info.company.description}}{% endif %}</textarea>
                                               <span class="mdc-text-field-character-counter">0 / 140</span>
                                             </span>
                                           </label>
@@ -311,7 +347,11 @@
                                               <input type="checkbox"
                                                      class="mdc-checkbox__native-control"
                                                      name="cxb_accept"
-                                                     id="checkbox-public"/>
+                                                     id="checkbox-public" 
+                                                     {%if ctx.user.extra_info.company.public%}
+                                                     checked
+                                                     {% endif %}
+                                                     />
                                               <div class="mdc-checkbox__background">
                                                 <svg class="mdc-checkbox__checkmark"
                                                      viewBox="0 0 24 24">

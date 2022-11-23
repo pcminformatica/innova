@@ -13,9 +13,17 @@ digitalcenter = Blueprint('digitalcenter', __name__, template_folder='templates'
 
 
 @digitalcenter.route('/form/perfil/')
+@login_required
 def __form_perfil_emp():
+        
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    return render_template('/digitalcenter/form_perfil_emp.html')
+
+    user = User.query.filter_by(id = current_user.id).first()
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+
+    ctx = {'user':user}
+    return render_template('/digitalcenter/form_perfil_emp.html',ctx=ctx)
+  
 
 
 @digitalcenter.route('/digitalcenter/')

@@ -206,7 +206,7 @@ def _home():
         else:
             return render_template('home_dashboard_admin.html')
     else:
-        return render_template('home_dashboard.html')
+        return redirect(url_for('home._login'))
     
 @home.route('/pre/')
 #@login_required

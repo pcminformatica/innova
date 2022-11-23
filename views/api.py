@@ -413,11 +413,11 @@ def _d_():
             company_facebook = request.json['txt_company_facebook']
             company_instagram = request.json['txt_company_instagram']
             jsPhones = {
-                'phone':company_phone
+                'phone':company_phone if company_phone else ''
             }
             jsSocial = {
-                'facebook':company_facebook,
-                'instagram':company_instagram
+                'facebook':company_facebook if company_facebook else '',
+                'instagram':company_instagram if company_instagram else '',
             }
             company.name = request.json['txt_company_name']
             company.rtn = request.json['txt_company_rtn']

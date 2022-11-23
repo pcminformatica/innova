@@ -34,7 +34,12 @@ function acceptterms(){
       //    document.getElementById('submitSaveButton').disabled = false;
       });
     }else{
-      Swal.fire('Por favor acepte todos los terminos')
+      Swal.fire('Por favor acepté todos los términos')
+      Swal.fire(
+        'Por favor acepté todos los términos',
+        'Para ingresar al proyecto, necesita cumplir con los requisitos indicados en el formulario',
+        'info'
+      )
     }
 
 
