@@ -15,7 +15,7 @@ function acceptterms(){
 
     if (accept){
       let apiUrl = '/api/accept/terminos/';
-      //document.getElementById('submitSaveButton').disabled = true;
+      document.getElementById('submitSaveButton').disabled = false;
       let postData = {}
       swcms.postFetch(apiUrl, postData).then((data) => {
         Swal.fire(
@@ -31,10 +31,10 @@ function acceptterms(){
           'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )
-      //    document.getElementById('submitSaveButton').disabled = false;
+        document.getElementById('submitSaveButton').disabled = true;
       });
     }else{
-      Swal.fire('Por favor acepté todos los términos')
+      document.getElementById('submitSaveButton').disabled = true;
       Swal.fire(
         'Por favor acepté todos los términos',
         'Para ingresar al proyecto, necesita cumplir con los requisitos indicados en el formulario',
@@ -89,7 +89,7 @@ function saveCompanyForms(){
     console.log(postData)
 
       let apiUrl = '/api/save/perfil/';
-      document.getElementById('submitSaveButton').disabled = true;
+      document.getElementById('submitSaveButton').disabled = false;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
         Swal.fire(
@@ -105,24 +105,22 @@ function saveCompanyForms(){
           'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )
-      //    document.getElementById('submitSaveButton').disabled = false;
+        document.getElementById('submitSaveButton').disabled = true;
       });
 
 }
 
 
+function saveCategory(){
+  const Swal = swcms.returnSwal()
+  Swal.fire(
+    'Gracias',
+    'Bienvenida a INNOVA MUJER!',
+    'success'
+  )
+  window.setTimeout(() => { window.location.assign('/home/'); }, 2000);
+}
 
 
 
 
-
-txt_name
-txt_last
-txt_dni
-txt_company_name
-txt_company_rtn
-txt_company_phone
-txt_company_facebook
-txt_company_instagram
-txt_company_direccion
-txt_company_direccion

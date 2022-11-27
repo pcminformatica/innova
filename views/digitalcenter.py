@@ -25,6 +25,17 @@ def __form_perfil_emp():
     return render_template('/digitalcenter/form_perfil_emp.html',ctx=ctx)
   
 
+@digitalcenter.route('/form/category/')
+@login_required
+def __form_perfil_category():
+        
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+
+    user = User.query.filter_by(id = current_user.id).first()
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+
+    ctx = {'user':user}
+    return render_template('/digitalcenter/form_perfil_category.html',ctx=ctx)
 
 @digitalcenter.route('/digitalcenter/')
 def _home_view():

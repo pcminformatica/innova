@@ -18,15 +18,15 @@
                                 <div class="mdc-card__ripple"></div>
                             </div>
                             <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.name }}</div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.extra_info.names }} {{ current_user.extra_info.last_names }}</div>
                                 <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">verified_user</i>
-                                    Empresaria
+                                    Empresaria 
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">business</i>
-                                    HonduTech LLC
+                                    {{ current_user.extra_info.company.name }} 
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-secondary">place</i>
@@ -52,6 +52,10 @@
                                         </span>
                                     </span>
                                 </span>
+                                <a href="/form/category/" class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                    <div class="mdc-icon-button__ripple"></div>
+                                    add 
+                                </a>
                             </div>
                             <div class="mdc-card__actions">
                                 <div class="mdc-card__actions-buttons"></div>
@@ -60,10 +64,9 @@
                                         <div class="mdc-icon-button__ripple"></div>
                                         edit
                                     </a>
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        more_vert
-                                    </button>
+                                    
+
+
                                 </div>
                             </div>
                         </div>
