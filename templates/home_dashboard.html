@@ -1,6 +1,16 @@
 {% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
 {% block body %}
 <main class="s-main-content">
     <div class="container-color-background">
@@ -90,7 +100,7 @@
                                             </button>
                                             <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Tus citas</span>
+                                                    <span class="mdc-tab__text-label">Preguntas frecuentes</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -110,7 +120,7 @@
                                         </span>
                                         <span class="mdc-deprecated-list-item__text">
                                             <span class="mdc-deprecated-list-item__primary-text">Hola! Tal como acordamos, acá le comparto el logo para CompraNow</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">Rebeca Linares</span>
+                                            <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
                                         </span>
                                         <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
                                     </li>
@@ -123,31 +133,42 @@
                                             <span class="mdc-deprecated-list-item__secondary-text">Notificación Innova</span>
                                         </span>
                                     </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                            <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Cualquier otra duda o consulta quedo a sus órdenes. Saludos!</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">René Navarrete</span>
-                                        </span>
-                                    </li>
+
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                 </ul>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
-                                <div class="container-dashboard--messages-list-empty s-font-align-center">
-                                    <p>
-                                        <i class="material-icons s-font-size-xl s-font-color-secondary">remove_shopping_cart</i>
-                                    </p>
-                                    <p class="mdc-typography--body1">
-                                        No posees contratos activos.
-                                    </p>
-                                    <p class="mdc-typography--caption">
-                                        Selecciona un servicio del Digital Center o el Marketplace.
-                                    </p>
+                                <div class="container-dashboard--messages-list-empty">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">library_books</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como contactar a un especialista.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+      
+                                    </ul>
                                 </div>
                             </div>
                             <div class="mdc-card__actions">
@@ -174,27 +195,52 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__content">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
-                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 1</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 2</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
-                                        <span class="mdc-deprecated-list-item__text">acciones de mejora 3</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                </ul>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 1</p>
+                                        <p class="alignright">10 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.10);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.10);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 2</p>
+                                        <p class="alignright">80 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.80);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.80);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 3</p>
+                                        <p class="alignright">100 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(100);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(100);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
                             </div>
                             <div class="mdc-card__actions">
                                 <div class="mdc-card__actions-buttons"></div>

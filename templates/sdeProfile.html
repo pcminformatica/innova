@@ -1,0 +1,154 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <img class="profile-background" src="../static/images/assets/landingpage/carousel_women/ejecutiva.png" alt="Border Perfil" />
+                                    
+                                </div>
+                                <div class="mdc-card__ripple"></div>
+                            </div>
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Julia Castro</div>
+                                <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">verified_user</i>
+                                    Empresaria 
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">business</i>
+                                    Diseñadora grafica
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-secondary">place</i>
+                                    Tegucigalpa, Honduras.
+                                </div>
+
+
+                            </div>
+                            <div class="mdc-card__actions" style="justify-content:center;" >
+                                <div class="mdc-card__actions-buttons"></div>
+                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">LinkedIn</span>
+                                </a>
+                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >touch_app</i
+                                    >
+                                    <span class="mdc-button__label">Contactar</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Biografia</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Áreas de Experiencia</div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, consequuntur consequatur nam aliquam tempore labore fugit similique blanditiis. Tenetur beatae harum inventore, reiciendis dolorem illum! Error ducimus voluptatem nam libero.
+                                </p>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Descripción del servicio</div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, consequuntur consequatur nam aliquam tempore labore fugit similique blanditiis. Tenetur beatae harum inventore, reiciendis dolorem illum! Error ducimus voluptatem nam libero.
+                                </p>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
+                                <div class="container-dashboard--messages-list-empty">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">library_books</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como contactar a un especialista.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+      
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+{% endblock %}

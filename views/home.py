@@ -207,7 +207,12 @@ def _home():
             return render_template('home_dashboard_admin.html')
     else:
         return redirect(url_for('home._login'))
-    
+
+@home.route('/sde/profile')
+def _sdeProfile():
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return render_template('sdeProfile.html')
+
 @home.route('/pre/')
 #@login_required
 def _preStart():
