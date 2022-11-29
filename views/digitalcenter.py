@@ -4,13 +4,16 @@ from babel.dates import format_date, format_datetime, format_time
 from datetime import datetime as dt
 from datetime import timedelta as td
 from datetime import timezone as tz
-from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
+from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User
-digitalcenter = Blueprint('digitalcenter', __name__, template_folder='templates', static_folder='static')
+from werkzeug.utils import secure_filename
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+import os
 
+digitalcenter = Blueprint('digitalcenter', __name__, template_folder='templates', static_folder='static')
 
 @digitalcenter.route('/form/perfil/')
 @login_required

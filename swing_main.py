@@ -6,6 +6,8 @@ from instance.config_models import configType as cfgmodels
 # Enables Instance Folder Configuration (instance_relative_config=True) 
 app = Flask(__name__, instance_relative_config=True)
 
+UPLOAD_FOLDER = 'static/upload/'
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # Configuration Files From Instance Folder
 cfgType = app.config['ENV']
 app.config.from_object(cfgapp[cfgType])
