@@ -438,3 +438,54 @@ def _d_():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/save/sde/perfil/', methods = ['POST'])
+# @login_required
+def _d_sde():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            user = User.query.filter_by(id = current_user.id).first()
+        
+            if user.extra_info is None:
+                user_extra = UserExtraInfo()
+                user_extra.id = user.id
+                user_extra.acceptterms = True
+                db.session.add(user_extra)
+                db.session.commit()
+                db.session.refresh(user)
+                app.logger.debug('** nooooo ** - API Appointment Detail')
+                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+ 
+ 
+
+            txt_bio_expertise = request.json['txt_bio_expertise']
+    
+            txt_occupation = request.json['txt_occupation']
+            txt_office_hours = request.json['txt_office_hours']
+            txt_LinkedIN = request.json['txt_LinkedIN']
+            txt_bio_description = request.json['txt_bio_description']
+            jsbio= {
+                'occupation':txt_occupation if txt_occupation else '',
+                'office_hours':txt_office_hours if txt_office_hours else '',
+                'linkedIN':txt_LinkedIN if txt_LinkedIN else '',
+                'description':txt_bio_description if txt_bio_description else '',
+                'expertise':txt_bio_expertise if txt_bio_expertise else '',
+                
+            }
+                        
+            user.extra_info.national_id = request.json['txt_dni']
+            user.extra_info.names = request.json['txt_name']
+            user.extra_info.last_names = request.json['txt_last']
+            user.extra_info.biography = jsbio
+            user.extra_info.profession_id = request.json['txt_profession']
+            user.phonenumber = request.json['txt_phone']
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

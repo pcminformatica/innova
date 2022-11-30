@@ -2,7 +2,7 @@ from datetime import datetime as dt
 from datetime import timezone as tz
 from flask import current_app as app
 from flask import jsonify
-from models import db, CatalogIDDocumentTypes, CatalogServices, CatalogOperations, CatalogUserRoles, RTCOnlineUsers, User, UserXRole
+from models import db,Professions, CatalogIDDocumentTypes, CatalogServices, CatalogOperations, CatalogUserRoles, RTCOnlineUsers, User, UserXRole
 from models import CatalogSurveysAnswerTypes, Surveys, SurveysQuestions
 
 # -----------------------------------------------------------------------------------------------------
@@ -35,6 +35,9 @@ def initPopulateDB():
 
     # Add Default RTC_OUL
     populateDefaultRTC_OUL()
+
+    #Add Default Professions
+    populateCatalogProfessions()
 
     app.logger.info('** SWING_CMS ** - Populate Database FINISHED.')
 
@@ -454,6 +457,32 @@ def populateCatalogUserRoles():
         app.logger.error('** SWING_CMS ** - Populate Catalog User Roles Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
 
+# Populate Catalog User Professions Data
+def populateCatalogProfessions():
+    try:
+        app.logger.debug('** SWING_CMS ** - Populate Catalog User Professions')
+
+        # Add User Roles
+        user_dis = Professions(name='Especialistas Diseño', name_short='Diseño')
+        db.session.add(user_dis)
+
+        user_empresarial = Professions(name='Especialistas Empresarial', name_short='Empresarial')
+        db.session.add(user_empresarial)
+        
+        user_marketing = Professions(name='Especialistas Marketing', name_short='Marketing')
+        db.session.add(user_marketing)
+
+        user__info = Professions(name='Especialistas Informática', name_short='Informática')
+        db.session.add(user__info)
+
+
+        db.session.commit()
+
+        return jsonify({ 'status': 'success' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Populate Catalog User Professions Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
 
 # Populate Specified Table
 def populateTable(dp_name, dp_options=None):
@@ -468,7 +497,8 @@ def populateTable(dp_name, dp_options=None):
             "default_rtc_oul": populateDefaultRTC_OUL,
             "default_users": populateDefaultUsers,
             "survey_answer_types": populateSurveysAnswerTypesCatalog,
-            "survey_uss": populateSurveyUserSatisfaction
+            "survey_uss": populateSurveyUserSatisfaction,
+            "professions":populateCatalogProfessions
         }
 
         if callable(data_procedures[dp_name]):

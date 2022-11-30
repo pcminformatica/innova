@@ -7,23 +7,70 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User
+from models.models import Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
 
 digitalcenter = Blueprint('digitalcenter', __name__, template_folder='templates', static_folder='static')
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@digitalcenter.route('/ddd/',methods = ['GET', 'POST'])
+def __form_perfil_emp2():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-photo' not in request.files:
+            return redirect(request.url)
+        file = request.files['upload-photo']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filename = str(current_user.id) +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        user = User.query.filter_by(id = current_user.id).first()
+        if user.extra_info is None:
+            user_extra = UserExtraInfo()
+            user_extra.id = user.id
+            user_extra.acceptterms = True
+            db.session.add(user_extra)
+            db.session.commit()
+            db.session.refresh(user)
+            app.logger.debug('** nooooo ** - API Appointment Detail')
+            app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+        user.extra_info.avatar = filename
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('digitalcenter.__form_profile_sde'))
+    if request.method == 'GET':
+        return 'hola'
+@app.route('/uploads/<name>')
+def download_file(name):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+    
+
+@digitalcenter.route('/form/sde/profile')
+#@login_required
+def __form_profile_sde():
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+    user = User.query.filter_by(id = current_user.id).first()
+    professions = Professions.query.filter_by(enabled = True).all()
+    app.logger.debug(professions)
+    ctx = {'user':user,'professions':professions}
+    return render_template('/digitalcenter/form_profile_sde.html',ctx=ctx)
+
 @digitalcenter.route('/form/perfil/')
 @login_required
 def __form_perfil_emp():
-        
     app.logger.debug('** SWING_CMS ** - Welcome2')
-
     user = User.query.filter_by(id = current_user.id).first()
     app.logger.debug('** SWING_CMS ** - Welcome2')
-
     ctx = {'user':user}
     return render_template('/digitalcenter/form_perfil_emp.html',ctx=ctx)
   

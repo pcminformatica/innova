@@ -642,6 +642,8 @@ class UserExtraInfo(db.Model):
     acceptterms = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
+    profession_id = db.Column(db.Integer, db.ForeignKey("professions.id"),nullable=True)
+    profession = db.relationship("Professions")
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -653,6 +655,22 @@ class UserExtraInfo(db.Model):
             state = self.state,
             city = self.city,
             acceptterms = self.acceptterms
+        )
+
+# Professions
+class Professions(db.Model):
+    _tablename__ = 'professions'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(300), unique=False, nullable=True)
+    name_short = db.Column(db.String(40), unique=True, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    users = db.relationship("UserExtraInfo", back_populates="profession")
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+            enabled = self.enabled,
+            name_short = name_short
         )
 
 # Company
