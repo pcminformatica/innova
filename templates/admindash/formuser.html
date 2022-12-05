@@ -1,0 +1,254 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+
+                                    <img class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }} " alt="Border Perfil" />
+                                    <img class="profile-pic" src="{{ url_for('static', filename='images/manifest/innova_icon.svg') }}" alt="Foto Perfil" />
+                                </div>
+                                <div class="mdc-card__ripple"></div>
+                            </div>
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Julia Castro</div>
+                                <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">verified_user</i>
+                                    Empresaria 
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">business</i>
+                                    Diseñadora grafica
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-secondary">place</i>
+                                    Tegucigalpa, Honduras.
+                                </div>
+
+
+                            </div>
+                            <div class="mdc-card__actions" style="justify-content:center;" >
+                                <div class="mdc-card__actions-buttons"></div>
+                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">LinkedIn</span>
+                                </a>
+                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >touch_app</i
+                                    >
+                                    <span class="mdc-button__label">Contactar</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Biografia</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de usuarios</div>
+                    
+                               
+                                <br>
+                                
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Datos Personales
+                                            </div>
+                                          </div>
+                                          
+                                          <input type="hidden" aria-labelledby="my-label-id" id="txt_id" value="{{user.id}}">
+
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Username 
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                               value=" {{user.name}}" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Email
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_email" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Email</span>
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                                value="{{user.email}}" data-assigned-var
+                                                >
+                                                <span class="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+          
+
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                            <div class="mdc-typography--body1">
+                                                Rol:
+                                            </div>
+                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_rol" data-assigned-var>
+                                                <div class="mdc-select__anchor"
+                                                     role="button"
+                                                     aria-haspopup="listbox"
+                                                     aria-expanded="false"
+                                                     aria-labelledby="demo-label demo-selected-text">
+                                                  <span class="mdc-select__ripple"></span>
+                                                  <span id="demo-label" class="mdc-floating-label">Rol</span>
+                                                  <span class="mdc-select__selected-text-container">
+                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                  </span>
+                                                  <span class="mdc-select__dropdown-icon">
+                                                    <svg
+                                                        class="mdc-select__dropdown-icon-graphic"
+                                                        viewBox="7 10 10 5" focusable="false">
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-inactive"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 10 12 15 17 10">
+                                                      </polygon>
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-active"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 15 12 10 17 15">
+                                                      </polygon>
+                                                    </svg>
+                                                  </span>
+                                                  <span class="mdc-line-ripple"></span>
+                                                </div>
+                                              
+                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    {% set list1 = user.roles[0]|string %}
+                                                    {% set namerol, idrol = list1.split(',') %}
+                                                    {% for role in roles %}
+                                                        {% if role.id == idrol|int %}
+                                                            <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{role.id}}" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                {{role.name}} 
+                                                                </span>
+                                                            </li>
+                                                        {% else %}
+                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{role.id}}" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    {{role.name}} 
+                                                                </span>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                          
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                          </div>
+
+                    
+
+
+                                        </div>
+                                        <div class="mdc-card__actions" style="justify-content:center;" >
+                                            <div class="mdc-card__actions-buttons"></div>
+                                            <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                  >bookmark</i
+                                                >
+                                                <span class="mdc-button__label">Cancelar</span>
+                                            </a>
+                                            <button id="submitSaveButton" onclick="saveUsers()" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                  >touch_app</i
+                                                >
+                                                <span class="mdc-button__label">Guardar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                               
+                                </div>
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+{% endblock %}

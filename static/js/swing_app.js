@@ -26,6 +26,8 @@ import { MDCTextFieldHelperText } from '@material/textfield/helper-text';
 import { MDCTextFieldIcon } from '@material/textfield/icon';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { Workbox } from 'workbox-window/Workbox.mjs';
+import {MDCDataTable} from '@material/data-table';
+
 import {MDCCheckbox} from '@material/checkbox';
 import {MDCFormField} from '@material/form-field';
 // ES6 Modules or TypeScript
@@ -1243,6 +1245,15 @@ export var mdcTextInputs = [].map.call(document.querySelectorAll('.mdc-text-fiel
     return mdcTxt;
 });
 
+// Material DataTables
+export var mdcDataTables = [].map.call(document.querySelectorAll('.mdc-data-table'), function (el) {
+    let mdctable= new MDCDataTable(el);
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCDataTable.prototype.assignedVar = null;
+        mdctable.assignedVar = el.getAttribute('id');
+    }
+    return mdctable;
+});
 
 // Material Textfields Helper Text
 var mdcTFHelperTexts = [].map.call(document.querySelectorAll('.mdc-text-field-helper-text'), function (el) {

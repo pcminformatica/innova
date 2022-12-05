@@ -44,8 +44,8 @@ function acceptterms(){
 
     if (accept){
       let apiUrl = '/api/accept/terminos/';
-      document.getElementById('submitSaveButton').disabled = false;
-      let postData = {}
+      document.getElementById('submitSaveButton').disabled = true;
+      let postData = {'aceptado':'true'}
       swcms.postFetch(apiUrl, postData).then((data) => {
         Swal.fire(
           'Gracias',
@@ -57,10 +57,10 @@ function acceptterms(){
 
         Swal.fire(
           'Error de conexión',
-          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )
-        document.getElementById('submitSaveButton').disabled = true;
+        document.getElementById('submitSaveButton').disabled = false;
       });
     }else{
       document.getElementById('submitSaveButton').disabled = false;
@@ -119,7 +119,7 @@ function saveCompanyForms(){
     console.log(postData)
 
       let apiUrl = '/api/save/perfil/';
-      document.getElementById('submitSaveButton').disabled = false;
+      document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
         Swal.fire(
@@ -135,7 +135,7 @@ function saveCompanyForms(){
           'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )
-        document.getElementById('submitSaveButton').disabled = true;
+        document.getElementById('submitSaveButton').disabled = false;
       });
 
 }

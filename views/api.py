@@ -354,11 +354,9 @@ def _u_userinfo(js):
 
 # Set the Appointment's Details
 @api.route('/api/accept/terminos/', methods = ['POST'])
-# @login_required
+@login_required
 def _d_accept_terms():
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API acceptterms')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -371,19 +369,16 @@ def _d_accept_terms():
                 db.session.add(user_extra)
                 db.session.commit()
                 db.session.refresh(user)
-                app.logger.debug('** nooooo ** - API Appointment Detail')
-                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-            else:
-                app.logger.debug('** yaaaa ** - API Appointment Detail')
+                app.logger.debug('** SWING_CMS ** - API acceptterms')
             # Update User information
 
             return jsonify({ 'status': 200, 'msg': 'Cita creada' })
     except Exception as e:
-        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
 @api.route('/api/save/perfil/', methods = ['POST'])
-# @login_required
+@login_required
 def _d_():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
@@ -484,6 +479,33 @@ def _d_sde():
             user.extra_info.profession_id = request.json['txt_profession']
             user.phonenumber = request.json['txt_phone']
             db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/user/admin', methods = ['POST'])
+# @login_required
+def _d_save_admin_user():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_id = request.json['txt_id']
+            user = User.query.filter_by(id = txt_id).first()
+            txt_name = request.json['txt_name']
+            txt_email = request.json['txt_email']
+            txt_rol = request.json['txt_rol']
+            user.email = txt_email
+            user.name = txt_name
+            xrol = UserXRole.query.filter_by(user_id = user.id).first()
+            xrol.user_role_id = txt_rol
+            db.session.add(user)
+            db.session.add(xrol)
             db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:

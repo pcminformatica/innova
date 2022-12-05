@@ -670,7 +670,7 @@ class Professions(db.Model):
             id = self.id,
             name = self.name,
             enabled = self.enabled,
-            name_short = name_short
+            name_short = self.name_short
         )
 
 # Company
@@ -729,4 +729,9 @@ class UserXRole(db.Model):
     datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
     user = db.relationship('User', back_populates='roles')
     user_role = db.relationship('CatalogUserRoles', back_populates='users')
+    
+    def __repr__(self):
+        cxt = {'id':str(self.user_role.name)}
+        return str(self.user_role.name) + ' , ' + str(self.user_role.id)
 
+      

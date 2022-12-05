@@ -23,6 +23,7 @@ with app.app_context():
     from views.socketio import sio as sio_view
     #   
     from views.digitalcenter import digitalcenter as digitalcenter_view
+    from views.admindash import admindash as admindash_view
     
     # from views.siortc import siortc as siortc_view
 
@@ -39,7 +40,8 @@ with app.app_context():
     # SocketIO WebRTC Events
     app.register_blueprint(sio_view)
     # app.register_blueprint(siortc_view)
-
+    app.register_blueprint(admindash_view)
+    
     # Register the Service Worker
     @app.route('/sw.js', methods=['GET'])
     def _serviceworker():

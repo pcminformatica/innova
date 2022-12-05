@@ -104,13 +104,15 @@
 @use "@material/textfield/mdc-text-field";
 @use "@material/top-app-bar";
 @use "@material/top-app-bar/mdc-top-app-bar";
-
+@use "@material/data-table/data-table";
 @use "@material/checkbox";
 @use "@material/banner/styles";
 
 
 @include checkbox.core-styles;
 @include form-field.core-styles;
+@include data-table.core-styles;
+@include data-table.theme-baseline;
 /* Default Components Styles */
 // @use "@material/button/styles" as button-style;
 // @use "@material/radio/styles" as radio-style;

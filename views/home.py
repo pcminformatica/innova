@@ -244,12 +244,13 @@ def _loginuser():
         
         # Login Process
         # Retrieve the uid from the JWT idToken
+        app.logger.info('** SWING_CMS ** - LoginUser added: {}'.format('siii'))
         idToken = request.json['idToken']
         decoded_token = auth.verify_id_token(idToken)
-        
+        app.logger.info('** SWING_CMS ** - LoginUser added: {}'.format('siii2'))
         usremail = decoded_token['email'] if 'email' in decoded_token else None
         uid = decoded_token['uid'] if usremail != 'admusr@innova.com' else 'INNO-Administrator'
-
+        app.logger.info('** SWING_CMS ** - LoginUser added: {}'.format('siii3'))
         # Search for the user in the DB.
         user = User.query.filter_by(uid = uid).first()
         if user is None:

@@ -21,15 +21,15 @@
                                 <div class="mdc-card__ripple"></div>
                             </div>
                             <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.name }}</div>
-                                <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.extra_info.names }} {{ current_user.extra_info.last_names }}</div>
+                                <div class="mdc-typography--subtitle1">{{ current_user.extra_info.biography.occupation }} </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">verified_user</i>
-                                    Empresaria
+                                    {{ current_user.extra_info.profession.name }}
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">d</i>
-                                    HonduTech LLC
+                                    {{ current_user.extra_info.biography.office_hours }} 
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-secondary">place</i>
