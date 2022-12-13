@@ -137,3 +137,14 @@ def _dc_chat_admin():
 def _dc_chat_home():
     app.logger.debug('** SWING_CMS ** - Welcome2')
     return render_template('/digitalcenter/dc_chat_home.html')
+
+
+@digitalcenter.route('/test/admin')
+def _dc_chat_ad():
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+    return render_template('/chatdc/chatadmin.html')
+
+@digitalcenter.route('/test/user')
+def _dc_chat_us():
+    app.logger.debug('** SWING_CMS ** - Welcome2')
+    return render_template('/chatdc/chatuser.html')

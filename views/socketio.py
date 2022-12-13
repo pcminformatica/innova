@@ -88,9 +88,10 @@ def _connect():
         if current_user.is_authenticated:
             if current_user.is_user_role(['adm', 'emp','usr','itc','mkt','dis']):
                 join_room('INNO-EMPS')
-        
+        new_userlist2 = {'hola':123}
         socketio.emit('userIsConnected', { 'status' : 'success', 'id' : user.id, 'roles' : user.get_user_roles() }, room=request.sid)
         socketio.emit('RTCUserList', new_userlist, room='INNO-EMPS')
+        socketio.emit('RTCUserList2', new_userlist2, room='INNO-EMPS')
     except Exception as e:
         app.logger.error('** SWING_CMS ** - SocketIO User Connected Error: {}'.format(e))
         return jsonify({ 'status': 'error' })

@@ -258,14 +258,22 @@ def _l_appointments(cmds = None, user_id = None):
 # @login_required
 def _l_users():
     app.logger.debug('** SWING_CMS ** - API List Users')
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    app.logger.debug('** SWING_CMS ** - API List Users')
     try:
         if request.method == 'GET':
             query = request.args.get('qry')
             filters = request.args.get('flt')
             filters_type = request.args.get('ft')
+            app.logger.debug(query)
+            app.logger.debug(filters)
+            app.logger.debug(filters_type)
 
             if query is not None:
-                ulist, total = User.search(query, 1, 5)
+                ulist, total = User.search(query, 1, 9)
 
                 # Check if there is a User Role Filter parameter and Filter by it
                 if filters is not None and filters != '':
@@ -273,6 +281,8 @@ def _l_users():
                     
                     # Check if the Filters are of type Servie User Role
                     if filters_type is not None and filters_type == 'sur':
+                        app.logger.debug('** 12 ** - sur List Users')
+                        app.logger.debug('** 123 ** - sur List Users')
                         newUserRolesFilters = []
                         
                         services = CatalogServices.query.filter(CatalogServices.name_short.in_(userRolesFilters))
@@ -282,6 +292,9 @@ def _l_users():
                                 newUserRolesFilters.append(user_role.name_short)
                         
                         userRolesFilters = newUserRolesFilters
+                    else:
+                        app.logger.debug('** 123 ** - API List Users')
+                        app.logger.debug('** 123 ** - API List Users')
 
                     ulistFiltered = []
                     for user in ulist:
@@ -305,7 +318,15 @@ def _l_users():
                             'u_name': usr.name,
                             'u_email': usr.email
                         })
-                
+                app.logger.debug('** SWING_CMS ** - API List Users')
+                app.logger.debug('** SWING_CMS ** - API List Users')
+                app.logger.debug('** SWING_CMS ** - API List Users')
+                app.logger.debug('** SWING_CMS ** - API List Users')
+                app.logger.debug('** SWING_CMS ** - API List Users')
+                app.logger.debug(query)
+                app.logger.debug(filters)
+                app.logger.debug(filters)
+                app.logger.debug(userRolesFilters)    
                 return jsonify(response)
             else:
                 return jsonify({ 'status': 400 })
