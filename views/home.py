@@ -22,12 +22,12 @@ def _index():
     app.logger.debug('** SWING_CMS ** - Index')
     return redirect(url_for('home._welcome'))
 
-@home.route('/aulavirtual/')
+@home.route('/escuelaempresarial/')
 def _aulavirtual():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('aulavirtual/home.html')
 
-@home.route('/comunidadempresarial/')
+@home.route('/comunidaddenegocios/')
 def _comunidadempresarial():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('comunidadempresarial/home.html')

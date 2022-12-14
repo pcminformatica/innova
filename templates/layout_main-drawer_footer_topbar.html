@@ -17,27 +17,27 @@
             <a class="mdc-deprecated-list-item" href="/atencionempresarial/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">rss_feed</i>
-                <span class="mdc-deprecated-list-item__text">Atención Empresarial</span>
+                <span class="mdc-deprecated-list-item__text">Comunidad Empresarial</span>
             </a>
             <a class="mdc-deprecated-list-item" href="/conexioninnova/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">store</i>
                 <span class="mdc-deprecated-list-item__text">Conexión INNOVA</span>
             </a>
-            <a class="mdc-deprecated-list-item" href="/aulavirtual/" aria-current="page">
+            <a class="mdc-deprecated-list-item" href="/escuelaempresarial/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">school</i>
-                <span class="mdc-deprecated-list-item__text">Aula Virtual</span>
+                <span class="mdc-deprecated-list-item__text">Escuela Empresarial</span>
             </a>
             <a class="mdc-deprecated-list-item" href="https://www.ciudadmujer.gob.hn/servicios/mae/" aria-current="page" target="_blank">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">assessment</i>
                 <span class="mdc-deprecated-list-item__text">MAE</span>
             </a>
-            <a class="mdc-deprecated-list-item" href="/comunidadempresarial/">
+            <a class="mdc-deprecated-list-item" href="/comunidaddenegocios/">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">label_important</i>
-                <span class="mdc-deprecated-list-item__text">Comunidad Empresarial</span>
+                <span class="mdc-deprecated-list-item__text">Comunidad de Negocios</span>
             </a>
             <hr class="mdc-deprecated-list-divider s-mdc-deprecated-list-divider">
             {% if current_user.is_authenticated %}
@@ -245,7 +245,17 @@
                     </button>
                     <button class="mdc-tab" role="tab" aria-selected="true" tabindex="3">
                         <span class="mdc-tab__content">
-                            <span class="mdc-tab__text-label">Aula Virtual</span>
+                            <span class="mdc-tab__text-label">Escuela Empresarial</span>
+                        </span>
+                        <span class="mdc-tab-indicator">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </button>
+
+                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="5">
+                        <span class="mdc-tab__content">
+                            <span class="mdc-tab__text-label">Comunidad de Negocios</span>
                         </span>
                         <span class="mdc-tab-indicator">
                             <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -255,15 +265,6 @@
                     <button class="mdc-tab" role="tab" aria-selected="true" tabindex="4">
                         <span class="mdc-tab__content">
                             <span class="mdc-tab__text-label">MAE</span>
-                        </span>
-                        <span class="mdc-tab-indicator">
-                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                        </span>
-                        <span class="mdc-tab__ripple"></span>
-                    </button>
-                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="5">
-                        <span class="mdc-tab__content">
-                            <span class="mdc-tab__text-label">Comunidad Empresarial</span>
                         </span>
                         <span class="mdc-tab-indicator">
                             <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
