@@ -22,6 +22,16 @@ def _index():
     app.logger.debug('** SWING_CMS ** - Index')
     return redirect(url_for('home._welcome'))
 
+@home.route('/aulavirtual/')
+def _aulavirtual():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('aulavirtual/home.html')
+
+@home.route('/comunidadempresarial/')
+def _comunidadempresarial():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('comunidadempresarial/home.html')
+
 
 @home.route('/acercade/')
 def _acercade():
@@ -328,10 +338,10 @@ def _logoutuser():
         return jsonify({ 'status': 'error' })
 
 
-@home.route('/marketplace/')
-def _marketplace():
+@home.route('/conexioninnova/')
+def _conexioninnova():
     app.logger.debug('** SWING_CMS ** - Marketplace')
-    return render_template('marketplace.html')
+    return render_template('conexioninnova.html')
 
 
 @home.route('/offline/')

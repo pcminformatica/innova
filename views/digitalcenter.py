@@ -87,7 +87,7 @@ def __form_perfil_category():
     ctx = {'user':user}
     return render_template('/digitalcenter/form_perfil_category.html',ctx=ctx)
 
-@digitalcenter.route('/digitalcenter/')
+@digitalcenter.route('/atencionempresarial/')
 def _home_view():
     cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()
     app.logger.debug('siiiiiiiiiiiiiiiiii *********')

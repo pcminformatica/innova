@@ -908,13 +908,15 @@ const topBarTabURLs = {
     // Inicio
     0: {'url': '/welcome/', 'target': '_self'},
     // Digital Center
-    1: {'url': '/digitalcenter/', 'target': '_self'},
+    1: {'url': '/atencionempresarial/', 'target': '_self'},
     // Marketplace
-    2: {'url': '/marketplace/', 'target': '_self'},
+    2: {'url': '/conexioninnova/', 'target': '_self'},
     // Programa con Laboratoria
-    3: {'url': '/laboratoria/', 'target': '_self'},
+    3: {'url': '/aulavirtual/', 'target': '_self'},
     // MAE
-    4: {'url': 'https://www.ciudadmujer.gob.hn/servicios/mae/', 'target': '_blank'}
+    4: {'url': 'https://www.ciudadmujer.gob.hn/servicios/mae/', 'target': '_blank'},
+    // Programa con Laboratoria
+    5: {'url': '/comunidadempresarial/', 'target': '_self'}
 };
 
 export function topBarTabRedirect(index) {
