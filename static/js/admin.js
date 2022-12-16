@@ -7,8 +7,8 @@ function loadFile(event){
   }
 
   Swal.fire({
-    title: 'Sweet!',
-    text: 'Modal with a custom image.',
+    title: '¿Desea modificar la imagen de perfil?',
+    text: 'Guardar Imagen',
     imageUrl: URL.createObjectURL(event.target.files[0]),
     imageWidth: 400,
     imageHeight: 200,
@@ -16,7 +16,7 @@ function loadFile(event){
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it'
+    confirmButtonText: 'Si, Acepto'
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire(

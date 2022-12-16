@@ -231,6 +231,31 @@ def verifyFirebaseCookieCreateSession():
         return jsonify({ 'status': 'error' })
 
 
+def changePassword():
+    try:
+        # First, verify if there is a Valid Firebase Cookie
+        # decoded_claims returns TRUE and a JWT dictionary if valid
+        decoded_claims = isFirebaseCookieSessionValid()
+        if decoded_claims:
+            uid = decoded_claims['uid']
+            user = auth.update_user(
+            uid,
+            email='gcruz@ciudadmujer.gob.hn',
+            phone_number='+504',
+            email_verified=False,
+            password='Jaguar1234',
+            display_name='John Doe',
+            photo_url='http://www.example.com/12345678/photo.png',
+            )
+            app.logger.error('Sucessfully updated user: {0}'.format(user.uid))
+            return jsonify({ 'status': 'success' })
+        else:
+            return False
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - sii Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
 
 # Verifies if User has any Session and Redirects
 def isUserLoggedInRedirectDC(origin, responseType):

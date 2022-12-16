@@ -1,4 +1,4 @@
-from . import auth, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
+from . import auth,changePassword, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
 
 from babel.dates import format_date, format_datetime, format_time
 from datetime import datetime as dt
@@ -16,6 +16,14 @@ home = Blueprint('home', __name__, template_folder='templates', static_folder='s
 #
 # Creates Dates witout UTC for Python handling:
 # utcDate.replace(tzinfo=tz.utc).astimezone(tz=None)
+
+
+@home.route('/pasw2/')
+def pasw2():
+    app.logger.debug('** SWING_CMS ** - pasw2')
+    va = changePassword()
+    app.logger.debug(va)    
+    return render_template('pasw2.html')
 
 @home.route('/')
 def _index():
@@ -372,7 +380,7 @@ def _terminosdelservicio():
 @home.route('/welcome/')
 def _welcome():
     app.logger.debug('** SWING_CMS ** - Welcome')
-    return render_template('welcome2.html')
+    return render_template('welcome.html')
 
 @home.route('/base/')
 def _base():
