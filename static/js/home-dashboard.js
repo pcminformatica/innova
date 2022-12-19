@@ -16,5 +16,16 @@ export function showMessagesContracts(index) {
             break;
     }
 }
+
+export function showRedirect(url,target='self') {
+    if(target=='self'){
+        window.location.assign(url);
+ 
+    }else{
+        window.open(url);
+    }
+}
+
 /* Allow 'window' context to reference the function */
 window.showMessagesContracts = showMessagesContracts;
+window.showRedirect = showRedirect;
