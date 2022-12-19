@@ -105,7 +105,7 @@ def _home_view():
     else:
         x=  new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
     x=  new_oul.userlist.get('rtc_online_users', {}).get('asesoras_user')
-    app.logger.debug('** zzzzzzzzzzz varela')   
+    app.logger.debug('** varela')   
     app.logger.debug(x)
     app.logger.debug('** iiiiiiiiiiii varela')   
     new_userlist = new_oul.userlist
@@ -148,3 +148,29 @@ def _dc_chat_ad():
 def _dc_chat_us():
     app.logger.debug('** SWING_CMS ** - Welcome2')
     return render_template('/chatdc/chatuser.html')
+
+@digitalcenter.route('/sde/profile/1/example/')
+def _sdeProfile():
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return render_template('sdeProfile.html')
+
+@digitalcenter.route('/sde/profile/<int:title>/',methods=['GET', 'POST'])
+def _sdeProfileA(title):
+    sdeProfile = User.query.filter_by(id = title).first()
+    if sdeProfile:
+        app.logger.debug('** SWING_CMS ** - Home Dashboard')
+        context = {'sdeProfile':sdeProfile}
+        return render_template('digitalcenter/sdeProfile.html',**context)
+    else:
+        return render_template('404.html')
+
+@digitalcenter.route('/sde/appointments/<int:title>/create',methods=['GET', 'POST'])
+def _dcappointments_create(title):
+    app.logger.debug('** SWING_CMS ** -  appointments_create')    
+    return render_template('digitalcenter/appointments_create.html')
+
+@digitalcenter.route('/sde/admin/appointments/<int:title>/create',methods=['GET', 'POST'])
+def _dcappointments_create_admin(title):
+    app.logger.debug('** SWING_CMS ** -  appointments_create')    
+    return render_template('digitalcenter/appointments_create_admin.html')
+

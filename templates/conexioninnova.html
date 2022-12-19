@@ -2,6 +2,11 @@
 {% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
 {% block page_title %}Marketplace - Innova{% endblock %}
 {% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+</style>
 <main class="s-main-content">
     <div class="container-color-background container-size-m">
         <header class="container-marketplace--topappbar mdc-top-app-bar">
@@ -66,21 +71,107 @@
                 </div>
             </div>
         </aside>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" >
+                      <div class="mdc-card__media mdc-card__media--square">
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                  <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-phone">
+                                    <div class="mdc-card__primary-action" tabindex="0">
+                                        <div class="mdc-card__media">
+                                            <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                            
+                                        </div>
+                                        <div class="mdc-card__ripple"></div>
+                                    </div>
+
+                                    <div >
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        Lun-Vie, 8am-5pm.
+                                    </div>
+                                    <div>
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+                                  </div>
+                                  <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-1-phone">
+
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                                        EMPRESA XYZ
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6">
+                                        Maria Perez
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1">
+                                        Descripción Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                                        voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                                        unde odio atque? Totam, aspernatur.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                                        voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                                        unde odio atque? Totam, aspernatur.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                                        voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                                        unde odio atque? Totam, aspernatur.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                                        voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                                        unde odio atque? Totam, aspernatur.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
+                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
+                                        voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
+                                        unde odio atque? Totam, aspernatur.
+                                    </div>
+                                  </div>
+                                 
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <!-- ... additional primary action content ... -->
+                      <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__actions">
+                      <div class="mdc-card__action-buttons">
+                        <button class="mdc-button mdc-card__action mdc-card__action--button">
+                          <div class="mdc-button__ripple"></div>
+                          <span class="mdc-button__label">Action 1</span>
+                        </button>
+                        <button class="mdc-button mdc-card__action mdc-card__action--button">
+                          <div class="mdc-button__ripple"></div>
+                          <span class="mdc-button__label">Action 2</span>
+                        </button>
+                      </div>
+                      <div class="mdc-card__action-icons">
+                        <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">compatir Perfil</span>
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
+                          </a>
+
+     
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+
         <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
             <div class="container-marketplace--main-content">
+                
                 <div class="container-marketplace--search-result mdc-card mdc-card--color-on-primary">
                     <div class="mdc-card__primary-action" tabindex="0">
-                        <div class="search-result--profile mdc-card__media">
-                            <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                            <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                        </div>
-                        <div class="search-result--rating">
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star_half</i>
-                        </div>
+   
                         <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
                             EMPRESA XYZ
                         </div>
@@ -155,58 +246,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-marketplace--search-result mdc-card mdc-card--color-on-primary">
-                    <div class="mdc-card__primary-action" tabindex="0">
-                        <div class="search-result--profile mdc-card__media">
-                            <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                            <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                        </div>
-                        <div class="search-result--rating">
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star</i>
-                            <i class="material-icons s-font-color-satisfied">star_half</i>
-                        </div>
-                        <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
-                            Empresa ABC
-                        </div>
-                        <div class="search-result--service mdc-typography--headline6">
-                            Claudia Perez
-                        </div>
-                        <div class="search-result--description mdc-typography--body1">
-                            Vendenos quesosipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                            Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                            voluptatem placeat. Hic eaque officiis consequatur. Quasi aliquam odit minima sapiente non libero dolorum 
-                            unde odio atque? Totam, aspernatur.
-                        </div>
-                        <div class="search-result--hours mdc-typography--subtitle2">
-                            <i class="material-icons s-font-color-secondary">schedule</i>
-                            Lun-Mar-Jue, 10am-2pm.
-                        </div>
-                        <div class="search-result--location mdc-typography--subtitle2">
-                            <i class="material-icons s-font-color-secondary">place</i>
-                            San Pedro Sula, Honduras.
-                        </div>
-
-                        <div class="mdc-card__ripple"></div>
-                    </div>
-                    <div class="mdc-card__content">
-                    </div>
-                    <div class="mdc-card__actions">
-                        <div class="mdc-card__actions-buttons"></div>
-                        <div class="mdc-card__action-icons">
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                <div class="mdc-icon-button__ripple"></div>
-                                edit
-                            </button>
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                <div class="mdc-icon-button__ripple"></div>
-                                more_vert
-                            </button>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
