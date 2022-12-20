@@ -105,6 +105,9 @@ def _home_view():
     else:
         x=  new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
     x=  new_oul.userlist.get('rtc_online_users', {}).get('asesoras_user')
+
+    userRu = User.query.filter_by(id = 5).first()
+    userRi = User.query.filter_by(id = 6).first()
     app.logger.debug('** varela')   
     app.logger.debug(x)
     app.logger.debug('** iiiiiiiiiiii varela')   
@@ -112,7 +115,8 @@ def _home_view():
     app.logger.debug(new_userlist)    
     app.logger.debug('** xxxxxxxxxxxxx varela')    
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    return render_template('digitalcenter/home_view.html')
+    context = {'userRu':userRu,'userRi':userRi}
+    return render_template('digitalcenter/home_view.html',**context)
 
 @digitalcenter.route('/digitalcenter/chat/')
 def _dc_chat():

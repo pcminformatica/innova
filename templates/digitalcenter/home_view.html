@@ -107,6 +107,7 @@
                                 </span>
                                 <span class="mdc-tab__ripple"></span>
                             </button>
+                            <!--
                             <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                 <span class="mdc-tab__content">
                                 <span class="mdc-tab__text-label">Especialista en informática</span>
@@ -134,7 +135,7 @@
                                 <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
                                 </span>
                                 <span class="mdc-tab__ripple"></span>
-                            </button>
+                            </button>-->
 
                             </div>
                         </div>
@@ -147,12 +148,17 @@
                             <div class="mdc-layout-grid__inner">
                               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                                     <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                                        {% if userRi %}
                                         <div class="mdc-card__content">
                                             
                                             <p class="mdc-typography--body2">
                                                 <div class="mdc-card__primary-action" tabindex="0">
                                                     <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/celina.png" alt="Border Perfil" />
+                                                        {% if userRi.extra_info.avatar %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{sdeProfile.extra_info.avatar}}" alt="Border Perfil" />
+                                                        {% else %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                                        {% endif %}
                                                         <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
                                                     </div>
                                                     <div class="search-result--rating s-font-align-center">
@@ -163,35 +169,36 @@
                                                         <i class="material-icons s-font-color-satisfied">star_half</i>
                                                     </div>
                                                     <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        Daniela Magaña
+                                                        {{ userRi.extra_info.names }} {{ userRi.extra_info.last_names }}
                                                     </div>
                                                     <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        Ingeniera Eléctrica
+                                                        {{ userRi.extra_info.profession.name }}
                                                     </div>
                                                     <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                        voluptatem placeat. 
+                                                        {%if userRi.extra_info.biography.description %}
+                                                        {% autoescape false %}
+                                                            {{userRi.extra_info.biography.description|replace("\n", "<br/>")}}
+                                                        {% endautoescape %}
+                                                        {% endif %}
                                                     </div>
                                                     <div class="search-result--hours mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        Lun-Mar-Jue, 10am-2pm.
+                                                        {{ userRi.extra_info.biography.office_hours }}
                                                     </div>
                                                     <div class="search-result--location mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
+                                                        Tegucigalpa, Honduras.
                                                     </div>
                            
                                                     <div class="mdc-card__ripple"></div>
                                                 </div>
                                             </p>
-                                            <p class="mdc-typography--body2">
-                                                <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                            </p>
+                 
                                         </div>
+                                        
                                         <div class="mdc-card__actions">
                                             <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfile') }}" class="mdc-button mdc-button--icon-leading" >
+                                                <a href="{{ url_for('digitalcenter._sdeProfileA',title=userRi.id) }}" class="mdc-button mdc-button--icon-leading" >
                                                     
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true"
@@ -201,85 +208,32 @@
                                                 </a>
                                             </div>
                                         </div>
-                            
+                                        {% endif %}
                                     </div>
                               </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                <div style="width: 80%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                    <div class="mdc-card__content">
-                                        
-                                        <p class="mdc-typography--body2">
-                                            <div class="mdc-card__primary-action" tabindex="0">
-                                                <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                    <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/ejecutiva.png" alt="Border Perfil" />
-                                                    <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                </div>
-                                                <div class="search-result--rating s-font-align-center">
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                </div>
-                                                <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                    Daniela Magaña
-                                                </div>
-                                                <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                    Ingeniera Eléctrica
-                                                </div>
-                                                <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                    Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                    voluptatem placeat. 
-                                                </div>
-                                                <div class="search-result--hours mdc-typography--subtitle2">
-                                                    <i class="material-icons s-font-color-secondary">schedule</i>
-                                                    Lun-Mar-Jue, 10am-2pm.
-                                                </div>
-                                                <div class="search-result--location mdc-typography--subtitle2">
-                                                    <i class="material-icons s-font-color-secondary">place</i>
-                                                    San Pedro Sula, Honduras.
-                                                </div>
-                       
-                                                <div class="mdc-card__ripple"></div>
-                                            </div>
-                                        </p>
-                                        <p class="mdc-typography--body2">
-                                            <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                        </p>
-                                    </div>
-                                    <div class="mdc-card__actions">
-                                        <div class="mdc-card__action-icons" style="justify-content:center">
-                                            <button class="mdc-button mdc-button--icon-leading" onclick="showDetailsCard('social','b')">
-                                            
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                  >person</i
-                                                >
-                                                <span class="mdc-button__label">Ver Perfil</span>
-                                              </button>
-                                        </div>
-                                    </div>
-                        
-                                </div>
-                                </div>
                             </div>
                             
                         </div>
              
                     </div>
                     <!-- two -->
-                    <div class="content">
+                    <div class="content content">
+                     
                         <div class="mdc-layout-grid">
                             <div class="mdc-layout-grid__inner">
                               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                                     <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                                        {% if userRu %}
                                         <div class="mdc-card__content">
                                             
                                             <p class="mdc-typography--body2">
                                                 <div class="mdc-card__primary-action" tabindex="0">
                                                     <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/karla.png" alt="Border Perfil" />
+                                                        {% if userRu.extra_info.avatar %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{sdeProfile.extra_info.avatar}}" alt="Border Perfil" />
+                                                        {% else %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                                        {% endif %}
                                                         <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
                                                     </div>
                                                     <div class="search-result--rating s-font-align-center">
@@ -290,313 +244,52 @@
                                                         <i class="material-icons s-font-color-satisfied">star_half</i>
                                                     </div>
                                                     <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        Daniela Figuera
+                                                        {{ userRu.extra_info.names }} {{ userRu.extra_info.last_names }}
                                                     </div>
                                                     <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        Ingeniera Eléctrica
+                                                        {{ userRu.extra_info.profession.name }}
                                                     </div>
                                                     <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                        voluptatem placeat. 
+                                                        {%if userRu.extra_info.biography.description %}
+                                                        {% autoescape false %}
+                                                            {{userRu.extra_info.biography.description|replace("\n", "<br/>")}}
+                                                        {% endautoescape %}
+                                                        {% endif %}
                                                     </div>
                                                     <div class="search-result--hours mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        Lun-Mar-Jue, 10am-2pm.
+                                                        {{ userRu.extra_info.biography.office_hours }}
                                                     </div>
                                                     <div class="search-result--location mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
+                                                        Tegucigalpa, Honduras.
                                                     </div>
                            
                                                     <div class="mdc-card__ripple"></div>
                                                 </div>
                                             </p>
-                                            <p class="mdc-typography--body2">
-                                                <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                            </p>
+                 
                                         </div>
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <button class="mdc-button mdc-button--icon-leading" >
-                                                
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                  </button>
-                                            </div>
-                                        </div>
-                            
-                                    </div>
-                              </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                <div style="width: 80%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                    <div class="mdc-card__content">
                                         
-                                        <p class="mdc-typography--body2">
-                                            <div class="mdc-card__primary-action" tabindex="0">
-                                                <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                    <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/yaneth.png" alt="Border Perfil" />
-                                                    <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                </div>
-                                                <div class="search-result--rating s-font-align-center">
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star</i>
-                                                    <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                </div>
-                                                <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                    Daniela Magaña
-                                                </div>
-                                                <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                    Ingeniera Eléctrica
-                                                </div>
-                                                <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                    Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                    voluptatem placeat. 
-                                                </div>
-                                                <div class="search-result--hours mdc-typography--subtitle2">
-                                                    <i class="material-icons s-font-color-secondary">schedule</i>
-                                                    Lun-Mar-Jue, 10am-2pm.
-                                                </div>
-                                                <div class="search-result--location mdc-typography--subtitle2">
-                                                    <i class="material-icons s-font-color-secondary">place</i>
-                                                    San Pedro Sula, Honduras.
-                                                </div>
-                       
-                                                <div class="mdc-card__ripple"></div>
-                                            </div>
-                                        </p>
-                                        <p class="mdc-typography--body2">
-                                            <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                        </p>
-                                    </div>
-                                    <div class="mdc-card__actions">
-                                        <div class="mdc-card__action-icons" style="justify-content:center">
-                                            <button class="mdc-button mdc-button--icon-leading" onclick="showDetailsCard('social','b')">
-                                            
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                  >person</i
-                                                >
-                                                <span class="mdc-button__label">Ver Perfil</span>
-                                              </button>
-                                        </div>
-                                    </div>
-                        
-                                </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!-- three -->
-                    <div class="content">
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-                              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/ejecutiva.png" alt="Border Perfil" />
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        Daniela Magaña
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        Ingeniera Eléctrica
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                        voluptatem placeat. 
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        Lun-Mar-Jue, 10am-2pm.
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <p class="mdc-typography--body2">
-                                                <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                            </p>
-                                        </div>
                                         <div class="mdc-card__actions">
                                             <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <button class="mdc-button mdc-button--icon-leading" >
-                                                
+                                                <a href="{{ url_for('digitalcenter._sdeProfileA',title=userRu.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                                    
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true"
                                                       >person</i
                                                     >
                                                     <span class="mdc-button__label">Ver Perfil</span>
-                                                  </button>
+                                                </a>
                                             </div>
                                         </div>
-                            
+                                        {% endif %}
                                     </div>
                               </div>
-                          
                             </div>
                             
                         </div>
-                    </div>
-                    <!-- three -->
-                    <div class="content">
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/ejecutiva.png" alt="Border Perfil" />
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        Daniela Magaña
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        Ingeniera Eléctrica
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                        voluptatem placeat. 
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        Lun-Mar-Jue, 10am-2pm.
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
-                                                    </div>
-                            
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <p class="mdc-typography--body2">
-                                                <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                            </p>
-                                        </div>
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <button class="mdc-button mdc-button--icon-leading" >
-                                                
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                        >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                    </button>
-                                            </div>
-                                        </div>
-                            
-                                    </div>
-                                </div>
-                            
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!-- three -->
-                    <div class="content">
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-                              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="../static/images/assets/landingpage/carousel_women/ejecutiva.png" alt="Border Perfil" />
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        Daniela Magaña 3
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        Ingeniera Eléctrica
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad a quam consectetur reiciendis vitae eos ut?
-                                                        Nisi ab illum sed! Esse, quisquam ut? Optio repellendus sed itaque consequuntur rerum obcaecati aspernatur 
-                                                        voluptatem placeat. 
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        Lun-Mar-Jue, 10am-2pm.
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <p class="mdc-typography--body2">
-                                                <span class="s-font-color-secondary">Tiempo:</span> 1 a 2 días.
-                                            </p>
-                                        </div>
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <button class="mdc-button mdc-button--icon-leading" >
-                                                
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                  </button>
-                                            </div>
-                                        </div>
-                            
-                                    </div>
-                              </div>
-                          
-                            </div>
-                            
-                        </div>
+             
                     </div>
                 </div>
             </div>
