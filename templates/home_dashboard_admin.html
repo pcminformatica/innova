@@ -33,7 +33,7 @@
                                     {{ current_user.extra_info.profession.name }}
                                 </div>
                                 <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-primary">d</i>
+                                    <i class="material-icons s-font-color-primary">schedule</i>
                                     {{ current_user.extra_info.biography.office_hours }} 
                                 </div>
                                 <div class="mdc-typography--subtitle1">
@@ -85,6 +85,15 @@
                                                     send
                                                 </i>
                                                 <span class="mdc-deprecated-list-item__text">Crear cita</span>
+                                            </li>
+                                            <li id="createUserAppt" onclick="showRedirect(`{{ url_for('digitalcenter._dcappointments_create_admin',title=12) }}`)" class="mdc-deprecated-list-item" role="menuitem"
+                                            tabindex="0">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                aria-hidden="true">
+                                                send
+                                            </i>
+                                            <span class="mdc-deprecated-list-item__text">Configurar tiempo atención</span>
                                             </li>
                                             <!--
                                             <li class="mdc-deprecated-list-item" role="menuitem" tabindex="1">
@@ -222,22 +231,6 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                    <div class="mdc-card s-mdc-card__stats-size-s">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="s-mdc-card__stats-title">
-                                <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
-                                <div class="mdc-typography--subtitle2">
-                                    Atenciones exitosas
-                                </div>
-                            </div>
-                            <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
-                                350
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
                     <div class="mdc-layout-grid container-stats">
                         <div class="mdc-layout-grid__inner">
@@ -296,6 +289,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <div class="mdc-card s-mdc-card__stats-size-s">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="s-mdc-card__stats-title">
+                                <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                <div class="mdc-typography--subtitle2">
+                                    Empresarias Atendidas
+                                </div>
+                            </div>
+                            <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                50
+                            </div>
+
+                        </div>
+                        
+                        <div class="mdc-card__primary-action" tabindex="1" style="margin-top: 10px;">
+                            <div class="s-mdc-card__stats-title">
+                                <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                <div class="mdc-typography--subtitle2">
+                                    Horas de atención 
+                                </div>
+                            </div>
+                            <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                75:35:00 Horas
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    
 
             </div>
         </div>
