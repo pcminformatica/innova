@@ -149,7 +149,48 @@
                               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                                     <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
                                         {% if userRi %}
-                                        a
+                                        <div class="mdc-card__content">
+                                            
+                                            <p class="mdc-typography--body2">
+                                                <div class="mdc-card__primary-action" tabindex="0">
+                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                                        {% if userRi.extra_info.avatar %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{sdeProfile.extra_info.avatar}}" alt="Border Perfil" />
+                                                        {% else %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                                        {% endif %}
+                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                                    </div>
+                                                    <div class="search-result--rating s-font-align-center">
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                                    </div>
+                                                    <div class="search-result--location mdc-typography--subtitle2">
+                                                        <i class="material-icons s-font-color-secondary">place</i>
+                                                        Tegucigalpa, Honduras.
+                                                    </div>
+                           
+                                                    <div class="mdc-card__ripple"></div>
+                                                </div>
+                                            </p>
+                 
+                                        </div>
+                                        
+                                        <div class="mdc-card__actions">
+                                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                                <a href="" class="mdc-button mdc-button--icon-leading" >
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >person</i
+                                                    >
+                                                    <span class="mdc-button__label">Ver Perfil</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                         {% endif %}
                                     </div>
                               </div>
@@ -166,7 +207,48 @@
                               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                                     <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
                                         {% if userRu %}
-                                        s
+                                        <div class="mdc-card__content">
+                                            
+                                            <p class="mdc-typography--body2">
+                                                <div class="mdc-card__primary-action" tabindex="0">
+                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                                        {% if userRu.extra_info.avatar %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{sdeProfile.extra_info.avatar}}" alt="Border Perfil" />
+                                                        {% else %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                                        {% endif %}
+                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                                    </div>
+                                                    <div class="search-result--rating s-font-align-center">
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                                    </div>
+                                                    <div class="search-result--location mdc-typography--subtitle2">
+                                                        <i class="material-icons s-font-color-secondary">place</i>
+                                                        Tegucigalpa, Honduras.
+                                                    </div>
+                           
+                                                    <div class="mdc-card__ripple"></div>
+                                                </div>
+                                            </p>
+                 
+                                        </div>
+                                        
+                                        <div class="mdc-card__actions">
+                                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                                <a href="" class="mdc-button mdc-button--icon-leading" >
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >person</i
+                                                    >
+                                                    <span class="mdc-button__label">Ver Perfil</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                         {% endif %}
                                     </div>
                               </div>
