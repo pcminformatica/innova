@@ -105,9 +105,16 @@ def _home_view():
     else:
         x=  new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
     x=  new_oul.userlist.get('rtc_online_users', {}).get('asesoras_user')
+    if User.query.filter_by(id = 5).first():
+        userRu = User.query.filter_by(id = 5).first()
+    else:
+        userRu = User.query.filter_by(id = 1).first()
+    if User.query.filter_by(id = 6).first():
+        userRi = User.query.filter_by(id = 6).first()
+    else:
+        userRu = User.query.filter_by(id = 1).first()
 
-    userRu = User.query.filter_by(id = 5).first()
-    userRi = User.query.filter_by(id = 6).first()
+    
     app.logger.debug('** varela')   
     app.logger.debug(x)
     app.logger.debug('** iiiiiiiiiiii varela')   
