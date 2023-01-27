@@ -40,6 +40,11 @@ def _comunidadempresarial():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('comunidadempresarial/home.html')
 
+@home.route('/preguntasfrecuentes/')
+def _preguntasfrecuentes():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('preguntasfrecuentes.html')
+
 
 @home.route('/acercade/')
 def _acercade():
@@ -378,6 +383,11 @@ def _terminosdelservicio():
 def _welcome():
     app.logger.debug('** SWING_CMS ** - Welcome')
     return render_template('welcome.html')
+
+@home.route('/welcome/2')
+def _welcome2():
+    app.logger.debug('** SWING_CMS ** - Welcome')
+    return render_template('welcome2.html')
 
 @home.route('/base/')
 def _base():

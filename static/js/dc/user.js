@@ -1295,8 +1295,8 @@ function updateRTCUserActionButtons(usrStatus, usrType) {
                 document.querySelector('#audioCall').disabled = false;
                 document.querySelector('#videoCall').disabled = false;
             } else {
-                document.querySelector('#audioCall').disabled = true;
-                document.querySelector('#videoCall').disabled = true;
+                document.querySelector('#audioCall').disabled = false;
+                document.querySelector('#videoCall').disabled = false;
             }
             break;
         case 'Offline':

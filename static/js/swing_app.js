@@ -887,6 +887,7 @@ export function slideShowAuto() {
         let nextSlide = slidesContainer.querySelector('.container-carousel--item-active + .container-carousel--item');
     
         if (!nextSlide) {
+            console.log('123455')
             nextSlide = slidesContainer.querySelector('.container-carousel--item:first-child');
         }
 
@@ -896,6 +897,41 @@ export function slideShowAuto() {
         nextSlide.classList.remove('container--hidden');
     });
     window.setTimeout(() => {slideShowAuto()}, 10000);
+}
+
+export function slideShowAutoLast() {
+    Array.from(document.querySelectorAll('.container-carousel')).forEach((slidesContainer) => {
+        let activeSlide = slidesContainer.querySelector('.container-carousel--item-active');
+        let nextSlide = slidesContainer.querySelector('.container-carousel--item-active  .container-carousel--item');
+    
+        if (!nextSlide) {
+            console.log('siii')
+            nextSlide = slidesContainer.querySelector('.container-carousel--item:last-child');
+        }
+
+        activeSlide.classList.remove('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        activeSlide.classList.add('container--hidden');
+        nextSlide.classList.add('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        nextSlide.classList.remove('container--hidden');
+    });
+    
+}
+
+export function slideShowAutoNext() {
+    Array.from(document.querySelectorAll('.container-carousel')).forEach((slidesContainer) => {
+        let activeSlide = slidesContainer.querySelector('.container-carousel--item-active');
+        let nextSlide = slidesContainer.querySelector('.container-carousel--item-active + .container-carousel--item');
+    
+        if (!nextSlide) {
+            nextSlide = slidesContainer.querySelector('.container-carousel--item:first-child');
+        }
+
+        activeSlide.classList.remove('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        activeSlide.classList.add('container--hidden');
+        nextSlide.classList.add('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        nextSlide.classList.remove('container--hidden');
+    });
+    
 }
 
 if (document.querySelectorAll('.container-carousel')) {
@@ -917,6 +953,8 @@ const topBarTabURLs = {
     4: {'url': '/comunidaddenegocios/', 'target': '_self'},
     // MAE
     5: {'url': 'https://www.ciudadmujer.gob.hn/servicios/mae/', 'target': '_blank'},
+    //
+    6:{'url': '/preguntasfrecuentes/', 'target': '_self'},
 
 };
 
