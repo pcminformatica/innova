@@ -6,8 +6,8 @@
 {% block body %}
 <style>
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: #6BC4D0;
+  color: white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -18,15 +18,20 @@
   transition: 0.4s;
 }
 
+.accordion:hover {
+  color: #952d98;
+}
 .active, .accordion:hover {
-  background-color: #ccc; 
+  background-color: white; 
+  color: #952d98;
 }
 
 .panel {
   padding: 0 18px;
-  display: block;
+  display: none;
   background-color: white;
   overflow: hidden;
+  color: #665;
 }
 
 .accordion:after {
@@ -40,45 +45,206 @@
 .active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
+.section-questions{
+  padding-bottom: 20px;
+  width: 89%;
+  text-align: justify;
+  margin: 0 auto;
+}
+.mdc-typography-questions{
+  font-size: 1.3em;
+  margin: 0px
+}
+
+ .active .s-font-color-questions{
+  color:#952d98 !important
+}
+
+.s-font-color-questions {
+  color:white
+}
+
+.s-font-color-questions:hover {
+  color:#952d98
+}
+.s-font-color-questions .active{
+  color:white
+}
+
     </style>
     </head>
     <body>
-    
-    <h2>Animated Accordion</h2>
-    <p>Click on the buttons to open the collapsible content.</p>
-    
-    <button class="accordion active">Section 1</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    
-    <button class="accordion active">Section 2</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    
-    <button class="accordion active">Section 3</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    
-    <script>addEventListener
-var acc = document.getElementsByClassName("accordion");
-var i;
+    <main class="s-main-content">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                                
+                        <p class="mdc-typography--headline5 s-font-color-secondary">
+                          Preguntas Frecuentes
+                        </p>
+                        <p class="mdc-typography--overline s-font-color-secondary">
+                            Mujeres construyendo la página
+                        </p>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              1. ¿Cuáles son los objetivos de aprendizaje en INNOVA MUJER HONDURAS?  
+                            </span>
+                          </button>
+                          <div class="panel">
+             
+                              <ul class="mdc-typography--overline">
+                                <li>Romper sesgos de aprendizaje: quitarnos la etiqueta que la tecnología y yo no nos llevamos bien</li>
+                                <li>Diagnóstico de Negocio: radiografía del estado de su empresa </li>
+                                <li>Aplicando tecnología en su negocio </li>
+                                <li>Brindanr servicios de Desarrollo Empresarial en distintas especialidades. </li>
+                                
+                              </ul>
+                            
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              2. ¿Cómo me inscribo? 
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline">
+                              Debes llenar los requisitos para participar en el programa, luego nuestro equipo de asesoras y asesores se podrán en contacto que te informan que puedes ser participe del mismo. Y así responder al diagnóstico empresarial y los demás servicios de INNOVA MUJER HONDURAS. 
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              3. ¿Cuáles son los requisitos para participar? 
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Son 4 los principales requisitos que son: 
+                            </p>
+                            <ul >
+                              <li>Ser mayor de 18 años. </li>
+                              <li>Generar al menos 5 empleos de los cuales el 60% deben ser mujeres.  </li>
+                              <li>Un año (1) de operación no necesariamente tiene que estar legalizada.  </li>
+                              <li>Ser dueña del negocio o contar con un cargo de liderazgo en la empresa.  </li>
+                              
+                            </ul>
+ 
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              4. ¿Es un programa exclusivo para mujeres?  
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Si, es un programa para todas las mujeres hondureñas.  
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              5. ¿Pueden participar quienes no han emprendido pero quieren emprender?   
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              El proyecto es un iniciativa para empresas que ya están operando, a la usuarias que tienen el deseo de emprender la invitamos a visitar el módulo de autonomía económica (MAE) en los Centros Ciudad Mujer para que pueda realizar su plan de negocio, orientarla en sus habilidades más fuerte para madurar su negocio y poder aplicar en las próximas promociones.   
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              6. ¿Cuál es la modalidad del programa?   
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Contamos con dos modalidades, presencial en cada centro ciudad mujer a nivel nacional con un equipo de asesoras . A su vez se ejecuta por la modalidad virtual, brindando servicios de desarrollo empresaria especializados.  
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              7. ¿Cuáles son los servicios de desarrollo empresarial que INNOVA MUJER HONDURAS me ofrece como empresaria? 
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Si, es un programa para todas las mujeres hondureñas.  
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              8.  ¿Cuál es la diferencia de otros programas para empresarias?       
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Este programa tiene 4 ventajas  
+                            </p>
+                            <ul class="mdc-typography--overline">
+                              <li>La clases las reciben a través de la plataforma nuestra plataforma en “Campus Innova” . </li>
+                              <li>No tiene ningún costo .  </li>
+                              <li>
+                                Al terminar la formación, si la usuaria destacada por su participación y entrega sus asignaciones en tiempo pasarán a los Servicios de Desarrollo Empresarial (SDE) donde recibe asesoría en diseño grafico y comunicaciones, mercadeo, legalidad, producción. 
 
-for (i = 0; i < acc.length; i++) {
-    alert('s')
-  acc[i].("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
-    </script>
+ 
+                              </li>
+                              
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              9. ¿Cómo me contacto con las asesoras?  
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Puedes contactarte con ellas a través del Centro Ciudad Mujer más cercano de ti.  
+                            </p>
+                            <p class="mdc-typography--overline" >
+                              
+                              <img class="resize-image-2fit-90 banner-img" src="{{ url_for('static', filename='images/questions/administradoras.png') }}" alt="Empresaria" />
+
+                            </p>
+                          </div>
+                        </div>
+                        <div class="section-questions">
+                          <button class="accordion">
+                            <span class="mdc-typography-questions">
+                              10. ¿Es un programa exclusivo para mujeres?  
+                            </span>
+                          </button>
+                          <div class="panel">
+                            <p class="mdc-typography--overline" >
+                              Si, es un programa para todas las mujeres hondureñas.  
+                            </p>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
 {% endblock %}
 {% block bottombar %}
 <button id="floatingButton" class="mdc-fab mdc-fab--fixed mdc-fab--whatsapp"
