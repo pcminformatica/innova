@@ -19,26 +19,75 @@ var calendar = {};
 function saveCalender(){
     console.log('sss')
     calendar = {};
-
+    let cupos = 0
+    
     for (const property in mdcAssignedVars) {
-        console.log(property)
-         
+     
+        horas = []
         mdcAssignedVars[property].rowCheckboxList.forEach(function(row) {
-            console.log(row.foundation.currentCheckState)
-
+        
             if (row.foundation.currentCheckState==='checked'){
                 if (calendar[property]=== undefined || calendar[property] === null){
-                    calendar[property] = [row.root.firstElementChild.value];
+                    //creamos una json con la propidad del dia
+                    calendar[property] = {'horas':[row.root.firstElementChild.value],'cupos':0};
+                    //luego almacenamos en un arreglo la hora
+                  
                 }else{
-                    calendar[property].push(row.root.firstElementChild.value);
+                   
+                    calendar[property].horas.push(row.root.firstElementChild.value);
                 }
-
-                 
             }
+        });
+        cupos = document.querySelector('#calendar-'+property).value
+        if (calendar[property] != undefined || calendar[property] != null){
+            //creamos una json con la propidad del dia
+           
+            //luego almacenamos en un arreglo la hora
+            calendar[property].cupos = cupos;
+         
+        }
 
-        console.log(calendar)
-    });
+  
+
+
+
+        
     }
+    let config = {};
+    config['calendar'] = calendar
+    console.log(config)
+    const Swal = swcms.returnSwal()
+    Swal.fire({
+        title: '¿Desea  almacenar su calendario?',
+        text: 'Para guardar da clic en,Si, Acepto ',
+
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Acepto'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let apiUrl = '/api/save/config/calendar';
+            let postData = {'config_json':config}
+            swcms.postFetch(apiUrl, postData).then((data) => {
+              Swal.fire(
+                'Gracias',
+                'Bienvenida a INNOVA MUJER!',
+                'success'
+              )
+             // window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+            }).catch((error) => {
+        
+                Swal.fire(
+                    'Error de conexión',
+                    'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                    'error'
+                  )
+             // document.getElementById('submitSaveButton').disabled = false;
+            });
+          }
+      })
+
     const date = new Date()
     initCalendar(date.toISOString().split('T')[0])
 }
@@ -49,6 +98,11 @@ function initCalendar(dateValue){
     const [year,month, day] = dateValue.split('-');
     //string to date
     const date = new Date(+year, +month - 1, +day, +0, +0, +0);
+    console.log(date + 'siiiiiiiiii')
+    console.log(date.getDay())
+    console.log(day)
+    console.log('day---')
+
     //definimos la fecha de inicio
     const startDate = new Date(date);
     // definimos el rango de dias del calendario (7 dias)
@@ -76,7 +130,7 @@ function initCalendar(dateValue){
             content = createElementContentCalendar(dayOfWeekAsString(date.getDay()),first)
             document.querySelector('#content-tab').appendChild(content);
 
-            calendar[dayOfWeekAsString(date.getDay())].forEach(function(hour) {
+            calendar[dayOfWeekAsString(date.getDay())].horas.forEach(function(hour) {
                 
                 console.log('hour')
                 //let va = availableDates(dayOfWeekAsString(date.getDay()),hour)
@@ -162,7 +216,7 @@ function createElementCalendar(date,hours){
     title.textContent = hours;
     subtitle.textContent = datetime;
 
-    cardContainer.setAttribute('onclick',"saveAppointment('"+ datetime + "')")
+    cardContainer.setAttribute('onclick',"saveAppointment2('"+ datetime + "')")
     dataContainer.appendChild(title)
     dataContainer.appendChild(subtitle)
     cardContainer.appendChild(dataContainer)
@@ -229,7 +283,7 @@ function createTabsElementCalendar(data,first){
 }
 
 function dayOfWeekAsString(dayIndex) {
-    return ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][dayIndex] || '';
+    return ["Domingo","Lunes", "Martes","Miercoles","Jueves","Viernes","Sabado"][dayIndex] || '';
 }
 
 function changeTAB(event){

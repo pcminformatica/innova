@@ -532,3 +532,58 @@ def _d_save_admin_user():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+from datetime import datetime
+
+
+@api.route('/api/save/app', methods = ['POST'])
+# @login_required
+def _d_save_admin():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+        # POST: Save Appointment
+        if request.method == 'POST':
+            servicio = CatalogServices.query.filter_by(id = 1).first()
+            scheduled_dt = request.json['scheduled_dt']
+            app.logger.debug(scheduled_dt)
+            scheduled_dt = datetime.strptime(scheduled_dt, '%Y-%m-%d %H:%M:%S')
+
+            appointment = Appointments()
+            appointment.created_by = 2
+            appointment.created_for = 2
+            appointment.date_scheduled = scheduled_dt
+            appointment.emp_assigned = 1
+            appointment.service_id = servicio.id
+            db.session.add(appointment)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/config/calendar', methods = ['POST'])
+# @login_required
+def _d_save_config_calendar():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+        # POST: Save Appointment
+        if request.method == 'POST':
+            user = User.query.filter_by(id = current_user.id).first()
+            config_json = request.json['config_json']
+            user.extra_info.config =config_json
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+                        
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+    

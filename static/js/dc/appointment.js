@@ -1,7 +1,8 @@
 var appCal, currAppListElm, jsonSchedule, minDate, maxDate = null;
 var currTab = 0;
 const mdcAssignedVars = {};
-
+const calendar = {'Lunes':{'horas':['09:00:00','10:00:00','11:00:00'],'cupos':2},'Martes':{'horas':['09:00:00','10:00:00','11:00:00','12:00:00'],'cupos':1}}
+const citas = {'citas':['2023-02-06 09:00:00','2023-02-06 10:00:00','2023-02-07 09:00:00']}
 function showAppointments(date) {
     if (currAppListElm) {
         let hasApp = false;
@@ -101,7 +102,8 @@ window.addEventListener('load', () => {
     // Click on date behavior
     appCal.onDateClick((event, date) => {
         appCal.set(date);
-        console.log('siiiiiiiii')
+        console.log(date.toISOString().split('T')[0])
+        initCalendar(date.toISOString().split('T')[0])
     });
 
     // Make changes on the date elements
@@ -161,3 +163,258 @@ window.addEventListener('load', () => {
       
     });
 });
+
+
+
+function initCalendar(dateValue){
+    //    console.log('siiiiiiiiiiiiiiiii',dateValue)
+    
+        const [year,month, day] = dateValue.split('-');
+        //string to date
+        const date = new Date(+year, +month - 1, +day, +0, +0, +0);
+        //definimos la fecha de inicio
+        const startDate = new Date(date);
+        // definimos el rango de dias del calendario (7 dias)
+        let endDate = new Date(date); endDate.setDate( endDate.getDate() + 6 )
+        //creamos el arreglo de semas
+    
+        document.querySelector('#content-tab').innerHTML = '';
+        document.querySelector('#tab-Calendar').innerHTML = '';
+    
+        const dates = [];
+        while (startDate <= endDate) {
+          dates.push(new Date(startDate));
+          startDate.setDate(startDate.getDate() + 1);
+        }
+        let first = true;
+        let tabContainer;
+        let content;
+        dates.forEach(function(date) {
+
+            if(typeof calendar[dayOfWeekAsString(date.getDay())] !== "undefined"){
+                console.log(date)
+                console.log('--undefined--')
+                tabContainer = createTabsElementCalendar(dayOfWeekAsString(date.getDay()),first)
+                document.querySelector('#tab-Calendar').appendChild(tabContainer);
+                content = createElementContentCalendar(dayOfWeekAsString(date.getDay()),first)
+                document.querySelector('#content-tab').appendChild(content);
+    
+                calendar[dayOfWeekAsString(date.getDay())].horas.forEach(function(hour) {
+                    
+                    console.log('hour')
+                    //let va = availableDates(dayOfWeekAsString(date.getDay()),hour)
+                    console.log('crear')
+    
+                    let calendarContainer = createElementCalendar(date,hour)
+                    console.log('appointment-hours-'+dayOfWeekAsString(date.getDay()))
+                    document.querySelector('#appointment-hours-'+dayOfWeekAsString(date.getDay())).appendChild(calendarContainer);
+                });
+    
+                first = false
+            }
+        })
+        let countDay = []
+        citas['citas'].forEach(function(date) {
+            console.log('date:b')
+            let elemento = document.querySelector('#div-'+date.replaceAll(' ','-').replaceAll(':','-'))
+            if (elemento != undefined || elemento != null){
+                elemento.removeAttribute('onclick')
+                elemento.setAttribute('onclick',"reservada()")
+                elemento.className =  'mdc-card';
+                console.log(date)
+            }
+      
+
+            //covertir el string en fecha
+            dia = date.split(' ')[0]
+            console.log(dia)
+            date = stringDate(date)
+            //tomamos los cupos que se pueden obtener al dìa          
+            if (countDay[dia]=== undefined || countDay[dia] === null){
+                countDay[dia] = 1;
+            }else{
+                countDay[dia] = countDay[dia] + 1;
+            }
+            //citas por dìas no supere los cupos
+            if (countDay[dia] >= calendar[dayOfWeekAsString(date.getDay())].cupos){
+                console.log('ya no hay cupos')
+
+                let busqueda = document.querySelectorAll('.mdc-'+dia)
+                if (busqueda != undefined || busqueda != null){
+                    busqueda.forEach((appointment) => {
+                        appointment.removeAttribute('onclick')
+                        appointment.setAttribute('onclick',"reservada()")
+                        appointment.className =  'mdc-card';
+                        console.log(date)
+                    });
+               
+                }
+                
+
+            }else{
+                console.log('si hay cupos')
+ 
+            }
+            
+          
+        })
+    }
+
+
+    
+    function stringDate(str){
+    
+        const [dateValues, timeValues] = str.split(' '); //  "09/24/2022", // "07:30:14"
+        
+        const [year,month, day] = dateValues.split('-');
+        const [hours, minutes, seconds] = timeValues.split(':');
+        
+        const date = new Date(+year, +month - 1, +day, +hours, +minutes, +seconds);
+        return date;
+    }
+    
+    function createElementCalendar(date,hours){
+        let datetime = date.toISOString() .split("T")[0] + ' ' + hours;
+        let cardContainer = document.createElement('div'); 
+        let dataContainer = document.createElement('div');
+        let title = document.createElement('div');
+        let subtitle = document.createElement('div');  
+        cardContainer.classList.add('mdc-card', 'mdc-card--color-on-primary');
+        dataContainer.classList.add('mdc-card__primary-action')
+        title.classList.add('mdc-typography--headline6','s-font-color-secondary');
+        subtitle.classList.add('mdc-typography--subtitle2');
+    
+        title.textContent = hours;
+        subtitle.textContent = datetime;
+    
+        cardContainer.setAttribute('onclick',"saveAppointment('"+ datetime + "')")
+        cardContainer.setAttribute('id','div-'+datetime.replaceAll(' ','-').replaceAll(':','-'))
+        cardContainer.classList.add('mdc-'+date.toISOString() .split("T")[0]);
+        dataContainer.appendChild(title)
+        dataContainer.appendChild(subtitle)
+        cardContainer.appendChild(dataContainer)
+        return cardContainer;
+    }
+    
+    function createElementContentCalendar(data,first){
+        let cardContainer = document.createElement('div'); 
+        let dataContainer = document.createElement('div');
+    
+        cardContainer.classList.add('content');
+        if (first){
+            cardContainer.classList.add('content','content--active')
+        }else{
+            cardContainer.classList.add('content')
+        }
+        dataContainer.classList.add('container-appointment-hours')
+        dataContainer.setAttribute('id','appointment-hours-'+data)
+        cardContainer.setAttribute('id','content-'+data)
+        cardContainer.appendChild(dataContainer)
+        return cardContainer;
+    }
+    
+    
+    function createTabsElementCalendar(data,first){
+        let btnContainer = document.createElement('button'); 
+        let tabContainer = document.createElement('span');
+        let tabtitle = document.createElement('span');
+    
+        let tabindicator = document.createElement('span');  
+        let tabindicatorcontent = document.createElement('span'); 
+        let tabripple = document.createElement('span'); 
+    
+        btnContainer.className = 'mdc-tab mdc-tab 123';
+    
+        btnContainer.setAttribute('role','tab')
+        btnContainer.setAttribute('aria-selected','true')
+        btnContainer.setAttribute('tabindex','0')
+        btnContainer.setAttribute('onclick','changeTAB(this)')
+        btnContainer.setAttribute('id',data)
+        tabContainer.classList.add('mdc-tab__content')
+        tabtitle.classList.add('mdc-tab__text-label')
+    
+        
+        tabindicator.setAttribute('id','indicator-'+data)
+        if (first){
+            tabindicator.className =  'mdc-tab-indicator mdc-tab-indicator--active';
+        }else{
+            tabindicator.className =  'mdc-tab-indicator';
+        }
+        tabindicatorcontent.classList.add('mdc-tab-indicator__content','mdc-tab-indicator__content--underline');
+        
+        tabripple.classList.add('mdc-tab__ripple');
+    
+        tabtitle.textContent = data
+    
+        tabindicator.appendChild(tabindicatorcontent)
+        tabContainer.appendChild(tabtitle)
+        btnContainer.appendChild(tabContainer)
+        btnContainer.appendChild(tabindicator)
+        btnContainer.appendChild(tabripple)
+    
+        return btnContainer;
+    }
+    
+    function dayOfWeekAsString(dayIndex) {
+        return ["Domingo","Lunes", "Martes","Miercoles","Jueves","Viernes","Sabado"][dayIndex] || '';
+    }
+    
+    function changeTAB(event){
+        document.querySelector('.content--active').classList.remove('content--active');
+        document.querySelector('.mdc-tab-indicator--active').classList.remove('mdc-tab-indicator--active');
+        // Show content for newly-activated tab
+        console.log('----',event.id)
+        console.log(event)
+        document.getElementById('indicator-'+event.id).classList.add('mdc-tab-indicator--active');
+        document.getElementById('content-'+event.id).classList.add('content--active');
+    
+    }
+
+
+    function saveAppointment(date){
+        const Swal = swcms.returnSwal()
+        console.log('sii1iiiiiiiiicx')
+
+        Swal.fire({
+            title: '¿Desea  reservar cita?',
+            text: date,
+
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Acepto'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                let apiUrl = '/api/save/app';
+                let postData = {'scheduled_dt':date}
+                swcms.postFetch(apiUrl, postData).then((data) => {
+                  Swal.fire(
+                    'Gracias',
+                    'Bienvenida a INNOVA MUJER!',
+                    'success'
+                  )
+                 // window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+                }).catch((error) => {
+            
+                    Swal.fire(
+                        'Error de conexión',
+                        'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                        'error'
+                      )
+                 // document.getElementById('submitSaveButton').disabled = false;
+                });
+              }
+          })
+
+
+
+    }
+
+    function reservada(){
+        const Swal = swcms.returnSwal()
+        Swal.fire(
+            'Fecha ya reservada',
+            'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+            'error'
+          )
+    }

@@ -185,3 +185,19 @@ def _dcappointments_create_admin(title):
     app.logger.debug('** SWING_CMS ** -  appointments_create')    
     return render_template('digitalcenter/appointments_create_admin.html')
 
+
+@digitalcenter.route('/sde/appointments/config',methods=['GET', 'POST'])
+def _dcconfig_calendar():
+    app.logger.debug('** SWING_CMS ** -  appointments_create')    
+    return render_template('digitalcenter/dcconfig_calendar.html')
+
+#  configuracion
+@digitalcenter.route('/sde/appointments/calendar/config',methods=['GET', 'POST'])
+def _dcconfig_calendar_sde():
+    app.logger.debug('** SWING_CMS ** -  appointments_create')    
+    return render_template('digitalcenter/dcconfig_sde_calendar.html')
+
+@digitalcenter.route('/sde/appointments/calendar/attend',methods=['GET', 'POST'])
+def _dcappointments_sde_create():
+    app.logger.debug('** SWING_CMS ** -  appointments_create')    
+    return render_template('digitalcenter/dcappointments_sde_create.html')

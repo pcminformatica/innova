@@ -1,0 +1,108 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Crear Citas, Agendar Citas, Crear Citas, Citas{% endblock %}
+{% block page_title %}Innova Crear Citas{% endblock %}
+{% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+{% endblock %}
+{% block css_script_section %}
+<style>
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content container-color-background">
+    <!--
+    <div class="mdc-layout-grid container-size-xs">
+        <div class="mdc-layout-grid__inner">
+            <header class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                           mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                <img src="{{ url_for('static', filename='images/manifest/calendar.svg') }}" class="resize-image-2fit-30" alt="Logo Citas" />
+                <div class="mdc-typography--headline2 s-font-color-primary">
+                    Solicita tu cita.
+                </div>
+            </header>
+        </div>
+    </div>-->
+    <div class="mdc-layout-grid container-appointment">
+        <div class="mdc-layout-grid__inner">
+
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
+                        container-justify-center container-appointment-date">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 1: Selecciona la fecha
+                </h5>
+                <div id="appointment-cal" class="auto-jsCalendar primary" data-language="es" data-month-format="month YYYY"
+                     data-day-format="DDD" data-first-day-of-the-week="2">
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet 
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top s-font-align-center
+                        container-appointment-time">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 2: Selecciona el horario
+                </h5>
+
+  
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                mdc-layout-grid__cell--align-middle">
+                    <div id="profiles" class="mdc-tab-bar" role="tablist" >
+                        <div class="mdc-tab-scroller">
+                        <div class="mdc-tab-scroller__scroll-area">
+                            <div id="tab-Calendar" class="mdc-tab-scroller__scroll-content">
+            
+            
+                            
+                            
+            
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            
+            
+                    <!-- two -->
+                    <section id="content-tab">
+            
+                    </section>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
+                        container-appointment-confirm">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 3: Confirma tu cita
+                </h5>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--service">
+                </div>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--date">
+                </div>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--time">
+                </div>
+                <div class="container-appointment-confirm--submit">
+                    <button class="mdc-button mdc-button--raised" aria-label="Submit Date" alt="Submit Date"
+                        data-action-type="redirect" data-action-val="/">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Enviar Solicitud</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/jsCalendar.lang.es.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jsCalendar.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/dc/appointment.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dc/appointment-config.js') }}"></script>
+{% endblock %}

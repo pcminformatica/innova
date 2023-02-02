@@ -639,6 +639,7 @@ class UserExtraInfo(db.Model):
     city = db.Column(db.JSON, unique=False, nullable=True)
     user = db.relationship('User', lazy='subquery', back_populates='extra_info')
     biography = db.Column(db.JSON, unique=False, nullable=True)
+    config = db.Column(db.JSON, unique=False, nullable=True)
     acceptterms = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
