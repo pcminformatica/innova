@@ -214,6 +214,7 @@ def _digitalcenter():
     return render_template('digitalcenter.html')
 
 
+
 @home.route('/home/')
 @login_required
 def _home():
@@ -227,7 +228,17 @@ def _home():
             else:
                 return render_template('home_dashboard.html')
         else:
-            return render_template('home_dashboard_admin.html')
+            today = dt.today()
+    
+            appointments = Appointments.query.filter(Appointments.date_scheduled > today).all()
+            appointments = Appointments.query.join(UserXEmployeeAssigned).filter(
+        Appointments.date_scheduled > today,
+        UserXEmployeeAssigned.user_id == Appointments.created_for,
+        UserXEmployeeAssigned.employee_id == current_user.id,
+        Appointments.cancelled == False
+        ).order_by(Appointments.date_scheduled.asc()).all()
+            context = {'appointments':appointments}
+            return render_template('home_dashboard_admin.html',**context)
     else:
         return redirect(url_for('home._login'))
 
@@ -393,3 +404,14 @@ def _welcome2():
 def _base():
     app.logger.debug('** SWING_CMS ** - Welcome')
     return render_template('components.html')
+
+
+@home.route('/empresaria/')
+def _perfil_empresaria():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('empresaria.html')
+
+@home.route('/resumen/')
+def _resumen():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('resumen.html')

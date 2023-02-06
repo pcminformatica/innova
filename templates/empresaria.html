@@ -1,0 +1,97 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+</style>
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" >
+                      <div class="mdc-card__media mdc-card__media--square">
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                  <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-phone">
+                                    <div class="mdc-card__primary-action" tabindex="0">
+                                        <div class="mdc-card__media">
+                                            <img class="profile-background" src="{{ url_for('static', filename='images/calzadovarela.png') }}" alt="Border Perfil" />
+                                            
+                                        </div>
+                                        <div class="mdc-card__ripple"></div>
+                                    </div>
+
+                                    <div >
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        Lun-Vie, 8am-5pm.
+                                    </div>
+                                    <div>
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+                                  </div>
+                                  <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-1-phone">
+
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                                        Calzado Varela
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6">
+                                        Fabricar y comercializar calzado de cuero
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1">
+                                        Somos productores y comercializadores de calzado para damas, caballeros y niños cuya materia principal es el cuero. Nos avalan más de 50 años de experiencia en la industria del calzado
+                                        <br>
+
+                                    </div>
+                                  </div>
+                                 
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <!-- ... additional primary action content ... -->
+                      <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__actions">
+                      <div class="mdc-card__action-buttons">
+                        <a target="_blank" href="https://wa.me/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                   
+                            <span class="mdc-fab__icon fa fa-whatsapp" aria-hidden="true"></span>
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label" style="margin-left: 10px;"> Whatsapp Business</span>
+                        </a>
+                      </div>
+                      <div class="mdc-card__action-icons">
+                        <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">compatir Perfil</span>
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
+                          </a>
+
+     
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+     
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+{% endblock %}

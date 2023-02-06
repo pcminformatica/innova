@@ -1,0 +1,170 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+</style>
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" >
+                      <div class="mdc-card__media mdc-card__media--square">
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+
+                                  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet 
+                                  mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                          <div class="mdc-typography--body1">
+                              Servicio:
+                          </div>
+                          <div class="mdc-select mdc-select--filled demo-width-class">
+                            <div class="mdc-select__anchor"
+                                 role="button"
+                                 aria-haspopup="listbox"
+                                 aria-expanded="false"
+                                 aria-labelledby="demo-label demo-selected-text">
+                              <span class="mdc-select__ripple"></span>
+                              <span id="demo-label" class="mdc-floating-label">Servicio</span>
+                              <span class="mdc-select__selected-text-container">
+                                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                              </span>
+                              <span class="mdc-select__dropdown-icon">
+                                <svg
+                                    class="mdc-select__dropdown-icon-graphic"
+                                    viewBox="7 10 10 5" focusable="false">
+                                  <polygon
+                                      class="mdc-select__dropdown-icon-inactive"
+                                      stroke="none"
+                                      fill-rule="evenodd"
+                                      points="7 10 12 15 17 10">
+                                  </polygon>
+                                  <polygon
+                                      class="mdc-select__dropdown-icon-active"
+                                      stroke="none"
+                                      fill-rule="evenodd"
+                                      points="7 15 12 10 17 15">
+                                  </polygon>
+                                </svg>
+                              </span>
+                              <span class="mdc-line-ripple"></span>
+                            </div>
+                          
+                            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                              <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+                                  <span class="mdc-deprecated-list-item__ripple"></span>
+                                </li>
+                                <li class="mdc-deprecated-list-item" aria-selected="false" data-value="grains" role="option">
+                                  <span class="mdc-deprecated-list-item__ripple"></span>
+                                  <span class="mdc-deprecated-list-item__text">
+                                    Servicio A
+                                  </span>
+                                </li>
+                                <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
+                                  <span class="mdc-deprecated-list-item__ripple"></span>
+                                  <span class="mdc-deprecated-list-item__text">
+                                    Servicio B
+                                  </span>
+                                </li>
+                                <li class="mdc-deprecated-list-item" aria-selected="false" data-value="fruit" role="option">
+                                  <span class="mdc-deprecated-list-item__ripple"></span>
+                                  <span class="mdc-deprecated-list-item__text">
+                                    Servicio C
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+               
+                          <br><br>
+                          <label class="mdc-text-field mdc-text-field--outlined">
+                            <span class="mdc-notched-outline">
+                              <span class="mdc-notched-outline__leading"></span>
+                              <span class="mdc-notched-outline__notch">
+                                <span class="mdc-floating-label" id="my-label-id">Porcentaje de avance</span>
+                              </span>
+                              <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="0">
+                          </label>
+                          <br><br>
+                            <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
+                              <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                  <span class="mdc-floating-label" id="my-label-id">Comentario</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                              </span>
+                              <span class="mdc-text-field__resizer">
+                                <textarea class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
+                                <span class="mdc-text-field-character-counter">0 / 140</span>
+                              </span>
+                            </label>
+                            <br><br>
+                            <div class="mdc-form-field">
+                              <div class="mdc-checkbox">
+                                <input type="checkbox"
+                                       class="mdc-checkbox__native-control"
+                                       id="checkbox-1"/>
+                                <div class="mdc-checkbox__background">
+                                  <svg class="mdc-checkbox__checkmark"
+                                       viewBox="0 0 24 24">
+                                    <path class="mdc-checkbox__checkmark-path"
+                                          fill="none"
+                                          d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                  </svg>
+                                  <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                                <div class="mdc-checkbox__ripple"></div>
+                              </div>
+                              <label for="checkbox-1">Finalizo completamente</label>
+                            </div>
+                           
+
+                      </div>
+                                 
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <!-- ... additional primary action content ... -->
+                      <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__actions">
+                      <div class="mdc-card__action-buttons">
+                        <a  href="/home/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                   
+                            <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label" style="margin-left: 10px;"> Enviar</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+     
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+{% endblock %}

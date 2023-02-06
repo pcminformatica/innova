@@ -244,7 +244,9 @@ class Appointments(db.Model):
     cancelled = db.Column(db.Boolean, nullable=True, default=False)
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     cancelled_reason = db.Column(EncryptedType(db.Text, get_crypto_key, AesEngine, 'pkcs5'), nullable=True)
-
+    created_by_user = db.relationship("User", foreign_keys=[created_by])
+    created_for_user = db.relationship("User", foreign_keys=[created_for])
+    cancelled_by_cancelled_by = db.relationship("User", foreign_keys=[cancelled_by])
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -718,7 +720,8 @@ class UserXEmployeeAssigned(db.Model):
             user_id = self.user_id,
             service_id = self.service_id,
             employee_id = self.employee_id,
-            enabled = self.enabled
+            enabled = self.enabled,
+            name = self.user_id.name,
         )
 
 
