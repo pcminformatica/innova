@@ -233,7 +233,7 @@ class Appointments(db.Model):
     date_scheduled = db.Column(db.DateTime, nullable=False)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_for = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
     service_supp_id = db.Column(db.Integer, db.ForeignKey('services_supplement.id'), nullable=True)
     emp_assigned = db.Column(db.Integer, db.ForeignKey('user_x_employees_assigned.id'), nullable=False)
     emp_accepted = db.Column(db.Boolean, nullable=True, default=False)
@@ -707,7 +707,7 @@ class UserXEmployeeAssigned(db.Model):
     __tablename__ = 'user_x_employees_assigned'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
     employee_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)

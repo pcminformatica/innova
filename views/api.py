@@ -548,14 +548,21 @@ def _d_save_admin():
         if request.method == 'POST':
             servicio = CatalogServices.query.filter_by(id = 1).first()
             scheduled_dt = request.json['scheduled_dt']
+            emp_id = request.json['emp_id']
             app.logger.debug(scheduled_dt)
-            scheduled_dt = datetime.strptime(scheduled_dt, '%Y-%m-%d %H:%M:%S')
+            scheduled_dt = datetime.strptime(scheduled_dt, '%Y-%m-%d %H:%M')
 
+            employee_assigned = UserXEmployeeAssigned()
+            employee_assigned.employee_id = emp_id
+            employee_assigned.user_id = current_user.id
+            db.session.add(employee_assigned)
+            db.session.commit()
+            
             appointment = Appointments()
-            appointment.created_by = 2
-            appointment.created_for = 2
+            appointment.created_by = current_user.id
+            appointment.created_for = current_user.id
             appointment.date_scheduled = scheduled_dt
-            appointment.emp_assigned = 1
+            appointment.emp_assigned = employee_assigned.id
             appointment.service_id = servicio.id
             db.session.add(appointment)
             db.session.commit()
@@ -586,4 +593,36 @@ def _d_save_config_calendar():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+#consultar el calendario del especialista
+@api.route('/api/sde/calendar', methods = ['POST'])
+# @login_required
+def _d_calendar_sde():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    dt_today = '2023-01-20 10:00:00'
+    try:
+        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+        # POST:
+        if request.method == 'POST':
+            date = request.json['date']
+            emp_id = request.json['emp_id']
+            details = Appointments.query.join(UserXEmployeeAssigned).filter(
+        Appointments.date_scheduled > date,
+        UserXEmployeeAssigned.user_id == Appointments.created_for,
+        UserXEmployeeAssigned.employee_id == emp_id,
+        Appointments.cancelled == False
+        ).order_by(Appointments.date_scheduled.asc()).all()
+            dates = []
+            if len(details)!=0:
+                for detail in details:
+                    app.logger.debug('sii')
+                    app.logger.debug(detail.date_scheduled)
+                    dates.append(detail.date_scheduled.strftime("%Y-%m-%d %H:%M:%S"))
+            
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con','citas':dates })
+                        
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
     

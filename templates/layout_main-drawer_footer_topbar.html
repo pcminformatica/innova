@@ -17,7 +17,7 @@
             <a class="mdc-deprecated-list-item" href="/atencionempresarial/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">rss_feed</i>
-                <span class="mdc-deprecated-list-item__text">Comunidad Empresarial</span>
+                <span class="mdc-deprecated-list-item__text">Atención Empresarial</span>
             </a>
             <a class="mdc-deprecated-list-item" href="/conexioninnova/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -27,7 +27,7 @@
             <a class="mdc-deprecated-list-item" href="/escuelaempresarial/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">school</i>
-                <span class="mdc-deprecated-list-item__text">Escuela Empresarial</span>
+                <span class="mdc-deprecated-list-item__text">Campus Innova</span>
             </a>
             <a class="mdc-deprecated-list-item" href="https://www.ciudadmujer.gob.hn/servicios/mae/" aria-current="page" target="_blank">
                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -37,14 +37,21 @@
             <a class="mdc-deprecated-list-item" href="/comunidaddenegocios/">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">label_important</i>
-                <span class="mdc-deprecated-list-item__text">Comunidad de Negocios</span>
+                <span class="mdc-deprecated-list-item__text">Comunidad Empresarial</span>
             </a>
+
+            <a class="mdc-deprecated-list-item" href="/preguntasfrecuentes/">
+                <span class="mdc-deprecated-list-item__ripple"></span>
+                <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">label_important</i>
+                <span class="mdc-deprecated-list-item__text">Preguntas Frecuentes</span>
+            </a>
+            
             <hr class="mdc-deprecated-list-divider s-mdc-deprecated-list-divider">
             {% if current_user.is_authenticated %}
             <a class="mdc-deprecated-list-item" href="/home/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">person</i>
-                <span class="mdc-deprecated-list-item__text">Dashboard</span>
+                <span class="mdc-deprecated-list-item__text">Mi perfil</span>
             </a>
             <a class="mdc-deprecated-list-item" href="/logoutuser/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -63,6 +70,8 @@
                 <span class="mdc-deprecated-list-item__text">Iniciar Sesión</span>
             </a>
             {% endif %}
+
+            <!--
             <hr class="mdc-deprecated-list-divider s-mdc-deprecated-list-divider">
             <a class="mdc-deprecated-list-item" href="/acercade/">
                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -73,7 +82,7 @@
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">info</i>
                 <span class="mdc-deprecated-list-item__text">Acerca de...</span>
-            </a>
+            </a>-->
         </nav>
     </div>
 </aside>
@@ -158,7 +167,7 @@
                     data-action-type="redirect" data-action-val="/home/">
                     <span class="mdc-button__ripple"></span>
                     <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
-                    <span class="mdc-button__label">Dashboard</span>
+                    <span class="mdc-button__label">Mi perfil</span>
                 </button>
             </div>
             {% else %}

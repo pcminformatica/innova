@@ -165,9 +165,9 @@ def _sdeProfile():
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     return render_template('sdeProfile.html')
 
-@digitalcenter.route('/sde/profile/<int:title>/',methods=['GET', 'POST'])
-def _sdeProfileA(title):
-    sdeProfile = User.query.filter_by(id = title).first()
+@digitalcenter.route('/sde/profile/<int:user_id>/',methods=['GET', 'POST'])
+def _sdeProfileA(user_id):
+    sdeProfile = User.query.filter_by(id = user_id).first()
     if sdeProfile:
         app.logger.debug('** SWING_CMS ** - Home Dashboard')
         context = {'sdeProfile':sdeProfile}
@@ -175,13 +175,13 @@ def _sdeProfileA(title):
     else:
         return render_template('404.html')
 
-@digitalcenter.route('/sde/appointments/<int:title>/create',methods=['GET', 'POST'])
+@digitalcenter.route('/sde/appointments/<int:user_id>/create/old',methods=['GET', 'POST'])
 def _dcappointments_create(title):
     app.logger.debug('** SWING_CMS ** -  appointments_create')    
     return render_template('digitalcenter/appointments_create.html')
 
-@digitalcenter.route('/sde/admin/appointments/<int:title>/create',methods=['GET', 'POST'])
-def _dcappointments_create_admin(title):
+@digitalcenter.route('/sde/admin/appointments/<int:user_id>/create',methods=['GET', 'POST'])
+def _dcappointments_create_admin(user_id):
     app.logger.debug('** SWING_CMS ** -  appointments_create')    
     return render_template('digitalcenter/appointments_create_admin.html')
 
@@ -197,7 +197,23 @@ def _dcconfig_calendar_sde():
     app.logger.debug('** SWING_CMS ** -  appointments_create')    
     return render_template('digitalcenter/dcconfig_sde_calendar.html')
 
-@digitalcenter.route('/sde/appointments/calendar/attend',methods=['GET', 'POST'])
-def _dcappointments_sde_create():
-    app.logger.debug('** SWING_CMS ** -  appointments_create')    
-    return render_template('digitalcenter/dcappointments_sde_create.html')
+@digitalcenter.route('/sde/appointments/<int:user_id>/create',methods=['GET', 'POST'])
+def _dcappointments_sde_create(user_id):
+    sdeProfile = User.query.filter_by(id = user_id).first()
+    dt_today = '2023-02-01 09:00:00'
+
+    details = Appointments.query.join(UserXEmployeeAssigned).filter(
+        Appointments.date_scheduled > dt_today,
+        UserXEmployeeAssigned.user_id == Appointments.created_for,
+        UserXEmployeeAssigned.employee_id == user_id,
+        Appointments.cancelled == False
+    ).order_by(Appointments.date_scheduled.asc()).all()
+    for details in details:
+        ('** SWING_CMS ** -  appointments_creaxxxxxte',details)  
+        app.logger.debug(details.id)    
+    if sdeProfile:
+        app.logger.debug('** SWING_CMS ** - Home Dashboard')
+        context = {'sdeProfile':sdeProfile}
+        return render_template('digitalcenter/dcappointments_sde_create.html',**context)
+    else:
+        return render_template('404.html')

@@ -68,7 +68,7 @@
                                                 </i>
                                                 <span class="mdc-deprecated-list-item__text">Editar perfil</span>
                                             </li>
-                                            <li id="createUserAppt"  onclick="showRedirect(`{{ url_for('digitalcenter._sdeProfileA',title=current_user.id) }}`,'_blank')" class="mdc-deprecated-list-item" role="menuitem"
+                                            <li id="createUserAppt"  onclick="showRedirect(`{{ url_for('digitalcenter._sdeProfileA',user_id=current_user.id) }}`,'_blank')" class="mdc-deprecated-list-item" role="menuitem"
                                             tabindex="0">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                                 <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
@@ -77,7 +77,7 @@
                                                 </i>
                                                 <span class="mdc-deprecated-list-item__text">ver perfil</span>
                                             </li>                                           
-                                            <li id="createUserAppt" onclick="showRedirect(`{{ url_for('digitalcenter._dcappointments_create_admin',title=12) }}`)" class="mdc-deprecated-list-item" role="menuitem"
+                                            <li id="createUserAppt" onclick="showRedirect(`{{ url_for('digitalcenter._dcappointments_create_admin',user_id=12) }}`)" class="mdc-deprecated-list-item" role="menuitem"
                                                 tabindex="0">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                                 <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"

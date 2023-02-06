@@ -76,27 +76,46 @@
             </div>
             
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
-                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
-                        container-appointment-confirm">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
-                    Paso 3: Confirma tu cita
-                </h5>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--service">
-                </div>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--date">
-                </div>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--time">
-                </div>
-                <div class="container-appointment-confirm--submit">
-                    <button class="mdc-button mdc-button--raised" aria-label="Submit Date" alt="Submit Date"
-                        data-action-type="redirect" data-action-val="/">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Enviar Solicitud</span>
-                    </button>
-                </div>
-            </div>
+            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
+            container-appointmentadm-confirm">
+    <h5 class="mdc-typography--headline5 s-font-color-primary">
+        Paso 3: Confirma tu cita
+    </h5>
+    <div class="s-font-align-center" style="display:flex">
+        <ul class="mdc-deprecated-list mdc-deprecated-list--non-interactive" style="margin:0 auto">
+            <li class="mdc-deprecated-list-item mdc-ripple-upgraded" tabindex="-1">
+                <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">support_agent</i>
+                <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--user">{{ sdeProfile.extra_info.names }} {{ sdeProfile.extra_info.last_names }}</span>
+                <input type="hidden" id="app_usr_id" value="{{ sdeProfile.id}}">
+            </li>
+            <li class="mdc-deprecated-list-item mdc-ripple-upgraded" tabindex="-1">
+                <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">handyman</i>
+                <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--service">{{ sdeProfile.extra_info.profession.name }}</span>
+                <input type="hidden" id="app_svc_id" value="{{sdeProfile.extra_info.config.calendar}}">
+            </li>
+
+            <li class="mdc-deprecated-list-item mdc-ripple-upgraded" tabindex="-1">
+                <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">today</i>
+                <span id="container-appointment-confirm--date" class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--date">-</span>
+            </li>
+            <li class="mdc-deprecated-list-item mdc-ripple-upgraded" tabindex="-1">
+                <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">schedule</i>
+                <span id="container-appointment-confirm--time" class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--time">-</span>
+                <input type="hidden" id="app_sch_dt" value="">
+            </li>
+        </ul>
+    </div>
+    <div class="container-appointment-confirm--submit">
+        <button id="submitSaveButton" onclick="saveAppointment()" class="mdc-button mdc-button--raised mdc-ripple-upgraded" aria-label="Submit Appointment" alt="Submit Appointment" >
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Reservar cita</span>
+        </button>
+
+    </div>
+</div>
         </div>
     </div>
+    
 </main>
 {% endblock %}
 {% block body_script_section %}
