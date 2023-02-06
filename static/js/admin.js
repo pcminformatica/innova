@@ -179,7 +179,10 @@ function saveSDEForms(){
       return false
     }
   }
-
+  
+  console.log(mdcAssignedVars['txt_Departamento'].value.trim())
+  console.log(mdcAssignedVars['txt_Municipio'].value.trim())
+  //return false;
   let postData = {
     'txt_name': mdcAssignedVars['txt_name'].value.trim() || null,
     'txt_last': mdcAssignedVars['txt_last'].value.trim() || null,
@@ -191,7 +194,9 @@ function saveSDEForms(){
     'txt_LinkedIN':mdcAssignedVars['txt_LinkedIN'].value.trim() || null,
     'txt_bio_description':mdcAssignedVars['txt_bio_description'].value.trim() || null,
     'txt_bio_expertise':mdcAssignedVars['txt_bio_expertise'].value.trim() || null,
-    'txt_company_public':document.getElementById("checkbox-public").checked
+    'txt_company_public':document.getElementById("checkbox-public").checked,
+    'txt_Departamento':mdcAssignedVars['txt_Departamento'].value.trim()|| null,
+    'txt_Municipio':mdcAssignedVars['txt_Municipio'].value.trim()|| null,
     
   };
   console.log(postData)

@@ -492,12 +492,19 @@ def _d_sde():
                 'expertise':txt_bio_expertise if txt_bio_expertise else '',
                 
             }
-                        
+            txt_Departamento = request.json['txt_Departamento']
+            jsDepto = {'title':txt_Departamento}
+            txt_Municipio = request.json['txt_Municipio']
+            jsMunicipio = {'title':txt_Municipio}
+
+
             user.extra_info.national_id = request.json['txt_dni']
             user.extra_info.names = request.json['txt_name']
             user.extra_info.last_names = request.json['txt_last']
             user.extra_info.biography = jsbio
             user.extra_info.profession_id = request.json['txt_profession']
+            user.extra_info.country = jsDepto
+            user.extra_info.state = jsMunicipio
             user.phonenumber = request.json['txt_phone']
             db.session.add(user)
             db.session.commit()
