@@ -222,3 +222,7 @@ def _dcappointments_sde_create(user_id):
 @digitalcenter.route('/webinar',methods=['GET', 'POST'])
 def _webinar():
     return redirect('http://inscripciones.ciudadmujer.gob.hn/webinar')
+
+@digitalcenter.route('/inscribite/list/web',methods=['GET', 'POST'])
+def _webinarResultados():
+    return redirect('http://inscripciones.ciudadmujer.gob.hn/inscribite/list/web')
