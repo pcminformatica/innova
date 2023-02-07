@@ -217,3 +217,8 @@ def _dcappointments_sde_create(user_id):
         return render_template('digitalcenter/dcappointments_sde_create.html',**context)
     else:
         return render_template('404.html')
+
+
+@digitalcenter.route('/webinar',methods=['GET', 'POST'])
+def _webinar():
+    return redirect('http://inscripciones.ciudadmujer.gob.hn/webinar')
