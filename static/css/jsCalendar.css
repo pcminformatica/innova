@@ -539,3 +539,8 @@
 	.jsCalendar.clean-theme.green ::selection {
 		background: #7FB800;
 	}
+
+	#appointment-cal-admin {
+		display: flex;
+		justify-content: center;
+	  }
