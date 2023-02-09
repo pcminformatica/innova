@@ -148,14 +148,14 @@
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                                     <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userRi %}
+                                        {% if userLCB %}
                                         <div class="mdc-card__content">
                                             
                                             <p class="mdc-typography--body2">
                                                 <div class="mdc-card__primary-action" tabindex="0">
                                                     <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userRi.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userRi.extra_info.avatar}}" alt="Border Perfil" />
+                                                        {% if userLCB.extra_info.avatar %}
+                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userLCB.extra_info.avatar}}" alt="Border Perfil" />
                                                         {% else %}
                                                             <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
                                                         {% endif %}
@@ -169,25 +169,25 @@
                                                         <i class="material-icons s-font-color-satisfied">star_half</i>
                                                     </div>
                                                     <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userRi.extra_info.names }} {{ userRi.extra_info.last_names }}
+                                                        {{ userLCB.extra_info.names }} {{ userLCB.extra_info.last_names }}
                                                     </div>
                                                     <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userRi.extra_info.profession.name }}
+                                                        {{ userLCB.extra_info.profession.name }}
                                                     </div>
                                                     <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userRi.extra_info.biography.description %}
+                                                        {%if userLCB.extra_info.biography.description %}
                                                         {% autoescape false %}
-                                                            {{userRi.extra_info.biography.description|replace("\n", "<br/>")}}
+                                                            {{userLCB.extra_info.biography.description|replace("\n", "<br/>")}}
                                                         {% endautoescape %}
                                                         {% endif %}
                                                     </div>
                                                     <div class="search-result--hours mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userRi.extra_info.biography.office_hours }}
+                                                        {{ userLCB.extra_info.biography.office_hours }}
                                                     </div>
                                                     <div class="search-result--location mdc-typography--subtitle2">
                                                         <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
+                                                        La Ceiba, Honduras.
                                                     </div>
                            
                                                     <div class="mdc-card__ripple"></div>
@@ -196,18 +196,7 @@
                  
                                         </div>
                                         
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userRi.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
+                             
                                         {% endif %}
                                     </div>
                                     
