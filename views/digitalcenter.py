@@ -116,7 +116,7 @@ def _home_view():
     if User.query.filter_by(id = 16).first():
         userLCB = User.query.filter_by(id = 16).first()
     else:
-        userLCB = User.query.filter_by(id = 1).first()
+        userLCB = User.query.filter_by(id = 3).first()
     
     app.logger.debug('** varela')   
     app.logger.debug(x)
