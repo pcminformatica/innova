@@ -118,7 +118,7 @@ def _home_view():
     else:
         userSPS = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 16).first():
-        userLCB = User.query.filter_by(id = 3).first()
+        userLCB = User.query.filter_by(id = 16).first()
     else:
         userLCB = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 17).first():
