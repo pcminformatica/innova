@@ -114,15 +114,15 @@ def _home_view():
     else:
         userRi = User.query.filter_by(id = 1).first()
     if User.query.filter_by(id = 15).first():
-        userSPS = User.query.filter_by(id = 16).first()
+        userSPS = User.query.filter_by(id = 15).first()
     else:
         userSPS = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 16).first():
-        userLCB = User.query.filter_by(id = 16).first()
+        userLCB = User.query.filter_by(id = 3).first()
     else:
         userLCB = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 17).first():
-        userCholo = User.query.filter_by(id = 16).first()
+        userCholo = User.query.filter_by(id = 17).first()
     else:
         userCholo = User.query.filter_by(id = 3).first()
 
