@@ -237,3 +237,9 @@ def _webinar():
 @digitalcenter.route('/inscribite/list/web',methods=['GET', 'POST'])
 def _webinarResultados():
     return redirect('http://inscripciones.ciudadmujer.gob.hn/inscribite/list/web')
+
+
+@digitalcenter.route('/inscribite/',methods=['GET', 'POST'])
+def _webinarResultados():
+    return redirect('http://inscripciones.ciudadmujer.gob.hn/inscribite/')
+    
