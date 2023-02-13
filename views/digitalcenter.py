@@ -125,7 +125,10 @@ def _home_view():
         userCholo = User.query.filter_by(id = 17).first()
     else:
         userCholo = User.query.filter_by(id = 3).first()
-
+    if User.query.filter_by(id = 18).first():
+        userCholu = User.query.filter_by(id = 18).first()
+    else:
+        userCholu = User.query.filter_by(id = 3).first()
     app.logger.debug('** varela')   
     app.logger.debug(x)
     app.logger.debug('** iiiiiiiiiiii varela')   
@@ -133,7 +136,7 @@ def _home_view():
     app.logger.debug(new_userlist)    
     app.logger.debug('** xxxxxxxxxxxxx varela')    
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    context = {'userRu':userRu,'userRi':userRi,'userLCB':userLCB,'userSPS':userSPS,'userCholo':userCholo}
+    context = {'userRu':userRu,'userRi':userRi,'userLCB':userLCB,'userSPS':userSPS,'userCholo':userCholo,'userCholu':userCholu}
     return render_template('digitalcenter/home_view.html',**context)
 
 @digitalcenter.route('/digitalcenter/chat/')
