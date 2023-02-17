@@ -282,11 +282,21 @@ export function getUsers(uType, timer) {
     let txtIn = txtEl.value.trim();
     
     if (txtIn.length > 1) {
-        let query = encodeURIComponent(txtIn);
-        let ft = (uType == 'usr')? '' : 'sur';
-        let apiUrl = `/api/list/users/?ft=${ft}&flt=${uType}&qry=${query}`;
 
-        swcms.getFetch(apiUrl, 'loadUsersResults');
+        let query = encodeURIComponent(txtIn);
+        let apiUrl = '/api/list/users/company';
+        let postData = {'query':query}
+        swcms.postFetch(apiUrl, postData).then((data) => {
+
+            loadUsersResults(data)
+           
+         // window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+        }).catch((error) => {
+    
+            
+         // document.getElementById('submitSaveButton').disabled = false;
+        });
+    
     } else {
         if (uType == 'usr') {
             searchResultsUsers.open = false;
@@ -368,50 +378,17 @@ window.loadStates = loadStates;
 
 // Load User Details
 export function loadUserDetails(data) {
-    Object.entries(data).forEach(([key, val]) => {
-        switch (key) {
-            case 'country':
-            case 'enabled':
-            case 'email':
-            case 'id':
-            case 'roles':
-            case 'status':
-                break;
+    console.log(data.company_name)
+    console.log('ss')
+    console.log(data.company_name)
+    
 
-            case 'national_id_type':
-                if (val){
-                    mdcAssignedVars['u.national_id_type'].value = val;
-                } else {
-                    mdcAssignedVars['u.national_id_type'].selectedIndex = -1;
-                }
-                break;
-            
-            case 'city':
-                mdcAssignedVars['u.city'].selectedIndex = -1;
-                break;
-            
-            case 'state':
-                mdcAssignedVars['u.state'].selectedIndex = -1;
-                break;
-            
-            default:
-                if (mdcAssignedVars['u.' + key]) mdcAssignedVars['u.' + key].value = (val)? val : '';
-                break;
-        }
-    });
-    if (data.state) {
-        let statesElms = document.querySelectorAll('#f-appointment-department-select > li');
-        // Validate that State exists in the Dropdown
-        if (!statesElms){
-            getStates().then((response) => {
-                setUserCity = data.city;
-                mdcAssignedVars['u.state'].value = data.state.iso2;
-            });
-        } else {
-            setUserCity = data.city;
-            mdcAssignedVars['u.state'].value = data.state.iso2;
-        }
-    }
+    document.getElementById('u.names').value = data.names + ' ' + data.last_names;
+    document.getElementById('u.company').value = data.company_name;
+    document.getElementById('u.rtn').value = data.company_rtn;
+    document.getElementById('u.national_id').value = data.company_name;
+    document.getElementById('u.phonenumber').value = data.company_phones.phone;
+    
     jsonUserDetails = data;
 }
 /* Allow 'window' context to reference the function */
@@ -576,33 +553,33 @@ window.saveAppointment = saveAppointment;
 // Select Appointment Service
 export function selectAppointmentService(value) {
     let apiUrl = `/api/detail/service/${value}/`;
-    let svcIdEl = document.getElementById('app_svc_id');
+    let svcIdEl = document.getElementById('app_service_id');
     let svcConfirmEl = document.querySelector('.container-appointment-confirm--service');
     let svcName = document.querySelector('#f-appointment-service-select > li[data-value="' + value + '"]');
 
     svcConfirmEl.textContent = svcName.textContent;
     svcIdEl.value = value;
     
-    swcms.getFetch(apiUrl).then((data) => {
-        jsonServiceDetails = data;
-        createServiceSessionsContainers();
-    });
+   //// swcms.getFetch(apiUrl).then((data) => {
+      ////  jsonServiceDetails = data;
+        ////createServiceSessionsContainers();
+    ////});
 
-    mdcAssignedVars['e.name'].value = '';
-    document.querySelector('.container-appointmentadm-emp--record-info').classList.add('container--hidden');
-    document.querySelectorAll('.container-appointmentadm-emp--record-info > span').forEach((el) => {
-        el.innerHTML = '-';
-    });
-    document.querySelector('.container-appointment-sessions').classList.add('container--hidden');
-    document.querySelector('.container-appointment-empty').classList.remove('container--hidden');
-    document.querySelector('.container-appointment-confirm--emp').innerHTML = '-';
-    document.querySelector('.container-appointment-confirm--date').innerHTML = '-';
-    document.querySelector('.container-appointment-confirm--time').innerHTML = '-';
-    document.getElementById('app_emp_id').value = '';
-    document.getElementById('app_sch_dt').value = '';
-    jsonEmpDetails = null;
-    jsonEmpBusySch = null;
-    appCal.refresh();
+    //mdcAssignedVars['e.name'].value = '';
+    //document.querySelector('.container-appointmentadm-emp--record-info').classList.add('container--hidden');
+   // document.querySelectorAll('.container-appointmentadm-emp--record-info > span').forEach((el) => {
+    //    el.innerHTML = '-';
+    //});
+    //document.querySelector('.container-appointment-sessions').classList.add('container--hidden');
+    //document.querySelector('.container-appointment-empty').classList.remove('container--hidden');
+    //document.querySelector('.container-appointment-confirm--emp').innerHTML = '-';
+    //document.querySelector('.container-appointment-confirm--date').innerHTML = '-';
+    //document.querySelector('.container-appointment-confirm--time').innerHTML = '-';
+    //document.getElementById('app_emp_id').value = '';
+    //document.getElementById('app_sch_dt').value = '';
+    //jsonEmpDetails = null;
+    //jsonEmpBusySch = null;
+    //appCal.refresh();
 }
 /* Allow 'window' context to reference the function */
 window.selectAppointmentService = selectAppointmentService;

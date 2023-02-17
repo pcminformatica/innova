@@ -44,13 +44,13 @@
                     <span class="mdc-typography--subtitle2">-</span>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled" id="u.names" data-assigned-var>
+                    <label class="mdc-text-field mdc-text-field--filled"  >
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-names-input" class="mdc-text-field__input" type="text" tabindex="0" maxlength="300"
-                                aria-labelledby="f-appointment-names-label">
+                        <input id="u.names" id="f-appointment-names-input" class="mdc-text-field__input" type="text" tabindex="0" maxlength="300"
+                                aria-labelledby="f-appointment-names-label" value="-">
                                 <!-- aria-controls="f-appointment-names-helper"
                                 aria-describedby="f-appointment-names-helper"> -->
-                        <span class="mdc-floating-label" id="f-appointment-names-label">Nombres</span>
+                        <span class="mdc-floating-label" id="f-appointment-names-label">Nombre</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                     <!-- <div class="mdc-text-field-helper-line">
@@ -58,38 +58,38 @@
                     </div> -->
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled" id="u.last_names" data-assigned-var>
+                    <label class="mdc-text-field mdc-text-field--filled" >
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-lastnames-input" class="mdc-text-field__input" type="text"
-                                aria-labelledby="f-appointment-lastnames-label" tabindex="0" maxlength="300">
-                        <span class="mdc-floating-label" id="f-appointment-lastnames-label">Apellidos</span>
+                        <input id="u.company"  class="mdc-text-field__input" type="text"
+                                aria-labelledby="f-appointment-lastnames-label" tabindex="0" maxlength="300" value="-">
+                        <span class="mdc-floating-label" id="f-appointment-lastnames-label">Empresa</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled" id="u.birthdate" data-assigned-var>
+                    <label class="mdc-text-field mdc-text-field--filled" >
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-birthdate-input" class="mdc-text-field__input" type="date"
-                                aria-labelledby="f-appointment-birthdate-label" tabindex="0" min="1900-01-01">
-                        <span class="mdc-floating-label" id="f-appointment-birthdate-label">Fecha de Nacimiento</span>
+                        <input id="u.rtn" class="mdc-text-field__input" type="text"
+                                aria-labelledby="f-appointment-birthdate-label" tabindex="0" min="1900-01-01" value="-">
+                        <span class="mdc-floating-label" id="f-appointment-birthdate-label">RTN</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
 
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled" id="u.national_id" data-assigned-var>
+                    <label class="mdc-text-field mdc-text-field--filled" >
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-nationalid-input" class="mdc-text-field__input" type="text"
-                                aria-labelledby="f-appointment-nationalid-label" tabindex="0" maxlength="30">
+                        <input id="u.national_id" class="mdc-text-field__input" type="text"
+                                aria-labelledby="f-appointment-nationalid-label" tabindex="0" maxlength="30" value="-">
                         <span class="mdc-floating-label" id="f-appointment-nationalid-label">Número ID</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled" id="u.phonenumber" data-assigned-var>
+                    <label class="mdc-text-field mdc-text-field--filled" >
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-phonenumber-input" class="mdc-text-field__input" type="tel"
-                                aria-labelledby="f-appointment-phonenumber-label" tabindex="0" maxlength="20">
+                        <input id="u.phonenumber" class="mdc-text-field__input" type="tel"
+                                aria-labelledby="f-appointment-phonenumber-label" tabindex="0" maxlength="20" value="-">
                         <span class="mdc-floating-label" id="f-appointment-phonenumber-label">Número Telefónico</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
@@ -116,14 +116,8 @@
                     </div>
                     <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth" role="listbox" tabindex="0">
                         <ul id="f-appointment-service-select" class="mdc-deprecated-list mdc-select__list">
-                            <li class="mdc-deprecated-list-item" data-value="2">
-                                <span class="mdc-deprecated-list-item__ripple"></span>
-                                <span class="mdc-deprecated-list-item__text">
-                                    2
-                                </span>
-                            </li>
                             {% for service in services %}
-                            <li class="mdc-deprecated-list-item" data-value="{{ service.name_short }}">
+                            <li class="mdc-deprecated-list-item" data-value="{{ service.id }}">
                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                 <span class="mdc-deprecated-list-item__text">
                                     {{ service.name }}
@@ -153,7 +147,7 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-appointmentadm-time">
                 <h5 class="mdc-typography--headline5 s-font-color-primary s-font-align-center" id="step-five">
-                    Paso 5: Selecciona el horario
+                    Paso 4: Selecciona el horario
                 </h5>
                 <div class="container-appointment-empty s-font-align-center">
                     <div id="profiles" class="mdc-tab-bar" role="tablist" >
@@ -184,7 +178,7 @@
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
                         container-appointmentadm-confirm">
                 <h5 class="mdc-typography--headline5 s-font-color-primary">
-                    Paso 6: Confirma tu cita
+                    Paso 5: Confirma tu cita
                 </h5>
                 <div class="container-appointment-confirm--review">
                     <ul class="mdc-deprecated-list mdc-deprecated-list--non-interactive">
@@ -196,27 +190,28 @@
                         <li class="mdc-deprecated-list-item">
                             <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">handyman</i>
                             <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--service">-</span>
-                            <input type="hidden" id="app_svc_id" value="{{current_user.extra_info.config.calendar}}">
+                            <input type="hidden" id="app_service_id" value="{{current_user.extra_info.config.calendar}}">
                         </li>
                         <li class="mdc-deprecated-list-item">
                             <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">support_agent</i>
-                            <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--emp">-</span>
-                            <input type="hidden" id="app_emp_id" value="">
+                            <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--emp">{{current_user.extra_info.names }} {{current_user.extra_info.last_names }}</span>
+                            <input type="hidden" id="app_emp_id" value="{{current_user.id }}">
+                            <input type="hidden" id="app_svc_id" value="{{current_user.extra_info.config.calendar}}">
                         </li>
                         <li class="mdc-deprecated-list-item">
                             <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">today</i>
-                            <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--date">-</span>
+                            <span id="container-appointment-confirm--date" class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--date">-</span>
                         </li>
                         <li class="mdc-deprecated-list-item">
                             <i class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary">schedule</i>
-                            <span class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--time">-</span>
+                            <span id="container-appointment-confirm--time" class="mdc-deprecated-list-item__text mdc-typography--body1 container-appointment-confirm--time">-</span>
                             <input type="hidden" id="app_sch_dt" value="">
                         </li>
                     </ul>
                 </div>
                 <div class="container-appointment-confirm--submit">
-                    <button id="submitSaveButton" class="mdc-button mdc-button--raised" aria-label="Submit Appointment" alt="Submit Appointment"
-                        data-action-type="submit" data-action-fn="saveAppointment">
+                    <button onclick="saveAppointmentAdmin()" class="mdc-button mdc-button--raised" aria-label="Submit Appointment" alt="Submit Appointment"
+                       >
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">Reservar cita</span>
                     </button>

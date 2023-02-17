@@ -318,3 +318,29 @@ function saveAppointment(date){
       document.getElementById('submitSaveButton').disabled = false;
     });
 }
+
+
+function Test2(){
+    alert('test2')
+    const Swal = swcms.returnSwal()
+    let apiUrl = '/api/list/users/company';
+    let postData = {'query':'vare'}
+    swcms.postFetch(apiUrl, postData).then((data) => {
+        let countDay = []
+
+      Swal.fire(
+        'Gracias',
+        'Cita almacenda con exito!',
+        'success'
+      )
+     // window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+    }).catch((error) => {
+
+        Swal.fire(
+            'Error de conexión',
+            'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+            'error'
+          )
+     // document.getElementById('submitSaveButton').disabled = false;
+    });
+}

@@ -196,8 +196,11 @@ def _dcappointments_create(title):
 
 @digitalcenter.route('/sde/admin/appointments/<int:user_id>/create',methods=['GET', 'POST'])
 def _dcappointments_create_admin(user_id):
-    app.logger.debug('** SWING_CMS ** -  appointments_create')    
-    return render_template('digitalcenter/appointments_create_admin.html')
+    app.logger.debug('** SWING_CMS ** -  appointments_create') 
+    services = CatalogServices.query.filter_by(enabled = 1).all()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    context = {'services':services}  
+    return render_template('digitalcenter/appointments_create_admin.html',**context)
 
 
 @digitalcenter.route('/sde/appointments/config',methods=['GET', 'POST'])

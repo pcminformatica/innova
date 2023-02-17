@@ -234,7 +234,7 @@ function initCalendar(dateValue){
         let dates = new Date();
         
         let datetime = dates.toISOString().split("T")[0] + ' 0:00:00';
-        let emp_id = document.querySelector('#app_usr_id').value;
+        let emp_id = document.querySelector('#app_emp_id').value;
         console.log(datetime)
         console.log('datetime')
 
@@ -426,7 +426,7 @@ function initCalendar(dateValue){
         
         const Swal = swcms.returnSwal()
         let date = document.querySelector('#app_sch_dt').value;
-        let emp_id = document.querySelector('#app_usr_id').value;
+        let emp_id = document.querySelector('#app_emp_id').value;
         Swal.fire({
             title: '¿Desea  reservar cita?',
             text: date,
@@ -540,4 +540,52 @@ function initCalendar(dateValue){
               )
          // document.getElementById('submitSaveButton').disabled = false;
         });
+    }
+
+
+
+    function saveAppointmentAdmin(){
+  
+        const Swal = swcms.returnSwal()
+        let date = document.querySelector('#app_sch_dt').value;
+        let usr_id = document.querySelector('#app_usr_id').value;
+        let emp_id = document.querySelector('#app_emp_id').value;
+        let app_service_id = document.querySelector('#app_service_id').value;
+        let postData = {'scheduled_dt':date,'emp_id':emp_id,'usr_id':usr_id,'app_service_id':app_service_id}
+        console.log(postData)
+        Swal.fire({
+            title: '¿Desea  reservar cita?',
+            text: date,
+
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Acepto',
+            cancelButtonText:'Cancelar',
+          }).then((result) => {
+            if (result.isConfirmed) {
+                let apiUrl = '/api/save/appointment/admin';
+                
+                swcms.postFetch(apiUrl, postData).then((data) => {
+                  Swal.fire(
+                    'Gracias',
+                    'Cita almacenda con exito!',
+                    'success'
+                  )
+                 // window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+                 disableDates()
+                }).catch((error) => {
+            
+                    Swal.fire(
+                        'Error de conexión',
+                        'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                        'error'
+                      )
+                 // document.getElementById('submitSaveButton').disabled = false;
+                });
+              }
+          })
+
+
+
     }

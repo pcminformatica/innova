@@ -234,7 +234,7 @@ function initCalendar(dateValue){
         let dates = new Date();
         
         let datetime = dates.toISOString().split("T")[0] + ' 0:00:00';
-        let emp_id = document.querySelector('#app_usr_id').value;
+        let emp_id = document.querySelector('#app_emp_id').value;
         console.log(datetime)
         console.log('datetime')
 
@@ -426,7 +426,7 @@ function initCalendar(dateValue){
         
         const Swal = swcms.returnSwal()
         let date = document.querySelector('#app_sch_dt').value;
-        let emp_id = document.querySelector('#app_usr_id').value;
+        let emp_id = document.querySelector('#app_emp_id').value;
         Swal.fire({
             title: '¿Desea  reservar cita?',
             text: date,

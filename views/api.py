@@ -7,7 +7,7 @@ from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
-
+from sqlalchemy import or_
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
 # Set the Appointment's Details
@@ -156,6 +156,13 @@ def _d_user(user_id = None):
                         response['country'] = detail.extra_info.country
                         response['state'] = detail.extra_info.state
                         response['city'] = detail.extra_info.city
+                    if detail.extra_info.company is not None:
+                        response['company_rtn'] = detail.extra_info.company.rtn
+                        response['company_name'] = detail.extra_info.company.name
+                        response['company_description'] = detail.extra_info.company.description
+                        response['company_address'] = detail.extra_info.company.address
+                        response['company_social_networks'] = detail.extra_info.company.social_networks
+                        response['company_phones'] = detail.extra_info.company.phones
 
                 return jsonify(response)
             else:
@@ -280,6 +287,7 @@ def _l_users():
                     userRolesFilters = filters.split('-')
                     
                     # Check if the Filters are of type Servie User Role
+                    filters_type = 'sur'
                     if filters_type is not None and filters_type == 'sur':
                         app.logger.debug('** 12 ** - sur List Users')
                         app.logger.debug('** 123 ** - sur List Users')
@@ -298,8 +306,9 @@ def _l_users():
 
                     ulistFiltered = []
                     for user in ulist:
-                        if user.is_user_role(userRolesFilters):
-                            ulistFiltered.append(user)
+                        ulistFiltered.append(user)
+                
+                            
                     ulist = ulistFiltered
                     total = len(ulistFiltered)
 
@@ -435,6 +444,7 @@ def _d_():
                 'facebook':company_facebook if company_facebook else '',
                 'instagram':company_instagram if company_instagram else '',
             }
+            
             company.name = request.json['txt_company_name']
             company.rtn = request.json['txt_company_rtn']
             company.address = request.json['txt_company_address']
@@ -579,6 +589,46 @@ def _d_save_admin():
         return jsonify({ 'status': 'error', 'msg': e })
 
 
+@api.route('/api/save/appointment/admin', methods = ['POST'])
+# @login_required
+def _save_admin_appointment():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API /api/save/appointment/admin Detail')
+    try:
+        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+        # POST: Save Appointment
+        if request.method == 'POST':
+            scheduled_dt = request.json['scheduled_dt']
+            emp_id = request.json['emp_id']
+            usr_id = request.json['usr_id']
+            app_service_id = request.json['app_service_id']
+            
+            servicio = CatalogServices.query.filter_by(id = app_service_id).first()
+            scheduled_dt = datetime.strptime(scheduled_dt, '%Y-%m-%d %H:%M')
+            emp = User.query.filter_by(id = emp_id).first()
+            usr = User.query.filter_by(id = usr_id).first()
+
+            employee_assigned = UserXEmployeeAssigned()
+            employee_assigned.employee_id = emp.id
+            employee_assigned.user_id = usr.id
+            db.session.add(employee_assigned)
+            db.session.commit()
+            
+            appointment = Appointments()
+            appointment.created_by = current_user.id
+            appointment.created_for = usr.id
+            appointment.date_scheduled = scheduled_dt
+            appointment.emp_assigned = emp.id
+            appointment.service_id = servicio.id
+            db.session.add(appointment)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
 @api.route('/api/save/config/calendar', methods = ['POST'])
 # @login_required
 def _d_save_config_calendar():
@@ -633,3 +683,94 @@ def _d_calendar_sde():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
     
+
+# Get a list of Users or company
+@api.route('/api/list/users/company', methods = ['GET','POST'])
+# @login_required
+def _l_users_company():
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    try:
+        if request.method == 'POST':
+            query= request.json['query']
+            search = "%{}%".format(query)
+            ulist = User.query.filter(User.name.like('%e%')).all()[:2]
+            ulist = User.query.join(UserExtraInfo, User.id==UserExtraInfo.id)\
+                .join(Company, Company.id==UserExtraInfo.company_id)\
+                .join(UserXRole, UserXRole.user_id==User.id)\
+                .filter(or_(UserExtraInfo.last_names.like(search),\
+                    UserExtraInfo.names.like(search),UserExtraInfo.national_id.like(search),\
+                    Company.rtn.like(search),Company.name.like(search),
+                    User.name.like(search),User.email.like(search),User.phonenumber.like(search),
+                     ))\
+                .filter(UserXRole.user_role_id == 1)\
+                .all()[:9]
+            total = len(ulist)
+            response = {
+                'r_filter': 'usr',
+                'r_total': total,
+                'records': [],
+                'status': 404
+            }
+
+            if total > 0:
+                response['status'] = 200
+                for usr in ulist:
+                    response['records'].append({
+                        'u_id': usr.id,
+                        'u_name': usr.name,
+                        'u_email': usr.email
+                    })
+            return jsonify(response)
+ 
+        else:
+            return jsonify({ 'status': 400 })
+        
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API List Users Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
+# Get a list of Users employees
+@api.route('/api/list/users/employees', methods = ['GET','POST'])
+# @login_required
+def _l_users_emp():
+    app.logger.debug('** SWING_CMS ** - API List Users')
+    try:
+        if request.method == 'POST':
+            query= request.json['query']
+            search = "%{}%".format(query)
+            ulist = User.query.filter(User.name.like('%e%')).all()[:2]
+            ulist = User.query.join(UserExtraInfo, User.id==UserExtraInfo.id)\
+                .join(Company, Company.id==UserExtraInfo.company_id)\
+                .join(UserXRole, UserXRole.user_id==User.id)\
+                .filter(or_(UserExtraInfo.last_names.like(search),\
+                    UserExtraInfo.names.like(search),UserExtraInfo.national_id.like(search),\
+                    Company.rtn.like(search),Company.name.like(search),
+                    User.name.like(search),User.email.like(search),User.phonenumber.like(search),
+                     ))\
+                .filter(UserXRole.user_role_id != 1)\
+                .all()[:9]
+            total = 10
+            response = {
+                'r_filter': query,
+                'r_total': 10,
+                'records': [],
+                'status': 404
+            }
+
+            if total > 0:
+                response['status'] = 200
+                for usr in ulist:
+                    response['records'].append({
+                        'u_id': usr.id,
+                        'u_name': usr.name,
+                        'u_email': usr.email
+                    })
+            return jsonify(response)
+ 
+        else:
+            return jsonify({ 'status': 400 })
+        
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API List Users Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
