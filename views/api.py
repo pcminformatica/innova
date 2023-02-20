@@ -619,7 +619,7 @@ def _save_admin_appointment():
             appointment.created_by = current_user.id
             appointment.created_for = usr.id
             appointment.date_scheduled = scheduled_dt
-            appointment.emp_assigned = emp.id
+            appointment.emp_assigned = employee_assigned.id
             appointment.service_id = servicio.id
             db.session.add(appointment)
             db.session.commit()
@@ -675,6 +675,7 @@ def _d_calendar_sde():
                 for detail in details:
                     app.logger.debug('sii')
                     app.logger.debug(detail.date_scheduled)
+                    #dates.append(detail.date_scheduled.strftime("%Y-%m-%d %H:%M:%S"))
                     dates.append(detail.date_scheduled.strftime("%Y-%m-%d %H:%M:%S"))
             
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con','citas':dates })

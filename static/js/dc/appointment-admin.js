@@ -245,7 +245,11 @@ function initCalendar(dateValue){
             data.citas.forEach(function(date) {
                 console.log('date:b')
                 console.log(date)
-                let elemento = document.querySelector('#div-'+date.replaceAll(' ','-').replaceAll(':','-'))
+                let x = date.replaceAll(' ','-').replaceAll(':','-').slice(0,-3)
+                console.log('datetime')
+                console.log(x)
+                console.log('datetime')
+                let elemento = document.querySelector('#div-'+x)
                 if (elemento != undefined || elemento != null){
                     elemento.removeAttribute('onclick')
                     elemento.setAttribute('onclick',"reservada()")
