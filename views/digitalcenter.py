@@ -251,3 +251,27 @@ def _webinarResultados():
 def _webinarInscribite():
     return redirect('http://inscripciones.ciudadmujer.gob.hn/inscribite/')
     
+@digitalcenter.route('/reset/chat',methods=['GET', 'POST'])
+def _re():
+    nowdt = dt.now(tz.utc)
+    operation = CatalogOperations.query.filter_by(name_short='ins').first()
+
+    rtc_oul = RTCOnlineUsers()
+    rtc_oul.id = nowdt
+    rtc_oul.operation_id = operation.id
+    rtc_oul.userlist = {
+        'rtc_online_users': {
+            'id': str(nowdt),
+            'anon_users': [],
+            'emp_users': [],
+            'reg_users': [],
+            'itc_users': [], 
+            'dis_users': [],
+            'mkt_users': []
+        }
+    }
+    rtc_oul.enabled = True
+    db.session.add(rtc_oul)
+
+    db.session.commit()
+    return render_template('404.html')
