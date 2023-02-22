@@ -693,7 +693,8 @@ function enableRTCUserList(enable = true){
             if (enable) {
                 elm.classList.remove('container--disable-click');
             } else {
-                elm.classList.add('container--disable-click');
+                elm.classList.remove('container--disable-click');
+                //elm.classList.add('container--disable-click');
             }
         });
     });
@@ -1049,7 +1050,8 @@ function showConversationUI(showOrHide, usrElem) {
         document.querySelector('.container-chat--topbar-info-data-name').textContent = usrName;
         updateRTCUserStatus(uid, usrStatus);
         if (uType == 'emp' && transferOption) {
-            transferOption.classList.add('mdc-deprecated-list-item--disabled');
+            //transferOption.classList.add('mdc-deprecated-list-item--disabled');
+            transferOption.classList.remove('mdc-deprecated-list-item--disabled');
         } else {
             transferOption.classList.remove('mdc-deprecated-list-item--disabled');
         }
@@ -1255,8 +1257,11 @@ function updateRTCUserActionButtons(usrStatus, usrType) {
                 document.querySelector('#audioCall').disabled = false;
                 document.querySelector('#videoCall').disabled = false;
             } else {
-                document.querySelector('#audioCall').disabled = true;
-                document.querySelector('#videoCall').disabled = true;
+                document.querySelector('#audioCall').disabled = false;
+                document.querySelector('#videoCall').disabled = false;
+
+                //document.querySelector('#audioCall').disabled = true;
+                //document.querySelector('#videoCall').disabled = true;
             }
             break;
         case 'Offline':
@@ -1328,15 +1333,20 @@ function updateRTCUserStatus(id, usrStatus) {
                     ftTextAreaElem.classList.remove('mdc-text-field--disabled');
                     ftTextInputElem.disabled = false;
                 } else {
-                    ftTextAreaElem.classList.add('mdc-text-field--disabled');
+                    //ftTextAreaElem.classList.add('mdc-text-field--disabled');
+                    //ftTextInputElem.disabled = false;
+                    ftTextAreaElem.classList.remove('mdc-text-field--disabled');
                     ftTextInputElem.disabled = false;
                 }
                 break;
             case 'Offline':
                 tbStatTextElem.classList.remove('s-font-color-primary');
                 tbStatTextElem.classList.add('s-font-color-secondary');
-                ftTextAreaElem.classList.add('mdc-text-field--disabled');
-                ftTextInputElem.disabled = true;
+                //ftTextAreaElem.classList.add('mdc-text-field--disabled');
+                //ftTextInputElem.disabled = true;
+                //
+                ftTextAreaElem.classList.remove('mdc-text-field--disabled');
+                ftTextInputElem.disabled = false;
                 break;
             default:
                 tbStatTextElem.classList.remove('s-font-color-secondary');

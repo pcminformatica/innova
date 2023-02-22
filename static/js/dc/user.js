@@ -711,7 +711,8 @@ function enableRTCUserList(enable = true){
             if (enable) {
                 elm.classList.remove('container--disable-click');
             } else {
-                elm.classList.add('container--disable-click');
+                elm.classList.remove('container--disable-click');
+                //elm.classList.add('container--disable-click');
             }
         });
     });
@@ -1068,6 +1069,7 @@ function showConversationUI(showOrHide, usrElem) {
         updateRTCUserStatus(uid, usrStatus);
         if (uType == 'emp' && transferOption) {
             transferOption.classList.add('mdc-deprecated-list-item--disabled');
+            transferOption.classList.remove('mdc-deprecated-list-item--disabled');
         } else {
             transferOption.classList.remove('mdc-deprecated-list-item--disabled');
         }
@@ -1373,8 +1375,10 @@ function updateRTCUserStatus(id, usrStatus) {
                     ftTextAreaElem.classList.remove('mdc-text-field--disabled');
                     ftTextInputElem.disabled = false;
                 } else {
-                    ftTextAreaElem.classList.add('mdc-text-field--disabled');
-                    ftTextInputElem.disabled = true;
+                    //ftTextAreaElem.classList.add('mdc-text-field--disabled');
+                    //ftTextInputElem.disabled = true;
+                    ftTextAreaElem.classList.remove('mdc-text-field--disabled');
+                    ftTextInputElem.disabled = false;
                 }
                 break;
             case 'Offline':

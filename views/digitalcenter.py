@@ -56,7 +56,7 @@ def download_file(name):
     
 
 @digitalcenter.route('/form/sde/profile')
-#@login_required
+@login_required
 def __form_profile_sde():
     app.logger.debug('** SWING_CMS ** - Welcome2')
     user = User.query.filter_by(id = current_user.id).first()
@@ -140,6 +140,7 @@ def _home_view():
     return render_template('digitalcenter/home_view.html',**context)
 
 @digitalcenter.route('/digitalcenter/chat/')
+@login_required
 def _dc_chat():
     app.logger.debug('** SWING_CMS ** - Try Chat')
     try:
@@ -156,13 +157,14 @@ def _dc_chat():
 @digitalcenter.route('/digitalcenter/chat/admin/')
 def _dc_chat_admin():
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    return render_template('/digitalcenter/dc_chat_admin.html')
+    #return render_template('/digitalcenter/dc_chat_admin.html')
+    return render_template('/chatdc/chatadmin.html')
 
 @digitalcenter.route('/digitalcenter/chat/home/')
 def _dc_chat_home():
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    return render_template('/digitalcenter/dc_chat_home.html')
-
+    #return render_template('/digitalcenter/dc_chat_home.html')
+    return render_template('/chatdc/chatuser.html')
 
 @digitalcenter.route('/test/admin')
 def _dc_chat_ad():
