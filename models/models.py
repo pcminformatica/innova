@@ -301,6 +301,7 @@ class CatalogServices(db.Model):
     duration_minutes = db.Column(db.Integer, unique=False, nullable=True, default=45)
     service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
     sessions_schedule = db.Column(db.JSON, nullable=True)
+    diagnostic_questions = db.Column(db.JSON, nullable=True)
 
     def __repr__(self):
         return jsonify(

@@ -275,3 +275,84 @@ def _re():
 
     db.session.commit()
     return render_template('404.html')
+
+
+@digitalcenter.route('/servicios/',methods=['GET', 'POST'])
+def _servicios_1():
+    return render_template('servicios.html')
+
+@digitalcenter.route('/plan/',methods=['GET', 'POST'])
+def _plan_2():
+    return render_template('plan.html')
+
+@digitalcenter.route('/historial/',methods=['GET', 'POST'])
+def _historial_2():
+    return render_template('historial.html')
+
+@digitalcenter.route('/servi/',methods=['GET', 'POST'])
+def _servi():
+    return render_template('servi.html')
+import requests
+import json 
+@digitalcenter.route('/datos/',methods=['GET', 'POST'])
+def _datos():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
+    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    context = {
+        'api': api
+    }
+    return render_template('datos.html',**context)
+
+@digitalcenter.route('/datos/<int:user_uid>/',methods=['GET', 'POST'])
+def _datos_describe(user_uid):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
+    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    servicios = []
+    for resp in api:
+        if api[resp] == '1':
+            print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
+            services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
+
+            for servicesx in services:
+                print('....')
+                if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
+                    servicios.append({'id':servicesx.id,'titulo':servicesx.name})
+                
+    context = {
+        'api': api,
+        'servicios':servicios
+    }
+    app.logger.debug(servicios)
+    app.logger.debug(servicios)
+    app.logger.debug(servicios)
+    return render_template('datos_describe.html',**context)
+
+
+@digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
+def _admin_servicios():
+    app.logger.debug('** SWING_CMS ** -  appointments_create') 
+    services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains("_6_2")).all()
+    app.logger.debug('** busqua1 ** - ----')
+    servicios = []
+    for servicesx in services:
+        servicios.append({'id':servicesx.id,'titulo':servicesx.name})
+        app.logger.debug('** busqueda ** - ----')
+        app.logger.debug(servicesx.id)
+    app.logger.debug('** busqua2 ** - ----')
+    for servicesx in services:
+        app.logger.debug('** busquedax ** - ----')
+        if next(x for x in servicios if x["id"] == 3 ):
+            servicios.append({'id':servicesx.id,'titulo':servicesx.name})
+            app.logger.debug('** busqueda ** - ----')
+            app.logger.debug(servicesx.id)
+    app.logger.debug(servicios)
+    context = {'services':services} 
+    return render_template('servicios.html',**context)
