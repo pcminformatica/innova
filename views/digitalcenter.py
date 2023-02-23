@@ -404,10 +404,10 @@ def _re1():
     db.session.add(websites)
     db.session.commit()
     #--
-    websites = CatalogServices(name='Realizar la descripción y análisis de los procesos actuales para elaborar el diagrama de flujo de procesos', name_short='s11', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_12"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_15"},{"id": "_5_19"},{"id": "_5_20"}])
+    websites = CatalogServices(name='Realizar la descripción y análisis de los procesos actuales para elaborar el diagrama de procesos.', name_short='s11', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_12"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_15"},{"id": "_5_19"},{"id": "_5_20"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Acompañamiento en la elaboración de una guia para la gestión de calidad', name_short='s12', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_8"},{"id": "_5_11"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_17"},{"id": "_5_22"}])
+    websites = CatalogServices(name='Acompañamiento en la elaboración de una guia para la gestión de calidad.', name_short='s12', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_8"},{"id": "_5_11"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_17"},{"id": "_5_22"}])
     db.session.add(websites)
     db.session.commit()
     websites = CatalogServices(name='Asesoria para el desarrollo de red proveedores, cadena de sumistros y canales de distribución.', name_short='s13', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_14"},{"id": "_4_20"},{"id": "_5_3"}])
