@@ -289,7 +289,17 @@ class CatalogOperations(db.Model):
             name_short = self.name_short
         )
 
+class catalogCategory(db.Model):
+    __tablename__ = 'Catalog_category'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(250), unique=True, nullable=False)
 
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+    
 # Catalog - Services Class
 class CatalogServices(db.Model):
     __tablename__ = 'catalog_services'
@@ -302,7 +312,6 @@ class CatalogServices(db.Model):
     service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
     sessions_schedule = db.Column(db.JSON, nullable=True)
     diagnostic_questions = db.Column(db.JSON, nullable=True)
-
     def __repr__(self):
         return jsonify(
             id = self.id,

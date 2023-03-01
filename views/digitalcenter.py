@@ -334,7 +334,6 @@ def _datos_describe(user_uid):
             services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
 
             for servicesx in services:
-                print('....')
                 if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
                     servicios.append({'id':servicesx.id,'titulo':servicesx.name})
                 
