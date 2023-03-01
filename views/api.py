@@ -775,3 +775,26 @@ def _l_users_emp():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API List Users Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/user/service', methods = ['POST'])
+# @login_required
+def _d_save_admin_servi():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_id = request.json['txt_id']
+            user = CatalogServices.query.filter_by(id = txt_id).first()
+            txt_name = request.json['txt_name']
+            txt_rol = request.json['txt_rol']
+            user.name = txt_name
+            user.catalog_category = txt_rol
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

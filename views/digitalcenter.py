@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
@@ -304,6 +304,14 @@ def _servi():
     context = {'services':services}  
     return render_template('servi.html',**context)
 
+@digitalcenter.route('/servi/<int:user_uid>',methods=['GET', 'POST'])
+def _servi_detalle(user_uid):
+    services = catalogCategory.query.all()
+    service = CatalogServices.query.filter_by(id = user_uid).first()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    context = {'services':services,'service':service}  
+    return render_template('admindash/formservicios.html',**context)
+
 import requests
 import json 
 @digitalcenter.route('/datos/',methods=['GET', 'POST'])
@@ -335,13 +343,37 @@ def _datos_describe(user_uid):
 
             for servicesx in services:
                 if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
-                    servicios.append({'id':servicesx.id,'titulo':servicesx.name})
-                
+                    servicios.append({'id':servicesx.id,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
+    legalizacion = []
+    administracion = []
+    produccion = []
+    financiera = []
+    mercadeo = [] 
+    for servicio in servicios:
+        serviciox = servicio['categoria']
+        if serviciox:
+            if serviciox == 1:
+                legalizacion.append(servicio)
+            elif serviciox == 2:
+                administracion.append(servicio)
+                app.logger.debug(administracion)
+            elif serviciox == 3:
+                produccion.append(servicio)
+            elif serviciox == 4:
+                financiera.append(servicio)
+            elif serviciox == 5:
+                mercadeo.append(servicio)
+        
     context = {
         'api': api,
-        'servicios':servicios
+        'legalizacion':legalizacion,
+        'administracion':administracion,
+        'produccion':produccion,
+        'financiera':financiera,
+        'mercadeo':mercadeo,
+
     }
-    app.logger.debug(servicios)
+   
     app.logger.debug(servicios)
     app.logger.debug(servicios)
     return render_template('datos_describe.html',**context)
@@ -427,16 +459,48 @@ def _re1():
 @digitalcenter.route('/insert/chat/2',methods=['GET', 'POST'])
 def _re2():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
-    websites = CatalogServices(name='Asesoria para la formalizacion legal de la empresa', name_short='s1', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    websites = CatalogServices(catalog_category=3,name='Asesoría en desarrollo de nuevos productos o mejora de los actuales y empaque.', name_short='s17', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_6"},{"id": "_5_2"},{"id": "_5_8"},{"id": "_5_9"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para gestión de registros legales', name_short='s2', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"}])
+    websites = CatalogServices(catalog_category=4,name='Asesoria para el analisis de los riesgos financieros de la empresa.', name_short='s18', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_1"},{"id": "_4_7"},{"id": "_4_13"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para adhesion al regimen de  facturacion, beneficios fiscales y legislación tributaria.', name_short='s3', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"},{"d": "_4_6"}])
+    websites = CatalogServices(catalog_category=4,name='Elaboración de presupuestos.', name_short='s19', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_23"},{"id": "_4_14"},{"id": "_4_19"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Acompañar en la gestión de solicitudes legales empresariales (permisos, licencias, registros, certificados y otros)', name_short='s4', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_3"},{"d": "_2_8"},{"d": "_5_7"}])
+    websites = CatalogServices(catalog_category=4,name='Asesoria para la Implementación de herramientas de control para registros de inventarios', name_short='s20', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_2"},{"id": "_4_3"},{"id": "_4_13"},{"id": "_4_14"},{"id": "_5_14"},{"id": "_5_21"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=4,name='Asesoria para los analisis de estados financieros e indicadores de productividad y gestión', name_short='s21', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_1"},{"id": "_4_5"},{"id": "_4_12"},{"id": "_4_17"},{"id": "_5_24"},{"id": "_6_17"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=4,name='Asesoría en analisis de costos y precios', name_short='s22', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_24"},{"id": "_2_25"},{"id": "_2_26"},{"id": "_4_1"},{"id": "_4_6"},{"id": "_4_18"},{"id": "_4_21"},{"id": "_5_19"},{"id": "_5_24"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoría para la adquisición de programas informáticos antivirus, ofis y sistemas operativos', name_short='s23', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_3_4"},{"id": "_3_7"},{"id": "_3_10'"},{"id": "3_11"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoría en requerimientos tecnológicos, contratos de servicios de internet y cuentas de correo', name_short='s24', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_9"},{"id": "_2_20"},{"id": "_3_1'"},{"id": "_3_2"},{"id": "_3_5"},{"id": "_3_6"},{"id": "_3_9"}])
+    db.session.add(websites)
+    db.session.commit()
+    return render_template('404.html')
+
+@digitalcenter.route('/insert/categias/',methods=['GET', 'POST'])
+def _re_categias():
+    staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
+    websites = catalogCategory(name='LEGALIZACIÓN')
+    db.session.add(websites)
+    db.session.commit()
+    websites = catalogCategory(name='ADMINISTRACIÓN')
+    db.session.add(websites)
+    db.session.commit()
+    websites = catalogCategory(name='PRODUCCIÓN Y AMBIENTE')
+    db.session.add(websites)
+    db.session.commit()
+    websites = catalogCategory(name='ANÁLISIS FINANCIERO')
+    db.session.add(websites)
+    db.session.commit()
+    websites = catalogCategory(name='MERCADEO Y TICs')
     db.session.add(websites)
     db.session.commit()
     return render_template('404.html')
