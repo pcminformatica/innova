@@ -22,70 +22,27 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__primary-action" tabindex="0">
                                 <div class="mdc-card__media">
-                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                    <img class="profile-background" src="{{ url_for('static', filename='images/calzadovarela.png') }}" alt="Border Perfil" />
+                                    
                                 </div>
                                 <div class="mdc-card__ripple"></div>
                             </div>
                             <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.extra_info.names }} {{ current_user.extra_info.last_names }}</div>
-                                <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Calzado Varela </div>
+                                <div class="mdc-typography--subtitle1">Fabricar y comercializar calzado de cuero </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">verified_user</i>
                                     Empresaria 
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">business</i>
-                                    {{ current_user.extra_info.company.name }} 
+                                    Lun-Vie, 8am-5pm.
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-secondary">place</i>
                                     Tegucigalpa, Honduras.
                                 </div>
-                                <span class="mdc-evolution-chip-set" role="grid">
-                                    <span class="mdc-evolution-chip-set__chips" role="presentation">
-                                      <span class="mdc-evolution-chip" role="row" id="c0">
-                                        <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
-                                          <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0">
-                                            <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
-                                            <span class="mdc-evolution-chip__text-label">Chip one</span>
-                                          </button>
-                                        </span>
-                                      </span>
-                                      <span class="mdc-evolution-chip" role="row" id="c1">
-                                        <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
-                                          <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="-1">
-                                            <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
-                                            <span class="mdc-evolution-chip__text-label">Chip two</span>
-                                          </button>
-                                        </span>
-                                      </span>
-                                    </span>
-                                  </span>
-                                <span class="mdc-evolution-chip-set" role="grid">
-                                    <span class="mdc-evolution-chip-set__chips" role="presentation">
-                                        <span class="mdc-evolution-chip" role="row" id="c0">
-                                        <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
-                                            <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0">
-                                            <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
-                                            <span class="mdc-evolution-chip__text-label">Habilidad 1</span>
-                                            </button>
-                                        </span>
-                                        </span>
-                                        <span class="mdc-evolution-chip" role="row" id="c1">
-                                        <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
-                                            <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="-1">
-                                            <span class="mdc-evolution-chip__ripple mdc-evolution-chip__ripple--primary"></span>
-                                            <span class="mdc-evolution-chip__text-label">Habilidad 2</span>
-                                            
-                                            </button>
-                                            <span class="material-icons">
-                                                done
-                                                </span>
-                                        </span>
-                                        </span>
-                                    </span>
-                                </span>
+
                                 <a href="/form/category/" class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
                                     <div class="mdc-icon-button__ripple"></div>
                                     add 
@@ -113,7 +70,7 @@
                                 <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
                                 <br>
                                 <p>
-                                    Figuras legales
+                                    LEGALIZACIÓN
                                 </p>
                                 <p class="mdc-deprecated-list-divider"></p>
                                 <div class="demo-linear-progress-indicator">
@@ -144,7 +101,7 @@
                                     <a href="#">
                                     <div id="textbox">
                                         <p style="font-weight: bold" class="alignleft">
-                                            Asesoria para gestión de registros legales
+                                            Asesoria para gestión de registros legales: RTN,  registro en cámara de comercio, municipalidad.
                                         </p>
                                         <p class="alignright">80 / 100</p>
                                     </div>
@@ -159,14 +116,14 @@
                                 <br>
                                 <p class="mdc-deprecated-list-divider"></p>
                                 <p>
-                                    Tramites legales
+                                    ADMINISTRACIÓN
                                 </p>
                                 <p class="mdc-deprecated-list-divider"></p>
                                 <div class="demo-linear-progress-indicator">
                                     
                                     <div id="textbox">
                                         <p style="font-weight: bold" class="alignleft">
-                                        Asesoria para adhesion al regimen de  facturacion, beneficios fiscales y legislación tributaria.
+                                        Asesoria en la gestión del talento humano.
                                     </p>
                                         <p class="alignright">100 / 100</p>
                                     </div>
