@@ -297,9 +297,11 @@ def _plan_2():
 def _historial_2():
     return render_template('historial.html')
 
+
+from sqlalchemy import desc
 @digitalcenter.route('/servi/',methods=['GET', 'POST'])
 def _servi():
-    services = CatalogServices.query.filter_by(enabled = 1).all()
+    services = CatalogServices.query.filter_by(enabled = 1).order_by(desc(CatalogServices.name_short)).all()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     context = {'services':services}  
     return render_template('servi.html',**context)
@@ -312,6 +314,14 @@ def _servi_detalle(user_uid):
     context = {'services':services,'service':service}  
     return render_template('admindash/formservicios.html',**context)
 
+@digitalcenter.route('/servi/delete/<int:service_id>',methods=['GET', 'POST'])
+def _servi_detalle_delete(service_id):
+    service = CatalogServices.query.filter_by(id = service_id).delete()
+    db.session.commit()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return redirect(url_for('digitalcenter._servi'))
+
+
 import requests
 import json 
 @digitalcenter.route('/datos/',methods=['GET', 'POST'])
@@ -322,6 +332,8 @@ def _datos():
     headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
+    for api in api['results']:
+        app.logger.debug(api)
     context = {
         'api': api
     }
@@ -404,53 +416,49 @@ def _admin_servicios():
 @digitalcenter.route('/insert/chat',methods=['GET', 'POST'])
 def _re1():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
-    websites = CatalogServices(name='Asesoria para la formalizacion legal de la empresa', name_short='s1', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    websites = CatalogServices(catalog_category=1,name='Asesoria para la formalizacion legal de la empresa', name_short='s1', service_user_role=staff_it_role.id,diagnostic_questions=[])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para gestión de registros legales', name_short='s2', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"}])
+    websites = CatalogServices(catalog_category=1,name='Asesoria para gestión de registros legales', name_short='s2', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para adhesion al regimen de  facturacion, beneficios fiscales y legislación tributaria.', name_short='s3', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"},{"id": "_4_6"}])
+    websites = CatalogServices(catalog_category=1,name='Asesoria para adhesion al regimen de  facturacion, beneficios fiscales y legislación tributaria.', name_short='s3', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_9"},{"id": "_4_6"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Acompañar en la gestión de solicitudes legales empresariales', name_short='s4', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_3"},{"id": "_2_8"},{"id": "_5_7"}])
+    websites = CatalogServices(catalog_category=1,name='Acompañar en la gestión de solicitudes legales empresariales', name_short='s4', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_3"},{"id": "_2_8"},{"id": "_5_7"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Acompañamiento en la elaboración de plan operativo y estratégico de desarrollo para la empresa.', name_short='s5', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_1_1"},{"id": "_1_2"},{"id": "_1_3"},{"id": "_1_4"},{"id": "_1_5"},{"id": "_1_7"},{"id": "_1_8"},{"id": "_1_8"},{"id": "_6_2"}])
+    websites = CatalogServices(catalog_category=2,name='Acompañamiento en la elaboración de plan operativo y estratégico de desarrollo para la empresa.', name_short='s5', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_1_1"},{"id": "_1_2"},{"id": "_1_3"},{"id": "_1_4"},{"id": "_1_5"},{"id": "_1_7"},{"id": "_1_8"},{"id": "_1_8"},{"id": "_6_2"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria en la gestión del talento humano.', name_short='s6', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_3_3"},{"id": "_5_6"},{"id": "_5_16"},{"id": "_5_17"},{"id": "_5_18"},{"id": "_6_1"},{"id": "_6_2"},{"id": "_6_3"},{"id": "_6_5"},{"id": "_6_6"},{"id": "_6_7"},{"id": "_6_8"},{"id": "_6_9"},{"id": "_6_10"},{"id": "_6_11"},{"id": "_6_12"},{"id": "_6_13"},{"id": "_6_14"},{"id": "_6_16"},{"id": "_6_17"}])
+    websites = CatalogServices(catalog_category=2,name='Asesoria en la gestión del talento humano.', name_short='s6', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_3_3"},{"id": "_5_6"},{"id": "_5_16"},{"id": "_5_17"},{"id": "_5_18"},{"id": "_6_1"},{"id": "_6_2"},{"id": "_6_3"},{"id": "_6_5"},{"id": "_6_6"},{"id": "_6_7"},{"id": "_6_8"},{"id": "_6_9"},{"id": "_6_10"},{"id": "_6_11"},{"id": "_6_12"},{"id": "_6_13"},{"id": "_6_14"},{"id": "_6_16"},{"id": "_6_17"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Guia para manual de funciones.', name_short='s7', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_16"},{"id": "_5_17"}])
+
+    websites = CatalogServices(catalog_category=2,name='Asesoria para implemetación de un sistema básico para el registro de las operaciones.', name_short='s8', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_8"},{"id": "_5_18"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para implemetación de un sistema básico para el registro de las operaciones.', name_short='s8', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_8"},{"id": "_5_18"}])
-    db.session.add(websites)
-    db.session.commit()
-    websites = CatalogServices(name='Generación de redes y trabajo coloraborativo.', name_short='s9', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_3"}])
-    db.session.add(websites)
-    db.session.commit()
-    websites = CatalogServices(name='Elaboración de platillas para la elaboración de los Estados Financieros.', name_short='s10', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_5"},{"id": "_4_7"},{"id": "_4_10"},{"id": "_4_12"},{"id": "_4_17"}])
+
+    websites = CatalogServices(catalog_category=2,name='Elaboración de platillas para la elaboración de los Estados Financieros.', name_short='s10', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_5"},{"id": "_4_7"},{"id": "_4_10"},{"id": "_4_12"},{"id": "_4_17"}])
     db.session.add(websites)
     db.session.commit()
     #--
-    websites = CatalogServices(name='Realizar la descripción y análisis de los procesos actuales para elaborar el diagrama de procesos.', name_short='s11', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_12"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_15"},{"id": "_5_19"},{"id": "_5_20"}])
+    websites = CatalogServices(catalog_category=3,name='Realizar la descripción y análisis de los procesos actuales para elaborar el diagrama de procesos.', name_short='s11', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_12"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_15"},{"id": "_5_19"},{"id": "_5_20"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Acompañamiento en la elaboración de una guia para la gestión de calidad.', name_short='s12', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_8"},{"id": "_5_11"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_17"},{"id": "_5_22"}])
+    websites = CatalogServices(catalog_category=3,name='Acompañamiento en la elaboración de una guia para la gestión de calidad.', name_short='s12', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_8"},{"id": "_5_11"},{"id": "_5_13"},{"id": "_5_14"},{"id": "_5_17"},{"id": "_5_22"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoria para el desarrollo de red proveedores, cadena de sumistros y canales de distribución.', name_short='s13', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_14"},{"id": "_4_20"},{"id": "_5_3"}])
+    websites = CatalogServices(catalog_category=3,name='Asesoria para el desarrollo de red proveedores, cadena de sumistros y canales de distribución.', name_short='s13', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_14"},{"id": "_4_20"},{"id": "_5_3"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Brindar estrategias y modelos para la mejora de la productividad.', name_short='s14', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_21"},{"id": "_5_23"}])
+    websites = CatalogServices(catalog_category=3,name='Brindar estrategias y modelos para la mejora de la productividad.', name_short='s14', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_1"},{"id": "_5_21"},{"id": "_5_23"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoría en la formalización de productos y diseño de fichas técnicas.', name_short='s15', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_7"},{"id": "_5_2"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_11"}])
+    websites = CatalogServices(catalog_category=3,name='Asesoría en la formalización de productos y diseño de fichas técnicas.', name_short='s15', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_7"},{"id": "_5_2"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_11"}])
     db.session.add(websites)
     db.session.commit()
-    websites = CatalogServices(name='Asesoría en la formalización de productos y diseño de fichas técnicas.', name_short='s16', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_7"},{"id": "_5_2"},{"id": "_5_5"},{"id": "_5_8"},{"id": "_5_11"}])
+    websites = CatalogServices(catalog_category=1,name='Asesoria para la afiliación y cotizaciones al IHSS, INFOP, RAP y gestiones legales de talento humano', name_short='s16', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_4_4"},{"id": "_4_19"},{"id": "_6_4"},{"id": "_6_9"},{"id": "_6_12"}])
     db.session.add(websites)
     db.session.commit()
     return render_template('404.html')
@@ -485,6 +493,59 @@ def _re2():
     db.session.commit()
     return render_template('404.html')
 
+@digitalcenter.route('/insert/chat/3',methods=['GET', 'POST'])
+def _re3():
+    staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
+    websites = CatalogServices(catalog_category=5,name='Elaboracion del plan de mercadeo para promocion e incremento de ventas.', name_short='s25', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_1"},{"id": "_5_23"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Analisis del entorno y la competencia para generación de estrategia de mejora.', name_short='s26', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_1_10'"},{"id": "_1_11"},{"id": "_2_9'"},{"id": "_2_26"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Acompañamiento en el uso de redes sociales (mercadeo digital)', name_short='s27', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_19'"},{"id": "_2_22"},{"id": "_3_9'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoria en como realizar sondeos de mercado.', name_short='s28', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_1'"},{"id": "_2_6"},{"id": "_2_9'"},{"id": "_2_10'"},{"id": "_2_13'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Acompañamiento en el desarrollo de estrategias de comercialización para captar y fidelizar clientes', name_short='s29', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_10'"},{"id": "_2_11"},{"id": "_2_12'"},{"id": "_2_19'"},{"id": "_2_20'"},{"id": "_2_18'"},{"id": "_2_21"},{"id": "_2_23'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoría en el desarrollo de canales de distribución.', name_short='s30', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_15'"},{"id": "_2_16"},{"id": "_2_17'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoria para uso de plataformas de desarrollo web.', name_short='s32', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_3_9'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoramiento para la creacion e implementación de Página web personalizada.', name_short='s33', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_21'"},{"id": "_3_8"},{"id": "_3_9'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoría para posicionar la empresa en Google.', name_short='s34', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_21'"},{"id": "_2_22"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoría en medios, pasarelas y botones de pagos.', name_short='s36', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoramiento en la generación de marca y línea gráfica.', name_short='s37', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_2'"},{"id": "_2_7"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoramiento en papeleria y productos promocionales bajo la guía de estilo', name_short='s38', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_4'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Generación de contenido de valor empresarial para redes sociales', name_short='s39', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_19'"},{"id": "_2_22'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoramiento en calendario de publicaciones para el contenido de valor en redes sociales', name_short='s40', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_22'"}])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=5,name='Asesoria en Herramientas básicas del diseño (aplicaciones)', name_short='s41', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(catalog_category=3,name='Elaboracion del Plan de inocuidad y seguridad industrial.', name_short='s42', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_5_5'"},{"id": "_5_7'"},{"id": "_5_8'"},{"id": "_5_13'"},{"id": "_5_14'"}])
+    db.session.add(websites)
+    db.session.commit()
+    return render_template('404.html')
+
 @digitalcenter.route('/insert/categias/',methods=['GET', 'POST'])
 def _re_categias():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
@@ -504,3 +565,70 @@ def _re_categias():
     db.session.add(websites)
     db.session.commit()
     return render_template('404.html')
+
+
+@digitalcenter.route('/datos/12/<int:user_uid>/',methods=['GET', 'POST'])
+def _datos_describe_12(user_uid):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
+    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    servicios = []
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
+    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    resp = requests.get(url,headers=headers)
+    api1 = json.loads(resp.content)
+    for api in api1['results']:
+        for resp in api:
+            if api[resp] == '1':
+                print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
+                services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
+                if services:
+                    for servicesx in services:
+                        if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
+                            servicios.append({'id':servicesx.id,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
+                        else:
+                            varl = list(e for e in servicios if e['id']  == servicesx.id)[0]
+                            index = servicios.index(varl)
+                            if servicios[index]['anterior'] != api['_id']:
+                                servicios[index]['total'] = servicios[index]['total'] + 1 
+                                servicios[index]['anterior'] = api['_id']
+
+                
+    legalizacion = []
+    administracion = []
+    produccion = []
+    financiera = []
+    mercadeo = [] 
+    for servicio in servicios:
+        serviciox = servicio['categoria']
+        if serviciox:
+            if serviciox == 1:
+                legalizacion.append(servicio)
+            elif serviciox == 2:
+                administracion.append(servicio)
+                app.logger.debug(administracion)
+            elif serviciox == 3:
+                produccion.append(servicio)
+            elif serviciox == 4:
+                financiera.append(servicio)
+            elif serviciox == 5:
+                mercadeo.append(servicio)
+        
+    context = {
+        'api': api,
+        'legalizacion':legalizacion,
+        'administracion':administracion,
+        'produccion':produccion,
+        'financiera':financiera,
+        'mercadeo':mercadeo,
+
+    }
+   
+
+    return render_template('datos_describe_2.html',**context)
+
