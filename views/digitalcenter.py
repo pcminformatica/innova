@@ -324,7 +324,7 @@ def _servi_detalle_delete(service_id):
 
 import requests
 import json 
-@digitalcenter.route('/datos/',methods=['GET', 'POST'])
+@digitalcenter.route('/diagnosticos/',methods=['GET', 'POST'])
 def _datos():
     app.logger.debug('** SWING_CMS ** - ------------------')
     url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
@@ -332,8 +332,7 @@ def _datos():
     headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
-    for api in api['results']:
-        app.logger.debug(api)
+
     context = {
         'api': api
     }
