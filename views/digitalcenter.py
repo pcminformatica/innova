@@ -631,3 +631,6 @@ def _datos_describe_12(user_uid):
 
     return render_template('datos_describe_2.html',**context)
 
+@digitalcenter.route('/registros/im',methods=['GET', 'POST'])
+def _registros_im():
+    return render_template('registro_im.html')
