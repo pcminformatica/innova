@@ -9,6 +9,8 @@
 .alignright {
 	float: right;
 }
+
+
 </style>
 {% endblock %}
 {% block body %}
@@ -16,8 +18,110 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                <div class="container-dashboard--messages">
+                    <div class="mdc-card mdc-card--color-on-primary">
+                        <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                            <div class="mdc-tab-scroller">
+                                <div class="mdc-tab-scroller__scroll-area">
+                                    <div class="mdc-tab-scroller__scroll-content">
+                                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                                <span class="mdc-tab__text-label">Datos de la empresa</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
 
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdc-card__content container-dashboard--messages-msg">
+                            
+                          <div class="mdc-layout-grid__inner">
+                              <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-typography--body1">
+                                    Nombre de la empresa:
+                                </div>
+                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                    <span class="mdc-text-field__ripple"></span>
+                                   
+                                    <input value="{{ api.NOMBRE_EMPRESA }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <span lass="mdc-line-ripple"></span>
+                                </label>
+                              </div>
+                              <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-typography--body1">
+                                    RTN:
+                                </div>
+                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                    <span class="mdc-text-field__ripple"></span>
+
+                                    <input value="{{ api.RTN }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <span lass="mdc-line-ripple"></span>
+                                </label>
+                              </div>
+                              <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-typography--body1">
+                                    EMAIL:
+                                </div>
+                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                    <span class="mdc-text-field__ripple"></span>
+
+                                    <input value="{{ api.EMAIL }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <span lass="mdc-line-ripple"></span>
+                                </label>
+                              </div>
+                              <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-typography--body1">
+                                    TELEFONO:
+                                </div>
+                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                    <span class="mdc-text-field__ripple"></span>
+
+                                    <input value="{{ api.TELEFONO }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <span lass="mdc-line-ripple"></span>
+                                </label>
+                              </div>
+
+                              <div class="mdc-layout-grid__cell--span-8-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-typography--body1">
+                                    DIRECCION:
+                                </div>
+                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                    <span class="mdc-text-field__ripple"></span>
+                                    <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
+                                    <input value="{{ api.DIRECCION }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <span lass="mdc-line-ripple"></span>
+                                </label>
+                              </div>
+                              
+                            </div>
+                        </div>
+          
+                            
+                         
+
+
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__actions-buttons">
+                            </div>
+                            <div class="mdc-card__action-icons">
+                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                    <div class="mdc-icon-button__ripple"></div>
+                                    more_vert
+                                </button>
+                            </div>
+                        </div>
+                    
+                    
+                </div>
+                </div>
+            </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -44,7 +148,7 @@
                               <br>     
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -66,8 +170,10 @@
                                         <th class="mdc-data-table__cell" scope="row">
                                             {{loop.index}}
                                         </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <th class="mdc-data-table__cell" scope="row" >
+                                          <p>
                                             {{ apix.titulo }}
+                                          </p>
                                         </th>
                                         <td class="mdc-data-table__cell">
                                           <input type="date" id="date_{{ apix.id }}">
@@ -75,11 +181,11 @@
       
                                     
                                         <td class="mdc-data-table__cell">
-                                            <button onclick="agregar('{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                                                <span class="mdc-button__label">Agregar a plan</span>
+                                                <span class="mdc-button__label">Agregar</span>
                                             </button>
                                         </td>
                                       </tr>
@@ -109,7 +215,7 @@
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-mdc-data-table__table_normal" aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -140,11 +246,11 @@
       
                                     
                                         <td class="mdc-data-table__cell">
-                                            <button onclick="agregar('{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                                                <span class="mdc-button__label">Agregar a plan</span>
+                                                <span class="mdc-button__label">Agregar</span>
                                             </button>
                                         </td>
                                       </tr>
@@ -174,7 +280,7 @@
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -197,7 +303,9 @@
                                             {{loop.index}}
                                         </th>
                                         <th class="mdc-data-table__cell" scope="row">
-                                            {{ apix.titulo }}
+                                            <p>
+                                              {{ apix.titulo }}
+                                            </p>
                                         </th>
                                         <td class="mdc-data-table__cell">
                                           <input type="date" id="date_{{ apix.id }}">
@@ -205,11 +313,11 @@
       
                                     
                                         <td class="mdc-data-table__cell">
-                                            <button onclick="agregar('{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('PRODUCCIÓN Y AMBIENTE', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                                                <span class="mdc-button__label">Agregar a plan</span>
+                                                <span class="mdc-button__label">Agregar</span>
                                             </button>
                                         </td>
                                       </tr>
@@ -239,7 +347,7 @@
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -270,11 +378,11 @@
       
                                     
                                         <td class="mdc-data-table__cell">
-                                            <button onclick="agregar('{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                                                <span class="mdc-button__label">Agregar a plan</span>
+                                                <span class="mdc-button__label">Agregar</span>
                                             </button>
                                         </td>
                                       </tr>
@@ -304,7 +412,7 @@
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -327,7 +435,9 @@
                                             {{loop.index}}
                                         </th>
                                         <th class="mdc-data-table__cell" scope="row">
+                                          <p>
                                             {{ apix.titulo }}
+                                          </p>
                                         </th>
                                         <td class="mdc-data-table__cell">
                                           <input type="date" id="date_{{ apix.id }}">
@@ -335,11 +445,11 @@
       
                                     
                                         <td class="mdc-data-table__cell">
-                                            <button onclick="agregar('{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                                                <span class="mdc-button__label">Agregar a plan</span>
+                                                <span class="mdc-button__label">Agregar</span>
                                             </button>
                                         </td>
                                       </tr>
@@ -385,7 +495,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -394,7 +504,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Plan de mejora</span>
+                                                    <span class="mdc-tab__text-label">Plan de Acción</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -410,10 +520,10 @@
                                 
                                   <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
-                                      <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
-                                            
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORÍA</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
                                             
@@ -476,40 +586,54 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 <script>
-    function agregar(id,servicio,fecha){
-        console.log(id)
-        console.log(servicio)
-     
+    function agregar(categoria,id,servicio,fecha){
+
         fecha = document.getElementById(fecha).value
         if (fecha){
             var Tbl = document.getElementById("tablaPlan");
             var hilera = document.createElement("tr");
             var celda = document.createElement("td");
+            var celda1 = document.createElement("td");
             var celda2 = document.createElement("td");
             var celda3 = document.createElement("td");
-            var textoCelda = document.createTextNode(servicio);
+            var textoCelda1 = document.createTextNode(servicio);
             var textoCelda2 = document.createTextNode(fecha);
-            var textoCelda3 = document.createTextNode("Eliminar");
+            var textoCelda = document.createTextNode(categoria);
 
+
+            hilera.className = 'mdc-data-table__row'
+            celda1.className = 'mdc-data-table__cell'
+            celda2.className = 'mdc-data-table__cell'
+            celda3.className = 'mdc-data-table__cell'
+
+        
             celda.appendChild(textoCelda);
+            celda1.appendChild(textoCelda1);
             celda2.appendChild(textoCelda2);
-            celda3.appendChild(textoCelda3);
-
+            celda3.innerHTML = `
+            <button onclick="deleteRow()" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                                            <span class="mdc-button__label">Eliminar</span>
+                                        </button>`
             hilera.appendChild(celda);
+            hilera.appendChild(celda1);
             hilera.appendChild(celda2);
             hilera.appendChild(celda3);
 
-Tbl.appendChild(hilera);
+            Tbl.appendChild(hilera);
         }else{
             alert('Seleccione una fecha')
         }
         
     }
 
-    function agregarFila() {
-
-
-
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
     }
 </script>
 {% endblock %}
