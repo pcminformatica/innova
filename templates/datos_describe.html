@@ -516,7 +516,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mdc-card__content container-dashboard--messages-msg">
+                            <div class="mdc-card__content container-dashboard--messages-msg" style="text-align: center">
                                 
                                   <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
@@ -555,7 +555,17 @@
                                         </div>
                                       </div>
                                     </div>
+
+                          
+                                    
                                   </div>
+                                  <br><br><br>
+                                  <button  onclick="" class="mdc-button mdc-button--raised mdc-button--leading" style="text-align: center">
+                                            
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                                    <span class="mdc-button__label">Guardar plan de accion</span>
+                                </button>
                             </div>
               
                                 
@@ -635,6 +645,13 @@
       var tr = td.parentNode.parentNode; // the row to be removed
       tr.remove()
     }
+
+    function deleteRow() {
+   
+   var td = event.target.parentNode; 
+   var tr = td.parentNode.parentNode; // the row to be removed
+   tr.remove()
+ }
 </script>
 {% endblock %}
 
