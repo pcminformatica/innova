@@ -520,7 +520,7 @@
                                 
                                   <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
-                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                      <table id="tbl_plan" class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORÍA</th>
@@ -560,12 +560,12 @@
                                     
                                   </div>
                                   <br><br><br>
-                                  <button  onclick="" class="mdc-button mdc-button--raised mdc-button--leading" style="text-align: center">
+                                  <button  onclick="savePlan()" class="mdc-button mdc-button--raised mdc-button--leading" style="text-align: center">
                                             
                                     <span class="mdc-button__ripple"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
                                     <span class="mdc-button__label">Guardar plan de accion</span>
-                                </button>
+                                  </button>
                             </div>
               
                                 
@@ -648,10 +648,28 @@
 
     function deleteRow() {
    
-   var td = event.target.parentNode; 
-   var tr = td.parentNode.parentNode; // the row to be removed
-   tr.remove()
- }
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+    function savePlan(){
+      var resume_table = document.getElementById("tbl_plan");
+     
+      if (resume_table.rows.length >1){
+
+        for (var i = 1, row; row = resume_table.rows[i]; i++) {
+          //alert(cell[i].innerText);
+          for (var j = 0, col; col = row.cells[j]; j++) {
+            //alert(col[j].innerText);
+            console.log(`Txt: ${col.innerText} \tFila: ${i} \t Celda: ${j}`);
+          }
+        }
+      }else{
+        alert('vacio')
+      }
+
+    }
 </script>
 {% endblock %}
 

@@ -588,10 +588,12 @@ def _datos_describe_12(user_uid):
                 services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
                 if services:
                     for servicesx in services:
-                        if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
-                            servicios.append({'id':servicesx.id,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
+                        departamento =api['DEPARTAMENTO']
+                        servi = str(servicesx.id) + '-' + str(departamento)
+                        if len(list(e for e in servicios if e['id']  == servi)) == 0:
+                            servicios.append({'id':servi,'departamento':departamento,'titulo':servicesx.name + ' ' ,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
                         else:
-                            varl = list(e for e in servicios if e['id']  == servicesx.id)[0]
+                            varl = list(e for e in servicios if e['id']  == servi)[0]
                             index = servicios.index(varl)
                             if servicios[index]['anterior'] != api['_id']:
                                 servicios[index]['total'] = servicios[index]['total'] + 1 
