@@ -11,6 +11,17 @@
   padding: 0 5px 0 4px;
 }
 }
+
+@media screen and (max-width: 400px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 10px;
+}
+
+.mdc-radio {
+  margin-right: 0px;
+}
+}
 </style>
 {% endblock %}
 
@@ -1274,10 +1285,10 @@
                                                     <thead>
                                                       <tr class="mdc-data-table__header-row">
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cargo</th>
-                                                        <th class="mdc-data-table__header-cell " role="columnheader" scope="col">1. Mujer</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">2. Hombre</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">3. No existe el cargo</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">4. NS/NR</th>
+                                                        <th class="mdc-data-table__header-cell " role="columnheader" scope="col">Mujer</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Hombre</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">No existe el cargo</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">NS/NR</th>
                                                       </tr>
                                                     </thead>
                                                     <tbody class="mdc-data-table__content" style="background-color: white;">
