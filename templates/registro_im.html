@@ -22,6 +22,25 @@
   margin-right: 0px;
 }
 }
+
+@media screen and (max-width: 340px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 7px;
+}
+
+.mdc-radio {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  will-change: opacity,transform,border-color,color;
+}
+}
 </style>
 {% endblock %}
 
@@ -2953,6 +2972,8 @@
                                                 </div>
                                                 <label for="radio-1">
                                                     b) Cooperativa 
+                                              </label>
+                                            </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
                                                   <input class="mdc-radio__native-control" type="radio" id="radio-1" name="tipo_financiera_obtenido">
@@ -2964,6 +2985,8 @@
                                                 </div>
                                                 <label for="radio-1">
                                                     c) Microfinanciera 
+                                                  </label>
+                                              </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
                                                   <input class="mdc-radio__native-control" type="radio" id="radio-1" name="tipo_financiera_obtenido" >
