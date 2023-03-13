@@ -1220,7 +1220,18 @@ var mdcNotchedOutlines = [].map.call(document.querySelectorAll('.mdc-notched-out
 
 // Material Radio Buttons
 export var mdcRadioButtons = [].map.call(document.querySelectorAll('.mdc-radio'), function (el) {
-    return new MDCRadio(el);
+    //return new MDCRadio(el);
+    let mdcRadi = new MDCRadio(el);
+    let actionFn = el.getAttribute('data-action-fn');
+    if (actionFn) {
+        let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
+        mdcRadi.listen('MDCRadio:change', () => fn(mdcRadi.value));
+    }
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCRadio.prototype.assignedVar = null;
+        mdcRadi.assignedVar = el.getAttribute('id');
+    }
+    return mdcRadi;
 });
 
 
@@ -1255,7 +1266,20 @@ export var mdcSelects = [].map.call(document.querySelectorAll('.mdc-select'), fu
     return mdcSel;
 });
 
-
+// Material MDCCheckbox
+export var mdcCheckbox = [].map.call(document.querySelectorAll('.mdc-checkbox'), function (el) {
+    let mdcCheck = new MDCCheckbox(el);
+    let actionFn = el.getAttribute('data-action-fn');
+    if (actionFn) {
+        let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
+        mdcCheck.listen('MDCCheckbox:change', () => fn(mdcCheck.value));
+    }
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCCheckbox.prototype.assignedVar = null;
+        mdcCheck.assignedVar = el.getAttribute('id');
+    }
+    return mdcCheck;
+});
 // Material Tab
 export var mdcTabBars = [].map.call(document.querySelectorAll('.mdc-tab-bar'), function (el) {
     let mdcTab = new MDCTabBar(el);
