@@ -715,6 +715,34 @@ class Company(db.Model):
         )
 
 
+# Appointments Class
+class ActionPlan(db.Model):
+    __tablename__ = 'action_plan'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_scheduled = db.Column(db.DateTime, nullable=False)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    service_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    emp_assigned = db.Column(db.Integer, db.ForeignKey('user_x_employees_assigned.id'), nullable=False)
+    emp_accepted = db.Column(db.Boolean, nullable=True, default=False)
+    usr_accepted = db.Column(db.DateTime, nullable=True)
+    emp_attendance_start = db.Column(db.DateTime, nullable=True)
+    emp_attendance_ending = db.Column(db.DateTime, nullable=True)
+    cancelled = db.Column(db.Boolean, nullable=True, default=False)
+    cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    cancelled_reason = db.Column(db.Text, unique=False, nullable=False)
+    progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    version = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            company_id = self.company_id,
+            service_id = self.service_id,
+            version = self.version,
+        )
+    
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):
     __tablename__ = 'user_x_employees_assigned'

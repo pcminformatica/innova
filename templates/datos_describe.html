@@ -9,7 +9,36 @@
 .alignright {
 	float: right;
 }
+@media print {
+  * { overflow: visible !important; } 
+  .mdc-top-app-bar__row{
+    display: none
+  }
 
+  .s-toptab{
+    display: none;
+  }
+  .no-print{
+    display: none;
+  }
+
+  .footer-about{
+    display: none;
+  }
+  .s-footer{
+    display: none;
+  }
+  @page {size: landscape}
+  body {
+    background: none;
+    -ms-zoom: 2.665;
+    margin: 0;
+    padding: 0;
+  }
+  .mdc-snackbar{
+    display: none;
+  }
+}
 
 </style>
 {% endblock %}
@@ -121,7 +150,7 @@
                 </div>
                 </div>
             </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -153,10 +182,10 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
                                         
 
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
                                       
@@ -175,12 +204,12 @@
                                             {{ apix.titulo }}
                                           </p>
                                         </th>
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                           <input type="date" id="date_{{ apix.id }}">
                                         </td>
       
                                     
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
@@ -220,10 +249,10 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
                                         
 
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
                                       
@@ -240,12 +269,12 @@
                                         <th class="mdc-data-table__cell" scope="row">
                                             {{ apix.titulo }}
                                         </th>
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <input type="date" id="date_{{ apix.id }}">
                                         </td>
       
                                     
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
@@ -285,10 +314,10 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
                                         
 
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
                                       
@@ -307,12 +336,12 @@
                                               {{ apix.titulo }}
                                             </p>
                                         </th>
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                           <input type="date" id="date_{{ apix.id }}">
                                         </td>
       
                                     
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('PRODUCCIÓN Y AMBIENTE', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
@@ -352,10 +381,10 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
                                         
 
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
                                       
@@ -372,12 +401,12 @@
                                         <th class="mdc-data-table__cell" scope="row">
                                             {{ apix.titulo }}
                                         </th>
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                           <input type="date" id="date_{{ apix.id }}">
                                         </td>
       
                                     
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
@@ -417,10 +446,10 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
                                         
 
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
                                       
@@ -439,12 +468,12 @@
                                             {{ apix.titulo }}
                                           </p>
                                         </th>
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                           <input type="date" id="date_{{ apix.id }}">
                                         </td>
       
                                     
-                                        <td class="mdc-data-table__cell">
+                                        <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
@@ -495,7 +524,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -528,7 +557,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
                                             
 
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES</th>
+                                            <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                           </tr>
                                           
                                           
@@ -560,7 +589,7 @@
                                     
                                   </div>
                                   <br><br><br>
-                                  <button  onclick="savePlan()" class="mdc-button mdc-button--raised mdc-button--leading" style="text-align: center">
+                                  <button  onclick="savePlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
                                             
                                     <span class="mdc-button__ripple"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
@@ -614,7 +643,7 @@
             hilera.className = 'mdc-data-table__row'
             celda1.className = 'mdc-data-table__cell'
             celda2.className = 'mdc-data-table__cell'
-            celda3.className = 'mdc-data-table__cell'
+            celda3.className = 'mdc-data-table__cell no-print'
 
         
             celda.appendChild(textoCelda);
@@ -669,7 +698,7 @@
       }else{
         alert('Seleccione un servicio')
       }
-
+      window.print()
     }
 </script>
 {% endblock %}

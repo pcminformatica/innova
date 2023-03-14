@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from sqlalchemy import or_
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
@@ -798,3 +798,29 @@ def _d_save_admin_servi():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/user/service', methods = ['POST'])
+# @login_required
+def _d_save_ActionPlan():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_compay = request.json['txt_compay']
+            company = Company.query.filter_by(name = txt_compay).first()
+            if not company:
+                    
+                txt_name = request.json['txt_name']
+                txt_rol = request.json['txt_rol']
+                user.name = txt_name
+            user.catalog_category = txt_rol
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+    
