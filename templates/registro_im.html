@@ -77,33 +77,33 @@
                                           </div>
                                         </div>
                                         <div class="mdc-layout-grid__inner">
-                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
-                                                    ¿Conoce los servicios que ofrece INNOVA?
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                ¿Conoce los servicios que ofrece INNOVA?
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="SI" name="txt_ofrece" checked>
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
                                                 </div>
-                                                <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                      <input class="mdc-radio__native-control" type="radio" value="SI" id="txt_ofrece" name="txt_ofrece" checked>
-                                                      <div class="mdc-radio__background">
-                                                        <div class="mdc-radio__outer-circle"></div>
-                                                        <div class="mdc-radio__inner-circle"></div>
-                                                      </div>
-                                                      <div class="mdc-radio__ripple"></div>
-                                                    </div>
-                                                    <label for="radio-1">A)  SI</label>
-                                                  </div>
-                                                  <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                      <input class="mdc-radio__native-control" type="radio" value="NO" id="txt_ofrece" name="txt_ofrece">
-                                                      <div class="mdc-radio__background">
-                                                        <div class="mdc-radio__outer-circle"></div>
-                                                        <div class="mdc-radio__inner-circle"></div>
-                                                      </div>
-                                                      <div class="mdc-radio__ripple"></div>
-                                                    </div>
-                                                    <label for="radio-1">B)  NO </label>
-                                                  </div>
+                                                <label for="radio-1">A)  SI</label>
                                               </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="NO"  name="txt_ofrece">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">B)  NO </label>
+                                              </div>
+                                          </div>
 
                                               <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
@@ -363,7 +363,7 @@
                                             <div class="mdc-typography--body1">
                                                 <b>1.5</b> Municipio
                                             </div>
-                                            <div class="mdc-select mdc-select--filled  mdc-select--required demo-width-class">
+                                            <div class="mdc-select mdc-select--filled  mdc-select--required demo-width-class" id="txt_municipio" data-assigned-var>
                                                 <div class="mdc-select__anchor" aria-required="true"
                                                      role="button"
                                                      aria-haspopup="listbox"
@@ -417,7 +417,7 @@
                                             <div class="mdc-typography--body1">
                                                 <b>1.6</b> Edad:
                                             </div>
-                                            <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="u.city" data-assigned-var>
+                                            <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_emp_edad" data-assigned-var>
                                                 <div class="mdc-select__anchor" aria-required="true"
                                                      role="button"
                                                      aria-haspopup="listbox"
@@ -715,9 +715,8 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
-                                        
+                                                        name="txt_dispositivos"
+                                                        value="Computadora"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -739,8 +738,8 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
+                                                        name="txt_dispositivos"
+                                                        value="Tablet"
                                         
                                                         />
                                                 <div class="mdc-checkbox__background">
@@ -763,8 +762,8 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
+                                                        name="txt_dispositivos"
+                                                        value="Teléfono inteligente"
                                         
                                                         />
                                                 <div class="mdc-checkbox__background">
@@ -787,8 +786,8 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
+                                                        name="txt_dispositivos"
+                                                        value="No tiene"
                                         
                                                         />
                                                 <div class="mdc-checkbox__background">
@@ -810,166 +809,87 @@
         
                                         </div>
                                         <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                <b>2.3</b> Calidad del Internet:
+                                          <div class="mdc-typography--body1">
+                                            <b>2.3</b> Calidad del Internet:
+                                          </div>
+                                          <div class="mdc-form-field">
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="Buena" name="txt_calidad_internet" checked>
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
+                                                </div>
+                                                <div class="mdc-radio__ripple"></div>
+                                              </div>
+                                              <label for="radio-1">A)  Buena</label>
                                             </div>
                                             <div class="mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                <input type="checkbox"
-                                                        class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
-                                        
-                                                        />
-                                                <div class="mdc-checkbox__background">
-                                                    <svg class="mdc-checkbox__checkmark"
-                                                        viewBox="0 0 24 24">
-                                                    <path class="mdc-checkbox__checkmark-path"
-                                                            fill="none"
-                                                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                                    </svg>
-                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="Media"  name="txt_calidad_internet">
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
                                                 </div>
-                                                <div class="mdc-checkbox__ripple"></div>
-                                                <div class="mdc-checkbox__focus-ring"></div>
-                                                </div>
-                                                <label for="checkbox-public">
-                                                    a)  Buena
-                                                </label>
+                                                <div class="mdc-radio__ripple"></div>
+                                              </div>
+                                              <label for="radio-1">B)  Media </label>
                                             </div>
                                             <div class="mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                <input type="checkbox"
-                                                        class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
-                                        
-                                                        />
-                                                <div class="mdc-checkbox__background">
-                                                    <svg class="mdc-checkbox__checkmark"
-                                                        viewBox="0 0 24 24">
-                                                    <path class="mdc-checkbox__checkmark-path"
-                                                            fill="none"
-                                                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                                    </svg>
-                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="Mala"  name="txt_calidad_internet">
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
                                                 </div>
-                                                <div class="mdc-checkbox__ripple"></div>
-                                                <div class="mdc-checkbox__focus-ring"></div>
-                                                </div>
-                                                <label for="checkbox-public">
-                                                    b)  Media
-                                                </label>
+                                                <div class="mdc-radio__ripple"></div>
+                                              </div>
+                                              <label for="radio-1">C)  Mala </label>
                                             </div>
                                             <div class="mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                <input type="checkbox"
-                                                        class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
-                                        
-                                                        />
-                                                <div class="mdc-checkbox__background">
-                                                    <svg class="mdc-checkbox__checkmark"
-                                                        viewBox="0 0 24 24">
-                                                    <path class="mdc-checkbox__checkmark-path"
-                                                            fill="none"
-                                                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                                    </svg>
-                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="No tiene"  name="txt_calidad_internet">
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
                                                 </div>
-                                                <div class="mdc-checkbox__ripple"></div>
-                                                <div class="mdc-checkbox__focus-ring"></div>
-                                                </div>
-                                                <label for="checkbox-public">
-                                                    c) Mala
-                                                </label>
-                                            </div>
-                                            <div class="mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                <input type="checkbox"
-                                                        class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
-                                                        id="checkbox-public" 
-                                        
-                                                        />
-                                                <div class="mdc-checkbox__background">
-                                                    <svg class="mdc-checkbox__checkmark"
-                                                        viewBox="0 0 24 24">
-                                                    <path class="mdc-checkbox__checkmark-path"
-                                                            fill="none"
-                                                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                                    </svg>
-                                                    <div class="mdc-checkbox__mixedmark"></div>
-                                                </div>
-                                                <div class="mdc-checkbox__ripple"></div>
-                                                <div class="mdc-checkbox__focus-ring"></div>
-                                                </div>
-                                                <label for="checkbox-public">
-                                                    d) No tiene 
-                                                </label>
-                                            </div>
-                                        </div>
+                                                <div class="mdc-radio__ripple"></div>
+                                              </div>
+                                              <label for="radio-1">d)  No tiene </label>
+                                            </div>                          
 
+
+
+                                        </div>
+                                 
 
                                         <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                <b>2.4</b> Pertenece a un grupo poblacional étnico: <span class="required">*</span>
-                                            </div>
-                                            <div class="mdc-select mdc-select--filled demo-width-class mdc-select--required" id="txt_grupo_pertenece" data-assigned-var>
-                                                <div class="mdc-select__anchor" aria-required="true"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label" hiddenlabel="2.4 Pertenece a un grupo poblacional étnico">Seleccione</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
+                                          <div class="mdc-typography--body1">
+                                            <b>2.4</b> Pertenece a un grupo poblacional étnico: <span class="required">*</span>
+                                          </div>
+                                          <div class="mdc-form-field">
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="SI" name="txt_grupo_pertenece" checked>
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
                                                 </div>
-                                              
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                    </li>
-                                                    <li class="mdc-deprecated-list-item" aria-selected="false" data-value="SI" role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                      <span class="mdc-deprecated-list-item__text">
-                                                        SI
-                                                      </span>
-                                                    </li>
-                                                    <li class="mdc-deprecated-list-item" aria-selected="false" data-value="NO" aria-disabled="true" role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                      <span class="mdc-deprecated-list-item__text">
-                                                        NO
-                                                      </span>
-                                                    </li>
-
-                                                  </ul>
-                                                </div>
+                                                <div class="mdc-radio__ripple"></div>
                                               </div>
+                                              <label for="radio-1">A)  SI</label>
+                                            </div>
+                                            <div class="mdc-form-field">
+                                              <div class="mdc-radio">
+                                                <input class="mdc-radio__native-control" type="radio" value="NO"  name="txt_grupo_pertenece">
+                                                <div class="mdc-radio__background">
+                                                  <div class="mdc-radio__outer-circle"></div>
+                                                  <div class="mdc-radio__inner-circle"></div>
+                                                </div>
+                                                <div class="mdc-radio__ripple"></div>
+                                              </div>
+                                              <label for="radio-1">B)  NO </label>
+                                            </div>
                                         </div>
+
                                         <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
                                                 <b>2.5</b> Origen étnico <span class="required"></span>
@@ -1067,7 +987,7 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
                                                         value="Accionista principal"
                                                         />
@@ -1091,7 +1011,7 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
                                                         value="Accionista minotaria"
                                                         />
@@ -1115,9 +1035,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Propietario principal"
+                                                        value="Propietaria principal"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1139,9 +1059,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="C. Gerente general"
+                                                        value="C. Gerenta general"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1163,9 +1083,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Gerente financiero"
+                                                        value="Gerenta financiero"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1187,9 +1107,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Presidente de la empresa"
+                                                        value="Presidenta de la empresa"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1211,9 +1131,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Presidente de la empresa"
+                                                        value="Presidenta de la empresa"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1235,9 +1155,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Gerente financiero"
+                                                        value="Vicepresidenta"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1259,9 +1179,9 @@
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="txt_emp_cargo"
                                                         id="checkbox-public" 
-                                                        value="Gerente financiero"
+                                                        value="Representanta legal"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -1276,16 +1196,16 @@
                                                 <div class="mdc-checkbox__focus-ring"></div>
                                                 </div>
                                                 <label for="checkbox-public">
-                                                    I. Representante legal 
+                                                    I. Representanta legal 
                                                 </label>
                                             </div>
                                             <div class="mdc-form-field">
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="cxb_accept"
+                                                        name="Administradora"
                                                         id="checkbox-public" 
-                                                        value="Gerente financiero"
+                                                        value="Administradora"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
