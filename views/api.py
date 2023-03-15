@@ -8,6 +8,7 @@ from flask_login import current_user, login_required
 from models.models import ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from sqlalchemy import or_
+import json
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
 # Set the Appointment's Details
@@ -800,7 +801,7 @@ def _d_save_admin_servi():
         return jsonify({ 'status': 'error', 'msg': e })
 
 
-@api.route('/api/save/user/service', methods = ['POST'])
+@api.route('/api/save/action/plan/', methods = ['POST'])
 # @login_required
 def _d_save_ActionPlan():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
@@ -809,17 +810,38 @@ def _d_save_ActionPlan():
     try:
         # POST: Save Appointment
         if request.method == 'POST':
-            txt_compay = request.json['txt_compay']
-            company = Company.query.filter_by(name = txt_compay).first()
+
+            txt_company_name = request.json['txt_company_name']
+            txt_company_rtn = request.json['txt_company_rtn']
+            services = request.json['services']
+            app.logger.error(txt_company_name)
+            app.logger.error(txt_company_rtn)
+            app.logger.error(services)
+            company =  Company.query.filter(or_(Company.name == txt_company_name, Company.rtn == txt_company_rtn)).first()
             if not company:
+                company = Company()
+                company.name = txt_company_name
+                company.rtn = txt_company_rtn
+                company.description = 'description'
+                db.session.add(company)
+                db.session.commit()
+            else:
+                app.logger.error('** siiiiiiiiiii * - API Appointment Detail Error: {}'.format('e'))
+            services = json.loads(services)
+            for service in services:
+                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],version=0).first()
+                if not actionplan:
+                    actionplan = ActionPlan()
+                    actionplan.company_id = actionplan.id
+                    actionplan.company = company
+                    actionplan.date_scheduled = service['fecha']
+                    actionplan.services_id = int(service['service'])
+                    actionplan.created_by = current_user.id
+                    db.session.add(actionplan)
+                    db.session.commit()
                     
-                txt_name = request.json['txt_name']
-                txt_rol = request.json['txt_rol']
-                user.name = txt_name
-            user.catalog_category = txt_rol
-            db.session.add(user)
-            db.session.commit()
-            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+                    
+        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })

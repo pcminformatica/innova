@@ -78,7 +78,7 @@
                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                     <span class="mdc-text-field__ripple"></span>
                                    
-                                    <input value="{{ api.NOMBRE_EMPRESA }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <input id="txt_company_name" value="{{ api.NOMBRE_EMPRESA }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
                                     <span lass="mdc-line-ripple"></span>
                                 </label>
                               </div>
@@ -89,7 +89,7 @@
                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                     <span class="mdc-text-field__ripple"></span>
 
-                                    <input value="{{ api.RTN }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                    <input id="txt_company_rtn" value="{{ api.RTN }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly >
                                     <span lass="mdc-line-ripple"></span>
                                 </label>
                               </div>
@@ -564,7 +564,28 @@
                                           
                                         </thead>
                                         <tbody id="tablaPlan" class="mdc-data-table__content">
-
+                                          {% for apix in plan %}
+                                        
+                                      
+                                          <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{loop.index}}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              <p>
+                                                {{ apix.services.name }}
+                                              </p>
+                                            </th>
+                                            <td class="mdc-data-table__cell ">
+                                                {{ apix.date_scheduled.strftime('%Y-%m-%d')  }}
+                                            </td>
+          
+                                        
+                                            <td class="mdc-data-table__cell no-print">
+                                               Porcentaje de avance: {{ apix.progress  }}%
+                                            </td>
+                                          </tr>
+                                          {% endfor %}
                                         </tbody>
                                       </table>
                                     </div>
@@ -589,12 +610,22 @@
                                     
                                   </div>
                                   <br><br><br>
+                                  {% if plan %}
+                                  <button  onclick="printPlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
+                                            
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                                    <span class="mdc-button__label">Imprimir plan de accion</span>
+                                  </button>
+
+                                  {% else %}
                                   <button  onclick="savePlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
                                             
                                     <span class="mdc-button__ripple"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
                                     <span class="mdc-button__label">Guardar plan de accion</span>
                                   </button>
+                                  {% endif %}
                             </div>
               
                                 
@@ -660,7 +691,7 @@
             hilera.appendChild(celda1);
             hilera.appendChild(celda2);
             hilera.appendChild(celda3);
-
+            hilera.id =    id                     
             Tbl.appendChild(hilera);
         }else{
             alert('Seleccione una fecha')
@@ -683,21 +714,58 @@
     }
 
     function savePlan(){
+      const Swal = swcms.returnSwal()
       var resume_table = document.getElementById("tbl_plan");
-     
+      var txt_company_name = document.getElementById("txt_company_name").value.trim() || null
+      var txt_company_rtn = document.getElementById("txt_company_rtn").value.trim() || null
+      
+
+      let services = [];
       if (resume_table.rows.length >1){
 
         for (var i = 1, row; row = resume_table.rows[i]; i++) {
           //alert(cell[i].innerText);
-          for (var j = 0, col; col = row.cells[j]; j++) {
-            //alert(col[j].innerText);
-            console.log(`Txt: ${col.innerText} \tFila: ${i} \t Celda: ${j}`);
-          }
+          col = resume_table.rows[i].cells[2].innerHTML;
+          id = resume_table.rows[i].id;
+          
+          services.push ({service:id,fecha:col})
         }
-        alert('no hay conexion con el servidor')
+        console.log(services)
       }else{
         alert('Seleccione un servicio')
+        return false
       }
+
+      let postData = {
+      "txt_company_name": txt_company_name,
+      "txt_company_rtn": txt_company_rtn,
+      "services": JSON.stringify(services)
+      };
+      console.log(postData)
+      let apiUrl = '/api/save/action/plan/';
+      //document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+      window.print()
+
+    }
+
+    function printPlan(){
       window.print()
     }
 </script>

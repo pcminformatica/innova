@@ -7,9 +7,10 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
+from sqlalchemy import or_
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
 
@@ -374,8 +375,17 @@ def _datos_describe(user_uid):
                 financiera.append(servicio)
             elif serviciox == 5:
                 mercadeo.append(servicio)
+    nombre = api['NOMBRE_EMPRESA']
+    rtn = api['RTN']
+    company =  Company.query.filter(or_(Company.name == nombre, Company.rtn == rtn)).first()
+    if company:
+
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id).all()
         
+    else:
+        plan = []
     context = {
+        'plan':plan,
         'api': api,
         'legalizacion':legalizacion,
         'administracion':administracion,
