@@ -109,11 +109,11 @@ def _home_view():
     if User.query.filter_by(id = 5).first():
         userRu = User.query.filter_by(id = 5).first()
     else:
-        userRu = User.query.filter_by(id = 1).first()
+        userRu = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 6).first():
         userRi = User.query.filter_by(id = 6).first()
     else:
-        userRi = User.query.filter_by(id = 1).first()
+        userRi = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 15).first():
         userSPS = User.query.filter_by(id = 15).first()
     else:
@@ -646,3 +646,117 @@ def _datos_describe_12(user_uid):
 @digitalcenter.route('/registros/im',methods=['GET', 'POST'])
 def _registros_im():
     return render_template('registro_im.html')
+
+@digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
+def _datos_diagnostico(user_uid):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
+    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    servicios = []
+    #preguntas
+    direccion_estrategica = ["_1_1","_1_2","_1_3","_1_4","_1_5","_1_6","_1_7","_1_8","_1_9","_1_10","_1_11"]
+    mercadeo_ventas = ["_2_1","_2_2","_2_3","_2_4","_2_5","_2_6","_2_7","_2_8", "_2_9", "_2_10", "_2_11", "_2_12","_2_13","_2_14","_2_15","_2_16","_2_17","_2_18","_2_19","_2_20","_2_21","_2_22","_2_23","_2_24","_2_25","_2_26"]
+    madurez_digital = ["_3_1","_3_2","_3_3","_3_4","_3_5","_3_6","_3_7","_3_8","_3_9","_3_10","_3_11"]
+    gestion_financiera = ["_4_1","_4_2","_4_3","_4_4","_4_5","_4_6","_4_7","_4_8","_4_9","_4_10","_4_11","_4_12","_4_13","_4_14","_4_15","_4_16","_4_17","_4_18","_4_19","_4_20","_4_21" ]
+    gestion_produccion = ["_5_1","_5_2","_5_3","_5_4","_5_5","_5_6","_5_7","_5_8","_5_9","_5_10","_5_11","_5_12","_5_13","_5_14","_5_15","_5_16","_5_17","_5_18","_5_19","_5_20","_5_21","_5_22","_5_23","_5_24",]
+    organizacion_gestion = ["_6_1","_6_2","_6_3","_6_4","_6_5","_6_6","_6_7","_6_8","_6_9","_6_10","_6_11","_6_12","_6_13","_6_14","_6_15","_6_16" ,"_6_17"]
+    
+    #1
+    respuestas_direccion_estrategica = []
+    total_direccion_estrategica = 0
+    for clave in direccion_estrategica:
+        respuestas_direccion_estrategica.append({clave:api[clave]})
+        total_direccion_estrategica = total_direccion_estrategica + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_direccion_estrategica = total_direccion_estrategica/(len(direccion_estrategica)*3) * 0.10 * 100
+    resultado_direccion_estrategica = round(resultado_direccion_estrategica, 2)
+    #2
+    respuestas_mercadeo_ventas = []
+    total_mercadeo_ventas = 0
+    for clave in mercadeo_ventas:
+        respuestas_mercadeo_ventas.append({clave:api[clave]})
+        total_mercadeo_ventas = total_mercadeo_ventas + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_mercadeo_ventas = total_mercadeo_ventas/(len(mercadeo_ventas)*3) * 0.25 * 100
+    resultado_mercadeo_ventas = round(resultado_mercadeo_ventas, 2)
+    #3
+    respuestas_madurez_digital = []
+    total_madurez_digital = 0
+    for clave in madurez_digital:
+        respuestas_madurez_digital.append({clave:api[clave]})
+        total_madurez_digital = total_madurez_digital + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_madurez_digital = total_madurez_digital/(len(madurez_digital)*3) * 0.10 * 100
+    resultado_madurez_digital = round(resultado_madurez_digital, 2)
+    #4
+    respuestas_gestion_financiera = []
+    total_gestion_financiera = 0
+    for clave in gestion_financiera:
+        respuestas_gestion_financiera.append({clave:api[clave]})
+        total_gestion_financiera = total_gestion_financiera + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_gestion_financiera = total_gestion_financiera/(len(gestion_financiera)*3) * 0.25 * 100
+    resultado_gestion_financiera = round(resultado_gestion_financiera, 2)
+    #5
+    respuestas_gestion_produccion = []
+    total_gestion_produccion = 0
+    for clave in gestion_produccion:
+        respuestas_gestion_produccion.append({clave:api[clave]})
+        total_gestion_produccion = total_gestion_produccion + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_gestion_produccion = total_gestion_produccion/(len(gestion_produccion)*3) * 0.20 * 100
+    resultado_gestion_produccion = round(resultado_gestion_produccion, 2)
+
+    #6
+    respuestas_organizacion_gestion = []
+    total_organizacion_gestion = 0
+    for clave in organizacion_gestion:
+        respuestas_organizacion_gestion.append({clave:api[clave]})
+        total_organizacion_gestion = total_organizacion_gestion + int(api[clave])
+        print("Pregunta: {} respuesta: {}".format(clave,api[clave]))
+    resultado_organizacion_gestion = total_organizacion_gestion/(len(organizacion_gestion)*3) * 0.10 * 100
+    resultado_organizacion_gestion = round(resultado_organizacion_gestion, 2)
+
+    totaldiagnostico = resultado_direccion_estrategica + resultado_mercadeo_ventas + resultado_madurez_digital + resultado_gestion_financiera + resultado_gestion_produccion + resultado_organizacion_gestion
+    totaldiagnostico = round(totaldiagnostico, 2) 
+    totalarea =  total_direccion_estrategica + total_mercadeo_ventas + total_madurez_digital + total_gestion_financiera + total_gestion_produccion + total_organizacion_gestion 
+    tipo_empresa = "EMPRESA D"
+    if totaldiagnostico <= 60:
+        tipo_empresa = "EMPRESA D"
+    elif totaldiagnostico <= 70:
+        tipo_empresa = "EMPRESA C"
+    elif totaldiagnostico <= 90:
+        tipo_empresa = "EMPRESA B"
+    elif totaldiagnostico <= 100:
+        tipo_empresa = "EMPRESA D"
+    context = {
+        'api': api,
+        "respuestas_direccion_estrategica":respuestas_direccion_estrategica,
+        "total_direccion_estrategica":total_direccion_estrategica,
+        "respuestas_mercadeo_ventas":respuestas_mercadeo_ventas,
+        "total_mercadeo_ventas":total_mercadeo_ventas,
+        "respuestas_madurez_digital":respuestas_madurez_digital,
+        "total_madurez_digital":total_madurez_digital,
+        "respuestas_gestion_financiera":respuestas_gestion_financiera,
+        "total_gestion_financiera":total_gestion_financiera,
+        "respuestas_gestion_produccion":respuestas_gestion_produccion,
+        "total_gestion_produccion":total_gestion_produccion,
+        "respuestas_organizacion_gestion":respuestas_organizacion_gestion,
+        "total_organizacion_gestion":total_organizacion_gestion,
+        "resultado_direccion_estrategica":resultado_direccion_estrategica,
+        "resultado_mercadeo_ventas":resultado_mercadeo_ventas,
+        "resultado_madurez_digital":resultado_madurez_digital,
+        "resultado_gestion_financiera":resultado_gestion_financiera,
+        "resultado_gestion_produccion":resultado_gestion_produccion,
+        "resultado_organizacion_gestion":resultado_organizacion_gestion,
+        "totaldiagnostico":totaldiagnostico,
+        "totalarea":totalarea,
+        "tipo_empresa":tipo_empresa
+    }
+   
+    app.logger.debug(servicios)
+    app.logger.debug(servicios)
+    return render_template('diagnostico.html',**context)
