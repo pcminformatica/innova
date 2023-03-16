@@ -40,6 +40,7 @@ function saveRegisterForms(){
     
 
 
+
   showMSJ('Éxito','Plan de Acción creado!','success')
 
   console.log(preguntas)
@@ -155,7 +156,13 @@ function saveRegisterForms(){
     if (mdcAssignedVars[property].value === '' ){   
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
-    }else{
+    }
+    else if (valida_correo(mdcAssignedVars[property].value) == false){
+      showMSJ('Tipo de correo no válido:','Pregunta 1.8 Correo','info')
+      return false
+    }
+    else
+    {  
       preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
@@ -359,9 +366,16 @@ function saveRegisterForms(){
     if (mdcAssignedVars[property].value === '' ){   
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
-    }else{
+    }
+    else if (valida_correo(mdcAssignedVars[property].value) == false){
+      showMSJ('Tipo de correo no válido:','Pregunta 3.9 Correo','info')
+      return false
+    }
+    else
+    {  
       preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }    
+    }
+
     //Pregunta 3.10
     property = 'txt_social_company'
     if (mdcAssignedVars[property].value === '' ){   
@@ -706,3 +720,23 @@ showMSJ('Éxito','Plan de Acción creado!','success')
         }
       }*/
 }
+
+function isNumberKey(evt){
+  var charCode = (evt.which) ? evt.which : event.keyCode
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+  return true;
+}  
+
+//Valida correo
+function valida_correo(correo) {
+  correo = correo.trim();
+  console.log(correo)
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correo)){
+  
+   return (true)
+  } else {
+   
+   return (false);
+  }
+ }

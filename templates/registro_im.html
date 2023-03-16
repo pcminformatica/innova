@@ -516,7 +516,7 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_correo" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.8 Correo">Correo</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id"
+                                                <input required class="mdc-text-field__input" onkeypress="return event.charCode != 32" type="mail" aria-labelledby="my-label-id"
                                  
                                                 >
                                                 <span class="mdc-line-ripple"></span>
@@ -2008,7 +2008,7 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_mail_company" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.7 Correo">Correo</span>
-                                                <input required class="mdc-text-field__input" type="mail" aria-labelledby="my-label-id"
+                                                <input required class="mdc-text-field__input" onkeypress="return event.charCode != 32" type="mail" aria-labelledby="my-label-id"
                                  
                                                 >
                                                 <span class="mdc-line-ripple"></span>
@@ -2036,7 +2036,7 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Años de fundación de la empresa</span>
-                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" min="0" max="100">
+                                                <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="number" aria-labelledby="my-label-id" min="0" max="100">
                                                 <span class="mdc-line-ripple"></span>
                                             </label>
                                           </div>
@@ -2166,7 +2166,7 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_company_miembros_junta" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.15 ¿Cuántos son los miembros de la junta directiva de la empresa?">Cuántos son los miembros de la junta directiva de la empresa</span>
-                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" value="0">
+                                                <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" aria-labelledby="my-label-id" value="0">
                                                 <span class="mdc-line-ripple"></span>
                                             </label>
                                           </div>
@@ -2178,7 +2178,7 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_company_miembros_mujeres" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.16 ¿Cuántas son mujeres?">Cuántas son mujeres</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" value="0" 
+                                                <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="text" aria-labelledby="my-label-id" value="0" 
                                  
                                                 >
                                                 <span class="mdc-line-ripple"></span>
@@ -2207,7 +2207,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_total_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2217,7 +2217,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_total_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2232,7 +2232,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2242,7 +2242,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number"  value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number"  value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2256,7 +2256,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_no_remunerados_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2266,7 +2266,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_u_no_remunerados_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2304,7 +2304,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_total_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2314,7 +2314,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_total_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number"  value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number"  value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2329,7 +2329,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_remunerados_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2339,7 +2339,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_remunerados_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2353,7 +2353,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_no_remunerados_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2363,7 +2363,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_no_remunerados_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2401,7 +2401,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_compl_remunerados_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2411,7 +2411,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_compl_remunerados_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" type="number" value="0" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2451,7 +2451,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_remunerados_2_mujer" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" value="0" type="number" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" value="0" type="number" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
@@ -2461,7 +2461,7 @@
                                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_temp_remunerados_2_hombre" data-assigned-var>
                                                                     <span class="mdc-text-field__ripple"></span>
                                                                     
-                                                                    <input required class="mdc-text-field__input" value="0" type="number" aria-labelledby="my-label-id">
+                                                                    <input required class="mdc-text-field__input"  onkeypress="return isNumberKey(event)" min="0" value="0" type="number" aria-labelledby="my-label-id">
                                                                     <span class="mdc-line-ripple"></span>
                                                                 </label>
                                                             </div>
