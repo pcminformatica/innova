@@ -36,79 +36,9 @@ function saveRegisterForms(){
           
   });
   let preguntas = []
-    //Pregunta 3.22
-    property = 'volumen_ventas_ultimo'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }
-    //Pregunta 3.23
-    property = 'volumen_utilidades_ultimo'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }
-    //Pregunta 3.24
-    const tuvo_acceso_credito =  getCheckValues('tuvo_acceso_credito');
-    if (tuvo_acceso_credito.length == 0 ){   
-      showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
-      return false
-    }else{
-      preguntas.push({"pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tuvo_acceso_credito[0]})
-    }
-    //Pregunta 3.25
-    property = 'rango_activos'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }
-    //Pregunta 3.26
-    property = 'monto_credito'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }
-    //Pregunta 3.27
-    const tipo_financiera_obtenido =  getCheckValues('tipo_financiera_obtenido');
-    if (tipo_financiera_obtenido.length == 0 ){   
-      showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
-      return false
-    }else{
-      preguntas.push({"pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tipo_financiera_obtenido[0]})
-    }
-    //Pregunta 3.28
-    property = 'services_mas_importantes'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }
-    const services_mas_importantes = mdcAssignedVars[property].value
-    property = 'services_importantes'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }
-    const services_importantes = mdcAssignedVars[property].value
-    property = 'services_menos_importantes'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }
-    const services_menos_importantes = mdcAssignedVars[property].value
-    const objetivos = {
-      services_mas_importantes:services_mas_importantes,
-      services_importantes:services_importantes,
-      services_menos_importantes:services_menos_importantes,
-    }
-    preguntas.push({"pregunta":"3.18 ¿Cuáles de los siguientes aspectos describe mejor su objetivo principal con la participación en INNOVAMUJER HONDURAS?","respuesta":tipo_financiera_obtenido[0]})
+
+    
+
 
   showMSJ('Éxito','Plan de Acción creado!','success')
 
@@ -654,7 +584,108 @@ function saveRegisterForms(){
     }else{
       preguntas.push({"pregunta":"3.21 El mercado de su producto o servicio es (marque todas las opciones que apliquen)","respuesta":mercado_producto})
     }
+    //Pregunta 3.22
+    property = 'volumen_ventas_ultimo'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
+    //Pregunta 3.23
+    property = 'volumen_utilidades_ultimo'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
+    //Pregunta 3.24
+    const tuvo_acceso_credito =  getCheckValues('tuvo_acceso_credito');
+    if (tuvo_acceso_credito.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
+      return false
+    }else{
+      preguntas.push({"pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tuvo_acceso_credito[0]})
+    }
+    //Pregunta 3.25
+    property = 'rango_activos'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
+    //Pregunta 3.26
+    property = 'monto_credito'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
+    //Pregunta 3.27
+    const tipo_financiera_obtenido =  getCheckValues('tipo_financiera_obtenido');
+    if (tipo_financiera_obtenido.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','3.27 En qué tipo de institución financiera ha obtenido su crédito ','info')
+      return false
+    }else{
+      preguntas.push({"pregunta":"3.27 En qué tipo de institución financiera ha obtenido su crédito ","respuesta":tipo_financiera_obtenido[0]})
+    }
+    //Pregunta 3.28
+    property = 'services_mas_importantes'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }
+    const services_mas_importantes = mdcAssignedVars[property].value
+    property = 'services_importantes'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }
+    const services_importantes = mdcAssignedVars[property].value
+    property = 'services_menos_importantes'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }
+    const services_menos_importantes = mdcAssignedVars[property].value
+    const objetivos = {
+      services_mas_importantes:services_mas_importantes,
+      services_importantes:services_importantes,
+      services_menos_importantes:services_menos_importantes,
+    }
+    preguntas.push({"pregunta":"3.28 ¿Cuáles de los siguientes aspectos describe mejor su objetivo principal con la participación en INNOVAMUJER HONDURAS?","respuesta":objetivos})
+    //4.1
+    const txt_estatus =  getCheckValues('txt_estatus');
+    if (txt_estatus.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','4.1 Estatus','info')
+      return false
+    }else{
+      preguntas.push({"pregunta":"4.1 Estatus","respuesta":txt_estatus[0]})
+    }
+    //4.2
+    const tipo_formalizacion =  getCheckValues('tipo_formalizacion');
+    if (tipo_formalizacion.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','4.2 Tipo de formalización','info')
+      return false
+    }else{
+      preguntas.push({"pregunta":"4.2 Tipo de formalización","respuesta":tipo_formalizacion})
+    }
+    //4.3
+    const tipo_organizacion =  getCheckValues('tipo_organizacion');
 
+    preguntas.push({"pregunta":"4.3 Registros pendientes ","respuesta":tipo_organizacion})
+  
+    //4.4
+    property = 'como_se_entero'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
 showMSJ('Éxito','Plan de Acción creado!','success')
   
     console.log(preguntas)
