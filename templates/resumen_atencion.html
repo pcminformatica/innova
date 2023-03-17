@@ -1,0 +1,174 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+</style>
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" >
+                      <div class="mdc-card__media mdc-card__media--square">
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+
+                                  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
+                                  mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
+                                        <div class="mdc-typography--body1">
+                                            Servicio:
+                                        </div>
+                                        <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                            
+                                                <input id="txt_company_name" value="{{ action.services.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                        </div>
+               
+                          <br><br>
+                          <label class="mdc-text-field mdc-text-field--outlined">
+                            <span class="mdc-notched-outline">
+                              <span class="mdc-notched-outline__leading"></span>
+                              <span class="mdc-notched-outline__notch">
+                                <span class="mdc-floating-label" id="my-label-id">Porcentaje de avance</span>
+                              </span>
+                              <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.progress}}">
+                          </label>
+                          <br><br>
+                            <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
+                              <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                  <span class="mdc-floating-label" id="my-label-id">Comentario</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                              </span>
+                              <span class="mdc-text-field__resizer">
+                                <textarea id="txt_comentario" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
+                                <span class="mdc-text-field-character-counter">0 / 140</span>
+                              </span>
+                            </label>
+                            <br><br>
+                            <div class="mdc-form-field">
+                              <div class="mdc-checkbox">
+                                <input type="checkbox"
+                                       class="mdc-checkbox__native-control"
+                                       id="checkbox-Finalizo"/>
+                                <div class="mdc-checkbox__background">
+                                  <svg class="mdc-checkbox__checkmark"
+                                       viewBox="0 0 24 24">
+                                    <path class="mdc-checkbox__checkmark-path"
+                                          fill="none"
+                                          d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                  </svg>
+                                  <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                                <div class="mdc-checkbox__ripple"></div>
+                              </div>
+                              <label for="checkbox-1">Finalizo completamente</label>
+                            </div>
+                           
+
+                      </div>
+                                 
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <!-- ... additional primary action content ... -->
+                      <div class="mdc-card__ripple"></div>
+                    </div>
+                    <div class="mdc-card__actions">
+                      <div class="mdc-card__action-buttons">
+                        <a  href="#" onclick="saveResumenAtencion()" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                   
+                            <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label" style="margin-left: 10px;"> Enviar</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+     
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+
+<script>
+    function saveResumenAtencion()
+    {
+        const Swal = swcms.returnSwal()
+        var txt_porcentaje = document.getElementById("txt_porcentaje").value.trim() || null
+        var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
+        var txt_finalizo =  document.getElementById('checkbox-Finalizo')
+        var txt_servicios = "{{ action.id }}"
+        if(txt_porcentaje<=0 || txt_porcentaje>=101){
+            alert("Por favor elija un rango correcto")
+            return false
+        }else if (txt_comentario=="") {
+            alert("Por favor escriba un comentario")
+            return false
+        }else if (txt_finalizo.checked==true && txt_porcentaje!=100 ){
+            alert("Por favor escriba el porcentaje de 100%")
+            return false
+        }
+      
+        txt_finalizo= txt_finalizo.checked
+        console.log(txt_finalizo)
+        console.log(txt_porcentaje)
+        console.log(txt_servicios)
+        let postData = {
+            "txt_comentario":txt_comentario,
+            "txt_finalizo":txt_finalizo,
+            "txt_finalizo":txt_finalizo,
+            "txt_porcentaje":txt_porcentaje,
+            "txt_servicios":txt_servicios
+      };
+      console.log(postData)
+      let apiUrl = '/api/save/action/plan/history/';
+      //document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+    }
+</script>
+{% endblock %}

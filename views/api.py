@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from sqlalchemy import or_
 import json
@@ -1026,6 +1026,34 @@ def _d_save_DiagnosisCompany():
             db.session.commit()
 
                     
+        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/save/action/plan/history/', methods = ['POST'])
+# @login_required
+def _d_save_ActionPlanHistory():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+
+            txt_comentario = request.json['txt_comentario']
+            txt_porcentaje = request.json['txt_porcentaje']
+            txt_finalizo = request.json['txt_finalizo']
+            txt_servicios = request.json['txt_servicios']
+            history =  ActionPlanHistory()
+            history.created_by = current_user.id 
+            history.description = txt_comentario
+            history.progress = txt_porcentaje
+            history.action_plan_id = txt_servicios
+            history.endservices = txt_finalizo
+            db.session.add(history)
+            db.session.commit()
+
         return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))

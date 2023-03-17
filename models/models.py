@@ -753,13 +753,6 @@ class DiagnosisCompany(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
-    def __repr__(self):
-        return jsonify(
-            id = self.id,
-            company_id = self.company_id,
-            name = self.name,
-            rtn = self.rtn,
-        )
     
 # Appointments Class
 class ActionPlan(db.Model):
@@ -782,13 +775,19 @@ class ActionPlan(db.Model):
     cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    def __repr__(self):
-        return jsonify(
-            id = self.id,
-            company_id = self.company_id,
-            service_id = self.service_id,
-            version = self.version,
-        )
+
+# Services Supplement Class
+class ActionPlanHistory(db.Model):
+    __tablename__ = 'action_plan_history'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    action_plan_id = db.Column(db.Integer, db.ForeignKey('action_plan.id'), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    url = db.Column(db.Text, nullable=True)
+    endservices = db.Column(db.Boolean, nullable=True, default=False)
+    cancelled = db.Column(db.Boolean, nullable=True, default=False)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
     
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):
