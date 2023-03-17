@@ -52,7 +52,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":txt_ofrece[0]})
+      preguntas.push({"id":"A", "pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":txt_ofrece[0]})
     }
    
     //Pregunta B
@@ -61,7 +61,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','¿Qué servicios requiere de INNOVA?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"¿Qué servicios requiere de INNOVA?","respuesta":servicios})
+      preguntas.push({"id":"B","pregunta":"¿Qué servicios requiere de INNOVA?","respuesta":servicios})
     }
     
     //Pregunta C
@@ -70,7 +70,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"C","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     showMSJ('Éxito','Plan de Acción creado!','success')
     //Pregunta 1.1
@@ -79,7 +79,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_1","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
   
     //Pregunta 1.2
@@ -88,7 +88,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_2","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     //Pregunta 1.3
@@ -97,7 +97,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_3","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 1.4
     property = 'txt_depto'
@@ -105,7 +105,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
+      preguntas.push({"id":"1_4","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 1.5
     property = 'txt_municipio'
@@ -113,7 +113,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
+      preguntas.push({"id":"1_5","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     
     //Pregunta 1.6
@@ -122,7 +122,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_6","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     //Pregunta 1.7
@@ -131,7 +131,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_7","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     //Pregunta 1.8
@@ -146,7 +146,7 @@ function showMSJ(titulo,subtitulo,tipo){
     }
     else
     {  
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_8","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     //Pregunta 1.9
@@ -155,7 +155,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_9","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     
     //Pregunta 1.10
@@ -164,7 +164,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_10","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     // pregunta 1.11
     property = 'txt_medio_prefiere'
@@ -172,7 +172,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"1_11","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     // pregunta 2.1
@@ -181,7 +181,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"2_1","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     // pregunta 2.2
     const dispositivos =  getCheckValues('txt_dispositivos');
@@ -189,7 +189,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','2.2 Qué dispositivos utiliza para conexión a internet','info')
       return false
     }else{
-      preguntas.push({"pregunta":"2.2 Qué dispositivos utiliza para conexión a internet","respuesta":dispositivos})
+      preguntas.push({"id":"2_2","pregunta":"2.2 Qué dispositivos utiliza para conexión a internet","respuesta":dispositivos})
     }
     // pregunta 2.3
     const calidad_internet =  getCheckValues('txt_calidad_internet');
@@ -197,7 +197,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','2.3 Calidad del Internet','info')
       return false
     }else{
-      preguntas.push({"pregunta":"2.3 Calidad del Internet","respuesta":calidad_internet[0]})
+      preguntas.push({"id":"2_3","pregunta":"2.3 Calidad del Internet","respuesta":calidad_internet[0]})
     }  
     // pregunta 2.4
     const grupo_pertenece =  getCheckValues('txt_grupo_pertenece');
@@ -205,7 +205,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','2.4 Pertenece a un grupo poblacional étnico','info')
       return false
     }else{
-      preguntas.push({"pregunta":"2.4 Pertenece a un grupo poblacional étnico","respuesta":grupo_pertenece[0]})
+      preguntas.push({"id":"2_4","pregunta":"2.4 Pertenece a un grupo poblacional étnico","respuesta":grupo_pertenece[0]})
     }  
     // pregunta 2.5 
     property = 'txt_origen_etnico'
@@ -213,7 +213,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"2_5","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     // pregunta 2.6
     const emp_cargo =  getCheckValues('txt_emp_cargo');
@@ -221,7 +221,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','2.6 Cargo que Ud. desempeña (puede seleccionar más de una opción)','info')
       return false
     }else{
-      preguntas.push({"pregunta":"2.6 Cargo que Ud. desempeña (puede seleccionar más de una opción)","respuesta":emp_cargo})
+      preguntas.push({"id":"2_6","pregunta":"2.6 Cargo que Ud. desempeña (puede seleccionar más de una opción)","respuesta":emp_cargo})
     }  
     // pregunta 2.8
     const accionista_principal =  getCheckValues('2_8_accionista_principal');
@@ -278,7 +278,7 @@ function showMSJ(titulo,subtitulo,tipo){
         representante_legal:representante_legal[0],
         administradora:administradora[0],
       }
-      preguntas.push({"pregunta":"2.8 ¿Me podría por favor indicar cuáles de los siguientes cargos en su empresa son ocupados por un hombre o una mujer? ","respuesta":ocupaciones})
+      preguntas.push({"id":"2_8","pregunta":"2.8 ¿Me podría por favor indicar cuáles de los siguientes cargos en su empresa son ocupados por un hombre o una mujer? ","respuesta":ocupaciones})
     }  
     //Pregunta 3.1
     property = 'txt_name_company'
@@ -286,7 +286,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_1","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.2
     const cuenta_local =  getCheckValues('cuenta_local');
@@ -294,7 +294,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.2 ¿Cuenta con local propio o es alquilado?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"3.2 ¿Cuenta con local propio o es alquilado?","respuesta":cuenta_local[0]})
+      preguntas.push({"id":"3_2","pregunta":"3.2 ¿Cuenta con local propio o es alquilado?","respuesta":cuenta_local[0]})
     }
     //Pregunta 3.3
     const empresa_formalizada =  getCheckValues('empresa_formalizada');
@@ -302,7 +302,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.3 ¿Su empresa está formalizada?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"3.3 ¿Su empresa está formalizada?","respuesta":empresa_formalizada[0]})
+      preguntas.push({"id":"3_3","pregunta":"3.3 ¿Su empresa está formalizada?","respuesta":empresa_formalizada[0]})
     }
     //Pregunta 3.4
     property = 'txt_phone_company'
@@ -310,7 +310,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_4","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.5
     property = 'txt_depto_company'
@@ -318,7 +318,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
+      preguntas.push({"id":"3_5","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 3.6
     property = 'txt_depto_municipio'
@@ -326,7 +326,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
+      preguntas.push({"id":"3_6","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 3.7
     property = 'txt_city_company'
@@ -334,7 +334,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_7","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.8
     property = 'txt_company_address'
@@ -342,7 +342,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_8","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.9
     property = 'txt_mail_company'
@@ -356,7 +356,7 @@ function showMSJ(titulo,subtitulo,tipo){
     }
     else
     {  
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_9","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
 
     //Pregunta 3.10
@@ -365,7 +365,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_10","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }   
     //Pregunta 3.11
     property = 'txt_fundation_company'
@@ -373,7 +373,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_11","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }   
     //Pregunta 3.12
     property = 'txt_actividad_company'
@@ -381,7 +381,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_12","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     } 
     //Pregunta 3.13
     property = 'txt_company_porcentaje'
@@ -389,7 +389,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_13","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     } 
     //Pregunta 3.14
     const cuentan_junta_directiva =  getCheckValues('cuentan_junta_directiva');
@@ -397,7 +397,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.14 Su organización o cooperativa ¿Cuentan con una junta directiva?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"3.2 ¿Cuenta con local propio o es alquilado?","respuesta":cuentan_junta_directiva[0]})
+      preguntas.push({"id":"3_14","pregunta":"3.2 ¿Cuenta con local propio o es alquilado?","respuesta":cuentan_junta_directiva[0]})
     }
     //Pregunta 3.15
     property = 'txt_company_miembros_junta'
@@ -405,7 +405,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_15","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     } 
     //Pregunta 3.16
     property = 'txt_company_miembros_mujeres'
@@ -413,7 +413,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_16","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     } 
     //Pregunta 3.17
     property = 'txt_u_total_mujer'
@@ -470,7 +470,7 @@ function showMSJ(titulo,subtitulo,tipo){
       "u_no_remunerados_mujer":u_no_remunerados_mujer,
       "u_no_remunerados_hombre":u_no_remunerados_hombre
     }
-    preguntas.push({"pregunta":"3.17 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?","respuesta":empleado_ultimo})
+    preguntas.push({"id":"3_17","pregunta":"3.17 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?","respuesta":empleado_ultimo})
 
     //Pregunta 3.18
     //Pregunta 3.17
@@ -528,7 +528,7 @@ function showMSJ(titulo,subtitulo,tipo){
       "temp_no_remunerados_mujer":temp_no_remunerados_mujer,
       "temp_no_remunerados_hombre":temp_no_remunerados_hombre
     }
-    preguntas.push({"pregunta":"3.18 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?","respuesta":temp_empleado_ultimo})
+    preguntas.push({"id":"3_18","pregunta":"3.18 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?","respuesta":temp_empleado_ultimo})
     //3.19
     property = 'txt_compl_remunerados_mujer'
     if (mdcAssignedVars[property].value === '' ){   
@@ -550,7 +550,7 @@ function showMSJ(titulo,subtitulo,tipo){
       "txt_compl_remunerados_mujer":txt_compl_remunerados_mujer,
       "txt_compl_remunerados_hombre":txt_compl_remunerados_hombre
     }
-    preguntas.push({"pregunta":"3.19 ¿Cuántos empleados a tiempo completo tuvo su empresa el año antepasado?","respuesta":tiempo_completo_2_year})
+    preguntas.push({"id":"3_19","pregunta":"3.19 ¿Cuántos empleados a tiempo completo tuvo su empresa el año antepasado?","respuesta":tiempo_completo_2_year})
   
     //3.20
     property = 'txt_temp_remunerados_2_mujer'
@@ -571,7 +571,7 @@ function showMSJ(titulo,subtitulo,tipo){
       "temp_remunerados_2_mujer":temp_remunerados_2_mujer,
       "temp_remunerados_2_hombre":temp_remunerados_2_hombre
     }
-    preguntas.push({"pregunta":"3.20 ¿Cuántos empleados temporales tuvo su empresa en el año antepasado?","respuesta":temporales_2_year})
+    preguntas.push({"id":"3_20","pregunta":"3.20 ¿Cuántos empleados temporales tuvo su empresa en el año antepasado?","respuesta":temporales_2_year})
     
     //3.21
     const mercado_producto =  getCheckValues('mercado_producto');
@@ -579,7 +579,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.21 El mercado de su producto o servicio es (marque todas las opciones que apliquen)','info')
       return false
     }else{
-      preguntas.push({"pregunta":"3.21 El mercado de su producto o servicio es (marque todas las opciones que apliquen)","respuesta":mercado_producto})
+      preguntas.push({"id":"3_21","pregunta":"3.21 El mercado de su producto o servicio es (marque todas las opciones que apliquen)","respuesta":mercado_producto})
     }
     //Pregunta 3.22
     property = 'volumen_ventas_ultimo'
@@ -587,7 +587,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_22","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.23
     property = 'volumen_utilidades_ultimo'
@@ -595,7 +595,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_23","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.24
     const tuvo_acceso_credito =  getCheckValues('tuvo_acceso_credito');
@@ -603,7 +603,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
       return false
     }else{
-      preguntas.push({"pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tuvo_acceso_credito[0]})
+      preguntas.push({"id":"3_24","pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tuvo_acceso_credito[0]})
     }
     //Pregunta 3.25
     property = 'rango_activos'
@@ -611,7 +611,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_25","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.26
     property = 'monto_credito'
@@ -619,7 +619,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"3_26","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
     //Pregunta 3.27
     const tipo_financiera_obtenido =  getCheckValues('tipo_financiera_obtenido');
@@ -627,7 +627,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.27 En qué tipo de institución financiera ha obtenido su crédito ','info')
       return false
     }else{
-      preguntas.push({"pregunta":"3.27 En qué tipo de institución financiera ha obtenido su crédito ","respuesta":tipo_financiera_obtenido[0]})
+      preguntas.push({"id":"3_27","pregunta":"3.27 En qué tipo de institución financiera ha obtenido su crédito ","respuesta":tipo_financiera_obtenido[0]})
     }
     //Pregunta 3.28
     property = 'services_mas_importantes'
@@ -653,14 +653,14 @@ function showMSJ(titulo,subtitulo,tipo){
       services_importantes:services_importantes,
       services_menos_importantes:services_menos_importantes,
     }
-    preguntas.push({"pregunta":"3.28 ¿Cuáles de los siguientes aspectos describe mejor su objetivo principal con la participación en INNOVAMUJER HONDURAS?","respuesta":objetivos})
+    preguntas.push({"id":"3_28","pregunta":"3.28 ¿Cuáles de los siguientes aspectos describe mejor su objetivo principal con la participación en INNOVAMUJER HONDURAS?","respuesta":objetivos})
     //4.1
     const txt_estatus =  getCheckValues('txt_estatus');
     if (txt_estatus.length == 0 ){   
       showMSJ('Por favor responda la pregunta:','4.1 Estatus','info')
       return false
     }else{
-      preguntas.push({"pregunta":"4.1 Estatus","respuesta":txt_estatus[0]})
+      preguntas.push({"id":"4_1","pregunta":"4.1 Estatus","respuesta":txt_estatus[0]})
     }
     //4.2
     const tipo_formalizacion =  getCheckValues('tipo_formalizacion');
@@ -668,12 +668,12 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','4.2 Tipo de formalización','info')
       return false
     }else{
-      preguntas.push({"pregunta":"4.2 Tipo de formalización","respuesta":tipo_formalizacion})
+      preguntas.push({"id":"4_2","pregunta":"4.2 Tipo de formalización","respuesta":tipo_formalizacion})
     }
     //4.3
     const tipo_organizacion =  getCheckValues('tipo_organizacion');
 
-    preguntas.push({"pregunta":"4.3 Registros pendientes ","respuesta":tipo_organizacion})
+    preguntas.push({"id":"4_3","pregunta":"4.3 Registros pendientes ","respuesta":tipo_organizacion})
   
     //4.4
     property = 'como_se_entero'
@@ -681,8 +681,34 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"id":"4_4", "pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
+
+      const Swal = swcms.returnSwal()
+  let postData = {
+    'preguntas': preguntas
+  }
+  console.log(postData)
+  let apiUrl = '/api/inscripciones/';
+  document.getElementById('submitSaveButton').disabled = true;
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+      'Gracias',
+      'Bienvenida a INNOVA MUJER!',
+      'success'
+    )
+    //window.setTimeout(() => { window.location.assign('/registros/im'); 
+ // }, 3000);
+
+  }).catch((error) => {
+    Swal.fire(
+      'Error de conexión',
+      'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+      'error'
+    )
+    document.getElementById('submitSaveButton').disabled = false;
+  });
 showMSJ('Éxito','Plan de Acción creado!','success')
   
     console.log(preguntas)

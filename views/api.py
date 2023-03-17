@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from sqlalchemy import or_
 import json
@@ -800,6 +800,64 @@ def _d_save_admin_servi():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+
+@api.route('/api/inscripciones/', methods = ['POST'])
+# @login_required
+def _d_inscripciones():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            preguntas = request.json['preguntas']
+            
+           
+            elegible = True
+            #evaluar elegible
+            print(preguntas)
+             #cargo de relevancia
+            cargo = list(e for e in preguntas if e['id']  == '2_6')[0]['respuesta']
+            if "Accionista minotaria" in cargo:
+                elegible = False
+            #cargo de relevancia
+            tiempo = list(e for e in preguntas if e['id']  == '3_11')[0]['respuesta']
+            if int(tiempo) < 1:
+                elegible = False
+            #3_17 
+            tiempo_completo = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+
+            #3_18
+            temp_tiempo_completo = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+            mujeres = tiempo_completo["u_total_mujer"]
+            hombres =tiempo_completo["u_total_hombre"]
+            total = int(mujeres) + int(hombres)
+            temp_mujeres = temp_tiempo_completo["temp_total_mujer"]
+            temp_hombres = temp_tiempo_completo["temp_total_hombre"]
+            temp_total = (int(temp_mujeres) + int(temp_hombres))/2
+            totales = total + temp_total
+            if totales <= 4:
+                elegible = False
+            print(list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'])
+
+            inscripcion = Inscripciones()
+            inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
+            inscripcion.company_name = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            inscripcion.correo = list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']
+            inscripcion.phone = list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta']
+            inscripcion.cohorte = 5
+            inscripcion.dni = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            inscripcion.departamento = list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta']
+            inscripcion.municipio = list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta']
+            inscripcion.rtn = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            inscripcion.respuestas = preguntas
+            inscripcion.elegible = elegible
+            db.session.add(inscripcion)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
 
 @api.route('/api/save/action/plan/', methods = ['POST'])
 # @login_required

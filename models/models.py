@@ -715,6 +715,30 @@ class Company(db.Model):
         )
 
 
+# Company
+class Inscripciones(db.Model):
+    _tablename__ = 'inscripciones'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    dni = db.Column(db.String(50), unique=False, nullable=True)
+    rtn = db.Column(db.String(50), unique=False, nullable=True)
+    name = db.Column(db.String(300), unique=False, nullable=True)
+    company_name = db.Column(db.String(300), unique=False, nullable=True)
+    departamento = db.Column(db.Text, unique=False, nullable=True)
+    municipio = db.Column(db.String(400), unique=False, nullable=True)
+    correo = db.Column(db.String(50), unique=False, nullable=True)
+    phone = db.Column(db.String(50), unique=False, nullable=True)
+    elegible = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    cohorte = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    respuestas = db.Column(db.JSON, unique=False, nullable=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            dni = self.dni,
+            name = self.name,
+            rtn = self.rtn,
+        )
+    
 # Appointments Class
 class ActionPlan(db.Model):
     __tablename__ = 'action_plan'
