@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_

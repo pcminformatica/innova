@@ -97,6 +97,19 @@
                                 </div>
                                 
                               </div>
+                              <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                    <br><br>
+                                    <center>
+                                    <button  onclick="saveDiagnostico()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
+                                            
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                                        <span class="mdc-button__label">Enviar diagnostico</span>
+                                      </button>
+                                    </center>
+                                  </div>
+                              </div>
                         </div>
           
                             
@@ -431,5 +444,76 @@
 
   </script>
 
+<script>
+    
+    function saveDiagnostico(){
+      const Swal = swcms.returnSwal()
+ 
+        let txt_company_name = document.getElementById("txt_company_name").value.trim() || null
+        let txt_company_rtn = document.getElementById("txt_company_rtn").value.trim() || null        
+        let respuestas_direccion_estrategica = "{{ respuestas_direccion_estrategica }}";
+        let total_direccion_estrategica = "{{ total_direccion_estrategica }}";
+        let respuestas_mercadeo_ventas = "{{ respuestas_mercadeo_ventas }}";
+        let total_mercadeo_ventas = "{{ total_mercadeo_ventas }}";
+        let respuestas_madurez_digital = "{{ respuestas_madurez_digital }}";
+        let total_madurez_digital = "{{ total_madurez_digital }}";
+        let respuestas_gestion_financiera = "{{ respuestas_gestion_financiera }}";
+        let total_gestion_financiera = "{{ total_gestion_financiera }}";
+        let respuestas_gestion_produccion = "{{ respuestas_gestion_produccion }}";
+        let total_gestion_produccion = "{{ total_gestion_produccion }}";
+        let respuestas_organizacion_gestion = "{{ respuestas_organizacion_gestion }}";
+        let total_organizacion_gestion = "{{ total_organizacion_gestion }}";
+        let resultado_direccion_estrategica = "{{ resultado_direccion_estrategica }}";
+        let resultado_mercadeo_ventas = "{{ resultado_mercadeo_ventas }}";
+        let resultado_madurez_digital = "{{ resultado_madurez_digital }}";
+        let resultado_gestion_financiera = "{{ resultado_gestion_financiera }}";
+        let resultado_gestion_produccion = "{{ resultado_gestion_produccion }}";
+        let resultado_organizacion_gestion = "{{ resultado_organizacion_gestion }}";
+        let postData = {
+            "txt_company_name": txt_company_name,
+            "txt_company_rtn": txt_company_rtn,
+            "respuestas_direccion_estrategica":respuestas_direccion_estrategica,
+            "total_direccion_estrategica":total_direccion_estrategica,
+            "respuestas_mercadeo_ventas":respuestas_mercadeo_ventas,
+            "total_mercadeo_ventas":total_mercadeo_ventas,
+            "respuestas_madurez_digital":respuestas_madurez_digital,
+            "total_madurez_digital":total_madurez_digital,
+            "respuestas_gestion_financiera":respuestas_gestion_financiera,
+            "total_gestion_financiera":total_gestion_financiera,
+            "respuestas_gestion_produccion":respuestas_gestion_produccion,
+            "total_gestion_produccion":total_gestion_produccion,
+            "respuestas_organizacion_gestion":respuestas_organizacion_gestion,
+            "total_organizacion_gestion":total_organizacion_gestion,
+            "resultado_direccion_estrategica":resultado_direccion_estrategica,
+            "resultado_mercadeo_ventas":resultado_mercadeo_ventas,
+            "resultado_madurez_digital":resultado_madurez_digital,
+            "resultado_gestion_financiera":resultado_gestion_financiera,
+            "resultado_gestion_produccion":resultado_gestion_produccion,
+            "resultado_organizacion_gestion":resultado_organizacion_gestion,
+        };
+      console.log(postData)
+      let apiUrl = '/api/save/diagnosis/company/';
+      //document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+       // window.setTimeout(() => { window.location.reload(); }, 1500);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+      window.print()
+
+    }
+</script>
 
 {% endblock %}
