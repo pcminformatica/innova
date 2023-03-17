@@ -451,17 +451,17 @@
  
         let txt_company_name = document.getElementById("txt_company_name").value.trim() || null
         let txt_company_rtn = document.getElementById("txt_company_rtn").value.trim() || null        
-        let respuestas_direccion_estrategica = "{{ respuestas_direccion_estrategica }}";
+        let respuestas_direccion_estrategica = '{{ respuestas_direccion_estrategica|tojson }}';
         let total_direccion_estrategica = "{{ total_direccion_estrategica }}";
-        let respuestas_mercadeo_ventas = "{{ respuestas_mercadeo_ventas }}";
+        let respuestas_mercadeo_ventas = '{{ respuestas_mercadeo_ventas|tojson }}';
         let total_mercadeo_ventas = "{{ total_mercadeo_ventas }}";
-        let respuestas_madurez_digital = "{{ respuestas_madurez_digital }}";
+        let respuestas_madurez_digital = '{{ respuestas_madurez_digital|tojson }}';
         let total_madurez_digital = "{{ total_madurez_digital }}";
-        let respuestas_gestion_financiera = "{{ respuestas_gestion_financiera }}";
+        let respuestas_gestion_financiera = '{{ respuestas_gestion_financiera|tojson }}';
         let total_gestion_financiera = "{{ total_gestion_financiera }}";
-        let respuestas_gestion_produccion = "{{ respuestas_gestion_produccion }}";
+        let respuestas_gestion_produccion = '{{ respuestas_gestion_produccion|tojson }}';
         let total_gestion_produccion = "{{ total_gestion_produccion }}";
-        let respuestas_organizacion_gestion = "{{ respuestas_organizacion_gestion }}";
+        let respuestas_organizacion_gestion = '{{ respuestas_organizacion_gestion|tojson}}';
         let total_organizacion_gestion = "{{ total_organizacion_gestion }}";
         let resultado_direccion_estrategica = "{{ resultado_direccion_estrategica }}";
         let resultado_mercadeo_ventas = "{{ resultado_mercadeo_ventas }}";

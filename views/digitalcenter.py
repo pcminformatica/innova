@@ -713,6 +713,7 @@ def _datos_diagnostico(user_uid):
     #6
     respuestas_organizacion_gestion = []
     total_organizacion_gestion = 0
+    
     for clave in organizacion_gestion:
         respuestas_organizacion_gestion.append({clave:api[clave]})
         total_organizacion_gestion = total_organizacion_gestion + int(api[clave])
@@ -788,12 +789,12 @@ def _dash_empresas(user_uid):
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
     print(diagnos)
     print(actions)
-    direccion_estrategica =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
-    mercadeo_ventas =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
-    madurez_digital =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
-    gestion_financiera =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
-    gestion_produccion =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
-    organizacion_gestion =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
+    direccion_estrategica =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True, DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
+    mercadeo_ventas =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
+    madurez_digital =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
+    gestion_financiera =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
+    gestion_produccion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
+    organizacion_gestion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
     resultado_direccion_estrategica  = direccion_estrategica.result_area 
     total_direccion_estrategica = direccion_estrategica.result_total
     resultado_mercadeo_ventas = mercadeo_ventas.result_area
