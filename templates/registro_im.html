@@ -41,6 +41,10 @@
   will-change: opacity,transform,border-color,color;
 }
 }
+
+#step-2{
+  display: none;
+}
 </style>
 {% endblock %}
 
@@ -49,7 +53,7 @@
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
 
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                <div id="step-1" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
 
@@ -3444,7 +3448,7 @@
                               </div>
                           <!-- fin -->
                           </div>
-                      </div>
+                            </div>
   
                             <div class="mdc-card__actions" style="margin: auto">
                                 <div class="mdc-card__action-buttons">
@@ -3470,7 +3474,24 @@
 
                             </div>
                         </div>
+                     
                     </div>
+                </div>
+
+                <div id="step-2" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                  <div class="container-dashboard--messages">
+                    <div class="mdc-card mdc-card--color-on-primary">
+
+                      <div class="mdc-card__content container-dashboard--messages-cnt">
+
+                        <p>Gracias por inscribirte en INNOVA MUJER HONDURAS</p>
+
+                        <p>En breve estarás recibiendo un correo electrónico a tu cuenta"<spam id="corre_empresaria" style="font-weight: bold;" >ma@yahoo.com</spam>" con la que te has registrado, con la información necesaria para continuar con tu proceso de formación empresarial.
+                        </p>
+                        <p>Saludos</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

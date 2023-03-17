@@ -698,6 +698,10 @@ function showMSJ(titulo,subtitulo,tipo){
       'Bienvenida a INNOVA MUJER!',
       'success'
     )
+
+    document.getElementById("corre_empresaria").innerHTML = mdcAssignedVars['txt_correo'].value
+    document.getElementById("step-2").style.display = "block";
+    document.getElementById("step-1").style.display = "none"; 
     //window.setTimeout(() => { window.location.assign('/registros/im'); 
  // }, 3000);
 
