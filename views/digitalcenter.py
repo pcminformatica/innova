@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -760,3 +760,12 @@ def _datos_diagnostico(user_uid):
     app.logger.debug(servicios)
     app.logger.debug(servicios)
     return render_template('diagnostico.html',**context)
+
+@digitalcenter.route('/elegibles/5',methods=['GET', 'POST'])
+def _elegibles_5():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).all()
+    context = {
+        'api': inscripciones
+    }
+    return render_template('elegibles.html',**context)
