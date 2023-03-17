@@ -27,7 +27,7 @@ import { MDCTextFieldIcon } from '@material/textfield/icon';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { Workbox } from 'workbox-window/Workbox.mjs';
 import {MDCDataTable} from '@material/data-table';
-
+import { default as cscApiKey } from '../../instance/js/swing_countrycitystate-api-key.json';
 import {MDCCheckbox} from '@material/checkbox';
 import {MDCFormField} from '@material/form-field';
 // ES6 Modules or TypeScript
@@ -36,7 +36,11 @@ import Swal from 'sweetalert2'
 export function returnSwal(){
     return Swal
 }
-
+export function getApiDepKeys(){
+    return cscApiKey.apiKey
+}
+/* Allow 'window' context to reference the function */
+window.getApiDepKeys = getApiDepKeys;
 /************************** FUNCTIONS **************************/
 
 // Date utils implementation

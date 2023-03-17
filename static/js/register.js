@@ -1,4 +1,26 @@
 const mdcAssignedVars = {};
+const appCountry = 'HN';
+window.addEventListener('load', function() {
+
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+    });
+  swcms.mdcTextInputs.forEach((txt) => {
+      if (txt.assignedVar)
+          mdcAssignedVars[txt.assignedVar] = txt;
+  });
+
+  swcms.mdcCheckbox.forEach((sel) => {
+      if (sel.assignedVar)
+          mdcAssignedVars[sel.assignedVar] = sel;
+  })
+  
+  getStates()
+})
+
+
+
 function getCheckValues(name){
   var chkds = document.getElementsByName(name);
   var ele=[];
@@ -20,48 +42,9 @@ function showMSJ(titulo,subtitulo,tipo){
     tipo
   )
 }
-function saveRegisterForms(){
-  swcms.mdcSelects.forEach((sel) => {
-    if (sel.assignedVar)
-        mdcAssignedVars[sel.assignedVar] = sel;
-    });
-  swcms.mdcTextInputs.forEach((txt) => {
-      if (txt.assignedVar)
-          mdcAssignedVars[txt.assignedVar] = txt;
-  });
 
-  swcms.mdcCheckbox.forEach((sel) => {
-      if (sel.assignedVar)
-          mdcAssignedVars[sel.assignedVar] = sel;
-          
-  });
-  let preguntas = []
-
+ function saveRegisterForms(){
     
-
-
-
-  showMSJ('Éxito','Plan de Acción creado!','success')
-
-  console.log(preguntas)
-}
- function saveRegisterFormsV2(){
-    
-
-    swcms.mdcSelects.forEach((sel) => {
-        if (sel.assignedVar)
-            mdcAssignedVars[sel.assignedVar] = sel;
-    });
-    swcms.mdcTextInputs.forEach((txt) => {
-        if (txt.assignedVar)
-            mdcAssignedVars[txt.assignedVar] = txt;
-    });
-
-    swcms.mdcCheckbox.forEach((sel) => {
-        if (sel.assignedVar)
-            mdcAssignedVars[sel.assignedVar] = sel;
-            
-    });
     let preguntas = []
     //Pregunta A
     const txt_ofrece =  getCheckValues('txt_ofrece');
@@ -122,7 +105,7 @@ function saveRegisterForms(){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 1.5
     property = 'txt_municipio'
@@ -130,7 +113,7 @@ function saveRegisterForms(){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     
     //Pregunta 1.6
@@ -335,7 +318,7 @@ function saveRegisterForms(){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 3.6
     property = 'txt_depto_municipio'
@@ -343,7 +326,7 @@ function saveRegisterForms(){
       showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
       return false
     }else{
-      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      preguntas.push({"pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].selectedText.textContent})
     }
     //Pregunta 3.7
     property = 'txt_city_company'
@@ -740,3 +723,184 @@ function valida_correo(correo) {
    return (false);
   }
  }
+
+
+ function getStates() {
+  let cscApiKey = swcms.getApiDepKeys()
+
+  let apiUrl = `https://api.countrystatecity.in/v1/countries/${appCountry}/states`;
+  let headers = new Headers();
+  let requestOptions = {
+      method: 'GET',
+      headers: headers,
+      redirect: 'follow'
+  };
+  headers.append("X-CSCAPI-KEY", cscApiKey);
+  swcms.getFetch(apiUrl, 'loadStates', requestOptions);
+}
+
+function loadStates(data) {
+
+  let depListEl = document.querySelector('#f-appointment-department-select');
+  let sortedData = data.sort((a, b) => a.name < b.name ? -1 : 1);
+
+  sortedData.forEach((dep, index) => {
+      let depContainer = document.createElement('li');
+      let depRipple = document.createElement('span');
+      let depName = document.createElement('span');
+
+      depContainer.classList.add('mdc-deprecated-list-item');
+      depRipple.classList.add('mdc-deprecated-list-item__ripple');
+      depName.classList.add('mdc-deprecated-list-item__text');
+
+      depName.textContent = dep.name.replace(' Department', '');
+      depContainer.setAttribute('data-value', dep.iso2);
+
+      depContainer.appendChild(depRipple);
+      depContainer.appendChild(depName);
+      depListEl.appendChild(depContainer);
+   
+      mdcAssignedVars['txt_depto'].menuItemValues[index] = dep.iso2;
+
+      
+  });
+  // Call the following method whenever menu options are dynamically updated
+  mdcAssignedVars['txt_depto'].layoutOptions();
+
+  statesData = data;
+  loadStates2(data)
+}
+
+function loadStates2(data) {
+
+
+  let depListEl2 = document.querySelector('#f-appointment-department-select-2');
+  let sortedData = data.sort((a, b) => a.name < b.name ? -1 : 1);
+
+  sortedData.forEach((dep, index) => {
+      let depContainer = document.createElement('li');
+      let depRipple = document.createElement('span');
+      let depName = document.createElement('span');
+
+      depContainer.classList.add('mdc-deprecated-list-item');
+      depRipple.classList.add('mdc-deprecated-list-item__ripple');
+      depName.classList.add('mdc-deprecated-list-item__text');
+
+      depName.textContent = dep.name.replace(' Department', '');
+      depContainer.setAttribute('data-value', dep.iso2);
+
+      depContainer.appendChild(depRipple);
+      depContainer.appendChild(depName);
+  
+      depListEl2.appendChild(depContainer);
+
+      mdcAssignedVars['txt_depto_company'].menuItemValues[index] = dep.iso2;
+      
+  });
+  // Call the following method whenever menu options are dynamically updated
+
+
+  mdcAssignedVars['txt_depto_company'].layoutOptions();
+  statesData = data;
+
+}
+/* Allow 'window' context to reference the function */
+
+function getCities(selState) {
+  let cscApiKey = swcms.getApiDepKeys()
+  if (selState) {
+      let apiUrl = `https://api.countrystatecity.in/v1/countries/${appCountry}/states/${selState}/cities`;
+      let headers = new Headers();
+      let requestOptions = {
+          method: 'GET',
+          headers: headers,
+          redirect: 'follow'
+      };
+      headers.append("X-CSCAPI-KEY", cscApiKey);
+      swcms.getFetch(apiUrl, 'loadCities', requestOptions).then((data) => {
+
+      });
+  }
+  
+}
+function getCities2(selState) {
+  let cscApiKey = swcms.getApiDepKeys()
+  if (selState) {
+      let apiUrl = `https://api.countrystatecity.in/v1/countries/${appCountry}/states/${selState}/cities`;
+      let headers = new Headers();
+      let requestOptions = {
+          method: 'GET',
+          headers: headers,
+          redirect: 'follow'
+      };
+      headers.append("X-CSCAPI-KEY", cscApiKey);
+      swcms.getFetch(apiUrl, 'loadCities2', requestOptions).then((data) => {
+
+      });
+  }
+  
+}
+
+function loadCities(data) {
+  let citListEl = document.querySelector('#f-appointment-city-select');
+  let sortedData = data.sort((a, b) => a.name < b.name ? -1 : 1);
+
+  mdcAssignedVars['txt_municipio'].selectedIndex = -1;
+  citListEl.innerHTML = '';
+
+  sortedData.forEach((cit, index) => {
+      let citContainer = document.createElement('li');
+      let citRipple = document.createElement('span');
+      let citName = document.createElement('span');
+
+      citContainer.classList.add('mdc-deprecated-list-item');
+      citRipple.classList.add('mdc-deprecated-list-item__ripple');
+      citName.classList.add('mdc-deprecated-list-item__text');
+
+      citName.textContent = cit.name;
+      citContainer.setAttribute('data-value', cit.id);
+
+      citContainer.appendChild(citRipple);
+      citContainer.appendChild(citName);
+      citListEl.appendChild(citContainer);
+
+      mdcAssignedVars['txt_municipio'].menuItemValues[index] = cit.id;
+  });
+  
+  // Call the following method whenever menu options are dynamically updated
+  mdcAssignedVars['txt_municipio'].layoutOptions();
+  
+  citiesData = data;
+}
+
+function loadCities2(data) {
+  let citListEl = document.querySelector('#f-appointment-city-select-2');
+  let sortedData = data.sort((a, b) => a.name < b.name ? -1 : 1);
+
+  mdcAssignedVars['txt_depto_municipio'].selectedIndex = -1;
+  citListEl.innerHTML = '';
+
+  sortedData.forEach((cit, index) => {
+      let citContainer = document.createElement('li');
+      let citRipple = document.createElement('span');
+      let citName = document.createElement('span');
+
+      citContainer.classList.add('mdc-deprecated-list-item');
+      citRipple.classList.add('mdc-deprecated-list-item__ripple');
+      citName.classList.add('mdc-deprecated-list-item__text');
+
+      citName.textContent = cit.name;
+      citContainer.setAttribute('data-value', cit.id);
+
+      citContainer.appendChild(citRipple);
+      citContainer.appendChild(citName);
+      citListEl.appendChild(citContainer);
+
+      mdcAssignedVars['txt_depto_municipio'].menuItemValues[index] = cit.id;
+  });
+  
+  // Call the following method whenever menu options are dynamically updated
+  mdcAssignedVars['txt_depto_municipio'].layoutOptions();
+  
+  citiesData = data;
+}
