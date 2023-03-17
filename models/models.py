@@ -313,6 +313,7 @@ class CatalogServices(db.Model):
     sessions_schedule = db.Column(db.JSON, nullable=True)
     diagnostic_questions = db.Column(db.JSON, nullable=True)
     catalog_category = db.Column(db.Integer, db.ForeignKey('catalog_category.id'), nullable=True)
+    catalog_catego = db.relationship("catalogCategory")
     def __repr__(self):
         return jsonify(
             id = self.id,

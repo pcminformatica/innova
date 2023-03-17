@@ -795,10 +795,10 @@ def _dash_empresas(user_uid):
     gestion_financiera =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
     gestion_produccion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
     organizacion_gestion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
-    resultado_direccion_estrategica  = direccion_estrategica.result_area 
-    total_direccion_estrategica = direccion_estrategica.result_total
-    resultado_mercadeo_ventas = mercadeo_ventas.result_area
-    total_mercadeo_ventas = mercadeo_ventas.result_total
+    resultado_direccion_estrategica  = direccion_estrategica.result_total 
+    total_direccion_estrategica = direccion_estrategica.result_area
+    resultado_mercadeo_ventas =  mercadeo_ventas.result_total
+    total_mercadeo_ventas =mercadeo_ventas.result_area
     total_madurez_digital = madurez_digital.result_area
     resultado_madurez_digital = madurez_digital.result_total
     total_gestion_financiera = gestion_financiera.result_area

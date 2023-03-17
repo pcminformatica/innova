@@ -935,8 +935,8 @@ def _d_save_DiagnosisCompany():
                 db.session.commit()
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Dirección Estratégica"
-            diagnosis.result_total = request.json["total_direccion_estrategica"]
-            diagnosis.result_area = request.json["resultado_direccion_estrategica"]
+            diagnosis.result_area = request.json["total_direccion_estrategica"]
+            diagnosis.result_total = request.json["resultado_direccion_estrategica"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -952,8 +952,8 @@ def _d_save_DiagnosisCompany():
 
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Mercadeo y ventas"
-            diagnosis.result_total = request.json["total_mercadeo_ventas"]
-            diagnosis.result_area = request.json["resultado_mercadeo_ventas"]
+            diagnosis.result_area = request.json["total_mercadeo_ventas"]
+            diagnosis.result_total = request.json["resultado_mercadeo_ventas"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -968,8 +968,8 @@ def _d_save_DiagnosisCompany():
                 db.session.commit()
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Madurez Digital"
-            diagnosis.result_total = request.json["total_madurez_digital"]
-            diagnosis.result_area = request.json["resultado_madurez_digital"]
+            diagnosis.result_area = request.json["total_madurez_digital"]
+            diagnosis.result_total = request.json["resultado_madurez_digital"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -984,8 +984,8 @@ def _d_save_DiagnosisCompany():
                 db.session.commit()
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Gestión Financiera"
-            diagnosis.result_total = request.json["total_gestion_financiera"]
-            diagnosis.result_area = request.json["resultado_gestion_financiera"]
+            diagnosis.result_area = request.json["total_gestion_financiera"]
+            diagnosis.result_total = request.json["resultado_gestion_financiera"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -1000,8 +1000,8 @@ def _d_save_DiagnosisCompany():
                 db.session.commit()
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Gestión de la producción"
-            diagnosis.result_total = request.json["total_gestion_produccion"]
-            diagnosis.result_area = request.json["resultado_gestion_produccion"]
+            diagnosis.result_area = request.json["total_gestion_produccion"]
+            diagnosis.result_total = request.json["resultado_gestion_produccion"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -1016,8 +1016,8 @@ def _d_save_DiagnosisCompany():
                 db.session.commit()
             diagnosis = DiagnosisCompany()
             diagnosis.categoria = "Organización y Gestión del talento humano"
-            diagnosis.result_total = request.json["total_organizacion_gestion"]
-            diagnosis.result_area = request.json["resultado_organizacion_gestion"]
+            diagnosis.result_area = request.json["total_organizacion_gestion"]
+            diagnosis.result_total = request.json["resultado_organizacion_gestion"]
             diagnosis.status = True
             diagnosis.created_by = current_user.id
             diagnosis.company_id = company.id
@@ -1060,11 +1060,56 @@ def _d_save_ActionPlanHistory():
             if txt_finalizo == True and txt_porcentaje == "100":
                 company = Company.query.filter_by(id = plan.company_id).first()
                 servicios_mejorados = plan.services.diagnostic_questions
+
                 for servicio_mejorado in servicios_mejorados:
-                    print(plan.services.diagnostic_questions)
-                    print(plan.services.diagnostic_questions)
-                direccion_estrategica =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
-                print(direccion_estrategica.respuestas)
+                    
+                    encontro = False
+                    clave = servicio_mejorado['id']
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    print(clave)
+                    direccion_estrategicax =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
+                    orj =  json.loads(direccion_estrategicax.respuestas)
+                    for resp in orj:
+                        if clave in resp:  
+                            resp[clave] = 3
+                            encontro = True
+                    if encontro:
+                        direccion_estrategica = ["_1_1","_1_2","_1_3","_1_4","_1_5","_1_6","_1_7","_1_8","_1_9","_1_10","_1_11"]
+                        total_direccion_estrategica = 0
+                        for clave in direccion_estrategica:
+                            for resp in orj:
+                                if clave in resp:
+                                    total_direccion_estrategica = total_direccion_estrategica + int(resp[clave])
+                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
+                        resultado_direccion_estrategica = total_direccion_estrategica/(len(direccion_estrategica)*3) * 0.10 * 100
+                        resultado_direccion_estrategica = round(resultado_direccion_estrategica, 2)
+                        #desactivar
+                        direccion_estrategicax.status = 0
+                        db.session.add(direccion_estrategicax)
+                        db.session.commit()
+                        #crear
+                        diagnosis = DiagnosisCompany()
+                        diagnosis.categoria = "Dirección Estratégica"
+                        diagnosis.result_total = resultado_direccion_estrategica 
+                        diagnosis.result_area = total_direccion_estrategica
+                        diagnosis.status = True
+                        diagnosis.created_by = current_user.id
+                        diagnosis.company_id = company.id
+                        diagnosis.respuestas = orj
+                        db.session.add(diagnosis)
+                        db.session.commit()   
+                return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+                    
+                    
                 mercadeo_ventas =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
                 print(mercadeo_ventas.respuestas)
                 madurez_digital =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
@@ -1082,15 +1127,15 @@ def _d_save_ActionPlanHistory():
                 clave = '_6_5'
                 for resp in orj:
                     if clave in resp:
-                        
                         resp[clave] = 3
+                     
                         print('siiiiiiiii')
                         print('siiiiiiiii')
                         print('siiiiiiiii')
                         print('siiiiiiiii')
                         print('siiiiiiiii')
                 organizacion_gestion = ["_6_1","_6_2","_6_3","_6_4","_6_5","_6_6","_6_7","_6_8","_6_9","_6_10","_6_11","_6_12","_6_13","_6_14","_6_15","_6_16" ,"_6_17"]
-                api = orj[0]
+ 
                 respuestas_organizacion_gestion = [clave]
                 total_organizacion_gestion = 0
                 for clave in organizacion_gestion:
