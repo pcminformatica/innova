@@ -207,13 +207,15 @@ function showMSJ(titulo,subtitulo,tipo){
     }else{
       preguntas.push({"id":"2_4","pregunta":"2.4 Pertenece a un grupo poblacional étnico","respuesta":grupo_pertenece[0]})
     }  
-    // pregunta 2.5 
-    property = 'txt_origen_etnico'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"id":"2_5","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    if (grupo_pertenece == 'SI'){
+      // pregunta 2.5 
+      property = 'txt_origen_etnico'
+      if (mdcAssignedVars[property].value === '' ){   
+        showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+        return false
+      }else{
+        preguntas.push({"id":"2_5","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      }
     }
     // pregunta 2.6
     const emp_cargo =  getCheckValues('txt_emp_cargo');
@@ -223,6 +225,24 @@ function showMSJ(titulo,subtitulo,tipo){
     }else{
       preguntas.push({"id":"2_6","pregunta":"2.6 Cargo que Ud. desempeña (puede seleccionar más de una opción)","respuesta":emp_cargo})
     }  
+    // pregunta 2.7
+    const participa_en_programas =  getCheckValues('participa_en_programas');
+    if (participa_en_programas.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','2.7 Actualmente usted participa de algún programa o proyecto de apoyo a la MIPYME: ','info')
+      return false
+    }else{
+      preguntas.push({"id":"2_7", "pregunta":"2.7 Actualmente usted participa de algún programa o proyecto de apoyo a la MIPYME","respuesta":participa_en_programas[0]})
+    }
+    if (participa_en_programas == 'SI'){
+      property = 'txt_especifique_programa'
+      if (mdcAssignedVars[property].value === '' ){   
+        showMSJ('Por favor responda la pregunta:','Especifique el o los programas o proyectos de apoyo a la MIPYME que usted participa','info')
+        return false
+      }else{
+        preguntas.push({"id":"2_7_1","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      }
+      
+    }
     // pregunta 2.8
     const accionista_principal =  getCheckValues('2_8_accionista_principal');
     const accionista_minoritaria =  getCheckValues('2_8_accionista_minoritaria');
@@ -397,7 +417,7 @@ function showMSJ(titulo,subtitulo,tipo){
       showMSJ('Por favor responda la pregunta:','3.14 Su organización o cooperativa ¿Cuentan con una junta directiva?','info')
       return false
     }else{
-      preguntas.push({"id":"3_14","pregunta":"3.2 ¿Cuenta con local propio o es alquilado?","respuesta":cuentan_junta_directiva[0]})
+      preguntas.push({"id":"3_14","pregunta":"3.14 Su organización o cooperativa ¿Cuentan con una junta directiva?","respuesta":cuentan_junta_directiva[0]})
     }
     //Pregunta 3.15
     property = 'txt_company_miembros_junta'
@@ -613,21 +633,23 @@ function showMSJ(titulo,subtitulo,tipo){
     }else{
       preguntas.push({"id":"3_25","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
+    if (tuvo_acceso_credito=='SI'){
     //Pregunta 3.26
-    property = 'monto_credito'
-    if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
-      return false
-    }else{
-      preguntas.push({"id":"3_26","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
-    }
-    //Pregunta 3.27
-    const tipo_financiera_obtenido =  getCheckValues('tipo_financiera_obtenido');
-    if (tipo_financiera_obtenido.length == 0 ){   
-      showMSJ('Por favor responda la pregunta:','3.27 En qué tipo de institución financiera ha obtenido su crédito ','info')
-      return false
-    }else{
-      preguntas.push({"id":"3_27","pregunta":"3.27 En qué tipo de institución financiera ha obtenido su crédito ","respuesta":tipo_financiera_obtenido[0]})
+      property = 'monto_credito'
+      if (mdcAssignedVars[property].value === '' ){   
+        showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+        return false
+      }else{
+        preguntas.push({"id":"3_26","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+      }
+      //Pregunta 3.27
+      const tipo_financiera_obtenido =  getCheckValues('tipo_financiera_obtenido');
+      if (tipo_financiera_obtenido.length == 0 ){   
+        showMSJ('Por favor responda la pregunta:','3.27 En qué tipo de institución financiera ha obtenido su crédito ','info')
+        return false
+      }else{
+        preguntas.push({"id":"3_27","pregunta":"3.27 En qué tipo de institución financiera ha obtenido su crédito ","respuesta":tipo_financiera_obtenido[0]})
+      }
     }
     //Pregunta 3.28
     property = 'services_mas_importantes'
@@ -654,6 +676,14 @@ function showMSJ(titulo,subtitulo,tipo){
       services_menos_importantes:services_menos_importantes,
     }
     preguntas.push({"id":"3_28","pregunta":"3.28 ¿Cuáles de los siguientes aspectos describe mejor su objetivo principal con la participación en INNOVAMUJER HONDURAS?","respuesta":objetivos})
+    //Pregunta 3.29
+    property = 'txt_cuanto_ascienden'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,'info')
+      return false
+    }else{
+      preguntas.push({"id":"3_25","pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
+    }
     //4.1
     const txt_estatus =  getCheckValues('txt_estatus');
     if (txt_estatus.length == 0 ){   
