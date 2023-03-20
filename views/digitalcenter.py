@@ -384,6 +384,7 @@ def _datos_describe(user_uid):
         
     else:
         plan = []
+    totalServicios = len(legalizacion) + len(administracion) + len(produccion) + len(financiera) + len(mercadeo)
     context = {
         'plan':plan,
         'api': api,
@@ -392,6 +393,7 @@ def _datos_describe(user_uid):
         'produccion':produccion,
         'financiera':financiera,
         'mercadeo':mercadeo,
+        'totalServicios':totalServicios
 
     }
    

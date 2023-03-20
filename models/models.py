@@ -760,7 +760,8 @@ class ActionPlan(db.Model):
     __tablename__ = 'action_plan'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
-    date_scheduled = db.Column(db.DateTime, nullable=False)
+    date_scheduled_start = db.Column(db.DateTime, nullable=True)
+    date_scheduled_end = db.Column(db.DateTime, nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
@@ -775,6 +776,7 @@ class ActionPlan(db.Model):
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
 
 # Services Supplement Class

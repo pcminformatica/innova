@@ -159,7 +159,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Servicios Recomendados</span>
+                                                    <span class="mdc-tab__text-label">Servicios Recomendados ({{totalServicios}})</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -173,7 +173,7 @@
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
                               <br>
-                              <h2>LEGALIZACIÓN</h2>
+                              <h2>LEGALIZACIÓN ({{ legalizacion|length }})</h2>
                               <br>     
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
@@ -183,8 +183,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        
-
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
@@ -205,12 +204,21 @@
                                           </p>
                                         </th>
                                         <td class="mdc-data-table__cell no-print">
+                                          <label>Fecha Inicio</label>
                                           <input type="date" id="date_{{ apix.id }}">
+                                          <br>
+                                          <label>Fecha Final</label>
+                                          <input type="date" id="date_fin_{{ apix.id }}">
                                         </td>
       
-                                    
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                          <select id="fase_{{ apix.id }}">
+                                            <option value="FASE1">FASE 1</option>
+                                            <option value="FASE2">FASE 2</option>
+                                          </select>
+                                        </td>
+                                        <td class="mdc-data-table__cell no-print">
+                                            <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -240,7 +248,7 @@
                                 </div>
                               </div>
                               <br>
-                                <h2>ADMINISTRACIÓN</h2>
+                                <h2>ADMINISTRACIÓN ({{ administracion|length }})</h2>
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
@@ -250,8 +258,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        
-
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
@@ -270,12 +277,23 @@
                                             {{ apix.titulo }}
                                         </th>
                                         <td class="mdc-data-table__cell no-print">
-                                            <input type="date" id="date_{{ apix.id }}">
+                                          <label>Fecha Inicio</label>
+                                          <input type="date" id="date_{{ apix.id }}">
+                                          <br>
+                                          <label>Fecha Final</label>
+                                          <input type="date" id="date_fin_{{ apix.id }}">
+                                        </td>
+      
+                                        <td class="mdc-data-table__cell no-print">
+                                          <select id="fase_{{ apix.id }}">
+                                            <option value="FASE1">FASE 1</option>
+                                            <option value="FASE2">FASE 2</option>
+                                          </select>
                                         </td>
       
                                     
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -305,7 +323,7 @@
                                 </div>
                               </div>
                               <br>
-                                <h2>PRODUCCIÓN Y AMBIENTE</h2>
+                                <h2>PRODUCCIÓN Y AMBIENTE  ({{ produccion|length }})</h2>
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
@@ -315,8 +333,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        
-
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
@@ -337,7 +354,18 @@
                                             </p>
                                         </th>
                                         <td class="mdc-data-table__cell no-print">
+                                          <label>Fecha Inicio</label>
                                           <input type="date" id="date_{{ apix.id }}">
+                                          <br>
+                                          <label>Fecha Final</label>
+                                          <input type="date" id="date_fin_{{ apix.id }}">
+                                        </td>
+      
+                                        <td class="mdc-data-table__cell no-print">
+                                          <select id="fase_{{ apix.id }}">
+                                            <option value="FASE1">FASE 1</option>
+                                            <option value="FASE2">FASE 2</option>
+                                          </select>
                                         </td>
       
                                     
@@ -372,7 +400,7 @@
                                 </div>
                               </div>
                               <br>
-                                <h2>ANÁLISIS FINANCIERO</h2>
+                                <h2>ANÁLISIS FINANCIERO ({{ financiera|length }})</h2>
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
@@ -382,8 +410,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        
-
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
@@ -402,10 +429,19 @@
                                             {{ apix.titulo }}
                                         </th>
                                         <td class="mdc-data-table__cell no-print">
+                                          <label>Fecha Inicio</label>
                                           <input type="date" id="date_{{ apix.id }}">
+                                          <br>
+                                          <label>Fecha Final</label>
+                                          <input type="date" id="date_fin_{{ apix.id }}">
                                         </td>
       
-                                    
+                                        <td class="mdc-data-table__cell no-print">
+                                          <select id="fase_{{ apix.id }}">
+                                            <option value="FASE1">FASE 1</option>
+                                            <option value="FASE2">FASE 2</option>
+                                          </select>
+                                        </td>
                                         <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
@@ -437,7 +473,7 @@
                                 </div>
                               </div>
                               <br>
-                                <h2>MERCADEO Y TICs</h2>
+                                <h2>MERCADEO Y TICs ({{ mercadeo|length }})</h2>
                               <br>
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
@@ -447,8 +483,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        
-
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
                                         <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                       </tr>
                                       
@@ -464,17 +499,25 @@
                                             {{loop.index}}
                                         </th>
                                         <th class="mdc-data-table__cell" scope="row">
-                                          <p>
-                                            {{ apix.titulo }}
-                                          </p>
-                                        </th>
+                                          {{ apix.titulo }}
+                                      </th>
                                         <td class="mdc-data-table__cell no-print">
+                                          <label>Fecha Inicio</label>
                                           <input type="date" id="date_{{ apix.id }}">
+                                          <br>
+                                          <label>Fecha Final</label>
+                                          <input type="date" id="date_fin_{{ apix.id }}">
                                         </td>
       
+                                        <td class="mdc-data-table__cell no-print">
+                                          <select id="fase_{{ apix.id }}">
+                                            <option value="FASE1">FASE 1</option>
+                                            <option value="FASE2">FASE 2</option>
+                                          </select>
+                                        </td>
                                     
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -528,12 +571,15 @@
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                              
                                 <div class="mdc-tab-scroller">
                                     <div class="mdc-tab-scroller__scroll-area">
+                                      
                                         <div class="mdc-tab-scroller__scroll-content">
+                                          
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Plan de Acción</span>
+                                                    <span class="mdc-tab__text-label">Plan de Acción </span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -546,16 +592,20 @@
                                 </div>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg" style="text-align: center">
-                                
+                              <br>
+                              <h2>FASE 1</h2>
+                              <br>
                                   <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
-                                      <table id="tbl_plan" class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                      <table id="tbl_plan_1" class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORÍA</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">INICIO</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIN</th>
                                             
+
 
                                             <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                           </tr>
@@ -563,7 +613,7 @@
                                           
                                           
                                         </thead>
-                                        <tbody id="tablaPlan" class="mdc-data-table__content">
+                                        <tbody id="tablaPlan_1" class="mdc-data-table__content">
                                           {% for apix in plan %}
                                         
                                       
@@ -577,7 +627,7 @@
                                               </p>
                                             </th>
                                             <td class="mdc-data-table__cell ">
-                                                {{ apix.date_scheduled.strftime('%Y-%m-%d')  }}
+                                                {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
                                             </td>
           
                                         
@@ -609,7 +659,75 @@
                           
                                     
                                   </div>
-                                  <br><br><br>
+                                  <br>
+                                  <h2>FASE 2</h2>
+                                  <br>
+                                  <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                    <div class="mdc-data-table__table-container">
+                                      <table id="tbl_plan_2" class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                        <thead>
+                                          <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORÍA</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">INICIO</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIN</th>
+                                            
+
+                                            <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
+                                          </tr>
+                                          
+                                          
+                                          
+                                        </thead>
+                                        <tbody id="tablaPlan_2" class="mdc-data-table__content">
+                                          {% for apix in plan %}
+                                        
+                                          {% if apix.fase == '2' %}
+                                            <tr class="mdc-data-table__row">
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                  {{loop.index}}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                <p>
+                                                  {{ apix.services.name }}
+                                                </p>
+                                              </th>
+                                              <td class="mdc-data-table__cell ">
+                                                  {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
+                                              </td>
+            
+                                          
+                                              <td class="mdc-data-table__cell no-print">
+                                                Porcentaje de avance: {{ apix.progress  }}%
+                                              </td>
+                                            </tr>
+                                          {% endif %}
+                                          {% endfor %}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  
+                                    <div class="mdc-data-table__progress-indicator">
+                                      <div class="mdc-data-table__scrim"></div>
+                                      <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                          <div class="mdc-linear-progress__buffer-bar"></div>
+                                          <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                          
+                                    
+                                  </div>
+                                  <br>
+                                  <br>
                                   {% if plan %}
                                   <button  onclick="printPlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
                                             
@@ -646,7 +764,9 @@
                         
                     </div>
                     </div>
+                    
                 </div>
+
             </div>
         </div>
     </div>
@@ -656,31 +776,49 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 <script>
-    function agregar(categoria,id,servicio,fecha){
+    function agregar(categoria,id,servicio){
 
-        fecha = document.getElementById(fecha).value
-        if (fecha){
-            var Tbl = document.getElementById("tablaPlan");
+        fecha_inicio = document.getElementById('date_' +id).value
+        fecha_fin = document.getElementById('date_fin_'+ id).value
+        fases = document.getElementById('fase_'+ id).value
+        if (fecha_inicio=="" || fecha_fin==""){ alert('Elija una fecha'); return false}
+       
+        
+
+        var Tbl;
+
+        if (fases == 'FASE1'){
+          Tbl = document.getElementById("tablaPlan_1");
+        }else{
+          Tbl = document.getElementById("tablaPlan_2");
+        }
+        fecha = 'Fecha inicio: ' + fecha_inicio + ' Fecha fin: ' + fecha_fin
+        
             var hilera = document.createElement("tr");
             var celda = document.createElement("td");
             var celda1 = document.createElement("td");
             var celda2 = document.createElement("td");
             var celda3 = document.createElement("td");
+            var celda4 = document.createElement("td");
+
             var textoCelda1 = document.createTextNode(servicio);
-            var textoCelda2 = document.createTextNode(fecha);
+            var textoCelda2 = document.createTextNode(fecha_inicio);
+            var textoCelda3 = document.createTextNode(fecha_fin);
             var textoCelda = document.createTextNode(categoria);
 
 
             hilera.className = 'mdc-data-table__row'
             celda1.className = 'mdc-data-table__cell'
             celda2.className = 'mdc-data-table__cell'
-            celda3.className = 'mdc-data-table__cell no-print'
+            celda3.className = 'mdc-data-table__cell'
+            celda4.className = 'mdc-data-table__cell no-print'
 
         
             celda.appendChild(textoCelda);
             celda1.appendChild(textoCelda1);
             celda2.appendChild(textoCelda2);
-            celda3.innerHTML = `
+            celda3.appendChild(textoCelda3);
+            celda4.innerHTML = `
             <button onclick="deleteRow()" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                             <span class="mdc-button__ripple"></span>
@@ -691,13 +829,12 @@
             hilera.appendChild(celda1);
             hilera.appendChild(celda2);
             hilera.appendChild(celda3);
+            hilera.appendChild(celda4);
             hilera.id =    id                     
             Tbl.appendChild(hilera);
-        }else{
-            alert('Seleccione una fecha')
         }
         
-    }
+    
 
     function deleteRow() {
    
@@ -714,27 +851,47 @@
     }
 
     function savePlan(){
+
+     
+      var resume_table_fase1 = document.getElementById("tbl_plan_1");
+      var resume_table_fase2 = document.getElementById("tbl_plan_2");
+      let services = [];
+      if (resume_table_fase1.rows.length >1){
+
+        for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
+          //alert(cell[i].innerText);
+          final = resume_table_fase1.rows[i].cells[2].innerHTML;
+          inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
+          id = resume_table_fase1.rows[i].id;
+          
+          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:1})
+        }
+        console.log(services)
+      }else{
+        alert('Seleccione servicios en la fase 1')
+        return false
+      }
+      if (resume_table_fase2.rows.length >1){
+
+        for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
+          //alert(cell[i].innerText);
+          final = resume_table_fase1.rows[i].cells[2].innerHTML;
+          inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
+          id = resume_table_fase1.rows[i].id;
+          
+          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:2})
+        }
+        console.log(services)
+        }else{
+        alert('Seleccione servicios en la fase 2')
+        return false
+      }
+
       const Swal = swcms.returnSwal()
       var resume_table = document.getElementById("tbl_plan");
       var txt_company_name = document.getElementById("txt_company_name").value.trim() || null
       var txt_company_rtn = document.getElementById("txt_company_rtn").value.trim() || null
-      
 
-      let services = [];
-      if (resume_table.rows.length >1){
-
-        for (var i = 1, row; row = resume_table.rows[i]; i++) {
-          //alert(cell[i].innerText);
-          col = resume_table.rows[i].cells[2].innerHTML;
-          id = resume_table.rows[i].id;
-          
-          services.push ({service:id,fecha:col})
-        }
-        console.log(services)
-      }else{
-        alert('Seleccione un servicio')
-        return false
-      }
 
       let postData = {
       "txt_company_name": txt_company_name,
@@ -768,6 +925,8 @@
     function printPlan(){
       window.print()
     }
+
+    
 </script>
 {% endblock %}
 

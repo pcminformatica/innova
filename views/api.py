@@ -887,17 +887,20 @@ def _d_save_ActionPlan():
                 app.logger.error('** siiiiiiiiiii * - API Appointment Detail Error: {}'.format('e'))
             services = json.loads(services)
             for service in services:
-                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],version=0).first()
+                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],version=service['fase']).first()
                 if not actionplan:
                     actionplan = ActionPlan()
                     actionplan.company_id = actionplan.id
                     actionplan.company = company
-                    actionplan.date_scheduled = service['fecha']
+                    actionplan.date_scheduled_start = service['fecha_inicio']
+                    actionplan.date_scheduled_end = service['fecha_final']
                     actionplan.services_id = int(service['service'])
                     actionplan.created_by = current_user.id
+                    actionplan.version = service['fase']
                     db.session.add(actionplan)
                     db.session.commit()
                     
+
                     
         return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
