@@ -791,13 +791,29 @@ def _d_save_admin_servi():
             user = CatalogServices.query.filter_by(id = txt_id).first()
             txt_name = request.json['txt_name']
             txt_rol = request.json['txt_rol']
+            txt_tiempo_asesoria = request.json['txt_tiempo_asesoria']
+            txt_tiempo_ejecucion = request.json['txt_tiempo_ejecucion']
+            txt_costo = request.json['txt_costo']
+
             user.name = txt_name
             user.catalog_category = txt_rol
+            user.advisory_time = txt_tiempo_asesoria
+            user.execution_time = txt_tiempo_ejecucion
+            user.cost = txt_costo
             db.session.add(user)
             db.session.commit()
+            print('111')
+            print('111')
+            print('111')
+            print('111')
+            print('111')
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
-        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        print('111')
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
 

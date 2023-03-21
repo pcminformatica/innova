@@ -60,20 +60,22 @@ function saveService(){
   let postData = {
     'txt_name': mdcAssignedVars['txt_name'].value.trim() || null,
     'txt_rol': mdcAssignedVars['txt_rol'].value.trim() || null,
+    'txt_tiempo_asesoria': mdcAssignedVars['txt_tiempo_asesoria'].value.trim() || null,
+    'txt_tiempo_ejecucion': mdcAssignedVars['txt_tiempo_ejecucion'].value.trim() || null,
+    'txt_costo': mdcAssignedVars['txt_costo'].value.trim() || null,
     'txt_id':document.getElementById('txt_id').value
   }
-  console.log(postData)
   let apiUrl = '/api/save/user/service';
   document.getElementById('submitSaveButton').disabled = true;
 
   swcms.postFetch(apiUrl, postData).then((data) => {
     Swal.fire(
       'Gracias',
-      'Bienvenida a INNOVA MUJER!',
+      'Modificado!',
       'success'
     )
-    window.setTimeout(() => { window.location.assign('/admin/list/user/'); 
-  }, 3000);
+    window.setTimeout(() => { window.location.reload(); 
+  }, 1000);
 
   }).catch((error) => {
     Swal.fire(

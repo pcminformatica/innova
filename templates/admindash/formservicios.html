@@ -106,7 +106,7 @@
 
                                           <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Username 
+                                                Titulo 
                                             </div>
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
@@ -123,7 +123,7 @@
                                            
 
                                             <div class="mdc-typography--body1">
-                                                Rol:
+                                                Categoria:
                                             </div>
                                             <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_rol" data-assigned-var>
                                                 <div class="mdc-select__anchor"
@@ -158,26 +158,72 @@
                                                 </div>
                                               
                                                 <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
- 
-                                                    {% for role in services %}
-
-                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{role.id}}" role="option">
-                                                                <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                <span class="mdc-deprecated-list-item__text">
-                                                                    {{role.name}} 
-                                                                </span>
-                                                            </li>
-                                                    
-                                                    {% endfor %}
-                          
+                                                    <ul id="my-list" class="mdc-list" role="listbox">
+                                                        {% for role in services %}
+                                                            {% if  service.catalog_category != role.id  %}
+                                                                <li class="mdc-list-item" role="option" aria-selected="false" data-value="{{role.id}}" >
+                                                                <span class="mdc-list-item__text"> {{role.name}} </span>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="mdc-list-item mdc-list-item--selected" role="option" aria-selected="true"  tabindex="0" data-value="{{role.id}}" >
+                                                                    <span class="mdc-list-item__text"> {{role.name}} </span>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                             
+                                                      </ul>
                                                   </ul>
+                                                
+                                                   
+                                                 
+                                   
+                  
                                                 </div>
                                               </div>
                                           </div>
+                                          
+                                          
+                                          
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Tiempo asesoria (horas)
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_tiempo_asesoria" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe</span>
+                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                               value=" {{service.advisory_time}}" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
 
-                    
-
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Tiempo ejecucion (semanas) 
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_tiempo_ejecucion" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe</span>
+                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                               value=" {{service.execution_time}}" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Costo 
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_costo" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe</span>
+                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                               value=" {{service.cost}}" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
 
                                         </div>
                                         <div class="mdc-card__actions" style="justify-content:center;" >
