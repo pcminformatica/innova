@@ -796,10 +796,10 @@ def _d_save_admin_servi():
             txt_costo = request.json['txt_costo']
 
             user.name = txt_name
-            user.catalog_category = txt_rol
-            user.advisory_time = txt_tiempo_asesoria
-            user.execution_time = txt_tiempo_ejecucion
-            user.cost = txt_costo
+            user.catalog_category = int(txt_rol)
+            user.advisory_time = int(txt_tiempo_asesoria)
+            user.execution_time = int(txt_tiempo_ejecucion)
+            user.cost =float(txt_costo)
             db.session.add(user)
             db.session.commit()
             print('111')
