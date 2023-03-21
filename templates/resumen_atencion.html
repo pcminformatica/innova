@@ -102,6 +102,59 @@
                       </div>
 
                     </div>
+
+                    <br>
+                    <br>
+                    <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
+                      <div class="mdc-data-table__table-container">
+                        <table id="tbl_plan_1" class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                          <thead>
+                            <tr class="mdc-data-table__header-row">
+                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">N.</th>
+                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Description</th>
+                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progress</th>
+                              
+                              
+
+
+                            </tr>
+                            
+                            
+                            
+                          </thead>
+                          <tbody id="tablaPlan_1" class="mdc-data-table__content">
+                            {% if history %}
+                            {% for apix in history %}
+                          
+                            
+   
+                              <tr class="mdc-data-table__row">
+                                <th class="mdc-data-table__cell" scope="row">
+                                    {{loop.index}}
+                                </th>
+                                <th class="mdc-data-table__cell" scope="row">
+                                  <p>
+                                    {{ apix.description }}
+                                  </p>
+                                </th>
+
+                            
+                                <td class="mdc-data-table__cell no-print">
+                                  Porcentaje de avance: {{ apix.progress  }}%
+                                </td>
+                              </tr>
+                             
+                            {% endfor %}
+                            {% endif %}
+                          </tbody>
+                        </table>
+                      </div>
+                    
+    
+
+            
+                      
+                    </div>
                   </div>
               </div>
             </div>

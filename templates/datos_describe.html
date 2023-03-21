@@ -313,7 +313,7 @@
       
                                     
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('ADMINISTRACIÓN', '{{ apix.id }}','{{ apix.titulo }}','{{ apix.tiempo_ejecucion }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -482,7 +482,7 @@
                                         </select>
                                       </td>
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','{{ apix.tiempo_ejecucion }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -567,7 +567,7 @@
                                       </td>
                                     
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}','{{ apix.tiempo_ejecucion }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -845,8 +845,9 @@
         fecha.setDate(fecha.getDate() + dias);
    
 
-        fecha_fin = new Date(fecha).toLocaleDateString('en-GB'); 
-        fecha_fin = fecha_fin.replaceAll('/','-')
+      //  fecha_fin = new Date(fecha).toLocaleDateString('en-GB'); 
+       // fecha_fin = fecha_fin.replaceAll('/','-')
+        fecha_fin = new Date(fecha).toISOString().slice(0, 10);
         var Tbl;
 
         if (fases == 'FASE1'){
@@ -923,7 +924,7 @@
         for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
           //alert(cell[i].innerText);
           final = resume_table_fase1.rows[i].cells[2].innerHTML;
-          inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
+          inicio = resume_table_fase1.rows[i].cells[3].innerHTML;
           id = resume_table_fase1.rows[i].id;
           
           services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:1})
@@ -935,11 +936,11 @@
       }
       if (resume_table_fase2.rows.length >1){
 
-        for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
+        for (var i = 1, row; row = resume_table_fase2.rows[i]; i++) {
           //alert(cell[i].innerText);
-          final = resume_table_fase1.rows[i].cells[2].innerHTML;
-          inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
-          id = resume_table_fase1.rows[i].id;
+          final = resume_table_fase2.rows[i].cells[2].innerHTML;
+          inicio = resume_table_fase2.rows[i].cells[3].innerHTML;
+          id = resume_table_fase2.rows[i].id;
           
           services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:2})
         }

@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -846,7 +846,9 @@ def _dash_empresas(user_uid):
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])
 def _resumen_atencion(user_uid):
     action = ActionPlan.query.filter_by(id=user_uid).first()
+    history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
     context = {
         'action': action,
+        'history':history
     }
     return render_template('resumen_atencion.html',**context)
