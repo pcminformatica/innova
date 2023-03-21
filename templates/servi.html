@@ -42,15 +42,20 @@
                                 
                                   <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
-                                      <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORÍA</th>
 
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">cost </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">execution time </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">advisory time </th>
                                             
-
+                                            
+                                            
+                                            
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones</th>
                                           </tr>
                                           
@@ -66,7 +71,15 @@
                                             <th class="mdc-data-table__cell" scope="row">
                                                 {{ services.name }}
                                             </th> 
-                                            
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              {{ services.cost }}
+                                            </th> 
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{ services.execution_time }}
+                                            </th> 
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              {{ services.advisory_time }}
+                                            </th> 
                                             <td class="mdc-data-table__cell" style="width: 80px;">
                                               {{ services.catalog_category }}
                                                
