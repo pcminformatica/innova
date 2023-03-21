@@ -299,7 +299,8 @@ class catalogCategory(db.Model):
             id = self.id,
             name = self.name,
         )
-    
+
+
 # Catalog - Services Class
 class CatalogServices(db.Model):
     __tablename__ = 'catalog_services'
@@ -307,11 +308,13 @@ class CatalogServices(db.Model):
     name = db.Column(db.String(250), unique=True, nullable=False)
     name_short = db.Column(db.String(6), unique=True, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
-    break_minutes = db.Column(db.Integer, unique=False, nullable=True, default=15)
-    duration_minutes = db.Column(db.Integer, unique=False, nullable=True, default=45)
+    execution_time = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    advisory_time = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    cost  = db.Column(db.FLOAT, unique=False, nullable=True, default=0.00)
     service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
     sessions_schedule = db.Column(db.JSON, nullable=True)
     diagnostic_questions = db.Column(db.JSON, nullable=True)
+    fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     catalog_category = db.Column(db.Integer, db.ForeignKey('catalog_category.id'), nullable=True)
     catalog_catego = db.relationship("catalogCategory")
     def __repr__(self):

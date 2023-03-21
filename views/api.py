@@ -896,7 +896,7 @@ def _d_save_ActionPlan():
                     actionplan.date_scheduled_end = service['fecha_final']
                     actionplan.services_id = int(service['service'])
                     actionplan.created_by = current_user.id
-                    actionplan.version = service['fase']
+                    actionplan.fase = service['fase']
                     db.session.add(actionplan)
                     db.session.commit()
                     

@@ -37,3 +37,10 @@ def _admin_form_user(user_id):
     cxt = {'user':user,'roles':roles}
         
     return render_template('/admindash/formuser.html',**cxt)
+
+@admindash.route('/super/innova', methods = ['GET'])
+@login_required
+def _home_admin():
+
+    app.logger.debug('** SWING_CMS ** - listuser')
+    return render_template('/admindash/home.html')

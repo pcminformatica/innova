@@ -181,10 +181,10 @@
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
-                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FECHA</th>
-                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">FASE</th>
-                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">Descripción</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">Configuración</th>
+                                        <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">Acciones</th>
                                       </tr>
                                       
                                       
@@ -201,24 +201,33 @@
                                         <th class="mdc-data-table__cell" scope="row" >
                                           <p>
                                             {{ apix.titulo }}
+
                                           </p>
                                         </th>
                                         <td class="mdc-data-table__cell no-print">
-                                          <label>Fecha Inicio</label>
-                                          <input type="date" id="date_{{ apix.id }}">
+
+
                                           <br>
-                                          <label>Fecha Final</label>
-                                          <input type="date" id="date_fin_{{ apix.id }}">
+                                          Tiempo asesoría: <b>{{ apix.tiempo_asesoria }}  horas </b> 
+                                          <br>
+                                          Tiempo ejecución: <b>{{ apix.tiempo_ejecucion }} semanas </b> 
+                                          <br>
+                                          Costo: <b>{{ apix.costo }} </b> 
                                         </td>
       
                                         <td class="mdc-data-table__cell no-print">
+                                          <label>Fecha de inicio:</label>
+                                          <input type="date" id="date_{{ apix.id }}">
+                                          <br><br>
+                                          <label>Seleccione fase:</label>
                                           <select id="fase_{{ apix.id }}">
+                                            <option value=""></option>
                                             <option value="FASE1">FASE 1</option>
                                             <option value="FASE2">FASE 2</option>
                                           </select>
                                         </td>
                                         <td class="mdc-data-table__cell no-print">
-                                            <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <button onclick="agregar('LEGALIZACIÓN', '{{ apix.id }}','{{ apix.titulo }}','{{ apix.tiempo_ejecucion }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
@@ -271,25 +280,36 @@
                                       
                                       <tr class="mdc-data-table__row">
                                         <th class="mdc-data-table__cell" scope="row">
-                                            {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            {{ apix.titulo }}
-                                        </th>
-                                        <td class="mdc-data-table__cell no-print">
-                                          <label>Fecha Inicio</label>
-                                          <input type="date" id="date_{{ apix.id }}">
-                                          <br>
-                                          <label>Fecha Final</label>
-                                          <input type="date" id="date_fin_{{ apix.id }}">
-                                        </td>
-      
-                                        <td class="mdc-data-table__cell no-print">
-                                          <select id="fase_{{ apix.id }}">
-                                            <option value="FASE1">FASE 1</option>
-                                            <option value="FASE2">FASE 2</option>
-                                          </select>
-                                        </td>
+                                          {{loop.index}}
+                                      </th>
+                                      <th class="mdc-data-table__cell" scope="row" >
+                                        <p>
+                                          {{ apix.titulo }}
+
+                                        </p>
+                                      </th>
+                                      <td class="mdc-data-table__cell no-print">
+
+
+                                        <br>
+                                        Tiempo asesoría: <b>{{ apix.tiempo_asesoria }}  horas </b> 
+                                        <br>
+                                        Tiempo ejecución: <b>{{ apix.tiempo_ejecucion }} semanas </b> 
+                                        <br>
+                                        Costo: <b>{{ apix.costo }} </b> 
+                                      </td>
+    
+                                      <td class="mdc-data-table__cell no-print">
+                                        <label>Fecha de inicio:</label>
+                                        <input type="date" id="date_{{ apix.id }}">
+                                        <br><br>
+                                        <label>Seleccione fase:</label>
+                                        <select id="fase_{{ apix.id }}">
+                                          <option value=""></option>
+                                          <option value="FASE1">FASE 1</option>
+                                          <option value="FASE2">FASE 2</option>
+                                        </select>
+                                      </td>
       
                                     
                                         <td class="mdc-data-table__cell no-print">
@@ -346,28 +366,36 @@
                                       
                                       <tr class="mdc-data-table__row">
                                         <th class="mdc-data-table__cell" scope="row">
-                                            {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            <p>
-                                              {{ apix.titulo }}
-                                            </p>
-                                        </th>
-                                        <td class="mdc-data-table__cell no-print">
-                                          <label>Fecha Inicio</label>
-                                          <input type="date" id="date_{{ apix.id }}">
-                                          <br>
-                                          <label>Fecha Final</label>
-                                          <input type="date" id="date_fin_{{ apix.id }}">
-                                        </td>
-      
-                                        <td class="mdc-data-table__cell no-print">
-                                          <select id="fase_{{ apix.id }}">
-                                            <option value="FASE1">FASE 1</option>
-                                            <option value="FASE2">FASE 2</option>
-                                          </select>
-                                        </td>
-      
+                                          {{loop.index}}
+                                      </th>
+                                      <th class="mdc-data-table__cell" scope="row" >
+                                        <p>
+                                          {{ apix.titulo }}
+
+                                        </p>
+                                      </th>
+                                      <td class="mdc-data-table__cell no-print">
+
+
+                                        <br>
+                                        Tiempo asesoría: <b>{{ apix.tiempo_asesoria }}  horas </b> 
+                                        <br>
+                                        Tiempo ejecución: <b>{{ apix.tiempo_ejecucion }} semanas </b> 
+                                        <br>
+                                        Costo: <b>{{ apix.costo }} </b> 
+                                      </td>
+    
+                                      <td class="mdc-data-table__cell no-print">
+                                        <label>Fecha de inicio:</label>
+                                        <input type="date" id="date_{{ apix.id }}">
+                                        <br><br>
+                                        <label>Seleccione fase:</label>
+                                        <select id="fase_{{ apix.id }}">
+                                          <option value=""></option>
+                                          <option value="FASE1">FASE 1</option>
+                                          <option value="FASE2">FASE 2</option>
+                                        </select>
+                                      </td>
                                     
                                         <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('PRODUCCIÓN Y AMBIENTE', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
@@ -423,25 +451,36 @@
                                       
                                       <tr class="mdc-data-table__row">
                                         <th class="mdc-data-table__cell" scope="row">
-                                            {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            {{ apix.titulo }}
-                                        </th>
-                                        <td class="mdc-data-table__cell no-print">
-                                          <label>Fecha Inicio</label>
-                                          <input type="date" id="date_{{ apix.id }}">
-                                          <br>
-                                          <label>Fecha Final</label>
-                                          <input type="date" id="date_fin_{{ apix.id }}">
-                                        </td>
-      
-                                        <td class="mdc-data-table__cell no-print">
-                                          <select id="fase_{{ apix.id }}">
-                                            <option value="FASE1">FASE 1</option>
-                                            <option value="FASE2">FASE 2</option>
-                                          </select>
-                                        </td>
+                                          {{loop.index}}
+                                      </th>
+                                      <th class="mdc-data-table__cell" scope="row" >
+                                        <p>
+                                          {{ apix.titulo }}
+
+                                        </p>
+                                      </th>
+                                      <td class="mdc-data-table__cell no-print">
+
+
+                                        <br>
+                                        Tiempo asesoría: <b>{{ apix.tiempo_asesoria }}  horas </b> 
+                                        <br>
+                                        Tiempo ejecución: <b>{{ apix.tiempo_ejecucion }} semanas </b> 
+                                        <br>
+                                        Costo: <b>{{ apix.costo }} </b> 
+                                      </td>
+    
+                                      <td class="mdc-data-table__cell no-print">
+                                        <label>Fecha de inicio:</label>
+                                        <input type="date" id="date_{{ apix.id }}">
+                                        <br><br>
+                                        <label>Seleccione fase:</label>
+                                        <select id="fase_{{ apix.id }}">
+                                          <option value=""></option>
+                                          <option value="FASE1">FASE 1</option>
+                                          <option value="FASE2">FASE 2</option>
+                                        </select>
+                                      </td>
                                         <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('ANÁLISIS FINANCIERO', '{{ apix.id }}','{{ apix.titulo }}','date_{{ apix.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
@@ -496,25 +535,36 @@
                                       
                                       <tr class="mdc-data-table__row">
                                         <th class="mdc-data-table__cell" scope="row">
-                                            {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.titulo }}
+                                          {{loop.index}}
                                       </th>
-                                        <td class="mdc-data-table__cell no-print">
-                                          <label>Fecha Inicio</label>
-                                          <input type="date" id="date_{{ apix.id }}">
-                                          <br>
-                                          <label>Fecha Final</label>
-                                          <input type="date" id="date_fin_{{ apix.id }}">
-                                        </td>
-      
-                                        <td class="mdc-data-table__cell no-print">
-                                          <select id="fase_{{ apix.id }}">
-                                            <option value="FASE1">FASE 1</option>
-                                            <option value="FASE2">FASE 2</option>
-                                          </select>
-                                        </td>
+                                      <th class="mdc-data-table__cell" scope="row" >
+                                        <p>
+                                          {{ apix.titulo }}
+
+                                        </p>
+                                      </th>
+                                      <td class="mdc-data-table__cell no-print">
+
+
+                                        <br>
+                                        Tiempo asesoría: <b>{{ apix.tiempo_asesoria }}  horas </b> 
+                                        <br>
+                                        Tiempo ejecución: <b>{{ apix.tiempo_ejecucion }} semanas </b> 
+                                        <br>
+                                        Costo: <b>{{ apix.costo }} </b> 
+                                      </td>
+    
+                                      <td class="mdc-data-table__cell no-print">
+                                        <label>Fecha de inicio:</label>
+                                        <input type="date" id="date_{{ apix.id }}">
+                                        <br><br>
+                                        <label>Seleccione fase:</label>
+                                        <select id="fase_{{ apix.id }}">
+                                          <option value=""></option>
+                                          <option value="FASE1">FASE 1</option>
+                                          <option value="FASE2">FASE 2</option>
+                                        </select>
+                                      </td>
                                     
                                         <td class="mdc-data-table__cell no-print">
                                             <button onclick="agregar('MERCADEO Y TICs', '{{ apix.id }}','{{ apix.titulo }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
@@ -616,25 +666,28 @@
                                         <tbody id="tablaPlan_1" class="mdc-data-table__content">
                                           {% for apix in plan %}
                                         
-                                      
-                                          <tr class="mdc-data-table__row">
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{loop.index}}
-                                            </th>
-                                            <th class="mdc-data-table__cell" scope="row">
-                                              <p>
-                                                {{ apix.services.name }}
-                                              </p>
-                                            </th>
-                                            <td class="mdc-data-table__cell ">
-                                                {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
-                                            </td>
-          
-                                        
-                                            <td class="mdc-data-table__cell no-print">
-                                               Porcentaje de avance: {{ apix.progress  }}%
-                                            </td>
-                                          </tr>
+                                            {% if apix.fase == 1 %}
+                                            <tr class="mdc-data-table__row">
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                  {{loop.index}}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                <p>
+                                                  {{ apix.services.name }}
+                                                </p>
+                                              </th>
+                                              <td class="mdc-data-table__cell ">
+                                                {% if apix.date_scheduled_start %}
+                                                  {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
+                                                {% endif %}
+                                              </td>
+            
+                                          
+                                              <td class="mdc-data-table__cell no-print">
+                                                Porcentaje de avance: {{ apix.progress  }}%
+                                              </td>
+                                            </tr>
+                                            {% endif %}
                                           {% endfor %}
                                         </tbody>
                                       </table>
@@ -682,7 +735,7 @@
                                         <tbody id="tablaPlan_2" class="mdc-data-table__content">
                                           {% for apix in plan %}
                                         
-                                          {% if apix.fase == '2' %}
+                                          {% if apix.fase == 2 %}
                                             <tr class="mdc-data-table__row">
                                               <th class="mdc-data-table__cell" scope="row">
                                                   {{loop.index}}
@@ -693,7 +746,9 @@
                                                 </p>
                                               </th>
                                               <td class="mdc-data-table__cell ">
+                                                {% if apix.date_scheduled_start %}
                                                   {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
+                                                {% endif %}
                                               </td>
             
                                           
@@ -776,15 +831,22 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 <script>
-    function agregar(categoria,id,servicio){
+    function agregar(categoria,id,servicio,tiempo_ejecucion){
 
         fecha_inicio = document.getElementById('date_' +id).value
-        fecha_fin = document.getElementById('date_fin_'+ id).value
         fases = document.getElementById('fase_'+ id).value
-        if (fecha_inicio=="" || fecha_fin==""){ alert('Elija una fecha'); return false}
-       
-        
+        if (fecha_inicio=="" || fases==""){ alert('Elija una fecha y fase'); return false}
+        console.log(fecha_inicio)
+        console.log(tiempo_ejecucion)
+        //pasamos las semanas a dias
+        let dias = parseInt(tiempo_ejecucion) * 7;
+        let fecha = new Date(fecha_inicio);
 
+        fecha.setDate(fecha.getDate() + dias);
+   
+
+        fecha_fin = new Date(fecha).toLocaleDateString('en-GB'); 
+        fecha_fin = fecha_fin.replaceAll('/','-')
         var Tbl;
 
         if (fases == 'FASE1'){
@@ -926,7 +988,13 @@
       window.print()
     }
 
-    
+    function formatDate(date) {
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join('/');
+}
 </script>
 {% endblock %}
 

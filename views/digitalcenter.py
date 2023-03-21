@@ -286,9 +286,6 @@ def _re():
     return render_template('404.html')
 
 
-@digitalcenter.route('/servicios/',methods=['GET', 'POST'])
-def _servicios_1():
-    return render_template('servicios.html')
 
 @digitalcenter.route('/plan/',methods=['GET', 'POST'])
 def _plan_2():
@@ -353,9 +350,11 @@ def _datos_describe(user_uid):
             print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
             services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
 
+
+
             for servicesx in services:
                 if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
-                    servicios.append({'id':servicesx.id,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
+                    servicios.append({'id':servicesx.id,'tiempo_asesoria':servicesx.advisory_time,'tiempo_ejecucion':servicesx.execution_time,'costo':servicesx.cost,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
     legalizacion = []
     administracion = []
     produccion = []
