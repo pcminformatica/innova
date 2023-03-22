@@ -752,7 +752,7 @@ console.log(preguntas)
     )
     document.getElementById('submitSaveButton').disabled = false;
   });
-showMSJ('Éxito','Plan de Acción creado!','success')
+showMSJ('Éxito','Soliciud enviada con exito','success')
   
     console.log(preguntas)
     /*
