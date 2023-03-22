@@ -46,6 +46,7 @@ function showMSJ(titulo,subtitulo,tipo){
  function saveRegisterForms(){
     
     let preguntas = []
+
     //Pregunta A
     const txt_ofrece =  getCheckValues('txt_ofrece');
     if (txt_ofrece.length == 0 ){   
@@ -713,7 +714,15 @@ function showMSJ(titulo,subtitulo,tipo){
     }else{
       preguntas.push({"id":"4_4", "pregunta":mdcAssignedVars[property].label.root.attributes.hiddenlabel.value,"respuesta":mdcAssignedVars[property].value})
     }
-
+        //Pregunta 4.5
+        const confirmacion =  getCheckValues('checkbox_confirmacion');
+        if (confirmacion.length == 0 ){   
+          showMSJ('Por favor responda la pregunta:','4.5 Confirmación','info')
+          return false
+        }else{
+          preguntas.push({"id":"4_5","pregunta":"4.5 Confirmación","respuesta":confirmacion})
+        }
+console.log(preguntas)
       const Swal = swcms.returnSwal()
   let postData = {
     'preguntas': preguntas
@@ -721,7 +730,7 @@ function showMSJ(titulo,subtitulo,tipo){
   console.log(postData)
   let apiUrl = '/api/inscripciones/';
   document.getElementById('submitSaveButton').disabled = true;
-
+  
   swcms.postFetch(apiUrl, postData).then((data) => {
     Swal.fire(
       'Gracias',

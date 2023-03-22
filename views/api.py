@@ -816,6 +816,7 @@ def _d_save_admin_servi():
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+import requests
 
 @api.route('/api/inscripciones/', methods = ['POST'])
 # @login_required
@@ -870,6 +871,22 @@ def _d_inscripciones():
             inscripcion.elegible = elegible
             db.session.add(inscripcion)
             db.session.commit()
+            try:
+                #enviar    
+                if elegible: 
+                    url = 'http://inscripciones.ciudadmujer.gob.hn/inscribite/web/acepta/'
+                    myobj = {'txt_Correo': list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']}
+                    x = requests.post(url, data = myobj)
+                    print(x.text)
+                else:
+                    url = 'http://inscripciones.ciudadmujer.gob.hn/inscribite/web/no/web'
+                    myobj = {'txt_Correo': list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']}
+                    x = requests.post(url, data = myobj)
+                    print(x.text)
+            except Exception as e:
+                #enviar
+                app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
