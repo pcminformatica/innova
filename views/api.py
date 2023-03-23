@@ -1371,3 +1371,33 @@ def _d_save_ActionPlanHistory():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+
+@api.route('/api/save/user/company/admin', methods = ['POST'])
+# @login_required
+def _d_save_admin_company():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_id = request.json['txt_id']
+            user = User.query.filter_by(id = txt_id).first()
+            txt_company = request.json['txt_company']
+            company = Company.query.filter_by(id = txt_company).first()
+            user.extra_info.company = company
+            db.session.add(user)
+            db.session.commit()
+            print('111')
+            print('111')
+            print('111')
+            print('111')
+            print('111')
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        print('111')
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

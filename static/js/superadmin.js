@@ -87,3 +87,33 @@ function saveService(){
   });
 }
 
+function saveUsersCompany(){
+  const Swal = swcms.returnSwal()
+
+  let postData = {
+    'txt_company': mdcAssignedVars['txt_company'].value.trim() || null,
+    'txt_id':document.getElementById('txt_id').value
+  }
+
+  let apiUrl = '/api/save/user/company/admin';
+  console.log(postData)
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+      'Gracias',
+      'Modificado!',
+      'success'
+    )
+    window.setTimeout(() => { window.location.reload(); 
+  }, 1000);
+
+  }).catch((error) => {
+    Swal.fire(
+      'Error de conexión',
+      'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+      'error'
+    )
+    document.getElementById('submitSaveButton').disabled = false;
+  });
+
+}

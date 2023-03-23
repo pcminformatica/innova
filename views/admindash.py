@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
@@ -30,17 +30,23 @@ def _admin_list_user():
 @admindash.route('/admin/list/user/<int:user_id>/custom', methods = ['GET'])
 @login_required
 def _admin_form_user(user_id):
-
     app.logger.debug('** SWING_CMS ** - listuser')
     user = User.query.filter_by(id = user_id).first()
     roles = CatalogUserRoles.query.all()
     cxt = {'user':user,'roles':roles}
-        
     return render_template('/admindash/formuser.html',**cxt)
 
 @admindash.route('/super/innova', methods = ['GET'])
 @login_required
 def _home_admin():
-
     app.logger.debug('** SWING_CMS ** - listuser')
     return render_template('/admindash/home.html')
+
+@admindash.route('/admin/list/user/company/<int:user_id>/custom', methods = ['GET'])
+@login_required
+def _admin_form_company(user_id):
+    app.logger.debug('** SWING_CMS ** - listuser')
+    user = User.query.filter_by(id = user_id).first()
+    company = Company.query.all()
+    cxt = {'user':user,'company':company}
+    return render_template('/admindash/formuser_company.html',**cxt)
