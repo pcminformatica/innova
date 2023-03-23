@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
@@ -415,3 +415,64 @@ def _perfil_empresaria():
 def _resumen():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('resumen.html')
+
+@home.route('/empresarias/')
+def _empresarias():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    user = User.query.filter_by(id=current_user.id)
+    company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).all()
+    actions = ActionPlan.query.filter_by(company_id=company.id).all()
+    print(diagnos)
+    print(actions)
+    direccion_estrategica =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True, DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
+    mercadeo_ventas =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
+    madurez_digital =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
+    gestion_financiera =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
+    gestion_produccion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
+    organizacion_gestion =  DiagnosisCompany.query.filter(DiagnosisCompany.status == True,DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
+    resultado_direccion_estrategica  = direccion_estrategica.result_total 
+    total_direccion_estrategica = direccion_estrategica.result_area
+    resultado_mercadeo_ventas =  mercadeo_ventas.result_total
+    total_mercadeo_ventas =mercadeo_ventas.result_area
+    total_madurez_digital = madurez_digital.result_area
+    resultado_madurez_digital = madurez_digital.result_total
+    total_gestion_financiera = gestion_financiera.result_area
+    resultado_gestion_financiera = gestion_financiera.result_total
+    total_gestion_produccion = gestion_produccion.result_area
+    resultado_gestion_produccion = gestion_produccion.result_total
+    total_organizacion_gestion = organizacion_gestion.result_area
+    resultado_organizacion_gestion = organizacion_gestion.result_total
+    totaldiagnostico = resultado_direccion_estrategica + resultado_mercadeo_ventas + resultado_madurez_digital + resultado_gestion_financiera + resultado_gestion_produccion + resultado_organizacion_gestion
+    totaldiagnostico = round(totaldiagnostico, 2) 
+    totalarea =  total_direccion_estrategica + total_mercadeo_ventas + total_madurez_digital + total_gestion_financiera + total_gestion_produccion + total_organizacion_gestion 
+    tipo_empresa = "EMPRESA D"
+    if totaldiagnostico <= 60:
+        tipo_empresa = "EMPRESA D"
+    elif totaldiagnostico <= 70:
+        tipo_empresa = "EMPRESA C"
+    elif totaldiagnostico <= 90:
+        tipo_empresa = "EMPRESA B"
+    elif totaldiagnostico <= 100:
+        tipo_empresa = "EMPRESA D"
+    context = {
+        'api': company,
+        'actions':actions,
+        "total_direccion_estrategica":total_direccion_estrategica,
+        "total_mercadeo_ventas":total_mercadeo_ventas,
+        "total_madurez_digital":total_madurez_digital,
+        "total_gestion_financiera":total_gestion_financiera,
+        "total_gestion_produccion":total_gestion_produccion,
+        "total_organizacion_gestion":total_organizacion_gestion,
+        "resultado_direccion_estrategica":resultado_direccion_estrategica,
+        "resultado_mercadeo_ventas":resultado_mercadeo_ventas,
+        "resultado_madurez_digital":resultado_madurez_digital,
+        "resultado_gestion_financiera":resultado_gestion_financiera,
+        "resultado_gestion_produccion":resultado_gestion_produccion,
+        "resultado_organizacion_gestion":resultado_organizacion_gestion,
+        "totaldiagnostico":totaldiagnostico,
+        "totalarea":totalarea,
+        "tipo_empresa":tipo_empresa
+    }
+ 
+    return render_template('home_empresarias.html',**context)

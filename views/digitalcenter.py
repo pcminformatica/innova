@@ -772,6 +772,24 @@ def _elegibles_5():
     }
     return render_template('elegibles.html',**context)
 
+@digitalcenter.route('/elegibles/no/5',methods=['GET', 'POST'])
+def _elegibles_no_5():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    inscripciones = Inscripciones.query.filter_by(elegible = False,cohorte=5).all()
+    context = {
+        'api': inscripciones
+    }
+    return render_template('elegibles.html',**context)
+
+@digitalcenter.route('/view/no/5/<int:inscribe_id>',methods=['GET', 'POST'])
+def _describe_inscripcion_5(inscribe_id):
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    inscripciones = Inscripciones.query.filter_by(id = inscribe_id).first()
+    context = {
+        'api': inscripciones
+    }
+    return render_template('describe_inscripcion.html',**context)
+
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
 def _empresas():
     app.logger.debug('** SWING_CMS ** - ------------------')
