@@ -8,7 +8,6 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
