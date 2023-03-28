@@ -298,29 +298,6 @@ def _historial_2():
 
 
 from sqlalchemy import desc
-@digitalcenter.route('/servi/',methods=['GET', 'POST'])
-def _servi():
-    services = CatalogServices.query.filter_by(enabled = 1).order_by(desc(CatalogServices.name_short)).all()
-    app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    context = {'services':services}  
-    return render_template('servi.html',**context)
-
-@digitalcenter.route('/servi/<int:user_uid>',methods=['GET', 'POST'])
-def _servi_detalle(user_uid):
-    services = catalogCategory.query.all()
-    service = CatalogServices.query.filter_by(id = user_uid).first()
-    app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    context = {'services':services,'service':service}  
-    return render_template('admindash/formservicios.html',**context)
-
-@digitalcenter.route('/servi/delete/<int:service_id>',methods=['GET', 'POST'])
-def _servi_detalle_delete(service_id):
-    service = CatalogServices.query.filter_by(id = service_id).delete()
-    db.session.commit()
-    app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    return redirect(url_for('digitalcenter._servi'))
-
-
 import requests
 import json 
 @digitalcenter.route('/diagnosticos/',methods=['GET', 'POST'])

@@ -794,12 +794,14 @@ def _d_save_admin_servi():
             txt_tiempo_asesoria = request.json['txt_tiempo_asesoria']
             txt_tiempo_ejecucion = request.json['txt_tiempo_ejecucion']
             txt_costo = request.json['txt_costo']
+            txt_diagnostic_questions = request.json['txt_diagnostic_questions']
 
             user.name = txt_name
             user.catalog_category = int(txt_rol)
             user.advisory_time = int(txt_tiempo_asesoria)
             user.execution_time = int(txt_tiempo_ejecucion)
             user.cost =float(txt_costo)
+            user.diagnostic_questions =  txt_diagnostic_questions
             db.session.add(user)
             db.session.commit()
             print('111')

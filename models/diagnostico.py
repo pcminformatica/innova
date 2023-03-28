@@ -7,7 +7,7 @@ class totalesDiagnostico():
     descripcion = ""
 
 class Diagnosticos():
-    name = 'hola'
+
     categorias = []
     preguntas = []
     def __init__(self):
