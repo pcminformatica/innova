@@ -40,7 +40,7 @@ class Diagnosticos():
         for total1  in total_resultado:
             totales.putaje_area = totales.putaje_area + total1.putaje_area
             totales.ideales = totales.ideales + total1.ideales
-            totales.resultados = totales.resultados + total1.resultados
+            totales.resultados = round(totales.resultados + total1.resultados,2)
         tipo_empresa = "EMPRESA D"
         if totales.resultados <= 60:
             totales.descripcion = "EMPRESA D"

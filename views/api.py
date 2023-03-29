@@ -898,8 +898,6 @@ def _d_inscripciones():
 # @login_required
 def _d_save_ActionPlan():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -932,6 +930,7 @@ def _d_save_ActionPlan():
                     actionplan.services_id = int(service['service'])
                     actionplan.created_by = current_user.id
                     actionplan.fase = service['fase']
+                    actionplan.descripcion = service['comentario']
                     db.session.add(actionplan)
                     db.session.commit()
                     

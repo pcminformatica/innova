@@ -45,7 +45,7 @@
 {% block body %}
 <main class="s-main-content">
     <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-s">
+        <div class="mdc-layout-grid container">
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                 <div class="container-dashboard--messages">
@@ -654,9 +654,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">INICIO</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIN</th>
-                                            
-
-
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">COMENTARIO</th>
                                             <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                           </tr>
                                           
@@ -682,10 +680,20 @@
                                                 {% endif %}
                                               </td>
             
-                                          
+                                              <td class="mdc-data-table__cell ">
+                                                {% if apix.date_scheduled_start %}
+                                                  {{ apix.date_scheduled_end.strftime('%Y-%m-%d')  }}
+                                                {% endif %}
+                                              </td>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                <p>
+                                                  {{ apix.descripcion }}
+                                                </p>
+                                              </th>
                                               <td class="mdc-data-table__cell no-print">
                                                 Porcentaje de avance: {{ apix.progress  }}%
                                               </td>
+
                                             </tr>
                                             {% endif %}
                                           {% endfor %}
@@ -724,8 +732,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">INICIO</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIN</th>
-                                            
-
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">COMENTARIO</th>
                                             <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
                                           </tr>
                                           
@@ -750,8 +757,18 @@
                                                   {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
                                                 {% endif %}
                                               </td>
-            
+                                              <td class="mdc-data-table__cell ">
+                                                {% if apix.date_scheduled_start %}
+                                                  {{ apix.date_scheduled_end.strftime('%Y-%m-%d')  }}
+                                                {% endif %}
+                                              </td>
                                           
+                                  
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                <p>
+                                                  {{ apix.descripcion }}
+                                                </p>
+                                              </th>
                                               <td class="mdc-data-table__cell no-print">
                                                 Porcentaje de avance: {{ apix.progress  }}%
                                               </td>
@@ -832,6 +849,31 @@
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 <script>
     function agregar(categoria,id,servicio,tiempo_ejecucion){
+      var resume_table_fase1 = document.getElementById("tbl_plan_1");
+      var resume_table_fase2 = document.getElementById("tbl_plan_2");
+      const Swal = swcms.returnSwal()
+      for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
+          //alert(cell[i].innerText);
+          if (id == resume_table_fase1.rows[i].id){
+            Swal.fire(
+              'Ya existe',
+              'El servicio esta agregado en la fase 1',
+              'error'
+            )
+            return false
+          }  
+        }
+        for (var i = 1, row; row = resume_table_fase2.rows[i]; i++) {
+          //alert(cell[i].innerText);
+          if (id == resume_table_fase2.rows[i].id){
+            Swal.fire(
+              'Ya existe',
+              'El servicio esta agregado en la fase 2',
+              'error'
+            )
+            return false
+          }  
+        }
 
         fecha_inicio = document.getElementById('date_' +id).value
         fases = document.getElementById('fase_'+ id).value
@@ -841,12 +883,7 @@
         //pasamos las semanas a dias
         let dias = parseInt(tiempo_ejecucion) * 7;
         let fecha = new Date(fecha_inicio);
-
         fecha.setDate(fecha.getDate() + dias);
-   
-
-      //  fecha_fin = new Date(fecha).toLocaleDateString('en-GB'); 
-       // fecha_fin = fecha_fin.replaceAll('/','-')
         fecha_fin = new Date(fecha).toISOString().slice(0, 10);
         var Tbl;
 
@@ -863,6 +900,7 @@
             var celda2 = document.createElement("td");
             var celda3 = document.createElement("td");
             var celda4 = document.createElement("td");
+            var celda5 = document.createElement("td");
 
             var textoCelda1 = document.createTextNode(servicio);
             var textoCelda2 = document.createTextNode(fecha_inicio);
@@ -875,24 +913,28 @@
             celda2.className = 'mdc-data-table__cell'
             celda3.className = 'mdc-data-table__cell'
             celda4.className = 'mdc-data-table__cell no-print'
+            celda5.className = 'mdc-data-table__cell no-print'
 
         
             celda.appendChild(textoCelda);
             celda1.appendChild(textoCelda1);
             celda2.appendChild(textoCelda2);
             celda3.appendChild(textoCelda3);
-            celda4.innerHTML = `
+            celda4.innerHTML = `<textarea id="txt_comentario_${id}" ></textarea>`
+
+            celda5.innerHTML = `
             <button onclick="deleteRow()" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                             
                                             <span class="mdc-button__ripple"></span>
                                             <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
                                             <span class="mdc-button__label">Eliminar</span>
-                                        </button>`
+            </button>`
             hilera.appendChild(celda);
             hilera.appendChild(celda1);
             hilera.appendChild(celda2);
             hilera.appendChild(celda3);
             hilera.appendChild(celda4);
+            hilera.appendChild(celda5);
             hilera.id =    id                     
             Tbl.appendChild(hilera);
         }
@@ -922,12 +964,12 @@
       if (resume_table_fase1.rows.length >1){
 
         for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
-          //alert(cell[i].innerText);
+          //alert(cell[i].innerText); 
           inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
           final = resume_table_fase1.rows[i].cells[3].innerHTML;
           id = resume_table_fase1.rows[i].id;
-          
-          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:1})
+          comentario = document.getElementById("txt_comentario_"+ id).value.trim() || null
+          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:1,comentario:comentario})
         }
         console.log(services)
       }else{
@@ -937,12 +979,12 @@
       if (resume_table_fase2.rows.length >1){
 
         for (var i = 1, row; row = resume_table_fase2.rows[i]; i++) {
-          //alert(cell[i].innerText);
+        
           inicio = resume_table_fase2.rows[i].cells[2].innerHTML;
           final = resume_table_fase2.rows[i].cells[3].innerHTML;
           id = resume_table_fase2.rows[i].id;
-          
-          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:2})
+          comentario = document.getElementById("txt_comentario_"+ id).value.trim() || null
+          services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:2,comentario:comentario})
         }
         console.log(services)
         }else{

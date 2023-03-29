@@ -305,7 +305,7 @@ class catalogCategory(db.Model):
 class CatalogServices(db.Model):
     __tablename__ = 'catalog_services'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(250), unique=True, nullable=False)
+    name = db.Column(db.String(350), unique=True, nullable=False)
     name_short = db.Column(db.String(6), unique=True, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     execution_time = db.Column(db.Integer, unique=False, nullable=True, default=0)
@@ -781,6 +781,7 @@ class ActionPlan(db.Model):
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
     fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    descripcion = db.Column(db.Text, nullable=True)
 
 # Services Supplement Class
 class ActionPlanHistory(db.Model):
