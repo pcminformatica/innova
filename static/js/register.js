@@ -696,8 +696,7 @@ function showMSJ(titulo,subtitulo,tipo){
     //4.2
     const tipo_formalizacion =  getCheckValues('tipo_formalizacion');
     if (tipo_formalizacion.length == 0 ){   
-      showMSJ('Por favor responda la pregunta:','4.2 Tipo de formalización','info')
-      return false
+      preguntas.push({"id":"4_2","pregunta":"4.2 Tipo de formalización","respuesta":""})
     }else{
       preguntas.push({"id":"4_2","pregunta":"4.2 Tipo de formalización","respuesta":tipo_formalizacion})
     }
