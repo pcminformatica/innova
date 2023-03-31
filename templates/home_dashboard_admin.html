@@ -173,17 +173,18 @@
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
-                                        <a target="_blank" href="https://app.powerbi.com/groups/me/reports/c349ed84-4d69-4f98-b099-b74252b7dc6d?ctid=91ed43f6-c29f-4fbc-a3b0-0d0e6865d0e8&pbi_source=linkShare&bookmarkGuid=5b28c4dd-aece-4c28-873f-786a46033b7b">
+                                        <a target="_blank" href="https://app.powerbi.com/groups/me/reports/c9dd7339-8230-4468-8076-81fb82bd15f2/ReportSection0a42dc2db72d7b05b741?ctid=91ed43f6-c29f-4fbc-a3b0-0d0e6865d0e8&bookmarkGuid=d11de429-2b8f-4796-9329-95e18446c364">
                                         
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
                                             <span class="mdc-deprecated-list-item__text">
                                                 <span class="mdc-deprecated-list-item__primary-text">Resultados del diagnostico empresarial</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Notificación Innova</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">POWER BI</span>
                                             </span>
                                         </a>
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <!--
                                     <li class="mdc-deprecated-list-item">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
@@ -192,7 +193,7 @@
                                         <span class="mdc-deprecated-list-item__text">
                                             <span class="mdc-deprecated-list-item__primary-text">Laboratoria</span>
                                         </span>
-                                    </li>
+                                    </li>-->
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
@@ -202,10 +203,26 @@
                                                 <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
                                             </span>
                                             <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">construir planes de mejora</span>
+                                                <span class="mdc-deprecated-list-item__primary-text">Control de diagnosticos</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial y creacion de usuario</span>
                                             </span>
                                         </a>
                                     </li>
+
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('digitalcenter._empresas') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas </span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">construir planes, bitacotaras, etc</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                         
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
                                         <a href="{{ url_for('digitalcenter._elegibles_5') }}">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
@@ -214,24 +231,22 @@
                                             </span>
                                             <span class="mdc-deprecated-list-item__text">
                                                 <span class="mdc-deprecated-list-item__primary-text">Elegibles 5 Cohorte</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                             </span>
                                         </a>
                                     </li>
                                     <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._empresas') }}">
+                                        <a href="{{ url_for('digitalcenter._elegibles_no_5') }}">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                 <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
                                             </span>
                                             <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas</span>
+                                                <span class="mdc-deprecated-list-item__primary-text">No elegibles 5 Cohorte</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                             </span>
                                         </a>
                                     </li>
-                                    <br>
-                                    <br>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-
                                     
                                 </ul>
                             </div>
