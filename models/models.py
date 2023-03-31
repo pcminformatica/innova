@@ -698,9 +698,10 @@ class Company(db.Model):
     _tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     rtn = db.Column(db.String(50), unique=True, nullable=True)
+    dni = db.Column(db.String(50), unique=True, nullable=True)
     name = db.Column(db.String(300), unique=False, nullable=True)
     avatar = db.Column(db.String(50), unique=False, nullable=True)
-    description = db.Column(db.Text, unique=False, nullable=False)
+    description = db.Column(db.Text, unique=False, nullable=True)
     address = db.Column(db.String(400), unique=False, nullable=True)
     social_networks = db.Column(db.JSON, unique=False, nullable=True)
     phones = db.Column(db.JSON, unique=False, nullable=True)
@@ -749,14 +750,12 @@ class DiagnosisCompany(db.Model):
     __tablename__ = 'diagnosis_company'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
-    categoria = db.Column(db.String(60), unique=False, nullable=True)
-    result_total = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    result_area = db.Column(db.Integer, unique=False, nullable=True, default=0)
     status = db.Column(db.Boolean, nullable=False, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
+    resultados = db.Column(db.JSON, unique=False, nullable=True)
     
 # Appointments Class
 class ActionPlan(db.Model):

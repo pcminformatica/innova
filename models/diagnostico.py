@@ -1,3 +1,5 @@
+from flask import jsonify
+import json
 class totalesDiagnostico():
     id_area = 0
     area = ""
@@ -5,23 +7,60 @@ class totalesDiagnostico():
     ideales = 0
     resultados = 0
     descripcion = ""
+    def __str__(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+    def __str1__(self):
+        return  json.dumps({"id_area": str(self.id_area), "area": str(self.area),"putaje_area": str(self.putaje_area),"ideales": str(self.ideales), "resultados": str(self.resultados),"descripcion": self.descripcion})
+
+    def __repr__(self):
+        return self.__str__()
+    def __iter__(self):
+        yield from {
+            "id_area": self.id_area,
+            "area": self.area,
+            "putaje_area": self.putaje_area,
+            "ideales": self.ideales,
+            "resultados": self.resultados,
+            "descripcion": self.descripcion,   
+        }.items()
 
 class Diagnosticos():
 
     categorias = []
     preguntas = []
+    total_resultado = []
+    def __str__(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+    def toJson(self):
+        return json.dumps(self.__dict__)
+
+    def __repr__(self):
+        return self.toJson()
+    
+
+    def __iter__(self):
+        yield from {
+            "categorias": self.categorias,
+            "area": self.area,
+            "total_resultado": self.total_resultado,
+
+        }.items()
+
     def __init__(self):
         
         self.categorias = self.init_categorias()
         self.preguntas = self.init_preguntas()
+        self.total_resultado = []
+
+
 
     def calcular_area(self,datos):
-        total_resultado = []
+        self.total_resultado = []
         for categoria in self.categorias:
             codigo_categoria = categoria['id']
             totales  =  totalesDiagnostico()
             totales.id_area =codigo_categoria
-            totales.area = categoria['area']
+            totales.area =  categoria['area']
             totales.ideales = categoria['ideales']
             #recojemos las preguntas de categoria
             preguntas_arr = list(e for e in self.preguntas if e['id_categoria']  == codigo_categoria) 
@@ -34,10 +73,10 @@ class Diagnosticos():
                     totales.putaje_area = totales.putaje_area + 0
             totales.resultados =  round( totales.putaje_area/(len(preguntas_arr)*3) * totales.ideales *100,2)
             totales.ideales = totales.ideales*100
-            total_resultado.append(totales)
+            self.total_resultado.append(totales)
         totales  =  totalesDiagnostico()
         totales.area = "Total"
-        for total1  in total_resultado:
+        for total1  in  self.total_resultado:
             totales.putaje_area = totales.putaje_area + total1.putaje_area
             totales.ideales = totales.ideales + total1.ideales
             totales.resultados = round(totales.resultados + total1.resultados,2)
@@ -50,8 +89,8 @@ class Diagnosticos():
             totales.descripcion = "EMPRESA B"
         elif totales.resultados <= 100:
             totales.descripcion = "EMPRESA A"
-        total_resultado.append(totales)
-        return(total_resultado)
+        self.total_resultado.append(totales)
+        return( self.total_resultado)
                 
 
                 

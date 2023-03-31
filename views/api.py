@@ -7,6 +7,8 @@ from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.formatjson import JsonPhone, JsonSocial
+from models.diagnostico import Diagnosticos
 from sqlalchemy import or_
 import json
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
@@ -941,135 +943,60 @@ def _d_save_ActionPlan():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+
+
+import copy
 @api.route('/api/save/diagnosis/company/', methods = ['POST'])
-# @login_required
+@login_required
 def _d_save_DiagnosisCompany():
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
 
-            txt_company_name = request.json['txt_company_name']
-            txt_company_rtn = request.json['txt_company_rtn']
-            app.logger.error(txt_company_name)
-            app.logger.error(txt_company_rtn)
-
-            company =  Company.query.filter(or_(Company.name == txt_company_name, Company.rtn == txt_company_rtn)).first()
+            txt_code = request.json['txt_code']
+            url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(txt_code)
+            headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+            resp = requests.get(url,headers=headers)
+            api = json.loads(resp.content)
+            company =  Company.query.filter(or_(Company.dni == api['IDENTIDAD'], Company.rtn == api['RTN'])).first()
             if not company:
                 company = Company()
-                company.name = txt_company_name
-                company.rtn = txt_company_rtn
-                company.description = 'description'
+                company.name = api['NOMBRE_EMPRESA']
+                company.rtn = api['RTN']
+                company.dni = api['IDENTIDAD']
+                company.address = api['DIRECCION']
+                jsonPhone = JsonPhone()
+                jsonPhone.phone = api['TELEFONO']
+                jsonSocial= JsonSocial()
+                jsonSocial.email = api['EMAIL']
+                company.phones = jsonPhone.jsonFormat()
+                company.social_networks = jsonSocial.jsonFormat()
                 db.session.add(company)
                 db.session.commit()
-            #11
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
+            diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+            if not diagnosis:
+                diagnostico = Diagnosticos()
+                resultados  = diagnostico.calcular_area(api)
+                diagnosis =  DiagnosisCompany()
+                diagnosis.company_id = company.id
+                diagnosis.respuestas = api
+                diagnosis.resultados =  json.loads( str(resultados))
+                diagnosis.created_by = current_user.id
+                db.session.add(diagnosis)
                 db.session.commit()
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Dirección Estratégica"
-            diagnosis.result_area = request.json["total_direccion_estrategica"]
-            diagnosis.result_total = request.json["resultado_direccion_estrategica"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_direccion_estrategica"]
-            db.session.add(diagnosis)
-            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+        
 
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
-                db.session.commit()
-
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Mercadeo y ventas"
-            diagnosis.result_area = request.json["total_mercadeo_ventas"]
-            diagnosis.result_total = request.json["resultado_mercadeo_ventas"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_mercadeo_ventas"]
-            db.session.add(diagnosis)
-            db.session.commit()
-
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
-                db.session.commit()
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Madurez Digital"
-            diagnosis.result_area = request.json["total_madurez_digital"]
-            diagnosis.result_total = request.json["resultado_madurez_digital"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_madurez_digital"]
-            db.session.add(diagnosis)
-            db.session.commit()
-
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
-                db.session.commit()
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Gestión Financiera"
-            diagnosis.result_area = request.json["total_gestion_financiera"]
-            diagnosis.result_total = request.json["resultado_gestion_financiera"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_gestion_financiera"]
-            db.session.add(diagnosis)
-            db.session.commit()
-
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
-                db.session.commit()
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Gestión de la producción"
-            diagnosis.result_area = request.json["total_gestion_produccion"]
-            diagnosis.result_total = request.json["resultado_gestion_produccion"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_gestion_produccion"]
-            db.session.add(diagnosis)
-            db.session.commit()
-
-            existe =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
-            if existe:
-                existe.status = False
-                db.session.add(existe)
-                db.session.commit()
-            diagnosis = DiagnosisCompany()
-            diagnosis.categoria = "Organización y Gestión del talento humano"
-            diagnosis.result_area = request.json["total_organizacion_gestion"]
-            diagnosis.result_total = request.json["resultado_organizacion_gestion"]
-            diagnosis.status = True
-            diagnosis.created_by = current_user.id
-            diagnosis.company_id = company.id
-            diagnosis.respuestas = request.json["respuestas_organizacion_gestion"]
-            db.session.add(diagnosis)
-            db.session.commit()
 
                     
-        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+        return jsonify({ 'status': 243, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
 @api.route('/api/save/action/plan/history/', methods = ['POST'])
-# @login_required
+@login_required
 def _d_save_ActionPlanHistory():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
@@ -1374,7 +1301,7 @@ def _d_save_ActionPlanHistory():
 
 
 @api.route('/api/save/user/company/admin', methods = ['POST'])
-# @login_required
+@login_required
 def _d_save_admin_company():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
@@ -1402,3 +1329,8 @@ def _d_save_admin_company():
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+    
+class Object:
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)

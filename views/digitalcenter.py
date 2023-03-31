@@ -642,7 +642,8 @@ def _datos_diagnostico(user_uid):
     resultados  = diagnostico.calcular_area(api)
     context = {
         "api":api,
-        "diagnostico":resultados
+        "diagnostico":resultados,
+        "user_uid":user_uid
     }
     return render_template('diagnostico.html',**context)
 
@@ -682,17 +683,20 @@ def _empresas():
     }
     return render_template('empresas.html',**context)
 
+
+from sqlalchemy import desc,asc
 @digitalcenter.route('/empresas/view/<int:user_uid>/',methods=['GET', 'POST'])
 def _dash_empresas(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
-    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).all()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
 
     context = {
         'api': company,
         'actions':actions,
+        "diagnostico":diagnos.resultados ,
     }
  
     return render_template('dash_empresas.html',**context)

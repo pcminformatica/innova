@@ -106,7 +106,7 @@
                                     more_vert
                                 </button>
                             </div>
-                        </div>
+                        </div>s
                     
                     
                 </div>
@@ -132,128 +132,31 @@
                                       
                                       
                                       
+
+
+
+
                                     </thead>
                                     <tbody class="mdc-data-table__content">
-                                                                             
+                                    {% for resultado in diagnostico %}                              
                                       <tr class="mdc-data-table__row">
                                         <th class="mdc-data-table__cell" scope="row">
-                                           1
+                                            {{loop.index}}
                                         </th>
                                         <th class="mdc-data-table__cell" scope="row">
-                                            Dirección Estratégica
+                                            {{ resultado.area }}
                                         </th>
                                         <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_direccion_estrategica }}
+                                            {{ resultado.putaje_area }}
                                         </td>
                                         <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            10.00%
+                                            {{ resultado.ideales }}
                                         </td>
                                         <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_direccion_estrategica }}
+                                            {{ resultado.resultados }}  
                                         </td>     
                                       </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           2
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Mercadeo y ventas
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_mercadeo_ventas }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            25.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_mercadeo_ventas }}
-                                        </td>     
-                                      </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           3
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Madurez Digital
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_madurez_digital }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            10.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_madurez_digital }}
-                                        </td>     
-                                      </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           4
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Gestión Financiera
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_madurez_digital }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            25.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_madurez_digital }}
-                                        </td>     
-                                      </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           5
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Gestión de la producción
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_gestion_produccion }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            25.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_gestion_produccion }}
-                                        </td>     
-                                      </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           6
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Organización y Gestión del talento humano
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ total_organizacion_gestion }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            10.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ resultado_organizacion_gestion }}
-                                        </td>     
-                                      </tr>
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
-                                           7
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                            Total
-                                        </th>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ totalarea }}
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            100.00%
-                                        </td>
-                                        <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                            {{ totaldiagnostico }}
-                                        </td>     
-                                      </tr>
+                                    {% endfor %}
                                     </tbody>
                                   </table>
                             </div>
@@ -380,12 +283,12 @@
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
       ['AREA', 'IDEALES', 'RESULTADOS'],
-      ['Dirección Estratégica',  10,      {{resultado_direccion_estrategica}}],
-      ['Mercadeo y ventas',  25,      {{resultado_mercadeo_ventas}}],
-      ['Madurez Digital',  10,       {{resultado_madurez_digital}}],
-      ['Gestión Financiera',  25,      {{resultado_gestion_financiera}}],
-      ['Gestión de la producción',  20,       {{resultado_gestion_produccion}}],
-      ['Organización y Gestión del talento humano',  10,      {{resultado_organizacion_gestion}}],
+      
+    {% for resultado in diagnostico %}    
+        {% if resultado.id_area != 0  %}
+        ['{{resultado.area}}',  {{resultado.ideales}}, {{resultado.resultados}}],
+        {% endif %}
+    {% endfor %}
     ]);
   
     var options = {
@@ -406,12 +309,11 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['AREA', 'RESULTADOS'],
-            ['Dirección Estratégica',     {{resultado_direccion_estrategica}}],
-            ['Mercadeo y ventas',        {{resultado_mercadeo_ventas}}],
-            ['Madurez Digital',        {{resultado_madurez_digital}}],
-            ['Gestión Financiera',       {{resultado_gestion_financiera}}],
-            ['Gestión de la producción',      {{resultado_gestion_produccion}}],
-            ['Organización y Gestión del talento humano',  {{resultado_organizacion_gestion}}],
+            {% for resultado in diagnostico %}    
+                 {% if resultado.id_area != 0  %}
+            ['{{resultado.area}}',     {{resultado.resultados}}],
+            {% endif %}
+    {% endfor %}
         ]);
 
         var options = {
@@ -422,8 +324,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-
-  </script>
+</script>
 
 
 

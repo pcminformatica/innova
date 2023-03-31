@@ -349,9 +349,41 @@
         chart.draw(data, options);
       }
 
+      function saveDiagnostico(){
+
+        const Swal = swcms.returnSwal()
+        const txt_code = '{{user_uid}}';
+
+
+
+        let postData = {
+            "txt_code": txt_code,
+        };
+        console.log(postData)
+        let apiUrl = '/api/save/diagnosis/company/';
+        //document.getElementById('submitSaveButton').disabled = true;
+
+        swcms.postFetch(apiUrl, postData).then((data) => {
+            Swal.fire(
+            'Éxito',
+            'Diagnostico creado!',
+            'success'
+            )
+            //window.setTimeout(() => { window.location.reload(); }, 1500);
+        
+        }).catch((error) => {
+            Swal.fire(
+            'Error de conexión',
+            'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+            'error'
+            )
+            //document.getElementById('submitSaveButton').disabled = false;
+        });
+        
+      }
   </script>
 
-<script>
+
     
 
 {% endblock %}
