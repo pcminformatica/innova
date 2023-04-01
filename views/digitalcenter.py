@@ -678,7 +678,7 @@ def _dash_empresas(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
-    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(desc(DiagnosisCompany.date_created)).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
     if diagnos:
         print('siiiis')
@@ -700,11 +700,11 @@ def _dash_empresas(user_uid):
 
 
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])
-def _resumen_atencion(user_uid):
+def _plan_action_bitacora(user_uid):
     action = ActionPlan.query.filter_by(id=user_uid).first()
     history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
     context = {
         'action': action,
         'history':history
     }
-    return render_template('resumen_atencion.html',**context)
+    return render_template('plan_action_bitacora.html',**context)

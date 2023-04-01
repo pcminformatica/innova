@@ -9,7 +9,8 @@ from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,Actio
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial
 from models.diagnostico import Diagnosticos
-from sqlalchemy import or_
+from sqlalchemy import or_,desc,asc
+
 import json
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
@@ -1023,220 +1024,34 @@ def _d_save_ActionPlanHistory():
             db.session.commit()
             if txt_finalizo == True and txt_porcentaje == "100":
                 company = Company.query.filter_by(id = plan.company_id).first()
-                servicios_mejorados = plan.services.diagnostic_questions
+                areas_mejoras = plan.services.diagnostic_questions
+                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
+                api = diagnos.respuestas
+                for area_mejora in areas_mejoras:
+                    clave = area_mejora['id'] 
+                    if clave in api:
+                        print(clave)
+                        print(api[clave])
+                        api[clave] = 3
+                        print(api[clave])
+                # nuevo diagnosticos activado
+                diagnostico = Diagnosticos()
+                resultados  = diagnostico.calcular_area(api)
+                diagnosis =  DiagnosisCompany()
+                diagnosis.company_id = company.id
+                diagnosis.respuestas = api
+                diagnosis.resultados =  json.loads( str(resultados))
+                diagnosis.created_by = current_user.id
+                db.session.add(diagnosis)
+                db.session.commit()
+                # anterior diagnosticos desactivado
+                diagnos.status = False
+                db.session.add(diagnos)
+                db.session.commit()
 
-                for servicio_mejorado in servicios_mejorados:
-                    #1
 
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    direccion_estrategicax =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Dirección Estratégica", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(direccion_estrategicax.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        direccion_estrategica = ["_1_1","_1_2","_1_3","_1_4","_1_5","_1_6","_1_7","_1_8","_1_9","_1_10","_1_11"]
-                        total_direccion_estrategica = 0
-                        for clave in direccion_estrategica:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_direccion_estrategica = total_direccion_estrategica + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_direccion_estrategica = total_direccion_estrategica/(len(direccion_estrategica)*3) * 0.10 * 100
-                        resultado_direccion_estrategica = round(resultado_direccion_estrategica, 2)
-                        #desactivar
-                        direccion_estrategicax.status = 0
-                        db.session.add(direccion_estrategicax)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Dirección Estratégica"
-                        diagnosis.result_total = resultado_direccion_estrategica 
-                        diagnosis.result_area = total_direccion_estrategica
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
+                
 
-                    #2
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    mercadeo_ventasx =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(mercadeo_ventasx.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        mercadeo_ventas = ["_2_1","_2_2","_2_3","_2_4","_2_5","_2_6","_2_7","_2_8", "_2_9", "_2_10", "_2_11", "_2_12","_2_13","_2_14","_2_15","_2_16","_2_17","_2_18","_2_19","_2_20","_2_21","_2_22","_2_23","_2_24","_2_25","_2_26"]
-                        total_mercadeo_ventas = 0
-                        for clave in mercadeo_ventas:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_mercadeo_ventas = total_mercadeo_ventas + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_mercadeo_ventas = total_mercadeo_ventas/(len(mercadeo_ventas)*3) * 0.25 * 100
-                        resultado_mercadeo_ventas = round(resultado_mercadeo_ventas, 2)
-                        #desactivar
-                        mercadeo_ventasx.status = 0
-                        db.session.add(mercadeo_ventasx)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Mercadeo y ventas"
-                        diagnosis.result_total = resultado_mercadeo_ventas 
-                        diagnosis.result_area = total_mercadeo_ventas
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
-
-                    #3
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    madurez_digitalx =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(madurez_digitalx.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        madurez_digital = ["_3_1","_3_2","_3_3","_3_4","_3_5","_3_6","_3_7","_3_8","_3_9","_3_10","_3_11"]
-                        total_madurez_digital = 0
-                        for clave in madurez_digital:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_madurez_digital = total_madurez_digital + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_madurez_digital = total_madurez_digital/(len(madurez_digital)*3) * 0.10 * 100
-                        resultado_madurez_digital = round(resultado_madurez_digital, 2)
-                        #desactivar
-                        madurez_digitalx.status = 0
-                        db.session.add(madurez_digitalx)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Mercadeo y ventas"
-                        diagnosis.result_total = resultado_madurez_digital 
-                        diagnosis.result_area = total_madurez_digital
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
-
-                    #4
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    gestion_financierax =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(gestion_financierax.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        gestion_financiera = ["_4_1","_4_2","_4_3","_4_4","_4_5","_4_6","_4_7","_4_8","_4_9","_4_10","_4_11","_4_12","_4_13","_4_14","_4_15","_4_16","_4_17","_4_18","_4_19","_4_20","_4_21" ]
-    
-                        total_gestion_financiera = 0
-                        for clave in gestion_financiera:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_gestion_financiera = total_gestion_financiera + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_gestion_financiera = total_gestion_financiera/(len(gestion_financiera)*3)  * 0.25 * 100
-                        resultado_gestion_financiera = round(resultado_gestion_financiera, 2)
-                        #desactivar
-                        gestion_financierax.status = 0
-                        db.session.add(gestion_financierax)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Gestión Financiera"
-                        diagnosis.result_total = resultado_gestion_financiera 
-                        diagnosis.result_area = total_gestion_financiera
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
-                    #5
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    gestion_produccionx =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(gestion_produccionx.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        gestion_produccion = ["_5_1","_5_2","_5_3","_5_4","_5_5","_5_6","_5_7","_5_8","_5_9","_5_10","_5_11","_5_12","_5_13","_5_14","_5_15","_5_16","_5_17","_5_18","_5_19","_5_20","_5_21","_5_22","_5_23","_5_24",]
-                        total_gestion_produccion = 0
-                        for clave in gestion_produccion:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_gestion_produccion = total_gestion_produccion + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_gestion_produccion = total_gestion_produccion/(len(gestion_produccion)*3)  * 0.20 * 100
-                        resultado_gestion_produccion = round(resultado_gestion_produccion, 2)
-                        #desactivar
-                        gestion_produccionx.status = 0
-                        db.session.add(gestion_produccionx)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Gestión de la producción"
-                        diagnosis.result_total = resultado_gestion_produccion 
-                        diagnosis.result_area = total_gestion_produccion
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
-
-                    #6
-                    encontro = False
-                    clave = servicio_mejorado['id']
-                    organizacion_gestionx =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
-                    orj =  json.loads(organizacion_gestionx.respuestas)
-                    for resp in orj:
-                        if clave in resp:  
-                            resp[clave] = 3
-                            encontro = True
-                    if encontro:
-                        organizacion_gestion = ["_6_1","_6_2","_6_3","_6_4","_6_5","_6_6","_6_7","_6_8","_6_9","_6_10","_6_11","_6_12","_6_13","_6_14","_6_15","_6_16" ,"_6_17"]
-        
-                        total_organizacion_gestion = 0
-                        for clave in organizacion_gestion:
-                            for resp in orj:
-                                if clave in resp:
-                                    total_organizacion_gestion = total_organizacion_gestion + int(resp[clave])
-                                    print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-                        resultado_organizacion_gestion = total_organizacion_gestion/(len(organizacion_gestion)*3)  * 0.10 * 100
-                        resultado_organizacion_gestion = round(resultado_organizacion_gestion, 2)
-                        #desactivar
-                        organizacion_gestionx.status = 0
-                        db.session.add(organizacion_gestionx)
-                        db.session.commit()
-                        #crear
-                        diagnosis = DiagnosisCompany()
-                        diagnosis.categoria = "Organización y Gestión del talento humano"
-                        diagnosis.result_total = resultado_organizacion_gestion 
-                        diagnosis.result_area = total_organizacion_gestion
-                        diagnosis.status = True
-                        diagnosis.created_by = current_user.id
-                        diagnosis.company_id = company.id
-                        diagnosis.respuestas = orj
-                        db.session.add(diagnosis)
-                        db.session.commit()   
                 return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
                     
                     
