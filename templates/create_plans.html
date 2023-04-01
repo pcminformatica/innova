@@ -976,6 +976,7 @@
         alert('Seleccione servicios en la fase 1')
         return false
       }
+
       if (resume_table_fase2.rows.length >1){
 
         for (var i = 1, row; row = resume_table_fase2.rows[i]; i++) {
@@ -987,10 +988,11 @@
           services.push ({service:id,fecha_inicio:inicio,fecha_final:final,fase:2,comentario:comentario})
         }
         console.log(services)
-        }else{
-        alert('Seleccione servicios en la fase 2')
-        return false
       }
+        //else{
+        //alert('Seleccione servicios en la fase 2')
+        //return false
+        //}
 
       const Swal = swcms.returnSwal()
       var resume_table = document.getElementById("tbl_plan");

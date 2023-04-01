@@ -1316,11 +1316,6 @@ def _d_save_admin_company():
             user.extra_info.company = company
             db.session.add(user)
             db.session.commit()
-            print('111')
-            print('111')
-            print('111')
-            print('111')
-            print('111')
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         print('111')

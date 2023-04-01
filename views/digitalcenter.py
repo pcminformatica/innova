@@ -318,22 +318,19 @@ def _datos():
     }
     return render_template('datos.html',**context)
 
-@digitalcenter.route('/datos/<int:user_uid>/',methods=['GET', 'POST'])
-def _datos_describe(user_uid):
+@digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
+def _create_plans(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
-    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
-    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
-    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
-    resp = requests.get(url,headers=headers)
-    api = json.loads(resp.content)
+    
+    company =  Company.query.filter(Company.id == user_uid).first()
+    diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id).all()
+    api = diagnosis.respuestas
     servicios = []
     for resp in api:
         if api[resp] == '1':
             print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
             services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
-
-
-
             for servicesx in services:
                 if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
                     servicios.append({'id':servicesx.id,'tiempo_asesoria':servicesx.advisory_time,'tiempo_ejecucion':servicesx.execution_time,'costo':servicesx.cost,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
@@ -356,15 +353,6 @@ def _datos_describe(user_uid):
                 financiera.append(servicio)
             elif serviciox == 5:
                 mercadeo.append(servicio)
-    nombre = api['NOMBRE_EMPRESA']
-    rtn = api['RTN']
-    company =  Company.query.filter(or_(Company.name == nombre, Company.rtn == rtn)).first()
-    if company:
-
-        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id).all()
-        
-    else:
-        plan = []
     totalServicios = len(legalizacion) + len(administracion) + len(produccion) + len(financiera) + len(mercadeo)
     context = {
         'plan':plan,
@@ -380,7 +368,7 @@ def _datos_describe(user_uid):
    
     app.logger.debug(servicios)
     app.logger.debug(servicios)
-    return render_template('datos_describe.html',**context)
+    return render_template('create_plans.html',**context)
 
 
 @digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
@@ -692,11 +680,20 @@ def _dash_empresas(user_uid):
     company = Company.query.filter_by(id=user_uid).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
-
+    if diagnos:
+        print('siiiis')
+        print('siisii')
+        print('siiii')
+        diagnostico = diagnos.resultados
+    else:
+        print('siiii')
+        print('siiii')
+        print('siiii')
+        diagnostico = False
     context = {
-        'api': company,
+        'company': company,
         'actions':actions,
-        "diagnostico":diagnos.resultados ,
+        "diagnostico":diagnostico,
     }
  
     return render_template('dash_empresas.html',**context)
