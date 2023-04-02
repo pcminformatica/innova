@@ -244,7 +244,6 @@ def changePassword():
             phone_number='+504',
             email_verified=False,
             password='Jaguar1234',
-            display_name='John Doe',
             photo_url='http://www.example.com/12345678/photo.png',
             )
             app.logger.error('Sucessfully updated user: {0}'.format(user.uid))

@@ -305,7 +305,7 @@ from sqlalchemy import desc
 import requests
 import json 
 @digitalcenter.route('/diagnosticos/',methods=['GET', 'POST'])
-def _datos():
+def _diagnosis_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
     #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
@@ -316,10 +316,10 @@ def _datos():
     context = {
         'api': api
     }
-    return render_template('datos.html',**context)
+    return render_template('diagnosis_monitoring_list.html',**context)
 
 @digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
-def _create_plans(user_uid):
+def _plan_action_create(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     
     company =  Company.query.filter(Company.id == user_uid).first()
@@ -368,7 +368,7 @@ def _create_plans(user_uid):
    
     app.logger.debug(servicios)
     app.logger.debug(servicios)
-    return render_template('create_plans.html',**context)
+    return render_template('plan_action_create.html',**context)
 
 
 @digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
@@ -619,7 +619,7 @@ def _registros_im():
     return render_template('registro_im.html')
 
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
-def _datos_diagnostico(user_uid):
+def _diagnosis_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
     url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
@@ -633,7 +633,7 @@ def _datos_diagnostico(user_uid):
         "diagnostico":resultados,
         "user_uid":user_uid
     }
-    return render_template('diagnostico.html',**context)
+    return render_template('diagnosis_dashboard.html',**context)
 
 @digitalcenter.route('/elegibles/5',methods=['GET', 'POST'])
 def _elegibles_5():
@@ -663,18 +663,18 @@ def _describe_inscripcion_5(inscribe_id):
     return render_template('describe_inscripcion.html',**context)
 
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
-def _empresas():
+def _plan_action_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     company = Company.query.all()
     context = {
         'api': company
     }
-    return render_template('empresas.html',**context)
+    return render_template('plan_action_monitoring_list.html',**context)
 
 
 from sqlalchemy import desc,asc
 @digitalcenter.route('/empresas/view/<int:user_uid>/',methods=['GET', 'POST'])
-def _dash_empresas(user_uid):
+def _plan_action_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
@@ -696,7 +696,7 @@ def _dash_empresas(user_uid):
         "diagnostico":diagnostico,
     }
  
-    return render_template('dash_empresas.html',**context)
+    return render_template('plan_action_dashboard.html',**context)
 
 
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])

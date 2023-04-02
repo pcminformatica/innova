@@ -26,7 +26,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Empresas Elegibles</span>
+                                                    <span class="mdc-tab__text-label">Empresas</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -40,49 +40,55 @@
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 
-                                <div class="mdc-data-table" style="background-color: white;width: 100%;" >
-                                    <div class="mdc-data-table__table-container">
+                                  <div class="mdc-data-table" style="background-color: white;" >
+                                    <div class="mdc-data-table__table-container_">
                                       <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">rtn </th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
 
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
+                                            
 
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Email</th>
+                                            
                                           </tr>
                                           
                                           
                                           
                                         </thead>
-
                                         <tbody class="mdc-data-table__content">
-                                          {% for api in api %}
+                                          {% for api in api.results %}
                                           <tr class="mdc-data-table__row">
-                                            <th class="mdc-data-table__cell" scope="row">
+                                            <th class="mdc-data-table__cell" scope="col">
                                               {{loop.index}}
                                             </th>
-                                            <td class="mdc-data-table__cell">
-                                              <a href="{{ url_for('digitalcenter._dash_empresas',user_uid=api.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            <th class="mdc-data-table__cell">
+
+                                              <a href="{{ url_for('digitalcenter._diagnosis_dashboard',user_uid=api._id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                               
-                                                  <span class="mdc-button__ripple"></span>
-                                                  <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                  <span class="mdc-button__label">Ver empresa</span>
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                <span class="mdc-button__label">Ver Diagnostico</span>
                                               </a>
-                                              <br>
-        
-                                            </td>
-       
-                                            
-                                            <td class="mdc-data-table__cell" style="width: 80px;">
-                                                {{ api.rtn }}
-                                            </td>
-          
-                                            <th class="mdc-data-table__cell" scope="row">
-                                              {{ api.name }}
                                             </th>
-                 
+                                            <th class="mdc-data-table__cell" scope="col">
+                                                {{ api.NOMBRE_EMPRESA }}
+                                            </th>
+                                            
+                                            <td class="mdc-data-table__cell" scope="col">
+                                                {{ api.NOMBRE_ENTREVISTADO }}
+                                            </td>
+                                            <th class="mdc-data-table__cell" scope="col">
+                                              {{ api.TELEFONO }}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="col">
+                                              {{ api.EMAIL }}
+                                            </th>
+
                                           </tr>
                                           {% endfor %}
                                    
