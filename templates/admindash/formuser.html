@@ -16,57 +16,8 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
-                            mdc-layout-grid__cell--align-middle">
-                    <div class="container-dashboard--profile">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__primary-action" tabindex="0">
-                                <div class="mdc-card__media">
 
-                                    <img class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }} " alt="Border Perfil" />
-                                    <img class="profile-pic" src="{{ url_for('static', filename='images/manifest/innova_icon.svg') }}" alt="Foto Perfil" />
-                                </div>
-                                <div class="mdc-card__ripple"></div>
-                            </div>
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Julia Castro</div>
-                                <div class="mdc-typography--subtitle1">Lic. en sistemas </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-primary">verified_user</i>
-                                    Empresaria 
-                                </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-primary">business</i>
-                                    Diseñadora grafica
-                                </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-secondary">place</i>
-                                    Tegucigalpa, Honduras.
-                                </div>
-
-
-                            </div>
-                            <div class="mdc-card__actions" style="justify-content:center;" >
-                                <div class="mdc-card__actions-buttons"></div>
-                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
-                                    <span class="mdc-button__ripple"></span>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                      >bookmark</i
-                                    >
-                                    <span class="mdc-button__label">LinkedIn</span>
-                                </a>
-                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
-                                    <span class="mdc-button__ripple"></span>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                      >touch_app</i
-                                    >
-                                    <span class="mdc-button__label">Contactar</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -112,11 +63,12 @@
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
                                                 <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
-                                               value=" {{user.name}}" data-assigned-var
+                                               value="{{user.name}}" data-assigned-var
                                                 >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                           </div>
+
                                           <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
                                                 Email
@@ -197,7 +149,20 @@
                                               </div>
                                           </div>
 
-                    
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                KOBOTOOLBOX (usuarios separados por comas)
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_cobotoolbox" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Usuarios de KOBOTOOLBOX </span>
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                                {% if user.extra_info %}
+                                               value="{{user.extra_info.config.kobotoolbox_access|join(',')}}" {% endif %} data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
 
 
                                         </div>
@@ -250,5 +215,5 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
 {% endblock %}

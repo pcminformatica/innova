@@ -28,6 +28,7 @@ function saveUsers(){
 
   let postData = {
     'txt_name': mdcAssignedVars['txt_name'].value.trim() || null,
+    'txt_cobotoolbox': mdcAssignedVars['txt_cobotoolbox'].value.trim() || null,
     'txt_email': mdcAssignedVars['txt_email'].value.trim() || null,
     'txt_rol': mdcAssignedVars['txt_rol'].value.trim() || null,
     'txt_id':document.getElementById('txt_id').value

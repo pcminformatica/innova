@@ -307,16 +307,20 @@ import json
 @digitalcenter.route('/diagnosticos/',methods=['GET', 'POST'])
 def _diagnosis_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
-    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
-    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
-    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
-    resp = requests.get(url,headers=headers)
-    api = json.loads(resp.content)
-
-    context = {
-        'api': api
-    }
-    return render_template('diagnosis_monitoring_list.html',**context)
+    try:
+        url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
+        #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
+        headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+        resp = requests.get(url,headers=headers)
+        api = json.loads(resp.content)
+        user = User.query.filter(User.id == current_user.id).first()
+        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.config['kobotoolbox_access'] )
+        context = {
+            'api': api
+        }
+        return render_template('diagnosis_monitoring_list.html',**context)
+    except Exception as e:
+        return render_template('404.html')
 
 @digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_create(user_uid):

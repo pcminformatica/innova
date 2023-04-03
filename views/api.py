@@ -7,7 +7,7 @@ from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
-from models.formatjson import JsonPhone, JsonSocial
+from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
 
@@ -269,19 +269,11 @@ def _l_appointments(cmds = None, user_id = None):
 # @login_required
 def _l_users():
     app.logger.debug('** SWING_CMS ** - API List Users')
-    app.logger.debug('** SWING_CMS ** - API List Users')
-    app.logger.debug('** SWING_CMS ** - API List Users')
-    app.logger.debug('** SWING_CMS ** - API List Users')
-    app.logger.debug('** SWING_CMS ** - API List Users')
-    app.logger.debug('** SWING_CMS ** - API List Users')
     try:
         if request.method == 'GET':
             query = request.args.get('qry')
             filters = request.args.get('flt')
             filters_type = request.args.get('ft')
-            app.logger.debug(query)
-            app.logger.debug(filters)
-            app.logger.debug(filters_type)
 
             if query is not None:
                 ulist, total = User.search(query, 1, 9)
@@ -293,8 +285,6 @@ def _l_users():
                     # Check if the Filters are of type Servie User Role
                     filters_type = 'sur'
                     if filters_type is not None and filters_type == 'sur':
-                        app.logger.debug('** 12 ** - sur List Users')
-                        app.logger.debug('** 123 ** - sur List Users')
                         newUserRolesFilters = []
                         
                         services = CatalogServices.query.filter(CatalogServices.name_short.in_(userRolesFilters))
@@ -304,9 +294,6 @@ def _l_users():
                                 newUserRolesFilters.append(user_role.name_short)
                         
                         userRolesFilters = newUserRolesFilters
-                    else:
-                        app.logger.debug('** 123 ** - API List Users')
-                        app.logger.debug('** 123 ** - API List Users')
 
                     ulistFiltered = []
                     for user in ulist:
@@ -331,15 +318,7 @@ def _l_users():
                             'u_name': usr.name,
                             'u_email': usr.email
                         })
-                app.logger.debug('** SWING_CMS ** - API List Users')
-                app.logger.debug('** SWING_CMS ** - API List Users')
-                app.logger.debug('** SWING_CMS ** - API List Users')
-                app.logger.debug('** SWING_CMS ** - API List Users')
-                app.logger.debug('** SWING_CMS ** - API List Users')
-                app.logger.debug(query)
-                app.logger.debug(filters)
-                app.logger.debug(filters)
-                app.logger.debug(userRolesFilters)    
+
                 return jsonify(response)
             else:
                 return jsonify({ 'status': 400 })
@@ -403,7 +382,6 @@ def _d_accept_terms():
                 db.session.add(user_extra)
                 db.session.commit()
                 db.session.refresh(user)
-                app.logger.debug('** SWING_CMS ** - API acceptterms')
             # Update User information
 
             return jsonify({ 'status': 200, 'msg': 'Cita creada' })
@@ -414,8 +392,6 @@ def _d_accept_terms():
 @api.route('/api/save/perfil/', methods = ['POST'])
 @login_required
 def _d_():
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
@@ -429,9 +405,6 @@ def _d_():
                 db.session.add(user_extra)
                 db.session.commit()
                 db.session.refresh(user)
-                app.logger.debug('** nooooo ** - API Appointment Detail')
-                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
- 
  
             if user.extra_info.company_id is None:
                 company = Company()
@@ -473,8 +446,6 @@ def _d_():
 # @login_required
 def _d_sde():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -487,10 +458,6 @@ def _d_sde():
                 db.session.add(user_extra)
                 db.session.commit()
                 db.session.refresh(user)
-                app.logger.debug('** nooooo ** - API Appointment Detail')
-                app.logger.debug('** SWING_CMS ** - API Appointment Detail')
- 
- 
 
             txt_bio_expertise = request.json['txt_bio_expertise']
     
@@ -532,8 +499,6 @@ def _d_sde():
 # @login_required
 def _d_save_admin_user():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -542,8 +507,12 @@ def _d_save_admin_user():
             txt_name = request.json['txt_name']
             txt_email = request.json['txt_email']
             txt_rol = request.json['txt_rol']
+            txt_cobotoolbox = request.json['txt_cobotoolbox']
             user.email = txt_email
             user.name = txt_name
+            jsconfig = JsonConfigProfile()
+            jsconfig.kobotoolbox_access = txt_cobotoolbox.split(',')
+            user.extra_info.config = jsconfig.jsonFormat()
             xrol = UserXRole.query.filter_by(user_id = user.id).first()
             xrol.user_role_id = txt_rol
             db.session.add(user)
@@ -561,16 +530,12 @@ from datetime import datetime
 # @login_required
 def _d_save_admin():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
-        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
         # POST: Save Appointment
         if request.method == 'POST':
             servicio = CatalogServices.query.filter_by(id = 1).first()
             scheduled_dt = request.json['scheduled_dt']
             emp_id = request.json['emp_id']
-            app.logger.debug(scheduled_dt)
             scheduled_dt = datetime.strptime(scheduled_dt, '%Y-%m-%d %H:%M')
 
             employee_assigned = UserXEmployeeAssigned()
@@ -597,10 +562,7 @@ def _d_save_admin():
 # @login_required
 def _save_admin_appointment():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API /api/save/appointment/admin Detail')
     try:
-        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
         # POST: Save Appointment
         if request.method == 'POST':
             scheduled_dt = request.json['scheduled_dt']
@@ -637,10 +599,7 @@ def _save_admin_appointment():
 # @login_required
 def _d_save_config_calendar():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
-        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
         # POST: Save Appointment
         if request.method == 'POST':
             user = User.query.filter_by(id = current_user.id).first()
@@ -659,11 +618,8 @@ def _d_save_config_calendar():
 # @login_required
 def _d_calendar_sde():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     dt_today = '2023-01-20 10:00:00'
     try:
-        app.logger.debug('** SWING_CMS ** - API Appointment Detail')
         # POST:
         if request.method == 'POST':
             date = request.json['date']
@@ -677,8 +633,6 @@ def _d_calendar_sde():
             dates = []
             if len(details)!=0:
                 for detail in details:
-                    app.logger.debug('sii')
-                    app.logger.debug(detail.date_scheduled)
                     #dates.append(detail.date_scheduled.strftime("%Y-%m-%d %H:%M:%S"))
                     dates.append(detail.date_scheduled.strftime("%Y-%m-%d %H:%M:%S"))
             
@@ -785,8 +739,6 @@ def _l_users_emp():
 # @login_required
 def _d_save_admin_servi():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -807,17 +759,8 @@ def _d_save_admin_servi():
             user.diagnostic_questions =  txt_diagnostic_questions
             db.session.add(user)
             db.session.commit()
-            print('111')
-            print('111')
-            print('111')
-            print('111')
-            print('111')
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
-        print('111')
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
@@ -827,8 +770,6 @@ import requests
 # @login_required
 def _d_inscripciones():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -837,7 +778,6 @@ def _d_inscripciones():
            
             elegible = True
             #evaluar elegible
-            print(preguntas)
              #cargo de relevancia
             cargo = list(e for e in preguntas if e['id']  == '2_6')[0]['respuesta']
             if "Accionista minotaria" in cargo:
@@ -860,8 +800,6 @@ def _d_inscripciones():
             totales = total + temp_total
             if totales <= 4:
                 elegible = False
-            print(list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'])
-
             inscripcion = Inscripciones()
             inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
             inscripcion.company_name = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
@@ -882,12 +820,11 @@ def _d_inscripciones():
                     url = 'http://inscripciones.ciudadmujer.gob.hn/inscribite/web/acepta/'
                     myobj = {'txt_Correo': list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']}
                     x = requests.post(url, data = myobj)
-                    print(x.text)
                 else:
                     url = 'http://inscripciones.ciudadmujer.gob.hn/inscribite/web/no/web'
                     myobj = {'txt_Correo': list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']}
                     x = requests.post(url, data = myobj)
-                    print(x.text)
+            
             except Exception as e:
                 #enviar
                 app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
@@ -919,8 +856,6 @@ def _d_save_ActionPlan():
                 company.description = 'description'
                 db.session.add(company)
                 db.session.commit()
-            else:
-                app.logger.error('** siiiiiiiiiii * - API Appointment Detail Error: {}'.format('e'))
             services = json.loads(services)
             for service in services:
                 actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],version=service['fase']).first()
@@ -1000,8 +935,6 @@ def _d_save_DiagnosisCompany():
 @login_required
 def _d_save_ActionPlanHistory():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
         if request.method == 'POST':
@@ -1030,10 +963,7 @@ def _d_save_ActionPlanHistory():
                 for area_mejora in areas_mejoras:
                     clave = area_mejora['id'] 
                     if clave in api:
-                        print(clave)
-                        print(api[clave])
                         api[clave] = 3
-                        print(api[clave])
                 # nuevo diagnosticos activado
                 diagnostico = Diagnosticos()
                 resultados  = diagnostico.calcular_area(api)
@@ -1053,61 +983,7 @@ def _d_save_ActionPlanHistory():
                 
 
                 return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
-                    
-                    
-                mercadeo_ventas =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Mercadeo y ventas", DiagnosisCompany.company_id == company.id).first()
-                print(mercadeo_ventas.respuestas)
-                madurez_digital =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Madurez Digital", DiagnosisCompany.company_id == company.id).first()
-                print(madurez_digital.respuestas)
-                gestion_financiera =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión Financiera", DiagnosisCompany.company_id == company.id).first()
-                print(json.loads(gestion_financiera.respuestas))
-                r = json.dumps(gestion_financiera.respuestas)
-
-                gestion_produccion =  DiagnosisCompany.query.filter(DiagnosisCompany.categoria == "Gestión de la producción", DiagnosisCompany.company_id == company.id).first()
-                print(json.loads(gestion_produccion.respuestas))
-
-                organizacion_gestionx =  DiagnosisCompany.query.filter( DiagnosisCompany.categoria == "Organización y Gestión del talento humano", DiagnosisCompany.company_id == company.id).first()
-                print(json.loads(organizacion_gestionx.respuestas))
-                orj =  json.loads(organizacion_gestionx.respuestas)
-                clave = '_6_5'
-                for resp in orj:
-                    if clave in resp:
-                        resp[clave] = 3
-                     
-                        print('siiiiiiiii')
-                        print('siiiiiiiii')
-                        print('siiiiiiiii')
-                        print('siiiiiiiii')
-                        print('siiiiiiiii')
-                organizacion_gestion = ["_6_1","_6_2","_6_3","_6_4","_6_5","_6_6","_6_7","_6_8","_6_9","_6_10","_6_11","_6_12","_6_13","_6_14","_6_15","_6_16" ,"_6_17"]
- 
-                respuestas_organizacion_gestion = [clave]
-                total_organizacion_gestion = 0
-                for clave in organizacion_gestion:
-                    for resp in orj:
-                        if clave in resp:
-                            respuestas_organizacion_gestion.append({clave:resp[clave]})
-                            total_organizacion_gestion = total_organizacion_gestion + int(resp[clave])
-                            print("Pregunta: {} respuesta: {}".format(clave,resp[clave]))
-
-                resultado_organizacion_gestion = total_organizacion_gestion/(len(organizacion_gestion)*3) * 0.10 * 100
-                resultado_organizacion_gestion = round(resultado_organizacion_gestion, 2)
-
-                #desactivar
-                organizacion_gestionx.status = 0
-                db.session.add(organizacion_gestionx)
-                db.session.commit()
-                #crear
-                diagnosis = DiagnosisCompany()
-                diagnosis.categoria = "Organización y Gestión del talento humano"
-                diagnosis.result_total = resultado_organizacion_gestion 
-                diagnosis.result_area = total_organizacion_gestion
-                diagnosis.status = True
-                diagnosis.created_by = current_user.id
-                diagnosis.company_id = company.id
-                diagnosis.respuestas = orj
-                db.session.add(diagnosis)
-                db.session.commit()                                
+                                          
 
         return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
@@ -1118,8 +994,6 @@ def _d_save_ActionPlanHistory():
 @api.route('/api/save/user/company/admin', methods = ['POST'])
 @login_required
 def _d_save_admin_company():
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
-    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         # POST: Save Appointment
@@ -1133,10 +1007,6 @@ def _d_save_admin_company():
             db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
-        print('111')
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
-        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
     

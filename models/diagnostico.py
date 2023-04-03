@@ -9,9 +9,7 @@ class totalesDiagnostico():
     descripcion = ""
     def __str__(self):
         return json.dumps(dict(self), ensure_ascii=False)
-    def __str1__(self):
-        return  json.dumps({"id_area": str(self.id_area), "area": str(self.area),"putaje_area": str(self.putaje_area),"ideales": str(self.ideales), "resultados": str(self.resultados),"descripcion": self.descripcion})
-
+    
     def __repr__(self):
         return self.__str__()
     def __iter__(self):
