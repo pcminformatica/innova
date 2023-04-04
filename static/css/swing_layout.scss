@@ -950,6 +950,18 @@ body {
                 max-width: 15rem;
                 width: 50%;
             }
+            .profile-pic-innova {
+                align-self: center;
+                background: stv.$swing-theme-surface;
+                border-radius: 50%;
+                grid-column-start: gtc;
+                grid-row-start: gtr;
+                justify-self: center;
+                margin-left: -3.5%;
+                margin-top: -18%;
+                max-width: 15rem;
+                width: 50%;
+            }
         }
     }
 }

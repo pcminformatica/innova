@@ -633,10 +633,14 @@ def _diagnosis_dashboard(user_uid):
     api = json.loads(resp.content)
     diagnostico = Diagnosticos()
     resultados  = diagnostico.calcular_area(api)
+    company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
+    diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
     context = {
         "api":api,
         "diagnostico":resultados,
-        "user_uid":user_uid
+        "user_uid":user_uid,
+        "company":company,
+        "diagnosis":diagnosis,
     }
     return render_template('diagnosis_dashboard.html',**context)
 
@@ -686,9 +690,6 @@ def _plan_action_dashboard(user_uid):
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
     if diagnos:
-        print('siiiis')
-        print('siisii')
-        print('siiii')
         diagnostico = diagnos.resultados
     else:
         print('siiii')
@@ -713,3 +714,33 @@ def _plan_action_bitacora(user_uid):
         'history':history
     }
     return render_template('plan_action_bitacora.html',**context)
+
+
+@digitalcenter.route('/empresas/view/user/<int:company_id>/',methods=['GET', 'POST'])
+def _company_user_list(company_id):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    company = Company.query.filter_by(id=company_id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+    dni =  company.dni
+    nombre = company.name
+    if diagnos.respuestas:
+        if 'EMAIL' in diagnos.respuestas:
+            email = diagnos.respuestas['EMAIL']
+        if 'TELEFONO' in diagnos.respuestas:
+            phone = diagnos.respuestas['TELEFONO']
+    rtn =  company.rtn
+    print(dni)
+    print(nombre)
+    print(email)
+    print(phone)
+    print(rtn)
+    inscripciones =  Inscripciones.query.filter(or_(Inscripciones.dni == dni, Inscripciones.company_name == nombre,Inscripciones.correo==email,Inscripciones.phone==phone,Inscripciones.rtn == rtn)).all()
+
+    users = User.query.join(UserExtraInfo, User.id==UserExtraInfo.id).filter(UserExtraInfo.company_id == company.id).all()
+    
+    context = {
+        'users': users,
+        'company':company,
+        'inscripciones':inscripciones
+    }
+    return render_template('company_user_list.html',**context)
