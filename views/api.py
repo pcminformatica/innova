@@ -854,6 +854,7 @@ def _d_save_ActionPlan():
                 company.rtn = txt_company_rtn
                 company.dni = txt_identidad
                 company.description = 'description'
+                company.created_by = current_user.id
                 db.session.add(company)
                 db.session.commit()
             services = json.loads(services)
@@ -908,6 +909,7 @@ def _d_save_DiagnosisCompany():
                 jsonSocial.email = api['EMAIL']
                 company.phones = jsonPhone.jsonFormat()
                 company.social_networks = jsonSocial.jsonFormat()
+                company.created_by = current_user.id
                 db.session.add(company)
                 db.session.commit()
             diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()

@@ -708,7 +708,7 @@ class Company(db.Model):
     public = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     users = db.relationship("UserExtraInfo", back_populates="company")
-
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     def __repr__(self):
         return jsonify(
             id = self.id,

@@ -677,7 +677,12 @@ def _describe_inscripcion_5(inscribe_id):
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
 def _plan_action_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
-    company = Company.query.all()
+    diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
+    lista = []
+    for diagnosi in diagnosis:
+        lista.append(diagnosi.company_id)
+    company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+    
     context = {
         'api': company
     }
