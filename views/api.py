@@ -842,17 +842,17 @@ def _d_save_ActionPlan():
         # POST: Save Appointment
         if request.method == 'POST':
 
-            txt_company_name = request.json['txt_company_name']
-            txt_company_rtn = request.json['txt_company_rtn']
+            txt_company_id = request.json['txt_company_id']
+            txt_identidad = request.json['txt_identidad']
             services = request.json['services']
-            app.logger.error(txt_company_name)
-            app.logger.error(txt_company_rtn)
-            app.logger.error(services)
-            company =  Company.query.filter(or_(Company.name == txt_company_name, Company.rtn == txt_company_rtn)).first()
+            company =  Company.query.filter(or_(Company.dni == txt_identidad, Company.id == txt_company_id)).first()
             if not company:
+                txt_company_name = request.json['txt_company_name']
+                txt_company_rtn = request.json['txt_company_rtn']
                 company = Company()
                 company.name = txt_company_name
                 company.rtn = txt_company_rtn
+                company.dni = txt_identidad
                 company.description = 'description'
                 db.session.add(company)
                 db.session.commit()
@@ -895,7 +895,7 @@ def _d_save_DiagnosisCompany():
             headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
-            company =  Company.query.filter(or_(Company.dni == api['IDENTIDAD'], Company.rtn == api['RTN'])).first()
+            company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
             if not company:
                 company = Company()
                 company.name = api['NOMBRE_EMPRESA']

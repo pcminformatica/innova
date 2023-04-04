@@ -1001,8 +1001,10 @@
 
 
       let postData = {
+      "txt_company_id": "{{ company.id }}",
       "txt_company_name": txt_company_name,
       "txt_company_rtn": txt_company_rtn,
+      "txt_identidad":"{{ api.IDENTIDAD }}",
       "services": JSON.stringify(services)
       };
       console.log(postData)

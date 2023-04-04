@@ -87,7 +87,6 @@ def _admin_list_company():
 def _admin_list_company_edit(company_id):
     company = Company.query.filter_by(id = company_id).first()
     if request.method == 'POST':
-        request_data = request.get_data()
         txt_name = request.form.get('txt_name') 
         txt_identidad= request.form.get('txt_identidad')
         cxb_status = False
@@ -95,7 +94,7 @@ def _admin_list_company_edit(company_id):
             cxb_status = True
         company.name = txt_name
         company.dni = txt_identidad
-        company.enable =  cxb_status
+        company.enabled =  cxb_status
         db.session.add(company)
         db.session.commit()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')

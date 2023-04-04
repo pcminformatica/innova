@@ -332,7 +332,7 @@ def _plan_action_create(user_uid):
     api = diagnosis.respuestas
     servicios = []
     for resp in api:
-        if api[resp] == '1':
+        if api[resp] == '1' or api[resp] == '2':
             print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
             services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
             for servicesx in services:
@@ -359,6 +359,7 @@ def _plan_action_create(user_uid):
                 mercadeo.append(servicio)
     totalServicios = len(legalizacion) + len(administracion) + len(produccion) + len(financiera) + len(mercadeo)
     context = {
+        'company':company,
         'plan':plan,
         'api': api,
         'legalizacion':legalizacion,
