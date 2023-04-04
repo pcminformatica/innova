@@ -74,3 +74,31 @@ def _servi_detalle_delete(service_id):
     db.session.commit()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     return redirect(url_for('admindash._servi'))
+
+@admindash.route('/admin/list/company', methods = ['GET'])
+@login_required
+def _admin_list_company():
+    companys = Company.query.all()
+    cxt = {'companys':companys}
+    return render_template('/admindash/admin_list_company.html',**cxt)
+
+@admindash.route('/admin/company/<int:company_id>/edit',methods=['GET', 'POST'])
+@login_required
+def _admin_list_company_edit(company_id):
+    company = Company.query.filter_by(id = company_id).first()
+    if request.method == 'POST':
+        request_data = request.get_data()
+        txt_name = request.form.get('txt_name') 
+        txt_identidad= request.form.get('txt_identidad')
+        cxb_status = False
+        if 'cxb_status' in request.form: 
+            cxb_status = True
+        company.name = txt_name
+        company.dni = txt_identidad
+        company.enable =  cxb_status
+        db.session.add(company)
+        db.session.commit()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    cxt = {'company':company}
+    return render_template('/admindash/form_company.html',**cxt)
+    return redirect(url_for('admindash._servi'))

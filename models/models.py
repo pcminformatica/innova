@@ -706,6 +706,7 @@ class Company(db.Model):
     social_networks = db.Column(db.JSON, unique=False, nullable=True)
     phones = db.Column(db.JSON, unique=False, nullable=True)
     public = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     users = db.relationship("UserExtraInfo", back_populates="company")
 
     def __repr__(self):

@@ -1,0 +1,178 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Biografia</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de usuarios</div>
+                    
+                               
+                                <br>
+                                
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <form method="post">
+                                    
+                                        <div class="mdc-layout-grid">
+                                            <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Datos Personales
+                                                </div>
+                                            </div>
+                                            
+                                
+                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Nombre 
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled"  id="txt_name" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
+                                                    <input required class="mdc-text-field__input" name="txt_name"   type="text" aria-labelledby="my-label-id" 
+                                                value="{{company.name}}" data-assigned-var
+                                                    >
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Identidad
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_dni" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id">Identidad</span>
+                                                    <input required class="mdc-text-field__input" name="txt_identidad"  type="text" aria-labelledby="my-label-id"
+                                                    value="{{company.dni}}" data-assigned-var
+                                                    >
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+            
+
+                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            
+
+                                                <div class="mdc-typography--body1">
+                                                    Estado: {{company.enabled}}
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                        <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="cxb_status"
+                                                            id="checkbox-public" 
+                                                            {%if company.enabled%}
+                                                            checked
+                                                            {% endif %}
+                                                            />
+                                                        <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Selecciona esta casilla para indicar que deseas que los datos de la empresa sea publicada en el Marketplace
+                                                    </label>
+                                                </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            </div>
+                                            <div class="mdc-card__actions" style="justify-content:center;" >
+                                                <div class="mdc-card__actions-buttons"></div>
+                                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                    >bookmark</i
+                                                    >
+                                                    <span class="mdc-button__label">Cancelar</span>
+                                                </a>
+                                                <button id="submitSaveButton" onclick="saveUsers()" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                    >touch_app</i
+                                                    >
+                                                    <span class="mdc-button__label">Guardar</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+{% endblock %}
