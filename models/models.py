@@ -697,7 +697,7 @@ class Professions(db.Model):
 class Company(db.Model):
     _tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    rtn = db.Column(db.String(50), unique=True, nullable=True)
+    rtn = db.Column(db.String(50), unique=False, nullable=True)
     dni = db.Column(db.String(50), unique=True, nullable=True)
     name = db.Column(db.String(300), unique=False, nullable=True)
     avatar = db.Column(db.String(50), unique=False, nullable=True)
