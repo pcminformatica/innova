@@ -634,7 +634,10 @@ def _diagnosis_dashboard(user_uid):
     diagnostico = Diagnosticos()
     resultados  = diagnostico.calcular_area(api)
     company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
-    diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+    if company:
+        diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+    else:
+        diagnosis = None
     context = {
         "api":api,
         "diagnostico":resultados,
