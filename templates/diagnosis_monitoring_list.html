@@ -48,7 +48,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
-
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Identidad</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                             
 
@@ -75,15 +75,19 @@
                                                 <span class="mdc-button__label">Ver Diagnostico</span>
                                               </a>
                                             </th>
-                                            <th class="mdc-data-table__cell" scope="col">
-                                                {{ api.NOMBRE_EMPRESA }}
-                                            </th>
-                                            
+                                    
                                             <td class="mdc-data-table__cell" scope="col">
-                                                {{ api.NOMBRE_ENTREVISTADO }}
+                                              {{ api.NOMBRE_ENTREVISTADO }}
                                             </td>
+                                            <td class="mdc-data-table__cell" scope="col">
+                                                {{ api.IDENTIDAD }}
+                                            </td>
+
                                             <th class="mdc-data-table__cell" scope="col">
-                                              {{ api._submitted_by }}
+                                            {{ api.NOMBRE_EMPRESA }}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="col">
+                                              {{ api.TELEFONO }}
                                             </th>
                                             <th class="mdc-data-table__cell" scope="col">
                                               {{ api.EMAIL }}

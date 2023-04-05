@@ -314,7 +314,7 @@ def _diagnosis_monitoring_list():
         resp = requests.get(url,headers=headers)
         api = json.loads(resp.content)
         user = User.query.filter(User.id == current_user.id).first()
-        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.config['kobotoolbox_access'] )
+        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
         context = {
             'api': api
         }

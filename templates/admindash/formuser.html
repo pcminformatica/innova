@@ -158,7 +158,7 @@
                                                 <span class="mdc-floating-label" id="my-label-id">Usuarios de KOBOTOOLBOX </span>
                                                 <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
                                                 {% if user.extra_info %}
-                                               value="{{user.extra_info.config.kobotoolbox_access|join(',')}}" {% endif %} data-assigned-var
+                                               value="{{user.extra_info.kobotoolbox.kobotoolbox_access|join(',')}}" {% endif %} data-assigned-var
                                                 >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
