@@ -1,4 +1,4 @@
-from . import crypto_key, db, removeItemFromList, updateItemFromList
+from . import auth,crypto_key, db, removeItemFromList, updateItemFromList
 
 from datetime import datetime as dt
 from datetime import timezone as tz
@@ -1016,3 +1016,61 @@ class Object:
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
             sort_keys=True, indent=4)
+
+
+@api.route('/create/company/user',methods=['GET', 'POST'])
+def _diagnosis_monitoring_lisst():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    try:
+        if request.method == 'POST':
+            txt_email = request.json['txt_email']
+            txt_name = request.json['txt_name']
+            txt_company_id = request.json['txt_company_id'] 
+            fibaUser = auth.create_user(
+                email=txt_email,
+                email_verified=False,
+                display_name=txt_name,
+                disabled=False)
+            print('Sucessfully created new user: {0}'.format(fibaUser.uid))
+            print('Sucessfully created new user: {0}'.format(fibaUser.email))
+            user = User.query.filter_by(uid = fibaUser.uid).first()
+            if user is None:
+                user = User()
+                user.uid = fibaUser.uid
+                user.email = fibaUser.email
+                user.name = fibaUser.display_name
+                user.phonenumber = fibaUser.phone_number
+                user.datecreated = dt.now(tz.utc)
+                user.cmuserid = 'INNO-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')
+                db.session.add(user)
+                db.session.commit()
+                if user.extra_info is None:
+                    user_extra = UserExtraInfo()
+                    user_extra.id = user.id
+                    user_extra.acceptterms = True
+                    user_extra.company_id = txt_company_id
+                    db.session.add(user_extra)
+                    db.session.commit()
+                    db.session.refresh(user)
+
+
+                # Add User Role
+                user_role = CatalogUserRoles.query.filter_by(name_short='usr').first()
+                user_userxrole = UserXRole()
+                user_userxrole.user_id = user.id
+                user_userxrole.user_role_id = user_role.id
+                db.session.add(user_userxrole)
+                db.session.refresh(user)
+                db.session.commit()
+            f = open(app.config.get('GOOGLE_APPLICATION_KEY'))
+            js = json.load(f)
+        
+            url = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={0}".format(js['firebaseConfig']['apiKey'])
+            headers={'Content-Type':'application/json'}
+            myobj = {'requestType': 'PASSWORD_RESET','email':fibaUser.email}
+            x = requests.post(url,headers=headers, json = myobj)
+            print(x)
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

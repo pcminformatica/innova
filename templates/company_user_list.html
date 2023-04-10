@@ -105,7 +105,7 @@
                                           <tr class="mdc-data-table__row">
                                             <th class="mdc-data-table__cell" scope="row">{{loop.index}} </th>
                                             <td class="mdc-data-table__cell">
-                                                <a href="#" onclick="alert('En construccion')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                <a href="#" onclick="saveUser('{{ inscripcione.correo}}','{{ inscripcione.name}}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                 
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
@@ -243,4 +243,40 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script>
+        function saveUser(email,name){
+
+const Swal = swcms.returnSwal()
+
+
+let postData = {
+    "txt_email": email,
+    "txt_name": name,
+    "txt_company_id":"{{ company.id }}"
+};
+
+console.log(postData)
+
+let apiUrl = '/create/company/user';
+//document.getElementById('submitSaveButton').disabled = true;
+
+swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+    'Éxito',
+    'Usuario creado creado!',
+    'success'
+    )
+    window.setTimeout(() => { window.location.reload(); }, 1500);
+
+}).catch((error) => {
+    Swal.fire(
+    'Error de conexión',
+    'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+    'error'
+    )
+    //document.getElementById('submitSaveButton').disabled = false;
+});
+
+}
+</script>
 {% endblock %}
