@@ -800,7 +800,7 @@ def _d_inscripciones():
             temp_hombres = temp_tiempo_completo["temp_total_hombre"]
             temp_total = (int(temp_mujeres) + int(temp_hombres))
             totales = total + temp_total
-            if totales <= 5:
+            if totales <= 4:
                 elegible = False
             inscripcion = Inscripciones()
             inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
