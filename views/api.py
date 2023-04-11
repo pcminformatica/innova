@@ -794,11 +794,13 @@ def _d_inscripciones():
             mujeres = tiempo_completo["u_total_mujer"]
             hombres =tiempo_completo["u_total_hombre"]
             total = int(mujeres) + int(hombres)
+            if total < 2:
+                elegible = False
             temp_mujeres = temp_tiempo_completo["temp_total_mujer"]
             temp_hombres = temp_tiempo_completo["temp_total_hombre"]
-            temp_total = (int(temp_mujeres) + int(temp_hombres))/2
+            temp_total = (int(temp_mujeres) + int(temp_hombres))
             totales = total + temp_total
-            if totales <= 4:
+            if totales <= 5:
                 elegible = False
             inscripcion = Inscripciones()
             inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
