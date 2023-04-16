@@ -740,6 +740,9 @@ class Inscripciones(db.Model):
     cohorte = db.Column(db.Integer, unique=False, nullable=True, default=0)
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
+    attended = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    attended_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    attention_date = db.Column(db.DateTime, nullable=True)
     def __repr__(self):
         return jsonify(
             id = self.id,
