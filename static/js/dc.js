@@ -21,3 +21,14 @@ window.addEventListener('load', function() {
       contentEls[event.detail.index].classList.add('content--active');
     });
 })
+
+function loadFile(event){
+  const Swal = swcms.returnSwal()
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function() {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+
+
+
+}

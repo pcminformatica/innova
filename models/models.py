@@ -256,6 +256,27 @@ class Appointments(db.Model):
             date_scheduled = self.date_scheduled
         )
 
+class DocumentCompany(db.Model):
+    _tablename__ = 'documentcompany'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    document_local = db.Column(db.String(250), unique=False, nullable=True)
+    document_external = db.Column(db.String(250), unique=False, nullable=True)
+    description = db.Column(db.Text, unique=False, nullable=True)
+    complete = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    signed = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    documente_type_id = db.Column(db.Integer, db.ForeignKey("catalog_id_document_types.id"),nullable=True)
+    documente_type = db.relationship("CatalogIDDocumentTypes")
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            company_id = self.company_id,
+            description = self.description,
+            documente_type_id = self.documente_type_id
+        )
 
 # Catalog - ID Document Type Class
 class CatalogIDDocumentTypes(db.Model):

@@ -1,0 +1,426 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+   
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+                                <div class="mdc-tab-scroller">
+                                <div class="mdc-tab-scroller__scroll-area">
+                                    <div class="mdc-tab-scroller__scroll-content">
+                                    <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Carta de compromiso</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Ficha de inscripción </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Lista de usuarios</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Diagnóstico Inicial</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Plan de mejora </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    
+
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- Inicio  -->
+                            <div class="content content--active">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            {% if carta %}
+                                            <p>
+                                                hay carta 
+                                            </p>
+                                            {% else %}
+                                            <h2>Carta de compromiso no encontrada</h2>
+                                            <p>
+                                                ¿Deseas generar la carta de compromiso?, por favor haz clic en el botón"Generar carta de compromiso".
+                                            </p>
+                                            <div class="s-font-align-center">
+                                                <a href="{{ url_for('digitalcenter._company_monitoring_list') }}" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                    <span class="mdc-button__label">Generar carta de compromiso</span>
+                                                </a>
+                                            </div>
+                                                <br>
+                                           
+                                                <p>
+                                                    O puedes cargar la carta de compromiso <b>ya firmada por la empresaria</b> seleccionando la carta de compromiso con él el botón "Seleccione carta de compromiso" y luego da clic en con el botón"Cargar carta de compromiso".
+                                                </p>
+                                                <form id="formPIC"  action = "/ddd/" method="POST" enctype = "multipart/form-data">
+                                                    <label htmlFor="upload-photo" style="margin: auto">
+                                                        <input
+                                                          style="display:none"
+                                                          id="upload-photo"
+                                                          name="upload-photo"
+                                                          type="file"
+                                                          onchange="loadFile(event)"
+                                                        />
+                                                      
+                                                        <Fab
+                                                        <button id="submitSaveButtonPIC" style="background-color: gray;"  class="mdc-button  mdc-button--raised mdc-button--leading">
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                              >add</i
+                                                            >
+                                                            <span class="mdc-button__label">Seleccione carta de compromiso</span>
+                                                          </button>
+                                                        </Fab>
+                                                        <br />
+                                                        <br />
+                                                      
+                                                        <Fab color="primary" size="small" component="span" aria-label="add">
+                                                          <AddIcon />
+                                                        </Fab>
+                                                      </label>
+                                                    <br>
+                                                      <embed id="output" width="500" height="375" type="application/pdf">
+                                                    <br><br><br>
+                                                    <div class="s-font-align-center">
+                                                        <a href="{{ url_for('digitalcenter._company_monitoring_list') }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                            
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Cargar carta de compromiso</span>
+                                                        </a>
+                                                    </div>
+                                                </form> 
+                                            
+                                                
+
+                                                
+                                              
+                                            {% endif %}
+                                        </div>
+
+                                    </div>                            
+                                </div>
+                    
+                            </div>
+                            <!-- Lista de usuarios  -->
+                            <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            {% if ficha %}
+                                            <p>
+                                                hay Ficha de inscripción 
+                                            </p>
+                                            {% else %}
+                                            <p>
+                                                no hay ficha
+                                            </p>
+                                            {% endif %}
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
+                            <!-- Lista de usuarios  -->
+                            <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        Lista de usuarios 
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
+                            <!-- Diagnóstico Inicial  -->
+                            <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        Diagnóstico Inicial
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
+                            <!-- Plan de mejora   -->
+                            <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        Plan de mejora 
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <img src="{{ url_for('static', filename='images/secuencia 01_1.gif') }}" style="width: 600px;">
+
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 1</p>
+                                        <p class="alignright">10 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.10);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.10);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 2</p>
+                                        <p class="alignright">80 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.80);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.80);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 3</p>
+                                        <p class="alignright">100 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(100);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(100);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Billera</div>
+                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">
+                                            <span class="mdc-deprecated-list-item__primary-text">2,500</span>
+                                            <span class="mdc-deprecated-list-item__secondary-text">Créditos disponibles</span>
+                                        </span>
+                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">2,500</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">
+                                            <span class="mdc-deprecated-list-item__primary-text">3,300 (-800)</span>
+                                            <span class="mdc-deprecated-list-item__secondary-text">17/11/2021 - Digital Center</span>
+                                        </span>
+                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">2,500</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">
+                                            <span class="mdc-deprecated-list-item__primary-text">3,800 (-500)</span>
+                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Marketplace</span>
+                                        </span>
+                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">3,300</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                    <button class="mdc-button mdc-button--raised mdc-button--color-secondary mdc-card__action
+                                                mdc-card__action--button">
+                                        <div class="mdc-button__ripple"></div>
+                                        <span class="mdc-button__label">Redimir</span>
+                                    </button>
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        receipt
+                                    </button>
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        add_circle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Gestiones</div>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">Solicitar más créditos</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">group</span>
+                                        <span class="mdc-deprecated-list-item__text">Solicitar permisos de acceso</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
+                                        <span class="mdc-deprecated-list-item__text">Solicitar rol de oferente</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+
+{% endblock %}

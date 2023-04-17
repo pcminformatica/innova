@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
@@ -545,6 +545,18 @@ def _re1_inicial():
     db.session.commit()
     return render_template('404.html')
 
+@digitalcenter.route('/insert/catalogo/documentos',methods=['GET', 'POST'])
+def _re1_inicial_inicial():
+    DOC1 = CatalogIDDocumentTypes(name='Ficha de inscripción', name_short='DOC1')
+    db.session.add(DOC1)
+
+    DOC2 = CatalogIDDocumentTypes(name='Carta de compromiso', name_short='DOC2')
+    db.session.add(DOC2)
+    db.session.commit()
+    return render_template('404.html')
+
+
+
 @digitalcenter.route('/insert/categias/',methods=['GET', 'POST'])
 def _re_categias():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
@@ -697,19 +709,7 @@ def _registro_no_eleibles_panel(inscribe_id):
     }
     return render_template('digitalcenter/registro_no_elegibles_panel.html',**context)
 
-@digitalcenter.route('/empresas/',methods=['GET', 'POST'])
-def _plan_action_monitoring_list():
-    app.logger.debug('** SWING_CMS ** - ------------------')
-    diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
-    lista = []
-    for diagnosi in diagnosis:
-        lista.append(diagnosi.company_id)
-    company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
-    
-    context = {
-        'api': company
-    }
-    return render_template('plan_action_monitoring_list.html',**context)
+
 
 
 from sqlalchemy import desc,asc
@@ -735,6 +735,50 @@ def _plan_action_dashboard(user_uid):
  
     return render_template('plan_action_dashboard.html',**context)
 
+
+@digitalcenter.route('/empresas/',methods=['GET', 'POST'])
+def _company_monitoring_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
+    lista = []
+    for diagnosi in diagnosis:
+        lista.append(diagnosi.company_id)
+    company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+    
+    context = {
+        'api': company
+    }
+    return render_template('company_monitoring_list.html',**context)
+
+@digitalcenter.route('/company/view/<int:user_uid>/',methods=['GET', 'POST'])
+def _company_dashboard(user_uid):
+    app.logger.debug('** sexo ** - ------------------')
+
+    company = Company.query.filter_by(id=user_uid).first()
+    #buscamos la carta de compromiso DOC2
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(documente_type_id=carta.id).first()
+    #buscamos la ficha de inscripcion DOC1
+    ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+    ficha =  DocumentCompany.query.filter_by(documente_type_id=ficha.id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
+    actions = ActionPlan.query.filter_by(company_id=company.id).all()
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        print('siiii')
+        print('siiii')
+        print('siiii')
+        diagnostico = False
+    context = {
+        'carta':carta,
+        'ficha':ficha,
+        'company': company,
+        'actions':actions,
+        "diagnostico":diagnostico,
+    }
+ 
+    return render_template('company_dashboard.html',**context)
 
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_bitacora(user_uid):
