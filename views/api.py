@@ -1049,6 +1049,7 @@ def _diagnosis_monitoring_lisst():
                 if user.extra_info is None:
                     user_extra = UserExtraInfo()
                     user_extra.id = user.id
+                    user_extra.names = txt_name
                     user_extra.acceptterms = True
                     user_extra.company_id = txt_company_id
                     db.session.add(user_extra)
@@ -1101,8 +1102,15 @@ def _initial_attention_companies():
                 company.phones = jsonPhone.jsonFormat()
                 company.social_networks = jsonSocial.jsonFormat()
                 company.created_by = current_user.id
+                company.inscripcion_id = inscripcion.id
                 db.session.add(company)
                 db.session.commit()
+            else:
+                company
+                company.inscripcion_id = inscripcion.id
+                db.session.add(company)
+                db.session.commit()
+                db.session.refresh(company)
             #insertamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
             service = CatalogServices.query.filter_by(name_short = 'a1').first()
             actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()

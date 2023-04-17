@@ -794,16 +794,8 @@ def _plan_action_bitacora(user_uid):
 def _company_user_list(company_id):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     company = Company.query.filter_by(id=company_id).first()
-    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
-    dni =  company.dni
-    nombre = company.name
-    if diagnos.respuestas:
-        if 'EMAIL' in diagnos.respuestas:
-            email = diagnos.respuestas['EMAIL']
-        if 'TELEFONO' in diagnos.respuestas:
-            phone = diagnos.respuestas['TELEFONO']
-    rtn =  company.rtn
-    inscripciones =  Inscripciones.query.filter(or_(Inscripciones.dni == dni, Inscripciones.company_name == nombre,Inscripciones.correo==email,Inscripciones.phone==phone,Inscripciones.rtn == rtn)).all()
+
+    inscripciones =  Inscripciones.query.filter_by(id=company.inscripcion_id).all()
 
     users = User.query.join(UserExtraInfo, User.id==UserExtraInfo.id).filter(UserExtraInfo.company_id == company.id).all()
     

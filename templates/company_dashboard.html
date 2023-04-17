@@ -258,7 +258,18 @@
                             
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
-                                        Lista de usuarios 
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            <h2>Administrar Accesos</h2>
+                                            <p>Para administrar los accesos a la plataforma para esta empresa da clic en el botón </p>
+                                            <div class="s-font-align-center">
+                                                <a href="{{ url_for('digitalcenter._company_user_list',company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                    <span class="mdc-button__label">Administrar Usuarios</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                 </div>
