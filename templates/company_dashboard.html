@@ -92,8 +92,12 @@
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                             {% if carta %}
                                             <p>
-                                                hay carta 
+                                                {% if carta.document_local %}
+                                                <embed src="{{ url_for('static', filename='upload/') }}{{carta.document_local}}" id="output" width="500" height="375" type="application/pdf">
+                                                {% else %}
+                                                {% endif %}
                                             </p>
+
                                             {% else %}
                                             <h2>Carta de compromiso no encontrada</h2>
                                             <p>
@@ -112,12 +116,14 @@
                                                 <p>
                                                     O puedes cargar la carta de compromiso <b>ya firmada por la empresaria</b> seleccionando la carta de compromiso con él el botón "Seleccione carta de compromiso" y luego da clic en con el botón"Cargar carta de compromiso".
                                                 </p>
-                                                <form id="formPIC"  action = "/ddd/" method="POST" enctype = "multipart/form-data">
+                                                <form id="formPIC"  action = "/save/carta/innova" method="POST" enctype = "multipart/form-data">
+                                                    <input type="hidden" name="txt_company_id"  value="{{ company.id }}">
+                                                    <input type="hidden"  name="txt_documente_id" value="DOC2">
                                                     <label htmlFor="upload-photo" style="margin: auto">
                                                         <input
                                                           style="display:none"
                                                           id="upload-photo"
-                                                          name="upload-photo"
+                                                          name="upload-carta"
                                                           type="file"
                                                           onchange="loadFile(event)"
                                                         />
@@ -142,12 +148,12 @@
                                                       <embed id="output" width="500" height="375" type="application/pdf">
                                                     <br><br><br>
                                                     <div class="s-font-align-center">
-                                                        <a href="{{ url_for('digitalcenter._company_monitoring_list') }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        <button type="submit" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                             
                                                             <span class="mdc-button__ripple"></span>
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                                                             <span class="mdc-button__label">Cargar carta de compromiso</span>
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </form> 
                                             
@@ -170,12 +176,75 @@
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                             {% if ficha %}
                                             <p>
-                                                hay Ficha de inscripción 
+                                                {% if ficha.document_local %}
+                                                <embed src="{{ url_for('static', filename='upload/') }}{{ficha.document_local}}" id="output" width="500" height="375" type="application/pdf">
+                                                {% else %}
+                                                {% endif %}
                                             </p>
+
                                             {% else %}
+                                            <h2>Ficha de inscripción no encontrada</h2>
                                             <p>
-                                                no hay ficha
+                                                ¿Deseas generar la Ficha de inscripción?, por favor haz clic en el botón "Ficha de inscripción".
                                             </p>
+                                            <div class="s-font-align-center">
+                                                <a href="{{ url_for('digitalcenter._company_monitoring_list') }}" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                    <span class="mdc-button__label">Generar Ficha de inscripción</span>
+                                                </a>
+                                            </div>
+                                                <br>
+                                           
+                                                <p>
+                                                    O puedes cargar la ficha de inscripción<b> ya firmada por la empresaria</b> seleccionando la ficha de inscripción con él el botón "Seleccione ficha de inscripción" y luego da clic en con el botón"Cargar ficha de inscripción".
+                                                </p>
+                                                <form id="formPIC"  action = "/save/carta/innova" method="POST" enctype = "multipart/form-data">
+                                                    <input type="hidden" name="txt_company_id"  value="{{ company.id }}">
+                                                    <input type="hidden"  name="txt_documente_id" value="DOC1">
+                                                    <label htmlFor="upload-photo" style="margin: auto">
+                                                        <input
+                                                          style="display:none"
+                                                          id="upload-photo"
+                                                          name="upload-carta"
+                                                          type="file"
+                                                          onchange="loadFileFicha(event)"
+                                                        />
+                                                      
+                                                        <Fab
+                                                        <button id="submitSaveButtonPIC" style="background-color: gray;"  class="mdc-button  mdc-button--raised mdc-button--leading">
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                              >add</i
+                                                            >
+                                                            <span class="mdc-button__label">Seleccione ficha de inscripcióno</span>
+                                                          </button>
+                                                        </Fab>
+                                                        <br />
+                                                        <br />
+                                                      
+                                                        <Fab color="primary" size="small" component="span" aria-label="add">
+                                                          <AddIcon />
+                                                        </Fab>
+                                                      </label>
+                                                    <br>
+                                                      <embed id="output2" width="500" height="375" type="application/pdf">
+                                                    <br><br><br>
+                                                    <div class="s-font-align-center">
+                                                        <button type="submit" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                            
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Cargar ficha de inscripción</span>
+                                                        </button>
+                                                    </div>
+                                                </form> 
+                                            
+                                                
+
+                                                
+                                              
                                             {% endif %}
                                         </div>
                                        

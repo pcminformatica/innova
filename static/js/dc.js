@@ -32,3 +32,14 @@ function loadFile(event){
 
 
 }
+
+function loadFileFicha(event){
+  const Swal = swcms.returnSwal()
+  output2.src = URL.createObjectURL(event.target.files[0]);
+  output2.onload = function() {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+
+
+
+}

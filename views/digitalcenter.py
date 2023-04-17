@@ -52,6 +52,8 @@ def __form_perfil_emp2():
         return redirect(url_for('digitalcenter.__form_profile_sde'))
     if request.method == 'GET':
         return 'hola'
+    
+
 @app.route('/uploads/<name>')
 def download_file(name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], name)
@@ -757,18 +759,15 @@ def _company_dashboard(user_uid):
     company = Company.query.filter_by(id=user_uid).first()
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-    carta = DocumentCompany.query.filter_by(documente_type_id=carta.id).first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
     #buscamos la ficha de inscripcion DOC1
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
-    ficha =  DocumentCompany.query.filter_by(documente_type_id=ficha.id).first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
     if diagnos:
         diagnostico = diagnos.resultados
     else:
-        print('siiii')
-        print('siiii')
-        print('siiii')
         diagnostico = False
     context = {
         'carta':carta,
@@ -804,11 +803,6 @@ def _company_user_list(company_id):
         if 'TELEFONO' in diagnos.respuestas:
             phone = diagnos.respuestas['TELEFONO']
     rtn =  company.rtn
-    print(dni)
-    print(nombre)
-    print(email)
-    print(phone)
-    print(rtn)
     inscripciones =  Inscripciones.query.filter(or_(Inscripciones.dni == dni, Inscripciones.company_name == nombre,Inscripciones.correo==email,Inscripciones.phone==phone,Inscripciones.rtn == rtn)).all()
 
     users = User.query.join(UserExtraInfo, User.id==UserExtraInfo.id).filter(UserExtraInfo.company_id == company.id).all()
@@ -819,3 +813,43 @@ def _company_user_list(company_id):
         'inscripciones':inscripciones
     }
     return render_template('company_user_list.html',**context)
+
+@digitalcenter.route('/save/carta/innova',methods = ['GET', 'POST'])
+def _form_carta_innova():
+    #sexo
+    if request.method == 'POST':
+        txt_company_id = request.form['txt_company_id']
+        txt_documente_id = request.form['txt_documente_id']
+        company = Company.query.filter_by(id=txt_company_id).first()
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+        file = request.files['upload-carta']
+        #buscamos la carta de compromiso DOC2
+        document_type = CatalogIDDocumentTypes.query.filter_by(name_short=txt_documente_id).first()
+        carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id).first()
+        if not carta:
+            # empty file without a filename.
+            if file.filename == '':
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                documentoName = str(company.dni) + ' ' + str(document_type.name) 
+                filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                carta = DocumentCompany()
+                carta.company_id = company.id
+                carta.documente_type_id = document_type.id
+                carta.complete = True
+                carta.signed = True
+                carta.enabled = True
+                carta.document_local = filename
+                db.session.add(carta)
+                db.session.commit()
+                return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+ 
+     
+        return redirect(url_for('digitalcenter._home_view'))
+    if request.method == 'GET':
+        return redirect(url_for('digitalcenter._home_view'))
