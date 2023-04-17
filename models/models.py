@@ -710,6 +710,8 @@ class Company(db.Model):
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     users = db.relationship("UserExtraInfo", back_populates="company")
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    inscripcion_id = db.Column(db.Integer, db.ForeignKey("inscripciones.id"),nullable=True)
+    inscripcion = db.relationship("Inscripciones")
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -742,6 +744,7 @@ class Inscripciones(db.Model):
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     attended = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     attended_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    user = db.relationship("User")
     attention_date = db.Column(db.DateTime, nullable=True)
     def __repr__(self):
         return jsonify(

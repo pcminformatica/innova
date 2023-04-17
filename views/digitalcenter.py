@@ -531,6 +531,20 @@ def _re3():
     db.session.commit()
     return render_template('404.html')
 
+@digitalcenter.route('/insert/servicios/inciales',methods=['GET', 'POST'])
+def _re1_inicial():
+    staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
+    websites = CatalogServices(name='Atención inicial', name_short='a1', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(name='Diagnóstico Empresarial', name_short='a2', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(name='Plan de acción', name_short='a3', service_user_role=staff_it_role.id,diagnostic_questions=[])
+    db.session.add(websites)
+    db.session.commit()
+    return render_template('404.html')
+
 @digitalcenter.route('/insert/categias/',methods=['GET', 'POST'])
 def _re_categias():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()

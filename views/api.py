@@ -861,7 +861,7 @@ def _d_save_ActionPlan():
                 db.session.commit()
             services = json.loads(services)
             for service in services:
-                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],version=service['fase']).first()
+                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],fase=service['fase']).first()
                 if not actionplan:
                     actionplan = ActionPlan()
                     actionplan.company_id = actionplan.id
@@ -1076,3 +1076,54 @@ def _diagnosis_monitoring_lisst():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+
+
+@api.route('/initial/attention/companies',methods=['GET', 'POST'])
+def _initial_attention_companies():
+    try:
+        if request.method == 'POST':
+            txt_inscripcion_id = request.json['txt_id']
+            inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_inscripcion_id).first()
+            Inscripciones
+            company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+            #creamos la empresa
+            if not company:
+                company = Company()
+                company.name = inscripcion.company_name
+                company.rtn = inscripcion.rtn
+                company.dni = inscripcion.dni
+                company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
+                jsonPhone = JsonPhone()
+                jsonPhone.phone = inscripcion.phone
+                jsonSocial= JsonSocial()
+                jsonSocial.email = inscripcion.correo
+                company.phones = jsonPhone.jsonFormat()
+                company.social_networks = jsonSocial.jsonFormat()
+                company.created_by = current_user.id
+                db.session.add(company)
+                db.session.commit()
+            #insertamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
+            service = CatalogServices.query.filter_by(name_short = 'a1').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
+            if not actionplan:
+                actionplan = ActionPlan()
+                actionplan.company_id = actionplan.id
+                actionplan.company = company
+                actionplan.services_id = service.id
+                actionplan.created_by = current_user.id
+                actionplan.fase = 0
+                db.session.add(actionplan)
+                db.session.commit()
+            #actulizamos la inscripcion a ya atendida 
+            inscripcion.attended = True
+            inscripcion.attended_user = current_user.id
+            inscripcion.attention_date = dt.now(tz.utc)
+            db.session.add(inscripcion)
+            db.session.commit()
+            db.session.refresh(inscripcion)
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+

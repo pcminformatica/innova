@@ -38,8 +38,25 @@
                             </div>
                         </div>
                         <div class="mdc-card__content container-dashboard--messages-msg">
-                            {% if attended %}
-
+                            {% if api.attended %}
+                                
+                                <div class="s-font-align-center">
+                                  <h2>Empresaria antendida</h2>
+                                  <p>
+                                    Atendida por: {{  api.user.name}}
+                                    <br>
+                                    Fecha: {{  api.attention_date}}
+                                  </p>
+                                  <p>
+                                    Si deseas dar seguimiento a empresarias, da clic en el botón "Seguimiento a empresarias" o dirígete a tu panel de inicio y da clic en la opción "Seguimiento a empresarias"
+                                  </p>
+                                  <a href="{{ url_for('digitalcenter._plan_action_monitoring_list') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                      
+                                      <span class="mdc-button__ripple"></span>
+                                      <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                      <span class="mdc-button__label">Seguimiento a empresarias</span>
+                                  </a>
+                                </div>
                             {% else %}
                                 <div class="s-font-align-center">
                                   <h2>Empresaria no antendida</h2>
@@ -175,10 +192,36 @@
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 <script>
   function atenderEmpresaria(){
-    alert('sii')
+    const Swal = swcms.returnSwal()
+    const txt_id = '{{api.id}}';
+    const apiUrl = '/initial/attention/companies';
+    let postData = {
+          "txt_id": txt_id,
+      };
+      console.log(postData)
+
+    //document.getElementById('submitSaveButton').disabled = true;
+
+    swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+        'Éxito',
+        'Atención inicial creada!',
+        'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+
+    }).catch((error) => {
+        Swal.fire(
+        'Error de conexión',
+        'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+        'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+    });
+
   }
 </script>
 {% endblock %}
 
 
-
+h
