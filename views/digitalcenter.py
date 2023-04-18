@@ -721,7 +721,8 @@ def _plan_action_dashboard(user_uid):
 
     company = Company.query.filter_by(id=user_uid).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
-    actions = ActionPlan.query.filter_by(company_id=company.id).all()
+    
+    actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
     if diagnos:
         diagnostico = diagnos.resultados
     else:
