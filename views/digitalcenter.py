@@ -808,7 +808,6 @@ def _company_user_list(company_id):
 
 @digitalcenter.route('/save/carta/innova',methods = ['GET', 'POST'])
 def _form_carta_innova():
-    #sexo
     if request.method == 'POST':
         txt_company_id = request.form['txt_company_id']
         txt_documente_id = request.form['txt_documente_id']

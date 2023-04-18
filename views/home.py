@@ -239,6 +239,7 @@ def _home():
             elif current_user.extra_info.company_id is None:
                 return redirect(url_for('digitalcenter.__form_perfil_emp'))
             else:
+                #
                 return render_template('home_dashboard.html')
         else:
             today = dt.today()
