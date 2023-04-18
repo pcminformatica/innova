@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -240,7 +240,12 @@ def _home():
                 return redirect(url_for('digitalcenter.__form_perfil_emp'))
             else:
                 #
-                return render_template('home_dashboard.html')
+                carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+                carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
+                context = {
+                    'carta':carta
+                }
+                return render_template('home_dashboard.html',**context)
         else:
             today = dt.today()
     

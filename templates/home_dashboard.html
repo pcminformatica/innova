@@ -94,9 +94,31 @@
                                 </div>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
-                                <p>
-                                    No hay mensajes
-                                </p>
+                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                {% if  carta.signed_innova %}
+                                    {% if not carta.signed %}
+                                    <a href="{{ url_for('digitalcenter._company_document_user',document_id=carta.id) }}" >
+                                        <li class="mdc-deprecated-list-item" tabindex="0">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Carta de compromiso pendiente de firma</span>
+                                            {% if carta.created_by %}
+                                                <span class="mdc-deprecated-list-item__secondary-text">{{ carta.created_by }}</span>
+                                            {% else %}
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin</span>
+                                            {% endif %}
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                        </li>
+
+                                    </a>
+
+                                    {% endif %}
+                                {% endif %}
+                                </ul>
                                 <!--
                                 <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                     <li class="mdc-deprecated-list-item" tabindex="0">

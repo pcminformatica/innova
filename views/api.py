@@ -1181,6 +1181,7 @@ def _d_create_carta_compromiso():
                 carta.signed_innova = False
                 carta.enabled = True
                 carta.document_local = filename
+                carta.created_by = current_user.id
                 db.session.add(carta)
                 db.session.commit()
 
@@ -1193,3 +1194,25 @@ class Object:
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
             sort_keys=True, indent=4)
+
+
+@api.route('/api/aprobar/documento/', methods = ['POST'])
+@login_required
+def _d_aprobar_documento():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_documente_id = request.json['txt_documente_id']
+ 
+            carta = DocumentCompany.query.filter_by(id=txt_documente_id).first()
+            if carta:
+                carta.complete = True
+                carta.enabled = True
+                db.session.add(carta)
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
