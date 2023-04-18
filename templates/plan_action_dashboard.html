@@ -56,7 +56,8 @@
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Area</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referirencias</th>
-                                                        
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
                                                         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
                                                     </tr>
                                                     
@@ -103,7 +104,14 @@
                                                             {% endif %}
                                                             
                                                         </th>
-                                                        
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
+
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
+
+                                                        </th>
                                                         <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
                                                             {{action.progress}}
 
