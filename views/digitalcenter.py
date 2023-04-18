@@ -330,7 +330,7 @@ def _plan_action_create(user_uid):
     
     company =  Company.query.filter(Company.id == user_uid).first()
     diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
-    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id).all()
+    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
     api = diagnosis.respuestas
     servicios = []
     for resp in api:
