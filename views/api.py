@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import ActionPlanReferences,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -1210,6 +1210,32 @@ def _d_aprobar_documento():
                 carta.complete = True
                 carta.enabled = True
                 db.session.add(carta)
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/created/reference/', methods = ['POST'])
+@login_required
+def _d_created_reference():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_action_id = request.json['txt_action_id']
+            txt_user_x = request.json['txt_user_x']
+            plan = ActionPlan.query.filter_by(id = txt_action_id).first()
+            user = User.query.filter(User.id == txt_user_x).first()
+            if plan:
+                plan.employe_assigned =user.id
+                db.session.add(plan)
+                db.session.commit()
+                reference = ActionPlanReferences()
+                reference.action_plan_id = plan.id
+                reference.employe_assigned = user.id
+                db.session.add(reference)
                 db.session.commit()
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })

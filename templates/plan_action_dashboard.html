@@ -53,8 +53,10 @@
                                                     <tr class="mdc-data-table__header-row">
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TIPO EMPRESA </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Area</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referirencias</th>
+                                                        
                                                         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
                                                     </tr>
                                                     
@@ -81,6 +83,27 @@
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{action.services.catalog_catego.name}}
                                                         </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {% if action.employe_assigned %}
+                                                                YA ASIGNADO
+                                                            {% else %}
+                                                            <select id="txt_user_{{action.id}}">
+                                                                <option value="0">--</option>
+                                                                {% for user in users %}
+                                                                <option value="{{ user.id }}">
+                                                                    {{ user.extra_info.names }}
+                                                                    {{ user.extra_info.last_names}}
+                                                                    
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            <button onclick="referirEmpresaria('{{action.id}}')">
+                                                                Referir
+                                                            </button>
+                                                            {% endif %}
+                                                            
+                                                        </th>
+                                                        
                                                         <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
                                                             {{action.progress}}
 
@@ -376,4 +399,35 @@
 
     {% endif %}
 
+    <script>
+        function referirEmpresaria(action_id){
+            const Swal = swcms.returnSwal()
+            let txt_user_x = document.getElementById('txt_user_'+action_id).value 
+
+            let postData = {
+                "txt_action_id": action_id,
+                "txt_user_x": txt_user_x,
+                };
+                console.log(postData)
+                let apiUrl = '/api/created/reference/';
+                //document.getElementById('submitSaveButton').disabled = true;
+
+                swcms.postFetch(apiUrl, postData).then((data) => {
+                    Swal.fire(
+                    'Éxito',
+                    'Plan de Acción creado!',
+                    'success'
+                    )
+                    window.setTimeout(() => { window.location.reload(); }, 1500);
+                
+                }).catch((error) => {
+                    Swal.fire(
+                    'Error de conexión',
+                    'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                    'error'
+                    )
+                    //document.getElementById('submitSaveButton').disabled = false;
+                });
+        }
+    </script>
 {% endblock %}

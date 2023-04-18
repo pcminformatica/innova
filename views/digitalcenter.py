@@ -727,10 +727,10 @@ def _plan_action_dashboard(user_uid):
         diagnostico = diagnos.resultados
     else:
         print('siiii')
-        print('siiii')
-        print('siiii')
         diagnostico = False
+    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(UserXRole.user_role_id == 3).all()
     context = {
+        'users':users,
         'company': company,
         'actions':actions,
         "diagnostico":diagnostico,

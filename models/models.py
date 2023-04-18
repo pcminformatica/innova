@@ -812,6 +812,15 @@ class ActionPlan(db.Model):
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
     descripcion = db.Column(db.Text, nullable=True)
 
+class ActionPlanReferences(db.Model):
+    __tablename__ = 'action_plan_references'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    action_plan_id = db.Column(db.Integer, db.ForeignKey("action_plan.id"),nullable=True)
+    action_plan = db.relationship("ActionPlan")
+    employe_assigned = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    employe_accepted = db.Column(db.Boolean, nullable=True, default=False)
+
+    
 # Services Supplement Class
 class ActionPlanHistory(db.Model):
     __tablename__ = 'action_plan_history'

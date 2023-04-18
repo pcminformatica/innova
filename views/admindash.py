@@ -22,6 +22,7 @@ def _admin_list_user():
 
     app.logger.debug('** SWING_CMS ** - listuser')
     users = User.query.all()
+    #users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(UserXRole.user_role_id == 3).all()
     app.logger.debug(users)
     cxt = {'users':users}
         
