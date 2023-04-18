@@ -759,7 +759,7 @@ def _company_dashboard(user_uid):
     company = Company.query.filter_by(id=user_uid).first()
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
     #buscamos la ficha de inscripcion DOC1
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
     ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
@@ -811,36 +811,92 @@ def _form_carta_innova():
     if request.method == 'POST':
         txt_company_id = request.form['txt_company_id']
         txt_documente_id = request.form['txt_documente_id']
+        txt_documente_version = request.form['txt_document_version']
         company = Company.query.filter_by(id=txt_company_id).first()
-        # check if the post request has the file part
-        if 'upload-carta' not in request.files:
-
-            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
-        file = request.files['upload-carta']
-        #buscamos la carta de compromiso DOC2
         document_type = CatalogIDDocumentTypes.query.filter_by(name_short=txt_documente_id).first()
-        carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id).first()
-        if not carta:
-            # empty file without a filename.
-            if file.filename == '':
-                return redirect(request.url)
+        if txt_documente_version == "0":
+            # check if the post request has the file part
+            if 'upload-carta' not in request.files:
+                return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+            file = request.files['upload-carta']
+            #buscamos el tipo de documento
+            carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+            if not carta:
+                # empty file without a filename.
+                if file.filename == '':
+                    return redirect(request.url)
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    documentoName = str(company.dni) + ' ' + str(document_type.name) 
+                    filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    carta = DocumentCompany()
+                    carta.company_id = company.id
+                    carta.documente_type_id = document_type.id
+                    carta.complete = True
+                    carta.signed = True
+                    carta.signed_innova = True
+                    carta.enabled = True
+                    carta.document_local = filename
+                    db.session.add(carta)
+                    db.session.commit()
+        elif txt_documente_version == "1":
+            # check if the post request has the file part
+            if 'upload-carta' not in request.files:
+                return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+            file = request.files['upload-carta']
+            #buscamos el tipo de documento
+            carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+            if carta:
+                carta.enabled = False
+                db.session.add(carta)   
+                db.session.commit()
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                documentoName = str(company.dni) + ' ' + str(document_type.name) 
+                documentoName = str(company.dni) + ' ' + str(document_type.name)  + str(txt_documente_version)
                 filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 carta = DocumentCompany()
                 carta.company_id = company.id
                 carta.documente_type_id = document_type.id
-                carta.complete = True
-                carta.signed = True
+                carta.complete = False
+                carta.signed = False
+                carta.signed_innova = True
                 carta.enabled = True
                 carta.document_local = filename
                 db.session.add(carta)
                 db.session.commit()
-                return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
  
      
         return redirect(url_for('digitalcenter._home_view'))
     if request.method == 'GET':
         return redirect(url_for('digitalcenter._home_view'))
+
+@digitalcenter.route('/generar/test',methods = ['GET', 'POST'])
+def _generar_innova():
+    url = app.config.get('GOOGLE_SCRIPT_CARTA_STEP_1')
+    id_asesor = "0709-asesor"
+    id_empresa = "0709-empresa"
+    response = requests.get(url.format(id_asesor,id_empresa))
+    print("file generated")
+    responsejson = json.loads(response.text)
+    print("file downloaded")
+    print()
+    print(responsejson["documentId"])
+    response = requests.get(responsejson["pdf"])
+    print("file downloaded")
+    filename = "invoice{}.pdf".format(id_empresa)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    with open(path, "wb") as f:
+        f.write(response.content)
+    return 'text'
+
+@digitalcenter.route('/formulario/documentos/<int:document_id>/inno',methods = ['GET', 'POST'])
+def _company_document_form(document_id):
+    document = DocumentCompany.query.filter_by(id=document_id).first()
+    print(document.id)
+    context = {
+        "document": document
+    }
+    return render_template('company_document_form.html',**context)

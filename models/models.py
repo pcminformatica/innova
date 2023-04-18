@@ -264,6 +264,7 @@ class DocumentCompany(db.Model):
     description = db.Column(db.Text, unique=False, nullable=True)
     complete = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     signed = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    signed_innova = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)

@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
@@ -1135,3 +1135,61 @@ def _initial_attention_companies():
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+import os
+from werkzeug.utils import secure_filename
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+@api.route('/api/create/carta/compromio', methods = ['POST'])
+@login_required
+def _d_create_carta_compromiso():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_company_id = request.json['txt_company_id']
+            txt_documente_id = request.json['txt_documente_id']
+            document_type = CatalogIDDocumentTypes.query.filter_by(name_short=txt_documente_id).first()
+            user = User.query.filter_by(id = current_user.id).first()
+            company = Company.query.filter_by(id = txt_company_id).first()
+            url = app.config.get('GOOGLE_SCRIPT_CARTA_STEP_1')
+
+            id_asesor = user.extra_info.national_id
+            id_empresa = company.dni
+            response = requests.get(url.format(id_asesor,id_empresa))
+            print("file generated")
+            responsejson = json.loads(response.text)
+            print("file downloaded")
+            print(responsejson["documentId"])
+            response = requests.get(responsejson["pdf"])
+            print("file downloaded")
+            filename = str(company.dni) + ' ' + str(document_type.name)  + str('0') + '.pdf'
+            filename = filename.replace(" ", "_")
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            with open(path, "wb") as file:
+                file.write(response.content)
+            carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+            if not carta:
+                # empty file without a filename.
+                carta = DocumentCompany()
+                carta.company_id = company.id
+                carta.documente_type_id = document_type.id
+                carta.complete = False
+                carta.signed = False
+                carta.signed_innova = False
+                carta.enabled = True
+                carta.document_local = filename
+                db.session.add(carta)
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+    
+class Object:
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)
