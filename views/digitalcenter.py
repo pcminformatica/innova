@@ -916,3 +916,18 @@ def _company_document_user(document_id):
         "document": document
     }
     return render_template('company_document_user.html',**context)
+
+
+
+@digitalcenter.route('/empresas/view/user/2/1',methods=['GET', 'POST'])
+def _company_111():
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+
+    inscripciones =  Inscripciones.query.filter_by(id=9).first()
+    preguntas = inscripciones.respuestas
+    print( list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta'])
+    print( list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'])
+    print( list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta'])
+    print( list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'])
+    return 'x'
+

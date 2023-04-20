@@ -804,7 +804,7 @@ def _d_inscripciones():
                 elegible = False
             inscripcion = Inscripciones()
             inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
-            inscripcion.company_name = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            inscripcion.company_name = list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta']
             inscripcion.correo = list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']
             inscripcion.phone = list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta']
             inscripcion.cohorte = 5
@@ -1242,3 +1242,4 @@ def _d_created_reference():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
