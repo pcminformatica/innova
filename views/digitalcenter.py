@@ -807,7 +807,9 @@ def _company_user_list(company_id):
     }
     return render_template('company_user_list.html',**context)
 
+
 @digitalcenter.route('/save/carta/innova',methods = ['GET', 'POST'])
+@login_required
 def _form_carta_innova():
     if request.method == 'POST':
         txt_company_id = request.form['txt_company_id']
@@ -842,6 +844,7 @@ def _form_carta_innova():
                     carta.created_by = current_user.id
                     db.session.add(carta)
                     db.session.commit()
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
         elif txt_documente_version == "1" or txt_documente_version == "2":
             # check if the post request has the file part
             if 'upload-carta' not in request.files:
@@ -877,7 +880,7 @@ def _form_carta_innova():
             else:
                 return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
  
-     
+        print(current_user.id)
         return redirect(url_for('digitalcenter._home_view'))
     if request.method == 'GET':
         return redirect(url_for('digitalcenter._home_view'))
@@ -925,9 +928,54 @@ def _company_111():
 
     inscripciones =  Inscripciones.query.filter_by(id=9).first()
     preguntas = inscripciones.respuestas
-    print( list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta'])
+    print( )
     print( list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'])
     print( list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta'])
     print( list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'])
-    return 'x'
+    data = {
+        "nombre_asesora" :'',
+        "fecha":"fecha",
+        "sabeusteddeinnova":'',
+        "conoce_servicios":list(e for e in preguntas if e['id']  == 'A')[0]['respuesta'],
+        "que_servicios":list(e for e in preguntas if e['id']  == 'B')[0]['respuesta'],
+        "porque_considera":list(e for e in preguntas if e['id']  == 'C')[0]['respuesta'],
+        "nombre_completo":list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta'],
+        "nacionalidad":"",
+        "n_identidad":list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta'],
+        "correo_electronico":list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'],
+        "telefono":list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta'],
+        "estadocivil":"",
+        "departamento":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
+        "ciudad":"",
+        "direccion":"",
+        "celular":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
+        "tiempo_de_operacion":list(e for e in preguntas if e['id']  == '3_11')[0]['respuesta'],
+        "cargo_empresa":list(e for e in preguntas if e['id']  == '2_6')[0]['respuesta'],
+        "actividad_comercia":list(e for e in preguntas if e['id']  == '3_12')[0]['respuesta'],
+        "nombre_empresa":list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'],
+        "descripcion_producto":"",
+        "rtn":"",
+        "correo_electronico_empresa":list(e for e in preguntas if e['id']  == '3_9')[0]['respuesta'],
+        "redes_sociales":list(e for e in preguntas if e['id']  == '3_10')[0]['respuesta'],
+        "pagina_web":"pagina_web",
+        "celular":list(e for e in preguntas if e['id']  == '3_4')[0]['respuesta'],
+        "ciudad":list(e for e in preguntas if e['id']  == '3_7')[0]['respuesta'],
+        "departamento":list(e for e in preguntas if e['id']  == '3_5')[0]['respuesta'],
+        "direccion_exacta":list(e for e in preguntas if e['id']  == '3_8')[0]['respuesta'],
+        "numero_empleados":list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta'],
+        "empleados_permanentes":"",
+        "empleados_temporales":"",
+        "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
+        "tipo_formalizacion":list(e for e in preguntas if e['id']  == '4_2')[0]['respuesta'],
+        "tipo_organizacion":"",
+        "registros_pendientes":list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'],
+        "volumen_venta_mensual":list(e for e in preguntas if e['id']  == '3_22')[0]['respuesta'],
+        "gasto_operativo_mensual":"",
+        "utilidades_mensuales":list(e for e in preguntas if e['id']  == '3_23')[0]['respuesta'],
+        "tiene_deudas_la_empresa":list(e for e in preguntas if e['id']  == '3_24')[0]['respuesta'],
+        "monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
+        "institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
+    }
+    str(data)
+    return str(data)
 

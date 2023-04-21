@@ -535,7 +535,7 @@ function showMSJ(titulo,subtitulo,tipo){
 
     property = 'txt_temp_no_remunerados_hombre'
     if (mdcAssignedVars[property].value === '' ){   
-      showMSJ('Por favor responda la pregunta:',"3.18 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?",'info')
+      showMSJ('Por favor responda la pregunta:',"3.18 ¿Cuántos empleados temporales tuvo su empresa en el último año?",'info')
       return false
     }
     const temp_no_remunerados_hombre = mdcAssignedVars[property].value
@@ -549,7 +549,7 @@ function showMSJ(titulo,subtitulo,tipo){
       "temp_no_remunerados_mujer":temp_no_remunerados_mujer,
       "temp_no_remunerados_hombre":temp_no_remunerados_hombre
     }
-    preguntas.push({"id":"3_18","pregunta":"3.18 ¿Cuántos empleados a tiempo completo tuvo su empresa en el último año?","respuesta":temp_empleado_ultimo})
+    preguntas.push({"id":"3_18","pregunta":"3.18 ¿Cuántos empleados temporales tuvo su empresa en el último año?","respuesta":temp_empleado_ultimo})
     //3.19
     property = 'txt_compl_remunerados_mujer'
     if (mdcAssignedVars[property].value === '' ){   
@@ -621,10 +621,10 @@ function showMSJ(titulo,subtitulo,tipo){
     //Pregunta 3.24
     const tuvo_acceso_credito =  getCheckValues('tuvo_acceso_credito');
     if (tuvo_acceso_credito.length == 0 ){   
-      showMSJ('Por favor responda la pregunta:','¿Conoce los servicios que ofrece INNOVA?','info')
+      showMSJ('Por favor responda la pregunta:','En el último año, ¿su empresa tuvo acceso a crédito de alguna institución del sistema financiero (banco, cooperativa, micro financiera, caja de ahorros, etc.)?','info')
       return false
     }else{
-      preguntas.push({"id":"3_24","pregunta":"¿Conoce los servicios que ofrece INNOVA?","respuesta":tuvo_acceso_credito[0]})
+      preguntas.push({"id":"3_24","pregunta":"En el último año, ¿su empresa tuvo acceso a crédito de alguna institución del sistema financiero (banco, cooperativa, micro financiera, caja de ahorros, etc.)?","respuesta":tuvo_acceso_credito[0]})
     }
     //Pregunta 3.25
     property = 'rango_activos'
