@@ -928,10 +928,9 @@ def _company_111():
 
     inscripciones =  Inscripciones.query.filter_by(id=9).first()
     preguntas = inscripciones.respuestas
-    print( )
-    print( list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'])
-    print( list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta'])
-    print( list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'])
+    totalEmpleadosPermanentes = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer'] + list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre']
+    totalEmpleadosTemporales =  list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer'] + list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre']
+    idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
     data = {
         "nombre_asesora" :'',
         "fecha":"fecha",
@@ -962,9 +961,9 @@ def _company_111():
         "ciudad":list(e for e in preguntas if e['id']  == '3_7')[0]['respuesta'],
         "departamento":list(e for e in preguntas if e['id']  == '3_5')[0]['respuesta'],
         "direccion_exacta":list(e for e in preguntas if e['id']  == '3_8')[0]['respuesta'],
-        "numero_empleados":list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta'],
-        "empleados_permanentes":"",
-        "empleados_temporales":"",
+        "numero_empleados":totalEmpleadosPermanentes +totalEmpleadosTemporales ,
+        "empleados_permanentes":totalEmpleadosPermanentes,
+        "empleados_temporales":totalEmpleadosTemporales,
         "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
         "tipo_formalizacion":list(e for e in preguntas if e['id']  == '4_2')[0]['respuesta'],
         "tipo_organizacion":"",
@@ -976,6 +975,23 @@ def _company_111():
         "monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
         "institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
     }
+    
+    urls = app.config.get('GOOGLE_SCRIPT_FICHA_STEP_1')
+    response = requests.post(urls, data = data)
+    print("file generated")
+    print(response)
+    responsejson = json.loads(response.text)
+    print("file downloaded")
+    print(responsejson)
+    print("file generated")
+    print(responsejson["documentId"])
+    response = requests.get(responsejson["pdf"])
+    print("file downloaded")
+    filename = "perfil-{}.pdf".format(idDN)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    with open(path, "wb") as f:
+        f.write(response.content)
+    return 'text'
     str(data)
     return str(data)
 

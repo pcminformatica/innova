@@ -1189,6 +1189,104 @@ def _d_create_carta_compromiso():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/create/ficha/inscripcion', methods = ['POST'])
+@login_required
+def _d_create_ficha_inscripcion():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_company_id = request.json['txt_company_id']
+            txt_documente_id = request.json['txt_documente_id']
+            document_type = CatalogIDDocumentTypes.query.filter_by(name_short=txt_documente_id).first()
+            user = User.query.filter_by(id = current_user.id).first()
+            company = Company.query.filter_by(id = txt_company_id).first()
+            inscripciones =  Inscripciones.query.filter_by(id=company.inscripcion_id).first()
+            preguntas = inscripciones.respuestas
+            totalEmpleadosPermanentes = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer'] + list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre']
+            totalEmpleadosTemporales =  list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer'] + list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre']
+            idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            data = {
+                "nombre_asesora" :'',
+                "fecha":"fecha",
+                "sabeusteddeinnova":'',
+                "conoce_servicios":list(e for e in preguntas if e['id']  == 'A')[0]['respuesta'],
+                "que_servicios":list(e for e in preguntas if e['id']  == 'B')[0]['respuesta'],
+                "porque_considera":list(e for e in preguntas if e['id']  == 'C')[0]['respuesta'],
+                "nombre_completo":list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta'],
+                "nacionalidad":"",
+                "n_identidad":list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta'],
+                "correo_electronico":list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'],
+                "telefono":list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta'],
+                "estadocivil":"",
+                "departamento":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
+                "ciudad":"",
+                "direccion":"",
+                "celular":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
+                "tiempo_de_operacion":list(e for e in preguntas if e['id']  == '3_11')[0]['respuesta'],
+                "cargo_empresa":list(e for e in preguntas if e['id']  == '2_6')[0]['respuesta'],
+                "actividad_comercia":list(e for e in preguntas if e['id']  == '3_12')[0]['respuesta'],
+                "nombre_empresa":list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'],
+                "descripcion_producto":"",
+                "rtn":"",
+                "correo_electronico_empresa":list(e for e in preguntas if e['id']  == '3_9')[0]['respuesta'],
+                "redes_sociales":list(e for e in preguntas if e['id']  == '3_10')[0]['respuesta'],
+                "pagina_web":"pagina_web",
+                "celular":list(e for e in preguntas if e['id']  == '3_4')[0]['respuesta'],
+                "ciudad":list(e for e in preguntas if e['id']  == '3_7')[0]['respuesta'],
+                "departamento":list(e for e in preguntas if e['id']  == '3_5')[0]['respuesta'],
+                "direccion_exacta":list(e for e in preguntas if e['id']  == '3_8')[0]['respuesta'],
+                "numero_empleados":totalEmpleadosPermanentes +totalEmpleadosTemporales ,
+                "empleados_permanentes":totalEmpleadosPermanentes,
+                "empleados_temporales":totalEmpleadosTemporales,
+                "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
+                "tipo_formalizacion":list(e for e in preguntas if e['id']  == '4_2')[0]['respuesta'],
+                "tipo_organizacion":"",
+                "registros_pendientes":list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'],
+                "volumen_venta_mensual":list(e for e in preguntas if e['id']  == '3_22')[0]['respuesta'],
+                "gasto_operativo_mensual":"",
+                "utilidades_mensuales":list(e for e in preguntas if e['id']  == '3_23')[0]['respuesta'],
+                "tiene_deudas_la_empresa":list(e for e in preguntas if e['id']  == '3_24')[0]['respuesta'],
+                "monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
+                "institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
+            }
+            
+            url = app.config.get('GOOGLE_SCRIPT_FICHA_STEP_1')
+
+            id_asesor = user.extra_info.national_id
+            id_empresa = company.dni
+            response = requests.post(url, data = data)
+            print("file generated")
+            responsejson = json.loads(response.text)
+            print("file downloaded")
+            print(responsejson["documentId"])
+            response = requests.get(responsejson["pdf"])
+            print("file downloaded")
+            filename = str(company.dni) + ' ' + str(document_type.name)  + str('0') + '.pdf'
+            filename = filename.replace(" ", "_")
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            with open(path, "wb") as file:
+                file.write(response.content)
+            carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+            if not carta:
+                # empty file without a filename.
+                carta = DocumentCompany()
+                carta.company_id = company.id
+                carta.documente_type_id = document_type.id
+                carta.complete = False
+                carta.signed = False
+                carta.signed_innova = False
+                carta.enabled = True
+                carta.document_local = filename
+                carta.created_by = current_user.id
+                db.session.add(carta)
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
     
 class Object:
     def toJSON(self):
