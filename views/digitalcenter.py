@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
@@ -747,9 +747,14 @@ def _company_monitoring_list():
     for diagnosi in diagnosis:
         lista.append(diagnosi.company_id)
     company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
-    
+    references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
+    lista = []
+    for reference in references:
+        lista.append(reference.action_plan.company.id)
+    company_references = Company.query.filter(Company.id.in_(lista)).all()
     context = {
-        'api': company
+        'api': company,
+        'company_references':company_references
     }
     return render_template('company_monitoring_list.html',**context)
 
@@ -779,6 +784,33 @@ def _company_dashboard(user_uid):
     }
  
     return render_template('company_dashboard.html',**context)
+
+@digitalcenter.route('/company/reference/view/<int:user_uid>/',methods=['GET', 'POST'])
+def _company_dashboard_action_plan_references(user_uid):
+    app.logger.debug('** sexo ** - ------------------')
+
+    company = Company.query.filter_by(id=user_uid).first()
+    #buscamos la carta de compromiso DOC2
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
+    #buscamos la ficha de inscripcion DOC1
+    ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
+    actions = ActionPlan.query.filter_by(company_id=company.id).all()
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    context = {
+        'carta':carta,
+        'ficha':ficha,
+        'company': company,
+        'actions':actions,
+        "diagnostico":diagnostico,
+    }
+ 
+    return render_template('company_dashboard_action_plan_references.html',**context)
 
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_bitacora(user_uid):
@@ -885,24 +917,6 @@ def _form_carta_innova():
     if request.method == 'GET':
         return redirect(url_for('digitalcenter._home_view'))
 
-@digitalcenter.route('/generar/test',methods = ['GET', 'POST'])
-def _generar_innova():
-    url = app.config.get('GOOGLE_SCRIPT_CARTA_STEP_1')
-    id_asesor = "0709-asesor"
-    id_empresa = "0709-empresa"
-    response = requests.get(url.format(id_asesor,id_empresa))
-    print("file generated")
-    responsejson = json.loads(response.text)
-    print("file downloaded")
-    print()
-    print(responsejson["documentId"])
-    response = requests.get(responsejson["pdf"])
-    print("file downloaded")
-    filename = "invoice{}.pdf".format(id_empresa)
-    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    with open(path, "wb") as f:
-        f.write(response.content)
-    return 'text'
 
 @digitalcenter.route('/formulario/documentos/<int:document_id>/inno',methods = ['GET', 'POST'])
 def _company_document_form(document_id):
@@ -920,78 +934,4 @@ def _company_document_user(document_id):
     }
     return render_template('company_document_user.html',**context)
 
-
-
-@digitalcenter.route('/empresas/view/user/2/1',methods=['GET', 'POST'])
-def _company_111():
-    app.logger.debug('** SWING_CMSx ** - ------------------')
-
-    inscripciones =  Inscripciones.query.filter_by(id=9).first()
-    preguntas = inscripciones.respuestas
-    totalEmpleadosPermanentes = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer'] + list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre']
-    totalEmpleadosTemporales =  list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer'] + list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre']
-    idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
-    data = {
-        "nombre_asesora" :'',
-        "fecha":"fecha",
-        "sabeusteddeinnova":'',
-        "conoce_servicios":list(e for e in preguntas if e['id']  == 'A')[0]['respuesta'],
-        "que_servicios":list(e for e in preguntas if e['id']  == 'B')[0]['respuesta'],
-        "porque_considera":list(e for e in preguntas if e['id']  == 'C')[0]['respuesta'],
-        "nombre_completo":list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta'],
-        "nacionalidad":"",
-        "n_identidad":list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta'],
-        "correo_electronico":list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta'],
-        "telefono":list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta'],
-        "estadocivil":"",
-        "departamento":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
-        "ciudad":"",
-        "direccion":"",
-        "celular":list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta'],
-        "tiempo_de_operacion":list(e for e in preguntas if e['id']  == '3_11')[0]['respuesta'],
-        "cargo_empresa":list(e for e in preguntas if e['id']  == '2_6')[0]['respuesta'],
-        "actividad_comercia":list(e for e in preguntas if e['id']  == '3_12')[0]['respuesta'],
-        "nombre_empresa":list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta'],
-        "descripcion_producto":"",
-        "rtn":"",
-        "correo_electronico_empresa":list(e for e in preguntas if e['id']  == '3_9')[0]['respuesta'],
-        "redes_sociales":list(e for e in preguntas if e['id']  == '3_10')[0]['respuesta'],
-        "pagina_web":"pagina_web",
-        "celular":list(e for e in preguntas if e['id']  == '3_4')[0]['respuesta'],
-        "ciudad":list(e for e in preguntas if e['id']  == '3_7')[0]['respuesta'],
-        "departamento":list(e for e in preguntas if e['id']  == '3_5')[0]['respuesta'],
-        "direccion_exacta":list(e for e in preguntas if e['id']  == '3_8')[0]['respuesta'],
-        "numero_empleados":totalEmpleadosPermanentes +totalEmpleadosTemporales ,
-        "empleados_permanentes":totalEmpleadosPermanentes,
-        "empleados_temporales":totalEmpleadosTemporales,
-        "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
-        "tipo_formalizacion":list(e for e in preguntas if e['id']  == '4_2')[0]['respuesta'],
-        "tipo_organizacion":"",
-        "registros_pendientes":list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'],
-        "volumen_venta_mensual":list(e for e in preguntas if e['id']  == '3_22')[0]['respuesta'],
-        "gasto_operativo_mensual":"",
-        "utilidades_mensuales":list(e for e in preguntas if e['id']  == '3_23')[0]['respuesta'],
-        "tiene_deudas_la_empresa":list(e for e in preguntas if e['id']  == '3_24')[0]['respuesta'],
-        "monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
-        "institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
-    }
-    
-    urls = app.config.get('GOOGLE_SCRIPT_FICHA_STEP_1')
-    response = requests.post(urls, data = data)
-    print("file generated")
-    print(response)
-    responsejson = json.loads(response.text)
-    print("file downloaded")
-    print(responsejson)
-    print("file generated")
-    print(responsejson["documentId"])
-    response = requests.get(responsejson["pdf"])
-    print("file downloaded")
-    filename = "perfil-{}.pdf".format(idDN)
-    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    with open(path, "wb") as f:
-        f.write(response.content)
-    return 'text'
-    str(data)
-    return str(data)
 

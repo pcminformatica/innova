@@ -819,8 +819,11 @@ class ActionPlanReferences(db.Model):
     action_plan = db.relationship("ActionPlan")
     employe_assigned = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     employe_accepted = db.Column(db.Boolean, nullable=True, default=False)
+    cancelled = db.Column(db.Boolean, nullable=True, default=False)
+    cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(tz.utc))
 
-    
 # Services Supplement Class
 class ActionPlanHistory(db.Model):
     __tablename__ = 'action_plan_history'

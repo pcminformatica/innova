@@ -1330,11 +1330,13 @@ def _d_created_reference():
                 plan.employe_assigned =user.id
                 db.session.add(plan)
                 db.session.commit()
-                reference = ActionPlanReferences()
-                reference.action_plan_id = plan.id
-                reference.employe_assigned = user.id
-                db.session.add(reference)
-                db.session.commit()
+                reference = ActionPlanReferences.query.filter_by(action_plan_id = plan.id,employe_assigned=user.id).first()
+                if not reference:
+                    reference = ActionPlanReferences()
+                    reference.action_plan_id = plan.id
+                    reference.employe_assigned = user.id
+                    db.session.add(reference)
+                    db.session.commit()
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
