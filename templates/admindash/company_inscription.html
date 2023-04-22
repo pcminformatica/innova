@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de usuarios</div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de emoresa : {{company.name}}</div>
                     
                                
                                 <br>
@@ -55,71 +55,63 @@
                                                 </div>
                                             </div>
                                             
-                                
-                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
-                                                    Nombre 
-                                                </div>
-                                                <label class="mdc-text-field mdc-text-field--filled"  id="txt_name" data-assigned-var>
-                                                    <span class="mdc-text-field__ripple"></span>
-                                                    <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
-                                                    <input required class="mdc-text-field__input" name="txt_name"   type="text" aria-labelledby="my-label-id" 
-                                                value="{{company.name}}" data-assigned-var
-                                                    >
-                                                    <span lass="mdc-line-ripple"></span>
-                                                </label>
-                                            </div>
-
-                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
-                                                    Identidad
-                                                </div>
-                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_dni" data-assigned-var>
-                                                    <span class="mdc-text-field__ripple"></span>
-                                                    <span class="mdc-floating-label" id="my-label-id">Identidad</span>
-                                                    <input required class="mdc-text-field__input" name="txt_identidad"  type="text" aria-labelledby="my-label-id"
-                                                    value="{{company.dni}}" data-assigned-var
-                                                    >
-                                                    <span class="mdc-line-ripple"></span>
-                                                </label>
-                                            </div>
-            
-
-                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
-                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
 
                                                 <div class="mdc-typography--body1">
-                                                    Estado: {{company.enabled}}
+                                                    Empresa:
                                                 </div>
-                                                <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
-                                                    <div class="mdc-form-field">
-                                                    <div class="mdc-checkbox">
-                                                        <input type="checkbox"
-                                                            class="mdc-checkbox__native-control"
-                                                            name="cxb_status"
-                                                            id="checkbox-public" 
-                                                            {%if company.enabled%}
-                                                            checked
-                                                            {% endif %}
-                                                            />
-                                                        <div class="mdc-checkbox__background">
-                                                        <svg class="mdc-checkbox__checkmark"
-                                                            viewBox="0 0 24 24">
-                                                            <path class="mdc-checkbox__checkmark-path"
-                                                                fill="none"
-                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_inscripcion" name="txt_inscripcion" data-assigned-var>
+                                                    <input type="hidden" name="txt_inscripcion">
+                                                    <div class="mdc-select__anchor"
+                                                         role="button"
+                                                         aria-haspopup="listbox"
+                                                         aria-expanded="false"
+                                                         aria-labelledby="demo-label demo-selected-text">
+                                                      <span class="mdc-select__ripple"></span>
+                                                      <span id="demo-label" class="mdc-floating-label">Empresa</span>
+                                                      <span class="mdc-select__selected-text-container">
+                                                        <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                      </span>
+                                                      <span class="mdc-select__dropdown-icon">
+                                                        <svg
+                                                            class="mdc-select__dropdown-icon-graphic"
+                                                            viewBox="7 10 10 5" focusable="false">
+                                                          <polygon
+                                                              class="mdc-select__dropdown-icon-inactive"
+                                                              stroke="none"
+                                                              fill-rule="evenodd"
+                                                              points="7 10 12 15 17 10">
+                                                          </polygon>
+                                                          <polygon
+                                                              class="mdc-select__dropdown-icon-active"
+                                                              stroke="none"
+                                                              fill-rule="evenodd"
+                                                              points="7 15 12 10 17 15">
+                                                          </polygon>
                                                         </svg>
-                                                        <div class="mdc-checkbox__mixedmark"></div>
-                                                        </div>
-                                                        <div class="mdc-checkbox__ripple"></div>
-                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                      </span>
+                                                      <span class="mdc-line-ripple"></span>
                                                     </div>
-                                                    <label for="checkbox-public">
-                                                        Selecciona esta casilla para indicar que deseas que los datos de la empresa sea publicada en el Marketplace
-                                                    </label>
-                                                </div>
-                                                </div>
-                                            </div>
+                                                  
+                                                    <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                      <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                  
+                                                        {% for inscripcion in inscripciones %}
+                  
+                                                                <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{inscripcion.id}}" role="option">
+                                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                    <span class="mdc-deprecated-list-item__text">
+                                                                        {{inscripcion.id}} - {{inscripcion.name}} - {{inscripcion.company_name}}
+                                                                    </span>
+                                                                </li>
+                                                      
+                                                        {% endfor %}
+                              
+                                                      </ul>
+                                                    </div>
+                                                  </div>
+                                              </div>
 
 
 
@@ -127,14 +119,14 @@
                                             </div>
                                             <div class="mdc-card__actions" style="justify-content:center;" >
                                                 <div class="mdc-card__actions-buttons"></div>
-                                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                                <a  href="{{ url_for('admindash._admin_list_company') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true"
                                                     >bookmark</i
                                                     >
                                                     <span class="mdc-button__label">Cancelar</span>
                                                 </a>
-                                                <button id="submitSaveButton" onclick="saveUsers()" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true"
                                                     >touch_app</i
