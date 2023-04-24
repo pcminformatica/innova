@@ -1376,3 +1376,22 @@ def _d_response_reference():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/innova/cohortes/', methods = ['POST'])
+@login_required
+def _api_innova_cohortes():
+    try:
+        if request.method == 'POST':
+            txt_busqueda = request.json['txt_busqueda']
+            url = app.config.get('INNOVA_API_1')
+            data={'txt_busqueda':txt_busqueda}
+            resp = requests.post(url,data=data)
+            responsejson = json.loads(resp.content)
+            for responsejs in responsejson:
+                print('responsejs:')
+                print(responsejs)
+            return jsonify({ 'status': 200, 'resultado': responsejson })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

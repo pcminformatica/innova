@@ -1,0 +1,384 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+@media print {
+  * { overflow: visible !important; } 
+  .mdc-top-app-bar__row{
+    display: none
+  }
+
+  .s-toptab{
+    display: none;
+  }
+  .no-print{
+    display: none;
+  }
+
+  .footer-about{
+    display: none;
+  }
+  .s-footer{
+    display: none;
+  }
+  @page {size: landscape}
+  body {
+    background: none;
+    -ms-zoom: 2.665;
+    margin: 0;
+    padding: 0;
+  }
+  .mdc-snackbar{
+    display: none;
+  }
+}
+
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                <div class="container-dashboard--messages">
+                    <div class="mdc-card mdc-card--color-on-primary">
+                        <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                            <div class="mdc-tab-scroller">
+                                <div class="mdc-tab-scroller__scroll-area">
+                                    <div class="mdc-tab-scroller__scroll-content">
+                                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                                <span class="mdc-tab__text-label">Datos de la empresa</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdc-card__content container-dashboard--messages-msg">
+                            
+                          <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                              <div class="mdc-typography--body1">
+                                  Buscar empresa:
+                              </div>
+                              <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                  <span class="mdc-text-field__ripple"></span>
+                                 
+                                  <input id="txt_busqueda" value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                  <span lass="mdc-line-ripple"></span>
+                              </label>
+                            </div>
+                            <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <br>
+                                <br>
+                                <button onclick="agregar()" class="mdc-button mdc-button--raised mdc-button--leading" style="width: 50%;">
+                                            
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                                    <span class="mdc-button__label">Buscar</span>
+                                </button>
+                              </div>
+                            
+                          </div>
+                        </div>
+          
+                            
+                         
+
+
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__actions-buttons">
+                            </div>
+                            <div class="mdc-card__action-icons">
+                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                    <div class="mdc-icon-button__ripple"></div>
+                                    more_vert
+                                </button>
+                            </div>
+                        </div>
+                    
+                    
+                </div>
+                </div>
+            </div>
+     
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                              
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                      
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                          
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Resultados </span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg" style="text-align: center">
+                              <br>
+                            
+                              <br>
+                                  <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                    <div class="mdc-data-table__table-container">
+                                      <table id="tbl_plan_1" class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                        <thead>
+                                          <tr class="mdc-data-table__header-row">
+                                        
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">dni</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">name</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company_name</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">departamento</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">municipio</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">correo</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">cohorte</th>
+                                            <th class="mdc-data-table__header-cell no-print" role="columnheader" scope="col">ACCIONES</th>
+                                          </tr>
+                                          
+                                          
+                                          
+                                        </thead>
+                                        <tbody id="tablaPlan_1" class="mdc-data-table__content">
+                                          
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  
+                                    <div class="mdc-data-table__progress-indicator">
+                                      <div class="mdc-data-table__scrim"></div>
+                                      <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                          <div class="mdc-linear-progress__buffer-bar"></div>
+                                          <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                          
+                                    
+                                  </div>
+                                  <br>
+       
+                                  <br>
+                                  <br>
+     
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+<script>
+    function agregar(){
+      var txt_busqueda = document.getElementById("txt_busqueda").value;
+
+      const Swal = swcms.returnSwal()
+        var data_result;
+        let postData = {
+            "txt_busqueda": txt_busqueda,
+        
+            };
+            console.log(postData)
+            let apiUrl = '/api/innova/cohortes/';
+            //document.getElementById('submitSaveButton').disabled = true;
+
+            swcms.postFetch(apiUrl, postData).then((data) => {
+            
+                console.log(data)
+                if(data.resultado){
+                    createTable(data.resultado)
+                }else{
+                    alert('Datos no encontrados')
+                }
+                
+            
+            }).catch((error) => {
+                Swal.fire(
+                'Error de conexión',
+                'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                'error'
+                )
+                //document.getElementById('submitSaveButton').disabled = false;
+            });
+            if(data.resultado){
+                alert('ss')
+            }
+    return false
+    }
+    function createTable(data){
+
+        let id,dni,name,company_name,departamento,municipio,correo,phone,cohorte
+
+        let secuencia = 0;
+        for (key in data){
+            secuencia++
+            context = {
+            'id': data[key].id,
+            'dni': data[key].identidad.trim(),
+            'name': data[key].nombre.trim(),
+            'company_name':data[key].RespuestasPregunta_idtipoperfil__respuesta.trim(),
+            'departamento': data[key].idmunicipio__iddepartamento__nombre.trim(),
+            'municipio':  data[key].idmunicipio__nombre.trim(),
+            'correo':  data[key].correo.trim(),
+            'phone': data[key].telefono.trim(),
+            'cohorte':  data[key].corte
+            }
+            console.log(context)
+        
+          Tbl = document.getElementById("tablaPlan_1");
+    
+        
+
+            var hilera = document.createElement("tr");
+            var celda_secuencia = document.createElement("td");
+
+            var celda_dni = document.createElement("td");
+            var celda_name = document.createElement("td");
+            var celda_company_name = document.createElement("td");
+            var celda_departamento = document.createElement("td");
+            var celda_municipio = document.createElement("td");
+            var celda_correo = document.createElement("td");
+            var celda_cohorte = document.createElement("td");
+            var celda_opciones = document.createElement("td");
+
+            var text_dni = document.createTextNode(context.dni);
+            var text_name = document.createTextNode(context.name);
+            var text_company_name = document.createTextNode(context.company_name);
+            var text_departamento = document.createTextNode(context.departamento);
+            var text_municipio = document.createTextNode(context.municipio);
+            var text_correo = document.createTextNode(context.correo);
+            var text_cohorte = document.createTextNode(context.cohorte);
+            
+            celda_secuencia.className = 'mdc-data-table__cell'
+            celda_dni.className = 'mdc-data-table__cell'
+            celda_name.className = 'mdc-data-table__cell'
+            celda_company_name.className = 'mdc-data-table__cell'
+            celda_departamento.className = 'mdc-data-table__cell'
+            celda_municipio.className = 'mdc-data-table__cell'
+            celda_correo.className = 'mdc-data-table__cell'
+            celda_cohorte.className = 'mdc-data-table__cell'
+            celda_opciones.className = 'mdc-data-table__cell'
+            hilera.className = 'mdc-data-table__row'
+
+
+            celda_dni.appendChild(text_dni)
+            celda_name.appendChild(text_name)
+            celda_company_name.appendChild(text_company_name)
+            celda_departamento.appendChild(text_departamento)
+            celda_municipio.appendChild(text_municipio)
+            celda_correo.appendChild(text_correo)
+            celda_cohorte.appendChild(text_cohorte)
+            celda_secuencia.innerHTML = secuencia
+            celda_opciones.innerHTML = `
+            <button onclick='createCompany(${JSON.stringify(context)})' 
+                    class="mdc-button mdc-button--raised mdc-button--leading" >                        
+                    <span class="mdc-button__ripple"></span>
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                    <span class="mdc-button__label">Crear Empresa</span>
+            </button>`
+            hilera.appendChild(celda_secuencia);
+            hilera.appendChild(celda_dni);
+            hilera.appendChild(celda_name);
+            hilera.appendChild(celda_company_name);
+            hilera.appendChild(celda_departamento);
+            hilera.appendChild(celda_municipio);
+            hilera.appendChild(celda_correo);
+            hilera.appendChild(celda_cohorte);
+            hilera.appendChild(celda_opciones);
+            
+            hilera.id =    1                     
+            Tbl.appendChild(hilera);
+        }
+    }
+        
+    
+    function createCompany(data){
+        alert('Error con el servidor de API')
+        console.log(data)
+    }
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+
+    function printPlan(){
+      window.print()
+    }
+
+    function formatDate(date) {
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join('/');
+}
+</script>
+{% endblock %}
+

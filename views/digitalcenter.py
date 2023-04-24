@@ -938,4 +938,6 @@ def _company_document_user(document_id):
     }
     return render_template('company_document_user.html',**context)
 
-
+@digitalcenter.route('/registros/inno/',methods = ['GET', 'POST'])
+def _registro_api_dashboard():
+    return render_template('digitalcenter/registro_api_dashboard.html')
