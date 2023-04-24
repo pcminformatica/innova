@@ -1211,13 +1211,13 @@ def _d_create_ficha_inscripcion():
             company = Company.query.filter_by(id = txt_company_id).first()
             inscripciones =  Inscripciones.query.filter_by(id=company.inscripcion_id).first()
             preguntas = inscripciones.respuestas
-            totalEmpleadosPermanentes = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer'] + list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre']
-            totalEmpleadosTemporales =  list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer'] + list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre']
+            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
             idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
             data = {
-                "nombre_asesora" :'',
-                "fecha":"fecha",
-                "sabeusteddeinnova":'',
+                "nombre_asesora" :user.extra_info.names + ' ' + user.extra_info.last_names,
+                "fecha":dt.now(tz.utc).strftime("%Y-%m-%d"),
+                "sabeusteddeinnova":'SI',
                 "conoce_servicios":list(e for e in preguntas if e['id']  == 'A')[0]['respuesta'],
                 "que_servicios":list(e for e in preguntas if e['id']  == 'B')[0]['respuesta'],
                 "porque_considera":list(e for e in preguntas if e['id']  == 'C')[0]['respuesta'],
@@ -1244,7 +1244,7 @@ def _d_create_ficha_inscripcion():
                 "ciudad":list(e for e in preguntas if e['id']  == '3_7')[0]['respuesta'],
                 "departamento":list(e for e in preguntas if e['id']  == '3_5')[0]['respuesta'],
                 "direccion_exacta":list(e for e in preguntas if e['id']  == '3_8')[0]['respuesta'],
-                "numero_empleados":totalEmpleadosPermanentes +totalEmpleadosTemporales ,
+                "numero_empleados":int(totalEmpleadosPermanentes) +int(totalEmpleadosTemporales) ,
                 "empleados_permanentes":totalEmpleadosPermanentes,
                 "empleados_temporales":totalEmpleadosTemporales,
                 "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
