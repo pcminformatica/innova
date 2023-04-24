@@ -267,6 +267,8 @@
         let id,dni,name,company_name,departamento,municipio,correo,phone,cohorte
 
         let secuencia = 0;
+        Tbl = document.getElementById("tablaPlan_1");
+        Tbl.innerHTML = ''
         for (key in data){
             secuencia++
             context = {
@@ -282,9 +284,9 @@
             }
             console.log(context)
         
-          Tbl = document.getElementById("tablaPlan_1");
+         
     
-        
+       
 
             var hilera = document.createElement("tr");
             var celda_secuencia = document.createElement("td");

@@ -1088,14 +1088,14 @@ def _initial_attention_companies():
         if request.method == 'POST':
             txt_inscripcion_id = request.json['txt_id']
             inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_inscripcion_id).first()
-            Inscripciones
-            company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+            dni= inscripcion.dni.replace("-", "")
+            company =  Company.query.filter(Company.dni == dni).first()
             #creamos la empresa
             if not company:
                 company = Company()
                 company.name = inscripcion.company_name
                 company.rtn = inscripcion.rtn
-                company.dni = inscripcion.dni.replace("-", "")
+                company.dni = dni
                 company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
                 jsonPhone = JsonPhone()
                 jsonPhone.phone = inscripcion.phone
