@@ -35,8 +35,32 @@
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                         </div>
-               
-                          <br><br>
+                                        <div class="mdc-typography--body1">
+                                          Fecha:
+                                      </div>
+                                      <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                              
+                                          <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
+                                              <span class="mdc-text-field__ripple"></span>
+                                          
+                                              <input id="txt_fecha"  class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" >
+                                              <span lass="mdc-line-ripple"></span>
+                                          </label>
+                                      </div>
+                          <br>
+                          <label class="mdc-text-field mdc-text-field--outlined">
+                            <span class="mdc-notched-outline">
+                              <span class="mdc-notched-outline__leading"></span>
+                              <span class="mdc-notched-outline__notch">
+                                <span class="mdc-floating-label" id="my-label-id">URL (opcional)</span>
+                              </span>
+                              <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.progress}}">
+                          </label>
+                          <br>
+                          
+                          <br>
                           <label class="mdc-text-field mdc-text-field--outlined">
                             <span class="mdc-notched-outline">
                               <span class="mdc-notched-outline__leading"></span>
@@ -178,6 +202,9 @@
         const Swal = swcms.returnSwal()
         var txt_porcentaje = document.getElementById("txt_porcentaje").value.trim() || null
         var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
+        var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
+        var txt_url = document.getElementById("txt_url").value.trim() || null
+        
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
         if(txt_porcentaje<=0 || txt_porcentaje>=101){
@@ -189,8 +216,11 @@
         }else if (txt_finalizo.checked==true && txt_porcentaje!=100 ){
             alert("Por favor escriba el porcentaje de 100%")
             return false
+        }else if(txt_fecha==null){
+          alert("Seleccione la fecha")
+          return false
         }
-      
+  
         txt_finalizo= txt_finalizo.checked
         console.log(txt_finalizo)
         console.log(txt_porcentaje)
@@ -200,7 +230,9 @@
             "txt_finalizo":txt_finalizo,
             "txt_finalizo":txt_finalizo,
             "txt_porcentaje":txt_porcentaje,
-            "txt_servicios":txt_servicios
+            "txt_servicios":txt_servicios,
+            "txt_fecha":txt_fecha,
+            "txt_url":txt_url
       };
       console.log(postData)
       let apiUrl = '/api/save/action/plan/history/';

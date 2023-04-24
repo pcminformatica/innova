@@ -949,14 +949,19 @@ def _d_save_ActionPlanHistory():
             txt_porcentaje = request.json['txt_porcentaje']
             txt_finalizo = request.json['txt_finalizo']
             txt_servicios = request.json['txt_servicios']
+            txt_fecha = request.json['txt_fecha']
+            txt_url = request.json['txt_url']
             history =  ActionPlanHistory()
             history.created_by = current_user.id 
             history.description = txt_comentario
             history.progress = txt_porcentaje
             history.action_plan_id = txt_servicios
             history.endservices = txt_finalizo
+            history.date_created = txt_fecha
+            history.url = txt_url
             db.session.add(history)
             db.session.commit()
+
             plan = ActionPlan.query.filter_by(id = txt_servicios).first()
             plan.progress =txt_porcentaje
             db.session.add(plan)
