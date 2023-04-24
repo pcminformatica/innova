@@ -821,7 +821,7 @@ class ActionPlanReferences(db.Model):
     employe_accepted = db.Column(db.Boolean, nullable=True, default=False)
     cancelled = db.Column(db.Boolean, nullable=True, default=False)
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
+    descripcion = db.Column(db.Text, unique=False, nullable=True)
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(tz.utc))
 
 # Services Supplement Class

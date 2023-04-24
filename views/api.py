@@ -1343,3 +1343,36 @@ def _d_created_reference():
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+
+@api.route('/api/reference/response', methods = ['POST'])
+@login_required
+def _d_response_reference():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            cod_refence = request.json['cod_refence']
+            txt_tipo = request.json['txt_tipo']
+            txt_observacion = request.json['txt_observacion']
+            reference = ActionPlanReferences.query.filter_by(id = cod_refence).first()
+            if reference:
+                actionplan = ActionPlan.query.filter_by(id = reference.action_plan_id).first()
+                #si la refenrecia fue aceptada
+                if txt_tipo == '1':
+                    reference.employe_accepted = True
+                    actionplan.employe_accepted = True
+                else:
+                    reference.employe_accepted = False
+                    actionplan.employe_accepted = False
+                    reference.cancelled = True
+                    reference.cancelled_by = current_user.id
+                    actionplan.employe_assigned = None
+                reference.descripcion = txt_observacion
+                db.session.add(reference)
+                db.session.add(actionplan)
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

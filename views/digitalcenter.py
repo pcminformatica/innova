@@ -763,6 +763,7 @@ def _company_dashboard(user_uid):
     app.logger.debug('** sexo ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
+    
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
     carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
@@ -802,12 +803,15 @@ def _company_dashboard_action_plan_references(user_uid):
         diagnostico = diagnos.resultados
     else:
         diagnostico = False
+    references = ActionPlanReferences.query.join(ActionPlan, ActionPlan.id==ActionPlanReferences.action_plan_id).filter(ActionPlanReferences.employe_assigned==current_user.id,ActionPlan.company_id==company.id).order_by(desc(ActionPlanReferences.id)).all()
+
     context = {
         'carta':carta,
         'ficha':ficha,
         'company': company,
         'actions':actions,
         "diagnostico":diagnostico,
+        "references":references
     }
  
     return render_template('company_dashboard_action_plan_references.html',**context)
