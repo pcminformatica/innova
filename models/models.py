@@ -768,6 +768,7 @@ class Inscripciones(db.Model):
     attended_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship("User")
     attention_date = db.Column(db.DateTime, nullable=True)
+    externa = db.Column(db.Integer, unique=False, nullable=True, default=0)
     def __repr__(self):
         return jsonify(
             id = self.id,

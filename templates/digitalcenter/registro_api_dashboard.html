@@ -350,8 +350,30 @@
         
     
     function createCompany(data){
-        alert('Error con el servidor de API')
-        console.log(data)
+        
+      const Swal = swcms.returnSwal()
+ 
+        let postData = data
+      console.log(postData)
+      let apiUrl = '/initial/attention/api/companies/';
+      //document.getElementById('submitSaveButton').disabled = true; 
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+        //window.setTimeout(() => { window.location.reload(); }, 1500);
+        window.location.replace("/empresas/");
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
     }
     function deleteRow() {
    

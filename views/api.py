@@ -803,12 +803,13 @@ def _d_inscripciones():
             if totales <= 4:
                 elegible = False
             inscripcion = Inscripciones()
+            dni = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
             inscripcion.name = list(e for e in preguntas if e['id']  == '1_1')[0]['respuesta']
             inscripcion.company_name = list(e for e in preguntas if e['id']  == '3_1')[0]['respuesta']
             inscripcion.correo = list(e for e in preguntas if e['id']  == '1_8')[0]['respuesta']
             inscripcion.phone = list(e for e in preguntas if e['id']  == '1_3')[0]['respuesta']
             inscripcion.cohorte = 5
-            inscripcion.dni = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            inscripcion.dni = dni.replace("-", "")
             inscripcion.departamento = list(e for e in preguntas if e['id']  == '1_4')[0]['respuesta']
             inscripcion.municipio = list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta']
             inscripcion.rtn = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
@@ -847,14 +848,14 @@ def _d_save_ActionPlan():
             txt_company_id = request.json['txt_company_id']
             txt_identidad = request.json['txt_identidad']
             services = request.json['services']
-            company =  Company.query.filter(or_(Company.dni == txt_identidad, Company.id == txt_company_id)).first()
+            company =  Company.query.filter(or_(Company.dni == txt_identidad.replace("-", ""), Company.id == txt_company_id)).first()
             if not company:
                 txt_company_name = request.json['txt_company_name']
                 txt_company_rtn = request.json['txt_company_rtn']
                 company = Company()
                 company.name = txt_company_name
                 company.rtn = txt_company_rtn
-                company.dni = txt_identidad
+                company.dni = txt_identidad.replace("-", "")
                 company.description = 'description'
                 company.created_by = current_user.id
                 db.session.add(company)
@@ -900,10 +901,11 @@ def _d_save_DiagnosisCompany():
             api = json.loads(resp.content)
             company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
             if not company:
+                dni = api['IDENTIDAD']
                 company = Company()
                 company.name = api['NOMBRE_EMPRESA']
                 company.rtn = api['RTN']
-                company.dni = api['IDENTIDAD']
+                company.dni = dni.replace("-", "")
                 company.address = api['DIRECCION']
                 jsonPhone = JsonPhone()
                 jsonPhone.phone = api['TELEFONO']
@@ -1093,7 +1095,7 @@ def _initial_attention_companies():
                 company = Company()
                 company.name = inscripcion.company_name
                 company.rtn = inscripcion.rtn
-                company.dni = inscripcion.dni
+                company.dni = inscripcion.dni.replace("-", "")
                 company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
                 jsonPhone = JsonPhone()
                 jsonPhone.phone = inscripcion.phone
@@ -1392,6 +1394,87 @@ def _api_innova_cohortes():
                 print('responsejs:')
                 print(responsejs)
             return jsonify({ 'status': 200, 'resultado': responsejson })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/initial/attention/api/companies/',methods=['GET', 'POST'])
+def _initial_attention_companies_api():
+    try:
+        print('company_name')
+        print('company_name')
+        if request.method == 'POST':
+            id = request.json['id']
+            dni = request.json['dni']
+            name = request.json['name']
+            company_name = request.json['company_name']
+            departamento = request.json['departamento']
+            municipio = request.json['municipio']
+            correo = request.json['correo']
+            phone = request.json['phone']
+            cohorte = request.json['cohorte']
+            #creamos la inscripcion
+            inscripcion = Inscripciones()
+            inscripcion.name = name
+            inscripcion.company_name = company_name
+            inscripcion.correo = correo
+            inscripcion.phone = phone
+            inscripcion.cohorte = cohorte
+            inscripcion.dni = dni.replace("-", "")
+            inscripcion.departamento = departamento
+            inscripcion.municipio = municipio
+            inscripcion.rtn = ''
+            inscripcion.respuestas = ''
+            inscripcion.elegible = True
+            inscripcion.externa = int(id)
+            db.session.add(inscripcion)
+            db.session.commit()
+            company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+            #creamos la empresa
+            if not company:
+                company = Company()
+                company.name = inscripcion.company_name
+                company.rtn = inscripcion.rtn
+                company.dni = inscripcion.dni
+                company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
+                jsonPhone = JsonPhone()
+                jsonPhone.phone = inscripcion.phone
+                jsonSocial= JsonSocial()
+                jsonSocial.email = inscripcion.correo
+                company.phones = jsonPhone.jsonFormat()
+                company.social_networks = jsonSocial.jsonFormat()
+                company.created_by = current_user.id
+                company.inscripcion_id = inscripcion.id
+                db.session.add(company)
+                db.session.commit()
+            else:
+                company
+                company.inscripcion_id = inscripcion.id
+                db.session.add(company)
+                db.session.commit()
+                db.session.refresh(company)
+            #creamos los servicios iniciales
+            #insertamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
+            service = CatalogServices.query.filter_by(name_short = 'a1').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
+            if not actionplan:
+                actionplan = ActionPlan()
+                actionplan.company_id = actionplan.id
+                actionplan.company = company
+                actionplan.services_id = service.id
+                actionplan.created_by = current_user.id
+                actionplan.fase = 0
+                db.session.add(actionplan)
+                db.session.commit()
+            #actulizamos la inscripcion a ya atendida 
+            inscripcion.attended = True
+            inscripcion.attended_user = current_user.id
+            inscripcion.attention_date = dt.now(tz.utc)
+            db.session.add(inscripcion)
+            db.session.commit()
+            db.session.refresh(inscripcion)
+            
+            return jsonify({ 'status': 200, 'resultado': 'responsejson' })
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
