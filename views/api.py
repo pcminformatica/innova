@@ -899,6 +899,7 @@ def _d_save_DiagnosisCompany():
             headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
+            identidad = api['IDENTIDAD'].replace("-", "")
             company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
             if not company:
                 dni = api['IDENTIDAD']
