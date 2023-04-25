@@ -148,12 +148,12 @@ def _admin_inscription_edit(inscription_id):
         txt_company_name = request.form.get('txt_company_name') 
         txt_correo = request.form.get('txt_correo') 
         txt_dni = request.form.get('txt_dni')
-        print(type(json.load(txt_respuestas)))
+        
         cxb_status = False
         if 'cxb_status' in request.form: 
             cxb_status = True
         inscripcion.elegible = cxb_status
-        inscripcion.respuestas = json.loads( json.dumps((txt_respuestas)))
+        inscripcion.respuestas = json.loads( txt_respuestas.replace("\'", "\""))
         inscripcion.dni = txt_dni
         inscripcion.name = txt_name
         inscripcion.company_name = txt_company_name
