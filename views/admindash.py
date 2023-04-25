@@ -136,7 +136,7 @@ def _admin_list_inscription():
     inscripciones = Inscripciones.query.all()
     cxt = {'inscripciones':inscripciones}
     return render_template('/admindash/incripcione_list.html',**cxt)
-
+import json
 @admindash.route('/admin/inscripcion/<int:inscription_id>/edit',methods=['GET', 'POST'])
 @login_required
 def _admin_inscription_edit(inscription_id):
@@ -152,7 +152,7 @@ def _admin_inscription_edit(inscription_id):
         if 'cxb_status' in request.form: 
             cxb_status = True
         inscripcion.elegible = cxb_status
-        inscripcion.respuestas = txt_respuestas
+        inscripcion.respuestas = json.loads(txt_respuestas)
         inscripcion.dni = txt_dni
         inscripcion.name = txt_name
         inscripcion.company_name = txt_company_name
