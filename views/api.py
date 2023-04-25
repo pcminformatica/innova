@@ -900,7 +900,7 @@ def _d_save_DiagnosisCompany():
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
             identidad = api['IDENTIDAD'].replace("-", "")
-            company =  Company.query.filter(Company.dni == api['IDENTIDAD']).first()
+            company =  Company.query.filter(Company.dni == identidad).first()
             if not company:
                 dni = api['IDENTIDAD']
                 company = Company()
