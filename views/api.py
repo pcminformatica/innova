@@ -1256,10 +1256,12 @@ def _d_create_ficha_inscripcion():
                 "gasto_operativo_mensual":"",
                 "utilidades_mensuales":list(e for e in preguntas if e['id']  == '3_23')[0]['respuesta'],
                 "tiene_deudas_la_empresa":list(e for e in preguntas if e['id']  == '3_24')[0]['respuesta'],
-                "monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
-                "institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
+                "monto":"",
+                "institucion_financiera":""
             }
             
+                #"monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
+                #"institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
             url = app.config.get('GOOGLE_SCRIPT_FICHA_STEP_1')
 
             id_asesor = user.extra_info.national_id
