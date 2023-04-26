@@ -9,7 +9,7 @@
 
 .video {
   width: 100%;
-  height: 100%;
+  height: 400px;
   border: 1px solid red;
   overflow: hidden;
   position: relative;
@@ -27,7 +27,36 @@
 
 
         <div class="mdc-layout-grid">
+
+
+       
             <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <p>
+                                    <b>Nombre de la empresa:</b>
+                                    {{ company.name }}
+                                </p>
+                                <p>
+                                    <b>DNI Empresaria:</b>
+                                    {{ company.dni }}
+                                </p>
+                                <p>
+                                    <b>RTN :</b>
+                                    {{ company.rtn }}
+                                </p>
+                                <p>
+                                    <b>Direccion:</b>
+                                    {{ company.address }}
+                                </p>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
               <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
                 <div class="mdc-card  mdc-card--color-on-primary">
                     <div class="mdc-card__primary-action" >
@@ -38,22 +67,18 @@
 
                                   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
                                   mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
-                                  <p>Documento generado:</p>
-                                  <div style="height: 800px; overflow: hidden">
-                                    <div class="video">
-                                        <embed src="{{ url_for('static', filename='upload/') }}{{document.document_local}}" id="output1" width="500" height="375" type="application/pdf">
-                                    </div>
-                                  </div>
+
                                     
-                                {% if not document.complete %}
-                                    {% if not document.signed_innova %}
                                     <h2>
                                         Cargar nuevo documento
                                     </h2>
+                                    <p>
+                                        Para cargar una nueva "{{ document_type.name }}", primero da clic en el botón "Seleccione documento" y luego da clic "Enviar Documento" 
+                                    </p>
                                 
-                                    <form id="formPIC"  action = "/save/carta/innova" method="POST" enctype = "multipart/form-data">
-                                    <input type="hidden" name="txt_company_id"  value="{{document.company_id}}">
-                                    <input type="hidden"  name="txt_documente_id" value="{{ document.documente_type.name_short }}">
+                                    <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
+                                    <input type="hidden" name="txt_company_id"  value="{{company.company_id}}">
+                                    <input type="hidden"  name="txt_documente_id" value="{{ document_type.name_short }}">
                                     <input type="hidden"  name="txt_document_version" value="1">
                                     <label htmlFor="upload-photo" style="margin: auto">
                                         <input
@@ -97,22 +122,8 @@
                                     </div>
                                     </form>    
                                     
-                                    {% elif not document.signed %}
-                                    <p>
-                                        Documento no ha sido firmado por la empresaria
-                                    </p>
-                                    {% else %}
-                                    <div class="s-font-align-center">
-                                      <br><br>
-                                      <button type="button" onclick="aprobarDocumento()" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                          
-                                          <span class="mdc-button__ripple"></span>
-                                          <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                          <span class="mdc-button__label">Aprobar documento</span>
-                                      </button>
-                                  </div>
-                                    {% endif %}
-                                {% endif %}
+  
+                        
 
 
 
@@ -156,7 +167,7 @@ const Swal = swcms.returnSwal()
 
 
 let postData = {
-  "txt_documente_id":"{{ document.id }}"
+  "txt_documente_id":"{{ company.id }}"
 };
 
 console.log(postData)

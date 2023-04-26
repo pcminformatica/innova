@@ -963,6 +963,47 @@ def _company_document_form(document_id):
     }
     return render_template('company_document_form.html',**context)
 
+@digitalcenter.route('/formulario/documentos/<int:company_id>/add/<int:document_id>/',methods = ['GET', 'POST'])
+def _company_document_form_add(company_id,document_id):
+    company = Company.query.filter_by(id=company_id).first()
+    document_type = CatalogIDDocumentTypes.query.filter_by(id=document_id).first()
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=document_type.id))
+        
+        file = request.files['upload-carta']
+        #buscamos el tipo de documento
+        document = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+        if document:
+            document.enabled = False
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            documentoName = str(company.dni) + ' ' + str(document_type.name) 
+            filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            carta = DocumentCompany()
+            carta.company_id = company.id
+            carta.documente_type_id = document_type.id
+            carta.complete = True
+            carta.signed = True
+            carta.signed_innova = True
+            carta.enabled = True
+            carta.document_local = filename
+            carta.created_by = current_user.id
+            db.session.add(carta)
+            db.session.commit()
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+
+    context = {
+        "company": company,
+        "document_type":document_type
+    }
+    return render_template('company_document_form_add.html',**context)
+
+
 @digitalcenter.route('/formulario/documentos/user/<int:document_id>/inno',methods = ['GET', 'POST'])
 def _company_document_user(document_id):
     document = DocumentCompany.query.filter_by(id=document_id).first()
