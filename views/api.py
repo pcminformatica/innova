@@ -1215,6 +1215,9 @@ def _d_create_ficha_inscripcion():
             totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
             totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
             idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
+            registrospendientes = list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta']
+            if not registrospendientes:
+                registrospendientes = ""
             data = {
                 "nombre_asesora" :user.extra_info.names + ' ' + user.extra_info.last_names,
                 "fecha":dt.now(tz.utc).strftime("%Y-%m-%d"),
@@ -1251,7 +1254,7 @@ def _d_create_ficha_inscripcion():
                 "status":list(e for e in preguntas if e['id']  == '4_1')[0]['respuesta'],
                 "tipo_formalizacion":list(e for e in preguntas if e['id']  == '4_2')[0]['respuesta'],
                 "tipo_organizacion":"",
-                "registros_pendientes":list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'],
+                "registros_pendientes":registrospendientes,
                 "volumen_venta_mensual":list(e for e in preguntas if e['id']  == '3_22')[0]['respuesta'],
                 "gasto_operativo_mensual":"",
                 "utilidades_mensuales":list(e for e in preguntas if e['id']  == '3_23')[0]['respuesta'],
@@ -1259,7 +1262,10 @@ def _d_create_ficha_inscripcion():
                 "monto":"",
                 "institucion_financiera":""
             }
-            
+        
+            print(list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'])
+            print(list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'])
+            print(list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta'])
                 #"monto":list(e for e in preguntas if e['id']  == '3_26')[0]['respuesta'],
                 #"institucion_financiera":list(e for e in preguntas if e['id']  == '3_27')[0]['respuesta']
             url = app.config.get('GOOGLE_SCRIPT_FICHA_STEP_1')
@@ -1268,6 +1274,12 @@ def _d_create_ficha_inscripcion():
             id_empresa = company.dni
             response = requests.post(url, data = data)
             print("file generated")
+            print("file generated")
+            print("file generated")
+            print("file generated-s")
+            print(response.text)
+            print(response.text)
+            print(response.text)
             responsejson = json.loads(response.text)
             print("file downloaded")
             print(responsejson["documentId"])
@@ -1295,6 +1307,11 @@ def _d_create_ficha_inscripcion():
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
+        print(e)
+        print(e)
+        print(e)
+        print(e)
+        print(e)
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
     
