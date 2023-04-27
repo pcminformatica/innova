@@ -779,7 +779,10 @@ def _company_monitoring_list():
     lista = []
     for diagnosi in diagnosis:
         lista.append(diagnosi.company_id)
-    company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+    if current_user.id == 3 or current_user.id == 24:
+        company = Company.query.filter(Company.enabled==True).all()
+    else:
+        company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
     references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
     lista = []
     for reference in references:
