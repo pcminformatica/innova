@@ -800,12 +800,13 @@ def _company_dashboard(user_uid):
 
     company = Company.query.filter_by(id=user_uid).first()
     
+
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
     #buscamos la ficha de inscripcion DOC1
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
-    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).order_by(DocumentCompany.id.desc()).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     actions = ActionPlan.query.filter_by(company_id=company.id).all()
     if diagnos:
@@ -978,13 +979,15 @@ def _company_document_form_add(company_id,document_id):
         file = request.files['upload-carta']
         #buscamos el tipo de documento
         document = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+        n = 1
         if document:
             document.enabled = False
+            n = document.id
         if file.filename == '':
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            documentoName = str(company.dni) + ' ' + str(document_type.name) 
+            documentoName = str(company.dni) + ' ' + str(document_type.name) + '-' + str(n)
             filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             carta = DocumentCompany()
@@ -1018,3 +1021,12 @@ def _company_document_user(document_id):
 @digitalcenter.route('/registros/inno/',methods = ['GET', 'POST'])
 def _registro_api_dashboard():
     return render_template('digitalcenter/registro_api_dashboard.html')
+
+@digitalcenter.route('/indicadores/home/',methods = ['GET', 'POST'])
+def _indicadores_dashboard():
+    return render_template('indicadores_dashboard.html')
+
+
+@digitalcenter.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
+def _indicadores_inscritas():
+    return render_template('indicadores_inscritas.html')
