@@ -937,11 +937,11 @@ def _form_carta_innova():
                 carta = DocumentCompany()
                 carta.company_id = company.id
                 carta.documente_type_id = document_type.id
-                carta.complete = False
+                carta.complete = True
                 if txt_documente_version == "2":
                     carta.signed = True
                 else:
-                    carta.signed = False
+                    carta.signed = True
                 carta.signed_innova = True
                 carta.enabled = True
                 carta.document_local = filename
@@ -1029,4 +1029,8 @@ def _indicadores_dashboard():
 
 @digitalcenter.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
 def _indicadores_inscritas():
-    return render_template('indicadores_inscritas.html')
+    inscripciones = Inscripciones.query.filter_by(cohorte=5).all()
+    context = {
+        'inscripciones': inscripciones
+    }
+    return render_template('indicadores_inscritas.html',**context)
