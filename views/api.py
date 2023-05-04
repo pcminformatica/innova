@@ -397,7 +397,7 @@ def _d_():
         # POST: Save Appointment
         if request.method == 'POST':
             user = User.query.filter_by(id = current_user.id).first()
-        
+    
             if user.extra_info is None:
                 user_extra = UserExtraInfo()
                 user_extra.id = user.id
@@ -405,7 +405,7 @@ def _d_():
                 db.session.add(user_extra)
                 db.session.commit()
                 db.session.refresh(user)
- 
+
             if user.extra_info.company_id is None:
                 company = Company()
             else:
@@ -435,6 +435,12 @@ def _d_():
             user.extra_info.names = request.json['txt_name']
             user.extra_info.last_names = request.json['txt_last']
             user.extra_info.company = company
+            txt_Departamento = request.json['txt_depto']
+            jsDepto = {'title':txt_Departamento}
+            txt_Municipio = request.json['txt_municipio']
+            jsMunicipio = {'title':txt_Municipio}
+            user.extra_info.country = jsDepto
+            user.extra_info.state = jsMunicipio
             db.session.add(user)
             db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })

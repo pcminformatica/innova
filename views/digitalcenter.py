@@ -21,6 +21,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Python 3 code to demonstrate the
+# working of MD5 (string - hexadecimal)
+ 
+import hashlib
+ 
+
 @digitalcenter.route('/ddd/',methods = ['GET', 'POST'])
 def __form_perfil_emp2():
     if request.method == 'POST':
@@ -34,7 +40,12 @@ def __form_perfil_emp2():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            filename = str(current_user.id) +'.'+ filename.rsplit('.', 1)[1].lower()
+            # initializing string
+            str2hash =  dt.now(tz.utc)
+            # encoding GeeksforGeeks using encode()
+            # then sending to md5()
+            result = hashlib.md5(str(str2hash).encode())
+            filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         user = User.query.filter_by(id = current_user.id).first()
         if user.extra_info is None:
@@ -49,7 +60,7 @@ def __form_perfil_emp2():
         user.extra_info.avatar = filename
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('digitalcenter.__form_profile_sde'))
+        return redirect(url_for('home._home'))
     if request.method == 'GET':
         return 'hola'
     
@@ -782,7 +793,7 @@ def _company_monitoring_list():
     if current_user.id == 3 or current_user.id == 24:
         company = Company.query.filter(Company.enabled==True).all()
     else:
-        company = Company.query.filter(or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+        company = Company.query.filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
     references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
     lista = []
     for reference in references:

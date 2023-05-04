@@ -22,8 +22,13 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__primary-action" tabindex="0">
                                 <div class="mdc-card__media">
-                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                    {% if current_user.extra_info.avatar %}
+                                    <img class="profile-background" src="{{ url_for('static', filename='upload/') }}{{current_user.extra_info.avatar}}" alt="Border Perfil" />
+
+                                    {% else %}
+                                    <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                    <img class="profile-pic" src="../../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                    {% endif %}
                                 </div>
                                 <div class="mdc-card__ripple"></div>
                             </div>

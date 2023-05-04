@@ -972,3 +972,102 @@ function loadCities2(data) {
   
   citiesData = data;
 }
+
+
+function loadFile(event){
+  const Swal = swcms.returnSwal()
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function() {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+
+  Swal.fire({
+    title: '¿Desea modificar la imagen de perfil?',
+    text: 'Guardar Imagen',
+    imageUrl: URL.createObjectURL(event.target.files[0]),
+    imageWidth: 400,
+    imageHeight: 200,
+    imageAlt: 'Custom image',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Acepto'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Gracias',
+        'Bienvenida a INNOVA MUJER!',
+        'success'
+      )
+      document.getElementById("formPIC").submit(); 
+    }
+  })
+
+}
+
+
+function saveCompanyForms(){
+  const Swal = swcms.returnSwal()
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  swcms.mdcTextInputs.forEach((txt) => {
+    if (txt.assignedVar)
+        mdcAssignedVars[txt.assignedVar] = txt;
+  });
+  for (const property in mdcAssignedVars) {
+    if(mdcAssignedVars[property].value === '' && mdcAssignedVars[property].required===true){
+      console.log(`${property}: ${mdcAssignedVars[property]}`);
+      mdcAssignedVars[property].required
+      Swal.fire(`Por favor complete el campo: ${mdcAssignedVars[property].label.root.innerText} `)
+      Swal.fire(
+        'Por favor complete el campo:',
+        `${mdcAssignedVars[property].label.root.innerText}`,
+        'info'
+        
+      )
+
+      return false
+    }
+  }
+  
+    let postData = {
+      'txt_name': mdcAssignedVars['txt_name'].value.trim() || null,
+      'txt_last': mdcAssignedVars['txt_last'].value.trim() || null,
+      'txt_dni': mdcAssignedVars['txt_dni'].value.trim() || null,
+      'txt_company_name': mdcAssignedVars['txt_company_name'].value.trim() || null,
+      'txt_company_rtn': mdcAssignedVars['txt_company_rtn'].value.trim() || null,
+      'txt_company_phone':mdcAssignedVars['txt_company_phone'].value.trim() || null,
+      'txt_company_facebook':mdcAssignedVars['txt_company_facebook'].value.trim() || null,
+      'txt_company_instagram':mdcAssignedVars['txt_company_instagram'].value.trim() || null,
+      'txt_company_address':mdcAssignedVars['txt_company_address'].value.trim() || null,
+      'txt_company_description':mdcAssignedVars['txt_company_description'].value.trim() || null,
+      'txt_company_public':document.getElementById("checkbox-public").checked,
+      'txt_depto': mdcAssignedVars['txt_depto'].selectedText.textContent,
+      'txt_municipio': mdcAssignedVars['txt_municipio'].selectedText.textContent,
+    };
+    console.log(postData)
+
+      let apiUrl = '/api/save/perfil/';
+      document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Gracias',
+          'Bienvenida a INNOVA MUJER!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        document.getElementById('submitSaveButton').disabled = false;
+      });
+
+}
+
