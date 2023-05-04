@@ -41,58 +41,46 @@
                         <div class="mdc-card__content container-dashboard--messages-msg">
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <table id="example" class="mdl-data-table" width="100%" cellspacing="0">
+                                    <table id="example" class="mdl-data-table_normal" width="100%" cellspacing="0" style="white-space: normal;">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>dni</th>
-                                                <th>name</th>
-                                                <th>company_name</th>
-                                                <th>departamento</th>
-                                                <th>municipio</th>
-                                                <th>correo</th>
-                                                <th>phone</th>
-                                                <th>cohorte</th>
+                                                <th>DNI</th>
+                                                <th>Nombre</th>
+                                                <th>Empresa</th>
+                                                <th>Departamento</th>
+                                                <th>Municipio</th>
+                                                <th>Correo</th>
+                                                <th>Telefono</th>
+                                                <th>Cohorte</th>
                                                 <th>Elegible</th>
                                                 <th>Fecha</th>
-
+                                                <th>¿Como se enteró de Innova?</th>
                                             </tr>
                                         </thead>
                                         
                                         <tfoot>
                                             <tr>
                                                 <th>#</th>
-                                                <th>dni</th>
-                                                <th>name</th>
-                                                <th>company_name</th>
-                                                <th>departamento</th>
-                                                <th>municipio</th>
-                                                <th>correo</th>
-                                                <th>phone</th>
-                                                <th>cohorte</th>
+                                                <th>DNI</th>
+                                                <th>Nombre</th>
+                                                <th>Empresa</th>
+                                                <th>Departamento</th>
+                                                <th>Municipio</th>
+                                                <th>Correo</th>
+                                                <th>Telefono</th>
+                                                <th>Cohorte</th>
                                                 <th>Elegible</th>
                                                 <th>Fecha</th>
-                                        
+                                                <th>¿Como se enteró de Innova?</th>
                                             </tr>
                                         </tfoot>
                                         
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                          
-                                        
-                                        
                                         <tbody>
                                             {% for inscripcion in inscripciones %}
+
                                             <tr>
+                                         
                                                 <td>{{loop.index}}</td>
                                                 <td>{{ inscripcion.dni }}</td>
                                                 <td>{{ inscripcion.name }}</td>
@@ -105,7 +93,14 @@
                                                 
                                                 <td>{{ inscripcion.elegible }}</td>
                                                 <td>{{ inscripcion.date_created.strftime('%Y-%m-%d') }}</td>
-                                                
+                                                <td>
+                                                    {% for respuesta in inscripcion.respuestas %}
+                                                    {% if respuesta.id == '4_4' %}
+                                                        {{ respuesta.respuesta }}
+                                                    {% endif %}
+                                                    
+                                                    {% endfor %}
+                                                </td>
                                           
                                             </tr>
                                             {% endfor %}

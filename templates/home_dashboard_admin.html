@@ -271,6 +271,20 @@
                                             </span>
                                         </a>
                                     </li>
+                                    {% if current_user.id in (3,5,24) %}
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('digitalcenter._indicadores_inscritas') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Listado de empresas 5 cohorte</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
