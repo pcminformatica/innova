@@ -270,12 +270,14 @@
         Tbl = document.getElementById("tablaPlan_1");
         Tbl.innerHTML = ''
         for (key in data){
+          
             secuencia++
+            company_name  = data[key].RespuestasPregunta_idtipoperfil__respuesta.trim()
             context = {
             'id': data[key].id,
             'dni': data[key].identidad.trim(),
             'name': data[key].nombre.trim(),
-            'company_name':data[key].RespuestasPregunta_idtipoperfil__respuesta.trim(),
+            'company_name':company_name.replace("'", ""),
             'departamento': data[key].idmunicipio__iddepartamento__nombre.trim(),
             'municipio':  data[key].idmunicipio__nombre.trim(),
             'correo':  data[key].correo.trim(),
