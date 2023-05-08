@@ -1,0 +1,69 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block drawer %}
+    {{ super() }}
+{% endblock %}
+{% block drawer_type %}mdc-drawer--dismissible{% endblock %}
+{% block topbar %}
+    {{ super() }}
+{% endblock %}
+{% block toptab %}
+    {{ super() }}
+{% endblock %}
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+
+{% block table_script_section %}
+
+
+<script src="{{ url_for('static', filename='js/vendor/datatable/jquery-3.5.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/dataTables.material.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/jszip.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/buttons.html5.min.js') }}"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('.data_table').DataTable(
+        {
+        columnDefs: [
+            {
+                targets: ['_all'],
+                className: 'mdc-data-table__cell',
+            },
+        ],
+        language: {
+        url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+    }
+    });
+    $('.data_table_buttons').DataTable(
+        
+            {
+            
+            autoWidth: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        ,
+            columnDefs: [
+                {
+                    targets: ['_all'],
+                    className: 'mdc-data-table__cell',
+                },
+            ],
+            language: {
+            url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+        }
+        });
+});
+
+  </script>
+
+
+
+{% endblock %}

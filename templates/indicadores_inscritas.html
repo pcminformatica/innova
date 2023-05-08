@@ -1,4 +1,4 @@
-{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% extends 'layout_main_drawer_table.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
 {% block css_script_section %}
@@ -41,7 +41,7 @@
                         <div class="mdc-card__content container-dashboard--messages-msg">
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <table id="example" class="mdl-data-table_normal" width="100%" cellspacing="0" style="white-space: normal;">
+                                    <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -141,38 +141,4 @@
     </div>
  
 </main>
-{% endblock %}
-{% block body_script_section %}
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.material.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-
-
-
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#example').DataTable({
-        autoWidth: false,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    ,
-        columnDefs: [
-            {
-                targets: ['_all'],
-                className: 'mdc-data-table__cell',
-            },
-        ],
-    });
-});
-  </script>
-
-
 {% endblock %}
