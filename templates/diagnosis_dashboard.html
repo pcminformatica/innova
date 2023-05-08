@@ -372,12 +372,22 @@
         //document.getElementById('submitSaveButton').disabled = true;
 
         swcms.postFetch(apiUrl, postData).then((data) => {
-            Swal.fire(
-            'Éxito',
-            'Diagnostico creado!',
-            'success'
-            )
-            window.setTimeout(() => { window.location.reload(); }, 1500);
+            if(data.status=='200'){
+                Swal.fire(
+                'Éxito',
+                'Diagnostico creado!',
+                'success'
+                )
+
+                window.setTimeout(() => { window.location.reload(); }, 1500);
+            }else{
+                let msj = "Por favor busque la inscripción de la empresa con número de DNI: " + data.dni
+                Swal.fire(
+                'DNI no encontrada',
+                msj,
+                'Error'
+                )
+            }
         
         }).catch((error) => {
             Swal.fire(

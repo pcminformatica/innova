@@ -908,6 +908,7 @@ def _d_save_DiagnosisCompany():
             identidad = api['IDENTIDAD'].replace("-", "")
             company =  Company.query.filter(Company.dni == identidad).first()
             if not company:
+                return jsonify({ 'status': 201, 'dni': identidad })
                 dni = api['IDENTIDAD']
                 company = Company()
                 company.name = api['NOMBRE_EMPRESA']
@@ -923,6 +924,7 @@ def _d_save_DiagnosisCompany():
                 company.created_by = current_user.id
                 db.session.add(company)
                 db.session.commit()
+                
             diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
             if not diagnosis:
                 diagnostico = Diagnosticos()

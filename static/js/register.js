@@ -732,8 +732,8 @@ console.log(preguntas)
   
   swcms.postFetch(apiUrl, postData).then((data) => {
     Swal.fire(
-      'Gracias',
-      'Bienvenida a INNOVA MUJER!',
+      'Gracias por inscribirte en INNOVA MUJER HONDURAS',
+      'En breve estarás recibiendo un correo electrónico ',
       'success'
     )
 
