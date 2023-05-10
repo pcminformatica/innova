@@ -157,11 +157,13 @@
             
                                 
                             <center>
-                                <button onclick="alert('En construccion')" class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary">
+                                <a href="{{ url_for('digitalcenter._plan_action_create',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary">
                                     <span class="mdc-button__ripple"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
                                     <span class="mdc-button__label">Editar plan de accion</span>
-                                </button>
+                                </a>
+                                <br>
+                                <br>
                             </center>
 
 

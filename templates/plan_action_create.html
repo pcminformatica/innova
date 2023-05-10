@@ -661,11 +661,11 @@
                                           
                                           
                                         </thead>
-                                        <tbody id="tablaPlan_1" class="mdc-data-table__content">
-                                          {% for apix in plan %}
+                                        <tbody >
+                                        {% for apix in plan %}
                                         
                                             {% if apix.fase == 1 %}
-                                            <tr class="mdc-data-table__row">
+                                            <tr id="{{apix.services.id}}" class="mdc-data-table__row">
                                               <th class="mdc-data-table__cell" scope="row">
                                                   {{loop.index}}
                                               </th>
@@ -691,12 +691,26 @@
                                                 </p>
                                               </th>
                                               <td class="mdc-data-table__cell no-print">
-                                                Porcentaje de avance: {{ apix.progress  }}%
+                                             
+                                              {% if apix.progress == 0 %}
+                                                <button onclick="deleteActionPlan('{{ apix.id  }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                              
+                                                  <span class="mdc-button__ripple"></span>
+                                                  <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                                                  <span class="mdc-button__label">Eliminar</span>
+                                                </button>
+                                              {% else %}
+                                                Avance: {{ apix.progress  }}%
+                                              {% endif %}
+                                            
                                               </td>
 
                                             </tr>
                                             {% endif %}
                                           {% endfor %}
+                                        </tbody>
+                                        <tbody id="tablaPlan_1" class="mdc-data-table__content">
+  
                                         </tbody>
                                       </table>
                                     </div>
@@ -739,42 +753,43 @@
                                           
                                           
                                         </thead>
-                                        <tbody id="tablaPlan_2" class="mdc-data-table__content">
-                                          {% for apix in plan %}
+                                        {% for apix in plan %}
                                         
-                                          {% if apix.fase == 2 %}
-                                            <tr class="mdc-data-table__row">
-                                              <th class="mdc-data-table__cell" scope="row">
-                                                  {{loop.index}}
-                                              </th>
-                                              <th class="mdc-data-table__cell" scope="row">
-                                                <p>
-                                                  {{ apix.services.name }}
-                                                </p>
-                                              </th>
-                                              <td class="mdc-data-table__cell ">
-                                                {% if apix.date_scheduled_start %}
-                                                  {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
-                                                {% endif %}
-                                              </td>
-                                              <td class="mdc-data-table__cell ">
-                                                {% if apix.date_scheduled_start %}
-                                                  {{ apix.date_scheduled_end.strftime('%Y-%m-%d')  }}
-                                                {% endif %}
-                                              </td>
-                                          
-                                  
-                                              <th class="mdc-data-table__cell" scope="row">
-                                                <p>
-                                                  {{ apix.descripcion }}
-                                                </p>
-                                              </th>
-                                              <td class="mdc-data-table__cell no-print">
-                                                Porcentaje de avance: {{ apix.progress  }}%
-                                              </td>
-                                            </tr>
-                                          {% endif %}
-                                          {% endfor %}
+                                        {% if apix.fase == 2 %}
+                                          <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{loop.index}}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              <p>
+                                                {{ apix.services.name }}
+                                              </p>
+                                            </th>
+                                            <td class="mdc-data-table__cell ">
+                                              {% if apix.date_scheduled_start %}
+                                                {{ apix.date_scheduled_start.strftime('%Y-%m-%d')  }}
+                                              {% endif %}
+                                            </td>
+                                            <td class="mdc-data-table__cell ">
+                                              {% if apix.date_scheduled_start %}
+                                                {{ apix.date_scheduled_end.strftime('%Y-%m-%d')  }}
+                                              {% endif %}
+                                            </td>
+                                        
+                                
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              <p>
+                                                {{ apix.descripcion }}
+                                              </p>
+                                            </th>
+                                            <td class="mdc-data-table__cell no-print">
+                                              Porcentaje de avance: {{ apix.progress  }}%
+                                            </td>
+                                          </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        <tbody id="tablaPlan_2" class="mdc-data-table__content">
+
                                         </tbody>
                                       </table>
                                     </div>
@@ -801,19 +816,25 @@
                                   <br>
                                   <br>
                                   {% if plan %}
+                                  <button  onclick="savePlan()" class="mdc-button mdc-button--color-secondary mdc-button--raised mdc-button--leading no-print" style="text-align: center">
+                                            
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">save</i>
+                                    <span class="mdc-button__label">Actulizar plan de acción</span>
+                                  </button>
                                   <button  onclick="printPlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
                                             
                                     <span class="mdc-button__ripple"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
-                                    <span class="mdc-button__label">Imprimir plan de accion</span>
+                                    <span class="mdc-button__label">Imprimir plan de acción</span>
                                   </button>
 
                                   {% else %}
                                   <button  onclick="savePlan()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
                                             
                                     <span class="mdc-button__ripple"></span>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
-                                    <span class="mdc-button__label">Guardar plan de accion</span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">save</i>
+                                    <span class="mdc-button__label">Guardar plan de acción</span>
                                   </button>
                                   {% endif %}
                             </div>
@@ -850,8 +871,18 @@
 <script>
     function agregar(categoria,id,servicio,tiempo_ejecucion){
       var resume_table_fase1 = document.getElementById("tbl_plan_1");
-      var resume_table_fase2 = document.getElementById("tbl_plan_2");
       const Swal = swcms.returnSwal()
+      if (resume_table_fase1.rows.length>8){
+        Swal.fire(
+              'Límite de servicios en fase 1',
+              'Has alcanzado límite de servicios a agregar en fase 1',
+              'error'
+            )
+        return false
+      }
+      
+      var resume_table_fase2 = document.getElementById("tbl_plan_2");
+      
       for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
           //alert(cell[i].innerText);
           if (id == resume_table_fase1.rows[i].id){
@@ -948,22 +979,17 @@
       tr.remove()
     }
 
-    function deleteRow() {
-   
-      var td = event.target.parentNode; 
-      var tr = td.parentNode.parentNode; // the row to be removed
-      tr.remove()
-    }
 
     function savePlan(){
 
-     
-      var resume_table_fase1 = document.getElementById("tbl_plan_1");
-      var resume_table_fase2 = document.getElementById("tbl_plan_2");
+   
+      var resume_table_fase1 = document.getElementById("tablaPlan_1");
+      var resume_table_fase2 = document.getElementById("tablaPlan_2");
       let services = [];
-      if (resume_table_fase1.rows.length >1){
+      
+      if (resume_table_fase1.rows.length !=0){
 
-        for (var i = 1, row; row = resume_table_fase1.rows[i]; i++) {
+        for (var i = 0, row; row = resume_table_fase1.rows[i]; i++) {
           //alert(cell[i].innerText); 
           inicio = resume_table_fase1.rows[i].cells[2].innerHTML;
           final = resume_table_fase1.rows[i].cells[3].innerHTML;
@@ -976,10 +1002,10 @@
         alert('Seleccione servicios en la fase 1')
         return false
       }
+ 
+      if (resume_table_fase2.rows.length !=0){
 
-      if (resume_table_fase2.rows.length >1){
-
-        for (var i = 1, row; row = resume_table_fase2.rows[i]; i++) {
+        for (var i = 0, row; row = resume_table_fase2.rows[i]; i++) {
         
           inicio = resume_table_fase2.rows[i].cells[2].innerHTML;
           final = resume_table_fase2.rows[i].cells[3].innerHTML;
@@ -989,10 +1015,6 @@
         }
         console.log(services)
       }
-        //else{
-        //alert('Seleccione servicios en la fase 2')
-        //return false
-        //}
 
       const Swal = swcms.returnSwal()
       var resume_table = document.getElementById("tbl_plan");
@@ -1036,12 +1058,39 @@
     }
 
     function formatDate(date) {
-  return [
-    padTo2Digits(date.getDate()),
-    padTo2Digits(date.getMonth() + 1),
-    date.getFullYear(),
-  ].join('/');
-}
+        return [
+          padTo2Digits(date.getDate()),
+          padTo2Digits(date.getMonth() + 1),
+          date.getFullYear(),
+        ].join('/');
+      }
+
+      function deleteActionPlan(actionPlan) {
+        const Swal = swcms.returnSwal()
+
+        let postData = {
+        "actionPlan": actionPlan
+        };
+        console.log(postData)
+        let apiUrl = '/api/save/action/delete/';
+        
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción Eliminado!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+      }
 </script>
 {% endblock %}
 
