@@ -732,20 +732,11 @@ class Company(db.Model):
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     users = db.relationship("UserExtraInfo", back_populates="company")
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    created_by_data = db.relationship("User", backref='created_by_data')
     inscripcion_id = db.Column(db.Integer, db.ForeignKey("inscripciones.id"),nullable=True)
     inscripcion = db.relationship("Inscripciones")
-    def __repr__(self):
-        return jsonify(
-            id = self.id,
-            name = self.name,
-            avatar = self.avatar,
-            description = self.description,
-            address = self.address,
-            social_networks = self.social_networks,
-            state = self.state,
-            phones = self.phones,
-            acceptterms = self.acceptterms
-        )
+
+        
 
 
 # Company

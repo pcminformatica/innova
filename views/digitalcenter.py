@@ -791,19 +791,22 @@ def _company_monitoring_list():
     for diagnosi in diagnosis:
         lista.append(diagnosi.company_id)
     if current_user.id == 3 or current_user.id == 24:
-        company = Company.query.filter(Company.enabled==True).all()
+        company = Company.query.join(User, User.id==Company.created_by)\
+            .filter(Company.enabled==True).all()
+   
     else:
-        company = Company.query.filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+        company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
     references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
     lista = []
     for reference in references:
         lista.append(reference.action_plan.company.id)
     company_references = Company.query.filter(Company.id.in_(lista)).all()
     context = {
-        'api': company,
+        'apis': company,
         'company_references':company_references
     }
     return render_template('company_monitoring_list.html',**context)
+
 
 @digitalcenter.route('/company/view/<int:user_uid>/',methods=['GET', 'POST'])
 def _company_dashboard(user_uid):
