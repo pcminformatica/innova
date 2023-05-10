@@ -58,6 +58,7 @@
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de inicio</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de referencia</th>
                                 
                                 </tr>
                                 </thead>
@@ -116,7 +117,7 @@
                             
                                   <!--fin opciones-->
                                 </td>
-                                <td class="mdc-data-table__cell" style="width: 80px;">
+                                <td class="mdc-data-table__cell">
                                 {{ reference.action_plan.services.name }}
                                 </td>
                                 <th class="mdc-data-table__cell" scope="row">
@@ -126,9 +127,11 @@
 
                                 <th class="mdc-data-table__cell" scope="row">
                                     {{ reference.action_plan.date_scheduled_end.strftime('%Y-%m-%d') }}
-                                    
                                 </th>
                                 
+                                <th class="mdc-data-table__cell" scope="row">
+                                    {{ reference.action_plan.date_created.strftime('%Y-%m-%d') }}
+                                </th>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
