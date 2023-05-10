@@ -96,6 +96,7 @@ def _admin_list_company_edit(company_id):
         txt_facebook= request.form.get('txt_facebook')
         txt_instagram= request.form.get('txt_instagram')
         txt_description= request.form.get('txt_description')
+        txt_created_by= request.form.get('txt_created_by')
         company.description = txt_description
         jsonSocial= JsonSocial()
         jsonSocial.email = txt_email
@@ -109,6 +110,7 @@ def _admin_list_company_edit(company_id):
         company.dni = txt_identidad
         company.enabled =  cxb_status
         company.rtn = txt_rtn
+        company.created_by = txt_created_by
         db.session.add(company)
         db.session.commit()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
