@@ -285,6 +285,32 @@
                                         </a>
                                     </li>
                                     {% endif %}
+                                    {% if current_user.id in (3,24) %}
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('monitoreo._indicadores_servicios') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Reporte SDE</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('monitoreo._indicadores_productividad') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Reporte productividad</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">

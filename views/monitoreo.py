@@ -16,8 +16,8 @@ from models.diagnostico import Diagnosticos
 
 @monitoreo.route('/indicadores/productividad/',methods = ['GET', 'POST'])
 def _indicadores_productividad():
-    my_list = [1,2,3,4]
-    users = User.query.filter(User.id.in_(my_list)).order_by(User.name.desc()).all()
+    list_user = [3,5,6,15,16,17,18,20,21,25,24,30]
+    users = User.query.filter(User.id.in_(list_user)).order_by(User.name.desc()).all()
     context = {'users':users}
     return render_template('monitoreo/indicadores_productividad.html',**context)
 
