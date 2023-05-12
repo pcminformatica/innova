@@ -1036,22 +1036,5 @@ def _company_document_user(document_id):
 def _registro_api_dashboard():
     return render_template('digitalcenter/registro_api_dashboard.html')
 
-@digitalcenter.route('/indicadores/home/',methods = ['GET', 'POST'])
-def _indicadores_dashboard():
-    return render_template('indicadores_dashboard.html')
-from collections import Counter
-@digitalcenter.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
-def _indicadores_inscritas():
-    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())
-    repite = []
-    repiteobj =[]
-    for obj in query:
-        if not obj.dni in repite:
-            repite.append(obj.dni)
-            repiteobj.append(obj)
-    context = {
-        'inscripciones': repiteobj
-    }
-    return render_template('indicadores_inscritas.html',**context)
 
 

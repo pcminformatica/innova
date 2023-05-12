@@ -53,6 +53,11 @@ def _comunidadempresarial():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('comunidadempresarial/home.html')
 
+@home.route('/blog/')
+def _blog():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('comunidadempresarial/blog.html')
+
 @home.route('/preguntasfrecuentes/')
 def _preguntasfrecuentes():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
