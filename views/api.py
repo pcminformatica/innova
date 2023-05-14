@@ -899,10 +899,9 @@ def _d_save_DiagnosisCompany():
     try:
         # POST: Save Appointment
         if request.method == 'POST':
-
             txt_code = request.json['txt_code']
-            url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(txt_code)
-            headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+            url = app.config.get('KOBOTOOLBOX_VIEW').format(txt_code)
+            headers=  app.config.get('KOBOTOOLBOX_TOKEN')
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
             identidad = api['IDENTIDAD'].replace("-", "")

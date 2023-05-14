@@ -321,9 +321,8 @@ import json
 def _diagnosis_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
-        url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
-        #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
-        headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+        url = app.config.get('KOBOTOOLBOX_ALL')
+        headers=app.config.get('KOBOTOOLBOX_TOKEN')
         resp = requests.get(url,headers=headers)
         api = json.loads(resp.content)
         user = User.query.filter(User.id == current_user.id).first()
@@ -593,12 +592,10 @@ def _re_categias():
 
 @digitalcenter.route('/demanda/',methods=['GET', 'POST'])
 def _datos_describe_12():
-
     servicios = []
     app.logger.debug('** SWING_CMS ** - ------------------')
-    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
-    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/202116860/?format=json"
-    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    url = app.config.get('KOBOTOOLBOX_ALL')
+    headers=app.config.get('KOBOTOOLBOX_TOKEN')
     resp = requests.get(url,headers=headers)
     api1 = json.loads(resp.content)
     for api in api1['results']:
@@ -698,9 +695,8 @@ def _registros_im():
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
 def _diagnosis_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
-    #url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/?format=json"
-    url = "https://kf.kobotoolbox.org/api/v2/assets/aTaYkJZNSLYUpSqoRd9snr/data/{}/?format=json".format(user_uid)
-    headers={'Authorization':'token 5690e59a570b717402ac2bcdba1fe02afc8abd85'}
+    url = app.config.get('KOBOTOOLBOX_VIEW').format(user_uid)
+    headers=  app.config.get('KOBOTOOLBOX_TOKEN')
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
     diagnostico = Diagnosticos()
