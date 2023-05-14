@@ -19,8 +19,8 @@ import json
 @monitoreo.route('/indicadores/productividad/',methods = ['GET', 'POST'])
 def _indicadores_productividad():
     #lista de usuarios a evaluar
-    list_user = [3,4,5,6,15,16,17,18,20,21,25,24,30]
-    users = User.query.filter(User.id.in_(list_user)).order_by(User.name.desc()).all()
+    list_user = [3,5,6,15,16,17,18,20,21,25,24,30]
+    users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
     #consultamos en KOBO la cantidad de diagnosticos
     url = app.config.get('KOBOTOOLBOX_ALL')
     headers=app.config.get('KOBOTOOLBOX_TOKEN')
@@ -70,7 +70,56 @@ def _indicadores_productividad():
 
 @monitoreo.route('/indicadores/servicios/',methods = ['GET', 'POST'])
 def _indicadores_servicios():
-    return render_template('monitoreo/indicadores_servicios.html')
+    #inscritas
+    inscritas_cohorte1 = 0
+    inscritas_cohorte2 = 0
+    inscritas_cohorte3 = 0
+    inscritas_cohorte4 = 0
+    #elegibles
+    elegibles_cohorte1 = 0
+    elegibles_cohorte2 = 0
+    elegibles_cohorte3 = 0
+    elegibles_cohorte4 = 0
+    #Quinta cohorte
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())
+    repite = []
+    repiteobj =[]
+    repiteobjelegibles =[]
+    for obj in query:
+        if not obj.dni in repite:
+            repite.append(obj.dni)
+            repiteobj.append(obj)
+            if(obj.elegible):
+                repiteobjelegibles.append(obj)
+    inscritas_cohorte5 = len(repiteobj)
+    elegibles_cohorte5 =len(repiteobjelegibles)
+    total_inscritas = inscritas_cohorte1 +inscritas_cohorte2 +inscritas_cohorte3 +inscritas_cohorte4 +inscritas_cohorte5
+    total_elegibles = elegibles_cohorte1 +elegibles_cohorte2 +elegibles_cohorte3 + elegibles_cohorte4 + elegibles_cohorte5
+    url = app.config.get('KOBOTOOLBOX_ALL')
+    headers=app.config.get('KOBOTOOLBOX_TOKEN')
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    diagnosticos = []
+    for e in api['results']:
+        if 'estado' in e:
+            if e['estado'] !=0:
+                diagnosticos.append(e)
+        else:
+            diagnosticos.append(e)
+    companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True).all()
+    planes = 0
+    for company in companys:
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+        if plan:
+            planes = planes + 1
+    context = {
+        'total_inscritas': total_inscritas,
+        'total_elegibles':total_elegibles,
+        'diagnosticos':len(diagnosticos),
+        'planes':planes
+    }
+
+    return render_template('monitoreo/indicadores_servicios.html',**context)
 
 from collections import Counter
 @monitoreo.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
