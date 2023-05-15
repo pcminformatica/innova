@@ -71,15 +71,15 @@ def _indicadores_productividad():
 @monitoreo.route('/indicadores/servicios/',methods = ['GET', 'POST'])
 def _indicadores_servicios():
     #inscritas
-    inscritas_cohorte1 = 0
-    inscritas_cohorte2 = 0
-    inscritas_cohorte3 = 0
-    inscritas_cohorte4 = 0
+    inscritas_cohorte1 = 585
+    inscritas_cohorte2 = 613
+    inscritas_cohorte3 = 83
+    inscritas_cohorte4 = 285 + 33
     #elegibles
-    elegibles_cohorte1 = 0
-    elegibles_cohorte2 = 0
-    elegibles_cohorte3 = 0
-    elegibles_cohorte4 = 0
+    elegibles_cohorte1 = 238
+    elegibles_cohorte2 = 170
+    elegibles_cohorte3 = 28 
+    elegibles_cohorte4 = 243 + 15
     #Quinta cohorte
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())
     repite = []
