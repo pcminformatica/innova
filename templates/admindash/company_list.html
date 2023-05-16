@@ -38,6 +38,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
+                            
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">EMPRESAS</div>
                     
@@ -83,6 +85,12 @@
                                                   <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
                                                   <span class="mdc-button__label">Editar incripcion</span>
                                               </a>
+                                              <a href="{{ url_for('admindash._admin_company_view', company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading">
+                                                
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
+                                                <span class="mdc-button__label">adminstra documentacion</span>
+                                            </a>
                                             </td>
                                             
                                           </tr>

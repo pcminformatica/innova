@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import DocumentCompany,ActionPlan,DiagnosisCompany,Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -83,6 +83,16 @@ def _admin_list_company():
     companys = Company.query.all()
     cxt = {'companys':companys}
     return render_template('/admindash/company_list.html',**cxt)
+
+@admindash.route('/admin/company/<int:company_id>/view/all', methods = ['GET'])
+@login_required
+def _admin_company_view(company_id):
+    company = Company.query.filter_by(id = company_id).first()
+    diagnosis=  DiagnosisCompany.query.filter_by(company_id=company.id).all()
+    actionplan = ActionPlan.query.filter_by(company_id=company.id).all()
+    documents = DocumentCompany.query.filter_by(company_id=company.id).all()
+    cxt = {'company':company,'documents':documents,'diagnosis':diagnosis,'actionplan':actionplan}
+    return render_template('/admindash/company_view.html',**cxt)
 
 @admindash.route('/admin/company/<int:company_id>/edit',methods=['GET', 'POST'])
 @login_required
@@ -165,3 +175,28 @@ def _admin_inscription_edit(inscription_id):
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     cxt = {'inscripcion':inscripcion}
     return render_template('/admindash/incripcione_edit.html',**cxt)
+
+    diagnosis=  DiagnosisCompany.query.filter_by(company_id=company.id).all()
+    actionplan = ActionPlan.query.filter_by(company_id=company.id).all()
+    documents = DocumentCompany.query.filter_by(company_id=company.id).all()
+
+@admindash.route('/document/delete/<int:document_id>/<int:company_id>',methods=['GET', 'POST'])
+def _document_delete(document_id,company_id):
+    document = DocumentCompany.query.filter_by(id = document_id).delete()
+    db.session.commit()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return redirect(url_for('admindash._admin_company_view',company_id=company_id))
+
+@admindash.route('/plan/delete/<int:actionplan_id>/<int:company_id>',methods=['GET', 'POST'])
+def _actionplan_delete(actionplan_id,company_id):
+    actionplan = ActionPlan.query.filter_by(id = actionplan_id).delete()
+    db.session.commit()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return redirect(url_for('admindash._admin_company_view',company_id=company_id))
+
+@admindash.route('/diagnosis/delete/<int:diagnosis_id>/<int:company_id>',methods=['GET', 'POST'])
+def _diagnosis_delete(diagnosis_id,company_id):
+    diagnosis = DiagnosisCompany.query.filter_by(id = diagnosis_id).delete()
+    db.session.commit()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    return redirect(url_for('admindash._admin_company_view',company_id=company_id))

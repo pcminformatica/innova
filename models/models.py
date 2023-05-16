@@ -271,6 +271,7 @@ class DocumentCompany(db.Model):
     company = db.relationship("Company")
     documente_type_id = db.Column(db.Integer, db.ForeignKey("catalog_id_document_types.id"),nullable=True)
     documente_type = db.relationship("CatalogIDDocumentTypes")
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(tz.utc))
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -821,6 +822,7 @@ class ActionPlanHistory(db.Model):
     __tablename__ = 'action_plan_history'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     action_plan_id = db.Column(db.Integer, db.ForeignKey('action_plan.id'), nullable=False)
+    action_plan = db.relationship("ActionPlan")
     description = db.Column(db.Text, nullable=True)
     url = db.Column(db.Text, nullable=True)
     endservices = db.Column(db.Boolean, nullable=True, default=False)
