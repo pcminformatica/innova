@@ -63,12 +63,16 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Nombre</th>
-                                                    <th>Especilidad</th>
+
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Empresas atendidas</th>
-                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Empresas referidas atendidas</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Solicitudes de referencias recibidas</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Empresas referidas aceptadas</th>
+                                                    
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Diagnósticos</th>
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Planes de acción</th>
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios en proceso</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios Finalizados</th>
                                                 </tr>
                                             </thead>
                                             
@@ -76,12 +80,16 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Nombre</th>
-                                                    <th>Especilidad</th>
+                                                 
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Empresas atendidas</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Solicitudes de referencias recibidas</th>
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Empresas referidas atendidas</th>
+                                                    
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Diagnósticos</th>
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric">Planes de acción</th>
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios en proceso</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" >Servicios Finalizados</th>
                                                 </tr>
                                             </tfoot>
                                             
@@ -92,15 +100,18 @@
                                              
                                                     <td>{{loop.index}}</td>
                                                     <th>{{ dato['nombre'] }}</th>
-                                                    <th>{{ dato['profesion'] }}</th>
+                                               
                         
                                                     <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company'] }}</th>
                                                     <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references'] }}</th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references_accepted'] }}</th>
+                                                    
                                                     <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['diagnosticos'] }}</th>
                                                     <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['planes'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">0</th>
-                    
-                                              
+                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['servicios'] }}</th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosproceso'] }}</th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosfin'] }}</th>
+                                                    
                                                 </tr>
                                                 {% endfor %}
     

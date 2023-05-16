@@ -45,6 +45,23 @@ def _indicadores_productividad():
         for reference in references:
             lista.append(reference.action_plan.company.id)
         company_references = Company.query.filter(Company.id.in_(lista)).all()
+        
+        references_accepted = ActionPlanReferences.query.filter_by(employe_assigned=user.id,employe_accepted=True).order_by(desc(ActionPlanReferences.id)).all()
+        lista = []
+        for reference in references_accepted:
+            lista.append(reference.action_plan.company.id)
+        company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
+
+        bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
+        servicios =   []
+        serviciosfin =  []
+        for bitacora in bitacoras:
+            if bitacora.action_plan_id not in servicios:
+                if bitacora.action_plan.progress == 100:
+                    serviciosfin.append(bitacora.action_plan_id)
+                servicios.append(bitacora.action_plan_id)
+        print(servicios)
+        print(serviciosfin)
         profesion = ''
         if user.extra_info.profession:
             profesion = user.extra_info.profession.name
@@ -62,7 +79,11 @@ def _indicadores_productividad():
             'diagnosticos':diagnosticos,
             'company':len(companys),
             'company_references':len(company_references),
-            'planes':planes
+            'company_references_accepted':len(company_references_accepted),
+            'planes':planes,
+            'servicios':len(servicios),
+            'serviciosproceso':len(servicios) -len(serviciosfin),
+            'serviciosfin':len(serviciosfin)
         }
         datos.append(diccionario)
     context = {'datos':datos}
