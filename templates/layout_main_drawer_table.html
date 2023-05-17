@@ -23,7 +23,14 @@
 <script src="{{ url_for('static', filename='js/vendor/datatable/jszip.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/datatable/buttons.html5.min.js') }}"></script>
 
-
+<style>
+    .dataTables_filter{
+        text-align: center;
+    }
+    .dataTables_length{
+        text-align: center;
+    }
+</style>
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -45,7 +52,7 @@ $(document).ready(function () {
             {
             
             autoWidth: false,
-            dom: 'Bfrtip',
+            dom: 'Bflrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
