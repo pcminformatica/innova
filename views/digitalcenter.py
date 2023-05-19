@@ -873,6 +873,15 @@ def _plan_action_bitacora(user_uid):
     }
     return render_template('plan_action_bitacora.html',**context)
 
+@digitalcenter.route('/empresas/resumen/bitecora/<int:user_uid>/',methods=['GET', 'POST'])
+def _plan_action_bitacora_atenciones(user_uid):
+
+    context = {
+        'user_uid': user_uid,
+  
+    }
+    return render_template('plan_action_bitacora_atenciones.html',**context)
+
 
 @digitalcenter.route('/empresas/view/user/<int:company_id>/',methods=['GET', 'POST'])
 def _company_user_list(company_id):
