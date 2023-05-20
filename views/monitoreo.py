@@ -28,6 +28,7 @@ def _indicadores_productividad():
     api = json.loads(resp.content)
     datos =  []
     for user in users:
+        cod_usuario = user.id
         #contamos los diagnosticos
         diagnosticos = 0
         if user.extra_info.kobotoolbox:
@@ -60,8 +61,7 @@ def _indicadores_productividad():
                 if bitacora.action_plan.progress == 100:
                     serviciosfin.append(bitacora.action_plan_id)
                 servicios.append(bitacora.action_plan_id)
-        print(servicios)
-        print(serviciosfin)
+
         profesion = ''
         if user.extra_info.profession:
             profesion = user.extra_info.profession.name
@@ -74,6 +74,7 @@ def _indicadores_productividad():
         full_name = names + ' ' + last_names
 
         diccionario = {
+            'cod_usuario':cod_usuario,
             'nombre':full_name,
             'profesion':profesion,
             'diagnosticos':diagnosticos,
@@ -175,3 +176,77 @@ def _indicadores_inscritas():
     }
  
     return render_template('monitoreo/indicadores_inscritas.html',**context)
+
+
+
+@monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
+def _indicadores_perfil_asesor(user_uid):
+    user = User.query.filter(User.id==user_uid).first()
+    url = app.config.get('KOBOTOOLBOX_ALL')
+    headers=app.config.get('KOBOTOOLBOX_TOKEN')
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    datos =  []
+    
+    cod_usuario = user.id
+    #contamos los diagnosticos
+    diagnosticos = 0
+    if user.extra_info.kobotoolbox:
+        
+        diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
+ 
+    companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
+    planes = 0
+    for company in companys:
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+        planes  =  []
+        if plan:
+            planes.append(company.id) 
+    planes = Company.query.filter(Company.id.in_(planes)).all()
+    references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
+    lista = []
+    for reference in references:
+        lista.append(reference.action_plan.company.id)
+    company_references = Company.query.filter(Company.id.in_(lista)).all()
+    
+    references_accepted = ActionPlanReferences.query.filter_by(employe_assigned=user.id,employe_accepted=True).order_by(desc(ActionPlanReferences.id)).all()
+    lista = []
+    for reference in references_accepted:
+        lista.append(reference.action_plan.company.id)
+    company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
+
+    bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
+    servicios =   []
+    serviciosfin =  []
+    for bitacora in bitacoras:
+        if bitacora.action_plan_id not in servicios:
+            if bitacora.action_plan.progress == 100:
+                serviciosfin.append(bitacora.action_plan_id)
+            servicios.append(bitacora.action_plan_id)
+
+    profesion = ''
+    if user.extra_info.profession:
+        profesion = user.extra_info.profession.name
+    names = ''
+    if user.extra_info.names:
+        names = user.extra_info.names
+    last_names = ''
+    if  user.extra_info.last_names:
+        last_names = user.extra_info.last_names
+    full_name = names + ' ' + last_names
+
+    context = {
+        'cod_usuario':cod_usuario,
+        'nombre':full_name,
+        'profesion':profesion,
+        'diagnosticos':diagnosticos,
+        'company':companys,
+        'company_references':company_references,
+        'company_references_accepted':len(company_references_accepted),
+        'planes':planes,
+        'servicios':len(servicios),
+        'serviciosproceso':len(servicios) -len(serviciosfin),
+        'serviciosfin':len(serviciosfin),
+        'users': user
+        }
+    return render_template('monitoreo/indicadores_perfil_asesor.html',**context)

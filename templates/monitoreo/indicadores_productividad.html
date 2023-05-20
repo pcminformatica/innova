@@ -93,26 +93,34 @@
                                                 </tr>
                                             </tfoot>
                                             
+                                            
                                             <tbody>
                                                 {% for dato in datos %}
-    
-                                                <tr>
-                                             
-                                                    <td>{{loop.index}}</td>
-                                                    <th>{{ dato['nombre'] }}</th>
-                                               
-                        
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references_accepted'] }}</th>
+                                                
+                                                    <tr>
+                                                        
+                                                        <td>{{loop.index}}
+                                                        
+                                                        </td>
+                                                        <th>
+                                                            <a href="{{ url_for('monitoreo._indicadores_perfil_asesor',user_uid=dato['cod_usuario'] ) }}">
+                                                                {{ dato['nombre'] }}
+                                                            </a>
+                                                        </th>
+                                                
+                            
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['company_references_accepted'] }}</th>
+                                                        
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['diagnosticos'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['planes'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['servicios'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosproceso'] }}</th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosfin'] }}</th>
                                                     
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['diagnosticos'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['planes'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['servicios'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosproceso'] }}</th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ dato['serviciosfin'] }}</th>
-                                                    
-                                                </tr>
+                                                    </tr>
+                                                
                                                 {% endfor %}
     
                                             </tbody>
