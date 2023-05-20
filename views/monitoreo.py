@@ -192,17 +192,19 @@ def _indicadores_perfil_asesor(user_uid):
     #contamos los diagnosticos
     diagnosticos = 0
     if user.extra_info.kobotoolbox:
-        
+        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
         diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
  
     companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
     planes = 0
+    lista = []
     for company in companys:
         plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
-        planes  =  []
         if plan:
-            planes.append(company.id) 
-    planes = Company.query.filter(Company.id.in_(planes)).all()
+            lista.append(company.id)
+            planes = planes + 1
+    planes = Company.query.filter(Company.id.in_(lista)).all()
+    #planes = Company.query.filter(Company.id.in_(planes)).all()
     references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
     lista = []
     for reference in references:
