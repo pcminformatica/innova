@@ -67,7 +67,31 @@ $(document).ready(function () {
             url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
         }
         });
+
+        $('.data_table_buttons_spam').DataTable(
+        
+        {
+        
+        autoWidth: false,
+        dom: 'Bflrtip',
+        'rowsGroup': [0,1],
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    ,
+        columnDefs: [
+            {
+                targets: ['_all'],
+                className: 'mdc-data-table__cell',
+            },
+        ],
+        language: {
+        url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+    }
+    });
 });
+
+
 
   </script>
 

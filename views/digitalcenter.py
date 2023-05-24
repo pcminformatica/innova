@@ -598,6 +598,7 @@ def _datos_describe_12():
     headers=app.config.get('KOBOTOOLBOX_TOKEN')
     resp = requests.get(url,headers=headers)
     api1 = json.loads(resp.content)
+    api1['results'] = list(e for e in api1['results'] if e['_submitted_by']  in current_user.extra_info.kobotoolbox['kobotoolbox_access'] )
     for api in api1['results']:
         for resp in api:
             if api[resp] == '1':
@@ -605,53 +606,58 @@ def _datos_describe_12():
                 if services:
                     for servicesx in services:
                         departamento =api['DEPARTAMENTO']
-                        servi = str(servicesx.id) + '-' + str(departamento)
+                        if departamento == '01':
+                            name_de ='Atlantida'
+                        elif departamento == '02':
+                            name_de ='COLÓN'
+                        elif departamento == '03':
+                            name_de ='COMAYAGUA'
+                        elif departamento == '04':
+                            name_de ='COPÁN'
+                        elif departamento == '05':
+                            name_de ='CORTÉS'
+                        elif departamento == '06':
+                            name_de ='CHOLUTECA'
+                        elif departamento == '07':
+                            name_de ='EL PARAÍSO'
+                        elif departamento == '08':
+                            name_de ='FRANCISCO MORAZÁN'
+                        elif departamento == '09':
+                            name_de ='GRACIAS A DIOS'
+                        elif departamento == '10':
+                            name_de ='INTIBUCÁ'
+                        elif departamento == '11':
+                            name_de ='ISLAS DE LA BAHÍA'
+                        elif departamento == '12':
+                            name_de ='LA PAZ'
+                        elif departamento == '13':
+                            name_de ='LEMPIRA'
+                        elif departamento == '14':
+                            name_de ='OCOTEPEQUE'
+                        elif departamento == '15':
+                            name_de ='OLANCHO'
+                        elif departamento == '16':
+                            name_de ='SANTA BÁRBARA'
+                        elif departamento == '17':
+                            name_de ='VALLE'
+                        elif departamento == '18':
+                            name_de ='YORO'
+                            
+                        servi = str(servicesx.id) 
+                        depart = []
                         if len(list(e for e in servicios if e['id']  == servi)) == 0:
-                            if departamento == '01':
-                                name_de ='Atlantida'
-                            elif departamento == '02':
-                                name_de ='COLÓN'
-                            elif departamento == '03':
-                                name_de ='COMAYAGUA'
-                            elif departamento == '04':
-                                name_de ='COPÁN'
-                            elif departamento == '05':
-                                name_de ='CORTÉS'
-                            elif departamento == '06':
-                                name_de ='CHOLUTECA'
-                            elif departamento == '07':
-                                name_de ='EL PARAÍSO'
-                            elif departamento == '08':
-                                name_de ='FRANCISCO MORAZÁN'
-                            elif departamento == '09':
-                                name_de ='GRACIAS A DIOS'
-                            elif departamento == '10':
-                                name_de ='INTIBUCÁ'
-                            elif departamento == '11':
-                                name_de ='ISLAS DE LA BAHÍA'
-                            elif departamento == '12':
-                                name_de ='LA PAZ'
-                            elif departamento == '13':
-                                name_de ='LEMPIRA'
-                            elif departamento == '14':
-                                name_de ='OCOTEPEQUE'
-                            elif departamento == '15':
-                                name_de ='OLANCHO'
-                            elif departamento == '16':
-                                name_de ='SANTA BÁRBARA'
-                            elif departamento == '17':
-                                name_de ='VALLE'
-                            elif departamento == '18':
-                                name_de ='YORO'	
-
-                            else:
-                                name_de = 'sss'
-                            servicios.append({'id':servi,'name_de':name_de,'departamento':departamento,'titulo':servicesx.name + ' ' ,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
+                            depart.append({'name_de':name_de,'departamento':departamento,'total':1})
+                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'anterior':api['_id']})
                         else:
                             varl = list(e for e in servicios if e['id']  == servi)[0]
                             index = servicios.index(varl)
                             if servicios[index]['anterior'] != api['_id']:
-                                servicios[index]['total'] = servicios[index]['total'] + 1 
+                                if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
+                                    servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
+                                else:
+                                    dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
+                                    index_departamento = servicios[index]['departamentos'].index(dep)
+                                    servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
                                 servicios[index]['anterior'] = api['_id']
 
                 

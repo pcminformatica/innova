@@ -1,4 +1,4 @@
-{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% extends 'layout_main_drawer_table.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
 {% block css_script_section %}
@@ -44,11 +44,11 @@
                               <br>     
                               <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                 <div class="mdc-data-table__table-container">
-                                  <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                  <table class="mdc-data-table__table " aria-label="Dessert calories">
                                     <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACTIVIDAD</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DEPARTAMENTO</th>
                                         
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
@@ -62,25 +62,30 @@
                                     </thead>
                                     <tbody class="mdc-data-table__content">
                                         {% for apix in legalizacion%}
-                                        
-                                      
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <tr class="mdc-data-table__row">
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{ apix.departamentos|length }}">
                                             {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                          </th>
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{apix.departamentos|length}}">
                                             {{ apix.titulo }}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.name_de }}
-                                      </th>
-                                        
-                                        <td class="mdc-data-table__cell">
-                                          {{ apix.total }}
-                                        </td>
-      
-            
-                                      </tr>
+                                          </th>
+                                              {% for depa in apix.departamentos%}
+                                                {% if loop.first  %}
+ 
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% else %}
+                                            <tr class="mdc-data-table__row">
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% endif %}
+                                        {% endfor %}
+
+                        
                                       {% endfor %}
                                     </tbody>
                                   </table>
@@ -125,22 +130,30 @@
                                         {% for apix in administracion%}
                                         
                                       
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <tr class="mdc-data-table__row">
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{ apix.departamentos|length }}">
                                             {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                          </th>
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{apix.departamentos|length}}">
                                             {{ apix.titulo }}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.name_de }}
-                                      </th>
-                                        <td class="mdc-data-table__cell">
-                                            {{ apix.total }}
-                                        </td>
-      
-                                    
-                                      </tr>
+                                          </th>
+                                              {% for depa in apix.departamentos%}
+                                                {% if loop.first  %}
+ 
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% else %}
+                                            <tr class="mdc-data-table__row">
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% endif %}
+                                        {% endfor %}
+
+                        
                                       {% endfor %}
                                     </tbody>
                                   </table>
@@ -184,22 +197,30 @@
                                         {% for apix in produccion%}
                                         
                                       
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <tr class="mdc-data-table__row">
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{ apix.departamentos|length }}">
                                             {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                          </th>
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{apix.departamentos|length}}">
                                             {{ apix.titulo }}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.name_de }}
-                                      </th>
-                                        <td class="mdc-data-table__cell">
-                                          {{ apix.total }}
-                                        </td>
-      
-         
-                                      </tr>
+                                          </th>
+                                              {% for depa in apix.departamentos%}
+                                                {% if loop.first  %}
+ 
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% else %}
+                                            <tr class="mdc-data-table__row">
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% endif %}
+                                        {% endfor %}
+
+                        
                                       {% endfor %}
                                     </tbody>
                                   </table>
@@ -243,21 +264,30 @@
                                         {% for apix in financiera%}
                                         
                                       
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <tr class="mdc-data-table__row">
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{ apix.departamentos|length }}">
                                             {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                          </th>
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{apix.departamentos|length}}">
                                             {{ apix.titulo }}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.name_de }}
-                                      </th>
-                                        <td class="mdc-data-table__cell">
-                                          {{ apix.total }}
-                                        </td>
-      
-                                      </tr>
+                                          </th>
+                                              {% for depa in apix.departamentos%}
+                                                {% if loop.first  %}
+ 
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% else %}
+                                            <tr class="mdc-data-table__row">
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% endif %}
+                                        {% endfor %}
+
+                        
                                       {% endfor %}
                                     </tbody>
                                   </table>
@@ -301,23 +331,30 @@
                                         {% for apix in mercadeo%}
                                         
                                       
-                                      <tr class="mdc-data-table__row">
-                                        <th class="mdc-data-table__cell" scope="row">
+                                        <tr class="mdc-data-table__row">
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{ apix.departamentos|length }}">
                                             {{loop.index}}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
+                                          </th>
+                                          <th class="mdc-data-table__cell" scope="row" rowspan="{{apix.departamentos|length}}">
                                             {{ apix.titulo }}
-                                        </th>
-                                        <th class="mdc-data-table__cell" scope="row">
-                                          {{ apix.name_de }}
-                                      </th>
-                                        <td class="mdc-data-table__cell">
-                                            {{ apix.total }}
-                                        </td>
-      
-                                    
-              
-                                      </tr>
+                                          </th>
+                                              {% for depa in apix.departamentos%}
+                                                {% if loop.first  %}
+ 
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% else %}
+                                            <tr class="mdc-data-table__row">
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                            </tr>
+                                          {% endif %}
+                                        {% endfor %}
+
+                        
                                       {% endfor %}
                                     </tbody>
                                   </table>
