@@ -647,10 +647,11 @@ def _datos_describe_12():
                         depart = []
                         if len(list(e for e in servicios if e['id']  == servi)) == 0:
                             depart.append({'name_de':name_de,'departamento':departamento,'total':1})
-                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'anterior':api['_id']})
+                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
                         else:
                             varl = list(e for e in servicios if e['id']  == servi)[0]
                             index = servicios.index(varl)
+                            
                             if servicios[index]['anterior'] != api['_id']:
                                 if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
                                     servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
@@ -658,6 +659,7 @@ def _datos_describe_12():
                                     dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
                                     index_departamento = servicios[index]['departamentos'].index(dep)
                                     servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
+                                servicios[index]['total'] = servicios[index]['total'] + 1
                                 servicios[index]['anterior'] = api['_id']
 
                 
