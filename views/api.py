@@ -519,10 +519,11 @@ def _d_save_admin_user():
             jsconfig = JsonConfigProfile()
             jsconfig.kobotoolbox_access = txt_cobotoolbox.split(',')
             user.extra_info.kobotoolbox = jsconfig.jsonFormat()
-            xrol = UserXRole.query.filter_by(user_id = user.id).first()
-            xrol.user_role_id = txt_rol
+            if UserXRole.query.filter_by(user_id = user.id).first():
+                xrol = UserXRole.query.filter_by(user_id = user.id).first()
+                xrol.user_role_id = txt_rol
+                db.session.add(xrol)
             db.session.add(user)
-            db.session.add(xrol)
             db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
