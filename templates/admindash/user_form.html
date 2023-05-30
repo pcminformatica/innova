@@ -127,7 +127,7 @@
                                                     {% if user.roles %}
                                                         {% set list1 = user.roles[0]|string %}
                                                         {% set namerol, idrol = list1.split(',') %}
-                                                    {% endif %}
+                                                    
                                                     {% for role in roles %}
                                                         {% if role.id == idrol|int %}
                                                             <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{role.id}}" role="option">
@@ -145,6 +145,21 @@
                                                             </li>
                                                         {% endif %}
                                                     {% endfor %}
+                                                    {% else %}
+                                                    {% for role in roles %}
+                                                        {% if role.id == idrol|int %}
+
+                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{role.id}}" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    {{role.name}} 
+                                                                </span>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    {% endif %}
+
                           
                                                   </ul>
                                                 </div>
