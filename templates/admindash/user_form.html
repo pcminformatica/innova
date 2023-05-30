@@ -124,8 +124,10 @@
                                               
                                                 <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
                                                   <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                    {% set list1 = user.roles[0]|string %}
-                                                    {% set namerol, idrol = list1.split(',') %}
+                                                    {% if user.roles %}
+                                                        {% set list1 = user.roles[0]|string %}
+                                                        {% set namerol, idrol = list1.split(',') %}
+                                                    {% endif %}
                                                     {% for role in roles %}
                                                         {% if role.id == idrol|int %}
                                                             <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{role.id}}" role="option">
@@ -157,7 +159,8 @@
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="my-label-id">Usuarios de KOBOTOOLBOX </span>
                                                 <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
-                                                data-assigned-var
+                                                {% if user.extra_info.kobotoolbox %}
+                                               value="{{user.extra_info.kobotoolbox.kobotoolbox_access|join(',')}}" {% endif %} data-assigned-var
                                                 >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
