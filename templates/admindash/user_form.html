@@ -146,17 +146,17 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% else %}
-                                                    {% for role in roles %}
-                                                        {% if role.id == idrol|int %}
+                                                        {% for role in roles %}
+                                                        
 
-                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{role.id}}" role="option">
-                                                                <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                <span class="mdc-deprecated-list-item__text">
-                                                                    {{role.name}} 
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                    {% endfor %}
+                                                                <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{role.id}}" role="option">
+                                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                    <span class="mdc-deprecated-list-item__text">
+                                                                        {{role.name}} 
+                                                                    </span>
+                                                                </li>
+                                                            
+                                                        {% endfor %}
 
                                                     {% endif %}
 
