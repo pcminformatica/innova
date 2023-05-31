@@ -1,0 +1,269 @@
+{% extends 'layout_main_drawer_table.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+.mdc-data-table__cell{
+  font-size: 20px;
+}
+
+@media print {
+  table, th, td {
+  border: 1px solid;
+}
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content" id="captura">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-6-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Servicios Recomendados</span>
+                                                </span>
+                                                <span clamdc-data-table__cellss="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                              <br>
+                                <button onclick="IMPRIMIR()">
+                                  IMPRIMIR
+                                </button>
+                              <br>
+                              <h2>LEGALIZACIÓN</h2>
+                              <br>     
+                              <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                <div class="mdc-data-table__table-container">
+                                  <table class="mdc-data-table__table_normal data_table_buttons" aria-label="Dessert calories" style="width: 100%;">
+                                    <thead>
+                                      <tr class="mdc-data-table__header-row">
+                                        
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CATEGORIA</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DEPARTAMENTO</th>
+                                        
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CANTIDAD DE SERVICIOS DEMANDADOS</th>
+                                        
+
+                                        
+                                      </tr>
+                                      
+                                      
+                                      
+                                    </thead>
+                                    <tbody class="mdc-data-table__content">
+                                    {% for apix in legalizacion%}
+                                        {% for depa in apix.departamentos%}
+                                        <tr class="mdc-data-table__row">
+                               
+                                          <th class="mdc-data-table__cell">
+                                            LEGALIZACIÓN
+                                          </th>
+                                          <th class="mdc-data-table__cell" >
+                                            {{ apix.titulo }}.
+                                       
+                                          </th>
+                                              
+                           
+                                            
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for apix in administracion%}
+                                        {% for depa in apix.departamentos%}
+                                        <tr class="mdc-data-table__row">
+                               
+                                          <th class="mdc-data-table__cell">
+                                            ADMINISTRACIÓN
+                                          </th>
+                                          <th class="mdc-data-table__cell" >
+                                            {{ apix.titulo }}.
+                                       
+                                          </th>
+                                              
+                           
+                                            
+
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                              <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for apix in produccion%}
+                                    {% for depa in apix.departamentos%}
+                                    <tr class="mdc-data-table__row">
+                           
+                                      <th class="mdc-data-table__cell">
+                                        PRODUCCIÓN Y AMBIENTE
+                                      </th>
+                                      <th class="mdc-data-table__cell" >
+                                        {{ apix.titulo }}.
+                                   
+                                      </th>
+                                          
+                       
+                                        
+
+                                          <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                          <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                    </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for apix in mercadeo%}
+                                {% for depa in apix.departamentos%}
+                                <tr class="mdc-data-table__row">
+                       
+                                  <th class="mdc-data-table__cell">
+                                    MERCADEO Y TICs
+                                  </th>
+                                  <th class="mdc-data-table__cell" >
+                                    {{ apix.titulo }}.
+                               
+                                  </th>
+                                      
+                   
+                                    
+
+                                      <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                      <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for apix in financiera%}
+                            {% for depa in apix.departamentos%}
+                            <tr class="mdc-data-table__row">
+                   
+                              <th class="mdc-data-table__cell">
+                                ANÁLISIS FINANCIERO
+                              </th>
+                              <th class="mdc-data-table__cell" >
+                                {{ apix.titulo }}.
+                           
+                              </th>
+                                  
+               
+                                
+
+                                  <th class="mdc-data-table__cell" scope="row"><p>{{ depa.name_de }}</p></th>
+                                  <th class="mdc-data-table__cell" scope="row"><p>{{ depa.total }}</p></th>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+
+                            
+                                    </tbody>
+                                  </table>
+                                </div>
+                              
+
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+     
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+<script>
+
+
+function IMPRIMIR(){
+
+  var divContents = document.getElementById("captura").innerHTML;
+  var prnt = window.open('', '', 'height=500, width=500');
+  prnt.document.write(divContents);
+  prnt.document.close();
+  prnt.print();
+  return false
+  html2canvas(document.querySelector("#captura")).then(canvas => {
+      document.body.appendChild(canvas)
+  });
+}
+
+    function agregar(id,servicio,fecha){
+        console.log(id)
+        console.log(servicio)
+     
+        fecha = document.getElementById(fecha).value
+        if (fecha){
+            var Tbl = document.getElementById("tablaPlan");
+            var hilera = document.createElement("tr");
+            var celda = document.createElement("td");
+            var celda2 = document.createElement("td");
+            var celda3 = document.createElement("td");
+            var textoCelda = document.createTextNode(servicio);
+            var textoCelda2 = document.createTextNode(fecha);
+            var textoCelda3 = document.createTextNode("Eliminar");
+
+            celda.appendChild(textoCelda);
+            celda2.appendChild(textoCelda2);
+            celda3.appendChild(textoCelda3);
+
+            hilera.appendChild(celda);
+            hilera.appendChild(celda2);
+            hilera.appendChild(celda3);
+
+Tbl.appendChild(hilera);
+        }else{
+            alert('Seleccione una fecha')
+        }
+        
+    }
+
+    function agregarFila() {
+
+
+
+    }
+</script>
+{% endblock %}
+
