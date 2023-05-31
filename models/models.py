@@ -8,6 +8,8 @@ from operator import attrgetter
 from sqlalchemy_utils import EncryptedType
 from sqlalchemy_utils.types import JSONType
 from sqlalchemy_utils.types.encrypted.encrypted_type import AesEngine
+import pytz
+default_timezone=pytz.timezone('America/Tegucigalpa')
 
 # **************************************************************************
 # SQLAlchemy Utilities
@@ -229,7 +231,7 @@ db.event.listen(db.session, 'before_commit', ElasticMixin.before_commit)
 class Appointments(db.Model):
     __tablename__ = 'appointments'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     date_scheduled = db.Column(db.DateTime, nullable=False)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_for = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -271,7 +273,7 @@ class DocumentCompany(db.Model):
     company = db.relationship("Company")
     documente_type_id = db.Column(db.Integer, db.ForeignKey("catalog_id_document_types.id"),nullable=True)
     documente_type = db.relationship("CatalogIDDocumentTypes")
-    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
     def __repr__(self):
         return jsonify(
             id = self.id,
@@ -386,7 +388,7 @@ class CatalogUserRoles(db.Model):
 
 # Chat Conversation Class
 class Chat():
-    date = db.Column(db.DateTime, primary_key=True, default=dt.now(tz.utc))
+    date = db.Column(db.DateTime, primary_key=True, default=dt.now(default_timezone))
     users = db.Column(EncryptedType(JSONType, get_crypto_key, AesEngine, 'pkcs5'), nullable=False)
     messages = db.Column(EncryptedType(JSONType, get_crypto_key, AesEngine, 'pkcs5'), nullable=False)
     # date_usr_msg = db.Column(db.DateTime, nullable=False)
@@ -477,7 +479,7 @@ class ChatsRegistered(Chat, db.Model):
 # Log User Connections Class
 class LogUserConnections(db.Model):
     __tablename__ = 'log_user_connections'
-    id = db.Column(db.DateTime, primary_key=True, default=dt.now(tz.utc))
+    id = db.Column(db.DateTime, primary_key=True, default=dt.now(default_timezone))
     sid = db.Column(db.String(35), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     ip_address = db.Column(db.String(15), nullable=False)
@@ -495,7 +497,7 @@ class LogUserConnections(db.Model):
 # Real Time Communication Online Users List Class
 class RTCOnlineUsers(db.Model):
     __tablename__ = 'rtc_online_users'
-    id = db.Column(db.DateTime, primary_key=True, default=dt.now(tz.utc))
+    id = db.Column(db.DateTime, primary_key=True, default=dt.now(default_timezone))
     userlist = db.Column(db.JSON, nullable=False)
     operation_id = db.Column(db.Integer, db.ForeignKey('catalog_operations.id'), nullable=False)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
@@ -596,7 +598,7 @@ class User(ElasticMixin, UserMixin, db.Model):
     phonenumber = db.Column(db.String(20), unique=False, nullable=True)
     notifications = db.Column(db.Boolean, unique=False, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
-    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
+    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(default_timezone))
     roles = db.relationship('UserXRole', lazy='subquery', back_populates='user')
     extra_info = db.relationship('UserExtraInfo', lazy='subquery', back_populates='user', uselist=False)
 
@@ -754,7 +756,7 @@ class Inscripciones(db.Model):
     phone = db.Column(db.String(50), unique=False, nullable=True)
     elegible = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     cohorte = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     attended = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     attended_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -772,19 +774,33 @@ class Inscripciones(db.Model):
 class DiagnosisCompany(db.Model):
     __tablename__ = 'diagnosis_company'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     status = db.Column(db.Boolean, nullable=False, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     resultados = db.Column(db.JSON, unique=False, nullable=True)
-    
+
+class WalletTransaction(db.Model):
+    __tablename__ = 'wallet_transaction'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
+    status = db.Column(db.Boolean, nullable=False, default=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    amount = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    #type – (0)deposit, (1)withdrawal
+    type = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    descripcion = db.Column(db.Text, nullable=True)
+
+
 # Appointments Class
 class ActionPlan(db.Model):
     __tablename__ = 'action_plan'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     date_scheduled_start = db.Column(db.DateTime, nullable=True)
     date_scheduled_end = db.Column(db.DateTime, nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -815,7 +831,7 @@ class ActionPlanReferences(db.Model):
     cancelled = db.Column(db.Boolean, nullable=True, default=False)
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     descripcion = db.Column(db.Text, unique=False, nullable=True)
-    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
 
 # Services Supplement Class
 class ActionPlanHistory(db.Model):
@@ -827,7 +843,7 @@ class ActionPlanHistory(db.Model):
     url = db.Column(db.Text, nullable=True)
     endservices = db.Column(db.Boolean, nullable=True, default=False)
     cancelled = db.Column(db.Boolean, nullable=True, default=False)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(tz.utc))
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
     
@@ -838,7 +854,7 @@ class UserXEmployeeAssigned(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
     employee_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
+    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(default_timezone))
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
 
     def __repr__(self):
@@ -857,7 +873,7 @@ class UserXRole(db.Model):
     __tablename__ = 'user_x_role'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     user_role_id = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), primary_key=True)
-    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
+    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(default_timezone))
     user = db.relationship('User', back_populates='roles')
     user_role = db.relationship('CatalogUserRoles', back_populates='users')
     

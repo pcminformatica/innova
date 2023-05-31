@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -47,6 +47,21 @@ def _index():
 def _aulavirtual():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('aulavirtual/home.html')
+
+@home.route('/formulario/')
+def _curso_created():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('aulavirtual/curso_created.html')
+
+@home.route('/enroll/')
+def _curso_enroll():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('aulavirtual/curso_enroll.html')
+
+@home.route('/cursos/list/')
+def _curso_list():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    return render_template('aulavirtual/curso_list.html')
 
 @home.route('/comunidaddenegocios/')
 def _comunidadempresarial():
@@ -233,6 +248,41 @@ def _digitalcenter():
 
 
 
+@home.route('/tiposempresa/')
+def _tipos_empresa():
+    app.logger.debug('** SWING_CMS ** - Digital Center')
+    company = Company.query.filter_by(enabled = True).all()
+    resultadosx = [] 
+    tipod = 0
+    tipoc = 0
+    tipob = 0
+    tipoa = 0
+    for company in company:
+        diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+        if diagnos:
+            for resultado in diagnos.resultados:
+                if 'id_area' in resultado:
+                    if resultado['id_area'] == 0:
+                        if resultado['descripcion'] == 'EMPRESA D':
+                            tipod = tipod+ 1
+                        elif  resultado['descripcion'] == 'EMPRESA C':
+                            tipoc = tipoc + 1
+                        elif resultado['descripcion'] == 'EMPRESA B':
+                            tipob = tipob + 1
+                        elif resultado['descripcion'] == 'EMPRESA A':
+                            tipoa = tipoa + 1
+    resultadosx.append({
+        'EMPRESA A':tipod,
+        'EMPRESA B':tipoc,
+        'EMPRESA C':tipob,
+        'EMPRESA D':tipoa,
+    })
+                                                      
+    return str(resultadosx)
+
+
+
+from sqlalchemy import desc,asc
 @home.route('/home/')
 @login_required
 def _home():
@@ -247,8 +297,32 @@ def _home():
                 #
                 carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
                 carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
+                company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
+                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+
+                actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+                catalog = catalogCategory.query.all()
+                plan_action = []
+                for catalog in catalog:
+                    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+                   
+                    if plan:
+                        miplan = {'catalog_id':catalog.id,'catalog_name':catalog.name,'plan_action':plan}
+                        plan_action.append(miplan)
+                    print(len(plan_action))
+                    print(len(plan_action))
+                    print(len(plan_action))
+                if diagnos:
+                    diagnostico = diagnos.resultados
+                else:
+                    diagnostico = False
                 context = {
-                    'carta':carta
+                    "carta":carta,
+                    "company":company,
+                    "diagnostico":diagnostico,
+                    "actions":actions,
+                    "diagnosis":diagnos,
+                    "plan_action":plan_action
                 }
                 return render_template('home_dashboard.html',**context)
         else:

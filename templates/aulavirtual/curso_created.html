@@ -1,0 +1,523 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+<style>
+.accordion {
+  background-color: #6BC4D0;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.accordion:hover {
+  color: #952d98;
+}
+.active, .accordion:hover {
+  background-color: white; 
+  color: #952d98;
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+  color: #665;
+}
+
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.section-questions{
+  padding-bottom: 20px;
+  width: 89%;
+  text-align: justify;
+  margin: 0 auto;
+}
+.mdc-typography-questions{
+  font-size: 1.3em;
+  margin: 0px
+}
+
+ .active .s-font-color-questions{
+  color:#952d98 !important
+}
+
+.s-font-color-questions {
+  color:white
+}
+
+.s-font-color-questions:hover {
+  color:#952d98
+}
+.s-font-color-questions .active{
+  color:white
+}
+
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">CAMPUS INNOVA</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de creación de curso</div>
+                    
+                               
+                                <br>
+                                
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Datos del curso
+                                            </div>
+  
+                                          </div>
+                                          
+                                          <input type="hidden" aria-labelledby="my-label-id" id="txt_id" value="">
+
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Nombre de la capacitación 
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                               value="" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                            <div class="mdc-typography--body1">
+                                                Tipo de formación:
+                                            </div>
+                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_rol" data-assigned-var>
+                                                <div class="mdc-select__anchor"
+                                                     role="button"
+                                                     aria-haspopup="listbox"
+                                                     aria-expanded="false"
+                                                     aria-labelledby="demo-label demo-selected-text">
+                                                  <span class="mdc-select__ripple"></span>
+                                                  <span id="demo-label" class="mdc-floating-label">Formación</span>
+                                                  <span class="mdc-select__selected-text-container">
+                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                  </span>
+                                                  <span class="mdc-select__dropdown-icon">
+                                                    <svg
+                                                        class="mdc-select__dropdown-icon-graphic"
+                                                        viewBox="7 10 10 5" focusable="false">
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-inactive"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 10 12 15 17 10">
+                                                      </polygon>
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-active"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 15 12 10 17 15">
+                                                      </polygon>
+                                                    </svg>
+                                                  </span>
+                                                  <span class="mdc-line-ripple"></span>
+                                                </div>
+                                              
+                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                              
+                                                            <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="0" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    Formación Inicial
+                                                                </span>
+                                                            </li>
+                                            
+                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="1" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    Formación continua
+                                                                </span>
+                                                            </li>
+                                                   
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                            <div class="mdc-typography--body1">
+                                                Tipo de modalidad:
+                                            </div>
+                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_rol" data-assigned-var>
+                                                <div class="mdc-select__anchor"
+                                                     role="button"
+                                                     aria-haspopup="listbox"
+                                                     aria-expanded="false"
+                                                     aria-labelledby="demo-label demo-selected-text">
+                                                  <span class="mdc-select__ripple"></span>
+                                                  <span id="demo-label" class="mdc-floating-label">Modalidad</span>
+                                                  <span class="mdc-select__selected-text-container">
+                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                  </span>
+                                                  <span class="mdc-select__dropdown-icon">
+                                                    <svg
+                                                        class="mdc-select__dropdown-icon-graphic"
+                                                        viewBox="7 10 10 5" focusable="false">
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-inactive"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 10 12 15 17 10">
+                                                      </polygon>
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-active"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 15 12 10 17 15">
+                                                      </polygon>
+                                                    </svg>
+                                                  </span>
+                                                  <span class="mdc-line-ripple"></span>
+                                                </div>
+                                              
+                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                              
+                                                            <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="0" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    Presencial
+                                                                </span>
+                                                            </li>
+                                            
+                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="1" role="option">
+                                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                <span class="mdc-deprecated-list-item__text">
+                                                                    Virtual
+                                                                </span>
+                                                            </li>
+                                                   
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                          </div>
+
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Horas de formación
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Horas</span>
+                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                               value="0" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Fecha
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Fecha</span>
+                                                <input required class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" 
+                                               value="0" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Fecha
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Hora</span>
+                                                <input required class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" 
+                                               value="0" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Link de Acceso Virtual (opcional)
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
+                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                               value="" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-form-field">
+                                              <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       name="cxb_accept"
+                                                       id="checkbox-public" 
+                                                   
+                                                       />
+                                                <div class="mdc-checkbox__background">
+                                                  <svg class="mdc-checkbox__checkmark"
+                                                       viewBox="0 0 24 24">
+                                                    <path class="mdc-checkbox__checkmark-path"
+                                                          fill="none"
+                                                          d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                  </svg>
+                                                  <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                                <div class="mdc-checkbox__ripple"></div>
+                                                <div class="mdc-checkbox__focus-ring"></div>
+                                              </div>
+                                              <label for="checkbox-public">
+                                                  Selecciona esta casilla para indicar que deseas delegar el llenado de la asistencia a todo el equipo de especialistas
+                                              </label>
+                                          </div>
+                                          </div>
+
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                               
+                                            <div class="section-questions">
+                                                <a class="accordion">
+                                                  <span class="mdc-typography-questions">
+                                                    ¿Desea delegar el registro de asistencia a usuarios especificas?  
+                                                  </span>
+                                                </a>
+                                                <div class="panel">
+                                   
+                                                    <div class="mdc-data-table">
+                                                        <div class="mdc-data-table__table-container">
+                                                          <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                                            <thead>
+                                                              <tr class="mdc-data-table__header-row">
+                                                                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
+                                                                  <div class="mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected">
+                                                                    <input type="checkbox" class="mdc-checkbox__native-control" aria-label="Toggle all rows"/>
+                                                                    <div class="mdc-checkbox__background">
+                                                                      <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                                      </svg>
+                                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                                    </div>
+                                                                    <div class="mdc-checkbox__ripple"></div>
+                                                                  </div>
+                                                                </th>
+                                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre</th>
+                                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Especilidad</th>
+                                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+                                                       
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody class="mdc-data-table__content">
+                                                              <tr data-row-id="u0" class="mdc-data-table__row">
+                                                                <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                                  <div class="mdc-checkbox mdc-data-table__row-checkbox">
+                                                                    <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u0"/>
+                                                                    <div class="mdc-checkbox__background">
+                                                                      <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                                      </svg>
+                                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                                    </div>
+                                                                    <div class="mdc-checkbox__ripple"></div>
+                                                                  </div>
+                                                                </td>
+                                                                <th class="mdc-data-table__cell" scope="row" id="u0">Arcus watch slowdown</th>
+                                                                <td class="mdc-data-table__cell">Online</td>
+                                                                <td class="mdc-data-table__cell">Medium</td>
+                                                      
+                                                              </tr>
+                                                              <tr data-row-id="u1" class="mdc-data-table__row mdc-data-table__row--selected" aria-selected="true">
+                                                                <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                                  <div class="mdc-checkbox mdc-data-table__row-checkbox mdc-checkbox--selected">
+                                                                    <input type="checkbox" class="mdc-checkbox__native-control" checked aria-labelledby="u1"/>
+                                                                    <div class="mdc-checkbox__background">
+                                                                      <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                                      </svg>
+                                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                                    </div>
+                                                                    <div class="mdc-checkbox__ripple"></div>
+                                                                  </div>
+                                                                </td>
+                                                                <th class="mdc-data-table__cell" scope="row" id="u1">monarch: prod shared ares-managed-features-provider-heavy</th>
+                                                                <td class="mdc-data-table__cell">Offline</td>
+                                                                <td class="mdc-data-table__cell">Huge</td>
+                                                         
+                                                              </tr>
+                                                              <tr data-row-id="u2" class="mdc-data-table__row mdc-data-table__row--selected" aria-selected="true">
+                                                                <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                                  <div class="mdc-checkbox mdc-data-table__row-checkbox mdc-checkbox--selected">
+                                                                    <input type="checkbox" class="mdc-checkbox__native-control" checked aria-labelledby="u2"/>
+                                                                    <div class="mdc-checkbox__background">
+                                                                      <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                                      </svg>
+                                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                                    </div>
+                                                                    <div class="mdc-checkbox__ripple"></div>
+                                                                  </div>
+                                                                </td>
+                                                                <th class="mdc-data-table__cell" scope="row" id="u2">monarch: prod shared ares-managed-features-provider-heavy</th>
+                                                                <td class="mdc-data-table__cell">Online</td>
+                                                                <td class="mdc-data-table__cell">Minor</td>
+                                                              </tr>
+                                                              <tr data-row-id="u3" class="mdc-data-table__row">
+                                                                <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                                  <div class="mdc-checkbox mdc-data-table__row-checkbox">
+                                                                    <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u3"/>
+                                                                    <div class="mdc-checkbox__background">
+                                                                      <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                                      </svg>
+                                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                                    </div>
+                                                                    <div class="mdc-checkbox__ripple"></div>
+                                                                  </div>
+                                                                </td>
+                                                                <th class="mdc-data-table__cell" scope="row" id="u3">Arcus watch slowdown</th>
+                                                                <td class="mdc-data-table__cell">Online</td>
+                                                                <td class="mdc-data-table__cell">Negligible</td>
+                                                              </tr>
+                                                            </tbody>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                  
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <br>
+                                          <br>
+    
+
+                                        </div>
+                                        <div class="mdc-card__actions" style="justify-content:center;" >
+                                            <div class="mdc-card__actions-buttons"></div>
+                                            <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                  >bookmark</i
+                                                >
+                                                <span class="mdc-button__label">Cancelar</span>
+                                            </a>
+                                            <button id="submitSaveButton" onclick="saveUsers()" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                  >touch_app</i
+                                                >
+                                                <span class="mdc-button__label">Guardar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                               
+                                </div>
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        const active = this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (!active) {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+    
+    </script>
+{% endblock %}

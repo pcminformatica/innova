@@ -12,6 +12,8 @@ from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, L
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
+import pytz
+
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
 
@@ -25,7 +27,15 @@ def allowed_file(filename):
 # working of MD5 (string - hexadecimal)
  
 import hashlib
- 
+
+@digitalcenter.route('/hora/')
+def __form_hora():
+    default_timezone=pytz.timezone('America/Tegucigalpa')
+    default = dt.now(default_timezone)
+    print(default)
+    print(default)
+    app.logger.debug(default)
+    return '9'
 
 @digitalcenter.route('/ddd/',methods = ['GET', 'POST'])
 def __form_perfil_emp2():
@@ -774,7 +784,6 @@ def _plan_action_dashboard(user_uid):
     if diagnos:
         diagnostico = diagnos.resultados
     else:
-        print('siiii')
         diagnostico = False
     users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(UserXRole.user_role_id == 3).all()
     context = {
