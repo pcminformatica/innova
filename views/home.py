@@ -251,34 +251,51 @@ def _digitalcenter():
 @home.route('/tiposempresa/')
 def _tipos_empresa():
     app.logger.debug('** SWING_CMS ** - Digital Center')
-    company = Company.query.filter(Company.enabled == True, Company.created_by != 3).all()
-    resultadosx = [] 
+    companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by != 3).all()
+    resultadosx = []
+    resultadosz =  []
     tipod = 0
     tipoc = 0
     tipob = 0
     tipoa = 0
-    for company in company:
+    companya  = []
+    companyb = []
+    companyc = []
+    companyd = []
+    for company in companys:
         diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
         if diagnos:
             for resultado in diagnos.resultados:
                 if 'id_area' in resultado:
                     if resultado['id_area'] == 0:
+                        departamento = ''
+                        if company.inscripcion:
+                            departamento =company.inscripcion.departamento
                         if resultado['descripcion'] == 'EMPRESA D':
                             tipod = tipod+ 1
+                            companyd.append({"company_name":company.name,"company_id":company.id,"departamento":departamento})
                         elif  resultado['descripcion'] == 'EMPRESA C':
                             tipoc = tipoc + 1
+                            companyc.append({"company_name":company.name,"company_id":company.id,"departamento":departamento})
                         elif resultado['descripcion'] == 'EMPRESA B':
                             tipob = tipob + 1
+                            companyb.append({"company_name":company.name,"company_id":company.id,"departamento":departamento})
                         elif resultado['descripcion'] == 'EMPRESA A':
                             tipoa = tipoa + 1
-    resultadosx.append({
-        'EMPRESA A':tipod,
-        'EMPRESA B':tipoc,
-        'EMPRESA C':tipob,
-        'EMPRESA D':tipoa,
-    })
-                                                      
-    return str(resultadosx)
+                            companya.append({"company_name":company.name,"company_id":company.id,"departamento":departamento})
+    resultadosx.append({"tipo":'EMPRESA D',"cantidad":tipod})
+    resultadosx.append({"tipo":'EMPRESA C',"cantidad":tipoc})
+    resultadosx.append({"tipo":'EMPRESA B',"cantidad":tipob})
+    resultadosx.append({"tipo":'EMPRESA A',"cantidad":tipoa})
+                                           
+    context = {
+        "resultadosx": resultadosx,
+        "companyd":companyd,
+        "companyc":companyc,
+        "companyb":companyb,
+        "companya":companya,
+    }
+    return render_template('tipos_empresa.html',**context)
 
 
 
