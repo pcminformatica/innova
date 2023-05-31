@@ -251,7 +251,7 @@ def _digitalcenter():
 @home.route('/tiposempresa/')
 def _tipos_empresa():
     app.logger.debug('** SWING_CMS ** - Digital Center')
-    company = Company.query.filter_by(enabled = True).all()
+    company = Company.query.filter(Company.enabled == True, Company.created_by != 3).all()
     resultadosx = [] 
     tipod = 0
     tipoc = 0
