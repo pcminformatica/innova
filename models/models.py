@@ -786,7 +786,8 @@ class WalletTransaction(db.Model):
     __tablename__ = 'wallet_transaction'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
-    status = db.Column(db.Boolean, nullable=False, default=True)
+    #status (2) in progress, (1) completed, (0) canceled
+    status = db.Column(db.Integer, unique=False, nullable=True, default=0)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")

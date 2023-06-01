@@ -272,6 +272,18 @@
                                             </span>
                                         </a>
                                     </li>
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('monitoreo._indicadores_perfil_asesor',user_uid=current_user.id ) }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Mi reporte</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                            </span>
+                                        </a>
+                                    </li>
                                     {% if current_user.id in (3,5,24) %}
                                     <li class="mdc-deprecated-list-item">
                                         <a href="{{ url_for('monitoreo._indicadores_inscritas') }}">

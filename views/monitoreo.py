@@ -181,7 +181,10 @@ def _indicadores_inscritas():
 
 @monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
 def _indicadores_perfil_asesor(user_uid):
-    user = User.query.filter(User.id==user_uid).first()
+    if current_user.id in [3,24]:
+        user = User.query.filter(User.id==user_uid).first()
+    else:
+        user = User.query.filter(User.id==current_user.id).first()
     url = app.config.get('KOBOTOOLBOX_ALL')
     headers=app.config.get('KOBOTOOLBOX_TOKEN')
     resp = requests.get(url,headers=headers)

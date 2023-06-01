@@ -316,19 +316,14 @@ def _home():
                 carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
                 company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
-
-                actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+                actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).all()
                 catalog = catalogCategory.query.all()
                 plan_action = []
                 for catalog in catalog:
-                    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
-                   
+                    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
                     if plan:
                         miplan = {'catalog_id':catalog.id,'catalog_name':catalog.name,'plan_action':plan}
                         plan_action.append(miplan)
-                    print(len(plan_action))
-                    print(len(plan_action))
-                    print(len(plan_action))
                 if diagnos:
                     diagnostico = diagnos.resultados
                 else:

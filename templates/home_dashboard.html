@@ -308,20 +308,23 @@ ul,li{
                                     <div class="section-questions">
                                         <a class="accordion" >
                                             <span  style="font-weight: bold;">{{plan['catalog_name']}}</span>
+                                            
                                         </a>
                                         <div class="panel">
+                                            {% for action in plan['plan_action'] %}  
+                                 
                                             <div class="demo-linear-progress-indicator">
-                                            
+                                                    
                                                 <div id="textbox">
                                                     <p style="font-weight: bold" class="alignleft">
-                                                    PLAn
+                                                        {{action.services.name}}
                                                     </p>
-                                                    <p class="alignright">10/ 100</p>
+                                                    <p class="alignright">{{action.progress}} / 100</p>
                                                 </div>
                                                 <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
-                                                <div class="mdc-linear-progress__buffer" style="transform: scaleX();">
+                                                <div class="mdc-linear-progress__buffer" style="transform: scaleX({{action.progress/100}});">
                                                 </div>
-                                                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX();">
+                                                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX({{action.progress/100}});">
                                                     <span class="mdc-linear-progress__bar-inner"></span>
                                                 </div>
                                                 <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
@@ -329,107 +332,33 @@ ul,li{
                                                 </div>
                                                 <center>
                                                     <br>
-                                                
+                                                    {% if action.progress == 100 %}
                                                         <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
                                                             <span class="mdc-button__ripple"></span>
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
                                                             <span class="mdc-button__label">Evaluar servicio</span>
                                                         </a>
-                                        
+                                                    {% elif action.progress == 0 %}
+                                                    {% else %}
+                                                        <a onclick="alert('En construcción')" class="mdc-button mdc-button--raised mdc-button--icon-leading" aria-label="bitácora" alt="bitácora">
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">app_registration</i>
+                                                            <span class="mdc-button__label">Ver bitácora de actividades</span>
+                                                        </a>
+                                                    {% endif %}
                                                     
                                                 </center>
                                             </div>
                                             <br>
             
                                             <p class="mdc-deprecated-list-divider"></p>
+                                            {% endfor %}
                                         
                                         </div>
                                     </div>
                                 {% endfor %}
-                                <div class="section-questions">
-                                    <a class="accordion" >
-                                        <span  style="font-weight: bold;">CATEGORIA 2</span>
-                                    </a>
-                                    <div class="panel">
-                                        <div class="demo-linear-progress-indicator">
-                                        
-                                            <div id="textbox">
-                                                <p style="font-weight: bold" class="alignleft">
-                                                PLAn
-                                                </p>
-                                                <p class="alignright">10/ 100</p>
-                                            </div>
-                                            <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
-                                            <div class="mdc-linear-progress__buffer" style="transform: scaleX();">
-                                            </div>
-                                            <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX();">
-                                                <span class="mdc-linear-progress__bar-inner"></span>
-                                            </div>
-                                            <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                                                <span class="mdc-linear-progress__bar-inner"></span></div>
-                                            </div>
-                                            <center>
-                                                <br>
-                                              
-                                                    <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
-                                                        <span class="mdc-button__label">Evaluar servicio</span>
-                                                    </a>
-                                      
-                                                
-                                            </center>
-                                        </div>
-                                        <br>
-        
-                                        <p class="mdc-deprecated-list-divider"></p>
-                                      
-                                    </div>
-                                </div>
-                                <br>
-                                <p class="mdc-deprecated-list-divider"></p>
-                                {% for action in actions %}  
-                                 
-                                <div class="demo-linear-progress-indicator">
-                                        
-                                    <div id="textbox">
-                                        <p style="font-weight: bold" class="alignleft">
-                                            {{action.services.name}}
-                                        </p>
-                                        <p class="alignright">{{action.progress}} / 100</p>
-                                    </div>
-                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
-                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX({{action.progress/100}});">
-                                    </div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX({{action.progress/100}});">
-                                        <span class="mdc-linear-progress__bar-inner"></span>
-                                    </div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                                        <span class="mdc-linear-progress__bar-inner"></span></div>
-                                    </div>
-                                    <center>
-                                        <br>
-                                        {% if action.progress == 100 %}
-                                            <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
-                                                <span class="mdc-button__label">Evaluar servicio</span>
-                                            </a>
-                                        {% elif action.progress == 0 %}
-                                        {% else %}
-                                            <a onclick="alert('En construcción')" class="mdc-button mdc-button--raised mdc-button--icon-leading" aria-label="bitácora" alt="bitácora">
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">app_registration</i>
-                                                <span class="mdc-button__label">Ver bitácora de actividades</span>
-                                            </a>
-                                        {% endif %}
-                                        
-                                    </center>
-                                </div>
-                                <br>
-
-                                <p class="mdc-deprecated-list-divider"></p>
-                                {% endfor %}
+                             
+             
                               
                             </div>
                             <div class="mdc-card__actions">
@@ -771,182 +700,7 @@ ul,li{
             </div>
         </div>
     </div>
-    <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-s">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-                    <div class="container-dashboard--card-info">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
-                                <br>
-                                <p class="mdc-deprecated-list-divider"></p>
-                                {% for action in actions %}  
-                                 
-                                <div class="demo-linear-progress-indicator">
-                                    
-                                    <div id="textbox">
-                                        <p style="font-weight: bold" class="alignleft">
-                                            {{action.services.name}}
-                                        </p>
-                                        <p class="alignright">{{action.progress}} / 100</p>
-                                    </div>
-                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
-                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX({{action.progress/100}});">
-                                    </div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX({{action.progress/100}});">
-                                        <span class="mdc-linear-progress__bar-inner"></span>
-                                    </div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                                        <span class="mdc-linear-progress__bar-inner"></span></div>
-                                    </div>
-                                    <center>
-                                        <br>
-                                   
-                                         
-                                       
-                                            {% if action.progress == 100 %}
-                                            <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
-                                                <span class="mdc-button__label">Evaluar servicio</span>
-                                            </a>
-                                            {% elif action.progress == 0 %}
-                                            <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">money</i>
-                                                <span class="mdc-button__label">Aceptar Servicio (Valor $250)</span>
-                                            </a>
-                                            {% else %}
-                                            <a onclick="alert('En construcción')" class="mdc-button mdc-button--raised mdc-button--icon-leading" aria-label="bitácora" alt="bitácora">
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">app_registration</i>
-                                                <span class="mdc-button__label">Ver bitácora de actividades</span>
-                                            </a>
-                                            {% endif %}
-                                        
-                                    </center>
-                                </div>
-                                <br>
-
-                                <p class="mdc-deprecated-list-divider"></p>
-                                {% endfor %}
-                              
-                            </div>
-                            <div class="mdc-card__actions">
-                                <div class="mdc-card__actions-buttons"></div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        more_vert
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                    <div class="container-dashboard--card-info">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Billetera</div>
-                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                    
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                           
-                                            <span class="mdc-deprecated-list-item__secondary-text">Créditos disponibles</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">1,500</span>
-                                    </li>
-                                    
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    {% for action in actions %} 
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            
-                                            <span class="mdc-deprecated-list-item__secondary-text">{{ action.date_created.strftime('%Y-%m-%d') }} - {{ action.services.name }} </span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                    </li>
-                                    <br>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    {% endfor %}
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                    
-                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Plan de acción</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                     
-                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Diagnóstico</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                              
-                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Formación inicial</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-1,000</span>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                           
-                                            <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Saldo inicial</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">4,500</span>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                </ul>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <!---
-                                <div class="mdc-card__actions-buttons">
-                                    <button class="mdc-button mdc-button--raised mdc-button--color-secondary mdc-card__action
-                                                mdc-card__action--button">
-                                        <div class="mdc-button__ripple"></div>
-                                        <span class="mdc-button__label">Redimir</span>
-                                    </button>
-                                </div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        receipt
-                                    </button>
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        add_circle
-                                    </button>
-
-                                </div>
-                                -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </main> 
 {% endif %}
 {% endblock %}

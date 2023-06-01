@@ -943,7 +943,7 @@ def _company_dashboard(user_uid):
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
     ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
-    actions = ActionPlan.query.filter_by(company_id=company.id).all()
+    actions = ActionPlan.query.filter_by(company_id=company.id,cancelled=False).all()
     if diagnos:
         diagnostico = diagnos.resultados
     else:
