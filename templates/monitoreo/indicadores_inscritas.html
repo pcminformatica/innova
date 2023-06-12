@@ -47,6 +47,7 @@
                                                 <th>#</th>
                                                 <th>DNI</th>
                                                 <th>Nombre</th>
+                                                <th>Edad</th>
                                                 <th>Empresa</th>
                                                 <th>Departamento</th>
                                                 <th>Municipio</th>
@@ -64,6 +65,7 @@
                                                 <th>#</th>
                                                 <th>DNI</th>
                                                 <th>Nombre</th>
+                                                <th>Edad</th>
                                                 <th>Empresa</th>
                                                 <th>Departamento</th>
                                                 <th>Municipio</th>
@@ -84,6 +86,14 @@
                                                 <td>{{loop.index}}</td>
                                                 <td>{{ inscripcion.dni }}</td>
                                                 <td>{{ inscripcion.name }}</td>
+                                                <td>
+                                                    {% for respuesta in inscripcion.respuestas %}
+                                                    {% if respuesta.id == '1_6' %}
+                                                        {{ respuesta.respuesta }}
+                                                    {% endif %}
+                                                    
+                                                    {% endfor %}
+                                                </td>
                                                 <td>{{ inscripcion.company_name }}</td>
                                                 <td>{{ inscripcion.departamento }}</td>
                                                 <td>{{ inscripcion.municipio }}</td>
