@@ -41,7 +41,7 @@
                         <div class="mdc-card__content container-dashboard--messages-msg">
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <table class="mdl-data-table data_table_buttons" >
+                                    <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -52,76 +52,29 @@
                                                 <th>Municipio</th>
                                                 <th>Correo</th>
                                                 <th>Telefono</th>
-                                                <th>Edad</th>
                                                 <th>Cohorte</th>
                                                 <th>Elegible</th>
                                                 <th>Fecha</th>
-                                                <th>¿Por qué medio prefiere recibir información de su aplicación al proyecto INNOVAMUJER?</th>
-                                                <th>¿Conoce los servicios que ofrece INNOVA?</th>
-                                                <th>¿Qué servicios requiere de INNOVA?</th>
-                                                <th>¿Por qué considera que requiere esos servicios?</th>
                                                 <th>¿Como se enteró de Innova?</th>
-                                                <th>
-                                                    <b>2.1</b> Último nivel educativo aprobado.
-                                                </th>
-                                                <th>
-                                                    <b>2.2</b> Qué dispositivos utiliza para conexión a internet:
-                                                </th>
-                                                <th>
-                                                    <b>2.3</b> Calidad del Internet:
-                                                </th>
-                                                <th>
-                                                    <b>2.4</b> Pertenece a un grupo poblacional étnico:
-                                                </th>
-                                                <th>
-                                                    <b>2.5</b> Origen étnico
-                                                </th>
-                                                <th>
-                                                    <b>2.6</b>  Cargo que Ud. desempeña
-                                                </th>
-                                                <th>
-                                                    <b>2.7</b> Actualmente usted participa de algún programa o proyecto de apoyo a la MIPYME:
-                                                </th>
-                                                <th>
-                                                    <b>2.8</b> ¿Me podría por favor indicar cuáles de los siguientes cargos en su empresa son ocupados por un hombre o una mujer?
-                                                </th>
-                                                <th>
-                                                    <b>3.1</b> Nombre de la empresa:
-                                                </th>
-                                                <th>
-                                                    <b>3.2</b> Cuenta con local propio o es alquilado:
-                                                </th>
-                                                <th>
-                                                    <b>3.3</b> Su empresa está formalizada:
-                                                </th>
-                                                <th>
-                                                    <b>3.4</b> Teléfono de contacto:
-                                                </th>
-                                                <th>
-                                                    <b>3.5</b> Departamento
-                                                </th>
-                                                <th>
-                                                    <b>3.6</b> Municipio
-                                                </th>
-                                                <th>
-                                                    <b>3.7</b> Ciudad 
-                                                </th>
-                                                <th>
-                                                    <b>3.8</b> Dirección 
-                                                </th>
-                                                <th>
-                                                    <b>3.9</b> Correo de la empresa
-                                                </th>
-                                                <th>
-                                                    <b>3.10</b> Su página web o red social empresarial: 
-                                                </th>
-                                                <th>
-                                                    <b>3.11</b> Años de fundación de la empresa 
-                                                </th>
                                             </tr>
                                         </thead>
                                         
-
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>DNI</th>
+                                                <th>Nombre</th>
+                                                <th>Empresa</th>
+                                                <th>Departamento</th>
+                                                <th>Municipio</th>
+                                                <th>Correo</th>
+                                                <th>Telefono</th>
+                                                <th>Cohorte</th>
+                                                <th>Elegible</th>
+                                                <th>Fecha</th>
+                                                <th>¿Como se enteró de Innova?</th>
+                                            </tr>
+                                        </tfoot>
                                         
                                         <tbody>
                                             {% for inscripcion in inscripciones %}
@@ -136,188 +89,19 @@
                                                 <td>{{ inscripcion.municipio }}</td>
                                                 <td>{{ inscripcion.correo }}</td>
                                                 <td>{{ inscripcion.phone }}</td>
+                                                <td>{{ inscripcion.cohorte }}</td>
+                                                
+                                                <td>{{ inscripcion.elegible }}</td>
+                                                <td>{{ inscripcion.date_created.strftime('%Y-%m-%d') }}</td>
                                                 <td>
                                                     {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '1_6' %}
+                                                    {% if respuesta.id == '4_4' %}
                                                         {{ respuesta.respuesta }}
                                                     {% endif %}
                                                     
                                                     {% endfor %}
                                                 </td>
-                                                <td>{{ inscripcion.cohorte }}</td>
-                                                
-                                                <td>{{ inscripcion.elegible }}</td>
-
-                                                <td>{{ inscripcion.date_created.strftime('%Y-%m-%d') }}</td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '1_11' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == 'A' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == 'B' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == 'C' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                        {% if respuesta.id == '4_4' %}
-                                                            {{ respuesta.respuesta }}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_1' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_2' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_3' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_4' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_5' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_6' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_7' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '2_8' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_1' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_2' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_3' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_4' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_5' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_6' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_7' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_8' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_9' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_10' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for respuesta in inscripcion.respuestas %}
-                                                    {% if respuesta.id == '3_11' %}
-                                                        {{ respuesta.respuesta }}
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                </td>
+                                          
                                             </tr>
                                             {% endfor %}
 
