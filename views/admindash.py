@@ -19,8 +19,10 @@ from sqlalchemy import desc,asc
 
 @admindash.route('/demanda/v1/11',methods=['GET', 'POST'])
 def _datos_describe_v1():
+
     servicios = []
     app.logger.debug('** SWING_CMS ** - ------------------')
+    app.logger.debug('** xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ** - ------------------')
     companys = Company.query.filter(Company.enabled==True).all()
     planes = 0
     lista = []
@@ -32,32 +34,23 @@ def _datos_describe_v1():
         if plans:
             print('s')
             for plan in plans:
-                print('s1231312313213')
                 servicesx = CatalogServices.query.filter(CatalogServices.id==plan.services_id).first()
+               
                 if servicesx:
                     print(servicesx.id)
-                    print(servicesx.id)
-                    if company.inscripcion:
-                        name_de = company.inscripcion.departamento
-                        departamento = company.inscripcion.departamento
-                        servi = str(servicesx.id) 
-                        depart = []
-                        if len(list(e for e in servicios if e['id']  == servi)) == 0:
-                            depart.append({'name_de':name_de,'departamento':departamento,'total':1})
-                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'total':1,'anterior':company.id})
-                        else:
-                            varl = list(e for e in servicios if e['id']  == servi)[0]
-                            index = servicios.index(varl)
-                            
-                            if servicios[index]['anterior'] != company.id:
-                                if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
-                                    servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
-                                else:
-                                    dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
-                                    index_departamento = servicios[index]['departamentos'].index(dep)
-                                    servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
-                                servicios[index]['total'] = servicios[index]['total'] + 1
-                                servicios[index]['anterior'] = company.id
+                    print('putaaaaaaa')   
+                    print(servicesx.id)                            
+                    servi = str(servicesx.id) 
+               
+                    if len(list(e for e in servicios if e['id']  == servi)) == 0:
+        
+                        servicios.append({'id':servi,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'anterior':company.id})
+                    else:
+                        varl = list(e for e in servicios if e['id']  == servi)[0]
+                        index = servicios.index(varl)
+                        if servicios[index]['anterior'] != company.id:
+                            servicios[index]['total'] = servicios[index]['total'] + 1
+                            servicios[index]['anterior'] = company.id
 
                 
     legalizacion = []
@@ -66,6 +59,9 @@ def _datos_describe_v1():
     financiera = []
     mercadeo = [] 
     for servicio in servicios:
+        print(servicio)
+        print('servicio')
+        print('s')
         serviciox = servicio['categoria']
         if serviciox:
             if serviciox == 1:
@@ -79,13 +75,7 @@ def _datos_describe_v1():
                 financiera.append(servicio)
             elif serviciox == 5:
                 mercadeo.append(servicio)
-    for legalizacion in administracion:
-        print(legalizacion) 
-        print(legalizacion) 
-        print(legalizacion) 
-        print(legalizacion) 
-        print(legalizacion) 
-
+        
     context = {
         'api': companys,
         'legalizacion':legalizacion,
@@ -96,9 +86,8 @@ def _datos_describe_v1():
 
     }
    
-
-    return render_template('datos_describe_2.html',**context)
-
+    
+    return render_template('datos_describe_3.html',**context)
 
 
 
