@@ -15,6 +15,91 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
 
 admindash = Blueprint('admindash', __name__, template_folder='templates', static_folder='static')
+from sqlalchemy import desc,asc
+
+@admindash.route('/demanda/v1/11',methods=['GET', 'POST'])
+def _datos_describe_v1():
+    servicios = []
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    companys = Company.query.filter(Company.enabled==True).all()
+    planes = 0
+    lista = []
+    for company in companys:
+        print(company.id)
+        #recorre todos los servicios de la fase 1.
+        plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+        #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+        if plans:
+            print('s')
+            for plan in plans:
+                print('s1231312313213')
+                servicesx = CatalogServices.query.filter(CatalogServices.id==plan.services_id).first()
+                if servicesx:
+                    print(servicesx.id)
+                    print(servicesx.id)
+                    if company.inscripcion:
+                        name_de = company.inscripcion.departamento
+                        departamento = company.inscripcion.departamento
+                        servi = str(servicesx.id) 
+                        depart = []
+                        if len(list(e for e in servicios if e['id']  == servi)) == 0:
+                            depart.append({'name_de':name_de,'departamento':departamento,'total':1})
+                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'total':1,'anterior':company.id})
+                        else:
+                            varl = list(e for e in servicios if e['id']  == servi)[0]
+                            index = servicios.index(varl)
+                            
+                            if servicios[index]['anterior'] != company.id:
+                                if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
+                                    servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
+                                else:
+                                    dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
+                                    index_departamento = servicios[index]['departamentos'].index(dep)
+                                    servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
+                                servicios[index]['total'] = servicios[index]['total'] + 1
+                                servicios[index]['anterior'] = company.id
+
+                
+    legalizacion = []
+    administracion = []
+    produccion = []
+    financiera = []
+    mercadeo = [] 
+    for servicio in servicios:
+        serviciox = servicio['categoria']
+        if serviciox:
+            if serviciox == 1:
+                legalizacion.append(servicio)
+            elif serviciox == 2:
+                administracion.append(servicio)
+                app.logger.debug(administracion)
+            elif serviciox == 3:
+                produccion.append(servicio)
+            elif serviciox == 4:
+                financiera.append(servicio)
+            elif serviciox == 5:
+                mercadeo.append(servicio)
+    for legalizacion in administracion:
+        print(legalizacion) 
+        print(legalizacion) 
+        print(legalizacion) 
+        print(legalizacion) 
+        print(legalizacion) 
+
+    context = {
+        'api': companys,
+        'legalizacion':legalizacion,
+        'administracion':administracion,
+        'produccion':produccion,
+        'financiera':financiera,
+        'mercadeo':mercadeo,
+
+    }
+   
+
+    return render_template('datos_describe_2.html',**context)
+
+
 
 
 @admindash.route('/admin/list/user/', methods = ['GET'])
