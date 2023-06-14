@@ -231,42 +231,41 @@ def _indicadores_inscritas():
                 "4_4",
                 "4_5",
                  ]
-    for repite in repiteobj:
-        lista_dic =[]
-        if repite.elegible: 
-            elegible = 'ELEGIBLE'
-        else:
-            elegible = "NO ELEGIBLE"
-        lista_dic.append({
-                                    "id":'PVA',
-                                    "pregunta":"ELEGIBLE",
-                                    "respuesta":elegible,
-                                })
-        for pregunta in preguntas:
-            if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
-                repites =list(e for e in repite.respuestas if e['id']  == pregunta)
-      
-                titulo = repites[0]['pregunta']
-                respuesta= repites[0]['respuesta']
-           
-                lista_dic.append({
-                                    "id":pregunta,
-                                    "pregunta":titulo,
-                                    "respuesta":respuesta,
-                                })
-
-            else:
-                lista_dic.append({
-                                    "id":pregunta,
-                                    "pregunta":"",
-                                    "respuesta":"",
-                                })
-        #for repites in repite.respuestas:
-
-        empresas.append(lista_dic)
-    print(empresas)
-    print(empresas)
     
+    for repite in repiteobj:
+        if repite.respuestas:
+            lista_dic =[]
+            if repite.elegible: 
+                elegible = 'ELEGIBLE'
+            else:
+                elegible = "NO ELEGIBLE"
+            lista_dic.append({
+                                        "id":'PVA',
+                                        "pregunta":"ELEGIBLE",
+                                        "respuesta":elegible,
+                                    })
+            for pregunta in preguntas:
+                if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
+                    repites =list(e for e in repite.respuestas if e['id']  == pregunta)
+        
+                    titulo = repites[0]['pregunta']
+                    respuesta= repites[0]['respuesta']
+            
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":titulo,
+                                        "respuesta":respuesta,
+                                    })
+
+                else:
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":"",
+                                        "respuesta":"",
+                                    })
+            #for repites in repite.respuestas:
+
+            empresas.append(lista_dic)    
     context = {
         'inscripciones': repiteobj,
         'respuesta':empresas
