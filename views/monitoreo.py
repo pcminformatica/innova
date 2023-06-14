@@ -232,8 +232,7 @@ def _indicadores_inscritas():
                 "4_5",
                  ]
     
-    for repite in repiteobj:
-        if repite.respuestas:
+
             lista_dic =[]
             if repite.elegible: 
                 elegible = 'ELEGIBLE'
@@ -267,8 +266,8 @@ def _indicadores_inscritas():
 
             empresas.append(lista_dic)    
     context = {
-        'inscripciones': repiteobj,
-        'respuesta':empresas
+        'inscripciones': '',
+        'respuesta':''
     }
  
     return render_template('monitoreo/indicadores_inscritas.html',**context)
