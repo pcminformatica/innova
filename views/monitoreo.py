@@ -164,7 +164,7 @@ def _indicadores_servicios():
 from collections import Counter
 @monitoreo.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
 def _indicadores_inscritas():
-    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[:5]
     repite = []
     repiteobj =[]
     for obj in query:
@@ -267,8 +267,8 @@ def _indicadores_inscritas():
 
             empresas.append(lista_dic)    
     context = {
-        'inscripciones': '',
-        'respuesta':''
+        'inscripciones': repiteobj,
+        'respuesta':empresas
     }
  
     return render_template('monitoreo/indicadores_inscritas.html',**context)
