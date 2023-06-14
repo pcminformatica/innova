@@ -232,7 +232,8 @@ def _indicadores_inscritas():
                 "4_5",
                  ]
     
-
+    for repite in repiteobj:
+        if repite.respuestas:
             lista_dic =[]
             if repite.elegible: 
                 elegible = 'ELEGIBLE'
