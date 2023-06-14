@@ -164,7 +164,7 @@ def _indicadores_servicios():
 from collections import Counter
 @monitoreo.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
 def _indicadores_inscritas():
-    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[:150]
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[:200]
     repite = []
     repiteobj =[]
     for obj in query:
