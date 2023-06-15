@@ -851,6 +851,7 @@ class ActionPlanHistory(db.Model):
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    advisory_time = db.Column(db.Time, nullable=True)
     
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):

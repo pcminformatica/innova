@@ -48,6 +48,19 @@
                                           </label>
                                       </div>
                           <br>
+                          <div class="mdc-typography--body1">
+                            Horas de asesoría:
+                        </div>
+                        <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                
+                            <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
+                                <span class="mdc-text-field__ripple"></span>
+                            
+                                <input id="txt_hora"  class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" >
+                                <span lass="mdc-line-ripple"></span>
+                            </label>
+                        </div>
+                        <br>
                           <label class="mdc-text-field mdc-text-field--outlined">
                             <span class="mdc-notched-outline">
                               <span class="mdc-notched-outline__leading"></span>
@@ -141,7 +154,9 @@
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Horas de asesoría</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">URL</th>
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
                                 
 
 
@@ -173,7 +188,9 @@
                                   <td class="mdc-data-table__cell no-print">
                                     {{ apix.date_created.strftime('%Y-%m-%d')  }}
                                   </td>
-                                  
+                                  <td class="mdc-data-table__cell no-print">
+                                    {{ apix.advisory_time  }}
+                                  </td>
                                   <td class="mdc-data-table__cell no-print">
                                     {% if apix.url  %}
                                     <a target="_blank" href="{{ apix.url }}" class="mdc-button mdc-button--raised mdc-button--leading" >
@@ -183,13 +200,16 @@
                                       <span class="mdc-button__label">Ver documento</span>
                                     </a>
                                     {% endif %}
-                                    <a target="_blank" href="{{ url_for('digitalcenter._plan_action_bitacora_update',user_uid=apix.id) }}" class="mdc-button mdc-button--color-secondary" >
-                                              
-                                      <span class="mdc-button__ripple"></span>
-                                      <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                      <span class="mdc-button__label">Editar bitacora</span>
-                                    </a>
+                                   
                                     
+                                  </td>
+                                  <td class="mdc-data-table__cell no-print">
+                                  <a target="_blank" href="{{ url_for('digitalcenter._plan_action_bitacora_update',user_uid=apix.id) }}" class="mdc-button mdc-button--color-secondary" >
+                                              
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Editar bitacora</span>
+                                  </a>
                                   </td>
                                 </tr>
                               
@@ -229,6 +249,7 @@
         var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
         var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
         var txt_url = document.getElementById("txt_url").value.trim() || null
+        var txt_hora = document.getElementById("txt_hora").value.trim() || null
         
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
@@ -257,7 +278,8 @@
             "txt_porcentaje":txt_porcentaje,
             "txt_servicios":txt_servicios,
             "txt_fecha":txt_fecha,
-            "txt_url":txt_url
+            "txt_url":txt_url,
+            "txt_hora":txt_hora,
       };
       console.log(postData)
       let apiUrl = '/api/save/action/plan/history/';

@@ -945,6 +945,8 @@ def _d_save_ActionPlanHistory():
             txt_servicios = request.json['txt_servicios']
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
+            txt_hora = request.json['txt_hora']
+            
             history =  ActionPlanHistory()
             history.created_by = current_user.id 
             history.description = txt_comentario
@@ -953,6 +955,7 @@ def _d_save_ActionPlanHistory():
             history.endservices = txt_finalizo
             history.date_created = txt_fecha
             history.url = txt_url
+            history.advisory_time = txt_hora
             db.session.add(history)
             db.session.commit()
             plan = ActionPlan.query.filter_by(id = txt_servicios).first()
@@ -1009,6 +1012,7 @@ def _d_save_ActionPlanHistory_update():
             txt_servicios = request.json['txt_servicios']
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
+            txt_hora = request.json['txt_hora']
             history =  ActionPlanHistory.query.filter(ActionPlanHistory.id==txt_servicios).first()
             history.created_by = current_user.id 
             history.description = txt_comentario
@@ -1016,6 +1020,7 @@ def _d_save_ActionPlanHistory_update():
             history.endservices = txt_finalizo
             history.date_created = txt_fecha
             history.url = txt_url
+            history.txt_hora = txt_hora
             db.session.add(history)
             db.session.commit()
 
