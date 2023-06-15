@@ -7,12 +7,13 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 import pytz
+from views.wallet import _update_wallet
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 import os
@@ -36,6 +37,114 @@ def __form_hora():
     print(default)
     app.logger.debug(default)
     return '9'
+
+
+@digitalcenter.route('/demanda/v2',methods=['GET', 'POST'])
+def _datos_describe_2_v2():
+    servicios = []
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    url = app.config.get('KOBOTOOLBOX_ALL')
+    headers=app.config.get('KOBOTOOLBOX_TOKEN')
+    resp = requests.get(url,headers=headers)
+    api1 = json.loads(resp.content)
+    api1['results'] = list(e for e in api1['results'] if e['_submitted_by']  in current_user.extra_info.kobotoolbox['kobotoolbox_access'] )
+    for api in api1['results']:
+        for resp in api:
+            if api[resp] == '1':
+                services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
+                if services:
+                    for servicesx in services:
+                        departamento =api['DEPARTAMENTO']
+                        if departamento == '01':
+                            name_de ='Atlantida'
+                        elif departamento == '02':
+                            name_de ='COLÓN'
+                        elif departamento == '03':
+                            name_de ='COMAYAGUA'
+                        elif departamento == '04':
+                            name_de ='COPÁN'
+                        elif departamento == '05':
+                            name_de ='CORTÉS'
+                        elif departamento == '06':
+                            name_de ='CHOLUTECA'
+                        elif departamento == '07':
+                            name_de ='EL PARAÍSO'
+                        elif departamento == '08':
+                            name_de ='FRANCISCO MORAZÁN'
+                        elif departamento == '09':
+                            name_de ='GRACIAS A DIOS'
+                        elif departamento == '10':
+                            name_de ='INTIBUCÁ'
+                        elif departamento == '11':
+                            name_de ='ISLAS DE LA BAHÍA'
+                        elif departamento == '12':
+                            name_de ='LA PAZ'
+                        elif departamento == '13':
+                            name_de ='LEMPIRA'
+                        elif departamento == '14':
+                            name_de ='OCOTEPEQUE'
+                        elif departamento == '15':
+                            name_de ='OLANCHO'
+                        elif departamento == '16':
+                            name_de ='SANTA BÁRBARA'
+                        elif departamento == '17':
+                            name_de ='VALLE'
+                        elif departamento == '18':
+                            name_de ='YORO'
+                            
+                        servi = str(servicesx.id) 
+                        depart = []
+                        if len(list(e for e in servicios if e['id']  == servi)) == 0:
+                            depart.append({'name_de':name_de,'departamento':departamento,'total':1})
+                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
+                        else:
+                            varl = list(e for e in servicios if e['id']  == servi)[0]
+                            index = servicios.index(varl)
+                            
+                            if servicios[index]['anterior'] != api['_id']:
+                                if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
+                                    servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
+                                else:
+                                    dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
+                                    index_departamento = servicios[index]['departamentos'].index(dep)
+                                    servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
+                                servicios[index]['total'] = servicios[index]['total'] + 1
+                                servicios[index]['anterior'] = api['_id']
+
+                
+    legalizacion = []
+    administracion = []
+    produccion = []
+    financiera = []
+    mercadeo = [] 
+    for servicio in servicios:
+        serviciox = servicio['categoria']
+        if serviciox:
+            if serviciox == 1:
+                legalizacion.append(servicio)
+            elif serviciox == 2:
+                administracion.append(servicio)
+                app.logger.debug(administracion)
+            elif serviciox == 3:
+                produccion.append(servicio)
+            elif serviciox == 4:
+                financiera.append(servicio)
+            elif serviciox == 5:
+                mercadeo.append(servicio)
+        
+    context = {
+        'api': api,
+        'legalizacion':legalizacion,
+        'administracion':administracion,
+        'produccion':produccion,
+        'financiera':financiera,
+        'mercadeo':mercadeo,
+
+    }
+   
+
+    return render_template('datos_describe_2_v2.html',**context)
+
 
 @digitalcenter.route('/ddd/',methods = ['GET', 'POST'])
 def __form_perfil_emp2():
@@ -350,7 +459,7 @@ def _plan_action_create(user_uid):
     
     company =  Company.query.filter(Company.id == user_uid).first()
     diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
-    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     api = diagnosis.respuestas
     servicios = []
     for resp in api:
@@ -419,6 +528,129 @@ def _admin_servicios():
     context = {'services':services} 
     return render_template('servicios.html',**context)
 
+
+@digitalcenter.route('/update/innova',methods=['GET', 'POST'])
+def _valorar_servicios():
+    servicios = CatalogServices.query.filter().all()
+    for servicio in servicios:
+        servicio.cost_innova = 250
+        db.session.add(servicio)
+        db.session.commit()
+    return 'Listo'
+
+@digitalcenter.route('/update/wallet',methods=['GET', 'POST'])
+def _init_wallet():
+    companys = Company.query.filter_by(enabled=True).all()
+    for company in companys:
+        diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).first()
+        #buscar si tiene diagnostico
+        if diagnostico:
+            #buscar si el diagnostico esta en plan de accion
+            service_plan = CatalogServices.query.filter_by(name_short='a2').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
+            if not actionplan:
+                actionplan = ActionPlan()
+                actionplan.company_id = actionplan.id
+                actionplan.company = company
+                actionplan.date_scheduled_start =diagnostico.date_created
+                actionplan.date_scheduled_end = diagnostico.date_created
+                actionplan.services_id = service_plan.id
+                actionplan.created_by = diagnostico.created_by
+                actionplan.fase = 0
+                actionplan.descripcion = ''
+                db.session.add(actionplan)
+                db.session.commit() 
+            #buscar en wallet si esta el diagnostico
+            wallet = WalletTransaction.query.filter_by(company_id = actionplan.company_id, services_id =service_plan.id).first()
+            if not wallet:  
+                wallet = WalletTransaction()
+                wallet.amount = service_plan.cost_innova
+                wallet.company_id =company.id
+                wallet.services_id = service_plan.id
+                wallet.created_by = diagnostico.created_by
+                wallet.status = 1
+                wallet.type = 1
+                db.session.add(wallet)
+                db.session.commit() 
+            #buscamos si tiene plan de accion
+            service_plan = CatalogServices.query.filter_by(name_short='a3').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
+            if not actionplan:
+                #validamos que se encuentren servicios dentro del plan de accion
+                plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).first()
+                if plan:
+                    plan = ActionPlan()
+                    plan.company_id = company.id
+                    plan.company = company
+                    plan.date_scheduled_start =plan.date_scheduled_start
+                    plan.date_scheduled_end = plan.date_scheduled_start
+                    plan.services_id = service_plan.id
+                    plan.created_by = diagnostico.created_by
+                    plan.fase = 0
+                    plan.descripcion = ''
+                    db.session.add(plan)
+                    db.session.commit() 
+                    db.session.refresh(plan)
+            wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_plan.id).first()
+            if not wallet:  
+                wallet = WalletTransaction()
+                wallet.amount = service_plan.cost_innova
+                wallet.company_id =company.id
+                wallet.services_id = service_plan.id
+                wallet.created_by = diagnostico.created_by
+                wallet.status = 1
+                wallet.type = 1
+                db.session.add(wallet)
+                db.session.commit() 
+        
+            #recorre todos los servicios de la fase 1.
+            plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+            #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+            if plans:
+                for plan in plans:
+                    service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
+                    wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
+                    if not wallet:  
+                        wallet = WalletTransaction()
+                        wallet.amount = service_plan.cost_innova
+                        wallet.company_id =company.id
+                        wallet.services_id = service_plan.id
+                        wallet.created_by = plan.created_by
+                        wallet.type = 1
+                        if plan.progress == 100:
+                            wallet.status = 1
+                        else:
+                            wallet.status = 2
+                        db.session.add(wallet)
+                        db.session.commit() 
+            service_plan = CatalogServices.query.filter_by(name_short='c1').first()
+            wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_plan.id).first()
+            if not wallet:  
+                wallet = WalletTransaction()
+                wallet.amount = service_plan.cost_innova
+                wallet.company_id =company.id
+                wallet.services_id = service_plan.id
+                wallet.created_by = diagnostico.created_by
+                wallet.type = 0
+                wallet.status = 1
+                db.session.add(wallet)
+                db.session.commit() 
+            actualizar = _update_wallet(company.id)
+            if actualizar:
+                print('empresa actulizada')
+
+    return 'Listo'
+
+@digitalcenter.route('/creditos/innova',methods=['GET', 'POST'])
+def _init_services_creditos():
+    staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
+    websites = CatalogServices(name='Beca INNOVA', name_short='c1',cost_innova=4000,cost=4000, service_user_role=staff_it_role.id)
+    db.session.add(websites)
+    db.session.commit()
+    websites = CatalogServices(name='Créditos INNOVA', name_short='c2',cost_innova=0,cost=0, service_user_role=staff_it_role.id)
+    db.session.add(websites)
+    db.session.commit()
+    return 'Listo'
 
 @digitalcenter.route('/insert/chat',methods=['GET', 'POST'])
 def _re1():
@@ -708,77 +940,41 @@ def _datos_describe_12():
 
 
 
-@digitalcenter.route('/demanda/v2',methods=['GET', 'POST'])
-def _datos_describe_2_v2():
+@digitalcenter.route('/demanda/v1',methods=['GET', 'POST'])
+def _datos_describe_v1():
+    print('putaaaaaaa') 
+    print('putaaaaaaa') 
+    print('putaaaaaaa') 
     servicios = []
     app.logger.debug('** SWING_CMS ** - ------------------')
-    url = app.config.get('KOBOTOOLBOX_ALL')
-    headers=app.config.get('KOBOTOOLBOX_TOKEN')
-    resp = requests.get(url,headers=headers)
-    api1 = json.loads(resp.content)
-    api1['results'] = list(e for e in api1['results'] if e['_submitted_by']  in current_user.extra_info.kobotoolbox['kobotoolbox_access'] )
-    for api in api1['results']:
-        for resp in api:
-            if api[resp] == '1':
-                services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
-                if services:
-                    for servicesx in services:
-                        departamento =api['DEPARTAMENTO']
-                        if departamento == '01':
-                            name_de ='Atlantida'
-                        elif departamento == '02':
-                            name_de ='COLÓN'
-                        elif departamento == '03':
-                            name_de ='COMAYAGUA'
-                        elif departamento == '04':
-                            name_de ='COPÁN'
-                        elif departamento == '05':
-                            name_de ='CORTÉS'
-                        elif departamento == '06':
-                            name_de ='CHOLUTECA'
-                        elif departamento == '07':
-                            name_de ='EL PARAÍSO'
-                        elif departamento == '08':
-                            name_de ='FRANCISCO MORAZÁN'
-                        elif departamento == '09':
-                            name_de ='GRACIAS A DIOS'
-                        elif departamento == '10':
-                            name_de ='INTIBUCÁ'
-                        elif departamento == '11':
-                            name_de ='ISLAS DE LA BAHÍA'
-                        elif departamento == '12':
-                            name_de ='LA PAZ'
-                        elif departamento == '13':
-                            name_de ='LEMPIRA'
-                        elif departamento == '14':
-                            name_de ='OCOTEPEQUE'
-                        elif departamento == '15':
-                            name_de ='OLANCHO'
-                        elif departamento == '16':
-                            name_de ='SANTA BÁRBARA'
-                        elif departamento == '17':
-                            name_de ='VALLE'
-                        elif departamento == '18':
-                            name_de ='YORO'
-                            
-                        servi = str(servicesx.id) 
-                        depart = []
-                        if len(list(e for e in servicios if e['id']  == servi)) == 0:
-                            depart.append({'name_de':name_de,'departamento':departamento,'total':1})
-                            servicios.append({'id':servi,'titulo':servicesx.name,'departamentos':depart,'categoria':servicesx.catalog_category,'total':1,'anterior':api['_id']})
-                        else:
-                            varl = list(e for e in servicios if e['id']  == servi)[0]
-                            index = servicios.index(varl)
-                            
-                            if servicios[index]['anterior'] != api['_id']:
-                                if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento))== 0:
-                                    servicios[index]['departamentos'].append({'name_de':name_de,'departamento':departamento,'total':1})
-                                else:
-                                    dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento)[0]
-                                    index_departamento = servicios[index]['departamentos'].index(dep)
-                                    servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
-                                servicios[index]['total'] = servicios[index]['total'] + 1
-                                servicios[index]['anterior'] = api['_id']
+    companys = Company.query.filter(Company.enabled==True).all()
+    planes = 0
+    lista = []
+    for company in companys:
+        print(company.id)
+        #recorre todos los servicios de la fase 1.
+        plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+        #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+        if plans:
+            print('s')
+            for plan in plans:
+                servicesx = CatalogServices.query.filter(id==plan.services_id).first()
+               
+                if servicesx:
+                    print(servicesx.id)
+                    print('putaaaaaaa')   
+                    print(servicesx.id)                            
+                    servi = str(servicesx.id) 
+                    depart = []
+                    if len(list(e for e in servicios if e['id']  == servi)) == 0:
+        
+                        servicios.append({'id':servi,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'anterior':company.id})
+                    else:
+                        varl = list(e for e in servicios if e['id']  == servi)[0]
+                        index = servicios.index(varl)
+                        if servicios[index]['anterior'] != company.id:
+                            servicios[index]['total'] = servicios[index]['total'] + 1
+                            servicios[index]['anterior'] = company.id
 
                 
     legalizacion = []
@@ -787,6 +983,9 @@ def _datos_describe_2_v2():
     financiera = []
     mercadeo = [] 
     for servicio in servicios:
+        print(servicio)
+        print('servicio')
+        print('s')
         serviciox = servicio['categoria']
         if serviciox:
             if serviciox == 1:
@@ -802,7 +1001,7 @@ def _datos_describe_2_v2():
                 mercadeo.append(servicio)
         
     context = {
-        'api': api,
+        'api': companys,
         'legalizacion':legalizacion,
         'administracion':administracion,
         'produccion':produccion,
@@ -812,7 +1011,10 @@ def _datos_describe_2_v2():
     }
    
 
-    return render_template('datos_describe_2_v2.html',**context)
+    return render_template('datos_describe_3.html',**context)
+
+
+
 
 @digitalcenter.route('/registros/im',methods=['GET', 'POST'])
 def _registros_im():
@@ -888,7 +1090,7 @@ def _plan_action_dashboard(user_uid):
     company = Company.query.filter_by(id=user_uid).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     
-    actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+    actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     if diagnos:
         diagnostico = diagnos.resultados
     else:
@@ -998,11 +1200,22 @@ def _plan_action_bitacora(user_uid):
     }
     return render_template('plan_action_bitacora.html',**context)
 
+
+@digitalcenter.route('/empresas/resumen/update/<int:user_uid>/',methods=['GET', 'POST'])
+def _plan_action_bitacora_update(user_uid):
+    action = ActionPlanHistory.query.filter_by(id=user_uid).first()
+    context = {
+        'action': action,
+       
+    }
+    return render_template('plan_action_bitacora_update.html',**context)
+
+
 @digitalcenter.route('/empresas/resumen/bitecora/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_bitacora_atenciones(user_uid):
-
+    history = ActionPlanHistory.query.filter_by(id=user_uid).first()
     context = {
-        'user_uid': user_uid,
+        'history': history,
   
     }
     return render_template('plan_action_bitacora_atenciones.html',**context)

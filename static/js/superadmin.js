@@ -64,6 +64,7 @@ function saveService(){
     'txt_tiempo_asesoria': mdcAssignedVars['txt_tiempo_asesoria'].value.trim() || null,
     'txt_tiempo_ejecucion': mdcAssignedVars['txt_tiempo_ejecucion'].value.trim() || null,
     'txt_costo': mdcAssignedVars['txt_costo'].value.trim() || null,
+    'txt_costo_innova': mdcAssignedVars['txt_costo_innova'].value.trim() || null,
     'txt_diagnostic_questions': mdcAssignedVars['txt_diagnostic_questions'].value.trim() || null,
     'txt_id':document.getElementById('txt_id').value
   }

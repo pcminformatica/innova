@@ -5,12 +5,12 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import ActionPlanReferences,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
-
+from views.wallet import _update_wallet
 import json
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
@@ -756,13 +756,14 @@ def _d_save_admin_servi():
             txt_tiempo_asesoria = request.json['txt_tiempo_asesoria']
             txt_tiempo_ejecucion = request.json['txt_tiempo_ejecucion']
             txt_costo = request.json['txt_costo']
+            txt_costo_innova = request.json['txt_costo_innova']            
             txt_diagnostic_questions = request.json['txt_diagnostic_questions']
-
             user.name = txt_name
             user.catalog_category = int(txt_rol)
             user.advisory_time = int(txt_tiempo_asesoria)
             user.execution_time = int(txt_tiempo_ejecucion)
             user.cost =float(txt_costo)
+            user.cost_innova = float(txt_costo_innova)
             user.diagnostic_questions =  txt_diagnostic_questions
             db.session.add(user)
             db.session.commit()
@@ -857,35 +858,35 @@ def _d_save_ActionPlan():
             services = request.json['services']
             company =  Company.query.filter(or_(Company.dni == txt_identidad.replace("-", ""), Company.id == txt_company_id)).first()
             if not company:
-                txt_company_name = request.json['txt_company_name']
-                txt_company_rtn = request.json['txt_company_rtn']
-                company = Company()
-                company.name = txt_company_name
-                company.rtn = txt_company_rtn
-                company.dni = txt_identidad.replace("-", "")
-                company.description = 'description'
-                company.created_by = current_user.id
-                db.session.add(company)
-                db.session.commit()
+                return jsonify({ 'status': 'error', 'msg': 'Empresa no encontrada' })
             services = json.loads(services)
             for service in services:
-                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],fase=service['fase']).first()
+                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service['service'],fase=service['fase'],cancelled=False).first()
+                service_plan = CatalogServices.query.filter_by(id=int(service['service'])).first()
                 if not actionplan:
                     actionplan = ActionPlan()
                     actionplan.company_id = actionplan.id
                     actionplan.company = company
                     actionplan.date_scheduled_start = service['fecha_inicio']
                     actionplan.date_scheduled_end = service['fecha_final']
-                    actionplan.services_id = int(service['service'])
+                    actionplan.services_id = service_plan.id
                     actionplan.created_by = current_user.id
                     actionplan.fase = service['fase']
                     actionplan.descripcion = service['comentario']
                     db.session.add(actionplan)
+                    wallet = WalletTransaction()
+                    wallet.amount = service_plan.cost_innova
+                    wallet.company_id =company.id
+                    wallet.services_id = service_plan.id
+                    wallet.created_by = current_user.id
+                    wallet.status = 2
+                    wallet.type = 1
+                    db.session.add(wallet)
                     db.session.commit()
-                    
-
-                    
-        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+            actualizar = _update_wallet(company.id)
+            if actualizar:
+                return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+                
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
@@ -909,22 +910,7 @@ def _d_save_DiagnosisCompany():
             company =  Company.query.filter(Company.dni == identidad).first()
             if not company:
                 return jsonify({ 'status': 201, 'dni': identidad })
-                dni = api['IDENTIDAD']
-                company = Company()
-                company.name = api['NOMBRE_EMPRESA']
-                company.rtn = api['RTN']
-                company.dni = dni.replace("-", "")
-                company.address = api['DIRECCION']
-                jsonPhone = JsonPhone()
-                jsonPhone.phone = api['TELEFONO']
-                jsonSocial= JsonSocial()
-                jsonSocial.email = api['EMAIL']
-                company.phones = jsonPhone.jsonFormat()
-                company.social_networks = jsonSocial.jsonFormat()
-                company.created_by = current_user.id
-                db.session.add(company)
-                db.session.commit()
-                
+
             diagnosis =  DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
             if not diagnosis:
                 diagnostico = Diagnosticos()
@@ -953,7 +939,6 @@ def _d_save_ActionPlanHistory():
     try:
         # POST: Save Appointment
         if request.method == 'POST':
-
             txt_comentario = request.json['txt_comentario']
             txt_porcentaje = request.json['txt_porcentaje']
             txt_finalizo = request.json['txt_finalizo']
@@ -970,12 +955,16 @@ def _d_save_ActionPlanHistory():
             history.url = txt_url
             db.session.add(history)
             db.session.commit()
-
             plan = ActionPlan.query.filter_by(id = txt_servicios).first()
             plan.progress =txt_porcentaje
             db.session.add(plan)
             db.session.commit()
             if txt_finalizo == True and txt_porcentaje == "100":
+                wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
+                wallet.status = 1
+                db.session.add(wallet)
+                db.session.commit()
+                actualizar = _update_wallet(plan.company_id)
                 company = Company.query.filter_by(id = plan.company_id).first()
                 areas_mejoras = plan.services.diagnostic_questions
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
@@ -998,10 +987,6 @@ def _d_save_ActionPlanHistory():
                 diagnos.status = False
                 db.session.add(diagnos)
                 db.session.commit()
-
-
-                
-
                 return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
                                           
 
@@ -1009,6 +994,80 @@ def _d_save_ActionPlanHistory():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/action/plan/history/update', methods = ['POST'])
+@login_required
+def _d_save_ActionPlanHistory_update():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_comentario = request.json['txt_comentario']
+            txt_porcentaje = request.json['txt_porcentaje']
+            txt_finalizo = request.json['txt_finalizo']
+            txt_servicios = request.json['txt_servicios']
+            txt_fecha = request.json['txt_fecha']
+            txt_url = request.json['txt_url']
+            history =  ActionPlanHistory.query.filter(ActionPlanHistory.id==txt_servicios).first()
+            history.created_by = current_user.id 
+            history.description = txt_comentario
+            history.progress = txt_porcentaje
+            history.endservices = txt_finalizo
+            history.date_created = txt_fecha
+            history.url = txt_url
+            db.session.add(history)
+            db.session.commit()
+
+            action_plan = ActionPlanHistory.query.filter_by(action_plan_id=history.action_plan_id).all()
+            porcentaje = 0
+            for action_planx in action_plan:
+               if porcentaje <= action_planx.progress:
+                    porcentaje = action_planx.progress
+
+            plan = ActionPlan.query.filter_by(id = history.action_plan_id).first()
+            plan.progress =porcentaje
+            db.session.add(plan)
+            db.session.commit()
+            if txt_finalizo == True and txt_porcentaje == "100":
+                wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
+                wallet.status = 1
+                db.session.add(wallet)
+                db.session.commit()
+                actualizar = _update_wallet(plan.company_id)
+                company = Company.query.filter_by(id = plan.company_id).first()
+                areas_mejoras = plan.services.diagnostic_questions
+                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
+                api = diagnos.respuestas
+                for area_mejora in areas_mejoras:
+                    clave = area_mejora['id'] 
+                    if clave in api:
+                        api[clave] = 3
+                # nuevo diagnosticos activado
+                diagnostico = Diagnosticos()
+                resultados  = diagnostico.calcular_area(api)
+                diagnosis =  DiagnosisCompany()
+                diagnosis.company_id = company.id
+                diagnosis.respuestas = api
+                diagnosis.resultados =  json.loads( str(resultados))
+                diagnosis.created_by = current_user.id
+                db.session.add(diagnosis)
+                db.session.commit()
+                # anterior diagnosticos desactivado
+                diagnos.status = False
+                db.session.add(diagnos)
+                db.session.commit()
+                return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+                                          
+
+        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        print(e)
+        print(e)
+        print(e)
+        app.logger.error('** SWING_CMS ** - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
 
 
 @api.route('/api/save/user/company/admin', methods = ['POST'])
@@ -1520,9 +1579,22 @@ def _d_delete_ActionPlan():
         # POST: Save Appointment
         if request.method == 'POST':
             actionPlan = request.json['actionPlan']
-            actionplan = ActionPlan.query.filter_by(id = actionPlan).delete()
+            cancelledReason = request.json['cancelledReason']  
+            actionplan = ActionPlan.query.filter_by(id = actionPlan).first()
+            actionplan.cancelled = True
+            actionplan.cancelled_by = current_user.id
+            actionplan.cancelled_reasons = cancelledReason
+            db.session.add(actionplan)
+            wallet = WalletTransaction.query.filter_by(company_id = actionplan.company_id, services_id =actionplan.services_id).first()
+            if wallet:
+                wallet.status = 0
+                wallet.cancelled_reasons = cancelledReason
+                db.session.add(wallet)     
+                
             db.session.commit()
-        return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+            actualizar = _update_wallet(actionplan.company_id)
+            if actualizar:
+                return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })

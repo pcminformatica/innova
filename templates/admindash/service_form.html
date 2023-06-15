@@ -213,13 +213,26 @@
                                           </div>
                                           <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Costo 
+                                                Costo de mercado
                                             </div>
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_costo" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Escribe</span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe Costo de mercado</span>
                                                 <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
                                                value="{{service.cost}}" data-assigned-var
+                                                >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Costo INNOVA 
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_costo_innova" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="my-label-id">Escribe</span>
+                                                <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                               value="{{service.cost_innova}}" data-assigned-var
                                                 >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
@@ -289,5 +302,5 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/superadmin.js') }}?id=1"></script>
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?version?1"></script>
 {% endblock %}

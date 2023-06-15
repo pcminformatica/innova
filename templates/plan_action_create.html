@@ -1068,28 +1068,50 @@
       function deleteActionPlan(actionPlan) {
         const Swal = swcms.returnSwal()
 
-        let postData = {
-        "actionPlan": actionPlan
-        };
-        console.log(postData)
-        let apiUrl = '/api/save/action/delete/';
-        
-      swcms.postFetch(apiUrl, postData).then((data) => {
-        Swal.fire(
-          'Éxito',
-          'Plan de Acción Eliminado!',
-          'success'
-        )
-        window.setTimeout(() => { window.location.reload(); }, 1500);
-    
-      }).catch((error) => {
-        Swal.fire(
-          'Error de conexión',
-          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
-          'error'
-        )
-        //document.getElementById('submitSaveButton').disabled = false;
-      });
+        Swal.fire({
+          title: 'Escriba la razón del porqué cancela el servicio ',
+          input: 'textarea',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Eliminar servicio',
+          showLoaderOnConfirm: true,
+
+        }).then(function(result) {
+
+          if (!result.value) {
+              Swal.fire('Escriba la razón del porqué cancela el servicio')
+          }else{
+            
+              let postData = {
+              "actionPlan": actionPlan,
+              "cancelledReason":result.value
+              };
+              console.log(postData)
+              let apiUrl = '/api/save/action/delete/';
+              
+              swcms.postFetch(apiUrl, postData).then((data) => {
+              Swal.fire(
+                'Éxito',
+                'Plan de Acción Eliminado!',
+                'success'
+              )
+              window.setTimeout(() => { window.location.reload(); }, 1500);
+            
+              }).catch((error) => {
+                Swal.fire(
+                  'Error de conexión',
+                  'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                  'error'
+                )
+                //document.getElementById('submitSaveButton').disabled = false;
+              });
+          }
+        })
+
+        return false
+
       }
 </script>
 {% endblock %}

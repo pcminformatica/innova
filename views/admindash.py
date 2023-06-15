@@ -38,7 +38,7 @@ def _datos_describe_v1():
                
                 if servicesx:
                     print(servicesx.id)
-                    print('putaaaaaaa')   
+
                     print(servicesx.id)                            
                     servi = str(servicesx.id) 
                

@@ -336,6 +336,7 @@ class CatalogServices(db.Model):
     execution_time = db.Column(db.Integer, unique=False, nullable=True, default=0)
     advisory_time = db.Column(db.Integer, unique=False, nullable=True, default=0)
     cost  = db.Column(db.FLOAT, unique=False, nullable=True, default=0.00)
+    cost_innova  = db.Column(db.FLOAT, unique=False, nullable=True, default=0.00)
     service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
     sessions_schedule = db.Column(db.JSON, nullable=True)
     diagnostic_questions = db.Column(db.JSON, nullable=True)
@@ -718,6 +719,24 @@ class Professions(db.Model):
         )
 
 
+# WalletTransaction
+class WalletTransaction(db.Model):
+    __tablename__ = 'wallet_transaction'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
+    #status (2) in progress, (1) completed, (0) canceled
+    status = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    amount = db.Column(db.Numeric(precision=10, scale=2), unique=False, nullable=True, default=0)
+    #type – (0)deposit, (1)withdrawal
+    type = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    descripcion = db.Column(db.Text, nullable=True)
+    cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
+    services_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
+    services = db.relationship("CatalogServices")
+    
 
 # Company
 class Company(db.Model):
@@ -738,8 +757,7 @@ class Company(db.Model):
     created_by_data = db.relationship("User", backref='created_by_data')
     inscripcion_id = db.Column(db.Integer, db.ForeignKey("inscripciones.id"),nullable=True)
     inscripcion = db.relationship("Inscripciones")
-
-        
+    available_credit = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
 
 
 # Company
@@ -782,20 +800,6 @@ class DiagnosisCompany(db.Model):
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     resultados = db.Column(db.JSON, unique=False, nullable=True)
 
-class WalletTransaction(db.Model):
-    __tablename__ = 'wallet_transaction'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
-    #status (2) in progress, (1) completed, (0) canceled
-    status = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
-    company = db.relationship("Company")
-    amount = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    #type – (0)deposit, (1)withdrawal
-    type = db.Column(db.Integer, unique=False, nullable=True, default=0)
-    descripcion = db.Column(db.Text, nullable=True)
-
 
 # Appointments Class
 class ActionPlan(db.Model):
@@ -817,7 +821,7 @@ class ActionPlan(db.Model):
     cancelled = db.Column(db.Boolean, nullable=True, default=False)
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
-    progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    progress = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
     fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
     descripcion = db.Column(db.Text, nullable=True)

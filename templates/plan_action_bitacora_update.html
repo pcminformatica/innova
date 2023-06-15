@@ -31,19 +31,19 @@
                                             <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                             
-                                                <input id="txt_company_name" value="{{ action.services.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
+                                                <input id="txt_company_name" value="{{ action.action_plan.services.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                         </div>
                                         <div class="mdc-typography--body1">
-                                          Fecha:
+                                          Fecha: 
                                       </div>
                                       <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               
                                           <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
                                               <span class="mdc-text-field__ripple"></span>
                                           
-                                              <input id="txt_fecha"  class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" >
+                                              <input id="txt_fecha" value="{{ action.date_created.strftime('%Y-%m-%d') }}"  class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" >
                                               <span lass="mdc-line-ripple"></span>
                                           </label>
                                       </div>
@@ -56,7 +56,7 @@
                               </span>
                               <span class="mdc-notched-outline__trailing"></span>
                             </span>
-                            <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="">
+                            <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.url }}">
                           </label>
                           <br>
                           
@@ -69,7 +69,7 @@
                               </span>
                               <span class="mdc-notched-outline__trailing"></span>
                             </span>
-                            <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.progress}}">
+                            <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.progress }}">
                           </label>
                           <br><br>
                             <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
@@ -81,7 +81,7 @@
                                 <span class="mdc-notched-outline__trailing"></span>
                               </span>
                               <span class="mdc-text-field__resizer">
-                                <textarea id="txt_comentario" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="500"></textarea>
+                                <textarea id="txt_comentario" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="500">{{ action.description }}</textarea>
                                 <span class="mdc-text-field-character-counter">0 / 500</span>
                               </span>
                             </label>
@@ -121,7 +121,13 @@
                                    
                             <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
                             <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label" style="margin-left: 10px;"> Enviar</span>
+                            <span class="mdc-button__label" style="margin-left: 10px;"> Actulizar informaciòn</span>
+                        </a>
+                        <a  href="{{ url_for('digitalcenter._plan_action_bitacora',user_uid=action.action_plan_id) }}" onclick="" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: purple;margin-left: 10px;">
+                                   
+                            <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label" style="margin-left: 10px;"> Regresar</span>
                         </a>
                       </div>
 
@@ -129,81 +135,7 @@
 
                     <br>
                     <br>
-                    <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
-                      <center>
-                        <div class="mdc-typography--headline5 s-font-color-secondary">Historial de bitácora</div>
-                        <br>
-                        <div class="mdc-data-table__table-container">
-                          <table id="tbl_plan_1" class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
-                            <thead>
-                              <tr class="mdc-data-table__header-row">
-                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">N.</th>
-                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
-                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
-                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
-                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">URL</th>
-                                
-
-
-                              </tr>
-                              
-                              
-                              
-                            </thead>
-                            <tbody id="tablaPlan_1" class="mdc-data-table__content">
-                              {% if history %}
-                              {% for apix in history %}
-                            
-                              
-    
-                                <tr class="mdc-data-table__row">
-                                  <th class="mdc-data-table__cell" scope="row">
-                                      {{loop.index}}
-                                  </th>
-                                  <th class="mdc-data-table__cell" scope="row">
-                                    <p>
-                                      {{ apix.description }}
-                                    </p>
-                                  </th>
-
-                              
-                                  <td class="mdc-data-table__cell no-print">
-                                    Porcentaje de avance: {{ apix.progress  }}%
-                                  </td>
-                                  <td class="mdc-data-table__cell no-print">
-                                    {{ apix.date_created.strftime('%Y-%m-%d')  }}
-                                  </td>
-                                  
-                                  <td class="mdc-data-table__cell no-print">
-                                    {% if apix.url  %}
-                                    <a target="_blank" href="{{ apix.url }}" class="mdc-button mdc-button--raised mdc-button--leading" >
-                                              
-                                      <span class="mdc-button__ripple"></span>
-                                      <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                      <span class="mdc-button__label">Ver documento</span>
-                                    </a>
-                                    {% endif %}
-                                    <a target="_blank" href="{{ url_for('digitalcenter._plan_action_bitacora_update',user_uid=apix.id) }}" class="mdc-button mdc-button--color-secondary" >
-                                              
-                                      <span class="mdc-button__ripple"></span>
-                                      <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                      <span class="mdc-button__label">Editar bitacora</span>
-                                    </a>
-                                    
-                                  </td>
-                                </tr>
-                              
-                              {% endfor %}
-                              {% endif %}
-                            </tbody>
-                          </table>
-                        </div>
-                      </center>
-    
-
             
-                      
-                    </div>
                   </div>
               </div>
             </div>
@@ -232,6 +164,7 @@
         
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
+    
         if(txt_porcentaje<=0 || txt_porcentaje>=101){
             alert("Por favor elija un rango correcto")
             return false
@@ -260,7 +193,7 @@
             "txt_url":txt_url
       };
       console.log(postData)
-      let apiUrl = '/api/save/action/plan/history/';
+      let apiUrl = '/api/save/action/plan/history/update';
       //document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
@@ -269,11 +202,11 @@
           'Plan de Acción creado!',
           'success'
         )
-        window.setTimeout(() => { window.location.reload(); }, 1500);
+        //window.setTimeout(() => { window.location.reload(); }, 1500);
     
       }).catch((error) => {
         Swal.fire(
-          'Error de conexión',
+          'Error de conexiócccccccccccccccccccccccn',
           'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )

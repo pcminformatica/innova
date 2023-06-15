@@ -388,24 +388,61 @@ ul,li{
                                                
                                                 <span class="mdc-deprecated-list-item__secondary-text">Crédito obtenido</span>
                                             </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ 5,000.00</span>
+                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ {{ deposits_total.total }}</span>
                                         </li>
                                     </a>
                                     <div class="panel">
                        
                                         <ul class="mdc-typography--overline">
                                             <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                       
+                                            {% for transaction in deposits %}
                                             <li class="mdc-deprecated-list-item" tabindex="0">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                                 
                                                 <span class="mdc-deprecated-list-item__text">
                                                     
-                                                    <span class="mdc-deprecated-list-item__secondary-text"> 08/11/2021 -<br>
-                                                         BECA INNOVA</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text"> {{ transaction.date_created }} -<br>
+                                                        {{ transaction.services.name }}</span>
                                                 </span>
-                                                <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">+ $5,000.00</span>
+                                                <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">+ $ {{ transaction.amount }}</span>
                                             </li>
+                                            {% endfor %}
+                                            <li role="separator" class="mdc-deprecated-list-divider"></li>
+ 
+                                        </ul>
+                                      
+                                    </div>
+                                </div>
+                            
+                                <br>
+                                <div class="section-questions">
+                                    <a class="accordion" >
+                                        <li class="mdc-deprecated-list-item" tabindex="0">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                               
+                                                <span class="mdc-deprecated-list-item__secondary-text">Crédito en proceso</span>
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ {{ withdrawals_progress_total.total }}</span>
+                                        </li>
+                                    </a>
+                                    <div class="panel">
+                       
+                                        <ul class="mdc-typography--overline">
+                                            <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                            {% for transaction in withdrawals_progress %}
+                                            <li class="mdc-deprecated-list-item" tabindex="0">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    
+                                                    <span class="mdc-deprecated-list-item__secondary-text"> {{ transaction.date_created }} -<br>
+                                                        {{ transaction.services.name }}</span>
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">+ $ {{ transaction.amount }}</span>
+                                            </li>
+                                            {% endfor %}
                                             <li role="separator" class="mdc-deprecated-list-divider"></li>
  
                                         </ul>
@@ -414,75 +451,42 @@ ul,li{
                                 </div>
                                 <br>
                                 <div class="section-questions">
-
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <a class="accordion" >
                                         <li class="mdc-deprecated-list-item" tabindex="0">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
                                             <span class="mdc-deprecated-list-item__text">
                                                
-                                                <span class="mdc-deprecated-list-item__secondary-text">Débitos realizados</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Crédito  completado</span>
                                             </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ 3,500.00</span>
+                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ {{ withdrawals_completed_total.total }}</span>
                                         </li>
-                                        
-       
                                     </a>
                                     <div class="panel">
                        
-                                        {% for action in actions %} 
-                                        <li class="mdc-deprecated-list-item" tabindex="0">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            
-                                            <span class="mdc-deprecated-list-item__text">
+                                        <ul class="mdc-typography--overline">
+                                            <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                            {% for transaction in withdrawals_completed %}
+                                            <li class="mdc-deprecated-list-item" tabindex="0">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
                                                 
-                                                <span class="mdc-deprecated-list-item__secondary-text" style="padding: 20px;">{{ action.date_created.strftime('%Y-%m-%d') }} <br> {{ action.services.name }} </span>
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                        </li>
-                                        <br>
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                        {% endfor %}
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-          
-                                        <li class="mdc-deprecated-list-item" tabindex="0">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            
-                                            <span class="mdc-deprecated-list-item__text">
-                        
-                                                <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 <br> Plan de acción</span>
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                        </li>
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                        <li class="mdc-deprecated-list-item" tabindex="0">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                          
-                                            <span class="mdc-deprecated-list-item__text">
-                                         
-                                                <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 <br> Diagnóstico</span>
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-250</span>
-                                        </li>
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                        <li class="mdc-deprecated-list-item" tabindex="0">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            
-                                            <span class="mdc-deprecated-list-item__text">
-                                  
-                                                <span class="mdc-deprecated-list-item__secondary-text">08/11/2021 - Formación inicial</span>
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">-1,000</span>
-                                        </li>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    
+                                                    <span class="mdc-deprecated-list-item__secondary-text"> {{ transaction.date_created }} -<br>
+                                                        {{ transaction.services.name }}</span>
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">+ $ {{ transaction.amount }}</span>
+                                            </li>
+                                            {% endfor %}
+                                            <li role="separator" class="mdc-deprecated-list-divider"></li>
+ 
+                                        </ul>
+                                      
                                     </div>
-
                                 </div>
                                 <br>
                                 <div class="section-questions">
-
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <a class="accordion1" >
+                                    <a class="" >
                                         <li class="mdc-deprecated-list-item" tabindex="0">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
@@ -490,13 +494,10 @@ ul,li{
                                                
                                                 <span class="mdc-deprecated-list-item__secondary-text">Crédito Actual</span>
                                             </span>
-                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ 1,500.00</span>
+                                            <span class="mdc-deprecated-list-item__meta s-font-color-secondary" aria-hidden="true">$ {{ company.available_credit }}</span>
                                         </li>
-                                        
-       
                                     </a>
-                                  
-
+                              
                                 </div>
                             </div>
                             <div class="mdc-card__actions">
