@@ -1020,7 +1020,7 @@ def _d_save_ActionPlanHistory_update():
             history.endservices = txt_finalizo
             history.date_created = txt_fecha
             history.url = txt_url
-            history.txt_hora = txt_hora
+            history.advisory_time = txt_hora
             db.session.add(history)
             db.session.commit()
 
