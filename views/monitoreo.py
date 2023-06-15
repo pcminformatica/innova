@@ -162,9 +162,346 @@ def _indicadores_servicios():
     return render_template('monitoreo/indicadores_servicios.html',**context)
 
 from collections import Counter
-@monitoreo.route('/indicadores/inscritas/',methods = ['GET', 'POST'])
-def _indicadores_inscritas():
-    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[:195]
+@monitoreo.route('/indicadores/inscritas/1',methods = ['GET', 'POST'])
+def _indicadores_inscritas_1():
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[0:150]
+    repite = []
+    repiteobj =[]
+    for obj in query:
+        if not obj.dni in repite:
+            repite.append(obj.dni)
+            repiteobj.append(obj)
+    respuesta = []
+    empresas = []
+    preguntas = [
+                "A",    
+                "B",
+                "C",
+                "1_1",
+                "1_2",
+                "1_3",
+                "1_4",
+                "1_5",
+                "1_6",
+                "1_7",
+                "1_8",
+                "1_9",
+                "1_10",
+                "1_11",
+                "2_1",
+                "2_2",
+                "2_3",
+                "2_4",
+                "2_5",
+                "2_6",
+                "2_7",
+                "2_8",
+                "3_1",
+                "3_2",
+                "3_3",
+                "3_4",
+                "3_5",
+                "3_6",
+                "3_7",
+                "3_8",
+                "3_9",
+                "3_10",
+                "3_11",
+                "3_12",
+                "3_13",
+                "3_14",
+                "3_15",
+                "3_16",
+                "3_17",
+                "3_18",
+                "3_19",
+                "3_20",
+                "3_21",
+                "3_22",
+                "3_23",
+                "3_24",
+                "3_25",
+                "3_26",
+                "3_27",
+                "3_28",
+                "3_29",
+                "4_1",
+                "4_2",
+                "4_3",
+                "4_4",
+                "4_5",
+                 ]
+    
+    for repite in repiteobj:
+        if repite.respuestas:
+            lista_dic =[]
+            if repite.elegible: 
+                elegible = 'ELEGIBLE'
+            else:
+                elegible = "NO ELEGIBLE"
+            lista_dic.append({
+                                        "id":'PVA',
+                                        "pregunta":"ELEGIBLE",
+                                        "respuesta":elegible,
+                                    })
+            for pregunta in preguntas:
+                if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
+                    repites =list(e for e in repite.respuestas if e['id']  == pregunta)
+        
+                    titulo = repites[0]['pregunta']
+                    respuesta= repites[0]['respuesta']
+            
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":titulo,
+                                        "respuesta":respuesta,
+                                    })
+
+                else:
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":"",
+                                        "respuesta":"",
+                                    })
+            #for repites in repite.respuestas:
+
+            empresas.append(lista_dic)    
+    context = {
+        'inscripciones': repiteobj,
+        'respuesta':empresas
+    }
+ 
+    return render_template('monitoreo/indicadores_inscritas.html',**context)
+
+
+@monitoreo.route('/indicadores/inscritas/2',methods = ['GET', 'POST'])
+def _indicadores_inscritas_2():
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[151:300]
+    repite = []
+    repiteobj =[]
+    for obj in query:
+        if not obj.dni in repite:
+            repite.append(obj.dni)
+            repiteobj.append(obj)
+    respuesta = []
+    empresas = []
+    preguntas = [
+                "A",    
+                "B",
+                "C",
+                "1_1",
+                "1_2",
+                "1_3",
+                "1_4",
+                "1_5",
+                "1_6",
+                "1_7",
+                "1_8",
+                "1_9",
+                "1_10",
+                "1_11",
+                "2_1",
+                "2_2",
+                "2_3",
+                "2_4",
+                "2_5",
+                "2_6",
+                "2_7",
+                "2_8",
+                "3_1",
+                "3_2",
+                "3_3",
+                "3_4",
+                "3_5",
+                "3_6",
+                "3_7",
+                "3_8",
+                "3_9",
+                "3_10",
+                "3_11",
+                "3_12",
+                "3_13",
+                "3_14",
+                "3_15",
+                "3_16",
+                "3_17",
+                "3_18",
+                "3_19",
+                "3_20",
+                "3_21",
+                "3_22",
+                "3_23",
+                "3_24",
+                "3_25",
+                "3_26",
+                "3_27",
+                "3_28",
+                "3_29",
+                "4_1",
+                "4_2",
+                "4_3",
+                "4_4",
+                "4_5",
+                 ]
+    
+    for repite in repiteobj:
+        if repite.respuestas:
+            lista_dic =[]
+            if repite.elegible: 
+                elegible = 'ELEGIBLE'
+            else:
+                elegible = "NO ELEGIBLE"
+            lista_dic.append({
+                                        "id":'PVA',
+                                        "pregunta":"ELEGIBLE",
+                                        "respuesta":elegible,
+                                    })
+            for pregunta in preguntas:
+                if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
+                    repites =list(e for e in repite.respuestas if e['id']  == pregunta)
+        
+                    titulo = repites[0]['pregunta']
+                    respuesta= repites[0]['respuesta']
+            
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":titulo,
+                                        "respuesta":respuesta,
+                                    })
+
+                else:
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":"",
+                                        "respuesta":"",
+                                    })
+            #for repites in repite.respuestas:
+
+            empresas.append(lista_dic)    
+    context = {
+        'inscripciones': repiteobj,
+        'respuesta':empresas
+    }
+ 
+    return render_template('monitoreo/indicadores_inscritas.html',**context)
+
+
+@monitoreo.route('/indicadores/inscritas/3',methods = ['GET', 'POST'])
+def _indicadores_inscritas_3():
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[301:450]
+    repite = []
+    repiteobj =[]
+    for obj in query:
+        if not obj.dni in repite:
+            repite.append(obj.dni)
+            repiteobj.append(obj)
+    respuesta = []
+    empresas = []
+    preguntas = [
+                "A",    
+                "B",
+                "C",
+                "1_1",
+                "1_2",
+                "1_3",
+                "1_4",
+                "1_5",
+                "1_6",
+                "1_7",
+                "1_8",
+                "1_9",
+                "1_10",
+                "1_11",
+                "2_1",
+                "2_2",
+                "2_3",
+                "2_4",
+                "2_5",
+                "2_6",
+                "2_7",
+                "2_8",
+                "3_1",
+                "3_2",
+                "3_3",
+                "3_4",
+                "3_5",
+                "3_6",
+                "3_7",
+                "3_8",
+                "3_9",
+                "3_10",
+                "3_11",
+                "3_12",
+                "3_13",
+                "3_14",
+                "3_15",
+                "3_16",
+                "3_17",
+                "3_18",
+                "3_19",
+                "3_20",
+                "3_21",
+                "3_22",
+                "3_23",
+                "3_24",
+                "3_25",
+                "3_26",
+                "3_27",
+                "3_28",
+                "3_29",
+                "4_1",
+                "4_2",
+                "4_3",
+                "4_4",
+                "4_5",
+                 ]
+    
+    for repite in repiteobj:
+        if repite.respuestas:
+            lista_dic =[]
+            if repite.elegible: 
+                elegible = 'ELEGIBLE'
+            else:
+                elegible = "NO ELEGIBLE"
+            lista_dic.append({
+                                        "id":'PVA',
+                                        "pregunta":"ELEGIBLE",
+                                        "respuesta":elegible,
+                                    })
+            for pregunta in preguntas:
+                if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
+                    repites =list(e for e in repite.respuestas if e['id']  == pregunta)
+        
+                    titulo = repites[0]['pregunta']
+                    respuesta= repites[0]['respuesta']
+            
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":titulo,
+                                        "respuesta":respuesta,
+                                    })
+
+                else:
+                    lista_dic.append({
+                                        "id":pregunta,
+                                        "pregunta":"",
+                                        "respuesta":"",
+                                    })
+            #for repites in repite.respuestas:
+
+            empresas.append(lista_dic)    
+    context = {
+        'inscripciones': repiteobj,
+        'respuesta':empresas
+    }
+ 
+    return render_template('monitoreo/indicadores_inscritas.html',**context)
+
+
+
+@monitoreo.route('/indicadores/inscritas/4',methods = ['GET', 'POST'])
+def _indicadores_inscritas_4():
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[451:600]
     repite = []
     repiteobj =[]
     for obj in query:
