@@ -279,10 +279,15 @@ def _indicadores_inscritas_2():
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[151:300]
     repite = []
     repiteobj =[]
+  
+   
     for obj in query:
-        if not obj.dni in repite:
-            repite.append(obj.dni)
-            repiteobj.append(obj)
+        try:
+            if not obj.dni in repite:
+                repite.append(obj.dni)
+                repiteobj.append(obj)
+        except Exception as e:
+            pass
     respuesta = []
     empresas = []
     preguntas = [
@@ -345,7 +350,8 @@ def _indicadores_inscritas_2():
                  ]
     
     for repite in repiteobj:
-        if repite.respuestas:
+        try:
+            if repite.respuestas:
             lista_dic =[]
             if repite.elegible: 
                 elegible = 'ELEGIBLE'
@@ -376,8 +382,9 @@ def _indicadores_inscritas_2():
                                         "respuesta":"",
                                     })
             #for repites in repite.respuestas:
-
             empresas.append(lista_dic)    
+        except Exception as e:
+            pass
     context = {
         'inscripciones': repiteobj,
         'respuesta':empresas
