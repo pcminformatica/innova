@@ -352,16 +352,16 @@ def _indicadores_inscritas_2():
     for repite in repiteobj:
         try:
             if repite.respuestas:
-            lista_dic =[]
-            if repite.elegible: 
-                elegible = 'ELEGIBLE'
-            else:
-                elegible = "NO ELEGIBLE"
-            lista_dic.append({
-                                        "id":'PVA',
-                                        "pregunta":"ELEGIBLE",
-                                        "respuesta":elegible,
-                                    })
+                lista_dic =[]
+                if repite.elegible: 
+                    elegible = 'ELEGIBLE'
+                else:
+                    elegible = "NO ELEGIBLE"
+                lista_dic.append({
+                                            "id":'PVA',
+                                            "pregunta":"ELEGIBLE",
+                                            "respuesta":elegible,
+                                        })
             for pregunta in preguntas:
                 if len(list(e for e in repite.respuestas if e['id']  == pregunta)) != 0:
                     repites =list(e for e in repite.respuestas if e['id']  == pregunta)
