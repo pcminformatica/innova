@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -509,7 +509,8 @@ def _plan_action_create(user_uid):
 @digitalcenter.route('/planes/add/12/',methods=['GET', 'POST'])
 def _asesorias_puntuales():
     categoria = catalogCategory.query.filter_by().all()
-    context = {'categoria':categoria} 
+    services = CatalogServices.query.filter_by(enabled=True).all()
+    context = {'categoria':categoria,'services':services} 
     return render_template('asesorias_puntuales.html',**context)
 
 
@@ -1165,10 +1166,10 @@ def _plan_action_dashboard(user_uid):
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
 def _company_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
-    diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
+    #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
     lista = []
-    for diagnosi in diagnosis:
-        lista.append(diagnosi.company_id)
+    #for diagnosi in diagnosis:
+    #    lista.append(diagnosi.company_id)
     if current_user.id == 3 or current_user.id == 24:
         company = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True).all()
@@ -1206,7 +1207,9 @@ def _company_dashboard(user_uid):
         diagnostico = diagnos.resultados
     else:
         diagnostico = False
+    enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
     context = {
+        'enrolls':enrolls,
         'carta':carta,
         'ficha':ficha,
         'company': company,
