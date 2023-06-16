@@ -76,6 +76,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
                                             
                                           </tr>
@@ -97,6 +98,7 @@
                                             </td>
                                             <td class="mdc-data-table__cell" style="width: 80px;">
                                                 {{ api.dni }}
+                                                
                                             </td>
                                             <th class="mdc-data-table__cell" scope="row">
                                                 {{ api.name }}
@@ -114,6 +116,11 @@
                                             <th class="mdc-data-table__cell" scope="row">
                                                 {% if api.inscripcion %}
                                                     {{ api.inscripcion.municipio }}
+                                                {% endif %}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {% if api.status_id %}
+                                                    {{ api.status.name }}
                                                 {% endif %}
                                             </th>
                                             <th class="mdc-data-table__cell" scope="row">

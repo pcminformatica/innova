@@ -57,7 +57,7 @@
 </div>
 <main class="s-main-content">
     <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-s">
+        <div class="mdc-layout-grid ">
             <div class="mdc-layout-grid__inner">
    
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
@@ -76,9 +76,19 @@
                                         </span>
                                         <span class="mdc-tab__ripple"></span>
                                     </button>
+                                    
                                     <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
                                         <span class="mdc-tab__text-label">Ficha de inscripción </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Formación Inicial</span>
                                         </span>
                                         <span class="mdc-tab-indicator mdc-tab-indicator">
                                         <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -112,7 +122,7 @@
                                         </span>
                                         <span class="mdc-tab__ripple"></span>
                                     </button>
-                                    
+                   
 
                                     </div>
                                 </div>
@@ -346,6 +356,38 @@
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            <h2>Formación Inicial</h2>
+                                            <p>
+                                                Registro de capacitación inicial no encontrado, por favor puedes registrar el cumplimiento de la empresaria en la formación inicial dando clic en el botón "Registrar asesoría inicial" o da clic en "Matricular" para registrar a la empresaria en una jornada de inducción y virtual.
+                                            </p>
+                                            <center>
+                                                <a  id="btn_generar_ficha"  href="#" onclick="generarFicha()" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                    <span class="mdc-button__label">Registrar asesoría inicial</span>
+                                                </a>
+                                        
+                         
+                                                    <a href="" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                                
+                                                        <span class="mdc-button__ripple"></span>
+                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                        <span class="mdc-button__label">Matricular</span>
+                                                    </a>
+                                                </center>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
+                            <!-- Lista de usuarios  -->
+                            <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                             <h2>Administrar Accesos</h2>
                                             <p>Para administrar los accesos a la plataforma para esta empresa da clic en el botón </p>
                                             <div class="s-font-align-center">
@@ -548,6 +590,7 @@
                     
                             </div>
 
+  
                         </div>
                     </div>
                 </div>

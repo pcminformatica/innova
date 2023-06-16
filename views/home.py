@@ -48,21 +48,6 @@ def _aulavirtual():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     return render_template('aulavirtual/home.html')
 
-@home.route('/formulario/')
-def _curso_created():
-    app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('aulavirtual/curso_created.html')
-
-@home.route('/enroll/')
-def _curso_enroll():
-    app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('aulavirtual/curso_enroll.html')
-
-@home.route('/cursos/list/')
-def _curso_list():
-    app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('aulavirtual/curso_list.html')
-
 @home.route('/comunidaddenegocios/')
 def _comunidadempresarial():
     app.logger.debug('** SWING_CMS ** - AcercaDe')

@@ -25,6 +25,7 @@ with app.app_context():
     from views.digitalcenter import digitalcenter as digitalcenter_view
     from views.admindash import admindash as admindash_view
     from views.monitoreo import monitoreo as monitoreo_view
+    from views.aulavirtual import aulavirtual as aulavirtual_view
     # from views.siortc import siortc as siortc_view
 
     # API Fetchs
@@ -43,6 +44,9 @@ with app.app_context():
     app.register_blueprint(admindash_view)
     # app.register_blueprint(monitoreo)
     app.register_blueprint(monitoreo_view)
+    #
+    app.register_blueprint(aulavirtual_view)
+    
     # Register the Service Worker
     @app.route('/sw.js', methods=['GET'])
     def _serviceworker():

@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -506,6 +506,12 @@ def _plan_action_create(user_uid):
     app.logger.debug(servicios)
     return render_template('plan_action_create.html',**context)
 
+@digitalcenter.route('/planes/add/12/',methods=['GET', 'POST'])
+def _asesorias_puntuales():
+    categoria = catalogCategory.query.filter_by().all()
+    context = {'categoria':categoria} 
+    return render_template('asesorias_puntuales.html',**context)
+
 
 @digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
 def _admin_servicios():
@@ -537,6 +543,24 @@ def _valorar_servicios():
         db.session.add(servicio)
         db.session.commit()
     return 'Listo'
+
+
+@digitalcenter.route('/update/status',methods=['GET', 'POST'])
+def _init_status_company():
+    companys = Company.query.filter_by(enabled=True).all()
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            status = CompanyStatus.query.filter_by(name_short='3').first()
+            update.status_id = status.id
+        else:
+            status = CompanyStatus.query.filter_by(name_short='2').first()
+            update.status_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
 
 @digitalcenter.route('/update/wallet',methods=['GET', 'POST'])
 def _init_wallet():
@@ -642,6 +666,7 @@ def _init_wallet():
 
     return 'Listo'
 
+
 @digitalcenter.route('/creditos/innova',methods=['GET', 'POST'])
 def _init_services_creditos():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
@@ -652,6 +677,39 @@ def _init_services_creditos():
     db.session.add(websites)
     db.session.commit()
     return 'Listo'
+
+#----
+@digitalcenter.route('/init/cursos',methods=['GET', 'POST'])
+def _init_cursos():
+    #tipo de formacion
+    TT1 = TrainingType(name='Formación Inicial', name_short='TT1')
+    db.session.add(TT1)
+    TT1 = TrainingType(name='Formación continua', name_short='TT1')
+    db.session.add(TT1)
+    #ModalityType
+    MT1 = ModalityType(name='Presencial', name_short='MT1')
+    db.session.add(MT1)
+    MT2 = ModalityType(name='Virtual', name_short='MT2')
+    db.session.add(MT2)
+    #CourseManagers
+    CM1 = CourseManagers(name='Laboratoria', name_short='Labo')
+    db.session.add(CM1)
+    CM2 = CourseManagers(name='Centro Nacional de Educación para el Trabajo', name_short='CENET')
+    db.session.add(CM2)
+    #CourseManagers
+    CS1 = CompanyStatus(name='Elegible', name_short='1')
+    db.session.add(CS1)
+    CS2 = CompanyStatus(name='En proceso', name_short='2')
+    db.session.add(CS2)
+    CS3 = CompanyStatus(name='Inscrita', name_short='3')
+    db.session.add(CS3)
+    CS4 = CompanyStatus(name='Inactiva por decisión de la empresaria', name_short='4')
+    db.session.add(CS4)
+    CS5 = CompanyStatus(name='Inactiva por no cumplimiento de requisitos', name_short='5')
+    db.session.add(CS5)
+    db.session.commit()
+    return 'Listo'
+
 
 @digitalcenter.route('/insert/chat',methods=['GET', 'POST'])
 def _re1():
@@ -943,9 +1001,7 @@ def _datos_describe_12():
 
 @digitalcenter.route('/demanda/v1',methods=['GET', 'POST'])
 def _datos_describe_v1():
-    print('putaaaaaaa') 
-    print('putaaaaaaa') 
-    print('putaaaaaaa') 
+
     servicios = []
     app.logger.debug('** SWING_CMS ** - ------------------')
     companys = Company.query.filter(Company.enabled==True).all()
@@ -962,9 +1018,7 @@ def _datos_describe_v1():
                 servicesx = CatalogServices.query.filter(id==plan.services_id).first()
                
                 if servicesx:
-                    print(servicesx.id)
-                    print('putaaaaaaa')   
-                    print(servicesx.id)                            
+                                     
                     servi = str(servicesx.id) 
                     depart = []
                     if len(list(e for e in servicios if e['id']  == servi)) == 0:
@@ -1358,6 +1412,13 @@ def _company_document_form_add(company_id,document_id):
             carta.document_local = filename
             carta.created_by = current_user.id
             db.session.add(carta)
+
+            if document_type.name_short == 'DOC1':
+                update =  Company.query.filter(Company.id == company.id).first()
+                status = CompanyStatus.query.filter_by(name_short='3').first()
+                update.status_id = status.id
+                db.session.add(update)
+                db.session.commit()
             db.session.commit()
             return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
 

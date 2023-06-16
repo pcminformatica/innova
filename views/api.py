@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import ActionPlanReferences,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -1377,6 +1377,13 @@ def _d_create_ficha_inscripcion():
                 db.session.add(carta)
                 db.session.commit()
 
+
+            if document_type.name_short == 'DOC1':
+                update =  Company.query.filter(Company.id == company.id).first()
+                status = CompanyStatus.query.filter_by(name_short='3').first()
+                update.status_id = status.id
+                db.session.add(update)
+                db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         print(e)

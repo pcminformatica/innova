@@ -736,8 +736,14 @@ class WalletTransaction(db.Model):
     cancelled_reasons = db.Column(db.Text, unique=False, nullable=True)
     services_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
     services = db.relationship("CatalogServices")
-    
 
+# Catalog - Services Class
+class CompanyStatus(db.Model):
+    __tablename__ = 'company_status'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    
 # Company
 class Company(db.Model):
     _tablename__ = 'company'
@@ -758,7 +764,8 @@ class Company(db.Model):
     inscripcion_id = db.Column(db.Integer, db.ForeignKey("inscripciones.id"),nullable=True)
     inscripcion = db.relationship("Inscripciones")
     available_credit = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
-
+    status_id = db.Column(db.Integer, db.ForeignKey('company_status.id'), nullable=True)
+    status = db.relationship("CompanyStatus")
 
 # Company
 class Inscripciones(db.Model):
@@ -887,4 +894,85 @@ class UserXRole(db.Model):
         cxt = {'id':str(self.user_role.name)}
         return str(self.user_role.name) + ' , ' + str(self.user_role.id)
 
-      
+
+
+# Catalog - ID Document Type Class
+class TrainingType(db.Model):
+    __tablename__ = 'training_type'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+
+# Catalog - ID Document Type Class
+class ModalityType(db.Model):
+    __tablename__ = 'modality_type'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+
+# Catalog - ID Document Type Class
+class CourseManagers(db.Model):
+    __tablename__ = 'course_managers'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+
+class Courses(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200), unique=True, nullable=False)
+    id_training_type =db.Column(db.Integer, db.ForeignKey('training_type.id'), nullable=False)
+    training_type = db.relationship("TrainingType")
+    id_modality_type =db.Column(db.Integer, db.ForeignKey('modality_type.id'), nullable=False)
+    modality_type = db.relationship("ModalityType")
+    id_course_managers = db.Column(db.Integer, db.ForeignKey('course_managers.id'), nullable=False)
+    course_managers = db.relationship("CourseManagers")
+    date_scheduled_start = db.Column(db.DateTime, nullable=True)
+    date_scheduled_end = db.Column(db.DateTime, nullable=True)
+    time_scheduled_start = db.Column(db.Time, nullable=True)
+    time_scheduled_end = db.Column(db.Time, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    description = db.Column(db.Text, unique=False, nullable=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+
+class EnrollmentRecord(db.Model):
+    __tablename__ = 'enrollment_record'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_course =db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+    course = db.relationship("Courses")
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    date_start = db.Column(db.DateTime, nullable=True)
+    date_end = db.Column(db.DateTime, nullable=True)
+    complete = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    description = db.Column(db.Text, unique=False, nullable=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
