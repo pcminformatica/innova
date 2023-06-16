@@ -684,8 +684,8 @@ def _init_cursos():
     #tipo de formacion
     TT1 = TrainingType(name='Formación Inicial', name_short='TT1')
     db.session.add(TT1)
-    TT1 = TrainingType(name='Formación continua', name_short='TT1')
-    db.session.add(TT1)
+    TT2 = TrainingType(name='Formación continua', name_short='TT2')
+    db.session.add(TT2)
     #ModalityType
     MT1 = ModalityType(name='Presencial', name_short='MT1')
     db.session.add(MT1)
