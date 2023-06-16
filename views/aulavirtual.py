@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import TrainingType,ModalityType,CourseManagers,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 aulavirtual = Blueprint('aulavirtual', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -21,12 +21,21 @@ import json
 
 @aulavirtual.route('/formulario/')
 def _curso_created():
-    app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('aulavirtual/curso_created.html')
+    training = TrainingType.query.filter_by(enabled=True).all()
+   
+    modality = ModalityType.query.filter_by(enabled=True).all()
+    manager = CourseManagers.query.filter_by(enabled=True).all()
+    context = {
+        'training':training,
+        'modality':modality,
+        'manager':manager,
+    }
+    return render_template('aulavirtual/curso_created.html',**context)
 
 @aulavirtual.route('/enroll/')
 def _curso_enroll():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
+
     return render_template('aulavirtual/curso_enroll.html')
 
 @aulavirtual.route('/cursos/list/')

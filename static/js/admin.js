@@ -224,3 +224,32 @@ function saveSDEForms(){
   
 }
 
+
+function saveCurso(){
+  const Swal = swcms.returnSwal()
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  swcms.mdcTextInputs.forEach((txt) => {
+    if (txt.assignedVar)
+        mdcAssignedVars[txt.assignedVar] = txt;
+  });
+
+  console.log(mdcAssignedVars)
+  for (const property in mdcAssignedVars) {
+    if(mdcAssignedVars[property].value === '' && mdcAssignedVars[property].required===true){
+      console.log(`${property}: ${mdcAssignedVars[property]}`);
+      mdcAssignedVars[property].required
+      Swal.fire(`Por favor complete el campo: ${mdcAssignedVars[property].label.root.innerText} `)
+      Swal.fire(
+        'Por favor complete el campo:',
+        `${mdcAssignedVars[property].label.root.innerText}`,
+        'info'
+        
+      )
+
+      return false
+    }
+  }
+}
