@@ -14,6 +14,14 @@
 {% endblock %}
 
 {% block table_script_section %}
+<link 
+ rel="stylesheet"
+ href="https://cdn.datatables.net/searchpanes/2.1.2/css/searchPanes.dataTables.min.css"
+><link 
+rel="stylesheet"
+href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
+>
+
 
 
 <script src="{{ url_for('static', filename='js/vendor/datatable/jquery-3.5.1.js') }}"></script>
@@ -22,6 +30,10 @@
 <script src="{{ url_for('static', filename='js/vendor/datatable/dataTables.buttons.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/datatable/jszip.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/datatable/buttons.html5.min.js') }}"></script>
+
+<script src="https://cdn.datatables.net/searchpanes/2.1.2/js/dataTables.searchPanes.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
+
 
 <style>
     .dataTables_filter{
@@ -34,6 +46,12 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+    console.log('s1')
+    $('.data_table_buttons tfoot th').each(function() {
+        console.log('so')
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Filtrar ' + title + '" />');
+    });
 
     $('.data_table').DataTable(
         {
@@ -47,12 +65,12 @@ $(document).ready(function () {
         url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
     }
     });
-    $('.data_table_buttons').DataTable(
+    var table = $('.data_table_buttons').DataTable(
         
             {
-            
+                
             autoWidth: false,
-            dom: 'Bflrtip',
+            dom: 'PBflrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
@@ -65,8 +83,33 @@ $(document).ready(function () {
             ],
             language: {
             url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+        },
+
+        initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+ 
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+ 
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                });
         }
         });
+
+
 
         $('.data_table_buttons_spam').DataTable(
         
