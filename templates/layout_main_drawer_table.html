@@ -136,6 +136,27 @@ $(document).ready(function () {
 
 
 
+var table = $('.data_table_buttons_sign').DataTable(
+        
+        {
+            
+        autoWidth: false,
+        dom: 'Bflrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    ,
+        columnDefs: [
+            {
+                targets: ['_all'],
+                className: 'mdc-data-table__cell',
+            },
+        ],
+        language: {
+        url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+    }
+    });
+
   </script>
 
 
