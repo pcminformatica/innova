@@ -66,6 +66,7 @@
                         
                                         
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESPECIALISTA</th>
                                         
 
                                         
@@ -92,7 +93,20 @@
                                             
                                           </th>
                                            
+                                          <th class="mdc-data-table__cell" scope="row">
 
+                                            <ul>
+                                              {% for  depto in apix.departamentos %}
+                                              <li>
+                                                <b>{{ depto['departamento'] }}</b>: {{ depto['total'] }}
+                                              </li>
+                                        
+                                              {% endfor %}
+                                            </ul>
+                                      
+                                            
+                                          </th>
+                                           
                         
                                       {% endfor %}
                                     </tbody>
@@ -129,7 +143,7 @@
                                             
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
                                             
-    
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESPECIALISTA</th>
                                             
                                           </tr>
                                           
@@ -153,8 +167,17 @@
                                                 <b>Total de servicios solicitados: {{ apix.total }}</b>
                                                 
                                               </th>
-                                               
-    
+                                              <th class="mdc-data-table__cell" scope="row">
+
+                                                <ul>
+                                                  {% for  depto in apix.departamentos %}
+                                                  <li>
+                                                    <b>{{ depto['departamento'] }}</b>: {{ depto['total'] }}
+                                                  </li>
+                                            
+                                                  {% endfor %}
+                                                </ul>
+                                                </th>
                             
                                           {% endfor %}
                                         </tbody>
@@ -190,7 +213,7 @@
                             
                                             
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
-                                            
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESPECIALISTA</th>
     
                                             
                                           </tr>
@@ -216,7 +239,17 @@
                                                 
                                               </th>
                                                
-    
+                                              <th class="mdc-data-table__cell" scope="row">
+
+                                                <ul>
+                                                  {% for  depto in apix.departamentos %}
+                                                  <li>
+                                                    <b>{{ depto['departamento'] }}</b>: {{ depto['total'] }}
+                                                  </li>
+                                            
+                                                  {% endfor %}
+                                                </ul>
+                                                </th>
                             
                                           {% endfor %}
                                         </tbody>
@@ -252,7 +285,7 @@
                             
                                             
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
-                                            
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESPECIALISTA</th>
     
                                             
                                           </tr>
@@ -278,7 +311,17 @@
                                                 
                                               </th>
                                                
-    
+                                              <th class="mdc-data-table__cell" scope="row">
+
+                                                <ul>
+                                                  {% for  depto in apix.departamentos %}
+                                                  <li>
+                                                    <b>{{ depto['departamento'] }}</b>: {{ depto['total'] }}
+                                                  </li>
+                                            
+                                                  {% endfor %}
+                                                </ul>
+                                                </th>
                             
                                           {% endfor %}
                                         </tbody>
@@ -313,7 +356,7 @@
                         
                                         
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TOTAL</th>
-                                        
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESPECIALISTA</th>
 
                                         
                                       </tr>
@@ -339,7 +382,17 @@
                                             
                                           </th>
                                            
+                                          <th class="mdc-data-table__cell" scope="row">
 
+                                            <ul>
+                                              {% for  depto in apix.departamentos %}
+                                              <li>
+                                                <b>{{ depto['departamento'] }}</b>: {{ depto['total'] }}
+                                              </li>
+                                        
+                                              {% endfor %}
+                                            </ul>
+                                            </th>
                         
                                       {% endfor %}
                                     </tbody>

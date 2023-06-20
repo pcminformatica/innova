@@ -27,7 +27,11 @@ def _datos_describe_v1():
     planes = 0
     lista = []
     for company in companys:
-        print(company.id)
+        if company.created_by_data:
+            departamento_name = company.created_by_data.name
+        else:
+            departamento_name = 'Ruby Marriaga'
+
         #recorre todos los servicios de la fase 1.
         plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
         #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
@@ -41,16 +45,25 @@ def _datos_describe_v1():
 
                     print(servicesx.id)                            
                     servi = str(servicesx.id) 
-               
+                    departamento = []
                     if len(list(e for e in servicios if e['id']  == servi)) == 0:
-        
-                        servicios.append({'id':servi,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'anterior':company.id})
+                        departamento.append({'departamento':departamento_name,'total':1})
+                        servicios.append({'id':servi,'titulo':servicesx.name,'categoria':servicesx.catalog_category,'total':1,'departamentos':departamento,'anterior':company.id})
                     else:
                         varl = list(e for e in servicios if e['id']  == servi)[0]
                         index = servicios.index(varl)
                         if servicios[index]['anterior'] != company.id:
+                            
                             servicios[index]['total'] = servicios[index]['total'] + 1
                             servicios[index]['anterior'] = company.id
+                            if len(list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento_name))== 0:
+                                servicios[index]['departamentos'].append({'departamento':departamento_name,'total':1})
+                            else:                        
+                                dep = list(e for e in servicios[index]['departamentos'] if e['departamento']  == departamento_name)[0]
+                                index_departamento = servicios[index]['departamentos'].index(dep)
+                                servicios[index]['departamentos'][index_departamento]['total'] = servicios[index]['departamentos'][index_departamento]['total'] + 1 
+                                
+
 
                 
     legalizacion = []
