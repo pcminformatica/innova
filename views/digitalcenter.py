@@ -550,7 +550,7 @@ def _valorar_servicios():
 def _init_status_company():
     companys = Company.query.filter_by(enabled=True).all()
     for company in companys:
-        if company.status_id:
+        if not company.status_id:
             update =  Company.query.filter(Company.id == company.id).first()
             ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
             ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
