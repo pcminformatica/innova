@@ -548,20 +548,53 @@ def _valorar_servicios():
 
 @digitalcenter.route('/update/status',methods=['GET', 'POST'])
 def _init_status_company():
-    companys = Company.query.filter_by(enabled=True).all()
+    companys = Company.query.filter_by(enabled=True).all()[0:200]
     for company in companys:
-        if not company.status_id:
-            update =  Company.query.filter(Company.id == company.id).first()
-            ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
-            ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
-            if ficha:
-                status = CompanyStatus.query.filter_by(name_short='3').first()
-                update.status_id = status.id
-            else:
-                status = CompanyStatus.query.filter_by(name_short='2').first()
-                update.status_id = status.id
-            db.session.add(update)
-            db.session.commit()
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            status = CompanyStatus.query.filter_by(name_short='3').first()
+            update.status_id = status.id
+        else:
+            status = CompanyStatus.query.filter_by(name_short='2').first()
+            update.status_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+@digitalcenter.route('/update/status/1',methods=['GET', 'POST'])
+def _init_status_company_2():
+    companys = Company.query.filter_by(enabled=True).all()[200:400]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            status = CompanyStatus.query.filter_by(name_short='3').first()
+            update.status_id = status.id
+        else:
+            status = CompanyStatus.query.filter_by(name_short='2').first()
+            update.status_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+@digitalcenter.route('/update/status/2',methods=['GET', 'POST'])
+def _init_status_company_3():
+    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            status = CompanyStatus.query.filter_by(name_short='3').first()
+            update.status_id = status.id
+        else:
+            status = CompanyStatus.query.filter_by(name_short='2').first()
+            update.status_id = status.id
+        db.session.add(update)
+        db.session.commit()
     return 'listo'
 
 @digitalcenter.route('/update/wallet',methods=['GET', 'POST'])
