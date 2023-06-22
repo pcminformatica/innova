@@ -592,3 +592,9 @@ def _empresarias():
     }
  
     return render_template('home_empresarias.html',**context)
+
+
+@home.route('/test/madurez/digital')
+def _FORMULARIO_MADUREZ_DIGITAL():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('evaluaciones/FORMULARIO_MADUREZ_DIGITAL.html')
