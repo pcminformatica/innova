@@ -641,3 +641,12 @@ def _save_test_madurez():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@home.route('/view/evaluations/5/<int:evaluations_id>',methods=['GET', 'POST'])
+def _evaluaciones_describe(evaluations_id):
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    evaluation = Evaluations.query.filter_by(id = evaluations_id).first()
+    context = {
+        'api': evaluation
+    }
+    return render_template('evaluaciones/evaluaciones_describe.html',**context)

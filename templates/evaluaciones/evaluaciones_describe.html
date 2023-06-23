@@ -1,4 +1,4 @@
-{% extends 'layout_main_drawer_table.html' %}
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
 {% block css_script_section %}
@@ -16,7 +16,7 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
-
+        
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
@@ -26,7 +26,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Diagnosticos</span>
+                                                    <span class="mdc-tab__text-label">Respuestas</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -40,56 +40,35 @@
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 
-                                  <div class="mdc-data-table" style="background-color: white;" >
-                                    <div class="mdc-data-table__table-container_">
-                                      <table class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                    <div class="mdc-data-table__table-container">
+                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Identidad</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Resultado</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Id</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Pregunta</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Respuesta</th>
                                           </tr>
-                                          
-                                          
-                                          
                                         </thead>
-                                        <tbody style="white-space: normal;">
-                                          {% for api in evaluations %}
-                                          <tr style="white-space: normal;">
-                                            <th class="mdc-data-table__cell" scope="col">
+                                        <tbody class="mdc-data-table__content">
+                                            {% for api in api.respuestas %}
+                                          <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">
                                               {{loop.index}}
                                             </th>
-                                            <th class="mdc-data-table__cell">
-                                              
-                                              
-                                              <a href="{{ url_for('home._evaluaciones_describe',evaluations_id=api.id) }}"  class="mdc-button mdc-button--raised mdc-button--leading" >
-                                              
-                                                <span class="mdc-button__ripple"></span>
-                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                <span class="mdc-button__label">Ver</span>
-                                              </a>
-                                            </th>
+                        
                                             
-                                            
-                                            
-                                            
-                                            <td class="mdc-data-table__cell" scope="col">
-                                              {{ api.dni }}
+                                            <td class="mdc-data-table__cell" style="width: 80px;">
+                                                {{ api.id }}
                                             </td>
-                                            <td class="mdc-data-table__cell" scope="col">
-                                                {{ api.name }}
-                                            </td>
-
-                                            <th class="mdc-data-table__cell" scope="col">
-                                            {{ api.result }}
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              {{ api.pregunta }}
                                             </th>
-                                            <th class="mdc-data-table__cell" scope="col">
-                                              {{ api.date_created.strftime('%Y-%m-%d') }}
+                                            <th class="mdc-data-table__cell" scope="row">
+                                              {{ api.respuesta }}
                                             </th>
-  
+     
                                           </tr>
                                           {% endfor %}
                                    
@@ -114,11 +93,6 @@
                                     </div>
                                   </div>
                             </div>
-              
-                                
-                             
-
-
                             <div class="mdc-card__actions">
                                 <div class="mdc-card__actions-buttons">
                                 </div>
@@ -142,4 +116,38 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+<script>
+  function atenderEmpresaria(){
+    const Swal = swcms.returnSwal()
+    const txt_id = '{{api.id}}';
+    const apiUrl = '/initial/attention/companies';
+    let postData = {
+          "txt_id": txt_id,
+      };
+      console.log(postData)
+
+    //document.getElementById('submitSaveButton').disabled = true;
+
+    swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+        'Éxito',
+        'Atención inicial creada!',
+        'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+
+    }).catch((error) => {
+        Swal.fire(
+        'Error de conexión',
+        'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+        'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+    });
+
+  }
+</script>
 {% endblock %}
+
+
+h
