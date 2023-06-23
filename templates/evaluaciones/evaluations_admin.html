@@ -1,0 +1,135 @@
+{% extends 'layout_main_drawer_table.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Evaluaciones</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                
+                                  <div class="mdc-data-table" style="background-color: white;" >
+                                    <div class="mdc-data-table__table-container_">
+                                      <table class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                        <thead>
+                                          <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la evaluación</th>
+              
+                                          </tr>
+                                          
+                                          
+                                          
+                                        </thead>
+                                        <tbody style="white-space: normal;">
+                                         
+                                          <tr style="white-space: normal;">
+                                            <th class="mdc-data-table__cell" scope="col">
+                                             1
+                                            </th>
+                                            <th class="mdc-data-table__cell">
+
+                                              <a href="{{ url_for('home._evaluations_list') }}"  class="mdc-button mdc-button--raised mdc-button--leading" >
+                                              
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                <span class="mdc-button__label">Ver</span>
+                                              </a>
+                                            </th>
+                                            
+                                            
+                                            
+                                            
+                                            <td class="mdc-data-table__cell" scope="col">
+                                                TEST DE MADUREZ DIGITAL INNOVA MUJER 
+                                            </td>
+                          
+
+                     
+  
+                                          </tr>
+                                      
+                                   
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  
+                                    <div class="mdc-data-table__progress-indicator">
+                                      <div class="mdc-data-table__scrim"></div>
+                                      <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                          <div class="mdc-linear-progress__buffer-bar"></div>
+                                          <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+{% endblock %}
