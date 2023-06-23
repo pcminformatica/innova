@@ -976,3 +976,14 @@ class EnrollmentRecord(db.Model):
             id = self.id,
             name = self.name,
         )
+
+# Catalog - ID Evaluations
+class Evaluations(db.Model):
+    _tablename__ = 'evaluations'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    dni = db.Column(db.String(50), unique=False, nullable=True)
+    name = db.Column(db.String(300), unique=False, nullable=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
+    respuestas = db.Column(db.JSON, unique=False, nullable=True)
+    result = db.Column(db.FLOAT, unique=False, nullable=True, default=0.00)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)

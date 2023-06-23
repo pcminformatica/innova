@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -598,3 +598,46 @@ def _empresarias():
 def _FORMULARIO_MADUREZ_DIGITAL():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/FORMULARIO_MADUREZ_DIGITAL.html')
+
+
+@home.route('/test/madurez/list')
+def _evaluations_list():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    evaluations = Evaluations.query.filter_by().all()
+    context = {
+        'evaluations': evaluations,
+    }
+    return render_template('evaluaciones/evaluations_list.html',**context)
+
+
+@home.route('/list/evaluations/')
+def _evaluations_admin():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('evaluaciones/evaluations_admin.html')
+
+
+# Set the Appointment's Details
+@home.route('/api/save/test/madurez', methods = ['POST'])
+@login_required
+def _save_test_madurez():
+    app.logger.debug('** SWING_CMS ** - API acceptterms')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_name = request.json['txt_name']
+            txt_identidad = request.json['txt_identidad']  
+            txt_preguntas = request.json['txt_preguntas']
+            total = request.json['total']
+
+            evaluation = Evaluations()
+            evaluation.name = txt_name
+            evaluation.dni = txt_identidad
+            evaluation.respuestas =txt_preguntas
+            evaluation.result = total
+            db.session.add(evaluation)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Cita creada' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

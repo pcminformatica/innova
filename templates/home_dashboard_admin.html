@@ -298,7 +298,35 @@
                                         </a>
                                     </li>
                                     {% endif %}
+                                    {% if current_user.id in (3,24,25) %}
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('aulavirtual._curso_list') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Administracion de cursos</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mdc-deprecated-list-item">
+                                        <a href="{{ url_for('home._evaluations_admin') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Evaluaciones</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Evaluaciones</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    
                                     {% if current_user.id in (3,24) %}
+
                                     <li class="mdc-deprecated-list-item">
                                         <a href="{{ url_for('monitoreo._indicadores_servicios') }}">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
