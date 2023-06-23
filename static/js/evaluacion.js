@@ -202,7 +202,7 @@ function test_madurez_save(){
           'success'
         )
         document.getElementById("step-1").style.display = "none"; 
-
+        document.getElementById("step-2").style.display = 'block'; 
         
         document.getElementById("lbl_resultado").innerHTML = total;
       }).catch((error) => {
