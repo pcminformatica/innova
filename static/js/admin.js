@@ -236,7 +236,7 @@ function saveCurso(){
         mdcAssignedVars[txt.assignedVar] = txt;
   });
 
-  console.log(mdcAssignedVars)
+
   for (const property in mdcAssignedVars) {
     if(mdcAssignedVars[property].value === '' && mdcAssignedVars[property].required===true){
       console.log(`${property}: ${mdcAssignedVars[property]}`);
@@ -252,4 +252,106 @@ function saveCurso(){
       return false
     }
   }
+
+  let postData = {
+    'txt_name': mdcAssignedVars['txt_name'].value.trim() || null,
+    'txt_formacion': mdcAssignedVars['txt_formacion'].value.trim() || null,
+    'txt_modalidad': mdcAssignedVars['txt_modalidad'].value.trim() || null,
+    'txt_responsable': mdcAssignedVars['txt_responsable'].value.trim() || null,
+    'txt_horas': mdcAssignedVars['txt_horas'].value.trim() || null,
+    'txt_fecha_inicial':mdcAssignedVars['txt_fecha_inicial'].value.trim() || null,
+    'txt_fecha_final':mdcAssignedVars['txt_fecha_final'].value.trim() || null,
+    'txt_hora_curso':mdcAssignedVars['txt_hora_curso'].value.trim() || null,
+
+
+  };
+  console.log(postData)
+
+
+  let apiUrl = '/api/save/courses/';
+  document.getElementById('submitSaveButton').disabled = false;
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+      'Gracias',
+      'Bienvenida a INNOVA MUJER!',
+      'success'
+    )
+    window.setTimeout(() => { window.location.reload(); 
+    }, 1000);
+
+  }).catch((error) => {
+    Swal.fire(
+      'Error de conexión',
+      'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+      'error'
+    )
+    document.getElementById('submitSaveButton').disabled = true;
+  });
+
+}
+
+
+
+function saveMatricula(company_id){
+
+  
+  const Swal = swcms.returnSwal()
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  swcms.mdcTextInputs.forEach((txt) => {
+    if (txt.assignedVar)
+        mdcAssignedVars[txt.assignedVar] = txt;
+  });
+
+
+  for (const property in mdcAssignedVars) {
+    if(mdcAssignedVars[property].value === '' && mdcAssignedVars[property].required===true){
+      console.log(`${property}: ${mdcAssignedVars[property]}`);
+      mdcAssignedVars[property].required
+      Swal.fire(`Por favor complete el campo: ${mdcAssignedVars[property].label.root.innerText} `)
+      Swal.fire(
+        'Por favor complete el campo:',
+        `${mdcAssignedVars[property].label.root.innerText}`,
+        'info'
+        
+      )
+
+      return false
+    }
+  }
+
+  let postData = {
+    'txt_curso': mdcAssignedVars['txt_curso'].value.trim() || null,
+    'txt_company': company_id,
+
+
+
+  };
+  console.log(postData)
+
+  
+  let apiUrl = '/api/save/enroll/';
+  document.getElementById('submitSaveButton').disabled = false;
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+      'Gracias',
+      'Bienvenida a INNOVA MUJER!',
+      'success'
+    )
+    window.setTimeout(() => { window.location.reload(); 
+    }, 1000);
+
+  }).catch((error) => {
+    Swal.fire(
+      'Error de conexión',
+      'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+      'error'
+    )
+    document.getElementById('submitSaveButton').disabled = true;
+  });
+
 }

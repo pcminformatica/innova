@@ -88,7 +88,7 @@
                                     </button>
                                     <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
-                                        <span class="mdc-tab__text-label">Formación Inicial</span>
+                                        <span class="mdc-tab__text-label">Formaciones</span>
                                         </span>
                                         <span class="mdc-tab-indicator mdc-tab-indicator">
                                         <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -310,7 +310,7 @@
             
             
                                                 </tbody>
-                                              </table>
+                                            </table>
                                             {% else %}
                                             <h2>Ficha de inscripción no encontrada</h2>
                                             <p>
@@ -356,26 +356,70 @@
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            <h2>Formación Inicial</h2>
+                                            <h2>Formación</h2>
                                             <p>
-                                                Registro de capacitación inicial no encontrado, por favor puedes registrar el cumplimiento de la empresaria en la formación inicial dando clic en el botón "Registrar asesoría inicial" o da clic en "Matricular" para registrar a la empresaria en una jornada de inducción y virtual.
+                                                Para matricular a la empresaria en cursos o talleres da clic en "Matricular"
                                             </p>
                                             <center>
-                                                <a  id="btn_generar_ficha"  href="#" onclick="alert('Habilitado 19-06-2021')" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Registrar asesoría inicial</span>
-                                                </a>
+                                          
                                         
                          
-                                                    <a href="#" onclick="alert('Habilitado 19-06-2021')"  class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                    <a href="{{ url_for('aulavirtual._curso_enroll',company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
                                                                 
                                                         <span class="mdc-button__ripple"></span>
                                                         <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                                                         <span class="mdc-button__label">Matricular</span>
                                                     </a>
                                                 </center>
+                                            <h2>Lista de cursos</h2>
+                                            <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                                <thead>
+                                                <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
+                                                        #
+                                                    </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la formación</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tipo de formación</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"> Tipo de modalidad</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Responsable</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicial </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                             
+                                                </tr>
+                                                
+                                                
+                                                
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                    {% for curso in enrolls %}
+                                                <tr data-row-id="u0" class="mdc-data-table__row">
+                                                    <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                        {{loop.index}}
+                                                    </td>   
+                                                    <th class="mdc-data-table__cell" scope="row" id="u0">
+                                                        {{ curso.course.name }}
+                                                    </th>
+                                                    <td class="mdc-data-table__cell"> {{ curso.course.training_type.name }}</td>
+                                                    <td class="mdc-data-table__cell"> {{ curso.course.modality_type.name }}</td>
+                                                    <td class="mdc-data-table__cell"> {{ curso.course.course_managers.name }}</td>
+                                                    <td class="mdc-data-table__cell"> {{ curso.course.date_scheduled_start.strftime('%Y-%m-%d') }}</td>
+                                                    <td class="mdc-data-table__cell"> {{ curso.course.date_scheduled_end.strftime('%Y-%m-%d') }}</td>
+                                                    <td class="mdc-data-table__cell">
+                                            
+                                                        <button id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                              >touch_app</i
+                                                            >
+                                                            <span class="mdc-button__label">Agregar fin de curso</span>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                     

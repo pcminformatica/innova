@@ -110,6 +110,17 @@
                                                     <span class="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
+
+                                            <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <select id="txt_status_e" name="txt_status_e">
+                                                    {% for status in status %}
+                                                    <option value="{{ status.id }}">
+                                                        {{ status.name }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     description
@@ -260,4 +271,10 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+<script>
+    window.addEventListener('load', function () {
+        document.getElementById('txt_status_e').value = '{{ company.status_id }}'
+})
+    
+</script>
 {% endblock %}

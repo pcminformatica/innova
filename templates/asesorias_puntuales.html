@@ -72,7 +72,7 @@
                                         </li>
                                         
                                         {% endfor %}
-                                        <li onclick="alert('111')" class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
+                                        <li onclick="agregarFuncion()" class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__text">
                                               Agregar nuevo
@@ -136,6 +136,60 @@
                                               </ul>
                                             </div>
                                         </div>
+                                        <div class="mdc-typography--body1">
+                                          Servicios:
+                                      </div>
+                                      <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_company_porcentaje" data-assigned-var>
+                                          <div class="mdc-select__anchor" aria-required="true"
+                                               role="button"
+                                               aria-haspopup="listbox"
+                                               aria-expanded="false"
+                                               aria-labelledby="demo-label demo-selected-text">
+                                            <span class="mdc-select__ripple"></span>
+                                            <span id="demo-label" class="mdc-floating-label" hiddenlabel="3.13 ¿Qué porcentaje de accionistas mujeres esta conformada la empresa?">Seleccione porcentaje de accionistas mujeres</span>
+                                            <span class="mdc-select__selected-text-container">
+                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                            </span>
+                                            <span class="mdc-select__dropdown-icon">
+                                              <svg
+                                                  class="mdc-select__dropdown-icon-graphic"
+                                                  viewBox="7 10 10 5" focusable="false">
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-inactive"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 10 12 15 17 10">
+                                                </polygon>
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-active"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 15 12 10 17 15">
+                                                </polygon>
+                                              </svg>
+                                            </span>
+                                            <span class="mdc-line-ripple"></span>
+                                          </div>
+                                        
+                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                              <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                              </li>
+                                              {% for service in services %}
+                                              <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                  {{ service.name }}
+                                                </span>
+                                              </li>
+                                              
+                                              {% endfor %}
+                             
+                  
+                                            </ul>
+                                          </div>
+                                      </div>
                                         <div class="mdc-typography--body1">
                                           Fecha Inicio:
                                       </div>
@@ -244,6 +298,16 @@
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
 
 <script>
+
+  function agregarFuncion(){
+alert('agregar')
+    const Swal = swcms.returnSwal()
+    Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+  }
     function saveResumenAtencion()
     {
         const Swal = swcms.returnSwal()

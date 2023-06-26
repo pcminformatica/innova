@@ -39,18 +39,10 @@
                                 </div>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Lista de cursos</div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Lista de empresas matriculadas</div>
                     
                                 <br>
-                                <center>
-                                    <a href="/formulario/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
-                                        <span class="mdc-button__ripple"></span>
-                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                          >bookmark</i
-                                        >
-                                        <span class="mdc-button__label">Crear nuevo curso</span>
-                                    </a>
-                                </center>
+                        
                                 <br>
                                 
                                 <div class="container-dashboard--messages-list-empty ">
@@ -58,7 +50,7 @@
                                         <div class="mdc-layout-grid__inner">
                                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Lista de cursos
+                                                Lista de empresas
                                             </div>
                                           </div>
                                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
@@ -70,13 +62,9 @@
                                                         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
                                                             #
                                                         </th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la formación</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tipo de formación</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col"> Tipo de modalidad</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Responsable</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicial </th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
-                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresa</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                        
                                                  
                                                     </tr>
                                                     
@@ -84,36 +72,17 @@
                                                     
                                                     </thead>
                                                     <tbody class="mdc-data-table__content">
-                                                        {% for curso in cursos %}
+                                                        {% for curso in enrolls %}
                                                     <tr data-row-id="u0" class="mdc-data-table__row">
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{loop.index}}
-                                                        </td>   
-                                                        <th class="mdc-data-table__cell" scope="row" id="u0">
-                                                            {{ curso.name }}
-                                                        </th>
-                                                        <td class="mdc-data-table__cell"> {{ curso.training_type.name }}</td>
-                                                        <td class="mdc-data-table__cell"> {{ curso.modality_type.name }}</td>
-                                                        <td class="mdc-data-table__cell"> {{ curso.course_managers.name }}</td>
-                                                        <td class="mdc-data-table__cell"> {{ curso.date_scheduled_start.strftime('%Y-%m-%d') }}</td>
-                                                        <td class="mdc-data-table__cell"> {{ curso.date_scheduled_end.strftime('%Y-%m-%d') }}</td>
-                                                        <td class="mdc-data-table__cell">
-                                                            <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
-                                                                <span class="mdc-button__ripple"></span>
-                                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                                  >bookmark</i
-                                                                >
-                                                                <span class="mdc-button__label">Reporte</span>
-                                                            </a>
-                                                            <a  href="{{ url_for('aulavirtual._curso_enroll_list',courses_id=curso.id ) }}" id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
-                                                                <span class="mdc-button__ripple"></span>
-                                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                                  >touch_app</i
-                                                                >
-                                                                <span class="mdc-button__label">Ver Matricula</span>
-                                                            </a>
-
                                                         </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.name}}
+                                                        </td>>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            Finalizada
+                                                        </td>>
                                                     </tr>
                                                         {% endfor %}
                                                     </tbody>

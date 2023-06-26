@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import CompanyStatus,Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import DocumentCompany,ActionPlan,DiagnosisCompany,Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
@@ -185,6 +185,7 @@ def _admin_company_view(company_id):
 @login_required
 def _admin_list_company_edit(company_id):
     company = Company.query.filter_by(id = company_id).first()
+    status = CompanyStatus.query.filter_by().all()
     if request.method == 'POST':
         txt_name = request.form.get('txt_name') 
         txt_identidad= request.form.get('txt_identidad')
@@ -194,6 +195,7 @@ def _admin_list_company_edit(company_id):
         txt_instagram= request.form.get('txt_instagram')
         txt_description= request.form.get('txt_description')
         txt_created_by= request.form.get('txt_created_by')
+        txt_status_e = request.form.get('txt_status_e')
         company.description = txt_description
         jsonSocial= JsonSocial()
         jsonSocial.email = txt_email
@@ -208,10 +210,11 @@ def _admin_list_company_edit(company_id):
         company.enabled =  cxb_status
         company.rtn = txt_rtn
         company.created_by = txt_created_by
+        company.status_id = txt_status_e
         db.session.add(company)
         db.session.commit()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    cxt = {'company':company}
+    cxt = {'company':company,'status':status}
     return render_template('/admindash/company_form.html',**cxt)
 
 @admindash.route('/admin/company/inscripcion/<int:company_id>/edit',methods=['GET', 'POST'])

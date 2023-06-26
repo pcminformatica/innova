@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de creación de curso</div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Formulario de matricula</div>
                     
                                
                                 <br>
@@ -115,43 +115,22 @@
                                 <div class="container-dashboard--messages-list-empty ">
                                     <div class="mdc-layout-grid">
                                         <div class="mdc-layout-grid__inner">
-                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Datos del curso
-                                            </div>
-  
-                                          </div>
-                                          
-                                          <input type="hidden" aria-labelledby="my-label-id" id="txt_id" value="">
+
 
                                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Nombre de la capacitación 
-                                            </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
-                                                <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
-                                                <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
-                                               value="" data-assigned-var
-                                                >
-                                                <span lass="mdc-line-ripple"></span>
-                                            </label>
-                                          </div>
-
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
                                            
 
                                             <div class="mdc-typography--body1">
-                                                Tipo de formación:
+                                                Curso:
                                             </div>
-                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_formacion" data-assigned-var>
+                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_curso" data-assigned-var>
                                                 <div class="mdc-select__anchor"
                                                      role="button"
                                                      aria-haspopup="listbox"
                                                      aria-expanded="false"
                                                      aria-labelledby="demo-label demo-selected-text">
                                                   <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label">Formación</span>
+                                                  <span id="demo-label" class="mdc-floating-label">Seleccione curso</span>
                                                   <span class="mdc-select__selected-text-container">
                                                     <span id="demo-selected-text" class="mdc-select__selected-text"></span>
                                                   </span>
@@ -178,20 +157,20 @@
                                               
                                                 <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
                                                   <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                          {% for training in training %}
+                                                          {% for curso in cursos %}
 
                                                             {% if loop.index == 0 %}
-                                                              <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ training.id }}" role="option">
+                                                              <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ curso.id }}" role="option">
                                                                   <span class="mdc-deprecated-list-item__ripple"></span>
                                                                   <span class="mdc-deprecated-list-item__text">
-                                                                    {{ training.name}}
+                                                                    {{ curso.name}}
                                                                   </span>
                                                               </li>
                                                             {% else %}
-                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ training.id }}"  role="option">
+                                                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ curso.id }}"  role="option">
                                                               <span class="mdc-deprecated-list-item__ripple"></span>
                                                               <span class="mdc-deprecated-list-item__text">
-                                                                {{training.name}}
+                                                                {{curso.name}} - {{curso.training_type.name}}
                                                               </span>
                                                           </li>
                                                             {% endif %}
@@ -203,185 +182,7 @@
                                                 </div>
                                               </div>
                                           </div>
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                           
 
-                                            <div class="mdc-typography--body1">
-                                                Tipo de modalidad:
-                                            </div>
-                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_modalidad" data-assigned-var>
-                                                <div class="mdc-select__anchor"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label">Modalidad</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
-                                                </div>
-                                              
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                              
-                                                    {% for modality in modality %}
-
-                                                    {% if loop.index == 0 %}
-                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ modality.id }}" role="option">
-                                                          <span class="mdc-deprecated-list-item__ripple"></span>
-                                                          <span class="mdc-deprecated-list-item__text">
-                                                            {{  modality.name }}
-                                                          </span>
-                                                      </li>
-                                                    {% else %}
-                                                    <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ modality.id }}"  role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                      <span class="mdc-deprecated-list-item__text">
-                                                        {{ modality.name}}
-                                                      </span>
-                                                  </li>
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                           
-
-                                            <div class="mdc-typography--body1">
-                                                Responsable:
-                                            </div>
-                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_responsable" data-assigned-var>
-                                                <div class="mdc-select__anchor"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label">Modalidad</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
-                                                </div>
-                                              
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                              
-                                                    {% for manager in manager %}
-
-                                                    {% if loop.index == 0 %}
-                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ manager.id }}" role="option">
-                                                          <span class="mdc-deprecated-list-item__ripple"></span>
-                                                          <span class="mdc-deprecated-list-item__text">
-                                                            {{manager.name}}
-                                                          </span>
-                                                      </li>
-                                                    {% else %}
-                                                    <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ manager.id }}"  role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                      <span class="mdc-deprecated-list-item__text">
-                                                        {{manager.name}}
-                                                      </span>
-                                                  </li>
-                                                    {% endif %}
-                                                    {% endfor %}
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                          </div>
-
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Horas total de formación
-                                            </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_horas" data-assigned-var>
-                                                <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Horas</span>
-                                                <input  required class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" 
-                                               value="0" data-assigned-var
-                                                >
-                                                <span lass="mdc-line-ripple"></span>
-                                            </label>
-                                          </div>
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Fecha Inicial
-                                            </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_inicial" data-assigned-var>
-                                                <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Fecha Inicial</span>
-                                                <input required class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" 
-                                               value="0" data-assigned-var
-                                                >
-                                                <span lass="mdc-line-ripple"></span>
-                                            </label>
-                                          </div>
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Fecha Final
-                                            </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_final" data-assigned-var>
-                                                <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Fecha Final</span>
-                                                <input required class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" 
-                                               value="0" data-assigned-var
-                                                >
-                                                <span lass="mdc-line-ripple"></span>
-                                            </label>
-                                          </div>
-                                          <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Hora
-                                            </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_hora_curso" data-assigned-var>
-                                                <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="my-label-id">Hora</span>
-                                                <input required class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" 
-                                               value="0" data-assigned-var
-                                                >
-                                                <span lass="mdc-line-ripple"></span>
-                                            </label>
-                                          </div>
                              
                                           <!--
                                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
@@ -538,7 +339,7 @@
                                                 >
                                                 <span class="mdc-button__label">Cancelar</span>
                                             </a>
-                                            <button id="submitSaveButton" onclick="saveCurso()" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                            <button id="submitSaveButton" onclick="saveMatricula('{{ company.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
                                                 <span class="mdc-button__ripple"></span>
                                                 <i class="material-icons mdc-button__icon" aria-hidden="true"
                                                   >touch_app</i

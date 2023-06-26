@@ -545,7 +545,6 @@ def _valorar_servicios():
         db.session.commit()
     return 'Listo'
 
-
 @digitalcenter.route('/update/status',methods=['GET', 'POST'])
 def _init_status_company():
     companys = Company.query.filter_by(enabled=True).all()[0:200]
@@ -554,7 +553,11 @@ def _init_status_company():
         ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
         ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
         if ficha:
-            status = CompanyStatus.query.filter_by(name_short='3').first()
+            diagnosis = DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+            if  diagnosis:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+            else:
+                status = CompanyStatus.query.filter_by(name_short='3').first()
             update.status_id = status.id
         else:
             status = CompanyStatus.query.filter_by(name_short='2').first()
@@ -571,7 +574,11 @@ def _init_status_company_2():
         ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
         ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
         if ficha:
-            status = CompanyStatus.query.filter_by(name_short='3').first()
+            diagnosis = DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+            if  diagnosis:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+            else:
+                status = CompanyStatus.query.filter_by(name_short='3').first()
             update.status_id = status.id
         else:
             status = CompanyStatus.query.filter_by(name_short='2').first()
@@ -588,7 +595,11 @@ def _init_status_company_3():
         ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
         ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
         if ficha:
-            status = CompanyStatus.query.filter_by(name_short='3').first()
+            diagnosis = DiagnosisCompany.query.filter(DiagnosisCompany.company_id == company.id).first()
+            if  diagnosis:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+            else:
+                status = CompanyStatus.query.filter_by(name_short='3').first()
             update.status_id = status.id
         else:
             status = CompanyStatus.query.filter_by(name_short='2').first()
@@ -745,6 +756,12 @@ def _init_cursos():
     db.session.commit()
     return 'Listo'
 
+@digitalcenter.route('/init/activas',methods=['GET', 'POST'])
+def _init_activas():
+    CS6 = CompanyStatus(name='Activa', name_short='6')
+    db.session.add(CS6)
+    db.session.commit()
+    return 'Listo'
 
 @digitalcenter.route('/insert/chat',methods=['GET', 'POST'])
 def _re1():
@@ -1365,6 +1382,10 @@ def _form_carta_innova():
                     carta.document_local = filename
                     carta.created_by = current_user.id
                     db.session.add(carta)
+                    if document_type.name_short == 'DOC1':
+                        status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 3).first()
+                        company.status_id = status.id
+                        db.session.add(company)
                     db.session.commit()
             return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
         elif txt_documente_version == "1" or txt_documente_version == "2":
@@ -1395,6 +1416,10 @@ def _form_carta_innova():
                 carta.enabled = True
                 carta.document_local = filename
                 carta.created_by = current_user.id
+                if document_type.name_short == 'DOC1':
+                    status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 3).first()
+                    company.status_id = status.id
+                    db.session.add(company)
                 db.session.add(carta)
                 db.session.commit()
             if txt_documente_version == "2":

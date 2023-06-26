@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import TrainingType,ModalityType,CourseManagers,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import EnrollmentRecord,Courses,TrainingType,ModalityType,CourseManagers,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 aulavirtual = Blueprint('aulavirtual', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -32,13 +32,34 @@ def _curso_created():
     }
     return render_template('aulavirtual/curso_created.html',**context)
 
-@aulavirtual.route('/enroll/')
-def _curso_enroll():
+@aulavirtual.route('/enroll/<int:company_id>//')
+def _curso_enroll(company_id):
+    company = Company.query.filter_by(id=company_id).first()
     app.logger.debug('** SWING_CMS ** - AcercaDe')
-
-    return render_template('aulavirtual/curso_enroll.html')
+    cursos = Courses.query.filter_by(enabled=True).all()
+    context = {
+        'company':company,
+        'cursos':cursos,
+    }
+    return render_template('aulavirtual/curso_enroll.html',**context)
 
 @aulavirtual.route('/cursos/list/')
 def _curso_list():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('aulavirtual/curso_list.html')
+    cursos = Courses.query.filter_by(enabled=True).all()
+    context = {
+        'cursos':cursos,
+   
+    }
+    return render_template('aulavirtual/curso_list.html',**context)
+
+@aulavirtual.route('/cursos/list/<int:courses_id>/')
+def _curso_enroll_list(courses_id):
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    cursos = Courses.query.filter_by(enabled=True).all()
+    enrolls = EnrollmentRecord.query.filter_by(id_course=courses_id).all()
+    context = {
+        'enrolls':enrolls,
+   
+    }
+    return render_template('aulavirtual/curso_enroll_list.html',**context)

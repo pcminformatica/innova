@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -921,6 +921,11 @@ def _d_save_DiagnosisCompany():
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
                 db.session.add(diagnosis)
+                update =  Company.query.filter(Company.id == company.id).first()
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+                update.status_id = status.id
+                db.session.add(update)
+            
                 db.session.commit()
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
         
@@ -1168,26 +1173,29 @@ def _initial_attention_companies():
             inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_inscripcion_id).first()
             dni= inscripcion.dni.replace("-", "")
             company =  Company.query.filter(Company.dni == dni).first()
+            status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 2).first()
             #creamos la empresa
             if not company:
                 company = Company()
-                company.name = inscripcion.company_name
+                company.name = inscripcion.company_name.strip()
                 company.rtn = inscripcion.rtn
-                company.dni = dni
+                company.dni = dni.strip()
                 company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
                 jsonPhone = JsonPhone()
                 jsonPhone.phone = inscripcion.phone
                 jsonSocial= JsonSocial()
-                jsonSocial.email = inscripcion.correo
+                jsonSocial.email = inscripcion.correo.strip()
                 company.phones = jsonPhone.jsonFormat()
                 company.social_networks = jsonSocial.jsonFormat()
                 company.created_by = current_user.id
                 company.inscripcion_id = inscripcion.id
+                company.status_id = status.id
                 db.session.add(company)
                 db.session.commit()
             else:
                 company
                 company.inscripcion_id = inscripcion.id
+                company.status_id = status.id
                 db.session.add(company)
                 db.session.commit()
                 db.session.refresh(company)
@@ -1263,6 +1271,10 @@ def _d_create_carta_compromiso():
                 carta.document_local = filename
                 carta.created_by = current_user.id
                 db.session.add(carta)
+                if document_type.name_short == 'DOC1':
+                    status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 3).first()
+                    company.status_id = status.id
+                    db.session.add(company)
                 db.session.commit()
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
@@ -1607,6 +1619,63 @@ def _d_delete_ActionPlan():
             actualizar = _update_wallet(actionplan.company_id)
             if actualizar:
                 return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/courses/', methods = ['POST'])
+# @login_required
+def _d_save_curso():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_name = request.json['txt_name']
+            txt_formacion = request.json['txt_formacion']  
+            txt_modalidad = request.json['txt_modalidad']
+            txt_responsable = request.json['txt_responsable']  
+            txt_horas = request.json['txt_horas']
+            txt_fecha_inicial = request.json['txt_fecha_inicial']  
+            txt_fecha_final = request.json['txt_fecha_final']
+            txt_hora_curso = request.json['txt_hora_curso']  
+            courses = Courses()
+            courses.name = txt_name
+            courses.id_training_type = txt_formacion
+            courses.id_modality_type = txt_modalidad
+            courses.id_course_managers = txt_responsable
+            courses.date_scheduled_start = txt_fecha_inicial
+            courses.date_scheduled_end = txt_fecha_final
+            courses.time_scheduled_start = txt_horas
+            courses.created_by = current_user.id
+            db.session.add(courses)         
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
+@api.route('/api/save/enroll/', methods = ['POST'])
+# @login_required
+def _d_save_enroll():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_curso = request.json['txt_curso']
+            txt_company = request.json['txt_company']  
+            enroll = EnrollmentRecord.query.filter_by(id_course = txt_curso,company_id=txt_company).first()
+            if not enroll:
+                courses = EnrollmentRecord()
+                courses.id_course = txt_curso
+                courses.company_id = txt_company
+                courses.created_by = current_user.id
+                db.session.add(courses)         
+                db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
