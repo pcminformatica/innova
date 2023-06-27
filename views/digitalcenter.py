@@ -480,6 +480,33 @@ def _diagnosis_monitoring_1_list():
     except Exception as e:
         return render_template('404.html')
 
+@digitalcenter.route('/cartas/comparativo',methods=['GET', 'POST'])
+def _diagnosis_monitoring_2_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    try:
+        diagnosis = DiagnosisCompany.query.filter_by(status=True).all()
+        companys = []
+        for diagnosi in diagnosis:
+        
+            ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+            ficha =  DocumentCompany.query.filter_by(company_id=diagnosi.company_id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
+            if not ficha:
+                if diagnosi.company_id:
+                    company = Company.query.filter_by(id=diagnosi.company_id,enabled=True).first()
+                    if company:
+                        companys.append(company)
+
+        company_references = []
+        context = {
+            'apis': companys,
+            'company_references':company_references
+        }
+        return render_template('company_monitoring_list.html',**context)
+    except Exception as e:
+        print(e)
+        print(e)
+        return render_template('404.html')
+    
 @digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_create(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
