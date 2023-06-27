@@ -56,10 +56,11 @@ def _curso_list():
 @aulavirtual.route('/cursos/list/<int:courses_id>/')
 def _curso_enroll_list(courses_id):
     app.logger.debug('** SWING_CMS ** - AcercaDe')
-    cursos = Courses.query.filter_by(enabled=True).all()
+    cursos = Courses.query.filter_by(id=courses_id).first()
     enrolls = EnrollmentRecord.query.filter_by(id_course=courses_id).all()
     context = {
         'enrolls':enrolls,
+        'cursos':cursos
    
     }
     return render_template('aulavirtual/curso_enroll_list.html',**context)

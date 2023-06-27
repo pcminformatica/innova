@@ -453,6 +453,33 @@ def _diagnosis_monitoring_list():
     except Exception as e:
         return render_template('404.html')
 
+@digitalcenter.route('/diagnosticos/comparativo',methods=['GET', 'POST'])
+def _diagnosis_monitoring_1_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    try:
+        url = app.config.get('KOBOTOOLBOX_ALL')
+        headers=app.config.get('KOBOTOOLBOX_TOKEN')
+        resp = requests.get(url,headers=headers)
+        api = json.loads(resp.content)
+        user = User.query.filter(User.id == current_user.id).first()
+        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
+        api2 = {}
+        apix1 = []
+        for apix in api['results']:
+            identidad = apix['IDENTIDAD'].replace('-','')
+            company =  Company.query.filter(Company.dni == identidad).first()
+            if not company:
+                apix1.append(apix)
+            
+        api2['results'] = apix1
+
+        context = {
+            'api': api2
+        }
+        return render_template('diagnosis_monitoring_list.html',**context)
+    except Exception as e:
+        return render_template('404.html')
+
 @digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_create(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
