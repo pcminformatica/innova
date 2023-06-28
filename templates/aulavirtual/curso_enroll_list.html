@@ -272,4 +272,188 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+<script>
+    function agregar(){
+      var txt_busqueda = document.getElementById("txt_busqueda").value;
+
+      const Swal = swcms.returnSwal()
+        var data_result;
+        let postData = {
+            "txt_busqueda": txt_busqueda,
+        
+            };
+            console.log(postData)
+            let apiUrl = '/api/company/search/';
+            //document.getElementById('submitSaveButton').disabled = true;
+
+            swcms.postFetch(apiUrl, postData).then((data) => {
+            
+                console.log(data)
+                if(data.r_total != '0'){
+               
+                   createTable(data.records)
+                }else{
+                    alert('Datos no encontrados')
+                }
+                
+            
+            }).catch((error) => {
+                Swal.fire(
+                'Error de conexión',
+                'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                'error'
+                )
+                //document.getElementById('submitSaveButton').disabled = false;
+            });
+       
+    return false
+    }
+    function createTable(data){
+    
+   
+        let id,dni,name,company_name,departamento,municipio,correo,phone,cohorte
+
+        let secuencia = 0;
+        Tbl = document.getElementById("tablaPlan_1");
+        Tbl.innerHTML = ''
+        for (key in data){
+          
+            secuencia++
+            
+            context = {
+            'id': data[key].company_id,
+            'dni': data[key].company_dni.trim(),
+            'name': data[key].empresarea_name.trim(),
+            'company_name': data[key].company_name.trim(),
+            'departamento': data[key].company_departamento.trim(),
+            'municipio':  data[key].company_municipio.trim(),
+            'correo':  data[key].company_mail.trim(),
+            'phone': data[key].company_phone.trim(),
+            'cohorte':  data[key].company_cohorte,
+            }
+            console.log(context)
+
+
+            var hilera = document.createElement("tr");
+            var celda_secuencia = document.createElement("td");
+
+            var celda_dni = document.createElement("td");
+            var celda_name = document.createElement("td");
+            var celda_company_name = document.createElement("td");
+            var celda_departamento = document.createElement("td");
+            var celda_municipio = document.createElement("td");
+            var celda_correo = document.createElement("td");
+            var celda_cohorte = document.createElement("td");
+            var celda_opciones = document.createElement("td");
+
+            var text_dni = document.createTextNode(context.dni);
+            var text_name = document.createTextNode(context.name);
+            var text_company_name = document.createTextNode(context.company_name);
+            var text_departamento = document.createTextNode(context.departamento);
+            var text_municipio = document.createTextNode(context.municipio);
+            var text_correo = document.createTextNode(context.correo);
+            var text_cohorte = document.createTextNode(context.cohorte);
+            
+            celda_secuencia.className = 'mdc-data-table__cell'
+            celda_dni.className = 'mdc-data-table__cell'
+            celda_name.className = 'mdc-data-table__cell'
+            celda_company_name.className = 'mdc-data-table__cell'
+            celda_departamento.className = 'mdc-data-table__cell'
+            celda_municipio.className = 'mdc-data-table__cell'
+            celda_correo.className = 'mdc-data-table__cell'
+            celda_cohorte.className = 'mdc-data-table__cell'
+            celda_opciones.className = 'mdc-data-table__cell'
+            hilera.className = 'mdc-data-table__row'
+
+
+            celda_dni.appendChild(text_dni)
+            celda_name.appendChild(text_name)
+            celda_company_name.appendChild(text_company_name)
+            celda_departamento.appendChild(text_departamento)
+            celda_municipio.appendChild(text_municipio)
+            celda_correo.appendChild(text_correo)
+            celda_cohorte.appendChild(text_cohorte)
+            celda_secuencia.innerHTML = secuencia
+            celda_opciones.innerHTML = `
+            <button onclick='createCompany(${JSON.stringify(context.id)})' 
+                    class="mdc-button mdc-button--raised mdc-button--leading" >                        
+                    <span class="mdc-button__ripple"></span>
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                    <span class="mdc-button__label">Agregar asistencia</span>
+            </button>`
+            hilera.appendChild(celda_secuencia);
+            hilera.appendChild(celda_dni);
+            hilera.appendChild(celda_name);
+            hilera.appendChild(celda_company_name);
+            hilera.appendChild(celda_departamento);
+            hilera.appendChild(celda_municipio);
+            hilera.appendChild(celda_correo);
+            hilera.appendChild(celda_cohorte);
+            hilera.appendChild(celda_opciones);
+            
+            hilera.id =    1                     
+            Tbl.appendChild(hilera);
+        }
+    }
+        
+    
+    function createCompany(data){
+        
+      const Swal = swcms.returnSwal()
+
+      const txt_curso = '{{ cursos.id }}'
+      const txt_company  = data
+
+      let postData = {
+            "txt_curso": txt_curso,
+            "txt_company":txt_company
+        
+            };
+      let apiUrl = '/api/save/enroll/';
+      //document.getElementById('submitSaveButton').disabled = true; 
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Acción creado!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+       // window.location.replace("/empresas/");
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+    }
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+
+    function printPlan(){
+      window.print()
+    }
+
+    function formatDate(date) {
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join('/');
+}
+</script>
 {% endblock %}
