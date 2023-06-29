@@ -10,7 +10,7 @@ from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 monitoreo = Blueprint('monitoreo', __name__, template_folder='templates/', static_folder='static')
-from models.models import CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from sqlalchemy import desc
@@ -696,3 +696,50 @@ def _indicadores_perfil_asesor(user_uid):
         'users': user
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
+
+
+from sqlalchemy import desc,asc,func
+@monitoreo.route('/diagnostico/publico/<int:user_uid>/',methods=['GET', 'POST'])
+def _diagnosis_dashboard(user_uid):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    company =  Company.query.filter(Company.id == user_uid).first()
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
+    company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+    #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+    actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+    catalog = catalogCategory.query.all()
+    deposits_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.company_id == company.id, WalletTransaction.type ==0,WalletTransaction.status!=0).first()
+    deposits = WalletTransaction.query.filter(WalletTransaction.company_id == company.id, WalletTransaction.type ==0,WalletTransaction.status!=0).all()
+
+    plan_action = []
+    for catalog in catalog:
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.cancelled ==False,CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+        if plan:
+            miplan = {'catalog_id':catalog.id,'catalog_name':catalog.name,'plan_action':plan}
+            plan_action.append(miplan)
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    #buscamos la carta de compromiso DOC2
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
+    #buscamos la ficha de inscripcion DOC1
+    ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+    context = {
+        
+        "deposits":deposits,
+        "deposits_total":deposits_total,
+
+        "carta":carta,
+        "ficha":ficha,
+        "company":company,
+        "diagnostico":diagnostico,
+        "actions":actions,
+        "diagnosis":diagnos,
+        "plan_action":plan_action
+    }
+    return render_template('monitoreo/indicadores_diagnostivo.html',**context)
