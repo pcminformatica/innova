@@ -65,7 +65,7 @@
                                             {% for company in companys %}
                                           <tr class="mdc-data-table__row">
                                             <th class="mdc-data-table__cell" scope="row">{{loop.index}} </th>
-                                            <th class="mdc-data-table__cell" scope="row">{{ company.name}}</th>
+                                            <th class="mdc-data-table__cell" scope="row">{{ company.id}} - {{ company.name}}</th>
                                             <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.dni}}</td>
                                             <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.inscripcion_id}}</td>
                                             <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.rtn}}</td>
