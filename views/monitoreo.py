@@ -703,8 +703,6 @@ from sqlalchemy import desc,asc,func
 def _diagnosis_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     company =  Company.query.filter(Company.id == user_uid).first()
-    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-    carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
     #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
     actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
