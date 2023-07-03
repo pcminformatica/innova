@@ -821,6 +821,9 @@ class ActionPlan(db.Model):
     services_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)
     services = db.relationship("CatalogServices")
     employe_assigned = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+    # Define la relación con la clase User para employe_assigned
+    employe_assigned_user = db.relationship('User', foreign_keys=[employe_assigned])
     employe_accepted = db.Column(db.Boolean, nullable=True, default=False)
     usr_accepted = db.Column(db.DateTime, nullable=True)
     emp_attendance_start = db.Column(db.DateTime, nullable=True)
@@ -844,6 +847,10 @@ class ActionPlanReferences(db.Model):
     cancelled_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     descripcion = db.Column(db.Text, unique=False, nullable=True)
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+    # Define la relación con la clase User para employe_assigned
+    employe_assigned_user = db.relationship('User', foreign_keys=[employe_assigned])
+    # Define la relación con la clase User para cancelled_by
+    cancelled_by_user = db.relationship('User', foreign_keys=[cancelled_by])
 
 # Services Supplement Class
 class ActionPlanHistory(db.Model):
@@ -939,7 +946,7 @@ class CourseManagers(db.Model):
 class Courses(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(200), unique=True, nullable=False)
+    name = db.Column(db.String(200), unique=False, nullable=False)
     id_training_type =db.Column(db.Integer, db.ForeignKey('training_type.id'), nullable=False)
     training_type = db.relationship("TrainingType")
     id_modality_type =db.Column(db.Integer, db.ForeignKey('modality_type.id'), nullable=False)

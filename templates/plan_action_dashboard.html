@@ -175,7 +175,7 @@
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {% if action.employe_assigned %}
-                                                                YA ASIGNADO
+                                                                YA ASIGNADO A  {{ action.employe_assigned_user.name }}
                                                             {% else %}
                                                             <select id="txt_user_{{action.id}}">
                                                                 <option value="0">--</option>

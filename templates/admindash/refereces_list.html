@@ -1,0 +1,146 @@
+{% extends 'layout_main_drawer_table.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                          <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+                            <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                    <span class="mdc-tab__content">
+                                    <span class="mdc-tab__text-label">Mis empresarias</span>
+                                    </span>
+                                    <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                    </span>
+                                    <span class="mdc-tab__ripple"></span>
+                                </button>
+       
+
+                                
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                          <!-- Lista de usuarios  -->
+                          <div class="content content--active">
+                          
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                      <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                        <div class="mdc-data-table__table-container">
+                                        <table class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">employe_assigned_user </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">cancelled_by_user</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">services</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">cancelled</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">date_created</th>
+                                          
+                                        </tr>
+                                        </thead>
+                                        
+                                        <tbody class="mdc-data-table__content">
+                                        {% for refereces in refereces %}
+
+                                        <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{loop.index}}
+                                            </th>
+ 
+                                              <td class="mdc-data-table__cell" style="width: 80px;">
+                                                {{ refereces.employe_assigned_user.name }}
+                                              </td>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {{ refereces.cancelled_by_user.name }}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {{ refereces.action_plan.services.name }}
+                                                
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {{ refereces.action_plan.company.name }}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {{ refereces.cancelled }}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {{ refereces.date_created }}
+                                                
+                                              </th>
+                                              
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="mdc-data-table__progress-indicator">
+                                        <div class="mdc-data-table__scrim"></div>
+                                        <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                        <div class="mdc-linear-progress__buffer-bar"></div>
+                                        <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>                            
+                            </div>
+                  
+                          </div>
+              
+                  
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+{% endblock %}

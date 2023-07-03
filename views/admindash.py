@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import CompanyStatus,Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import ActionPlanReferences,CompanyStatus,Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import DocumentCompany,ActionPlan,DiagnosisCompany,Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
@@ -290,3 +290,11 @@ def _diagnosis_delete(diagnosis_id,company_id):
     db.session.commit()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     return redirect(url_for('admindash._admin_company_view',company_id=company_id))
+
+
+@admindash.route('/admin/list/refereces', methods = ['GET'])
+@login_required
+def _admin_reference_inscription():
+    refereces = ActionPlanReferences.query.join(User, ActionPlanReferences.employe_assigned==User.id).all()
+    cxt = {'refereces':refereces}
+    return render_template('/admindash/refereces_list.html',**cxt)
