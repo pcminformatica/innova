@@ -722,10 +722,10 @@ def _diagnosis_dashboard(user_uid):
         diagnostico = False
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
     #buscamos la ficha de inscripcion DOC1
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
-    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
     context = {
         
         "deposits":deposits,
