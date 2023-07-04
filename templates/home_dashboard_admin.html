@@ -43,7 +43,37 @@
                                     {% endif %}
 
                                 </div>
-
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet
+                                                mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                        <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                            Filtra por fecha:
+                                        </p>
+                                        <input id="f-filter-date-input1">
+                                                        
+                                        <div>
+                                            <label class="mdc-text-field mdc-text-field--filled mdc-text-field--label-floating" id="filter-date" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <input id="f-filter-date-input" class="mdc-text-field__input" type="text"
+                                                        aria-labelledby="f-filter-date-label" tabindex="0" value="mm/dd/yyyy">
+                                                        
+                                                <span class="mdc-floating-label mdc-floating-label--float-above" id="f-filter-date-label">Filtra por fecha</span>
+                                                <span class="mdc-line-ripple"></span>
+                                            </label>
+                                        </div>
+                       
+                                        <div class="container-stats-export">
+                                            <button onclick="valor()" id="exportExcelButton" class="mdc-button mdc-button--raised button-stats-export--excel"
+                                                    aria-label="Export to Excel" alt="Export to Excel">
+                                                <div class="mdc-button__ripple"></div>
+                                                <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
+                                                <span class="mdc-button__label">Buscar</span>
+                                            </button>
+                                   
+                                        </div>
+                                    </div>
+         
+                                </div>
                             </div>
                             <div class="mdc-card__actions" style="justify-content:right;" >
                                 <div class="mdc-card__actions-buttons"></div>
@@ -555,8 +585,25 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}?c=3"></script>
+<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}?v=1"></script>
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+<script>
+    function valor(){
+        alert('si')
+        let cadenaFechas = document.getElementById('f-filter-date-input').value
+        console.log(cadenaFechas)
+        // Separar la cadena en dos fechas
+        var fechasSeparadas = cadenaFechas.split(" - ");
 
+        // Obtener las fechas por separado
+        var fechaInicio = new Date(fechasSeparadas[0]);
+        var fechaFin = new Date(fechasSeparadas[1]);
+
+        // Imprimir las fechas obtenidas
+        console.log("Fecha de inicio: ", fechaInicio.toISOString().slice(0, 10));
+        console.log("Fecha de fin: ", fechaFin.toISOString().slice(0, 10));
+    }
+</script>
+</script>
 {% endblock %}

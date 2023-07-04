@@ -20,16 +20,18 @@
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">rss_feed</i>
                 <span class="mdc-deprecated-list-item__text">Atención Empresarial</span>
             </a>
+             <!--
             <a class="mdc-deprecated-list-item" href="/conexioninnova/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">store</i>
                 <span class="mdc-deprecated-list-item__text">Conexión INNOVA</span>
             </a>
+           
             <a class="mdc-deprecated-list-item" href="/escuelaempresarial/" aria-current="page">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">school</i>
                 <span class="mdc-deprecated-list-item__text">Campus Innova</span>
-            </a>
+            </a>-->
             <a class="mdc-deprecated-list-item" href="https://www.ciudadmujer.gob.hn/servicios/mae/" aria-current="page" target="_blank">
                 <span class="mdc-deprecated-list-item__ripple"></span>
                 <i class="material-icons mdc-deprecated-list-item__graphic" aria-hidden="true">assessment</i>
@@ -259,6 +261,7 @@
                         </span>
                         <span class="mdc-tab__ripple"></span>
                     </button>
+                     <!--
                     <button class="mdc-tab" role="tab" aria-selected="true" tabindex="3">
                         <span class="mdc-tab__content">
                             <span class="mdc-tab__text-label">Campus INNOVA</span>
@@ -277,7 +280,7 @@
                             <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
                         </span>
                         <span class="mdc-tab__ripple"></span>
-                    </button>
+                    </button>-->
                     <button class="mdc-tab" role="tab" aria-selected="true" tabindex="4">
                         <span class="mdc-tab__content">
                             <span class="mdc-tab__text-label">Ciudad Mujer</span>
@@ -315,14 +318,10 @@
     </div>
 </div>
 {% block bottombar %}{% endblock %}
-<footer class="s-footer">
+<footer class="s-footer" style="background-color: #88CFE0;">
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
-                <section class="footer-about">
-                    <img class="footer-pic-inc" src="{{ url_for('static', filename='images/manifest/innova_drop.svg') }}" alt="Logo Innova Mujer Footer" />
-                </section>
-            </div>
+
             <div class="mdc-layout-grid__cell">
                 <section class="footer-followus">
                     <div class="footer-section__title">

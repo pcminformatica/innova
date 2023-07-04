@@ -952,13 +952,13 @@ const topBarTabURLs = {
     // Marketplace
     2: {'url': '/conexioninnova/', 'target': '_self'},
     // Programa con Laboratoria
-    3: {'url': '/escuelaempresarial/', 'target': '_self'},
+    // 3: {'url': '/escuelaempresarial/', 'target': '_self'},
     // Programa con Laboratoria
-    4: {'url': '/comunidaddenegocios/', 'target': '_self'},
+    // 4: {'url': '/comunidaddenegocios/', 'target': '_self'},
     // MAE
-    5: {'url': 'https://www.ciudadmujer.gob.hn/servicios/mae/', 'target': '_blank'},
+    3: {'url': 'https://www.ciudadmujer.gob.hn/servicios/mae/', 'target': '_blank'},
     //
-    6:{'url': '/preguntasfrecuentes/', 'target': '_self'},
+    4:{'url': '/preguntasfrecuentes/', 'target': '_self'},
 
 };
 
