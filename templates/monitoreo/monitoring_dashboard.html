@@ -1,0 +1,1961 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.checkbox-container {
+  max-height: 200px;
+  width: 100%;
+  overflow:scroll;
+  margin-bottom: 20px;  
+  border-color: gray;
+  border: 2px solid;
+  border-radius: .5rem;
+  padding: 2px;  
+  font-size: 8px !important;
+}
+
+
+
+.mdc-checkbox__background {
+  display: inline-flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 13px;
+  height: 13px;
+  border: 2px solid currentColor;
+    border-top-color: currentcolor;
+    border-right-color: currentcolor;
+    border-bottom-color: currentcolor;
+    border-left-color: currentcolor;
+  border-radius: 2px;
+  background-color: transparent;
+  pointer-events: none;
+  will-change: background-color,border-color;
+  transition: background-color 90ms 0ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms 0ms cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.mdc-form-field > label {
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 0px;
+  padding-right: 0;
+  order: 0;
+}
+.mdc-checkbox, .mdc-radio {
+    margin-right: -7px;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone ">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Filtros</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                              
+                                <div class="mdc-layout-grid container">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    AÑOS DE OPERACIÓN
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_identidad" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.2  N. Identidad" >0</span>
+                                                    <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
+                                            
+                                                    >
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                           
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                     Comercio
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="Comercio"
+                                                            id="sr_1" 
+                                                            value="Al detalle"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Al detalle
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="Comercio"
+                                                            id="sr_2" 
+                                                            value="Mayorista"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Mayorista
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="Comercio"
+                                                            id="sr_3" 
+                                                            value="Comisionistas"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Comisionistas
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-typography--body1">
+                                                    Industria
+                                               </div>
+                                               <div class="mdc-form-field">
+                                                   <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                   <input type="checkbox"
+                                                           class="mdc-checkbox__native-control"
+                                                           name="Comercio"
+                                                           id="sr_1" 
+                                                           value="Manufactura"
+                                                           />
+                                                   <div class="mdc-checkbox__background">
+                                                       <svg class="mdc-checkbox__checkmark"
+                                                           viewBox="0 0 24 24">
+                                                       <path class="mdc-checkbox__checkmark-path"
+                                                               fill="none"
+                                                               d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                       </svg>
+                                                       <div class="mdc-checkbox__mixedmark"></div>
+                                                   </div>
+                                                   <div class="mdc-checkbox__ripple"></div>
+                                                   <div class="mdc-checkbox__focus-ring"></div>
+                                                   </div>
+                                                   <label for="checkbox-public">
+                                                    Manufactura
+                                                   </label>
+                                               </div>
+                                               <div class="mdc-form-field">
+                                                   <div class="mdc-checkbox" data-assigned-var>
+                                                   <input type="checkbox"
+                                                           class="mdc-checkbox__native-control"
+                                                           name="Comercio"
+                                                           id="sr_2" 
+                                                           value="Procesamiento de alimentos"
+                                                           />
+                                                   <div class="mdc-checkbox__background">
+                                                       <svg class="mdc-checkbox__checkmark"
+                                                           viewBox="0 0 24 24">
+                                                       <path class="mdc-checkbox__checkmark-path"
+                                                               fill="none"
+                                                               d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                       </svg>
+                                                       <div class="mdc-checkbox__mixedmark"></div>
+                                                   </div>
+                                                   <div class="mdc-checkbox__ripple"></div>
+                                                   <div class="mdc-checkbox__focus-ring"></div>
+                                                   </div>
+                                                   <label for="checkbox-public">
+                                                    Procesamiento de alimentos
+                                                   </label>
+                                               </div>
+                                               <div class="mdc-typography--body1">
+                                                Agropecuario
+                                           </div>
+                                           <div class="mdc-form-field">
+                                               <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                               <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       name="Comercio"
+                                                       id="sr_1" 
+                                                       value="Producción agrícola"
+                                                       />
+                                               <div class="mdc-checkbox__background">
+                                                   <svg class="mdc-checkbox__checkmark"
+                                                       viewBox="0 0 24 24">
+                                                   <path class="mdc-checkbox__checkmark-path"
+                                                           fill="none"
+                                                           d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                   </svg>
+                                                   <div class="mdc-checkbox__mixedmark"></div>
+                                               </div>
+                                               <div class="mdc-checkbox__ripple"></div>
+                                               <div class="mdc-checkbox__focus-ring"></div>
+                                               </div>
+                                               <label for="checkbox-public">
+                                                Producción agrícola
+                                               </label>
+                                           </div>
+                                           <div class="mdc-form-field">
+                                               <div class="mdc-checkbox" data-assigned-var>
+                                               <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       name="Comercio"
+                                                       id="sr_2" 
+                                                       value="Producción pecuaría"
+                                                       />
+                                               <div class="mdc-checkbox__background">
+                                                   <svg class="mdc-checkbox__checkmark"
+                                                       viewBox="0 0 24 24">
+                                                   <path class="mdc-checkbox__checkmark-path"
+                                                           fill="none"
+                                                           d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                   </svg>
+                                                   <div class="mdc-checkbox__mixedmark"></div>
+                                               </div>
+                                               <div class="mdc-checkbox__ripple"></div>
+                                               <div class="mdc-checkbox__focus-ring"></div>
+                                               </div>
+                                               <label for="checkbox-public">
+                                                Producción pecuaría
+                                               </label>
+                                           </div>
+                                       
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    Sevicios
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Hotelería"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Hotelería
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Educativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Educativos
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Financieros"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Financieros
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Turisticos y recreativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Turisticos y recreativos
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Técnologicos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Técnologicos
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Comunicación"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Comunicación
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Salud y belleza"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Salud y belleza
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Gastronomía"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Gastronomía
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Comercial"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Comercial
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Manufactura"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Manufactura
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    Tipo de empresa
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Hotelería"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Nivel 1: Nuevos Emprendimientos
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Educativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Nivel 2: Microempresa pequeña
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Financieros"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Nivel 3: Microempresa mediana
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Turisticos y recreativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Nivel 4: Pequeña empresa
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Técnologicos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        Nivel 5: Mediana empresa
+                                                    </label>
+                                                </div>
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.13 ¿Su(s) producto(s) tiene(n) registro sanitario? (Aplica solamente en el caso de las empresas enfocadas en productos de interés sanitario que pueden ser fabricados, importados, envasados o expedidos).
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Hotelería"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Educativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Financieros"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.12 ¿Posee Licencia Sanitaria para operar su planta? (Aplica solamente para empresas de alimentos y de interés sanitario).
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Hotelería"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Educativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="servicios_requiere"
+                                                            id="sr_1" 
+                                                            value="Financieros"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.4 ¿Tiene la empresa/ organización/ cooperativa cuenta bancaria propia (corriente/cheques)?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    1.6 ¿Su empresa es familiar?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    2.3 ¿Su marca está registrada?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    4.8 ¿Maneja su empresa contabilidad formal?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    4.16 ¿Está su empresa solvente con sus obligaciones financieras y fiscales?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    4.17 ¿Tiene la empresa la capacidad de ser autosostenible financieramente?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.3 ¿Tiene la empresa/ organización/ cooperativa/ su RTN de Persona Jurídica?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.5 ¿Cuenta con sistema de facturación CAI/ Boletas de Facturación, en uso y vigente?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.10 ¿Tiene la empresa/ organización/ cooperativa/ permiso de operación municipal vigente?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.15 ¿Posee registro de marca para productos y/o servicio? (Marca: Aplica para nombres comerciales para productos y servicios para uso exclusivo).
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.2 ¿Está constituida legalmente la empresa/ organización/ cooperativa?
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone ">
+                                            <div class="checkbox-container">
+                                                <div class="mdc-typography--body1">
+                                                    7.15 ¿Posee registro de marca para productos y/o servicio? (Marca: Aplica para nombres comerciales para productos y servicios para uso exclusivo).
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_16" 
+                                                            value="SI"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        SI
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="REGULAR"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        REGULAR
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="sr_16"
+                                                            id="sr_1" 
+                                                            value="NO"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        NO
+                                                    </label>
+                                                </div>
+                                      
+ 
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone ">
+                                            <center>
+
+                                                <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="alert('En Construcción')">
+                                                  <span class="mdc-button__ripple"></span>
+                                                  <span class="mdc-button__focus-ring"></span>
+                                                  <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                    >bookmark</i
+                                                  >
+                                                  <span class="mdc-button__label">Buscar  </span>
+                                    
+                                                </button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+              
+                                
+                             
+
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-8-phone ">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">EMPRESAS</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">EMPRESAS</div>
+                    
+                                  <div class="mdc-data-table " style="background-color: white;width: 100%;" >
+                                    <div class="mdc-data-table__table-container">
+                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                        <thead>
+                                          <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">dni</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Inscripcion codigo</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">rtn</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">description</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">social_networks</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
+                                          </tr>
+
+                                          
+                                          
+                                        </thead>
+                                        <tbody class="mdc-data-table__content">
+                                            {% for company in companys %}
+                                          <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">{{loop.index}} </th>
+                                            <th class="mdc-data-table__cell" scope="row">{{ company.id}} - {{ company.name}}</th>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.dni}}</td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.inscripcion_id}}</td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.rtn}}</td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.description}} -- Wallet {{ company.available_credit }}</td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ company.social_networks}}</td>
+                                            
+                                            <td class="mdc-data-table__cell">
+                                                <a href="{{ url_for('admindash._admin_list_company_edit', company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
+                                                    <span class="mdc-button__label">Editar Perfil</span>
+                                                </a>
+                                                <a href="{{ url_for('admindash._admin_company_inscription_edit', company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                  <span class="mdc-button__ripple"></span>
+                                                  <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
+                                                  <span class="mdc-button__label">Editar incripcion</span>
+                                              </a>
+                                              <a href="{{ url_for('admindash._admin_company_view', company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading">
+                                                
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true">edit</i>
+                                                <span class="mdc-button__label">adminstra documentacion</span>
+                                            </a>
+                                            </td>
+                                            
+                                          </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  
+                                    <div class="mdc-data-table__progress-indicator">
+                                      <div class="mdc-data-table__scrim"></div>
+                                      <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                          <div class="mdc-linear-progress__buffer-bar"></div>
+                                          <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+              
+                                
+                             
+
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+{% endblock %}
