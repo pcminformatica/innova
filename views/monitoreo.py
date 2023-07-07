@@ -744,5 +744,25 @@ def _diagnosis_dashboard(user_uid):
 
 @monitoreo.route('/monitoring/dashboard',methods=['GET', 'POST'])
 def _monitoring_dashboard():
-
-    return render_template('monitoreo/monitoring_dashboard.html')
+    departamentos_honduras = [
+    {"titulo": "Atlántida", "codigo": "AT"},
+    {"titulo": "Choluteca", "codigo": "CH"},
+    {"titulo": "Colón", "codigo": "CL"},
+    {"titulo": "Comayagua", "codigo": "CM"},
+    {"titulo": "Copán", "codigo": "CP"},
+    {"titulo": "Cortés", "codigo": "CR"},
+    {"titulo": "El Paraíso", "codigo": "EP"},
+    {"titulo": "Francisco Morazán", "codigo": "FM"},
+    {"titulo": "Gracias a Dios", "codigo": "GD"},
+    {"titulo": "Intibucá", "codigo": "IN"},
+    {"titulo": "Islas de la Bahía", "codigo": "IB"},
+    {"titulo": "La Paz", "codigo": "LP"},
+    {"titulo": "Lempira", "codigo": "LE"},
+    {"titulo": "Ocotepeque", "codigo": "OC"},
+    {"titulo": "Olancho", "codigo": "OL"},
+    {"titulo": "Santa Bárbara", "codigo": "SB"},
+    {"titulo": "Valle", "codigo": "VA"},
+    {"titulo": "Yoro", "codigo": "YO"}
+    ]
+    context = {"departamentos_honduras":departamentos_honduras}
+    return render_template('monitoreo/monitoring_dashboard.html',**context)
