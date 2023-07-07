@@ -1,0 +1,28 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Estadísticas, Estadísticas, Ver Estadísticas, Mis Estadísticas{% endblock %}
+{% block page_title %}Innova Estadísticas{% endblock %}
+{% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+{% endblock %}
+{% block body %}
+<main class="s-main-content container-color-background">
+    <div class="mdc-layout-grid container-size-xs">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet 
+                        mdc-layout-grid__cell--align-middle container-justify-center s-font-align-center">
+  
+
+
+                        <iframe allowfullscreen="allowfullscreen" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/1536ea6219.html" style="border: 1px solid lightgray; width: 100%; height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block bottombar %}
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
+{% endblock %}
+

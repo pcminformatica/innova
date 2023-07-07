@@ -748,6 +748,12 @@ def _diagnosis_dashboard(user_uid):
 def _doc_dashboard():
     return render_template('doc.html')
 
+
+@monitoreo.route('/guia/',methods=['GET', 'POST'])
+def _guia_dashboard():
+    return render_template('guia.html')
+
+
 @monitoreo.route('/monitoring/dashboard',methods=['GET', 'POST'])
 def _monitoring_dashboard():
     departamentos_honduras = [
