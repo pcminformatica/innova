@@ -56,7 +56,7 @@
                                             <th>correo</th>
                                             <th >phone</th>
                                             <th >Enviado</th>
-
+                                            <th >cómo se enteró</th>
                                           </tr>
                                           
                                           
@@ -115,9 +115,20 @@
                                                 {{ api.phone }}
                                               </th>
 
-                                              <th  >
+                                              <th >
                                                 {{ api.date_created }}
                                               </th>
+                                            
+                                                                                             
+                                               {% for inscrip in api.respuestas %}
+                                                    {% if inscrip['id'] == '4_4' %}
+                                                    <th>
+                                                      {{ inscrip['respuesta'] }}
+                                                    </th>
+                                                    {% endif %}
+                                               {% endfor %}
+                                            
+                                              
                                           </tr>
                                           {% endfor %}
                                    

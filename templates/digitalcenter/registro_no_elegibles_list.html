@@ -56,7 +56,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">correo</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">phone</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Enviado</th>
-                                      
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">cómo se enteró</th>
                                           </tr>
 
                                         </thead>
@@ -107,7 +107,15 @@
 
                                               <th class="mdc-data-table__cell" scope="row">
                                                 {{ api.date_created }}
+                                             
+                                              {% for inscrip in api.respuestas %}
+                                              {% if inscrip['id'] == '4_4' %}
+                                              <th>
+                                                {{ inscrip['respuesta'] }}
                                               </th>
+                                              {% endif %}
+                                         {% endfor %}
+                                      
                                           </tr>
                                           {% endfor %}
                                    
