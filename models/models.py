@@ -766,7 +766,8 @@ class Company(db.Model):
     available_credit = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
     status_id = db.Column(db.Integer, db.ForeignKey('company_status.id'), nullable=True)
     status = db.relationship("CompanyStatus")
-
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+    
 # Company
 class Inscripciones(db.Model):
     _tablename__ = 'inscripciones'
