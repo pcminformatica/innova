@@ -1,5 +1,5 @@
 from . import credentials,auth,changePassword, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
-
+from sqlalchemy import or_
 from babel.dates import format_date, format_datetime, format_time
 from datetime import datetime as dt
 from datetime import timedelta as td
@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -650,3 +650,37 @@ def _evaluaciones_describe(evaluations_id):
         'api': evaluation
     }
     return render_template('evaluaciones/evaluaciones_describe.html',**context)
+
+
+
+@home.route('/empresas/comparativo',methods=['GET', 'POST'])
+def _company_monitoring_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
+    lista = []
+    #for diagnosi in diagnosis:
+    #    lista.append(diagnosi.company_id)
+    if current_user.id == 3 or current_user.id == 24:
+        company = Company.query.join(User, User.id==Company.created_by)\
+            .filter(Company.enabled==True).all()
+   
+    else:
+        company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+    references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
+    companyx = company
+
+    company = []
+    for compa in companyx:
+        diagn = DiagnosisCompany.query.filter_by(company_id=compa.id).first()
+        if not diagn:
+            company.append(compa)
+
+    lista = []
+    for reference in references:
+        lista.append(reference.action_plan.company.id)
+    company_references = Company.query.filter(Company.id.in_(lista)).all()
+    context = {
+        'apis': company,
+        'company_references':company_references
+    }
+    return render_template('company_monitoring_list.html',**context)
