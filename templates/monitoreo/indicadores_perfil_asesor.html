@@ -748,6 +748,7 @@
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Categoría </th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
@@ -768,6 +769,9 @@
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{ api.action_plan.services.name }}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.action_plan.services.catalog_catego.name }}
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{ api.progress }}
