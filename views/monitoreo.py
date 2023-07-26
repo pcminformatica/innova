@@ -673,7 +673,7 @@ def _indicadores_perfil_asesor(user_uid):
                 if bitacora.action_plan.progress == 100:
                     serviciosfin.append(bitacora.action_plan_id)
                 servicios.append(bitacora.action_plan_id)
-        
+        asesorias = ActionPlanHistory.query.filter(ActionPlanHistory.date_created.between(txt_start_date, txt_end_date), ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).all()
     else:
 
         #contamos los diagnosticos
