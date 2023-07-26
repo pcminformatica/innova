@@ -19,7 +19,7 @@ import json
 @monitoreo.route('/indicadores/productividad/',methods = ['GET', 'POST'])
 def _indicadores_productividad():
     #lista de usuarios a evaluar
-    list_user = [3,5,6,15,16,17,18,20,21,25,24,30]
+    list_user = [3,5,6,15,16,17,18,20,21,25,24,30,66]
     users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
     #consultamos en KOBO la cantidad de diagnosticos
     url = app.config.get('KOBOTOOLBOX_ALL')
