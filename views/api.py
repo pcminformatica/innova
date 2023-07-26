@@ -11,6 +11,7 @@ from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
 from views.wallet import _update_wallet
+from views.digitalcenter import convertir_a_datetime
 import json
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
@@ -907,6 +908,7 @@ def _d_save_DiagnosisCompany():
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
             identidad = api['IDENTIDAD'].replace("-", "")
+            fecha_string = diagnostico['_submission_time']
             company =  Company.query.filter(Company.dni == identidad).first()
             if not company:
                 return jsonify({ 'status': 201, 'dni': identidad })
@@ -920,7 +922,11 @@ def _d_save_DiagnosisCompany():
                 diagnosis.respuestas = api
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
+                fecha_datetime = convertir_a_datetime(fecha_string)
+                if fecha_datetime:
+                    diagnosis.date_created = fecha_datetime
                 db.session.add(diagnosis)
+
                 update =  Company.query.filter(Company.id == company.id).first()
                 status = CompanyStatus.query.filter_by(name_short='6').first()
                 update.status_id = status.id
@@ -1725,3 +1731,32 @@ def _d_company_search():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+    
+
+
+@api.route('/api/action/search/', methods = ['GET','POST'])
+# @login_required
+def _d_action_search():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+
+        clist = ActionPlan.query.filter(ActionPlan.date_created.between('2023-04-01', '2023-05-05')).all()[:100]
+        total = len(clist)
+        response = {
+            'r_filter': 'clist',
+            'r_total': total,
+            'records': [],
+            'status': 404
+        }
+
+        if total > 0:
+            response['status'] = 200
+            for company in clist:
+                response['records'].append({
+                    'company_id': company.id,
+
+                })
+            return jsonify(response)
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': 'e' })

@@ -1582,3 +1582,123 @@ def _registro_api_dashboard():
 
 
 
+@digitalcenter.route('/diagnostico/update',methods=['GET', 'POST'])
+def _diagnosis_monitoring_1s_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    try:
+        url = app.config.get('KOBOTOOLBOX_ALL')
+        headers=app.config.get('KOBOTOOLBOX_TOKEN')
+        resp = requests.get(url,headers=headers)
+        api = json.loads(resp.content)
+        user = User.query.filter(User.id == current_user.id).first()
+        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
+        for diagnostico in api['results']:
+            fecha_string = diagnostico['_submission_time']
+            identidad = diagnostico['IDENTIDAD'].replace('-','')
+            company =  Company.query.filter(Company.dni == identidad).first()
+            fecha_datetime = convertir_a_datetime(fecha_string)
+            if company:
+                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+                if diagnos:
+                    if fecha_datetime:
+                        diagnos.date_created = fecha_datetime
+                        db.session.add(diagnos)
+                        db.session.commit()
+                        print("Fecha convertida:", fecha_datetime)
+                    else:
+                        print("Error: El formato del string es incorrecto.")
+        context = {
+            'api': api
+        }
+        return render_template('diagnosis_monitoring_list.html',**context)
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Try Chat Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
+from datetime import datetime
+
+def convertir_a_datetime(fecha_string):
+    try:
+        # Utilizamos strptime para analizar el string y obtener un objeto datetime
+        fecha_datetime = datetime.strptime(fecha_string, "%Y-%m-%dT%H:%M:%S")
+        return fecha_datetime
+    except ValueError:
+        # Si el formato del string no coincide con el esperado, manejar el error aquí
+        return None
+    
+
+@digitalcenter.route('/update/l/1',methods=['GET', 'POST'])
+def _init1_status_company():
+    companys = Company.query.filter_by(enabled=True).all()[0:200]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+
+        if company.inscripcion:
+            fecha = company.inscripcion.date_created
+            documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
+            if documento:
+                fecha_documento = documento.date_created
+                if fecha_documento:
+                    if fecha > fecha_documento:
+                        fecha = fecha_documento
+            diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+            if diagnostico:
+                fecha_diagnostico = diagnostico.date_created
+                if fecha_diagnostico:
+                    if fecha > fecha_diagnostico:
+                        fecha = fecha_diagnostico
+            company.date_created =fecha
+            db.session.add(update)
+            db.session.commit()
+    return 'listo'
+
+@digitalcenter.route('/update/l/2',methods=['GET', 'POST'])
+def _init2_status_company():
+    companys = Company.query.filter_by(enabled=True).all()[200:400]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+
+        if company.inscripcion:
+            fecha = company.inscripcion.date_created
+            documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
+            if documento:
+                fecha_documento = documento.date_created
+                if fecha_documento:
+                    if fecha > fecha_documento:
+                        fecha = fecha_documento
+            diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+            if diagnostico:
+                fecha_diagnostico = diagnostico.date_created
+                if fecha_diagnostico:
+                    if fecha > fecha_diagnostico:
+                        fecha = fecha_diagnostico
+            company.date_created =fecha
+            db.session.add(update)
+            db.session.commit()
+    return 'listo'
+
+@digitalcenter.route('/update/l/3',methods=['GET', 'POST'])
+def _init3_status_company():
+    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+
+        if company.inscripcion:
+            fecha = company.inscripcion.date_created
+            documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
+            if documento:
+                fecha_documento = documento.date_created
+                if fecha_documento:
+                    if fecha > fecha_documento:
+                        fecha = fecha_documento
+            diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+            if diagnostico:
+                fecha_diagnostico = diagnostico.date_created
+                if fecha_diagnostico:
+                    if fecha > fecha_diagnostico:
+                        fecha = fecha_diagnostico
+            company.date_created =fecha
+            db.session.add(update)
+            db.session.commit()
+    return 'listo'

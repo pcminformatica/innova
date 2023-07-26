@@ -1,0 +1,379 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, Welcome, Home, Inicio, Bienvenida{% endblock %}
+{% block page_title %}Welcome - Innova{% endblock %}
+{% block body %}
+<style>
+    .container-color-landingpage{
+        background: rgb(134,44,134);
+background: linear-gradient(92deg, rgba(134,44,134,1) 33%, rgba(252,252,252,1) 94%);
+    }
+    .container-color-indicador{
+        background: rgb(134,44,134);
+background: linear-gradient(40deg, rgb(134, 44, 134) 58%, rgb(252, 252, 252) 100%);
+display: block;
+width: 100%;
+    }
+
+    
+    .indicadores-innova{
+        color: white;
+font-size: 4em;
+margin: 0 0 47px 0;
+    }
+    .indicador-panel{
+        margin-bottom: 50px;
+        text-align: center;
+    
+    }
+
+    .mdc-typography-bold{
+        font-weight: bold !important;
+    }
+
+   .info-innova ul li::marker {
+  content: '✓';
+  color: #ff6319;
+ 
+  font-size: 2em;
+}
+
+
+.banner-img{
+    display: inline-block;
+}
+
+@media screen and (max-width: 700px) {
+    .banner-img{
+        display:none;
+    }
+    .mdc-typography--headline4{
+        font-size: 1.3em;
+        margin: 0px;
+        padding: 0px;
+        line-height:1em
+    }
+    .mdc-typography--headline5{
+        font-size: 1em;
+        margin: 0px;
+        padding: 0px;
+    }
+}
+</style>
+
+
+<main class="s-main-content">
+    <div class="container-color-landingpage">
+        <div class="container-carousel">
+            <div  order="0" class="container-carousel--item container-carousel--item-active">
+                <div class="mdc-layout-grid container-size-xs">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet
+                                    mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <h4 class="mdc-typography--headline4 s-font-color-on-primary mdc-typography-bold">
+                                SERVICIOS DE DESARROLLO EMPRESARIAL Y ENTORNO FAVORABLE PARA LAS EMPRESARIAS EN HONDURAS.
+                            </h4>
+                            <p class="mdc-typography--headline5 s-font-color-on-primary">Inicitiva dirigida a mujeres que lideran micro, pequeñas y medianas empresas (MIPyME)
+                                y que desean impulsar sus negocios participando en procesos formativos integrales</p>
+                            <p>
+                                <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                                    data-action-val="#onduras.pdf">
+                                    <div class="mdc-button__ripple"></div>
+                                    <span class="mdc-button__label">VER MÁS</span>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <img class="resize-image-2fit-100 banner-img" src="{{ url_for('static', filename='images/s1.svg') }}" alt="Empresaria" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+            <div  order="1" class="container-carousel--item container--hidden">
+                <div class="mdc-layout-grid container-size-xs">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet
+                                    mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <h4 class="mdc-typography--headline4 s-font-color-on-primary mdc-typography-bold">
+                                ASESORAS EN CADA CENTRO CIUDAD MUJER.
+                            </h4>
+                            <p class="mdc-typography--headline5 s-font-color-on-primary">
+                                Nuestra modalidad principal de antención es virtual, más sin embargo contamos con
+                                asesoras en cada centro ciudad mujer a nivel nacional de manera presencial.
+                            </p>
+                            <p>
+                                <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                                    data-action-val="#onduras.pdf">
+                                    <div class="mdc-button__ripple"></div>
+                                    <span class="mdc-button__label">VER MÁS</span>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <img class="resize-image-2fit-90 banner-img" src="{{ url_for('static', filename='images/s2.svg') }}" alt="Empresaria" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  order="2" class="container-carousel--item container--hidden">
+                <div class="mdc-layout-grid container-size-xs">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet
+                                    mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <h4 class="mdc-typography--headline4 s-font-color-on-primary mdc-typography-bold">
+                                "Darle las gracias a INNOVAMUJER quienes nos motivan y nos dan esta oportunidad siendo una iniciativa de Ciudad Mujer".
+                            </h4>
+                            <p class="mdc-typography--headline5 s-font-color-on-primary">
+                                Suaby Morales-Bela Store
+                            </p>
+                            <p>
+                                <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                                    data-action-val="#onduras.pdf">
+                                    <div class="mdc-button__ripple"></div>
+                                    <span class="mdc-button__label">VER MÁS</span>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <img class="resize-image-2fit-90 banner-img" src="{{ url_for('static', filename='images/s3.png') }}" alt="Empresaria" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  order="3" class="container-carousel--item container--hidden">
+                <div class="mdc-layout-grid container-size-xs">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet
+                                    mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <h4 class="mdc-typography--headline4 s-font-color-on-primary mdc-typography-bold">
+                                ¡SE PARTE DE LA I PROMOCIÓN 2023!
+                            </h4>
+                            <p class="mdc-typography--headline5 s-font-color-on-primary">
+                                ¿Quieres saber la clave para obtener desarrolo empresarial? Inscribete al programa y se parte de Red de Mujeres empresarias IM.
+                            </p>
+                            <p>
+                                <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                                    data-action-val="#onduras.pdf">
+                                    <div class="mdc-button__ripple"></div>
+                                    <span class="mdc-button__label">APLICAR</span>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                            <img class="resize-image-2fit-90 banner-img" src="{{ url_for('static', filename='images/s4.png') }}" alt="Empresaria" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section  class="controls">
+            <button class="prev-slide" onclick="slideShowAutoLast2()">&#9665;</button>
+            <button class="next-slide" onclick="swcms.slideShowAutoNext()">&#9655;</button>
+        </section>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <h4 class="mdc-typography--headline4 s-font-color-secondary" style="margin: 0px;">
+                        Innova Mujer Honduras integra distintas áreas de atención.
+                    </h4>
+                    <p class="mdc-typography--headline5 s-font-color-secondary">
+                        Rompiendo las barreras digitales de las empresarias hondureñas, con acciones puntuales en: 
+                    </p>
+          
+                    <div class="info-innova">
+                        <ul>     
+                            <li>Capacitaciones presenciales y virtuales</li>       
+                            <li>Diagnostico Empresarial</li>
+                            <li>Asistencia técnica</li>
+                            <li>Vinculación</li>
+                            <li>Servicios del Programa Presidencial Ciudad Mujer</li>
+                        </ul> 
+                    </div>
+          
+                    <div class="mdc-typography--body1">
+                           
+                    </div>
+                    <div class="mdc-typography--body1">
+                          
+                    </div>
+                    <div class="mdc-typography--body1">
+                          
+                    </div>
+
+                    
+
+
+ 
+
+  
+
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <div class="container-justify-center--hor-ver">
+                        <img class="resize-image-2fit-70 container-elevation-s" src="../static/images/assets/placeholders/learning.jpg" alt="Aprende Innova" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-on-primary">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
+                    <div class="" style="font-size: 1.4em;">
+                        Socios principales:
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div  >
+                        <img class="resize-image-2fit-70"  src="../static/images/SOCIOS.svg" alt="Logo BID" />
+               
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-color-indicador">
+
+                <div class="mdc-layout-grid container-size-xs">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet
+                                    mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
+                            <h4 class="mdc-typography--headline4 s-font-color-on-primary">
+                                LOGROS:
+                            </h4>
+
+                        </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
+                <div class="indicador-panel">
+                    <h4 class="indicadores-innova">
+                        1,801
+                    </h4>
+
+                    <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                        data-action-val="#onduras.pdf">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Inscritas</span>
+                    </button>
+                </div>
+            </div>
+             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
+                <div class="indicador-panel">
+                    <h4 class="indicadores-innova">
+                        964
+                    </h4>
+
+                    <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                        data-action-val="#onduras.pdf">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Elegibles</span>
+                    </button>
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
+                <div class="indicador-panel">
+                    <h4 class="indicadores-innova">
+                        291
+                    </h4>
+
+                    <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                        data-action-val="#onduras.pdf">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">CAPACITADAS</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
+            <div class="indicador-panel">
+                <h4 class="indicadores-innova">
+                    141
+                </h4>
+        
+                <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
+                        data-action-val="#onduras.pdf">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">RECIBIENDO SDE</span>
+                </button>
+                </div>
+            </div>  
+
+                       
+                    </div>
+                </div>
+
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet 
+                            mdc-layout-grid__cell--span-12-phone">
+                    
+                            <iframe src="https://www.google.com/maps/d/embed?mid=1jHQnPhRkqp2iGLbxx_sT40XGEtYof8o&ehbc=2E312F" width="100%" height="560"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</main>
+{% endblock %}
+{% block bottombar %}
+<button id="floatingButton" class="mdc-fab mdc-fab--fixed mdc-fab--whatsapp"
+        aria-label="WhatsApp Contact Center" onclick="window.open('https://wa.me/50499993293');">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__icon fa fa-whatsapp"></span>
+</button>
+{% endblock %}
+{% block body_script_section %}
+<script>
+
+function slideShowAutoLast2() {
+    let hor = 1;
+    Array.from(document.querySelectorAll('.container-carousel')).forEach((slidesContainer) => {
+ 
+
+        let activeSlide = slidesContainer.querySelector('.container-carousel--item-active');
+
+        var nodes = document.querySelectorAll('.container-carousel--item');
+        var nextSlide
+        if (activeSlide.getAttribute('order')==0){
+            nextSlide = document.querySelector('.container-carousel--item:last-child');
+        }else{
+            nextSlide = nodes[activeSlide.getAttribute('order')-1];
+        }
+
+        if (!nextSlide) {
+            nextSlide = slidesContainer.querySelector('.container-carousel--item:first-child');
+        }
+
+        activeSlide.classList.remove('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        activeSlide.classList.add('container--hidden');
+        nextSlide.classList.add('container-carousel--item-active', 'animate__animated', 'animate__fadeIn');
+        nextSlide.classList.remove('container--hidden');
+    });
+    
+}
+
+</script>
+{% endblock %}

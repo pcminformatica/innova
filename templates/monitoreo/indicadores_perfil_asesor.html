@@ -62,7 +62,43 @@
                                     {% endif %}
 
                                 </div>
+                                <div class="mdc-layout-grid__inner">
+                                    <form id="searchForm"  method="post">
+                                       <input type="hidden" name="txt_start_date" id="txt_start_date">
+                                        <input type="hidden" name="txt_end_date" id="txt_end_date">
+                                        
+                                      </form>
 
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet
+                                                mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                        <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                            Filtra por fecha:
+                                        </p>
+                                        <input id="f-filter-date-input1">
+                                                        
+                                        <div>
+                                            <label class="mdc-text-field mdc-text-field--filled mdc-text-field--label-floating" id="filter-date" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <input id="f-filter-date-input" class="mdc-text-field__input" type="text"
+                                                        aria-labelledby="f-filter-date-label" tabindex="0" value="mm/dd/yyyy">
+                                                        
+                                                <span class="mdc-floating-label mdc-floating-label--float-above" id="f-filter-date-label">Filtra por fecha</span>
+                                                <span class="mdc-line-ripple"></span>
+                                            </label>
+                                        </div>
+                       
+                                        <div class="container-stats-export">
+                                            <button onclick="valor()" id="exportExcelButton" class="mdc-button mdc-button--raised button-stats-export--excel"
+                                                    aria-label="Export to Excel" alt="Export to Excel">
+                                                <div class="mdc-button__ripple"></div>
+                                                <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
+                                                <span class="mdc-button__label">Buscar</span>
+                                            </button>
+                                   
+                                        </div>
+                                    </div>
+         
+                                </div>
                             </div>
                             <div class="mdc-card__actions" style="justify-content:right;" >
                                 <div class="mdc-card__actions-buttons"></div>
@@ -197,7 +233,15 @@
                                         </span>
                                         <span class="mdc-tab__ripple"></span>
                                     </button>
-                                    
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Asesorias </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
 
                                     </div>
                                 </div>
@@ -330,6 +374,24 @@
                             
                                                     </div>
                                                 </div>
+                                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                                                mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                                    <div class="mdc-card__primary-action" tabindex="0">
+                                                        <div class="s-mdc-card__stats-title">
+                                                            <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                                            <div class="mdc-typography--subtitle2">
+                                                                Asesorias
+                                                            </div>
+                                                        </div>
+                                                        <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                                            {{ asesorias|length }}
+                                                        </div>
+                            
+                                                    </div>
+                                                </div>
+
+
+                                                
               
 
                                             </div>
@@ -515,7 +577,7 @@
                                             <div class="mdc-typography--headline5 s-font-color-secondary">
                                                 Diagnósticos elaborados 
                                             </div>
-                                            <table class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                            <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
                                                 <thead>
                                                   <tr class="mdc-data-table__header-row">
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -669,6 +731,81 @@
                                 </div>
                     
                             </div>
+                            <!-- Plan de mejora   -->
+                            <div class="content content">
+
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                                <div class="mdc-typography--headline5 s-font-color-secondary">
+                                                    Asesorias 
+                                                </div>
+                                                <div class="mdc-data-table__table-container">
+                                                    <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
+                                                        <thead>
+                                                        <tr class="mdc-data-table__header-row">
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                                        
+                                                        </tr>
+                                                        </thead>
+                                                        
+                                                        <tbody class="mdc-data-table__content">
+                                                        {% for api in asesorias %}
+                                                        <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                        {{loop.index}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.action_plan.company.name }}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.action_plan.services.name }}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.progress }}
+                                                         </th>
+                                                  
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            
+                                                                {{ api.date_created }}
+                                                
+                                                        </th>
+                                                        <td class="mdc-data-table__cell" style="width: 80px;">
+                                                            {{ api.description }}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell" style="width: 80px;">
+                                                            {% if api.action_plan.company.inscripcion %}
+                                                            {{ api.action_plan.company.inscripcion.departamento }}
+                                                            {% endif %}
+                                                        </td>   
+                                                        <td class="mdc-data-table__cell" style="width: 80px;">
+                                                            {% if api.action_plan.company.inscripcion %}
+                                                                {{ api.action_plan.company.inscripcion.municipio }}
+                                                            {% endif %}
+                                                        </td>
+                                                
+                                                        
+                                                        </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                    
+                            </div>
 
                         </div>
                     </div>
@@ -684,5 +821,27 @@
 <script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+<script>
+    function valor(){
+      
+        let cadenaFechas = document.getElementById('f-filter-date-input').value
+        console.log(cadenaFechas)
+        // Separar la cadena en dos fechas
+        var fechasSeparadas = cadenaFechas.split(" - ");
 
+        // Obtener las fechas por separado
+        var fechaInicio = new Date(fechasSeparadas[0]);
+        var fechaFin = new Date(fechasSeparadas[1]);
+
+        // Imprimir las fechas obtenidas
+        console.log("Fecha de inicio: ", fechaInicio.toISOString().slice(0, 10));
+        console.log("Fecha de fin: ", fechaFin.toISOString().slice(0, 10));
+        fechaInicio = fechaInicio.toISOString().slice(0, 10)
+        fechaFin = fechaFin.toISOString().slice(0, 10)
+
+        document.getElementById("txt_start_date").value = fechaInicio
+        document.getElementById("txt_end_date").value = fechaFin
+        document.getElementById("searchForm").submit();
+    }
+</script>
 {% endblock %}

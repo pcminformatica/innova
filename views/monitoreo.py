@@ -618,7 +618,7 @@ def _indicadores_inscritas_4():
     return render_template('monitoreo/indicadores_inscritas.html',**context)
 
 
-
+from views.digitalcenter import convertir_a_datetime
 @monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
 def _indicadores_perfil_asesor(user_uid):
     if current_user.id in [3,24]:
@@ -632,44 +632,89 @@ def _indicadores_perfil_asesor(user_uid):
     datos =  []
     
     cod_usuario = user.id
-    #contamos los diagnosticos
-    diagnosticos = 0
-    if user.extra_info.kobotoolbox:
-        api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
-        diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
- 
-    #companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
-    companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
-    planes = 0
-    lista = []
-    for company in companys:
-        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
-        if plan:
-            lista.append(company.id)
-            planes = planes + 1
-    planes = Company.query.filter(Company.id.in_(lista)).all()
-    #planes = Company.query.filter(Company.id.in_(planes)).all()
-    references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
-    lista = []
-    for reference in references:
-        lista.append(reference.action_plan.company.id)
-    company_references = Company.query.filter(Company.id.in_(lista)).all()
+    if request.method == 'POST':
+        txt_start_date = request.form.get('txt_start_date') 
+        txt_end_date = request.form.get('txt_end_date') 
+        clist = ActionPlan.query.filter(ActionPlan.date_created.between('2023-04-01', '2023-05-05')).all()[:100]
+        range1 = dt.strptime(txt_start_date, '%Y-%m-%d')
+        range2 = dt.strptime(txt_end_date, '%Y-%m-%d')
+        #contamos los diagnosticos
+        diagnosticos = 0
+        if user.extra_info.kobotoolbox:
+            api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
+            diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] and range1 <= convertir_a_datetime(e['_submission_time']) <= range2  )
+            print(diagnosticos)
+            print(len(diagnosticos))
+        companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        planes = 0
+        lista = []
+        for company in companys:
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            if plan:
+                lista.append(company.id)
+                planes = planes + 1
+        planes = Company.query.filter(Company.id.in_(lista)).all()
+        references = ActionPlanReferences.query.filter(ActionPlanReferences.date_created.between(txt_start_date, txt_end_date),ActionPlanReferences.employe_assigned==user.id).order_by(desc(ActionPlanReferences.id)).all()
+        lista = []
+        for reference in references:
+            lista.append(reference.action_plan.company.id)
+        company_references = Company.query.filter(Company.id.in_(lista)).all()
+        
+        references_accepted = ActionPlanReferences.query.filter(ActionPlanReferences.date_created.between(txt_start_date, txt_end_date),ActionPlanReferences.employe_assigned==user.id,ActionPlanReferences.employe_accepted==True).order_by(desc(ActionPlanReferences.id)).all()
+        lista = []
+        for reference in references_accepted:
+            lista.append(reference.action_plan.company.id)
+        company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
+        bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.date_created.between(txt_start_date, txt_end_date),ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
+        servicios =   []
+        serviciosfin =  []
+        for bitacora in bitacoras:
+            if bitacora.action_plan_id not in servicios:
+                if bitacora.action_plan.progress == 100:
+                    serviciosfin.append(bitacora.action_plan_id)
+                servicios.append(bitacora.action_plan_id)
+        
+    else:
+
+        #contamos los diagnosticos
+        diagnosticos = 0
+        if user.extra_info.kobotoolbox:
+            api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
+            diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access']  )
     
-    references_accepted = ActionPlanReferences.query.filter_by(employe_assigned=user.id,employe_accepted=True).order_by(desc(ActionPlanReferences.id)).all()
-    lista = []
-    for reference in references_accepted:
-        lista.append(reference.action_plan.company.id)
-    company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
+        #companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
+        companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        planes = 0
+        lista = []
+        for company in companys:
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            if plan:
+                lista.append(company.id)
+                planes = planes + 1
+        planes = Company.query.filter(Company.id.in_(lista)).all()
+        #planes = Company.query.filter(Company.id.in_(planes)).all()
+        references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
+        lista = []
+        for reference in references:
+            lista.append(reference.action_plan.company.id)
+        company_references = Company.query.filter(Company.id.in_(lista)).all()
+        
+        references_accepted = ActionPlanReferences.query.filter_by(employe_assigned=user.id,employe_accepted=True).order_by(desc(ActionPlanReferences.id)).all()
+        lista = []
+        for reference in references_accepted:
+            lista.append(reference.action_plan.company.id)
+        company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
 
-    bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
-    servicios =   []
-    serviciosfin =  []
-    for bitacora in bitacoras:
-        if bitacora.action_plan_id not in servicios:
-            if bitacora.action_plan.progress == 100:
-                serviciosfin.append(bitacora.action_plan_id)
-            servicios.append(bitacora.action_plan_id)
-
+        bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
+        servicios =   []
+        serviciosfin =  []
+        for bitacora in bitacoras:
+            if bitacora.action_plan_id not in servicios:
+                if bitacora.action_plan.progress == 100:
+                    serviciosfin.append(bitacora.action_plan_id)
+                servicios.append(bitacora.action_plan_id)
+        asesorias = ActionPlanHistory.query.filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).all()
+    
     profesion = ''
     if user.extra_info.profession:
         profesion = user.extra_info.profession.name
@@ -693,7 +738,9 @@ def _indicadores_perfil_asesor(user_uid):
         'servicios':len(servicios),
         'serviciosproceso':len(servicios) -len(serviciosfin),
         'serviciosfin':len(serviciosfin),
-        'users': user
+        'users': user,
+        'bitacoras':bitacoras,
+        'asesorias':asesorias
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
 
@@ -757,24 +804,26 @@ def _guia_dashboard():
 @monitoreo.route('/monitoring/dashboard',methods=['GET', 'POST'])
 def _monitoring_dashboard():
     departamentos_honduras = [
-    {"titulo": "Atlántida", "codigo": "AT"},
-    {"titulo": "Choluteca", "codigo": "CH"},
-    {"titulo": "Colón", "codigo": "CL"},
-    {"titulo": "Comayagua", "codigo": "CM"},
-    {"titulo": "Copán", "codigo": "CP"},
-    {"titulo": "Cortés", "codigo": "CR"},
-    {"titulo": "El Paraíso", "codigo": "EP"},
-    {"titulo": "Francisco Morazán", "codigo": "FM"},
-    {"titulo": "Gracias a Dios", "codigo": "GD"},
-    {"titulo": "Intibucá", "codigo": "IN"},
-    {"titulo": "Islas de la Bahía", "codigo": "IB"},
-    {"titulo": "La Paz", "codigo": "LP"},
-    {"titulo": "Lempira", "codigo": "LE"},
-    {"titulo": "Ocotepeque", "codigo": "OC"},
-    {"titulo": "Olancho", "codigo": "OL"},
-    {"titulo": "Santa Bárbara", "codigo": "SB"},
-    {"titulo": "Valle", "codigo": "VA"},
-    {"titulo": "Yoro", "codigo": "YO"}
+        {"titulo": "Atlántida", "codigo": "AT"},
+        {"titulo": "Choluteca", "codigo": "CH"},
+        {"titulo": "Colón", "codigo": "CL"},
+        {"titulo": "Comayagua", "codigo": "CM"},
+        {"titulo": "Copán", "codigo": "CP"},
+        {"titulo": "Cortés", "codigo": "CR"},
+        {"titulo": "El Paraíso", "codigo": "EP"},
+        {"titulo": "Francisco Morazán", "codigo": "FM"},
+        {"titulo": "Gracias a Dios", "codigo": "GD"},
+        {"titulo": "Intibucá", "codigo": "IN"},
+        {"titulo": "Islas de la Bahía", "codigo": "IB"},
+        {"titulo": "La Paz", "codigo": "LP"},
+        {"titulo": "Lempira", "codigo": "LE"},
+        {"titulo": "Ocotepeque", "codigo": "OC"},
+        {"titulo": "Olancho", "codigo": "OL"},
+        {"titulo": "Santa Bárbara", "codigo": "SB"},
+        {"titulo": "Valle", "codigo": "VA"},
+        {"titulo": "Yoro", "codigo": "YO"}
     ]
-    context = {"departamentos_honduras":departamentos_honduras}
+    services = CatalogServices.query.filter_by().all()
+    categorys = catalogCategory.query.filter_by().all()
+    context = {"departamentos_honduras":departamentos_honduras,'services':services,'categorys':categorys}
     return render_template('monitoreo/monitoring_dashboard.html',**context)
