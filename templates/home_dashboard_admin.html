@@ -3,6 +3,24 @@
 {% block page_title %}Innova Mujer Home{% endblock %}
 {% block head_section %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+<style>
+    .content {
+    display: none;
+  }
+  
+  .content--active {
+    display: block;
+  }
+  .mdc-deprecated-list .mdc-deprecated-list-item__graphic {
+    display: inline-flex;
+    margin-top: 16px;
+}
+
+.mdc-deprecated-list-item__secondary-text{
+    white-space: break-spaces;
+    
+}
+  </style>
 {% endblock %}
 {% block body %}
 <main class="s-main-content">
@@ -129,424 +147,513 @@
                     </div>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
-                    <div class="container-dashboard--messages">
-                        <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
-                                <div class="mdc-tab-scroller">
+                    <div class="mdc-card  mdc-card--color-on-primary">
+                        <div class="mdc-card__primary-action">
+                          <div class="mdc-card__media mdc-card__media--square">
+                            <div class="mdc-card__media-content">
+                                <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+                                    <div class="mdc-tab-scroller">
                                     <div class="mdc-tab-scroller__scroll-area">
                                         <div class="mdc-tab-scroller__scroll-content">
-                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-                                                <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Herramientas</span>
-                                                </span>
-                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                                </span>
-                                                <span class="mdc-tab__ripple"></span>
-                                            </button>
-                                            <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
-                                                <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Tus citas</span>
-                                                </span>
-                                                <span class="mdc-tab-indicator">
-                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                                </span>
-                                                <span class="mdc-tab__ripple"></span>
-                                            </button>
+                                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Herramientas</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Tus citas</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+                                        {% if current_user.id in (3,24) %}
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Reportes de empresas</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Reportes de asesores</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+                                        {% endif %}
+                                        <!--
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Especialista en informática</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+            
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Especialista en Pedagogía</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>
+                                        <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                            <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label">Especialista en producción industrial</span>
+                                            </span>
+                                            <span class="mdc-tab-indicator mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                            </span>
+                                            <span class="mdc-tab__ripple"></span>
+                                        </button>-->
+            
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mdc-card__content container-dashboard--messages-msg">
-                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas </span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item" tabindex="0">
-                                        <a target="_blank" href="https://ee.kobotoolbox.org/x/gG31mMNd">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                            <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Responder diagnostico empresarial</span>
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
-                                        </a>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a target="_blank" href="https://app.powerbi.com/groups/me/reports/c9dd7339-8230-4468-8076-81fb82bd15f2/ReportSection0a42dc2db72d7b05b741?ctid=91ed43f6-c29f-4fbc-a3b0-0d0e6865d0e8&bookmarkGuid=d11de429-2b8f-4796-9329-95e18446c364">
+                                                        <!-- one  -->
+                        <div class="content content--active">
+                            <div class="container-dashboard--messages">
+            
+                                <div class="mdc-card__content container-dashboard--messages-msg">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas </span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="https://ee.kobotoolbox.org/x/gG31mMNd">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Responder diagnostico empresarial </span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Formulario web del diagnóstico empresarial en KoboToolbox.</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <!--
+                                        <li class="mdc-deprecated-list-item">
+                                            <a target="_blank" href="https://app.powerbi.com/groups/me/reports/c9dd7339-8230-4468-8076-81fb82bd15f2/ReportSection0a42dc2db72d7b05b741?ctid=91ed43f6-c29f-4fbc-a3b0-0d0e6865d0e8&bookmarkGuid=d11de429-2b8f-4796-9329-95e18446c364">
+                                            
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Resultados del diagnostico empresarial</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">POWER BI</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
                                         
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Resultados del diagnostico empresarial</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">POWER BI</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <!--
-                                    <li class="mdc-deprecated-list-item">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                            <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                        </span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Laboratoria</span>
-                                        </span>
-                                    </li>-->
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._diagnosis_monitoring_list') }}">
+                                        <li class="mdc-deprecated-list-item">
                                             <span class="mdc-deprecated-list-item__ripple"></span>
                                             <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                 <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
                                             </span>
                                             <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Control de diagnosticos</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
+                                                <span class="mdc-deprecated-list-item__primary-text">Laboratoria</span>
                                             </span>
-                                        </a>
-                                    </li>
+                                        </li>-->
 
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._diagnosis_monitoring_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Control de diagnosticos</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+    
+                            
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles 5 Cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_no_elegibles_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">No elegibles 5 Cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_api_dashboard') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Eligibles Cohorte 1,2,3 4</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="https://gobciudadmujerhn-my.sharepoint.com/:x:/g/personal/infoinnova_ciudadmujer_gob_hn/ET324bPgNaFDrMR1XsiTo00BBUyIAe7sMv3-f0P6-1W8xg?e=kWspuD">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">RECUPERADAS SIN CONDICIONANTE</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('monitoreo._indicadores_perfil_asesor',user_uid=current_user.id ) }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Mi reporte</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Da clic para ver tus estadísticas de servicios brindados </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        {% if current_user.id in (3,24,25) %}
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('aulavirtual._curso_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Administracion de cursos</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Crea, edita y observa la estadística de cada curso o capacitación y administrar asistencia.</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('home._evaluations_admin') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Evaluaciones</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Evaluaciones</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
    
-                         
-                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Elegibles 5 Cohorte</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._registro_no_elegibles_list') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">No elegibles 5 Cohorte</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('digitalcenter._registro_api_dashboard') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Eligibles Cohorte 1,2,3 4</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="https://gobciudadmujerhn-my.sharepoint.com/:x:/g/personal/infoinnova_ciudadmujer_gob_hn/ET324bPgNaFDrMR1XsiTo00BBUyIAe7sMv3-f0P6-1W8xg?e=kWspuD">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">RECUPERADAS SIN CONDICIONANTE</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('monitoreo._indicadores_perfil_asesor',user_uid=current_user.id ) }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Mi reporte</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Da clic para ver tus estadísticas de servicios brindados </span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    {% if current_user.id in (3,5,24) %}
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('monitoreo._indicadores_inscritas_1') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Listado de empresas 5 cohorte</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                    {% if current_user.id in (3,24,25) %}
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('aulavirtual._curso_list') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Administracion de cursos</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('home._evaluations_admin') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Evaluaciones</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Evaluaciones</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                    
-                                    {% if current_user.id in (3,24) %}
-
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('monitoreo._indicadores_servicios') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte SDE</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a href="{{ url_for('monitoreo._indicadores_productividad') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte productividad</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_12') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        
-                                        <a target="_blank"  href="{{ url_for('admindash._datos_describe_v1') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda segun plan de acción</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a target="_blank"  href="{{ url_for('home._tipos_empresa') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdc-deprecated-list-item">
-                                        <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_2_v2') }}">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                <img src="../static/images/manifest/innova_icon.svg" alt="Foto Usuario" />
-                                            </span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas EXCEL</span>
-                                                <span class="mdc-deprecated-list-item__secondary-text">Busqueda de empresas</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    
-
-                                    {% endif %}
-                                </ul>
-                            </div>
-                            <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
-                                <div class="container-dashboard--messages-list-empty s-font-align-center" style="height: 100%">
-                                    {% if appointments %}
-                                        
-                                      
-                                        
-                                        <div class="mdc-data-table" style="background-color: aliceblue;width: 100%;">
-                                            <div class="mdc-data-table__table-container" style="min-height: 400px;">
-                                              <table class="mdc-data-table__table" aria-label="Dessert calories" >
-                                                <thead>
-                                                  <tr class="mdc-data-table__header-row">
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
-                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Empresaria</th>
-                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Nombre</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody class="mdc-data-table__content">
-                                                    {% for appointment in appointments %}
-                                                  <tr class="mdc-data-table__row">
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        {{loop.index}}
-
-                                                    </th>
-                                                    <td>
-                                                        <div class="s-mdc-menu mdc-menu-surface--anchor" data-action-fn="moreOptionsSelection1" data-action-fn-ri>
-          
-                                                            <button  id="moreOptionsButton1"   class="mdc-button mdc-button--raised mdc-button--leading s-mdc-menu__button" style="margin-left: 10px;">
-                                                                <span class="mdc-button__ripple"></span>
-                                                                <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                                  >more_vert</i
-                                                                >
-                                                                <span class="mdc-button__label">opciones</span>
-                                                            </button>
-                                                            <div id="moreOptionsMenu1" class="s-mdc-menu__list mdc-menu mdc-menu-surface" tabindex="-1">
-                                                                <ul class="mdc-deprecated-list mdc-menu__items" role="menu" aria-hidden="true">
-                                                                    <li onclick="acceptAppointments()" id="transferUserOption" class="mdc-deprecated-list-item" role="menuitem"
-                                                                        tabindex="0">
-                                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                            aria-hidden="true">
-                                                                            check
-                                                                        </i>
-                                                                        <span class="mdc-deprecated-list-item__text">Aceptar Cita</span>
-                                                                    </li>
-                                                                    <li id="createUserAppt"  onclick="showRedirect('/empresaria/','_blank')" class="mdc-deprecated-list-item" role="menuitem"
-                                                                    tabindex="0">
-                                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                            aria-hidden="true">
-                                                                            book_online
-                                                                        </i>
-                                                                        <span class="mdc-deprecated-list-item__text">ver perfil</span>
-                                                                    </li>                                           
-                                                                    <li id="createUserAppt" onclick="acceptAppointments2()" class="mdc-deprecated-list-item" role="menuitem"
-                                                                        tabindex="0">
-                                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                            aria-hidden="true">
-                                                                            edit
-                                                                        </i>
-                                                                        <span class="mdc-deprecated-list-item__text">Reprogramar Cita</span>
-                                                                    </li>
-                                                                    <li id="createUserAppt" onclick="showRedirect('/resumen/')" class="mdc-deprecated-list-item" role="menuitem"
-                                                                    tabindex="0">
-                                                                    <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                    <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                        aria-hidden="true">
-                                                                        send
-                                                                    </i>
-                                                                    <span class="mdc-deprecated-list-item__text">Agregar Reporte de Atencion</span>
-                                                                    </li>
-                                                                    <!--
-                                                                    <li class="mdc-deprecated-list-item" role="menuitem" tabindex="1">
-                                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                            aria-hidden="true">
-                                                                            exit_to_app
-                                                                        </i>
-                                                                        <span class="mdc-deprecated-list-item__text">Finalizar atención</span>
-                                                                    </li>
-                                                                    
-                                                                    <hr class="mdc-deprecated-list-divider s-mdc-deprecated-list-divider">
-                                                                    <li class="mdc-deprecated-list-item" role="menuitem" tabindex="2">
-                                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
-                                                                            aria-hidden="true">
-                                                                            cancel
-                                                                        </i>
-                                                                        <span class="mdc-deprecated-list-item__text">Cerrar sesión</span>
-                                                                    </li>
-                                                                    -->
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        {{ appointment.created_by_user.extra_info.names }}
-                                                        {{ appointment.created_by_user.extra_info.last_names }}
-
-                                                    </th>
-                                                    <td class="mdc-data-table__cell" scope="row">                                           
-                                                        {{ appointment.created_by_user.extra_info.company.name }}-
-
-                                                    </th>
-                                                    <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ appointment.date_scheduled }}</td>
-                                                    <td class="mdc-data-table__cell">
-                                                        {%if appointment.emp_accepted %}
-                                                            Aceptada
-                                                        {% else %}
-                                                            En espera
-                                                        {% endif %}
-                                                    </td>
-                                      
-                                                  </tr>
-                                                  {% endfor %}
-                                                  
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </div>
-                                    {% else %}
-                                    <img src="{{ url_for('static', filename='images/manifest/calendar.svg') }}">
-                                    <p class="mdc-typography--body1">
-                                        No hay citas activas.
-                                    </p>
-                                    {% endif %}
-                              
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="mdc-card__actions">
-                                
-                                <div class="mdc-card__actions-buttons">
-       
-                                </div>
-              
                             </div>
                         </div>
-                    </div>
+                        <!-- two -->
+                        <div class="content content">
+                            {% if appointments %}
+                                        
+                                      
+                                        
+                            <div class="mdc-data-table" style="background-color: aliceblue;width: 100%;">
+                                <div class="mdc-data-table__table-container" style="min-height: 400px;">
+                                  <table class="mdc-data-table__table" aria-label="Dessert calories" >
+                                    <thead>
+                                      <tr class="mdc-data-table__header-row">
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Empresaria</th>
+                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Nombre</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="mdc-data-table__content">
+                                        {% for appointment in appointments %}
+                                      <tr class="mdc-data-table__row">
+                                        <th class="mdc-data-table__cell" scope="row">
+                                            {{loop.index}}
+
+                                        </th>
+                                        <td>
+                                            <div class="s-mdc-menu mdc-menu-surface--anchor" data-action-fn="moreOptionsSelection1" data-action-fn-ri>
+
+                                                <button  id="moreOptionsButton1"   class="mdc-button mdc-button--raised mdc-button--leading s-mdc-menu__button" style="margin-left: 10px;">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >more_vert</i
+                                                    >
+                                                    <span class="mdc-button__label">opciones</span>
+                                                </button>
+                                                <div id="moreOptionsMenu1" class="s-mdc-menu__list mdc-menu mdc-menu-surface" tabindex="-1">
+                                                    <ul class="mdc-deprecated-list mdc-menu__items" role="menu" aria-hidden="true">
+                                                        <li onclick="acceptAppointments()" id="transferUserOption" class="mdc-deprecated-list-item" role="menuitem"
+                                                            tabindex="0">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                                aria-hidden="true">
+                                                                check
+                                                            </i>
+                                                            <span class="mdc-deprecated-list-item__text">Aceptar Cita</span>
+                                                        </li>
+                                                        <li id="createUserAppt"  onclick="showRedirect('/empresaria/','_blank')" class="mdc-deprecated-list-item" role="menuitem"
+                                                        tabindex="0">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                                aria-hidden="true">
+                                                                book_online
+                                                            </i>
+                                                            <span class="mdc-deprecated-list-item__text">ver perfil</span>
+                                                        </li>                                           
+                                                        <li id="createUserAppt" onclick="acceptAppointments2()" class="mdc-deprecated-list-item" role="menuitem"
+                                                            tabindex="0">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                                aria-hidden="true">
+                                                                edit
+                                                            </i>
+                                                            <span class="mdc-deprecated-list-item__text">Reprogramar Cita</span>
+                                                        </li>
+                                                        <li id="createUserAppt" onclick="showRedirect('/resumen/')" class="mdc-deprecated-list-item" role="menuitem"
+                                                        tabindex="0">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                            aria-hidden="true">
+                                                            send
+                                                        </i>
+                                                        <span class="mdc-deprecated-list-item__text">Agregar Reporte de Atencion</span>
+                                                        </li>
+                                                        <!--
+                                                        <li class="mdc-deprecated-list-item" role="menuitem" tabindex="1">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                                aria-hidden="true">
+                                                                exit_to_app
+                                                            </i>
+                                                            <span class="mdc-deprecated-list-item__text">Finalizar atención</span>
+                                                        </li>
+                                                        
+                                                        <hr class="mdc-deprecated-list-divider s-mdc-deprecated-list-divider">
+                                                        <li class="mdc-deprecated-list-item" role="menuitem" tabindex="2">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                                aria-hidden="true">
+                                                                cancel
+                                                            </i>
+                                                            <span class="mdc-deprecated-list-item__text">Cerrar sesión</span>
+                                                        </li>
+                                                        -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                        <th class="mdc-data-table__cell" scope="row">
+                                            {{ appointment.created_by_user.extra_info.names }}
+                                            {{ appointment.created_by_user.extra_info.last_names }}
+
+                                        </th>
+                                        <td class="mdc-data-table__cell" scope="row">                                           
+                                            {{ appointment.created_by_user.extra_info.company.name }}-
+
+                                        </th>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{{ appointment.date_scheduled }}</td>
+                                        <td class="mdc-data-table__cell">
+                                            {%if appointment.emp_accepted %}
+                                                Aceptada
+                                            {% else %}
+                                                En espera
+                                            {% endif %}
+                                        </td>
+                          
+                                      </tr>
+                                      {% endfor %}
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/manifest/calendar.svg') }}">
+                        <p class="mdc-typography--body1">
+                            No hay citas activas.
+                        </p>
+                        {% endif %}
+                        </div>
+                        <!-- two -->
+                        <div class="content content">
+                            <div class="container-dashboard--messages">
+            
+                                <div class="mdc-card__content container-dashboard--messages-msg">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+  
+
+                                        {% if current_user.id in (3,5,24) %}
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('monitoreo._indicadores_inscritas_1') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Listado de empresas 5 cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresas que llenaron el formulario de inscripción en la quinta cohorte </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
+                                        
+                                        {% if current_user.id in (3,24) %}
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('monitoreo._indicadores_servicios') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte SDE</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Estadística de cuantas empresas registradas, elegibles, capacitación inicial, diagnósticos, planes de acción y servicios </span>
+                                                </span>
+                                            </a>
+                                        </li>
+    
+                                        <li class="mdc-deprecated-list-item">
+                                            <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_12') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Total de servicios solicitados en los diagnósticos empresariales elaborados en kobotoolbox </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            
+                                            <a target="_blank"  href="{{ url_for('admindash._datos_describe_v1') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda segun plan de acción</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Total de servicios solicitados en los diagnósticos empresariales elaborados segun plan de acción </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a target="_blank"  href="{{ url_for('home._tipos_empresa') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Cuantas empresarias son de tipo EMPRESA A, B, C, D según el diagnóstico empresarial.</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_2_v2') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas EXCEL</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Cuantas empresarias son de tipo EMPRESA A, B, C, D según el diagnóstico empresarial con la función de importar a Excel.</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                                                                        <!-- two -->
+                        <div class="content content">
+                            <div class="container-dashboard--messages">
+            
+                                <div class="mdc-card__content container-dashboard--messages-msg">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                        {% if current_user.id in (3,24) %}
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('monitoreo._indicadores_productividad') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Reporte productividad</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Reporte de productividad de especialista, cantidad de empresas inscritas, referencias atendidas, diagnosticos elaborados, plan de acción, servicios y asesorías. </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+   
+
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                          </div>
+                          <!-- ... additional primary action content ... -->
+                          <div class="mdc-card__ripple"></div>
+                        </div>
+                        <div class="mdc-card__actions">
+                     
+                        </div>
+                      </div>
+
+           
                 </div>
             </div>
         </div>
@@ -555,6 +662,7 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}?c=3"></script>
 <script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}?v=1"></script>
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
