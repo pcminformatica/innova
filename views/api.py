@@ -957,6 +957,19 @@ def _d_save_ActionPlanHistory():
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
             txt_hora = request.json['txt_hora']
+            if int(txt_porcentaje) > 100:
+                return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
+            plan = ActionPlan.query.filter_by(id = txt_servicios).first()
+            historys = ActionPlanHistory.query.filter_by(action_plan_id=plan.id)
+            #Recorremos el porcentaje actual del servicio
+            porcentaje = 0
+            for history in historys:
+                porcentaje = porcentaje + history.progress
+            #sumamos el porcentaje actual + el porcentaje de la nueva asesoria
+            porcentaje = porcentaje + int(txt_porcentaje)
+            #Si el porcentaje es mayor a 100 lanzamos el error
+            if porcentaje > 100:
+                return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
             
             history =  ActionPlanHistory()
             history.created_by = current_user.id 
@@ -969,15 +982,26 @@ def _d_save_ActionPlanHistory():
             history.advisory_time = txt_hora
             db.session.add(history)
             db.session.commit()
-            plan = ActionPlan.query.filter_by(id = txt_servicios).first()
-            plan.progress =txt_porcentaje
+           
+            plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
-            if txt_finalizo == True and txt_porcentaje == "100":
+            if txt_finalizo == True and porcentaje == 100:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
-                wallet.status = 1
-                db.session.add(wallet)
-                db.session.commit()
+                if not wallet:
+                    wallet = WalletTransaction()
+                    wallet.amount = plan.services.cost_innova
+                    wallet.company_id =plan.company_id
+                    wallet.services_id = plan.services.id
+                    wallet.created_by = current_user.id
+                    wallet.status = 1
+                    wallet.type = 1
+                    db.session.add(wallet)
+                    db.session.commit()
+                else:
+                    wallet.status = 1
+                    db.session.add(wallet)
+                    db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
                 company = Company.query.filter_by(id = plan.company_id).first()
                 areas_mejoras = plan.services.diagnostic_questions
@@ -1024,32 +1048,53 @@ def _d_save_ActionPlanHistory_update():
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
             txt_hora = request.json['txt_hora']
-            history =  ActionPlanHistory.query.filter(ActionPlanHistory.id==txt_servicios).first()
-            history.created_by = current_user.id 
-            history.description = txt_comentario
-            history.progress = txt_porcentaje
-            history.endservices = txt_finalizo
-            history.date_created = txt_fecha
-            history.url = txt_url
-            history.advisory_time = txt_hora
-            db.session.add(history)
+            #buscamos el historial a actulizar
+            historyUpdate =  ActionPlanHistory.query.filter(ActionPlanHistory.id==txt_servicios).first()
+            #buscamos el plan de accion que deseamos actulizar
+            plan = ActionPlan.query.filter_by(id = historyUpdate.action_plan_id).first()
+            #buscamos todos los historias que tengan que ver con el plan de accion
+            historys = ActionPlanHistory.query.filter_by(action_plan_id=plan.id)
+            #Recorremos el porcentaje actual del servicio
+            porcentaje = 0
+            for history in historys:
+                #si el historial no es el que estamos actulizando lo sumamos para optener el porcentaje de avance actual
+                if historyUpdate.id != history.id:
+                    porcentaje = porcentaje + history.progress
+            #sumamos el porcentaje actual + el porcentaje de la asesoria que estamos editando
+            porcentaje = porcentaje + int(txt_porcentaje)
+            #Si el porcentaje es mayor a 100 lanzamos el error
+            if porcentaje > 100:
+                return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
+
+            historyUpdate.created_by = current_user.id 
+            historyUpdate.description = txt_comentario
+            historyUpdate.progress = txt_porcentaje
+            historyUpdate.endservices = txt_finalizo
+            historyUpdate.date_created = txt_fecha
+            historyUpdate.url = txt_url
+            historyUpdate.advisory_time = txt_hora
+            db.session.add(historyUpdate)
             db.session.commit()
 
-            action_plan = ActionPlanHistory.query.filter_by(action_plan_id=history.action_plan_id).all()
-            porcentaje = 0
-            for action_planx in action_plan:
-               if porcentaje <= action_planx.progress:
-                    porcentaje = action_planx.progress
-
-            plan = ActionPlan.query.filter_by(id = history.action_plan_id).first()
             plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
-            if txt_finalizo == True and txt_porcentaje == "100":
+            if txt_finalizo == True and porcentaje == 100:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
-                wallet.status = 1
-                db.session.add(wallet)
-                db.session.commit()
+                if not wallet:
+                    wallet = WalletTransaction()
+                    wallet.amount = plan.services.cost_innova
+                    wallet.company_id =plan.company_id
+                    wallet.services_id = plan.services.id
+                    wallet.created_by = current_user.id
+                    wallet.status = 1
+                    wallet.type = 1
+                    db.session.add(wallet)
+                    db.session.commit()
+                else:
+                    wallet.status = 1
+                    db.session.add(wallet)
+                    db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
                 company = Company.query.filter_by(id = plan.company_id).first()
                 areas_mejoras = plan.services.diagnostic_questions

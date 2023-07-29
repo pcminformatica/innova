@@ -82,7 +82,7 @@
                               </span>
                               <span class="mdc-notched-outline__trailing"></span>
                             </span>
-                            <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="{{ action.progress}}">
+                            <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="0">
                           </label>
                           <br><br>
                             <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
@@ -259,9 +259,6 @@
         }else if (txt_comentario=="") {
             alert("Por favor escriba un comentario")
             return false
-        }else if (txt_finalizo.checked==true && txt_porcentaje!=100 ){
-            alert("Por favor escriba el porcentaje de 100%")
-            return false
         }else if(txt_fecha==null){
           alert("Seleccione la fecha")
           return false
@@ -286,12 +283,22 @@
       //document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
-        Swal.fire(
+
+        if (data.status == 200){
+          Swal.fire(
           'Éxito',
           'Plan de Acción creado!',
           'success'
         )
         window.setTimeout(() => { window.location.reload(); }, 1500);
+        }else if (data.status == 201){
+            Swal.fire(
+            'Error',
+            'Plan de Acción porcentaje de avance no puede ser mayor que 100',
+            'error'
+          )
+        }
+  
     
       }).catch((error) => {
         Swal.fire(

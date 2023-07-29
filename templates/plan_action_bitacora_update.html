@@ -187,9 +187,6 @@
         }else if (txt_comentario=="") {
             alert("Por favor escriba un comentario")
             return false
-        }else if (txt_finalizo.checked==true && txt_porcentaje!=100 ){
-            alert("Por favor escriba el porcentaje de 100%")
-            return false
         }else if(txt_fecha==null){
           alert("Seleccione la fecha")
           return false
@@ -214,16 +211,26 @@
       //document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
-        Swal.fire(
+        if (data.status == 200){
+          Swal.fire(
           'Éxito',
           'Plan de Acción creado!',
           'success'
         )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+        }else if (data.status == 201){
+            Swal.fire(
+            'Error',
+            'Plan de Acción porcentaje de avance no puede ser mayor que 100',
+            'error'
+          )
+        }
+  
         //window.setTimeout(() => { window.location.reload(); }, 1500);
     
       }).catch((error) => {
         Swal.fire(
-          'Error de conexiócccccccccccccccccccccccn',
+          'Error de conexión',
           'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
           'error'
         )
