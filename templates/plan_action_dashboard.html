@@ -70,9 +70,27 @@
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                             
-                                            <div class="mdc-typography--headline5 ">
+                                            <div class="mdc-typography--headline7">
+                                                                            
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
                                                 <p><b>Nombre de empresa:</b> {{company.name}} </p>
-                                                <p><b>Nombre de empresa:</b> {{company.name}} </p>
+                                                <p><b>Nombre de empresaria:</b> {{company.inscripcion.name}} </p>
+                                                <p><b>Teléfono:</b> {{company.inscripcion.phone}} </p>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                                <p><b>Departamento:</b> {{company.inscripcion.departamento}} </p>
+                                                <p><b>Municipio:</b> {{company.inscripcion.municipio}} </p>
+                                                <p><b>Correo:</b> {{company.inscripcion.correo}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                
+                                                
+                                                
+                                                
+                                                
                                             </div>
                                             <br>
                                             {% if diagnostico %} 
@@ -98,7 +116,7 @@
                                                             
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
-                                                            <a href="{{ url_for('digitalcenter._plan_action_bitacora_atenciones',user_uid=1) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                            <a href="{{ url_for('digitalcenter._plan_action_dianostico_plan',company_uid=company.id,servicio_uid='a2') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                         
                                                                 <span class="mdc-button__ripple"></span>
                                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
@@ -130,7 +148,7 @@
                                                             
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
-                                                            <a href="{{ url_for('digitalcenter._plan_action_bitacora_atenciones',user_uid=1 ) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                            <a href="{{ url_for('digitalcenter._plan_action_dianostico_plan',company_uid=company.id,servicio_uid='a3') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                         
                                                                 <span class="mdc-button__ripple"></span>
                                                                 <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>

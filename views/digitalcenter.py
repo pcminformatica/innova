@@ -560,13 +560,43 @@ def _plan_action_create(user_uid):
     app.logger.debug(servicios)
     return render_template('plan_action_create.html',**context)
 
-@digitalcenter.route('/planes/add/12/',methods=['GET', 'POST'])
+@digitalcenter.route('/planes/add/asesorias/',methods=['GET', 'POST'])
 def _asesorias_puntuales():
     categoria = catalogCategory.query.filter_by().all()
     services = CatalogServices.query.filter_by(enabled=True).all()
     context = {'categoria':categoria,'services':services} 
     return render_template('asesorias_puntuales.html',**context)
 
+@digitalcenter.route('/activar/diagnostico/<int:company_uid>/plan/<servicio_uid>/',methods=['GET', 'POST'])
+def _plan_action_dianostico_plan(company_uid,servicio_uid):
+    company = Company.query.filter_by(id=company_uid).first()
+                #buscar si el diagnostico esta en plan de accion
+    service_plan = CatalogServices.query.filter_by(name_short=servicio_uid).first()
+    if not service_plan or not company:
+        return render_template('404.html')
+    actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
+    if not actionplan:
+        if request.method == 'POST':
+            txt_start_date = request.form.get('txt_start_date') 
+            txt_end_date = request.form.get('txt_end_date') 
+            txt_descripcion = request.form.get('txt_descripcion') 
+            actionplan = ActionPlan()
+            actionplan.company_id = actionplan.id
+            actionplan.company = company
+            actionplan.date_scheduled_start =txt_start_date
+            actionplan.date_scheduled_end = txt_end_date
+            actionplan.services_id = service_plan.id
+            actionplan.created_by = current_user.id
+            actionplan.fase = 0
+            actionplan.descripcion = txt_descripcion
+            db.session.add(actionplan)
+            db.session.commit() 
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
+            return redirect(url_for('digitalcenter._plan_action_bitacora',user_uid=actionplan.id))
+    else:
+        return redirect(url_for('digitalcenter._plan_action_bitacora',user_uid=actionplan.id))
+    context = {'services':service_plan} 
+    return render_template('plan_action_dianostico_plan.html',**context)
 
 @digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
 def _admin_servicios():
