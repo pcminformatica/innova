@@ -1735,3 +1735,24 @@ def _init3_status_company():
             db.session.add(update)
             db.session.commit()
     return 'listo'
+
+@digitalcenter.route('/sde/service/',methods=['GET', 'POST'])
+def _asesoria_colectivas_service_list():
+    app.logger.debug('** SWING_CMS ** -  appointments_create') 
+    services = CatalogServices.query.filter_by(enabled = 1).all()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    context = {'services':services}  
+    return render_template('digitalcenter/asesoria_colectivas_service_list.html',**context)
+
+
+@digitalcenter.route('/sde/service/<int:service_id>/search',methods=['GET', 'POST'])
+def _asesoria_colectivas_service_search(service_id):
+    app.logger.debug('** SWING_CMS ** -  appointments_create') 
+    services = CatalogServices.query.filter_by(id = service_id).first()
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+    actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    context = {'actions':actions}  
+    return render_template('digitalcenter/asesoria_colectivas_service_search.html',**context)
+
+
+    
