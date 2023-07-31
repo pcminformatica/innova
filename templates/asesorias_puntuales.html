@@ -26,127 +26,29 @@
                                   <div class="mdc-typography--body1">
                                     Nombre del asesoría:
                                 </div>
-                                <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_company_porcentaje" data-assigned-var>
-                                    <div class="mdc-select__anchor" aria-required="true"
-                                         role="button"
-                                         aria-haspopup="listbox"
-                                         aria-expanded="false"
-                                         aria-labelledby="demo-label demo-selected-text">
-                                      <span class="mdc-select__ripple"></span>
-                                      <span id="demo-label" class="mdc-floating-label" hiddenlabel="Seleccione nombre del servicio">Seleccione nombre del servicio</span>
-                                      <span class="mdc-select__selected-text-container">
-                                        <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                      </span>
-                                      <span class="mdc-select__dropdown-icon">
-                                        <svg
-                                            class="mdc-select__dropdown-icon-graphic"
-                                            viewBox="7 10 10 5" focusable="false">
-                                          <polygon
-                                              class="mdc-select__dropdown-icon-inactive"
-                                              stroke="none"
-                                              fill-rule="evenodd"
-                                              points="7 10 12 15 17 10">
-                                          </polygon>
-                                          <polygon
-                                              class="mdc-select__dropdown-icon-active"
-                                              stroke="none"
-                                              fill-rule="evenodd"
-                                              points="7 15 12 10 17 15">
-                                          </polygon>
-                                        </svg>
-                                      </span>
-                                      <span class="mdc-line-ripple"></span>
-                                    </div>
+                              <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                      
+                                  <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
+                                      <span class="mdc-text-field__ripple"></span>
                                   
-                                    <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                      <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                        <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                          <span class="mdc-deprecated-list-item__ripple"></span>
-                                        </li>
-                                        {% for categoria in categoria %}
-                                        <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
-                                          <span class="mdc-deprecated-list-item__ripple"></span>
-                                          <span class="mdc-deprecated-list-item__text">
-                                            Asesorias {{ categoria.id }}
-                                          </span>
-                                        </li>
-                                        
-                                        {% endfor %}
-                                        <li onclick="agregarFuncion()" class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
-                                            <span class="mdc-deprecated-list-item__ripple"></span>
-                                            <span class="mdc-deprecated-list-item__text">
-                                              Agregar nuevo
-                                            </span>
-                                          </li>
-            
-                                      </ul>
-                                    </div>
-                                </div>
+                                      <input placeholder="nombre del asesoría" id="txt_nombre" name="txt_nombre"  class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                      <span lass="mdc-line-ripple"></span>
+                                  </label>
+                              </div>
+
+
+                                      
                                         <div class="mdc-typography--body1">
-                                            Area:
-                                        </div>
-                                        <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_company_porcentaje" data-assigned-var>
-                                            <div class="mdc-select__anchor" aria-required="true"
-                                                 role="button"
-                                                 aria-haspopup="listbox"
-                                                 aria-expanded="false"
-                                                 aria-labelledby="demo-label demo-selected-text">
-                                              <span class="mdc-select__ripple"></span>
-                                              <span id="demo-label" class="mdc-floating-label" hiddenlabel="3.13 ¿Qué porcentaje de accionistas mujeres esta conformada la empresa?">Seleccione porcentaje de accionistas mujeres</span>
-                                              <span class="mdc-select__selected-text-container">
-                                                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                              </span>
-                                              <span class="mdc-select__dropdown-icon">
-                                                <svg
-                                                    class="mdc-select__dropdown-icon-graphic"
-                                                    viewBox="7 10 10 5" focusable="false">
-                                                  <polygon
-                                                      class="mdc-select__dropdown-icon-inactive"
-                                                      stroke="none"
-                                                      fill-rule="evenodd"
-                                                      points="7 10 12 15 17 10">
-                                                  </polygon>
-                                                  <polygon
-                                                      class="mdc-select__dropdown-icon-active"
-                                                      stroke="none"
-                                                      fill-rule="evenodd"
-                                                      points="7 15 12 10 17 15">
-                                                  </polygon>
-                                                </svg>
-                                              </span>
-                                              <span class="mdc-line-ripple"></span>
-                                            </div>
-                                          
-                                            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                              <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                                  <span class="mdc-deprecated-list-item__ripple"></span>
-                                                </li>
-                                                {% for categoria in categoria %}
-                                                <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
-                                                  <span class="mdc-deprecated-list-item__ripple"></span>
-                                                  <span class="mdc-deprecated-list-item__text">
-                                                    {{ categoria.name }}
-                                                  </span>
-                                                </li>
-                                                
-                                                {% endfor %}
-                               
-                    
-                                              </ul>
-                                            </div>
-                                        </div>
-                                        <div class="mdc-typography--body1">
-                                          Servicios:
+                                          Servicio:
                                       </div>
-                                      <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_company_porcentaje" data-assigned-var>
+                                      <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_servicio" data-assigned-var>
                                           <div class="mdc-select__anchor" aria-required="true"
                                                role="button"
                                                aria-haspopup="listbox"
                                                aria-expanded="false"
                                                aria-labelledby="demo-label demo-selected-text">
                                             <span class="mdc-select__ripple"></span>
-                                            <span id="demo-label" class="mdc-floating-label" hiddenlabel="3.13 ¿Qué porcentaje de accionistas mujeres esta conformada la empresa?">Seleccione porcentaje de accionistas mujeres</span>
+                                            
                                             <span class="mdc-select__selected-text-container">
                                               <span id="demo-selected-text" class="mdc-select__selected-text"></span>
                                             </span>
@@ -177,10 +79,10 @@
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                               </li>
                                               {% for service in services %}
-                                              <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ categoria.id }}" role="option">
+                                              <li class="mdc-deprecated-list-item" aria-selected="false" data-value="{{ service.id }}" role="option">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                  {{ service.name }}
+                                                  {{ service.catalog_catego.name }} - {{ service.name }}
                                                 </span>
                                               </li>
                                               
@@ -191,7 +93,7 @@
                                           </div>
                                       </div>
                                         <div class="mdc-typography--body1">
-                                          Fecha Inicio:
+                                          Fecha de la asesoría:
                                       </div>
                                       <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               
@@ -202,18 +104,7 @@
                                               <span lass="mdc-line-ripple"></span>
                                           </label>
                                       </div>
-                                      <div class="mdc-typography--body1">
-                                        Fecha Final:
-                                    </div>
-                                    <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                            
-                                        <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
-                                            <span class="mdc-text-field__ripple"></span>
-                                        
-                                            <input id="txt_fecha"  class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" >
-                                            <span lass="mdc-line-ripple"></span>
-                                        </label>
-                                    </div>
+
                           <br>
                           <div class="mdc-typography--body1">
                             Horas de asesoría:
@@ -229,10 +120,12 @@
                         </div>
                         <br>
                      
-                   
-                          <br>
+                        <div class="mdc-typography--body1">
+                          Descripción de la asesoría:
+                        </div>                   
+                     
  
-                          <br><br>
+  
                             <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
                               <span class="mdc-notched-outline">
                                 <span class="mdc-notched-outline__leading"></span>
@@ -273,23 +166,12 @@
 
                     <br>
                     <br>
-                    <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
-           
-    
-
-            
-                      
-                    </div>
                   </div>
               </div>
             </div>
             
           </div>
-     
-        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
-
-            
-        </div>
+ 
     </div>
 </main>
 {% endblock %}
@@ -298,57 +180,42 @@
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
 
 <script>
-
-  function agregarFuncion(){
-alert('agregar')
-    const Swal = swcms.returnSwal()
-    Swal.fire(
-          'Éxito',
-          'Plan de Acción creado!',
-          'success'
-        )
-  }
+const mdcAssignedVars = {};
     function saveResumenAtencion()
     {
+      
         const Swal = swcms.returnSwal()
-        var txt_porcentaje = document.getElementById("txt_porcentaje").value.trim() || null
-        var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
-        var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
-        var txt_url = document.getElementById("txt_url").value.trim() || null
-        var txt_hora = document.getElementById("txt_hora").value.trim() || null
+        swcms.mdcSelects.forEach((sel) => {
+            if (sel.assignedVar)
+                mdcAssignedVars[sel.assignedVar] = sel;
+        });
+        swcms.mdcTextInputs.forEach((txt) => {
+          if (txt.assignedVar)
+              mdcAssignedVars[txt.assignedVar] = txt;
+        });
         
-        var txt_finalizo =  document.getElementById('checkbox-Finalizo')
+        console.log(mdcAssignedVars)
 
-        if(txt_porcentaje<=0 || txt_porcentaje>=101){
-            alert("Por favor elija un rango correcto")
-            return false
-        }else if (txt_comentario=="") {
-            alert("Por favor escriba un comentario")
-            return false
-        }else if (txt_finalizo.checked==true && txt_porcentaje!=100 ){
-            alert("Por favor escriba el porcentaje de 100%")
-            return false
-        }else if(txt_fecha==null){
-          alert("Seleccione la fecha")
-          return false
-        }
-  
-        txt_finalizo= txt_finalizo.checked
-        console.log(txt_finalizo)
-        console.log(txt_porcentaje)
-        console.log(txt_servicios)
+
+
+
+        var txt_nombre = document.getElementById("txt_nombre").value.trim() || null
+        var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
+        var txt_hora = document.getElementById("txt_hora").value.trim() || null
+        var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
+        var txt_company = '{{ company.id }}'
+
         let postData = {
-            "txt_comentario":txt_comentario,
-            "txt_finalizo":txt_finalizo,
-            "txt_finalizo":txt_finalizo,
-            "txt_porcentaje":txt_porcentaje,
-            "txt_servicios":txt_servicios,
+            'txt_servicio': mdcAssignedVars['txt_servicio'].value.trim() || null,
+            "txt_nombre":txt_nombre,
             "txt_fecha":txt_fecha,
-            "txt_url":txt_url,
             "txt_hora":txt_hora,
+            "txt_comentario":txt_comentario,
+            "txt_company":txt_company
       };
       console.log(postData)
-      let apiUrl = '/api/save/action/plan/history/';
+    
+      let apiUrl = '/api/save/asesoria/puntual';
       //document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
@@ -357,7 +224,11 @@ alert('agregar')
           'Plan de Acción creado!',
           'success'
         )
-        window.setTimeout(() => { window.location.reload(); }, 1500);
+        window.setTimeout(() => { 
+          window.location.replace("/empresas/view/{{ company.id }}/");
+         
+        
+        }, 1500);
     
       }).catch((error) => {
         Swal.fire(

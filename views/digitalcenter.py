@@ -560,11 +560,12 @@ def _plan_action_create(user_uid):
     app.logger.debug(servicios)
     return render_template('plan_action_create.html',**context)
 
-@digitalcenter.route('/planes/add/asesorias/',methods=['GET', 'POST'])
-def _asesorias_puntuales():
+@digitalcenter.route('/planes/add/asesorias/<int:company_uid>/',methods=['GET', 'POST'])
+def _asesorias_puntuales(company_uid):
+    company = Company.query.filter_by(id=company_uid).first()
     categoria = catalogCategory.query.filter_by().all()
     services = CatalogServices.query.filter_by(enabled=True).all()
-    context = {'categoria':categoria,'services':services} 
+    context = {'categoria':categoria,'services':services,'company':company} 
     return render_template('asesorias_puntuales.html',**context)
 
 @digitalcenter.route('/activar/diagnostico/<int:company_uid>/plan/<servicio_uid>/',methods=['GET', 'POST'])
@@ -581,7 +582,7 @@ def _plan_action_dianostico_plan(company_uid,servicio_uid):
             txt_end_date = request.form.get('txt_end_date') 
             txt_descripcion = request.form.get('txt_descripcion') 
             actionplan = ActionPlan()
-            actionplan.company_id = actionplan.id
+            actionplan.company_id = company.id
             actionplan.company = company
             actionplan.date_scheduled_start =txt_start_date
             actionplan.date_scheduled_end = txt_end_date
@@ -705,7 +706,7 @@ def _init_wallet():
                 actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
                 if not actionplan:
                     actionplan = ActionPlan()
-                    actionplan.company_id = actionplan.id
+                    actionplan.company_id = company.id
                     actionplan.company = company
                     actionplan.date_scheduled_start =diagnostico.date_created
                     actionplan.date_scheduled_end = diagnostico.date_created
@@ -1282,6 +1283,7 @@ def _plan_action_dashboard(user_uid):
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
     
     actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    actions_asesorias = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.espuntal==True).all()
     if diagnos:
         diagnostico = diagnos.resultados
     else:
@@ -1292,6 +1294,7 @@ def _plan_action_dashboard(user_uid):
         'company': company,
         'actions':actions,
         "diagnostico":diagnostico,
+        "actions_asesorias":actions_asesorias
     }
  
     return render_template('plan_action_dashboard.html',**context)

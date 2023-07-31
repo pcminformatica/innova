@@ -836,6 +836,8 @@ class ActionPlan(db.Model):
     fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
     descripcion = db.Column(db.Text, nullable=True)
+    # Define si es una asesoria es puntual
+    espuntal = db.Column(db.Boolean, nullable=True, default=False)
 
 class ActionPlanReferences(db.Model):
     __tablename__ = 'action_plan_references'

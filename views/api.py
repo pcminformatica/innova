@@ -866,7 +866,7 @@ def _d_save_ActionPlan():
                 service_plan = CatalogServices.query.filter_by(id=int(service['service'])).first()
                 if not actionplan:
                     actionplan = ActionPlan()
-                    actionplan.company_id = actionplan.id
+                    actionplan.company_id = company.id
                     actionplan.company = company
                     actionplan.date_scheduled_start = service['fecha_inicio']
                     actionplan.date_scheduled_end = service['fecha_final']
@@ -1255,7 +1255,7 @@ def _initial_attention_companies():
             actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
             if not actionplan:
                 actionplan = ActionPlan()
-                actionplan.company_id = actionplan.id
+                actionplan.company_id = company.id
                 actionplan.company = company
                 actionplan.services_id = service.id
                 actionplan.created_by = current_user.id
@@ -1626,7 +1626,7 @@ def _initial_attention_companies_api():
             actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
             if not actionplan:
                 actionplan = ActionPlan()
-                actionplan.company_id = actionplan.id
+                actionplan.company_id = company.id
                 actionplan.company = company
                 actionplan.services_id = service.id
                 actionplan.created_by = current_user.id
@@ -1805,3 +1805,48 @@ def _d_action_search():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': 'e' })
+    
+@api.route('/api/save/asesoria/puntual', methods = ['POST'])
+# @login_required
+def _d_save_asesoria_puntual():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_company = request.json['txt_company']
+            txt_servicio = request.json['txt_servicio']
+            txt_nombre = request.json['txt_nombre']  
+            txt_fecha = request.json['txt_fecha']
+            txt_hora = request.json['txt_hora']  
+            txt_comentario = request.json['txt_comentario']
+            company = Company.query.filter_by(id = txt_company).first()
+            service = CatalogServices.query.filter_by(id = txt_servicio).first()
+            actionplan = ActionPlan()
+            actionplan.company_id = company.id
+            actionplan.services_id = service.id
+            actionplan.created_by = current_user.id
+            actionplan.fase = 0
+            actionplan.progress = 100
+            actionplan.date_scheduled_end = txt_fecha
+            actionplan.date_scheduled_start = txt_fecha
+            actionplan.espuntal = True
+            actionplan.descripcion = txt_nombre
+            db.session.add(actionplan)
+            db.session.commit()
+            db.session.refresh(actionplan)
+            history =  ActionPlanHistory()
+            history.created_by = current_user.id 
+            history.description = txt_comentario
+            history.progress = 100
+            history.action_plan_id = actionplan.id
+            history.endservices = True
+            history.date_created = txt_fecha
+            history.advisory_time = txt_hora
+            db.session.add(history)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
