@@ -743,7 +743,20 @@ class CompanyStatus(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(150), unique=True, nullable=False)
     name_short = db.Column(db.String(10), unique=True, nullable=True)
-    
+
+# Attention Log
+class AttentionLog(db.Model):
+    _tablename__ = 'attentionlog'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    # 0 none , 1 create , 2 update, 3 delete, 4 diagnosis, 5 action plan, 6 bitacora
+    codigo = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    description = db.Column(db.Text, unique=False, nullable=True)
+    date_attention = db.Column(db.DateTime, nullable=True)
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+        
 # Company
 class Company(db.Model):
     _tablename__ = 'company'
@@ -767,6 +780,7 @@ class Company(db.Model):
     status_id = db.Column(db.Integer, db.ForeignKey('company_status.id'), nullable=True)
     status = db.relationship("CompanyStatus")
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+    istransferred = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     
 # Company
 class Inscripciones(db.Model):

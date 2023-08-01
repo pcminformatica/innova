@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import AttentionLog,WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
@@ -1668,7 +1668,17 @@ def _init1_status_company():
         update =  Company.query.filter(Company.id == company.id).first()
 
         if company.inscripcion:
-            fecha = company.inscripcion.date_created
+            #buscamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
+            service = CatalogServices.query.filter_by(name_short = 'a1').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
+            if not actionplan:
+                fecha = company.inscripcion.date_created
+            else:
+                if actionplan.date_created:
+                    fecha = actionplan.date_created
+                else:
+                    fecha = company.inscripcion.date_created
+
             documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
             if documento:
                 fecha_documento = documento.date_created
@@ -1693,7 +1703,17 @@ def _init2_status_company():
         update =  Company.query.filter(Company.id == company.id).first()
 
         if company.inscripcion:
-            fecha = company.inscripcion.date_created
+            #buscamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
+            service = CatalogServices.query.filter_by(name_short = 'a1').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
+            if not actionplan:
+                fecha = company.inscripcion.date_created
+            else:
+                if actionplan.date_created:
+                    fecha = actionplan.date_created
+                else:
+                    fecha = company.inscripcion.date_created
+
             documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
             if documento:
                 fecha_documento = documento.date_created
@@ -1718,7 +1738,16 @@ def _init3_status_company():
         update =  Company.query.filter(Company.id == company.id).first()
 
         if company.inscripcion:
-            fecha = company.inscripcion.date_created
+            #buscamos el servicio de atencion inicial al plan de mejora como primer servicio de empresa
+            service = CatalogServices.query.filter_by(name_short = 'a1').first()
+            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service.id,fase=0).first()
+            if not actionplan:
+                fecha = company.inscripcion.date_created
+            else:
+                if actionplan.date_created:
+                    fecha = actionplan.date_created
+                else:
+                    fecha = company.inscripcion.date_created
             documento =  DocumentCompany.query.filter_by(company_id=company.id).order_by(asc(DocumentCompany.date_created)).first()
             if documento:
                 fecha_documento = documento.date_created
@@ -1755,4 +1784,19 @@ def _asesoria_colectivas_service_search(service_id):
     return render_template('digitalcenter/asesoria_colectivas_service_search.html',**context)
 
 
-    
+
+@digitalcenter.route('/init/log/1',methods=['GET', 'POST'])
+def _init1_logs_company():
+    companys = Company.query.filter_by(enabled=True).all()
+    for company in companys:
+        atention = AttentionLog.query.filter_by(company_id=company.id).first()
+        if not atention:
+            update = AttentionLog()
+            update.codigo = 1
+            update.company_id = company.id
+            update.description = "Inicio de atención"
+            update.created_by = company.created_by
+            update.date_attention = company.date_created
+            db.session.add(update)
+            db.session.commit() 
+    return 'listo'
