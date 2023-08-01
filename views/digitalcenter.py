@@ -1733,7 +1733,7 @@ def _init2_status_company():
 
 @digitalcenter.route('/update/l/3',methods=['GET', 'POST'])
 def _init3_status_company():
-    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    companys = Company.query.filter_by(enabled=True).all()[400:700]
     for company in companys:
         update =  Company.query.filter(Company.id == company.id).first()
 
@@ -1819,7 +1819,7 @@ def _init2_logs_company():
 
 @digitalcenter.route('/init/log/3',methods=['GET', 'POST'])
 def _init3_logs_company():
-    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    companys = Company.query.filter_by(enabled=True).all()[400:700]
     for company in companys:
         atention = AttentionLog.query.filter_by(company_id=company.id).first()
         if not atention:
@@ -1836,7 +1836,7 @@ def _init3_logs_company():
 
 @digitalcenter.route('/init/log/4',methods=['GET', 'POST'])
 def _init4_logs_company():
-    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    companys = Company.query.filter_by(enabled=True).all()[400:700]
     dato = []
     for company in companys:
         if not company.created_by or not company.date_created:
