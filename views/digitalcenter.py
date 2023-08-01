@@ -1832,3 +1832,13 @@ def _init3_logs_company():
             db.session.add(update)
             db.session.commit() 
     return 'listo'
+
+
+@digitalcenter.route('/init/log/4',methods=['GET', 'POST'])
+def _init4_logs_company():
+    companys = Company.query.filter_by(enabled=True).all()[400:600]
+    dato = []
+    for company in companys:
+        if not company.created_by or not company.date_created:
+            dato.append(company.id)
+    return str(dato)
