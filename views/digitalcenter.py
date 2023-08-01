@@ -1868,7 +1868,7 @@ def _company_document_list():
         ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
         if carta:
             lista.append(ficha.id)
-    lista = DocumentCompany.query.filter(DocumentCompany.id.in_(lista)).all()
+    lista = DocumentCompany.query.filter(DocumentCompany.id.in_(lista)).order_by(DocumentCompany.company_id).all()
     context = {
         'apis': lista,
       
