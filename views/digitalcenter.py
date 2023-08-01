@@ -1787,7 +1787,39 @@ def _asesoria_colectivas_service_search(service_id):
 
 @digitalcenter.route('/init/log/1',methods=['GET', 'POST'])
 def _init1_logs_company():
-    companys = Company.query.filter_by(enabled=True).all()
+    companys = Company.query.filter_by(enabled=True).all()[0:200]
+    for company in companys:
+        atention = AttentionLog.query.filter_by(company_id=company.id).first()
+        if not atention:
+            update = AttentionLog()
+            update.codigo = 1
+            update.company_id = company.id
+            update.description = "Inicio de atención"
+            update.created_by = company.created_by
+            update.date_attention = company.date_created
+            db.session.add(update)
+            db.session.commit() 
+    return 'listo'
+
+@digitalcenter.route('/init/log/2',methods=['GET', 'POST'])
+def _init2_logs_company():
+    companys = Company.query.filter_by(enabled=True).all()[200:400]
+    for company in companys:
+        atention = AttentionLog.query.filter_by(company_id=company.id).first()
+        if not atention:
+            update = AttentionLog()
+            update.codigo = 1
+            update.company_id = company.id
+            update.description = "Inicio de atención"
+            update.created_by = company.created_by
+            update.date_attention = company.date_created
+            db.session.add(update)
+            db.session.commit() 
+    return 'listo'
+
+@digitalcenter.route('/init/log/3',methods=['GET', 'POST'])
+def _init3_logs_company():
+    companys = Company.query.filter_by(enabled=True).all()[400:600]
     for company in companys:
         atention = AttentionLog.query.filter_by(company_id=company.id).first()
         if not atention:
