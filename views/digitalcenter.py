@@ -1842,3 +1842,35 @@ def _init4_logs_company():
         if not company.created_by or not company.date_created:
             dato.append(company.id)
     return str(dato)
+
+@digitalcenter.route('/documentos/list',methods=['GET', 'POST'])
+def _company_document_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
+    lista = []
+    #for diagnosi in diagnosis:
+    #    lista.append(diagnosi.company_id)
+    if current_user.id == 3 or current_user.id == 24:
+        companys = Company.query.join(User, User.id==Company.created_by)\
+            .filter(Company.enabled==True).all()
+   
+    else:
+        companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+    for company in companys:
+        #buscamos la carta de compromiso DOC2
+        
+        carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+        carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
+        if carta:
+            lista.append(carta.id)
+        #buscamos la ficha de inscripcion DOC1
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
+        if carta:
+            lista.append(ficha.id)
+    lista = DocumentCompany.query.filter(DocumentCompany.id.in_(lista)).all()
+    context = {
+        'apis': lista,
+      
+    }
+    return render_template('company_document_list.html',**context)
