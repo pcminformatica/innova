@@ -908,7 +908,7 @@ def _d_save_DiagnosisCompany():
             resp = requests.get(url,headers=headers)
             api = json.loads(resp.content)
             identidad = api['IDENTIDAD'].replace("-", "")
-            fecha_string = diagnostico['_submission_time']
+            fecha_string = api['_submission_time']
             company =  Company.query.filter(Company.dni == identidad).first()
             if not company:
                 return jsonify({ 'status': 201, 'dni': identidad })
