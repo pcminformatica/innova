@@ -1079,7 +1079,7 @@ def _d_save_ActionPlanHistory_update():
             plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
-            if txt_finalizo == True and porcentaje == 100:
+            if txt_finalizo == True and porcentaje == 10000:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
                 if not wallet:
                     wallet = WalletTransaction()
