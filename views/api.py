@@ -968,7 +968,7 @@ def _d_save_ActionPlanHistory():
             #sumamos el porcentaje actual + el porcentaje de la nueva asesoria
             porcentaje = porcentaje + int(txt_porcentaje)
             #Si el porcentaje es mayor a 100 lanzamos el error
-            if porcentaje > 100:
+            if porcentaje > 10000:
                 return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
             
             history =  ActionPlanHistory()
@@ -983,7 +983,10 @@ def _d_save_ActionPlanHistory():
             db.session.add(history)
             db.session.commit()
            
-            plan.progress =porcentaje
+            if porcentaje > 100:
+                plan.progress =100
+            else:
+                plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
             if txt_finalizo == True and porcentaje == 100:
@@ -1063,7 +1066,7 @@ def _d_save_ActionPlanHistory_update():
             #sumamos el porcentaje actual + el porcentaje de la asesoria que estamos editando
             porcentaje = porcentaje + int(txt_porcentaje)
             #Si el porcentaje es mayor a 100 lanzamos el error
-            if porcentaje > 100:
+            if porcentaje > 10000:
                 return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
 
             historyUpdate.created_by = current_user.id 
@@ -1075,11 +1078,13 @@ def _d_save_ActionPlanHistory_update():
             historyUpdate.advisory_time = txt_hora
             db.session.add(historyUpdate)
             db.session.commit()
-
-            plan.progress =porcentaje
+            if porcentaje > 100:
+                plan.progress =100
+            else:
+                plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
-            if txt_finalizo == True and porcentaje == 10000:
+            if txt_finalizo == True and porcentaje == 100:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
                 if not wallet:
                     wallet = WalletTransaction()
