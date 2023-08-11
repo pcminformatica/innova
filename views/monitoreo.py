@@ -38,7 +38,7 @@ def _indicadores_productividad():
         companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
         planes = 0
         for company in companys:
-            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.created_by == user.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
                 planes = planes + 1
         references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
