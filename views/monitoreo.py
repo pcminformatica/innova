@@ -649,7 +649,7 @@ def _indicadores_perfil_asesor(user_uid):
         planes = 0
         lista = []
         for company in companys:
-            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.created_by == user.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
                 lista.append(company.id)
                 planes = planes + 1
@@ -687,7 +687,7 @@ def _indicadores_perfil_asesor(user_uid):
         planes = 0
         lista = []
         for company in companys:
-            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.created_by == user.id,ActionPlan.fase!=0).first()
             if plan:
                 lista.append(company.id)
                 planes = planes + 1
