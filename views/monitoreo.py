@@ -646,10 +646,23 @@ def _indicadores_perfil_asesor(user_uid):
             print(diagnosticos)
             print(len(diagnosticos))
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        companys_etapa1 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1'
+                                            ).all()
+        companys_etapa2 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E2'
+                                            ).all()
         planes = 0
         lista = []
         for company in companys:
-            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.created_by == user.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            #plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.created_by == user.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
                 lista.append(company.id)
                 planes = planes + 1
@@ -699,7 +712,8 @@ def _indicadores_perfil_asesor(user_uid):
         planes = 0
         lista = []
         for company in companys:
-            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.created_by == user.id,ActionPlan.fase!=0).first()
+            #plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.created_by == user.id,ActionPlan.fase!=0).first()
+            plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
                 lista.append(company.id)
                 planes = planes + 1
