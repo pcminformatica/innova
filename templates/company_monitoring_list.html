@@ -77,6 +77,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
@@ -125,6 +126,12 @@
                                                     {{ api.status.name }}
                                                 {% endif %}
                                             </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {% if api.stage %}
+                                                    {{ api.stage.name }}
+                                                {% endif %}
+                                            </th>
+                                        
                                             <th class="mdc-data-table__cell" scope="row">
                                                 {% if api.inscripcion %}
                                                     {{ api.inscripcion.correo }}

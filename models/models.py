@@ -744,6 +744,13 @@ class CompanyStatus(db.Model):
     name = db.Column(db.String(150), unique=True, nullable=False)
     name_short = db.Column(db.String(10), unique=True, nullable=True)
 
+
+class CompanyStage(db.Model):
+    __tablename__ = 'company_stage'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+
 # Attention Log
 class AttentionLog(db.Model):
     _tablename__ = 'attentionlog'
@@ -779,6 +786,8 @@ class Company(db.Model):
     available_credit = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
     status_id = db.Column(db.Integer, db.ForeignKey('company_status.id'), nullable=True)
     status = db.relationship("CompanyStatus")
+    stage_id = db.Column(db.Integer, db.ForeignKey('company_stage.id'), nullable=True)
+    stage = db.relationship("CompanyStage")
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
     istransferred = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     

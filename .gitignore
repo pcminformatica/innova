@@ -182,3 +182,7 @@ static/js/bundle/
 alembic.ini
 #
 package-lock.json
+migracion.py
+migracionall.py
+static/elegibles.json
+static/inscripcion.json

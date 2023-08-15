@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import AttentionLog,WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import CompanyStage,EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -1874,3 +1874,76 @@ def _company_document_list():
       
     }
     return render_template('company_document_list.html',**context)
+
+
+
+@digitalcenter.route('/update/stage/',methods=['GET', 'POST'])
+def _init_stage_company():
+    companys = Company.query.filter_by(enabled=True).all()[0:200]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            if update.status_id == 1:                
+                status = CompanyStage.query.filter_by(name_short='E1').first()
+                update.stage_id = status.id
+            else:
+                status = CompanyStage.query.filter_by(name_short='E2').first()
+                update.stage_id = status.id
+        else:
+            status = CompanyStage.query.filter_by(name_short='E1').first()
+            update.stage_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+
+@digitalcenter.route('/formulario/change/<int:company_id>/form/',methods = ['GET', 'POST'])
+def _company_change_form(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=document_type.id))
+        
+        file = request.files['upload-carta']
+        #buscamos el tipo de documento
+        document = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+        n = 1
+        if document:
+            document.enabled = False
+            n = document.id
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            documentoName = str(company.dni) + ' ' + str(document_type.name) + '-' + str(n)
+            filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            carta = DocumentCompany()
+            carta.company_id = company.id
+            carta.documente_type_id = document_type.id
+            carta.complete = True
+            carta.signed = True
+            carta.signed_innova = True
+            carta.enabled = True
+            carta.document_local = filename
+            carta.created_by = current_user.id
+            db.session.add(carta)
+
+            if document_type.name_short == 'DOC1':
+                update =  Company.query.filter(Company.id == company.id).first()
+                status = CompanyStatus.query.filter_by(name_short='3').first()
+                update.status_id = status.id
+                db.session.add(update)
+                db.session.commit()
+            db.session.commit()
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+
+    context = {
+        "company": company,
+        "document_type":document_type
+    }
+    return render_template('company_change_form.html',**context)
+

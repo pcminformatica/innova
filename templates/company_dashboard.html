@@ -24,6 +24,7 @@
 </style>
 {% endblock %}
 {% block body %}
+
 <div class="container-color-background">
     <div class="mdc-layout-grid container-size-s" style="min-height: auto;">
         <div class="mdc-layout-grid__inner">
@@ -31,22 +32,26 @@
                 <div class="container-dashboard--card-info">
                     <div class="mdc-card mdc-card--color-on-primary">
                         <div class="mdc-card__content">
-                            <p>
-                                <b>Nombre de la empresa:</b>
-                                {{ company.name }}
-                            </p>
-                            <p>
-                                <b>DNI Empresaria:</b>
-                                {{ company.dni }}
-                            </p>
-                            <p>
-                                <b>RTN :</b>
-                                {{ company.rtn }}
-                            </p>
-                            <p>
-                                <b>Direccion:</b>
-                                {{ company.address }}
-                            </p>
+                            <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                    <p><b>Nombre de empresa:</b> {{company.name}} </p>
+                                    <p><b>Nombre de empresaria:</b> {{company.inscripcion.name}} </p>
+                                    <p><b>Teléfono:</b> {{company.inscripcion.phone}} </p>
+                                </div>
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                    <p><b>Departamento:</b> {{company.inscripcion.departamento}} </p>
+                                    <p><b>Municipio:</b> {{company.inscripcion.municipio}} </p>
+                                    <p><b>Correo:</b> {{company.inscripcion.correo}} </p>
+                                </div>
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet s-font-align-center">
+                                    <a href="{{ url_for('digitalcenter._company_change_form',company_id=company.id) }}" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
+                                        <span class="mdc-button__label">Editar Etapa</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

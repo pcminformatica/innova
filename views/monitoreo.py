@@ -10,7 +10,7 @@ from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 monitoreo = Blueprint('monitoreo', __name__, template_folder='templates/', static_folder='static')
-from models.models import WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import CompanyStage,WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from sqlalchemy import desc
@@ -684,6 +684,18 @@ def _indicadores_perfil_asesor(user_uid):
     
         #companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        companys_etapa1 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1'
+                                            ).all()
+        companys_etapa2 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E2'
+                                            ).all()
         planes = 0
         lista = []
         for company in companys:
@@ -740,7 +752,9 @@ def _indicadores_perfil_asesor(user_uid):
         'serviciosfin':len(serviciosfin),
         'users': user,
         'bitacoras':bitacoras,
-        'asesorias':asesorias
+        'asesorias':asesorias,
+        'companys_etapa1':companys_etapa1,
+        'companys_etapa2':companys_etapa2
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
 
