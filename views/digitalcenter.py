@@ -1946,45 +1946,12 @@ def _company_change_form(company_id):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'upload-carta' not in request.files:
-            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=document_type.id))
-        
-        file = request.files['upload-carta']
-        #buscamos el tipo de documento
-        document = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
-        n = 1
-        if document:
-            document.enabled = False
-            n = document.id
-        if file.filename == '':
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            documentoName = str(company.dni) + ' ' + str(document_type.name) + '-' + str(n)
-            filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            carta = DocumentCompany()
-            carta.company_id = company.id
-            carta.documente_type_id = document_type.id
-            carta.complete = True
-            carta.signed = True
-            carta.signed_innova = True
-            carta.enabled = True
-            carta.document_local = filename
-            carta.created_by = current_user.id
-            db.session.add(carta)
-
-            if document_type.name_short == 'DOC1':
-                update =  Company.query.filter(Company.id == company.id).first()
-                status = CompanyStatus.query.filter_by(name_short='3').first()
-                update.status_id = status.id
-                db.session.add(update)
-                db.session.commit()
-            db.session.commit()
-            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
-
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id))
+    status = CompanyStage.query.all()
     context = {
         "company": company,
-        "document_type":document_type
+        'status':status,
+
     }
     return render_template('company_change_form.html',**context)
 

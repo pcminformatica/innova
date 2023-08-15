@@ -355,3 +355,39 @@ function saveMatricula(company_id){
   });
 
 }
+
+
+function actualizarEtapa(){
+  const Swal = swcms.returnSwal()
+  const company_id = document.getElementById('txt_company_id').value ;
+  
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  let postData = {
+    'txt_status': mdcAssignedVars['txt_status'].value.trim() || null,
+    'txt_company': company_id,
+  };
+  let aUrl = '/company/view/'+company_id+'/';
+  let apiUrl = '/api/save/stage/'
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+    'Éxito',
+    'Etapa aprobada',
+    'success'
+    )
+    window.setTimeout(() => { window.location.replace(aUrl);}, 1500);
+  
+  }).catch((error) => {
+    Swal.fire(
+    'Error de conexión',
+    'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+    'error'
+    )
+    document.getElementById('btn_generar_carta').disabled = false;
+  });
+  
+  
+}

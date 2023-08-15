@@ -70,54 +70,78 @@
 
                                     
                                     <h2>
-                                        Cargar nuevo documento
+                                        Formulario de edición de etapa
                                     </h2>
-                                    <p>
-                                        Para cargar una nueva "{{ document_type.name }}", primero da clic en el botón "Seleccione documento" y luego da clic "Enviar Documento" 
-                                    </p>
-                                
+                           
                                     <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
-                                    <input type="hidden" name="txt_company_id"  value="{{company.company_id}}">
-                                    <input type="hidden"  name="txt_documente_id" value="{{ document_type.name_short }}">
+                                    <input type="hidden" id="txt_company_id" name="txt_company_id"  value="{{company.id}}">
+                    
                                     <input type="hidden"  name="txt_document_version" value="1">
-                                    <label htmlFor="upload-photo" style="margin: auto">
-                                        <input
-                                            style="display:none"
-                                            id="upload-photo"
-                                            name="upload-carta"
-                                            type="file"
-                                            onchange="loadFileFicha(event)"
-                                        />
+                                    <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                      <div class="mdc-typography--body1">
+                                        Etapa:
+                                      </div>
+                                      <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_status" data-assigned-var>
+                                          <div class="mdc-select__anchor"
+                                               role="button"
+                                               aria-haspopup="listbox"
+                                               aria-expanded="false"
+                                               aria-labelledby="demo-label demo-selected-text">
+                                            <span class="mdc-select__ripple"></span>
+                                            <span id="demo-label" class="mdc-floating-label">Etapa</span>
+                                            <span class="mdc-select__selected-text-container">
+                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                            </span>
+                                            <span class="mdc-select__dropdown-icon">
+                                              <svg
+                                                  class="mdc-select__dropdown-icon-graphic"
+                                                  viewBox="7 10 10 5" focusable="false">
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-inactive"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 10 12 15 17 10">
+                                                </polygon>
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-active"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 15 12 10 17 15">
+                                                </polygon>
+                                              </svg>
+                                            </span>
+                                            <span class="mdc-line-ripple"></span>
+                                          </div>
                                         
-                                        <Fab
-                                        <button id="submitSaveButtonPIC" style="background-color: gray;"  class="mdc-button  mdc-button--raised mdc-button--leading">
-                                            <span class="mdc-button__ripple"></span>
-                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                >add</i
-                                            >
-                                            <span class="mdc-button__label">Seleccione documento</span>
-                                            </button>
-                                        </Fab>
-                                        <br />
-                                        <br />
-                                        
-                                        <Fab color="primary" size="small" component="span" aria-label="add">
-                                            <AddIcon />
-                                        </Fab>
-                                        </label>
-                                    <br>
-                                        <embed id="output2" width="500" height="375" type="application/pdf">
+                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    {% for status in status %}
+                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ status.name_short }}" role="option">
+                                                          <span class="mdc-deprecated-list-item__ripple"></span>
+                                                          <span class="mdc-deprecated-list-item__text">
+                                                          {{ status.name }}
+                                                          </span>
+                                                      </li>
+                                                    {% endfor %}
+                                       
+                                            </ul>
+                                          </div>
+                                        </div>
+                                    </div>
+                              
                                     <br><br><br>
                                     
                                     
             
 
                                     <div class="s-font-align-center">
-                                        <button type="submit" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                        <button onclick="actualizarEtapa()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
                                             
                                             <span class="mdc-button__ripple"></span>
                                             <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                            <span class="mdc-button__label">Enviar documento</span>
+                                            <span class="mdc-button__label">Actualizar etapa</span>
                                         </button>
                                     </div>
                                     </form>    
@@ -159,9 +183,10 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 
 <script>
-  function aprobarDocumento(){
+  function actualizarEtapa1(){
 
 const Swal = swcms.returnSwal()
 
