@@ -1955,3 +1955,25 @@ def _company_change_form(company_id):
     }
     return render_template('company_change_form.html',**context)
 
+@digitalcenter.route('/blueberry/',methods=['GET', 'POST'])
+def _company_blueberry_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    company = Company.query.filter(Company.enabled==True).all()
+    context = {
+        'apis': company,
+    }
+    return render_template('company_list.html',**context)
+
+@digitalcenter.route('/blueberry/<int:company_id>/',methods=['GET', 'POST'])
+def _company_blueberry_view(company_id):
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    company = Company.query.filter_by(id=company_id).first()
+    if request.method == 'POST':
+        txt_departamento = request.form['txt_departamento']
+        txt_municipios = request.form['txt_municipios']
+
+
+    context = {
+        'company': company,
+    }
+    return render_template('company_forms.html',**context)
