@@ -1898,6 +1898,47 @@ def _init_stage_company():
         db.session.commit()
     return 'listo'
 
+@digitalcenter.route('/update/stage/2',methods=['GET', 'POST'])
+def _init_stage_2_company():
+    companys = Company.query.filter_by(enabled=True).all()[200:420]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            if update.status_id == 1:                
+                status = CompanyStage.query.filter_by(name_short='E1').first()
+                update.stage_id = status.id
+            else:
+                status = CompanyStage.query.filter_by(name_short='E2').first()
+                update.stage_id = status.id
+        else:
+            status = CompanyStage.query.filter_by(name_short='E1').first()
+            update.stage_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+@digitalcenter.route('/update/stage/3',methods=['GET', 'POST'])
+def _init_stage_3_company():
+    companys = Company.query.filter_by(enabled=True).all()[420:670]
+    for company in companys:
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        if ficha:
+            if update.status_id == 1:                
+                status = CompanyStage.query.filter_by(name_short='E1').first()
+                update.stage_id = status.id
+            else:
+                status = CompanyStage.query.filter_by(name_short='E2').first()
+                update.stage_id = status.id
+        else:
+            status = CompanyStage.query.filter_by(name_short='E1').first()
+            update.stage_id = status.id
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
 
 @digitalcenter.route('/formulario/change/<int:company_id>/form/',methods = ['GET', 'POST'])
 def _company_change_form(company_id):
