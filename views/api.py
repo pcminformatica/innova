@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -957,6 +957,7 @@ def _d_save_ActionPlanHistory():
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
             txt_hora = request.json['txt_hora']
+            txt_modality = request.json['txt_modality'] 
             if int(txt_porcentaje) > 100:
                 return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
             plan = ActionPlan.query.filter_by(id = txt_servicios).first()
@@ -980,6 +981,10 @@ def _d_save_ActionPlanHistory():
             history.date_created = txt_fecha
             history.url = txt_url
             history.advisory_time = txt_hora
+            if txt_modality:
+                modality = ModalityType.query.filter_by(name_short=txt_modality).first()
+                history.id_modality_type = modality.id
+                
             db.session.add(history)
             db.session.commit()
            

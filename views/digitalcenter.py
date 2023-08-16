@@ -1413,9 +1413,12 @@ def _company_dashboard_action_plan_references(user_uid):
 def _plan_action_bitacora(user_uid):
     action = ActionPlan.query.filter_by(id=user_uid).first()
     history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
+    lista = ['MT1','MT2']
+    modalidad = ModalityType.query.filter(ModalityType.name_short.in_(lista)).all()
     context = {
         'action': action,
-        'history':history
+        'history':history,
+        'modalidad':modalidad
     }
     return render_template('plan_action_bitacora.html',**context)
 

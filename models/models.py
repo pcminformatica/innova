@@ -892,6 +892,8 @@ class ActionPlanHistory(db.Model):
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     progress = db.Column(db.Integer, unique=False, nullable=True, default=0)
     advisory_time = db.Column(db.Time, nullable=True)
+    id_modality_type =db.Column(db.Integer, db.ForeignKey('modality_type.id'),nullable=True)
+    modality_type = db.relationship("ModalityType")
     
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):
@@ -934,7 +936,7 @@ class TrainingType(db.Model):
     __tablename__ = 'training_type'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
-    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    name_short = db.Column(db.String(10), unique=True, nullable=True,)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     def __repr__(self):
         return jsonify(

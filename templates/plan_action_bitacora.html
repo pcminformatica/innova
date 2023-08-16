@@ -39,6 +39,56 @@
                                             </label>
                                         </div>
                                         <div class="mdc-typography--body1">
+                                          Modalidad:
+                                        </div>
+                                        <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_modality" data-assigned-var>
+                                          <div class="mdc-select__anchor"
+                                               role="button"
+                                               aria-haspopup="listbox"
+                                               aria-expanded="false"
+                                               aria-labelledby="demo-label demo-selected-text">
+                                            <span class="mdc-select__ripple"></span>
+                                            <span id="demo-label" class="mdc-floating-label">Modalidad</span>
+                                            <span class="mdc-select__selected-text-container">
+                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                            </span>
+                                            <span class="mdc-select__dropdown-icon">
+                                              <svg
+                                                  class="mdc-select__dropdown-icon-graphic"
+                                                  viewBox="7 10 10 5" focusable="false">
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-inactive"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 10 12 15 17 10">
+                                                </polygon>
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-active"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 15 12 10 17 15">
+                                                </polygon>
+                                              </svg>
+                                            </span>
+                                            <span class="mdc-line-ripple"></span>
+                                          </div>
+                                        
+                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    {% for modalidad in modalidad %}
+                                                      <li class="mdc-deprecated-list-item " aria-selected="false" data-value="{{ modalidad.name_short }}" role="option">
+                                                          <span class="mdc-deprecated-list-item__ripple"></span>
+                                                          <span class="mdc-deprecated-list-item__text">
+                                                          {{ modalidad.name }}
+                                                          </span>
+                                                      </li>
+                                                    {% endfor %}
+                                       
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      <br>
+                                        <div class="mdc-typography--body1">
                                           Fecha:
                                       </div>
                                       <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
@@ -164,6 +214,7 @@
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Horas de asesoría</th>
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Modalidad</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">URL</th>
                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
                                 
@@ -199,6 +250,11 @@
                                   </td>
                                   <td class="mdc-data-table__cell no-print">
                                     {{ apix.advisory_time  }}
+                                  </td>
+                                  <td class="mdc-data-table__cell no-print">
+                                    {% if modality_type  %}
+                                    {{ apix.modality_type.name  }}
+                                    {% endif %}
                                   </td>
                                   <td class="mdc-data-table__cell no-print">
                                     {% if apix.url  %}
@@ -251,15 +307,20 @@
 <script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
 
 <script>
+  const mdcAssignedVars = {};
     function saveResumenAtencion()
     {
         const Swal = swcms.returnSwal()
+        swcms.mdcSelects.forEach((sel) => {
+          if (sel.assignedVar)
+              mdcAssignedVars[sel.assignedVar] = sel;
+        });
         var txt_porcentaje = document.getElementById("txt_porcentaje").value.trim() || null
         var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
         var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
         var txt_url = document.getElementById("txt_url").value.trim() || null
         var txt_hora = document.getElementById("txt_hora").value.trim() || null
-        
+
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
         if(txt_porcentaje<=0 || txt_porcentaje>=101){
@@ -286,8 +347,10 @@
             "txt_fecha":txt_fecha,
             "txt_url":txt_url,
             "txt_hora":txt_hora,
+            'txt_modality': mdcAssignedVars['txt_modality'].value.trim() || null,
       };
       console.log(postData)
+
       let apiUrl = '/api/save/action/plan/history/';
       //document.getElementById('submitSaveButton').disabled = true;
 
