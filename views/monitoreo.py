@@ -11,7 +11,7 @@ from flask_login import logout_user, current_user, login_required
 from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 monitoreo = Blueprint('monitoreo', __name__, template_folder='templates/', static_folder='static')
 from models.models import CompanyStage,WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import ModalityType,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from sqlalchemy import desc
 import requests
@@ -697,26 +697,53 @@ def _indicadores_perfil_asesor(user_uid):
     
         #companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        inactivas = ['4','5']
         companys_etapa1 = Company.query.join(User, User.id==Company.created_by
                                             ).join(CompanyStatus, Company.status_id==CompanyStatus.id
                                             ).join(CompanyStage, Company.stage_id==CompanyStage.id
                                             ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
                                             CompanyStage.name_short == 'E1'
-                                            ).all()
+                                            ).count()
+        companys_etapa1_inactivas = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1',CompanyStatus.name_short.in_(inactivas)
+                                            ).count()
+        companys_etapa1_activas = companys_etapa1 - companys_etapa1_inactivas
         companys_etapa2 = Company.query.join(User, User.id==Company.created_by
                                             ).join(CompanyStatus, Company.status_id==CompanyStatus.id
                                             ).join(CompanyStage, Company.stage_id==CompanyStage.id
                                             ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
                                             CompanyStage.name_short == 'E2'
-                                            ).all()
+                                            ).count()
+        companys_etapa2_inactivas = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1',CompanyStatus.name_short.in_(inactivas)
+                                            ).count()   
+        companys_etapa2_activas = companys_etapa2 - companys_etapa2_inactivas     
+
         planes = 0
         lista = []
+
         for company in companys:
             #plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.created_by == user.id,ActionPlan.fase!=0).first()
             plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
                 lista.append(company.id)
                 planes = planes + 1
+            
+        plan_services_total = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.cancelled == False,ActionPlan.company_id.in_(lista),ActionPlan.fase!=0).all()
+        referidos_servicios =   []
+        referidos_serviciosfin =  []
+        for bitacora in plan_services_total:
+            if bitacora.id not in referidos_servicios:
+                if bitacora.progress == 100:
+                    referidos_serviciosfin.append(bitacora.id)
+                referidos_servicios.append(bitacora.id)
+
         planes = Company.query.filter(Company.id.in_(lista)).all()
         #planes = Company.query.filter(Company.id.in_(planes)).all()
         references = ActionPlanReferences.query.filter_by(employe_assigned=user.id).order_by(desc(ActionPlanReferences.id)).all()
@@ -740,7 +767,8 @@ def _indicadores_perfil_asesor(user_uid):
                     serviciosfin.append(bitacora.action_plan_id)
                 servicios.append(bitacora.action_plan_id)
         asesorias = ActionPlanHistory.query.filter(ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).all()
-    
+        asesorias_virtual = ActionPlanHistory.query.join(ModalityType, ModalityType.id==ActionPlanHistory.id_modality_type).filter(ModalityType.name_short == 'MT2', ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).count()
+        asesorias_presencial = len(asesorias) - asesorias_virtual
     profesion = ''
     if user.extra_info.profession:
         profesion = user.extra_info.profession.name
@@ -768,7 +796,17 @@ def _indicadores_perfil_asesor(user_uid):
         'bitacoras':bitacoras,
         'asesorias':asesorias,
         'companys_etapa1':companys_etapa1,
-        'companys_etapa2':companys_etapa2
+        'companys_etapa2':companys_etapa2,
+"companys_etapa1_inactivas":companys_etapa1_inactivas,
+"companys_etapa1_activas":companys_etapa1_activas,
+"companys_etapa2_inactivas":companys_etapa2_inactivas,
+"companys_etapa2_activas":companys_etapa2_activas,
+"asesorias_presencial":asesorias_presencial,
+"asesorias_virtual":asesorias_virtual,
+"plan_services_total":plan_services_total,
+        'referidos_servicios':len(referidos_servicios),
+        'referidos_serviciosproceso':len(referidos_servicios) -len(referidos_serviciosfin),
+        'referidos_serviciosfin':len(referidos_serviciosfin),
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
 
