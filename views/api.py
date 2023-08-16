@@ -1056,6 +1056,7 @@ def _d_save_ActionPlanHistory_update():
             txt_fecha = request.json['txt_fecha']
             txt_url = request.json['txt_url']
             txt_hora = request.json['txt_hora']
+            txt_modality = request.json['txt_modality'] 
             #buscamos el historial a actulizar
             historyUpdate =  ActionPlanHistory.query.filter(ActionPlanHistory.id==txt_servicios).first()
             #buscamos el plan de accion que deseamos actulizar
@@ -1081,6 +1082,9 @@ def _d_save_ActionPlanHistory_update():
             historyUpdate.date_created = txt_fecha
             historyUpdate.url = txt_url
             historyUpdate.advisory_time = txt_hora
+            if txt_modality:
+                modality = ModalityType.query.filter_by(name_short=txt_modality).first()
+                historyUpdate.id_modality_type = modality.id
             db.session.add(historyUpdate)
             db.session.commit()
             if porcentaje > 100:

@@ -1426,8 +1426,11 @@ def _plan_action_bitacora(user_uid):
 @digitalcenter.route('/empresas/resumen/update/<int:user_uid>/',methods=['GET', 'POST'])
 def _plan_action_bitacora_update(user_uid):
     action = ActionPlanHistory.query.filter_by(id=user_uid).first()
+    lista = ['MT1','MT2']
+    modalidad = ModalityType.query.filter(ModalityType.name_short.in_(lista)).all()
     context = {
         'action': action,
+        'modalidad':modalidad,
        
     }
     return render_template('plan_action_bitacora_update.html',**context)
