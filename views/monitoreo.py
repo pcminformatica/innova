@@ -650,14 +650,45 @@ def _indicadores_perfil_asesor(user_uid):
                                             ).join(CompanyStatus, Company.status_id==CompanyStatus.id
                                             ).join(CompanyStage, Company.stage_id==CompanyStage.id
                                             ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
-                                            CompanyStage.name_short == 'E1'
+                                            CompanyStage.name_short == 'E1',
+                                            Company.date_created.between(txt_start_date, txt_end_date)
                                             ).all()
         companys_etapa2 = Company.query.join(User, User.id==Company.created_by
                                             ).join(CompanyStatus, Company.status_id==CompanyStatus.id
                                             ).join(CompanyStage, Company.stage_id==CompanyStage.id
                                             ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
-                                            CompanyStage.name_short == 'E2'
+                                            CompanyStage.name_short == 'E2',Company.date_created.between(txt_start_date, txt_end_date)
                                             ).all()
+        inactivas = ['4','5']
+        companys_etapa1 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1',Company.date_created.between(txt_start_date, txt_end_date)
+                                            ).count()
+        companys_etapa1_inactivas = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1',CompanyStatus.name_short.in_(inactivas),
+                                            Company.date_created.between(txt_start_date, txt_end_date)
+                                            ).count()
+        companys_etapa1_activas = companys_etapa1 - companys_etapa1_inactivas
+        companys_etapa2 = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E2',
+                                            Company.date_created.between(txt_start_date, txt_end_date)
+                                            ).count()
+        companys_etapa2_inactivas = Company.query.join(User, User.id==Company.created_by
+                                            ).join(CompanyStatus, Company.status_id==CompanyStatus.id
+                                            ).join(CompanyStage, Company.stage_id==CompanyStage.id
+                                            ).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ,
+                                            CompanyStage.name_short == 'E1',CompanyStatus.name_short.in_(inactivas),
+                                            Company.date_created.between(txt_start_date, txt_end_date)
+                                            ).count()   
+        companys_etapa2_activas = companys_etapa2 - companys_etapa2_inactivas   
         planes = 0
         lista = []
         for company in companys:
@@ -667,6 +698,14 @@ def _indicadores_perfil_asesor(user_uid):
                 lista.append(company.id)
                 planes = planes + 1
         planes = Company.query.filter(Company.id.in_(lista)).all()
+        plan_services_total = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.cancelled == False,ActionPlan.company_id.in_(lista),ActionPlan.fase!=0).all()
+        referidos_servicios =   []
+        referidos_serviciosfin =  []
+        for bitacora in plan_services_total:
+            if bitacora.id not in referidos_servicios:
+                if bitacora.progress == 100:
+                    referidos_serviciosfin.append(bitacora.id)
+                referidos_servicios.append(bitacora.id)        
         references = ActionPlanReferences.query.filter(ActionPlanReferences.date_created.between(txt_start_date, txt_end_date),ActionPlanReferences.employe_assigned==user.id).order_by(desc(ActionPlanReferences.id)).all()
         lista = []
         for reference in references:
@@ -678,6 +717,7 @@ def _indicadores_perfil_asesor(user_uid):
         for reference in references_accepted:
             lista.append(reference.action_plan.company.id)
         company_references_accepted = Company.query.filter(Company.id.in_(lista)).all()
+        
         bitacoras = ActionPlanHistory.query.distinct(ActionPlanHistory.action_plan_id).filter(ActionPlanHistory.date_created.between(txt_start_date, txt_end_date),ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False)
         servicios =   []
         serviciosfin =  []
@@ -687,6 +727,9 @@ def _indicadores_perfil_asesor(user_uid):
                     serviciosfin.append(bitacora.action_plan_id)
                 servicios.append(bitacora.action_plan_id)
         asesorias = ActionPlanHistory.query.filter(ActionPlanHistory.date_created.between(txt_start_date, txt_end_date), ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).all()
+        asesorias_virtual = ActionPlanHistory.query.join(ModalityType, ModalityType.id==ActionPlanHistory.id_modality_type).filter(ActionPlanHistory.date_created.between(txt_start_date, txt_end_date),ModalityType.name_short == 'MT2', ActionPlanHistory.created_by==user.id,ActionPlanHistory.cancelled==False).count()
+        asesorias_presencial = len(asesorias) - asesorias_virtual
+
     else:
 
         #contamos los diagnosticos
