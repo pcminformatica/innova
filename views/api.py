@@ -1346,7 +1346,7 @@ def _d_create_carta_compromiso():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
-
+import re
 @api.route('/api/create/ficha/inscripcion', methods = ['POST'])
 @login_required
 def _d_create_ficha_inscripcion():
@@ -1361,8 +1361,51 @@ def _d_create_ficha_inscripcion():
             company = Company.query.filter_by(id = txt_company_id).first()
             inscripciones =  Inscripciones.query.filter_by(id=company.inscripcion_id).first()
             preguntas = inscripciones.respuestas
-            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
-            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+            if inscripciones.cohorte <= 4:
+                print('3_17')
+                data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                # Buscar y extraer los números usando expresiones regulares
+                numbers = re.findall(r'\d+', data)
+
+                # Convertir los números a enteros y separarlos en listas para cada sección
+                total_mujeres = int(numbers[0])
+                total_hombres = int(numbers[1])
+                total_general = int(numbers[2])
+
+                remunerados_mujeres = int(numbers[3])
+                remunerados_hombres = int(numbers[4])
+                total_remunerados = int(numbers[5])
+
+                no_remunerados_mujeres = int(numbers[6])
+                no_remunerados_hombres = int(numbers[7])
+                total_no_remunerados = int(numbers[8])
+                totalEmpleadosPermanentes = total_general + total_remunerados + total_no_remunerados
+                data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                # Buscar y extraer los números usando expresiones regulares
+                numbers = re.findall(r'\d+', data)
+
+                # Convertir los números a enteros y separarlos en listas para cada sección
+                total_mujeres = int(numbers[0])
+                total_hombres = int(numbers[1])
+                total_general = int(numbers[2])
+
+                remunerados_mujeres = int(numbers[3])
+                remunerados_hombres = int(numbers[4])
+                total_remunerados = int(numbers[5])
+
+                no_remunerados_mujeres = int(numbers[6])
+                no_remunerados_hombres = int(numbers[7])
+                total_no_remunerados = int(numbers[8])
+                # Sumar los totales
+                totalEmpleadosTemporales = total_general + total_remunerados + total_no_remunerados
+                print(totalEmpleadosPermanentes)
+                print(totalEmpleadosTemporales)
+
+            else:
+                
+                totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+                totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+      
             idDN = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
             registrospendientes = list(e for e in preguntas if e['id']  == '4_3')[0]['respuesta']
             if not registrospendientes:
