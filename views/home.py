@@ -616,31 +616,7 @@ def _evaluations_admin():
     return render_template('evaluaciones/evaluations_admin.html')
 
 
-# Set the Appointment's Details
-@home.route('/api/save/test/madurez', methods = ['POST'])
-@login_required
-def _save_test_madurez():
-    app.logger.debug('** SWING_CMS ** - API acceptterms')
-    try:
-        # POST: Save Appointment
-        if request.method == 'POST':
-            txt_name = request.json['txt_name']
-            txt_identidad = request.json['txt_identidad']  
-            txt_preguntas = request.json['txt_preguntas']
-            total = request.json['total']
 
-            evaluation = Evaluations()
-            evaluation.name = txt_name
-            evaluation.dni = txt_identidad
-            evaluation.respuestas =txt_preguntas
-            evaluation.result = total
-            db.session.add(evaluation)
-            db.session.commit()
-
-            return jsonify({ 'status': 200, 'msg': 'Cita creada' })
-    except Exception as e:
-        app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
-        return jsonify({ 'status': 'error', 'msg': e })
 
 @home.route('/view/evaluations/5/<int:evaluations_id>',methods=['GET', 'POST'])
 def _evaluaciones_describe(evaluations_id):

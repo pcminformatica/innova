@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -1912,4 +1912,28 @@ def _d_save_depto_company():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
     
- 
+ # Set the Appointment's Details
+@api.route('/api/save/test/madurez/123/', methods = ['POST'])
+def _save_test_madurez():
+    app.logger.debug('** SWING_CMS ** - API acceptterms')
+    try:
+        # POST: Save Appointment
+        print('siiiiiiiiiiii')
+        if request.method == 'POST':
+            txt_name = request.json['txt_name']
+            txt_identidad = request.json['txt_identidad']  
+            txt_preguntas = request.json['txt_preguntas']
+            total = request.json['total']
+            print('siiiiiiiiiiii')
+            evaluation = Evaluations()
+            evaluation.name = txt_name
+            evaluation.dni = txt_identidad
+            evaluation.respuestas =txt_preguntas
+            evaluation.result = total
+            db.session.add(evaluation)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Cita creada' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

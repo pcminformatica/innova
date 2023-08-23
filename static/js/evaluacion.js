@@ -192,7 +192,7 @@ function test_madurez_save(){
       console.log(preguntas)
       console.log(total)
       console.log(postData)
-      let apiUrl = '/api/save/test/madurez';
+      let apiUrl = '/api/save/test/madurez/123/';
       document.getElementById('submitSaveButton').disabled = true;
 
       swcms.postFetch(apiUrl, postData).then((data) => {
