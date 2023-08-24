@@ -385,6 +385,8 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        {% endif %}
+                                        {% if current_user.id in (3,6,24,25) %}
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('home._evaluations_admin') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
