@@ -75,22 +75,23 @@ def _curso_enroll_list(courses_id):
             return "No se seleccionó ningún archivo."
         
         if file:
-            filename = secure_filename(file.filename)
-            # initializing string
-            str2hash =  dt.now(tz.utc)
-            # encoding GeeksforGeeks using encode()
-            # then sending to md5()
-            result = hashlib.md5(str(str2hash).encode())
-            filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
-            df = pd.read_excel(file)
-            
-            required_columns = ['DNI', 'Correo']
-            if not all(column in df.columns for column in required_columns):
-                return "El archivo no contiene todas las columnas requeridas."
-            linea = 1
             try:
+                filename = secure_filename(file.filename)
+                # initializing string
+                str2hash =  dt.now(tz.utc)
+                # encoding GeeksforGeeks using encode()
+                # then sending to md5()
+                result = hashlib.md5(str(str2hash).encode())
+                filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                
+                df = pd.read_excel(file)
+                
+                required_columns = ['DNI', 'Correo']
+                if not all(column in df.columns for column in required_columns):
+                    return "El archivo no contiene todas las columnas requeridas."
+                linea = 1
+        
                 for index, row in df.iterrows():
                     identity = row['DNI']
                     correo = row['Correo']
