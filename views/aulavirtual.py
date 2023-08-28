@@ -93,10 +93,10 @@ def _curso_enroll_list(courses_id):
                 linea = 1
         
                 for index, row in df.iterrows():
-                    identity = row['DNI']
+                    identity = str(row['DNI'])
                     correo = row['Correo']
         
-                    dni = identity.replace("-", "").replace(" ", "")
+                    dni = identity.strip().replace("-", "").replace(" ", "")
                     inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
                     if inscripcion:
                         company =  Company.query.filter(Company.dni == inscripcion.dni).first()
