@@ -1258,7 +1258,7 @@ def _initial_attention_companies():
                 db.session.add(company)
                 db.session.commit()
             else:
-                company
+                company.status_id = status.id
                 company.inscripcion_id = inscripcion.id
                 company.status_id = status.id
                 db.session.add(company)
@@ -1654,6 +1654,7 @@ def _initial_attention_companies_api():
             db.session.add(inscripcion)
             db.session.commit()
             company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+            status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 2).first()
             #creamos la empresa
             if not company:
                 company = Company()
@@ -1669,11 +1670,14 @@ def _initial_attention_companies_api():
                 company.social_networks = jsonSocial.jsonFormat()
                 company.created_by = current_user.id
                 company.inscripcion_id = inscripcion.id
+                company.status_id = status.id
                 db.session.add(company)
                 db.session.commit()
             else:
-                company
+                if not company.created_by:
+                    company.created_by = current_user.id
                 company.inscripcion_id = inscripcion.id
+                company.status_id = status.id
                 db.session.add(company)
                 db.session.commit()
                 db.session.refresh(company)
@@ -1774,11 +1778,32 @@ def _d_save_enroll():
         if request.method == 'POST':
             txt_curso = request.json['txt_curso']
             txt_company = request.json['txt_company']  
-            enroll = EnrollmentRecord.query.filter_by(id_course = txt_curso,company_id=txt_company).first()
+            inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_company).first()
+            company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+            status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 1).first()
+            #creamos la empresa
+            if not company:
+                company = Company()
+                company.name = inscripcion.company_name
+                company.rtn = inscripcion.rtn
+                company.dni = inscripcion.dni
+                company.address = inscripcion.departamento + ' - ' + inscripcion.municipio
+                jsonPhone = JsonPhone()
+                jsonPhone.phone = inscripcion.phone
+                jsonSocial= JsonSocial()
+                jsonSocial.email = inscripcion.correo
+                company.phones = jsonPhone.jsonFormat()
+                company.social_networks = jsonSocial.jsonFormat()
+                company.inscripcion_id = inscripcion.id
+                company.status_id = status.id
+                db.session.add(company)
+                db.session.commit()
+                
+            enroll = EnrollmentRecord.query.filter_by(id_course = txt_curso,company_id=company.id).first()
             if not enroll:
                 courses = EnrollmentRecord()
                 courses.id_course = txt_curso
-                courses.company_id = txt_company
+                courses.company_id = company.id
                 courses.created_by = current_user.id
                 db.session.add(courses)         
                 db.session.commit()
@@ -1797,13 +1822,12 @@ def _d_company_search():
         # POST: Save Appointment
         query = request.json['txt_busqueda']
         search = "%{}%".format(query)
-        clist = Company.query.join(CompanyStatus, CompanyStatus.id==Company.status_id)\
-            .join(Inscripciones, Inscripciones.id==Company.inscripcion_id)\
-            .filter(or_(Company.name.like(search),\
-                Company.dni.like(search),Company.phones.like(search),\
-                Company.address.like(search),\
+        clist = Inscripciones.query\
+            .filter(or_(Inscripciones.name.like(search),\
+                Inscripciones.dni.like(search),Inscripciones.municipio.like(search),\
+                Inscripciones.departamento.like(search),\
                 Inscripciones.correo.like(search),
-                Inscripciones.name.like(search),
+                Inscripciones.company_name.like(search),
                 ))\
             .filter(Company.enabled == True)\
             .all()[:20]
@@ -1822,14 +1846,15 @@ def _d_company_search():
                     'company_id': company.id,
                     'company_name': company.name,
                     'company_dni': company.dni,
-                    'empresarea_name':company.inscripcion.name,
-                    'company_departamento': company.inscripcion.departamento,
-                    'company_municipio': company.inscripcion.municipio,
-                    'company_cohorte': company.inscripcion.cohorte,
-                    'company_mail': company.inscripcion.correo,
-                    'company_phone': company.inscripcion.phone,
+                    'empresarea_name':company.company_name,
+                    'company_departamento': company.departamento,
+                    'company_municipio': company.municipio,
+                    'company_cohorte': company.cohorte,
+                    'company_mail': company.correo,
+                    'company_phone': company.phone,
                 })
-            return jsonify(response)
+        return jsonify(response)
+        
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
