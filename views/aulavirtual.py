@@ -12,6 +12,7 @@ from models.models import CompanyStatus,Inscripciones,EnrollmentRecord,Courses,T
 aulavirtual = Blueprint('aulavirtual', __name__, template_folder='templates', static_folder='static')
 
 
+from werkzeug.utils import secure_filename
 # Creates Timestamps without UTC for JavaScript handling:
 # utcDate.replace(tzinfo=tz.utc).timestamp()
 #
@@ -55,6 +56,7 @@ def _curso_list():
     return render_template('aulavirtual/curso_list.html',**context)
 import os
 import pandas as pd
+import hashlib
 @aulavirtual.route('/cursos/list/<int:courses_id>/',methods = ['GET', 'POST'])
 def _curso_enroll_list(courses_id):
     app.logger.debug('** SWING_CMS ** - AcercaDe')
@@ -73,11 +75,16 @@ def _curso_enroll_list(courses_id):
             return "No se seleccionó ningún archivo."
         
         if file:
-            filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            filename = secure_filename(file.filename)
+            # initializing string
+            str2hash =  dt.now(tz.utc)
+            # encoding GeeksforGeeks using encode()
+            # then sending to md5()
+            result = hashlib.md5(str(str2hash).encode())
+            filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             
-            file.save(filename)
-            
-            df = pd.read_excel(filename)
+            df = pd.read_excel(file)
             
             required_columns = ['DNI', 'Correo']
             if not all(column in df.columns for column in required_columns):
@@ -87,6 +94,7 @@ def _curso_enroll_list(courses_id):
                 for index, row in df.iterrows():
                     identity = row['DNI']
                     correo = row['Correo']
+        
                     dni = identity.strip().replace("-", "").replace(" ", "")
                     inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
                     if inscripcion:
