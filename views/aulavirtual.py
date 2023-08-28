@@ -83,29 +83,31 @@ def _curso_enroll_list(courses_id):
             if not all(column in df.columns for column in required_columns):
                 return "El archivo no contiene todas las columnas requeridas."
             linea = 1
-            for index, row in df.iterrows():
-                identity = row['DNI']
-                correo = row['Correo']
-                dni = identity.strip().replace("-", "").replace(" ", "")
-                inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
-                if inscripcion:
-                    company =  Company.query.filter(Company.dni == inscripcion.dni).first()
-                    #creamos la empresa
-                    if company:                       
-                        enroll = EnrollmentRecord.query.filter_by(id_course = txt_id_company,company_id=company.id).first()
-                        if not enroll:
-                            courses = EnrollmentRecord()
-                            courses.id_course = txt_id_company
-                            courses.company_id = company.id
-                            courses.created_by = current_user.id
-                            db.session.add(courses)         
-                            db.session.commit()
+            try:
+                for index, row in df.iterrows():
+                    identity = row['DNI']
+                    correo = row['Correo']
+                    dni = identity.strip().replace("-", "").replace(" ", "")
+                    inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
+                    if inscripcion:
+                        company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+                        #creamos la empresa
+                        if company:                       
+                            enroll = EnrollmentRecord.query.filter_by(id_course = txt_id_company,company_id=company.id).first()
+                            if not enroll:
+                                courses = EnrollmentRecord()
+                                courses.id_course = txt_id_company
+                                courses.company_id = company.id
+                                courses.created_by = current_user.id
+                                db.session.add(courses)         
+                                db.session.commit()
+                        else:
+                            data.append({'linea':index+2, 'dni': dni, 'correo': correo})
                     else:
                         data.append({'linea':index+2, 'dni': dni, 'correo': correo})
-                else:
-                    data.append({'linea':index+2, 'dni': dni, 'correo': correo})
                 
-    
+            except Exception as e:
+                return jsonify({'status': 'error', 'msg': str(e)}) 
     
     context = {
         'enrolls':enrolls,
