@@ -9,6 +9,29 @@
 .alignright {
 	float: right;
 }
+
+
+.file-upload {
+	margin: 0 10px 0 25px;
+}
+.file-upload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+  z-index: 10;
+	font-size: 20px;
+	cursor: pointer;
+	height: 36px;
+	opacity: 0;
+	filter: alpha(opacity=0); }
+
+#fileuploadurl{
+  border: none;
+  font-size: 12px;
+  padding-left: 0;
+  width: 250px; }
 </style>
 {% endblock %}
 {% block body %}
@@ -143,9 +166,10 @@
                               
                             <div class="mdc-layout-grid__inner">
                               <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                <div class="mdc-typography--body1">
+                          
+                                <p class="mdc-typography--subtitle1 s-font-color-primary">
                                     Buscar empresa:
-                                </div>
+                                </p>
                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                     <span class="mdc-text-field__ripple"></span>
                                    
@@ -153,7 +177,8 @@
                                     <span lass="mdc-line-ripple"></span>
                                 </label>
                               </div>
-                              <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                              <div class="mdc-layout-grid__cell--span-2-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                  <br>
                                   <br>
                                   <br>
                                   <button onclick="agregar()" class="mdc-button mdc-button--raised mdc-button--leading" style="width: 50%;">
@@ -163,7 +188,49 @@
                                       <span class="mdc-button__label">Buscar</span>
                                   </button>
                                 </div>
-                              
+                                <div class="mdc-layout-grid__cell--span-6-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                  
+                                    <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                        Exportar datos:
+                                    </p>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="txt_id_company" value="{{ cursos.id }}">
+                                    <div class="container-stats-export">
+                                        <div class="file-upload  mdl-js-button  mdl-js-ripple-effect mdc-button mdc-button--raised button-stats-export--excel">
+                                            <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
+                                            <span>Excel</span>
+                                            <input type="file" name="file-excel" id="FileAttachment" class="upload" />
+                                        </div>
+                                            <input type="text" name="fileuploadurl" id="fileuploadurl" readonly placeholder="Maximum file size is 1GB">
+                                    </div>
+                                    <br>
+                                    <center>
+                                        <button type="submit" onclick="agregar1()" class="mdc-button mdc-button--raised mdc-button--leading" style="width: 50%;">
+                                              
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                                            <span class="mdc-button__label">Cargar Excel</span>
+                                        </button>
+                                    </center>
+                                    <p class="mdc-typography--subtitle1 s-font-color-primary">
+                                        {% if data %}
+                                        No encontrados:
+                                        <ul>
+                                            {% for data in data %}
+                                                <li>
+                                                    <b>Linea:</b> {{ data.linea }}  <br>
+                                                    <b>Identidad:</b> {{ data.dni }}  <br>
+                                                    <b>Correo:</b> {{ data.correo }}
+                                                </li>
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                        {% endif %}
+                                    </p>
+                                    
+                                    
+                                    </form>
+                                  </div>
                             </div>
                             
                           </div>
@@ -254,10 +321,11 @@
                         </div>
                            
     
-                      
-                      
-                  </div>
-                  </div>
+
+
+                        </div>
+                
+                  
               </div>
        
                 
@@ -455,5 +523,10 @@
     date.getFullYear(),
   ].join('/');
 }
+
+
+document.getElementById("FileAttachment").onchange = function () {
+    document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');
+};
 </script>
 {% endblock %}
