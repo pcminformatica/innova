@@ -96,7 +96,7 @@ def _curso_enroll_list(courses_id):
                     identity = row['DNI']
                     correo = row['Correo']
         
-                    dni = identity.strip().replace("-", "").replace(" ", "")
+                    dni = identity.replace("-", "").replace(" ", "")
                     inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
                     if inscripcion:
                         company =  Company.query.filter(Company.dni == inscripcion.dni).first()
