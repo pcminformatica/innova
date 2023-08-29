@@ -80,7 +80,12 @@
                                                         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
                                                             #
                                                         </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresaria</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresa</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
                                         
                                                  
@@ -96,7 +101,22 @@
                                                             {{loop.index}}
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.inscripcion.name}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{curso.company.name}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.inscripcion.phone}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.inscripcion.departamento}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.inscripcion.municipio}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.inscripcion.correo}}
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             Finalizada
