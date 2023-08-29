@@ -812,6 +812,8 @@ class Inscripciones(db.Model):
     user = db.relationship("User")
     attention_date = db.Column(db.DateTime, nullable=True)
     externa = db.Column(db.Integer, unique=False, nullable=True, default=0)
+    #status (1) completed, (0) canceled
+    status = db.Column(db.Integer, unique=False, nullable=True, default=1)
     def __repr__(self):
         return jsonify(
             id = self.id,

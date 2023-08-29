@@ -823,6 +823,7 @@ def _d_inscripciones():
             inscripcion.municipio = list(e for e in preguntas if e['id']  == '1_5')[0]['respuesta']
             inscripcion.rtn = list(e for e in preguntas if e['id']  == '1_2')[0]['respuesta']
             inscripcion.respuestas = preguntas
+            inscripcion.status = 1
             inscripcion.elegible = elegible
             db.session.add(inscripcion)
             db.session.commit()

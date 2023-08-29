@@ -1238,7 +1238,7 @@ def _diagnosis_dashboard(user_uid):
 @digitalcenter.route('/elegibles/5',methods=['GET', 'POST'])
 def _registro_elegibles_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
-    inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).all()
+    inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
     context = {
         'api': inscripciones
     }
@@ -1256,7 +1256,7 @@ def _registro_elegibles_panel(inscribe_id):
 @digitalcenter.route('/elegibles/no/5',methods=['GET', 'POST'])
 def _registro_no_elegibles_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
-    inscripciones = Inscripciones.query.filter_by(elegible = False,cohorte=5).all()
+    inscripciones = Inscripciones.query.filter_by(elegible = False,cohorte=5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
     context = {
         'api': inscripciones
     }

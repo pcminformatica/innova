@@ -89,7 +89,7 @@ def _indicadores_productividad():
         datos.append(diccionario)
     context = {'datos':datos}
     return render_template('monitoreo/indicadores_productividad.html',**context)
-
+from sqlalchemy import or_
 @monitoreo.route('/indicadores/servicios/',methods = ['GET', 'POST'])
 def _indicadores_servicios():
     #inscritas
@@ -103,7 +103,7 @@ def _indicadores_servicios():
     elegibles_cohorte3 = 28 
     elegibles_cohorte4 = 243 + 15
     #Quinta cohorte
-    query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())
+    query = Inscripciones.query.filter(Inscripciones.cohorte==5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).order_by(Inscripciones.id.desc())
     repite = []
     repiteobj =[]
     repiteobjelegibles =[]
