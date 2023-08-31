@@ -211,6 +211,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Creada por</th>
                                           
                                         </tr>
@@ -251,6 +252,11 @@
                                                   {% if api.inscripcion %}
                                                       {{ api.inscripcion.municipio }}
                                                   {% endif %}
+                                              </th>
+                                              <th class="mdc-data-table__cell" scope="row">
+                                                {% if api.created_by_data %}
+                                                    {{ api.inscripcion.phone }}
+                                                {% endif %}
                                               </th>
                                               <th class="mdc-data-table__cell" scope="row">
                                                 {% if api.created_by_data %}
