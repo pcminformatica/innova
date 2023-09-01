@@ -2045,10 +2045,11 @@ def _d_company_dash_search():
                     municipio = company.inscripcion.municipio
                     respuestas = company.inscripcion.respuestas
                     etenia = ''
-                    for item in respuestas:
-                        if item['id'] == '2_5':
-                            etenia = str(item['respuesta'])
-                            break
+                    if isinstance(respuestas, list):
+                        for item in respuestas:
+                            if item['id'] == '2_5':
+                                etenia = str(item['respuesta'])
+                                break
                 else:
                     departamento = ''
                     municipio = ''
