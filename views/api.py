@@ -2032,6 +2032,21 @@ def _d_company_dash_search():
             for company in companies:
                 # Después de obtener la variable 'diagnoses' con la consulta original
                 filtered_diagnoses = [diagnosis for diagnosis in diagnoses if diagnosis.company_id == company.id]
+                dni = company.dni
+                company_name = company.name
+                
+                if company.status:
+                    company_status = company.status.name
+                else:
+                    company_status = ''
+                if company.inscripcion:
+                    name = company.inscripcion.name
+                    departamento = company.inscripcion.departamento
+                    municipio = company.inscripcion.municipio
+                else:
+                    departamento = ''
+                    municipio = ''
+                    name = ''
                 ids = ''
                 status = ''
                 respuestas = ''
@@ -2046,6 +2061,13 @@ def _d_company_dash_search():
                 
                 response['records'].append({
                     'company_id': company.id,
+                    "dni":dni,
+                    "name":name,
+                    "company_name":company_name,
+                    "company_status":company_status,
+                    "departamento":departamento,
+                    "municipio":municipio,
+                    
                     'id':ids,
                     "ids":ids,
                     "status":status,
