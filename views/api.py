@@ -2006,3 +2006,56 @@ def _save_test_madurez():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API acceptterms Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/company/dash/', methods = ['POST','GET'])
+def _d_company_dash_search():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+
+        companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True).all()
+        # Obtiene una lista de ids de las compañías
+        company_ids = [company.id for company in companies]
+
+        # Consulta los diagnósticos para las compañías en la lista de ids
+        diagnoses = DiagnosisCompany.query.filter(DiagnosisCompany.company_id.in_(company_ids)).order_by(DiagnosisCompany.date_created.asc()).all()
+        actions = ActionPlan.query.filter(ActionPlan.company_id.in_(company_ids)).order_by(ActionPlan.date_created.asc()).all()
+        total = len(companies)
+        response = {
+            'r_filter': 'company',
+            'r_total': total,
+            'records': [],
+            'status': 404
+        }
+
+        if total > 0:
+            response['status'] = 200
+            for company in companies:
+                # Después de obtener la variable 'diagnoses' con la consulta original
+                filtered_diagnoses = [diagnosis for diagnosis in diagnoses if diagnosis.company_id == company.id]
+                ids = ''
+                status = ''
+                respuestas = ''
+                resultados = ''
+                if filtered_diagnoses:
+                    ids = filtered_diagnoses[0].id
+                    status = filtered_diagnoses[0].status
+                    respuestas = filtered_diagnoses[0].respuestas
+                    resultados = filtered_diagnoses[0].resultados
+                #filtered_diagnoses = [diagnosis.titulo for diagnosis in diagnoses if diagnosis.id == 10]
+                actions_diagnoses = [action.services_id  for action in actions if action.company_id == company.id]
+                
+                response['records'].append({
+                    'company_id': company.id,
+                    'id':ids,
+                    "ids":ids,
+                    "status":status,
+                    "respuestas":respuestas,
+                    "resultados":resultados,
+                    'services':actions_diagnoses
+
+                })
+            return jsonify(response)
+    except Exception as e:
+        print(e)
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': str(e) })

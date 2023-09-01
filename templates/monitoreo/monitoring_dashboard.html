@@ -980,21 +980,41 @@
     }
 
     function buscarEmpresas(){
+        var datas = [];
+        var data;
+
         let nombre = 'cheack-departamento';
         filtro = getCheckValues(nombre)
+        data = {"Departamentos": filtro};
+        datas.push(data)
         console.log(filtro)
+
+
         nombre = 'checkbox-sevicios'
         filtro = getCheckValues(nombre)
+        data = {"Servicios": filtro};
+        datas.push(data)
         console.log(filtro)
+
+
         nombre = 'tipo-empresa'
         filtro = getCheckValues(nombre)
+        data = {"tipo-empresa": filtro};
+        datas.push(data)
         console.log(filtro)
+
         nombre = 'checkbox-nivel-empresa'
         filtro = getCheckValues(nombre)
+        data = {"nivel-empresa": filtro};
+        datas.push(data)
         console.log(filtro)
+
         nombre = 'servicios-requiere'
         filtro = getCheckValues(nombre)
+        data = {"servicios-requiere": filtro};
+        datas.push(data)
         console.log(filtro)
+        console.log(datas)
         
         alert('si')
     }
