@@ -1011,12 +1011,15 @@
 
 
         console.log(filteredData)
-
+        secuencia = 1
         filteredData.forEach(record => {
         const row = document.createElement("tr");
-        
+        let ids = document.createElement("td");
+    ids.textContent = secuencia;
+    row.appendChild(ids);
+    secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["company_id", "dni", "name", "company_name", "company_status", "departamento", "municipio"];
+        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -1063,12 +1066,16 @@ function getCheckValues(name){
     setJson(data)
     console.log(jsonData)
     const tableBody = document.getElementById("tableBody");
-
+let secuencia = 1
     jsonData.records.forEach(record => {
   const row = document.createElement("tr");
   
+    let ids = document.createElement("td");
+    ids.textContent = secuencia;
+    row.appendChild(ids);
+    secuencia = secuencia + 1
   // Create and append table cells
-  const fields = ["company_id", "dni", "name", "company_name", "company_status", "departamento", "municipio"];
+  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio"];
   fields.forEach(field => {
     const cell = document.createElement("td");
     cell.textContent = record[field];
