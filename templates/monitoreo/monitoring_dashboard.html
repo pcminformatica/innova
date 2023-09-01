@@ -943,6 +943,102 @@
                                                     </div>
      
                                                 </div>
+
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter7')" >
+                                                    
+                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
+                                                    <span class="mdc-deprecated-list-item__text">
+                                                        <span class="mdc-deprecated-list-item__primary-text">Años de antiguedad</span>
+                                                        
+                                                    </span>
+                                           
+                                                    <span id="icon-filter7"  class="mdc-deprecated-list-item__meta  material-icons" role="grid">
+                                                        add
+                                                    </span>
+                                                    
+                                    
+                                                </li>
+                                                <div id="filter7" class="checkbox-container" style="display: none;">
+                                              
+                                                    <div class="mdc-form-field">
+                                                        <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                        <input type="checkbox"
+                                                                class="mdc-checkbox__native-control"
+                                                                name="checkbox-antiguedad"
+                                                                id="sr_1" 
+                                                                value="1"
+                                                                />
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark"
+                                                                viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                    fill="none"
+                                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                        </div>
+                                                        <label for="checkbox-public">
+                                                            Entre 1 y 2
+                                                        </label>
+                                                    </div>
+                                                    <br>
+                                                    <div class="mdc-form-field">
+                                                        <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                        <input type="checkbox"
+                                                                class="mdc-checkbox__native-control"
+                                                                name="checkbox-antiguedad"
+                                                                id="sr_1" 
+                                                                value="2"
+                                                                />
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark"
+                                                                viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                    fill="none"
+                                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                        </div>
+                                                        <label for="checkbox-public">
+                                                            Entre 3 a 5
+                                                        </label>
+                                                    </div>
+                                                    <div class="mdc-form-field">
+                                                        <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                        <input type="checkbox"
+                                                                class="mdc-checkbox__native-control"
+                                                                name="checkbox-antiguedad"
+                                                                id="sr_1" 
+                                                                value="3"
+                                                                />
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark"
+                                                                viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                    fill="none"
+                                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                        </div>
+                                                        <label for="checkbox-public">
+                                                            Entre 5 a más
+                                                        </label>
+                                                    </div>
+     
+                                                </div>
+
                                             </ul>
                            
                                             
@@ -1147,13 +1243,37 @@
             return etnicoToFilter.includes(record.etenia);
             
             });
-        }    
+        }   
+        nombre = 'checkbox-antiguedad'
+        antiguedadToFilter = getCheckValues(nombre)
+        if (antiguedadToFilter.length !=0){
+            // Filtrar los registros filtrados por "services" por los departamentos en "nivelEmpresaToFilter"
+            antiguedadToFilter = antiguedadToFilter[0]
+            if (antiguedadToFilter=='1'){
+                minRange = 1; // Rango mínimo
+                maxRange = 2; // Rango máximo
+            }else if(antiguedadToFilter=='2'){
+                minRange = 3; // Rango mínimo
+                maxRange = 5; // Rango máximo
+            }else if(antiguedadToFilter=='3'){
+                minRange = 5; // Rango mínimo
+                maxRange = 200; // Rango máximo
+            }
+    
+            // Filtrar los registros por rango en "respuestas.A_OS_DE_OPERACI_N"
+            filteredData = filteredData.filter(record => {
+            const añosDeOperación = parseInt(record.respuestas.A_OS_DE_OPERACI_N);
+            return añosDeOperación >= minRange && añosDeOperación <= maxRange;
+            });
+        }   
 
+   
         const tableBody = document.getElementById("tableBody");
         tableBody.innerHTML = "";
         // Definir el array de servicios y departamentos que deseas filtrar
 
 
+        
         // Limpiar la tabla antes de insertar nuevos datos
         tableBody.innerHTML = "";
         console.log(jsonData)
