@@ -2043,10 +2043,18 @@ def _d_company_dash_search():
                     name = company.inscripcion.name
                     departamento = company.inscripcion.departamento
                     municipio = company.inscripcion.municipio
+                    respuestas = company.inscripcion.respuestas
+                    etenia = ''
+                    for item in respuestas:
+                        if item['id'] == '2_5':
+                            etenia = item['respuesta']
+                            break
                 else:
                     departamento = ''
                     municipio = ''
                     name = ''
+                    respuestas = ''
+                    etenia = ''
                 ids = ''
                 status = ''
                 respuestas = ''
@@ -2067,7 +2075,7 @@ def _d_company_dash_search():
                     "company_status":company_status,
                     "departamento":departamento,
                     "municipio":municipio,
-                    
+                    "etenia":etenia,
                     'id':ids,
                     "ids":ids,
                     "status":status,
