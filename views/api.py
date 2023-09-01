@@ -2047,7 +2047,7 @@ def _d_company_dash_search():
                     etenia = ''
                     for item in respuestas:
                         if item['id'] == '2_5':
-                            etenia = item['respuesta']
+                            etenia = str(item['respuesta'])
                             break
                 else:
                     departamento = ''
