@@ -95,7 +95,8 @@
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                                <li class="mdc-deprecated-list-item">
+                                            
+                                                <li class="mdc-deprecated-list-item" style="display: none;">
                                                     <div class="mdc-typography--body1">
                                                         AÑOS DE OPERACIÓN
                                                     </div>
@@ -131,7 +132,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="cheack-departamento"
                                                                 id="sr_1" 
-                                                                value="{{ departamento.titulo }}"
+                                                                value="{{ departamento.codigo }}"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -153,7 +154,7 @@
                                                     
                        
                                                 </div>
-                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter1')" >
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter1')" style="display: none;">
                                                     
                                                     <span class="mdc-deprecated-list-item__ripple"></span>
                                                     <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
@@ -414,7 +415,7 @@
                                                 </div>
                                                 
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter2')" >
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter2')" style="display: none;" >
                                                     
                                                     <span class="mdc-deprecated-list-item__ripple"></span>
                                                     <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
@@ -634,7 +635,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="checkbox-nivel-empresa"
                                                                 id="sr_1" 
-                                                                value="Nivel 1: Nuevos Emprendimientos"
+                                                                value="nivel_1__nuevos_emprendimientos"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -659,7 +660,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="checkbox-nivel-empresa"
                                                                 id="sr_1" 
-                                                                value="Nivel 2: Microempresa pequeña"
+                                                                value="nivel_2__microempresa_peque_a"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -683,7 +684,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="checkbox-nivel-empresa"
                                                                 id="sr_1" 
-                                                                value="Nivel 3: Microempresa mediana"
+                                                                value="nivel_3__microempresa_mediana"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -707,7 +708,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="checkbox-nivel-empresa"
                                                                 id="sr_1" 
-                                                                value="Nivel 4: Pequeña empresa"
+                                                                value="nivel_4__peque_a_empresa"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -731,7 +732,7 @@
                                                                 class="mdc-checkbox__native-control"
                                                                 name="checkbox-nivel-empresa"
                                                                 id="sr_1" 
-                                                                value="Nivel 5: Mediana empresa"
+                                                                value="nivel_5__mediana_empresa"
                                                                 />
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark"
@@ -773,7 +774,7 @@
                                                                         class="mdc-checkbox__native-control"
                                                                         name="servicios-requiere"
                                                                         id="sr_1" 
-                                                                        value="{{ service.name }}"
+                                                                        value="{{ service.id }}"
                                                                         />
                                                                 <div class="mdc-checkbox__background">
                                                                     <svg class="mdc-checkbox__checkmark"
@@ -928,7 +929,12 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+
 <script>
+    let jsonData;
+    function setJson(data){
+        jsonData =data
+    }
     function toggleCheckboxDiv(containerId) {
         var checkboxDiv = document.getElementById(containerId);
         var icon = document.getElementById('icon-' + containerId);
@@ -946,13 +952,6 @@
         var datas = [];
         var data;
 
-        let nombre = 'cheack-departamento';
-        filtro = getCheckValues(nombre)
-        data = {"Departamentos": filtro};
-        datas.push(data)
-        console.log(filtro)
-
-
         nombre = 'checkbox-sevicios'
         filtro = getCheckValues(nombre)
         data = {"Servicios": filtro};
@@ -960,26 +959,77 @@
         console.log(filtro)
 
 
-        nombre = 'tipo-empresa'
-        filtro = getCheckValues(nombre)
-        data = {"tipo-empresa": filtro};
-        datas.push(data)
-        console.log(filtro)
-
         nombre = 'checkbox-nivel-empresa'
         filtro = getCheckValues(nombre)
         data = {"nivel-empresa": filtro};
         datas.push(data)
         console.log(filtro)
+        filteredData =  jsonData.records
+        // Filtrar los registros que tienen los valores en "servicesToFilter"
 
         nombre = 'servicios-requiere'
-        filtro = getCheckValues(nombre)
-        data = {"servicios-requiere": filtro};
-        datas.push(data)
-        console.log(filtro)
-        console.log(datas)
+        servicesToFilter = getCheckValues(nombre)
+        if (servicesToFilter!=0){
+            servicesToFilter = servicesToFilter.map(cadena => parseInt(cadena));
+            console.log(servicesToFilter)
+            filteredData = filteredData.filter(record => {
+                return servicesToFilter.some(service => record.services.includes(service));
+            });
+        }
+
+        nombre = 'cheack-departamento';
+        departamentosToFilter = getCheckValues(nombre)
+        console.log(departamentosToFilter)
+        if (departamentosToFilter.length !=0){
+            // Filtrar los registros filtrados por "services" por los departamentos en "departamentosToFilter"
+            filteredData = filteredData.filter(record => {
+            return departamentosToFilter.includes(record.respuestas.DEPARTAMENTO);
+            
+            });
+        }
+        nombre = 'checkbox-nivel-empresa'
+        nivelEmpresaToFilter = getCheckValues(nombre)
+        console.log(nivelEmpresaToFilter)
+        if (nivelEmpresaToFilter.length !=0){
+            // Filtrar los registros filtrados por "services" por los departamentos en "nivelEmpresaToFilter"
+            filteredData = filteredData.filter(record => {
+            return nivelEmpresaToFilter.includes(record.respuestas.TIPO_DE_EMPRESA);
+            
+            });
+        }    
+
+
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+        // Definir el array de servicios y departamentos que deseas filtrar
+
+
+        // Limpiar la tabla antes de insertar nuevos datos
+        tableBody.innerHTML = "";
+        console.log(jsonData)
+  
+
+
+        console.log(filteredData)
+
+        filteredData.forEach(record => {
+        const row = document.createElement("tr");
         
-        alert('si')
+        // Crear y agregar celdas de la tabla
+        const fields = ["company_id", "dni", "name", "company_name", "company_status", "departamento", "municipio"];
+
+        fields.forEach(field => {
+            const cell = document.createElement("td");
+            if (field === "services") {
+            cell.textContent = record[field].join(", "); // Convertir array a texto
+            } else {
+            cell.textContent = record[field];
+            }
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+        });
     }
 
 function getCheckValues(name){ 
@@ -1010,10 +1060,11 @@ function getCheckValues(name){
       });
   }
   function loadCities2(data){
-    console.log(data)
+    setJson(data)
+    console.log(jsonData)
     const tableBody = document.getElementById("tableBody");
 
-    data.records.forEach(record => {
+    jsonData.records.forEach(record => {
   const row = document.createElement("tr");
   
   // Create and append table cells
@@ -1033,5 +1084,8 @@ function getCheckValues(name){
 
     int()
 })
+
+
+
 </script>
 {% endblock %}

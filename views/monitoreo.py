@@ -913,24 +913,24 @@ def _guia_dashboard():
 @monitoreo.route('/monitoring/dashboard',methods=['GET', 'POST'])
 def _monitoring_dashboard():
     departamentos_honduras = [
-        {"titulo": "Atlántida", "codigo": "AT"},
-        {"titulo": "Choluteca", "codigo": "CH"},
-        {"titulo": "Colón", "codigo": "CL"},
-        {"titulo": "Comayagua", "codigo": "CM"},
-        {"titulo": "Copán", "codigo": "CP"},
-        {"titulo": "Cortés", "codigo": "CR"},
-        {"titulo": "El Paraíso", "codigo": "EP"},
-        {"titulo": "Francisco Morazán", "codigo": "FM"},
-        {"titulo": "Gracias a Dios", "codigo": "GD"},
-        {"titulo": "Intibucá", "codigo": "IN"},
-        {"titulo": "Islas de la Bahía", "codigo": "IB"},
-        {"titulo": "La Paz", "codigo": "LP"},
-        {"titulo": "Lempira", "codigo": "LE"},
-        {"titulo": "Ocotepeque", "codigo": "OC"},
-        {"titulo": "Olancho", "codigo": "OL"},
-        {"titulo": "Santa Bárbara", "codigo": "SB"},
-        {"titulo": "Valle", "codigo": "VA"},
-        {"titulo": "Yoro", "codigo": "YO"}
+        {"titulo": "Atlántida", "codigo": "01"},
+        {"titulo": "Choluteca", "codigo": "02"},
+        {"titulo": "Colón", "codigo": "03"},
+        {"titulo": "Comayagua", "codigo": "04"},
+        {"titulo": "Copán", "codigo": "05"},
+        {"titulo": "Cortés", "codigo": "06"},
+        {"titulo": "El Paraíso", "codigo": "07"},
+        {"titulo": "Francisco Morazán", "codigo": "08"},
+        {"titulo": "Gracias a Dios", "codigo": "09"},
+        {"titulo": "Intibucá", "codigo": "10"},
+        {"titulo": "Islas de la Bahía", "codigo": "11"},
+        {"titulo": "La Paz", "codigo": "12"},
+        {"titulo": "Lempira", "codigo": "13"},
+        {"titulo": "Ocotepeque", "codigo": "14"},
+        {"titulo": "Olancho", "codigo": "15"},
+        {"titulo": "Santa Bárbara", "codigo": "16"},
+        {"titulo": "Valle", "codigo": "17"},
+        {"titulo": "Yoro", "codigo": "18"}
     ]
     services = CatalogServices.query.filter_by().all()
     categorys = catalogCategory.query.filter_by().all()
