@@ -561,7 +561,7 @@
 
                                         
                                         {% if current_user.id in (3,24) %}
-
+                                        
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('monitoreo._indicadores_servicios') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -574,6 +574,20 @@
                                                 </span>
                                             </a>
                                         </li>
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Monitoreo dashboard</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                </span>
+                                            </a>
+                                        </li>
+    
     
                                         <li class="mdc-deprecated-list-item">
                                             <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_12') }}">
