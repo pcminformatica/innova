@@ -2054,32 +2054,33 @@ def _d_company_dash_search():
                                 break
                     
                     preguntas = company.inscripcion.respuestas
-                    if '""' not in preguntas and preguntas != "":
-                        if company.inscripcion.cohorte <= 4 or company.inscripcion.externa !=0:
-                            print('3_17')
-                            print(company.id)
-                            print(company.id)
-                            data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
-                            # Buscar y extraer los números usando expresiones regulares
-                            numbers = re.findall(r'\d+', data)
+                    if '""' not in preguntas:
+                        if preguntas != "":
+                            if company.inscripcion.cohorte <= 4 or company.inscripcion.externa !=0:
+                                print('3_17')
+                                print(company.id)
+                                print(company.id)
+                                data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                                # Buscar y extraer los números usando expresiones regulares
+                                numbers = re.findall(r'\d+', data)
 
-                            total_general = int(numbers[2])
-                            total_no_remunerados = int(numbers[8])
-                            totalEmpleadosPermanentes = total_general 
-                            data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
-                            # Buscar y extraer los números usando expresiones regulares
-                            numbers = re.findall(r'\d+', data)
+                                total_general = int(numbers[2])
+                                total_no_remunerados = int(numbers[8])
+                                totalEmpleadosPermanentes = total_general 
+                                data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                                # Buscar y extraer los números usando expresiones regulares
+                                numbers = re.findall(r'\d+', data)
 
-                            # Sumar los totales
-                            totalEmpleadosTemporales = total_general 
-                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
-                        else:
-                            #
-                            print(company.id)
-                            print(company.id)
-                            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
-                            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
-                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                                # Sumar los totales
+                                totalEmpleadosTemporales = total_general 
+                                totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                            else:
+                                #
+                                print(company.id)
+                                print(company.id)
+                                totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+                                totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+                                totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
                 else:
                     departamento = ''
                     municipio = ''
