@@ -2054,7 +2054,7 @@ def _d_company_dash_search():
                                 break
                     
                     preguntas = company.inscripcion.respuestas
-                    if preguntas != "":
+                    if '""' not in preguntas or preguntas != "":
                         if company.inscripcion.cohorte <= 4 or company.inscripcion.externa !=0:
                             print('3_17')
                             print(company.id)
