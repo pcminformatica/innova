@@ -2052,31 +2052,7 @@ def _d_company_dash_search():
                             if item['id'] == '2_5':
                                 etenia = str(item['respuesta'])
                                 break
-                    
-                    preguntas = company.inscripcion.respuestas
-                    if '""' not in preguntas:
-                        if preguntas != "":
-                            if company.inscripcion.cohorte <= 4 or company.inscripcion.externa !=0:
-                                print('3_17')
-                                print(company.id)
-                                print(company.id)
-                                data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
-                                # Buscar y extraer los números usando expresiones regulares
-                                numbers = re.findall(r'\d+', data)
 
-                                total_general = int(numbers[2])
-                                total_no_remunerados = int(numbers[8])
-                                totalEmpleadosPermanentes = total_general 
-                                data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
-                                # Buscar y extraer los números usando expresiones regulares
-                                numbers = re.findall(r'\d+', data)
-
-                                # Sumar los totales
-                                totalEmpleadosTemporales = total_general 
-                                totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
-                            else:
-                                #
-                                totalempleados = 0
                 else:
                     departamento = ''
                     municipio = ''
