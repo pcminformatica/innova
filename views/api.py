@@ -2040,6 +2040,7 @@ def _d_company_dash_search():
                 else:
                     company_status = ''
                 totalempleados = ''
+                edad = ''
                 if company.inscripcion:
                     name = company.inscripcion.name
                     departamento = company.inscripcion.departamento
@@ -2051,6 +2052,11 @@ def _d_company_dash_search():
                         for item in respuestas:
                             if item['id'] == '2_5':
                                 etenia = str(item['respuesta'])
+                                break
+                    if isinstance(respuestas, list):
+                        for item in respuestas:
+                            if item['id'] == '1_6':
+                                edad = str(item['respuesta']).strip()
                                 break
                     
                     preguntas = company.inscripcion.respuestas
@@ -2131,7 +2137,8 @@ def _d_company_dash_search():
                     "respuestas":respuestas,
                     "resultados":resultados,
                     'services':actions_diagnoses,
-                    'totalempleados':totalempleados
+                    'totalempleados':totalempleados,
+                    'edad':edad
 
                 })
             return jsonify(response)
