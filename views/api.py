@@ -2039,17 +2039,47 @@ def _d_company_dash_search():
                     company_status = company.status.name
                 else:
                     company_status = ''
+                totalempleados = ''
                 if company.inscripcion:
                     name = company.inscripcion.name
                     departamento = company.inscripcion.departamento
                     municipio = company.inscripcion.municipio
                     respuestas = company.inscripcion.respuestas
                     etenia = ''
+                    
                     if isinstance(respuestas, list):
                         for item in respuestas:
                             if item['id'] == '2_5':
                                 etenia = str(item['respuesta'])
                                 break
+                    
+                    preguntas = company.inscripcion.respuestas
+                    if preguntas != "":
+                        if company.inscripcion.cohorte <= 4:
+                            print('3_17')
+                            print(company.id)
+                            print(company.id)
+                            data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                            # Buscar y extraer los números usando expresiones regulares
+                            numbers = re.findall(r'\d+', data)
+
+                            total_general = int(numbers[2])
+                            total_no_remunerados = int(numbers[8])
+                            totalEmpleadosPermanentes = total_general 
+                            data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                            # Buscar y extraer los números usando expresiones regulares
+                            numbers = re.findall(r'\d+', data)
+
+                            # Sumar los totales
+                            totalEmpleadosTemporales = total_general 
+                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                        else:
+                            #
+                            print(company.id)
+                            print(company.id)
+                            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+                            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
                 else:
                     departamento = ''
                     municipio = ''
@@ -2082,7 +2112,8 @@ def _d_company_dash_search():
                     "status":status,
                     "respuestas":respuestas,
                     "resultados":resultados,
-                    'services':actions_diagnoses
+                    'services':actions_diagnoses,
+                    'totalempleados':totalempleados
 
                 })
             return jsonify(response)
