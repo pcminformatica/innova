@@ -2120,4 +2120,4 @@ def _d_company_dash_search():
     except Exception as e:
         print(e)
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
-        return jsonify({ 'status': 'error', 'msg': str(e) })
+        return jsonify({ 'status': 'error','s':company.id, 'msg': str(e) })
