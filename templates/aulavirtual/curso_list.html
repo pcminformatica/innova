@@ -42,6 +42,7 @@
                                 <div class="mdc-typography--headline5 s-font-color-secondary">Lista de cursos</div>
                     
                                 <br>
+                                {% if current_user.id in (3,24,25) %}
                                 <center>
                                     <a href="/formulario/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
                                         <span class="mdc-button__ripple"></span>
@@ -51,6 +52,7 @@
                                         <span class="mdc-button__label">Crear nuevo curso</span>
                                     </a>
                                 </center>
+                                {% endif %}
                                 <br>
                                 
                                 <div class="container-dashboard--messages-list-empty ">

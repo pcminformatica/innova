@@ -371,8 +371,6 @@
                                                 </span>
                                             </a>
                                         </li>
-
-                                        {% if current_user.id in (3,24,25) %}
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('aulavirtual._curso_list') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -385,6 +383,8 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        {% if current_user.id in (3,24,25) %}
+
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
@@ -425,7 +425,7 @@
                                             </a>
                                         </li>
                                         <li class="mdc-deprecated-list-item">
-                                            
+
                                         </li>
                                         {% endif %}
    
