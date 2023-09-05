@@ -174,7 +174,7 @@ def _curso_enroll_list_inscritas_capacitadas():
         not_(Inscripciones.id.in_(inscripciones_ids_distintas))
     ).all()
     app.logger.debug('** SWING_CMS ** - ------------------')
-    inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(Inscripciones.id.in_(inscripciones_ids_distintas)).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
+    inscripciones = Inscripciones.query.filter_by(elegible = True).filter(Inscripciones.id.in_(inscripciones_ids_distintas)).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
     context = {
         'api': inscripciones
     }
