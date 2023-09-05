@@ -119,14 +119,15 @@
                                                 {{ api.date_created }}
                                               </th>
                                             
-                                                                                             
+                                              <th>                                           
                                                {% for inscrip in api.respuestas %}
                                                     {% if inscrip['id'] == '4_4' %}
-                                                    <th>
+                                                    
                                                       {{ inscrip['respuesta'] }}
-                                                    </th>
+                                                    
                                                     {% endif %}
                                                {% endfor %}
+                                              </th>
                                             
                                               
                                           </tr>
