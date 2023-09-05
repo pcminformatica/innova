@@ -397,6 +397,18 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas_capacitadas') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Empresas con apacitación inicial</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresas inscritas han registrado capacitación inicial.</span>
+                                                </span>
+                                            </a>
+                                        </li>
                                         
                                         {% endif %}
                                         {% if current_user.id in (3,6,24,25) %}
@@ -411,6 +423,9 @@
                                                     <span class="mdc-deprecated-list-item__secondary-text">Evaluaciones</span>
                                                 </span>
                                             </a>
+                                        </li>
+                                        <li class="mdc-deprecated-list-item">
+                                            
                                         </li>
                                         {% endif %}
    
