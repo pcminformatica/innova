@@ -154,3 +154,28 @@ def _curso_enroll_list_inscritas():
         'api': inscripciones
     }
     return render_template('digitalcenter/registro_elegibles_list.html',**context)
+
+@aulavirtual.route('/cursos/list/inscritas/capacitadas',methods = ['GET', 'POST'])
+def _curso_enroll_list_inscritas_capacitadas():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    companies = EnrollmentRecord.query.join(
+        Courses, Courses.id==EnrollmentRecord.id_course).join(
+        TrainingType, Courses.id_training_type==TrainingType.id).join(
+        Company,Company.id == EnrollmentRecord.company_id).join(
+        Inscripciones,Inscripciones.id == Company.inscripcion_id
+        ).filter(
+                TrainingType.name_short == 'TT1'
+        ).all()
+    print(len(companies))
+    # Accede a las Inscripciones.id a través de la relación en EnrollmentRecord
+    inscripciones_ids_distintas = [company.company.inscripcion.id for company in companies]
+    # Realiza la consulta para obtener las Inscripciones que no están en la lista
+    inscripciones_no_en_lista = Inscripciones.query.filter(
+        not_(Inscripciones.id.in_(inscripciones_ids_distintas))
+    ).all()
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(Inscripciones.id.in_(inscripciones_ids_distintas)).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
+    context = {
+        'api': inscripciones
+    }
+    return render_template('digitalcenter/registro_elegibles_list.html',**context)
