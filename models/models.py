@@ -1011,7 +1011,7 @@ class EnrollmentRecord(db.Model):
     def __repr__(self):
         return jsonify(
             id = self.id,
-            name = self.name,
+            name = self.description,
         )
 
 # Catalog - ID Evaluations
