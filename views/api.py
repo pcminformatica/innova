@@ -1261,7 +1261,8 @@ def _initial_attention_companies():
             else:
                 company.status_id = status.id
                 company.inscripcion_id = inscripcion.id
-                company.status_id = status.id
+                if not company.created_by:
+                    company.created_by = current_user.id
                 db.session.add(company)
                 db.session.commit()
                 db.session.refresh(company)

@@ -1983,3 +1983,40 @@ def _company_blueberry_view(company_id):
         'company': company,
     }
     return render_template('company_forms.html',**context)
+
+
+from flask import Flask, jsonify
+from sqlalchemy import func
+from sqlalchemy.orm import aliased
+
+@digitalcenter.route('/get_action_plans', methods=['GET'])
+def get_action_plans():
+    # Subconsulta para obtener el ID mínimo para cada company_id
+    subquery = db.session.query(
+        ActionPlan.company_id,
+        func.min(ActionPlan.id).label('min_id')
+    ).filter(ActionPlan.fase != 0).group_by(ActionPlan.company_id).subquery()
+
+
+    # Consulta principal para obtener los registros completos
+    result = db.session.query(ActionPlan).join(
+        subquery,
+        db.and_(
+            ActionPlan.company_id == subquery.c.company_id,
+            ActionPlan.id == subquery.c.min_id
+        )
+    ).all()
+
+    # Crear una lista de diccionarios con los datos de result
+    action_plans_data = []
+    for action_plan in result:
+        action_plans_data.append({
+            'id': action_plan.id,
+            'company_id': action_plan.company_id,
+            'date_created': action_plan.date_created.strftime('%Y-%m-%d'),
+            'date_scheduled_start': action_plan.date_scheduled_start.strftime('%Y-%m-%d') if action_plan.date_scheduled_start else None,
+            # Agrega otros campos según sea necesario
+        })
+
+    # Retorna los datos en formato JSON
+    return jsonify(action_plans_data)
