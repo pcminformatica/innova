@@ -81,7 +81,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
-                                            
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
                                           </tr>
                                           </thead>
                                           
@@ -147,6 +147,11 @@
                                                     {{ api.created_by_data.name }}
                                                 {% endif %}
                                             </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {% if api.date_created %}
+                                                    {{ api.date_created.strftime('%Y-%m-%d') }}
+                                                    {% endif %}
+                                            </th>
                                             
                                           </tr>
                                           {% endfor %}
@@ -165,7 +170,7 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
-                                                    
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
                                             </tr>
                                         </tfoot>
                                           </table>
