@@ -790,7 +790,10 @@ class Company(db.Model):
     stage = db.relationship("CompanyStage")
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
     istransferred = db.Column(db.Boolean, unique=False, nullable=True, default=False)
-    
+    have_action_plan = db.Column(db.Boolean, unique=False, nullable=True, default=False)
+    date_action_plan = db.Column(db.DateTime, nullable=True)
+    date_first_service_action_plan = db.Column(db.DateTime, nullable=True)
+
 # Company
 class Inscripciones(db.Model):
     _tablename__ = 'inscripciones'

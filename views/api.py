@@ -885,6 +885,26 @@ def _d_save_ActionPlan():
                     wallet.type = 1
                     db.session.add(wallet)
                     db.session.commit()
+            # Verificar si la empresa tiene al menos un registro en ActionPlan con fase no igual a 0
+            has_non_zero_phase = ActionPlan.query.filter(
+                ActionPlan.company_id == company.id,
+                ActionPlan.fase != 0
+            ).first()
+
+            if has_non_zero_phase:
+                # Obtener el primer registro de ActionPlan de la empresa que cumple con el requisito
+                first_action_plan = ActionPlan.query.filter(
+                    ActionPlan.company_id == company.id,
+                    ActionPlan.fase != 0
+                ).order_by(ActionPlan.date_created.asc()).first()
+
+                # Imprimir las fechas date_created y date_scheduled_start del primer registro
+                if not company.have_action_plan:
+                    company.have_action_plan = True
+                    company.date_action_plan = first_action_plan.date_created
+                    company.date_first_service_action_plan = first_action_plan.date_scheduled_start
+                    db.session.add(company)
+                    db.session.commit()
             actualizar = _update_wallet(company.id)
             if actualizar:
                 return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })

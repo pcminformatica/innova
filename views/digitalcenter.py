@@ -1986,7 +1986,7 @@ def _company_blueberry_view(company_id):
 
 
 from flask import Flask, jsonify
-from sqlalchemy import func
+from sqlalchemy import func, and_
 from sqlalchemy.orm import aliased
 
 @digitalcenter.route('/get_action_plans', methods=['GET'])
@@ -2020,3 +2020,87 @@ def get_action_plans():
 
     # Retorna los datos en formato JSON
     return jsonify(action_plans_data)
+
+@digitalcenter.route('/first_records_by_company', methods=['GET'])
+def first_records_by_company():
+    # Realiza una subconsulta para obtener el primer registro creado por cada company_id
+                
+    subquery = db.session.query(
+        func.min(DiagnosisCompany.date_created).label('min_date_created'),
+        DiagnosisCompany.company_id.label('company_id')  # Asigna un alias a la columna company_id
+    ).group_by(DiagnosisCompany.company_id).subquery()
+
+    # Consulta principal que une la subconsulta para obtener los registros completos
+    first_records = db.session.query(DiagnosisCompany).join(
+        subquery,
+        and_(
+            DiagnosisCompany.company_id == subquery.c.company_id,
+            DiagnosisCompany.date_created == subquery.c.min_date_created
+        )
+    ).all()
+
+    # Crea una lista de diccionarios con los datos de los primeros registros
+    data = []
+    for record in first_records:
+        data.append({
+            'company_id': record.company_id,
+            'date_created': record.date_created.strftime('%Y-%m-%d'),  # Convierte la fecha a una cadena
+            'status': record.status,
+            # Agrega otros campos según sea necesario
+        })
+
+    # Convierte la lista de diccionarios en formato JSON y la devuelve como respuesta
+    return jsonify(data)
+
+
+@digitalcenter.route('/get_companies', methods=['GET'])
+def get_companies():
+    # Subconsulta para obtener el ID mínimo para cada company_id
+    subquery = db.session.query(
+        ActionPlan.company_id,
+        func.min(ActionPlan.id).label('min_id')
+    ).filter(ActionPlan.fase != 0).group_by(ActionPlan.company_id).subquery()
+
+
+    # Consulta principal para obtener los registros completos
+    result = db.session.query(ActionPlan).join(
+        subquery,
+        db.and_(
+            ActionPlan.company_id == subquery.c.company_id,
+            ActionPlan.id == subquery.c.min_id
+        )
+    ).all()
+
+    # Crear una lista de diccionarios con los datos de result
+    action_plans_data = []
+    for action_plan in result:
+        action_plans_data.append({
+            'id': action_plan.id,
+            'company_id': action_plan.company_id,
+            'date_created': action_plan.date_created.strftime('%Y-%m-%d'),
+            'date_scheduled_start': action_plan.date_scheduled_start.strftime('%Y-%m-%d') if action_plan.date_scheduled_start else None,
+            # Agrega otros campos según sea necesario
+        })
+
+    # Retorna los datos en formato JSON
+    return jsonify(action_plans_data)
+
+# Ruta para la vista que retorna las empresas con ActionPlan no en fase 0
+@digitalcenter.route('/companies_with_non_zero_phase', methods=['GET'])
+def companies_with_non_zero_phase():
+    # Realiza una consulta que filtre las empresas en función de ActionPlan con fase no igual a 0
+    companies = db.session.query(Company).\
+        join(ActionPlan, Company.id == ActionPlan.company_id).\
+        filter(ActionPlan.fase != 0).distinct().all()
+
+    # Crea una lista de diccionarios con los datos de las empresas
+    data = []
+    for company in companies:
+        data.append({
+            'id': company.id,
+            'name': company.name,
+            # Agrega otros campos de la empresa según sea necesario
+        })
+
+    # Convierte la lista de diccionarios en formato JSON y la devuelve como respuesta
+    return jsonify(data)
