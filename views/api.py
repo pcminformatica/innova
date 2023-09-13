@@ -905,6 +905,18 @@ def _d_save_ActionPlan():
                     company.have_action_plan = True
                     company.date_action_plan = first_action_plan.date_created
                     company.date_first_service_action_plan = first_action_plan.date_scheduled_start
+                    action_plans = ActionPlan.query.filter(
+                        ActionPlan.company_id == company.id,
+                        ActionPlan.fase != 0,
+                        ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
+                    ).all()
+                    # Calcular la suma de progreso y la cantidad de ActionPlan
+                    total_progress = sum(action_plan.progress for action_plan in action_plans)
+                    num_action_plans = len(action_plans)
+
+                    # Calcular el promedio de avance total y redondearlo a dos decimales máximo
+                    average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
+                    company.action_plan_progress = average_progress
                     db.session.add(company)
                     db.session.commit()
             actualizar = _update_wallet(company.id)
