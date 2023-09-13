@@ -2103,7 +2103,14 @@ def _d_company_dash_search():
                 filtered_diagnoses = [diagnosis for diagnosis in diagnoses if diagnosis.company_id == company.id]
                 dni = company.dni
                 company_name = company.name
-                
+                action_plan_progress = '0.0 %' 
+                if company.have_action_plan:
+                    if company.stage:
+                        if company.stage.name_short == 'E1':
+                            action_plan_progress = 'Empresa en etapa 1' 
+                        else:
+                            action_plan_progress = company.action_plan_progress
+                                                   
                 if company.status:
                     company_status = company.status.name
                 else:
@@ -2127,7 +2134,7 @@ def _d_company_dash_search():
                             if item['id'] == '1_6':
                                 edad = str(item['respuesta']).strip()
                                 break
-                    
+
                     preguntas = company.inscripcion.respuestas
                     if '""' not in preguntas:
                         if preguntas:
@@ -2179,14 +2186,25 @@ def _d_company_dash_search():
                     name = ''
                     respuestas = ''
                     etenia = ''
+                    diagnosis_date = ''
                 ids = ''
                 status = ''
                 respuestas = ''
                 resultados = ''
+                diagnoses_submission_time = ''
                 if filtered_diagnoses:
                     ids = filtered_diagnoses[0].id
                     status = filtered_diagnoses[0].status
                     respuestas = filtered_diagnoses[0].respuestas
+                    if respuestas['_submission_time']:
+                        # Convertir el valor de cadena a un objeto datetime
+                        submission_time = datetime.strptime(respuestas['_submission_time'], '%Y-%m-%dT%H:%M:%S')
+
+                        # Obtener la fecha (año, mes, día) en formato "YYYY-MM-DD"
+
+                        # Obtener la fecha (año, mes, día)
+                        diagnoses_submission_time = submission_time.strftime('%Y-%m-%d')
+                        print(submission_time)
                     resultados = filtered_diagnoses[0].resultados
                 #filtered_diagnoses = [diagnosis.titulo for diagnosis in diagnoses if diagnosis.id == 10]
                 actions_diagnoses = [action.services_id  for action in actions if action.company_id == company.id]
@@ -2199,8 +2217,10 @@ def _d_company_dash_search():
                     "name":name,
                     "company_name":company_name,
                     "company_status":company_status,
+                    "action_plan_progress":action_plan_progress,
                     "have_action_plan":company.have_action_plan,
                     "date_action_plan":date_action_plan,
+                    "diagnoses_submission_time":diagnoses_submission_time,
                     "departamento":departamento,
                     "municipio":municipio,
                     "etenia":etenia,
@@ -2211,7 +2231,7 @@ def _d_company_dash_search():
                     "resultados":resultados,
                     'services':actions_diagnoses,
                     'totalempleados':totalempleados,
-                    'edad':edad
+                    'edad':edad,
 
                 })
             return jsonify(response)

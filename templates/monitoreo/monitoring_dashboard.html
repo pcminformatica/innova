@@ -147,6 +147,38 @@
                                                     
                        
                                                 </div>
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter11')" >
+                                                    
+                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
+                                                    <span class="mdc-deprecated-list-item__text">
+                                                        <span class="mdc-deprecated-list-item__primary-text">FECHA CREACIÓN DIAGNÓSTICOS EMPRESARIAL</span>
+                                                        
+                                                    </span>
+                                           
+                                                    <span id="icon-filter11"  class="mdc-deprecated-list-item__meta  material-icons" role="grid">
+                                                        add
+                                                    </span>
+                                                    
+                                    
+                                                </li>
+                                                <div id="filter11" class="checkbox-container" style="display: none;">
+                                                    
+                                                    <label style="font-size: 2em;">
+                                                        Fecha desde:
+                                                    </label>
+                                                    
+                                                    <input type="date" id="txt_startDateDiagnostico">
+                                                    <br>
+
+                                                    <label style="font-size: 2em;">
+                                                        Fecha Hasta:
+                                                    </label>
+                                                    
+                                                    <input type="date" id="txt_endDatePlanDiagnostico">
+                                                    
+                       
+                                                </div>
                                                 <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter0')" >
                                                     
                                                     <span class="mdc-deprecated-list-item__ripple"></span>
@@ -1444,12 +1476,17 @@
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">name </th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company_name</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company_status</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">departamento</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">municipio</th>
-                        
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre </th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresa</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
+                                        
+                                        
+                                        
                                         
                                       </tr>
                                       </thead>
@@ -1460,14 +1497,15 @@
                                       <tfoot>
                                         <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">dni</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">name </th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company_name</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">company_status</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">departamento</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">municipio</th>
-                                  
-                                                
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre Empresa</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
                                         </tr>
                                     </tfoot>
                                       </table>
@@ -1675,6 +1713,28 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
        
         }
 
+        var startDateDiagnostico = document.getElementById("txt_startDateDiagnostico").value.trim();
+        var endDateDiagnostico = document.getElementById("txt_endDatePlanDiagnostico").value.trim();
+
+        // Verificar que las fechas no estén en blanco
+        if (startDateDiagnostico !== "" &&  endDateDiagnostico !== "") {
+            // Verificar que las fechas sean válidas
+            console.log('no estan en blanco')
+            if (!isNaN(Date.parse(startDateDiagnostico)) && !isNaN(Date.parse(endDateDiagnostico))) {
+                console.log('son fechas')
+                startDateDiagnostico = new Date(startDateDiagnostico)
+                endDateDiagnostico = new Date(endDateDiagnostico)
+                console.log(startDateDiagnostico)
+                console.log(endDateDiagnostico)
+                
+                filteredData = filteredData.filter(record => {
+                const diagnoses_submission_time = new Date(record.diagnoses_submission_time);
+                return diagnoses_submission_time >= startDateDiagnostico && diagnoses_submission_time <= endDateDiagnostico;
+                });
+            } 
+       
+        }
+
        
    
         const tableBody = document.getElementById("tableBody");
@@ -1698,7 +1758,7 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
     row.appendChild(ids);
     secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio"];
+        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -1777,7 +1837,9 @@ let secuencia = 1
     row.appendChild(ids);
     secuencia = secuencia + 1
   // Create and append table cells
-  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio"];
+
+  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress"];
+
   fields.forEach(field => {
     const cell = document.createElement("td");
     cell.textContent = record[field];
