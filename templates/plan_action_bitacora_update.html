@@ -157,7 +157,7 @@
                               <div class="mdc-checkbox">
                                 <input type="checkbox"
                                        class="mdc-checkbox__native-control"
-                                       id="checkbox-Finalizo"/>
+                                       id="checkbox-Finalizo" {% if action.endservices %} checked {% endif %} />
                                 <div class="mdc-checkbox__background">
                                   <svg class="mdc-checkbox__checkmark"
                                        viewBox="0 0 24 24">
@@ -251,6 +251,7 @@
         }
   
         txt_finalizo= txt_finalizo.checked
+  
         console.log(txt_finalizo)
         console.log(txt_porcentaje)
         console.log(txt_servicios)
