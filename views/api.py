@@ -888,6 +888,7 @@ def _d_save_ActionPlan():
             # Verificar si la empresa tiene al menos un registro en ActionPlan con fase no igual a 0
             has_non_zero_phase = ActionPlan.query.filter(
                 ActionPlan.company_id == company.id,
+                ActionPlan.cancelled != True,  # Filtrar registros donde 'cancelled' no sea verdadero
                 ActionPlan.fase != 0
             ).first()
 
@@ -895,6 +896,7 @@ def _d_save_ActionPlan():
                 # Obtener el primer registro de ActionPlan de la empresa que cumple con el requisito
                 first_action_plan = ActionPlan.query.filter(
                     ActionPlan.company_id == company.id,
+                    ActionPlan.cancelled != True,  # Filtrar registros donde 'cancelled' no sea verdadero
                     ActionPlan.fase != 0
                 ).order_by(ActionPlan.date_created.asc()).first()
 
@@ -1015,7 +1017,7 @@ def _d_save_ActionPlanHistory():
                 plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
-            
+
             company = Company.query.filter_by(id = plan.company_id).first()
             action_plans = ActionPlan.query.filter(
                 ActionPlan.company_id == company.id,
