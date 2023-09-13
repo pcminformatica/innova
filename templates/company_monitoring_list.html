@@ -136,7 +136,12 @@
                                                 {% if api.have_action_plan %}
                                                     {{api.action_plan_progress}} %
                                                 {% else %}
-                                                    NO
+                                                    {% if api.stage.name_short == 'E1' %}
+                                                        Empresa en etapa 1
+                                                    {% else %}
+                                                        0
+                                                    {% endif %}
+
                                                 {% endif %}
                                             </th>
                                             <th class="mdc-data-table__cell" scope="row">
