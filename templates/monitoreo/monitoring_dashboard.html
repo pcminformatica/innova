@@ -1438,7 +1438,7 @@
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">EMPRESAS</div>
                                 <div class="mdc-data-table__table-container">
-                                    <table class="mdl-data-table_normal data_table_buttons11" width="100%" cellspacing="0" style="white-space: normal;">
+                                    <table class="mdl-data-table_normal data_table_buttons11 data_table_buttons_sign1" width="100%" cellspacing="0" style="white-space: normal;">
                                       <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -1492,10 +1492,25 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+<link 
+ rel="stylesheet"
+ href="https://cdn.datatables.net/searchpanes/2.1.2/css/searchPanes.dataTables.min.css"
+><link 
+rel="stylesheet"
+href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
+>
+
+
+
+<script src="{{ url_for('static', filename='js/vendor/datatable/jquery-3.5.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/dataTables.material.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/jszip.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/datatable/buttons.html5.min.js') }}"></script>
+
+<script src="https://cdn.datatables.net/searchpanes/2.1.2/js/dataTables.searchPanes.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
 
 <script>
     let jsonData;
@@ -1516,6 +1531,8 @@
     }
 
     function buscarEmpresas(){
+        $('.data_table_buttons_sign1').DataTable().clear();;
+        $('.data_table_buttons_sign1').DataTable().destroy();
         var datas = [];
         var data;
 
@@ -1694,6 +1711,29 @@
 
         tableBody.appendChild(row);
         });
+        
+   
+        table = $('.data_table_buttons_sign1').DataTable(
+        
+        {
+            
+        autoWidth: false,
+        dom: 'Bflrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    ,
+        columnDefs: [
+            {
+                targets: ['_all'],
+                className: 'mdc-data-table__cell',
+            },
+        ],
+        language: {
+        url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+    }
+    });
+
     }
 
 function getCheckValues(name){ 
@@ -1745,6 +1785,31 @@ let secuencia = 1
 
   tableBody.appendChild(row);
 });
+
+
+
+var table = $('.data_table_buttons_sign1').DataTable(
+        
+        {
+            
+        autoWidth: false,
+        dom: 'Bflrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    ,
+        columnDefs: [
+            {
+                targets: ['_all'],
+                className: 'mdc-data-table__cell',
+            },
+        ],
+        language: {
+        url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+    }
+    });
+
+
   }
 
 
