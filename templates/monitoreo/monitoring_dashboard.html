@@ -96,25 +96,44 @@
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                             
-                                                <li class="mdc-deprecated-list-item" style="display: none;">
-                                                    <div class="mdc-typography--body1">
-                                                        AÑOS DE OPERACIÓN
-                                                    </div>
-                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_identidad" data-assigned-var>
-                                                        <span class="mdc-text-field__ripple"></span>
-                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.2  N. Identidad" >Ingrese años</span>
-                                                        <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" 
-                                                
-                                                        >
-                                                        <span lass="mdc-line-ripple"></span>
-                                                    </label>
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter10')" >
+                                                    
+                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
+                                                    <span class="mdc-deprecated-list-item__text">
+                                                        <span class="mdc-deprecated-list-item__primary-text">FECHA CREACIÓN PLAN DE ACCIÓN</span>
+                                                        
+                                                    </span>
+                                           
+                                                    <span id="icon-filter10"  class="mdc-deprecated-list-item__meta  material-icons" role="grid">
+                                                        add
+                                                    </span>
+                                                    
+                                    
                                                 </li>
+                                                <div id="filter10" class="checkbox-container" style="display: none;">
+                                                    
+                                                    <label style="font-size: 2em;">
+                                                        Fecha desde:
+                                                    </label>
+                                                    
+                                                    <input type="date" id="txt_startDatePlan">
+                                                    <br>
+
+                                                    <label style="font-size: 2em;">
+                                                        Fecha Hasta:
+                                                    </label>
+                                                    
+                                                    <input type="date" id="txt_endDatePlan">
+                                                    
+                       
+                                                </div>
                                                 <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter0')" >
                                                     
                                                     <span class="mdc-deprecated-list-item__ripple"></span>
                                                     <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
                                                     <span class="mdc-deprecated-list-item__text">
-                                                        <span class="mdc-deprecated-list-item__primary-text">Departamentos</span>
+                                                        <span class="mdc-deprecated-list-item__primary-text">DEPARTAMENTOS</span>
                                                         
                                                     </span>
                                            
@@ -1473,6 +1492,11 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
 
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+
 <script>
     let jsonData;
     function setJson(data){
@@ -1611,7 +1635,29 @@
             });
         } 
         
+        var startDatePlan = document.getElementById("txt_startDatePlan").value.trim();
+        var endDatePlan = document.getElementById("txt_endDatePlan").value.trim();
 
+        // Verificar que las fechas no estén en blanco
+        if (startDatePlan !== "" &&  endDatePlan !== "") {
+            // Verificar que las fechas sean válidas
+            console.log('no estan en blanco')
+            if (!isNaN(Date.parse(startDatePlan)) && !isNaN(Date.parse(endDatePlan))) {
+                console.log('son fechas')
+                startDatePlan = new Date(startDatePlan)
+                endDatePlan = new Date(endDatePlan)
+                console.log(startDatePlan)
+                console.log(endDatePlan)
+                
+                filteredData = filteredData.filter(record => {
+                const date_action_plan = new Date(record.date_action_plan);
+                return date_action_plan >= startDatePlan && date_action_plan <= endDatePlan;
+                });
+            } 
+       
+        }
+
+       
    
         const tableBody = document.getElementById("tableBody");
         tableBody.innerHTML = "";

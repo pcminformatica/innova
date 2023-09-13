@@ -793,6 +793,7 @@ class Company(db.Model):
     have_action_plan = db.Column(db.Boolean, unique=False, nullable=True, default=False)
     date_action_plan = db.Column(db.DateTime, nullable=True)
     date_first_service_action_plan = db.Column(db.DateTime, nullable=True)
+    action_plan_progress = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
 
 # Company
 class Inscripciones(db.Model):

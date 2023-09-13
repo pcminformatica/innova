@@ -1015,6 +1015,24 @@ def _d_save_ActionPlanHistory():
                 plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
+            
+            company = Company.query.filter_by(id = plan.company_id).first()
+            action_plans = ActionPlan.query.filter(
+                ActionPlan.company_id == company.id,
+                ActionPlan.fase != 0,
+                ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
+            ).all()
+
+            # Calcular la suma de progreso y la cantidad de ActionPlan
+            total_progress = sum(action_plan.progress for action_plan in action_plans)
+            num_action_plans = len(action_plans)
+
+            # Calcular el promedio de avance total y redondearlo a dos decimales máximo
+            average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
+            company.action_plan_progress = average_progress
+            db.session.add(company)
+            db.session.commit()
+
             if txt_finalizo == True and porcentaje == 100:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
                 if not wallet:
@@ -1032,7 +1050,6 @@ def _d_save_ActionPlanHistory():
                     db.session.add(wallet)
                     db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
-                company = Company.query.filter_by(id = plan.company_id).first()
                 areas_mejoras = plan.services.diagnostic_questions
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
                 api = diagnos.respuestas
@@ -1114,6 +1131,22 @@ def _d_save_ActionPlanHistory_update():
                 plan.progress =porcentaje
             db.session.add(plan)
             db.session.commit()
+            company = Company.query.filter_by(id = plan.company_id).first()
+            action_plans = ActionPlan.query.filter(
+                ActionPlan.company_id == company.id,
+                ActionPlan.fase != 0,
+                ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
+            ).all()
+
+            # Calcular la suma de progreso y la cantidad de ActionPlan
+            total_progress = sum(action_plan.progress for action_plan in action_plans)
+            num_action_plans = len(action_plans)
+
+            # Calcular el promedio de avance total y redondearlo a dos decimales máximo
+            average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
+            company.action_plan_progress = average_progress
+            db.session.add(company)
+            db.session.commit()
             if txt_finalizo == True and porcentaje == 100:
                 wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =plan.services_id).first()
                 if not wallet:
@@ -1131,7 +1164,8 @@ def _d_save_ActionPlanHistory_update():
                     db.session.add(wallet)
                     db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
-                company = Company.query.filter_by(id = plan.company_id).first()
+  
+
                 areas_mejoras = plan.services.diagnostic_questions
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
                 api = diagnos.respuestas
@@ -2142,13 +2176,17 @@ def _d_company_dash_search():
                     resultados = filtered_diagnoses[0].resultados
                 #filtered_diagnoses = [diagnosis.titulo for diagnosis in diagnoses if diagnosis.id == 10]
                 actions_diagnoses = [action.services_id  for action in actions if action.company_id == company.id]
-                
+                date_action_plan = ''
+                if company.date_action_plan:
+                    date_action_plan = company.date_action_plan.strftime('%Y-%m-%d')
                 response['records'].append({
                     'company_id': company.id,
                     "dni":dni,
                     "name":name,
                     "company_name":company_name,
                     "company_status":company_status,
+                    "have_action_plan":company.have_action_plan,
+                    "date_action_plan":date_action_plan,
                     "departamento":departamento,
                     "municipio":municipio,
                     "etenia":etenia,
