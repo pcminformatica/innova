@@ -2192,13 +2192,22 @@ def _d_company_dash_search():
                 respuestas = ''
                 resultados = ''
                 diagnoses_submission_time = ''
+                constituida = ''
                 if filtered_diagnoses:
                     ids = filtered_diagnoses[0].id
                     status = filtered_diagnoses[0].status
                     respuestas = filtered_diagnoses[0].respuestas
-                    if respuestas['_submission_time']:
+                    if '_submission_time' in respuestas:
                         # Convertir el valor de cadena a un objeto datetime
                         submission_time = datetime.strptime(respuestas['_submission_time'], '%Y-%m-%dT%H:%M:%S')
+                        
+                    if '_7_2' in respuestas:
+                        constituida = respuestas['_7_2']
+                        if constituida == '3':
+                            constituida = 'SI'
+                        else:
+                            constituida = 'NO'
+
 
                         # Obtener la fecha (año, mes, día) en formato "YYYY-MM-DD"
 
@@ -2231,6 +2240,7 @@ def _d_company_dash_search():
                     "resultados":resultados,
                     'services':actions_diagnoses,
                     'totalempleados':totalempleados,
+                    'constituida':constituida,
                     'edad':edad,
 
                 })
