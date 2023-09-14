@@ -2203,11 +2203,6 @@ def _d_company_dash_search():
                         
                     if '_7_2' in respuestas:
                         constituida = respuestas['_7_2']
-                        if constituida == '3':
-                            constituida = 'SI'
-                        else:
-                            constituida = 'NO'
-
 
                         # Obtener la fecha (año, mes, día) en formato "YYYY-MM-DD"
 
