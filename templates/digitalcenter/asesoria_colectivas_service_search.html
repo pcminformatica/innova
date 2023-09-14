@@ -9,158 +9,238 @@
 .alignright {
 	float: right;
 }
+
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+
 </style>
 {% endblock %}
 {% block body %}
 <main class="s-main-content">
     <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-s">
+        <div class="mdc-layout-grid container">
             <div class="mdc-layout-grid__inner">
 
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
-                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
-                                <div class="mdc-tab-scroller">
-                                    <div class="mdc-tab-scroller__scroll-area">
-                                        <div class="mdc-tab-scroller__scroll-content">
-                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-                                                <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">Empresas Elegibles</span>
-                                                </span>
-                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                                </span>
-                                                <span class="mdc-tab__ripple"></span>
-                                            </button>
+                          <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+                            <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                    <span class="mdc-tab__content">
+                                    <span class="mdc-tab__text-label">Mis empresarias ({{ actions |length }})</span>
+                                    </span>
+                                    <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                    </span>
+                                    <span class="mdc-tab__ripple"></span>
+                                </button>
+                                <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                    <span class="mdc-tab__content">
+                                    <span class="mdc-tab__text-label">Empresarias Referidas ({{ action_plan_references |length }}) </span>
+                                    </span>
+                                    <span class="mdc-tab-indicator mdc-tab-indicator">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                    </span>
+                                    <span class="mdc-tab__ripple"></span>
+                                </button>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mdc-card__content container-dashboard--messages-msg">
-                                <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
-                                    <thead>
-                                    <tr class="mdc-data-table__header-row">
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referencias</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
-                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
-                                    </tr>
-                                    
-                                    
-                                    
-                                    </thead>
-                                    <tbody class="mdc-data-table__content">
-                                  
-                                        {% for action in actions %}                                   
-                                        <tr class="mdc-data-table__row">
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{loop.index}}
-                                            </th>
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                <a href="{{ url_for('digitalcenter._company_dashboard',user_uid=action.company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                            
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Ver Empresa</span>
-                                                </a>
-                                            </th>
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{action.company.name}}
-                                            </th>
-
-                                         
-
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{action.company.inscripcion.name}}
-                                            </th>
-                                            
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{action.services.name}}
-                                            </th>
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {{action.services.catalog_catego.name}}
-                                            </th>
-                                            <th class="mdc-data-table__cell" scope="row">
-                                                {% if action.employe_assigned %}
-                                                    YA ASIGNADO A  {{ action.employe_assigned_user.name }}
-                                                {% else %}
-                                                <select id="txt_user_{{action.id}}">
-                                                    <option value="0">--</option>
-                                                    {% for user in users %}
-                                                    <option value="{{ user.id }}">
-                                                        {{ user.extra_info.names }}
-                                                        {{ user.extra_info.last_names}}
-                                                        
-                                                    </option>
-                                                    {% endfor %}
-                                                </select>
-                                                <button onclick="referirEmpresaria('{{action.id}}')">
-                                                    Referir
-                                                </button>
-                                                {% endif %}
-                                                
-                                            </th>
-                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                                {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
-
-                                            </th>
-                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                                {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
-
-                                            </th>
-                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                                {{action.progress}}
-
-                                            </th>
-                    
-                                        </tr>
-                                        {% endfor %}
-
-                                    </tbody>
-                                </table>
-                                  
-                                    <div class="mdc-data-table__progress-indicator">
-                                      <div class="mdc-data-table__scrim"></div>
-                                      <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
-                                        <div class="mdc-linear-progress__buffer">
-                                          <div class="mdc-linear-progress__buffer-bar"></div>
-                                          <div class="mdc-linear-progress__buffer-dots"></div>
-                                        </div>
-                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-                                          <span class="mdc-linear-progress__bar-inner"></span>
-                                        </div>
-                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                                          <span class="mdc-linear-progress__bar-inner"></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  
-                            </div>
-              
                                 
-                             
 
-
-                            <div class="mdc-card__actions">
-                                <div class="mdc-card__actions-buttons">
-                                </div>
-                                <div class="mdc-card__action-icons">
-                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                        <div class="mdc-icon-button__ripple"></div>
-                                        more_vert
-                                    </button>
                                 </div>
                             </div>
-                        
-                        
+                            </div>
+                        </div>
+                            <!-- Inicio  -->
+                            <div class="content content--active">
+                            
+                              <div class="mdc-layout-grid">
+                                  <div class="mdc-layout-grid__inner">
+                                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                        <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                            <thead>
+                                            <tr class="mdc-data-table__header-row">
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referencias</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
+                                            </tr>
+                                            
+                                            
+                                            
+                                            </thead>
+                                            <tbody class="mdc-data-table__content">
+                                          
+                                                {% for action in actions %}                                   
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{loop.index}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="{{ url_for('digitalcenter._company_dashboard',user_uid=action.company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Ver Empresa</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.company.name}}
+                                                    </th>
+        
+                                                 
+        
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.company.inscripcion.name}}
+                                                    </th>
+                                                    
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.services.name}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.services.catalog_catego.name}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {% if action.employe_assigned %}
+                                                            YA ASIGNADO A  {{ action.employe_assigned_user.name }}
+                                                        {% else %}
+                                                        <select id="txt_user_{{action.id}}">
+                                                            <option value="0">--</option>
+                                                            {% for user in users %}
+                                                            <option value="{{ user.id }}">
+                                                                {{ user.extra_info.names }}
+                                                                {{ user.extra_info.last_names}}
+                                                                
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <button onclick="referirEmpresaria('{{action.id}}')">
+                                                            Referir
+                                                        </button>
+                                                        {% endif %}
+                                                        
+                                                    </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
+        
+                                                    </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
+        
+                                                    </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.progress}}
+        
+                                                    </th>
+                            
+                                                </tr>
+                                                {% endfor %}
+        
+                                            </tbody>
+                                        </table>
+                                          
+                                      </div>
+
+                                  </div>                            
+                              </div>
+                  
+                          </div>
+                          <!-- Lista de usuarios  -->
+                          <div class="content content">
+                          
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                        <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                            <thead>
+                                            <tr class="mdc-data-table__header-row">
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
+                          
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
+                                            </tr>
+                                            
+                                            
+                                            
+                                            </thead>
+                                            <tbody class="mdc-data-table__content">
+                                          
+                                                {% for action in action_plan_references %}                                   
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{loop.index}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="{{ url_for('digitalcenter._company_dashboard',user_uid=action.action_plan.company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Ver Empresa</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.action_plan.company.name}}
+                                                    </th>
+        
+                                                 
+        
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.action_plan.company.inscripcion.name}}
+                                                    </th>
+                                                    
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.action_plan.services.name}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.action_plan.services.catalog_catego.name}}
+                                                    </th>
+
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.action_plan.date_scheduled_start.strftime('%Y-%m-%d') }}
+        
+                                                    </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.action_plan.date_scheduled_end.strftime('%Y-%m-%d') }}
+        
+                                                    </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.action_plan.progress}}
+        
+                                                    </th>
+                            
+                                                </tr>
+                                                {% endfor %}
+        
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+
+                                </div>                            
+                            </div>
+                  
+                          </div>
+              
+                  
                     </div>
                     </div>
                 </div>
@@ -171,6 +251,5 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
 {% endblock %}
-

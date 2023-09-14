@@ -1350,7 +1350,7 @@ def _company_monitoring_list_id():
 
 @digitalcenter.route('/company/view/<int:user_uid>/',methods=['GET', 'POST'])
 def _company_dashboard(user_uid):
-    app.logger.debug('** sexo ** - ------------------')
+    app.logger.debug('** _company_dashboard ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
     
@@ -1381,7 +1381,7 @@ def _company_dashboard(user_uid):
 
 @digitalcenter.route('/company/reference/view/<int:user_uid>/',methods=['GET', 'POST'])
 def _company_dashboard_action_plan_references(user_uid):
-    app.logger.debug('** sexo ** - ------------------')
+    app.logger.debug('** _company_dashboard_action_plan_references ** - ------------------')
 
     company = Company.query.filter_by(id=user_uid).first()
     #buscamos la carta de compromiso DOC2
@@ -1774,9 +1774,12 @@ def _init3_status_company():
 @digitalcenter.route('/sde/service/',methods=['GET', 'POST'])
 def _asesoria_colectivas_service_list():
     app.logger.debug('** SWING_CMS ** -  appointments_create') 
-    services = CatalogServices.query.filter_by(enabled = 1).all()
+    services = CatalogServices.query.filter_by(enabled=1).filter(
+        or_(CatalogServices.fase != 0, CatalogServices.fase.is_(None))
+    ).all()
+    references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    context = {'services':services}  
+    context = {'services':services,'references':references}  
     return render_template('digitalcenter/asesoria_colectivas_service_list.html',**context)
 
 
@@ -1786,7 +1789,17 @@ def _asesoria_colectivas_service_search(service_id):
     services = CatalogServices.query.filter_by(id = service_id).first()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
-    context = {'actions':actions}  
+    # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
+
+    # Realizar la consulta
+    action_plan_references = ActionPlanReferences.query.join(
+        ActionPlan, ActionPlanReferences.action_plan_id == ActionPlan.id
+    ).filter(
+        ActionPlan.services_id == services.id,
+        ActionPlanReferences.employe_assigned == current_user.id
+    ).all()    
+
+    context = {'actions':actions,'action_plan_references':action_plan_references}  
     return render_template('digitalcenter/asesoria_colectivas_service_search.html',**context)
 
 
