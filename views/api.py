@@ -13,6 +13,8 @@ from sqlalchemy import or_,desc,asc
 from views.wallet import _update_wallet
 from views.digitalcenter import convertir_a_datetime
 import json
+from views.email_app import send_email  # Importar la función send_email desde email_app.py
+from models.models import default_timezone
 api = Blueprint('api', __name__, template_folder='templates', static_folder='static')
 
 # Set the Appointment's Details
@@ -1621,6 +1623,7 @@ def _d_created_reference():
             txt_action_id = request.json['txt_action_id']
             txt_user_x = request.json['txt_user_x']
             plan = ActionPlan.query.filter_by(id = txt_action_id).first()
+
             user = User.query.filter(User.id == txt_user_x).first()
             if plan:
                 plan.employe_assigned =user.id
@@ -1633,6 +1636,30 @@ def _d_created_reference():
                     reference.employe_assigned = user.id
                     db.session.add(reference)
                     db.session.commit()
+                usr_name = current_user.name
+                companyName = plan.company.name
+                servicesName = plan.services.name
+                now_time=dt.now(default_timezone)
+                # Formatear now_time como un string con el formato deseado
+                formatted_time = now_time.strftime('%Y-%m-%d a las %I:%M %p')
+                html_content = f'''
+                <html>
+                <body>
+                    <p><strong>{usr_name}</strong> ha asignado la empresa  <strong>{companyName}</strong> que requiere el servicio <strong>{servicesName}</strong>, referencia creada a las <strong>{formatted_time}</strong>.</p>
+                </body>
+                </html>
+                '''
+                recipient =  [current_user.email, user.email] 
+                subject = 'Referencia creada - INNOVA MUJER HONDURAS'
+
+                try:
+                    if send_email(recipient, subject, html_content):
+                        print('Correo enviado con éxito.')
+                    else:
+                        print('Error al enviar el correo.' )
+                except Exception as e:
+                    print('Ocurrió un error: ' + str(e))
+
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:

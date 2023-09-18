@@ -29,6 +29,22 @@ def pasw3():
 
     return render_template("pasw2.html")
 import requests
+from views.email_app import send_email  # Importar la función send_email desde email_app.py
+
+
+@app.route('/enviar_correo')
+def send_email_route():
+    recipient =  ['consultorvarela@gmail.com', 'pedroavarela@yahoo.com'] 
+    subject = 'Mi correo'
+    html_content = '<p>Este es el contenido del correo con <strong>HTML</strong> para dar estilo.</p>'
+        
+    try:
+        if send_email(recipient, subject, html_content):
+            return 'Correo enviado con éxito.'
+        else:
+            return 'Error al enviar el correo.' 
+    except Exception as e:
+        return 'Ocurrió un error: ' + str(e)
 
     
 @home.route('/pasw2/')
