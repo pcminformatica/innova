@@ -645,8 +645,8 @@ def _indicadores_perfil_asesor(user_uid):
             diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] and range1 <= convertir_a_datetime(e['_submission_time']) <= range2  )
             print(diagnosticos)
             print(len(diagnosticos))
-        #companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
-        companys = Company.query.join(User, User.id == Company.created_by).join(CompanyStatus, Company.status_id == CompanyStatus.id).filter(
+        companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
+        companys1 = Company.query.join(User, User.id == Company.created_by).join(CompanyStatus, Company.status_id == CompanyStatus.id).filter(
             or_(
                 Company.date_created.between(txt_start_date, txt_end_date),
                 Company.date_action_plan.between(txt_start_date, txt_end_date)
@@ -700,7 +700,7 @@ def _indicadores_perfil_asesor(user_uid):
         companys_etapa2_activas = companys_etapa2 - companys_etapa2_inactivas   
         planes = 0
         lista = []
-        for company in companys:
+        for company in companys1:
             #plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.created_by == user.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
