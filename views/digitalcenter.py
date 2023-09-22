@@ -793,12 +793,11 @@ def _init_wallet():
                             db.session.delete(wallet)
                             db.session.commit()
                 service_planx = CatalogServices.query.filter_by(name_short='c1').first()
-                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1,amount=250).first()
+                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
                 if wallet:  
                     # Si se encuentra un registro en la consulta, lo eliminamos
                     db.session.delete(wallet)
                     db.session.commit()
-                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
                 if not wallet:  
                     wallet = WalletTransaction()
                     wallet.amount = service_planx.cost_innova
