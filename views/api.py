@@ -1645,7 +1645,7 @@ def _d_created_reference():
                 html_content = f'''
                 <html>
                 <body>
-                    <p><strong>{usr_name}</strong> ha asignado la empresa  <strong>{companyName}</strong> que requiere el servicio <strong>{servicesName}</strong>, referencia creada a las <strong>{formatted_time}</strong>.</p>
+                    <p><strong>{usr_name}</strong> ha asignado la empresa  <strong>{companyName}</strong> que requiere el servicio <strong>{servicesName}</strong>, referencia creada el <strong>{formatted_time}</strong>.</p>
                 </body>
                 </html>
                 '''

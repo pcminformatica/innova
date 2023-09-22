@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -314,8 +314,6 @@ def _home():
                 return redirect(url_for('digitalcenter.__form_perfil_emp'))
             else:
                 #
-                carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
-                carta = DocumentCompany.query.filter_by(company_id=current_user.extra_info.company.id,documente_type_id=carta.id,enabled=True).first()
                 company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
                 #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
@@ -328,11 +326,6 @@ def _home():
                 withdrawals_completed = WalletTransaction.query.filter(WalletTransaction.status ==1,WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).all()
                 withdrawals_progress_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.status ==2, WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).first()
                 withdrawals_completed_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.status ==1, WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).first()
-                print(deposits_total)
-                print(withdrawals_progress_total)
-                print(withdrawals_completed_total)
-                print(withdrawals_progress)
-                print(withdrawals_completed)
                 plan_action = []
                 for catalog in catalog:
                     plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.cancelled ==False,CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
@@ -343,8 +336,15 @@ def _home():
                     diagnostico = diagnos.resultados
                 else:
                     diagnostico = False
+                #buscamos la carta de compromiso DOC2
+                carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+                carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
+                #buscamos la ficha de inscripcion DOC1
+                ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+                ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
+                enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
                 context = {
-                    
+                    "enrolls":enrolls,
                     "deposits":deposits,
                     "deposits_total":deposits_total,
                     "withdrawals_progress":withdrawals_progress,
@@ -352,6 +352,7 @@ def _home():
                     "withdrawals_progress_total":withdrawals_progress_total,
                     "withdrawals_completed_total":withdrawals_completed_total,
                     "carta":carta,
+                    "ficha":ficha,
                     "company":company,
                     "diagnostico":diagnostico,
                     "actions":actions,
@@ -375,6 +376,55 @@ def _home():
         return redirect(url_for('home._login'))
 
 
+@home.route('/dashboard/company/<int:company_id>/view',methods=['GET', 'POST'])
+def _company_dashboard_view(company_id):
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    company = Company.query.filter_by(id=company_id).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+    #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+    actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+    catalog = catalogCategory.query.all()
+    deposits_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.company_id == company.id, WalletTransaction.type ==0,WalletTransaction.status!=0).first()
+    deposits = WalletTransaction.query.filter(WalletTransaction.company_id == company.id, WalletTransaction.type ==0,WalletTransaction.status!=0).all()
+    #status (2) in progress, (1) completed, (0) canceled
+    withdrawals_progress = WalletTransaction.query.filter(WalletTransaction.status ==2,WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).all()
+    withdrawals_completed = WalletTransaction.query.filter(WalletTransaction.status ==1,WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).all()
+    withdrawals_progress_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.status ==2, WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).first()
+    withdrawals_completed_total =WalletTransaction.query.with_entities(func.sum(WalletTransaction.amount).label('total')).filter(WalletTransaction.status ==1, WalletTransaction.company_id == company.id, WalletTransaction.type ==1,WalletTransaction.status!=0).first()
+    plan_action = []
+    for catalog in catalog:
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.cancelled ==False,CatalogServices.catalog_category == catalog.id,ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+        if plan:
+            miplan = {'catalog_id':catalog.id,'catalog_name':catalog.name,'plan_action':plan}
+            plan_action.append(miplan)
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    #buscamos la carta de compromiso DOC2
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
+    #buscamos la ficha de inscripcion DOC1
+    ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
+    enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
+    context = {
+        "enrolls":enrolls,
+        "deposits":deposits,
+        "deposits_total":deposits_total,
+        "withdrawals_progress":withdrawals_progress,
+        "withdrawals_completed":withdrawals_completed,
+        "withdrawals_progress_total":withdrawals_progress_total,
+        "withdrawals_completed_total":withdrawals_completed_total,
+        "carta":carta,
+        "ficha":ficha,
+        "company":company,
+        "diagnostico":diagnostico,
+        "actions":actions,
+        "diagnosis":diagnos,
+        "plan_action":plan_action
+    }
+    return render_template('company_dashboard_view.html',**context)
 
 @home.route('/pre/')
 #@login_required
