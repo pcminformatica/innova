@@ -697,7 +697,7 @@ def _init_status_company_3():
 def _init_wallet():
     companys = Company.query.filter_by(enabled=True).all()
     for company in companys:
-        if not company.available_credit:
+        if not company.available_credit or  company.available_credit <= 0:
             diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).first()
             #buscar si tiene diagnostico
             if diagnostico:
@@ -779,13 +779,13 @@ def _init_wallet():
                                 wallet.status = 2
                             db.session.add(wallet)
                             db.session.commit() 
-                service_plan = CatalogServices.query.filter_by(name_short='c1').first()
-                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_plan.id).first()
+                service_planx = CatalogServices.query.filter_by(name_short='c1').first()
+                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
                 if not wallet:  
                     wallet = WalletTransaction()
-                    wallet.amount = service_plan.cost_innova
+                    wallet.amount = service_planx.cost_innova
                     wallet.company_id =company.id
-                    wallet.services_id = service_plan.id
+                    wallet.services_id = service_planx.id
                     wallet.created_by = diagnostico.created_by
                     wallet.type = 0
                     wallet.status = 1
