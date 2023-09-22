@@ -760,7 +760,7 @@ def _init_wallet():
                     db.session.commit() 
             
                 #recorre todos los servicios de la fase 1.
-                plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==1,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
                 #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
                 if plans:
                     for plan in plans:
@@ -779,6 +779,17 @@ def _init_wallet():
                                 wallet.status = 2
                             db.session.add(wallet)
                             db.session.commit() 
+                #recorre todos los servicios de la fase 2
+                plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==2,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                if plans:
+                    for plan in plans:
+                        service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
+                        wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
+                        if wallet:  
+                        # Si se encuentra un registro en la consulta, lo eliminamos
+                            db.session.delete(wallet)
+                            db.session.commit()
                 service_planx = CatalogServices.query.filter_by(name_short='c1').first()
                 wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
                 if not wallet:  
