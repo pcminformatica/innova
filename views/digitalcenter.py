@@ -697,7 +697,9 @@ def _init_status_company_3():
 def _init_wallet():
     companys = Company.query.filter_by(enabled=True).all()
     for company in companys:
+        # Verificar si available_credit no existe o es menor o igual a cero
         if not company.available_credit or company.available_credit <= 0:
+            # El código a ejecutar cuando la condición se cumple
             diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).first()
             #buscar si tiene diagnostico
             if diagnostico:
@@ -728,83 +730,83 @@ def _init_wallet():
                     wallet.type = 1
                     db.session.add(wallet)
                     db.session.commit() 
-            #buscamos si tiene plan de accion
-            service_plan = CatalogServices.query.filter_by(name_short='a3').first()
-            actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
-            if not actionplan:
-                #validamos que se encuentren servicios dentro del plan de accion
-                plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).first()
-                if plan:
-                    plan = ActionPlan()
-                    plan.company_id = company.id
-                    plan.company = company
-                    plan.date_scheduled_start =plan.date_scheduled_start
-                    plan.date_scheduled_end = plan.date_scheduled_start
-                    plan.services_id = service_plan.id
-                    plan.created_by = diagnostico.created_by
-                    plan.fase = 0
-                    plan.descripcion = ''
-                    db.session.add(plan)
-                    db.session.commit() 
-                    db.session.refresh(plan)
-            wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_plan.id).first()
-            if not wallet:  
-                wallet = WalletTransaction()
-                wallet.amount = service_plan.cost_innova
-                wallet.company_id =company.id
-                wallet.services_id = service_plan.id
-                wallet.created_by = diagnostico.created_by
-                wallet.status = 1
-                wallet.type = 1
-                db.session.add(wallet)
-                db.session.commit() 
-        
-            #recorre todos los servicios de la fase 1.
-            plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==1,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
-            #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
-            if plans:
-                for plan in plans:
-                    service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
-                    wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
-                    if not wallet:  
-                        wallet = WalletTransaction()
-                        wallet.amount = service_plan.cost_innova
-                        wallet.company_id =company.id
-                        wallet.services_id = service_plan.id
-                        wallet.created_by = plan.created_by
-                        wallet.type = 1
-                        if plan.progress == 100:
-                            wallet.status = 1
-                        else:
-                            wallet.status = 2
-                        db.session.add(wallet)
+                #buscamos si tiene plan de accion
+                service_plan = CatalogServices.query.filter_by(name_short='a3').first()
+                actionplan = ActionPlan.query.filter_by(company_id = company.id,services_id=service_plan.id,cancelled=False).first()
+                if not actionplan:
+                    #validamos que se encuentren servicios dentro del plan de accion
+                    plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).first()
+                    if plan:
+                        plan = ActionPlan()
+                        plan.company_id = company.id
+                        plan.company = company
+                        plan.date_scheduled_start =plan.date_scheduled_start
+                        plan.date_scheduled_end = plan.date_scheduled_start
+                        plan.services_id = service_plan.id
+                        plan.created_by = diagnostico.created_by
+                        plan.fase = 0
+                        plan.descripcion = ''
+                        db.session.add(plan)
                         db.session.commit() 
-            #recorre todos los servicios de la fase 2
-            plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==2,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
-            #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
-            if plans:
-                for plan in plans:
-                    service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
-                    wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
-                    if wallet:  
-                    # Si se encuentra un registro en la consulta, lo eliminamos
-                        db.session.delete(wallet)
-                        db.session.commit()
-            service_planx = CatalogServices.query.filter_by(name_short='c1').first()
-            wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
-            if not wallet:  
-                wallet = WalletTransaction()
-                wallet.amount = service_planx.cost_innova
-                wallet.company_id =company.id
-                wallet.services_id = service_planx.id
-                wallet.created_by = diagnostico.created_by
-                wallet.type = 0
-                wallet.status = 1
-                db.session.add(wallet)
-                db.session.commit() 
-            actualizar = _update_wallet(company.id)
-            if actualizar:
-                print('empresa actulizada')
+                        db.session.refresh(plan)
+                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_plan.id).first()
+                if not wallet:  
+                    wallet = WalletTransaction()
+                    wallet.amount = service_plan.cost_innova
+                    wallet.company_id =company.id
+                    wallet.services_id = service_plan.id
+                    wallet.created_by = diagnostico.created_by
+                    wallet.status = 1
+                    wallet.type = 1
+                    db.session.add(wallet)
+                    db.session.commit() 
+            
+                #recorre todos los servicios de la fase 1.
+                plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==1,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                if plans:
+                    for plan in plans:
+                        service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
+                        wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
+                        if not wallet:  
+                            wallet = WalletTransaction()
+                            wallet.amount = service_plan.cost_innova
+                            wallet.company_id =company.id
+                            wallet.services_id = service_plan.id
+                            wallet.created_by = plan.created_by
+                            wallet.type = 1
+                            if plan.progress == 100:
+                                wallet.status = 1
+                            else:
+                                wallet.status = 2
+                            db.session.add(wallet)
+                            db.session.commit() 
+                #recorre todos los servicios de la fase 2
+                plans = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase==2,ActionPlan.cancelled==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                #plans = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+                if plans:
+                    for plan in plans:
+                        service_plan = CatalogServices.query.filter_by(id=plan.services_id).first()
+                        wallet = WalletTransaction.query.filter_by(company_id = plan.company_id, services_id =service_plan.id).first()
+                        if wallet:  
+                        # Si se encuentra un registro en la consulta, lo eliminamos
+                            db.session.delete(wallet)
+                            db.session.commit()
+                service_planx = CatalogServices.query.filter_by(name_short='c1').first()
+                wallet = WalletTransaction.query.filter_by(company_id = company.id, services_id =service_planx.id,status = 1).first()
+                if not wallet:  
+                    wallet = WalletTransaction()
+                    wallet.amount = service_planx.cost_innova
+                    wallet.company_id =company.id
+                    wallet.services_id = service_planx.id
+                    wallet.created_by = diagnostico.created_by
+                    wallet.type = 0
+                    wallet.status = 1
+                    db.session.add(wallet)
+                    db.session.commit() 
+                actualizar = _update_wallet(company.id)
+                if actualizar:
+                    print('empresa actulizada')
 
     return 'Listo'
 
