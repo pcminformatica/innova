@@ -104,8 +104,8 @@ ul,li{
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__primary-action" tabindex="0">
                                 <div class="mdc-card__media">
-                                    {% if current_user.extra_info.avatar %}
-                                    <img class="profile-background" src="{{ url_for('static', filename='upload/') }}{{current_user.extra_info.avatar}}" alt="Border Perfil" />
+                                    {% if company.users.avatar %}
+                                    <img class="profile-background" src="{{ url_for('static', filename='upload/') }}{{company.users.avatar}}" alt="Border Perfil" />
 
                                     {% else %}
                                     <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
@@ -116,8 +116,8 @@ ul,li{
                             </div>
                             <div class="mdc-card__content">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">
-                                    {% if current_user.extra_info.company.name %}
-                                        {{ current_user.extra_info.company.name }}
+                                    {% if company.name %}
+                                        {{ company.name }}
                                     {% endif %}
                                     
 
@@ -127,11 +127,11 @@ ul,li{
                                     <i class="material-icons s-font-color-primary">verified_user</i>
                                     Empresaria 
                                 </div>
-                                {% if  current_user.extra_info.names %}
+                                {% if  company.names %}
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">business</i>
                                     
-                                    {{ current_user.extra_info.names }}
+                                    {{ company.names }}
                                 </div>
                                 {% endif %}
 
