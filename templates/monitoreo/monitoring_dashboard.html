@@ -1921,11 +1921,11 @@ function getCheckValues(name){
           redirect: 'follow'
       };
 
-      swcms.getFetch(apiUrl, 'loadCities2', requestOptions).then((data) => {
+      swcms.getFetch(apiUrl, 'loadCompany', requestOptions).then((data) => {
 
       });
   }
-  function loadCities2(data){
+  function loadCompany(data){
     setJson(data)
     console.log(jsonData)
     const tableBody = document.getElementById("tableBody");
