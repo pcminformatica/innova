@@ -1287,7 +1287,6 @@ def _diagnosis_monitoring_lisst():
                 user.uid = fibaUser.uid
                 user.email = fibaUser.email
                 user.name = fibaUser.display_name
-                user.phonenumber = fibaUser.phone_number
                 user.datecreated = dt.now(tz.utc)
                 user.cmuserid = 'INNO-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')
                 db.session.add(user)
