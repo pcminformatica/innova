@@ -1278,7 +1278,7 @@ def _diagnosis_monitoring_lisst():
                 <p>Atentamente,</p>
                 <p>Equipo INNOVA MUJER HONDURAS</p>
             '''
-            mail.send(msg)
+            
             print('Sucessfully created new user: {0}'.format(fibaUser.uid))
             print('Sucessfully created new user: {0}'.format(fibaUser.email))
             user = User.query.filter_by(uid = fibaUser.uid).first()
@@ -1303,13 +1303,14 @@ def _diagnosis_monitoring_lisst():
 
 
                 # Add User Role
-                #user_role = CatalogUserRoles.query.filter_by(name_short='usr').first()
+                user_role = CatalogUserRoles.query.filter_by(name_short='usr').first()
                 user_userxrole = UserXRole()
                 user_userxrole.user_id = user.id
-                user_userxrole.user_role_id = 1
+                user_userxrole.user_role_id = user_role.id
                 db.session.add(user_userxrole)
                 db.session.refresh(user)
                 db.session.commit()
+                mail.send(msg)
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
