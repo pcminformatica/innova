@@ -5,7 +5,7 @@ import 'regenerator-runtime/runtime';
 import anchorme from 'anchorme';
 import console from 'dev-console.macro';
 import * as localForage from "localforage";
-import { accountRedirect } from './swing_firebase';
+import { accountRedirect,startSesion } from './swing_firebase';
 import { MDCChipSet } from '@material/chips';
 import { MDCDialog } from '@material/dialog';
 import { MDCDrawer } from "@material/drawer";
@@ -995,6 +995,7 @@ window.topBarTabURLActive = topBarTabURLActive;
 /* Import Account Redirect Function and make it available in the window scope */
 /* Allow 'window' context to reference the function */
 window.accountRedirect = accountRedirect;
+window.startSesion = startSesion;
 
 /************************** LIBRARIES INIT **************************/
 

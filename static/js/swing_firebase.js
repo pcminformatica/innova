@@ -167,3 +167,34 @@ export function accountRedirect(e) {
         });
     }
 }
+// Función para iniciar sesión
+export function startSesion() {
+
+    var email = document.getElementById("txt_mail").value.trim() || null
+    var password = document.getElementById("txt_password").value.trim() || null
+  
+    // Inicia sesión con correo y contraseña
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Inicio de sesión exitoso, userCredential contiene información del usuario
+        const user = userCredential.user;
+  
+        // Obtiene el token de acceso del usuario autenticado
+        user.getIdToken().then(idToken => {
+            var postData = {
+                "idToken": idToken,
+                "csrfToken": "ADMIN123654"
+            };
+            postFetch('/loginuser/', postData);
+        }).catch((error) => {
+            console.error('Error al obtener el token de acceso:', error);
+        });
+      })
+      .catch((error) => {
+        // Error de inicio de sesión, muestra un mensaje de error
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Error de inicio de sesión:', errorMessage);
+      });
+  }
+  

@@ -1240,7 +1240,8 @@ class Object:
         return json.dumps(self, default=lambda o: o.__dict__, 
             sort_keys=True, indent=4)
 
-
+from flask_mail import Message
+from . import mail  # Importar la instancia de Flask-Mail desde __init__.py
 @api.route('/create/company/user',methods=['GET', 'POST'])
 def _diagnosis_monitoring_lisst():
     app.logger.debug('** SWING_CMS ** - ------------------')
@@ -1249,11 +1250,35 @@ def _diagnosis_monitoring_lisst():
             txt_email = request.json['txt_email']
             txt_name = request.json['txt_name']
             txt_company_id = request.json['txt_company_id'] 
+            txt_password = generar_contraseña_temporal()  # Agregar campo de contraseña en el formulario
+
+            # Crea el usuario en Firebase Authentication
             fibaUser = auth.create_user(
                 email=txt_email,
-                email_verified=False,
                 display_name=txt_name,
+                password=txt_password,  # Utiliza la contraseña proporcionada por el usuario
                 disabled=False)
+
+
+            # Envía un correo electrónico al usuario con la información de inicio de sesión
+            msg = Message('Bienvenida a la plataforma Innova Mujer Honduras', sender='infoinnova@ciudadmujer.gob.hn', recipients=[txt_email])
+            # Contenido del correo electrónico con formato HTML
+            msg.html = f'''
+                <p>Estimada empresaria,</p>
+                <p>¡Felicitaciones! Ahora tienes tu propio usuario en nuestra plataforma Innova Mujer Honduras.</p>
+                <p>Para acceder a tu cuenta, utiliza la siguiente información:</p>
+                <ul>
+                    <li><strong>Correo Electrónico:</strong> {txt_email}</li>
+                    <li><strong>Contraseña:</strong> <em>{txt_password}</em></li>
+                </ul>
+                <p>Puedes iniciar sesión en la plataforma Innova Mujer Honduras a través del siguiente enlace:</p>
+                <p><a href="https://innova.ciudadmujer.gob.hn/login/">Iniciar Sesión</a></p>
+                <p>Si no solicitaste un usuario o restablecimiento de contraseña, no dudes en ignorar este correo electrónico con confianza.</p>
+                <p>Gracias por unirte a nosotras y ser parte de Innova Mujer Honduras.</p>
+                <p>Atentamente,</p>
+                <p>Equipo INNOVA MUJER HONDURAS</p>
+            '''
+            mail.send(msg)
             print('Sucessfully created new user: {0}'.format(fibaUser.uid))
             print('Sucessfully created new user: {0}'.format(fibaUser.email))
             user = User.query.filter_by(uid = fibaUser.uid).first()
@@ -1286,20 +1311,23 @@ def _diagnosis_monitoring_lisst():
                 db.session.add(user_userxrole)
                 db.session.refresh(user)
                 db.session.commit()
-            f = open(app.config.get('GOOGLE_APPLICATION_KEY'))
-            js = json.load(f)
-        
-            url = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={0}".format(js['firebaseConfig']['apiKey'])
-            headers={'Content-Type':'application/json'}
-            myobj = {'requestType': 'PASSWORD_RESET','email':fibaUser.email}
-            x = requests.post(url,headers=headers, json = myobj)
-            print(x)
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+import secrets
+import string
 
+# Función para generar una contraseña aleatoria y segura
+def generar_contraseña_temporal(tamaño=8):
+    caracteres = string.ascii_letters + string.digits  # Letras mayúsculas, minúsculas y números
+    # También puedes agregar símbolos permitidos, por ejemplo: +*%$#@!&?
+    caracteres += '-+*%$#@!<>?'
+    contraseña = ''.join(secrets.choice(caracteres) for _ in range(tamaño))
+    return contraseña
+
+# Ejemplo de uso
 
 @api.route('/initial/attention/companies',methods=['GET', 'POST'])
 def _initial_attention_companies():

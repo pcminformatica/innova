@@ -1,0 +1,179 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer, Innova, Login, Iniciar Sesión, Registrarte, Acceder{% endblock %}
+{% block page_title %}Iniciar Sesión - Innova{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-30"
+                        src="{{ url_for('static', filename='images/manifest/innova_pin.svg') }}" alt="Logo Login" />
+                    <h6 class="mdc-typography--subtitle2">
+                        Inicia sesión con tu método favorito:
+                    </h6>
+                    <div class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-sign-in">
+                        <form  id="formulario-inicio-sesion" onsubmit="return false" method="POST">
+                            <div class="firebaseui-card-header">
+                                <h1 class="firebaseui-title">Acceder con el correo electrónico</h1>
+                            </div>
+                            <div class="firebaseui-card-content">
+                                <div class="firebaseui-relative-wrapper">
+
+                                    <label class="mdc-text-field mdc-text-field--outlined">
+                                        <span class="mdc-notched-outline">
+                                          <span class="mdc-notched-outline__leading"></span>
+                                          <span class="mdc-notched-outline__notch">
+                                            <span class="mdc-floating-label" id="my-label-id">Correo electrónico</span>
+                                          </span>
+                                          <span class="mdc-notched-outline__trailing"></span>
+                                        </span>
+                                        <input id="txt_mail" type="mail" class="mdc-text-field__input" aria-labelledby="my-label-id" value="">
+                                    </label>
+                                    <br><br>
+                               
+                             
+                                    <label class="mdc-text-field mdc-text-field--outlined">
+                                        <span class="mdc-notched-outline">
+                                          <span class="mdc-notched-outline__leading"></span>
+                                          <span class="mdc-notched-outline__notch">
+                                            <span class="mdc-floating-label" id="my-label-id">Contraseña</span>
+                                          </span>
+                                          <span class="mdc-notched-outline__trailing"></span>
+                                        </span>
+                                        <input id="txt_password" type="password" class="mdc-text-field__input" aria-labelledby="my-label-id" value="">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="firebaseui-card-actions">
+                                <div class="firebaseui-form-actions">
+                                    <button type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Siguiente</button>
+                                </div>
+                            </div>
+                            <div class="firebaseui-card-footer">
+                                <p class="firebaseui-tos firebaseui-tospp-full-message">Si continúas, indicas que aceptas nuestras <a href="javascript:void(0)" class="firebaseui-link firebaseui-tos-link" target="_blank">Condiciones del Servicio</a> y la <a href="javascript:void(0)" class="firebaseui-link firebaseui-pp-link" target="_blank">Política de Privacidad</a>.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <h4 class="mdc-typography--headline4 s-font-color-support">
+                        Inicia sesión e ingresa a tu cuenta personalizada
+                    </h4>
+                    <p class="mdc-typography--body1">
+                        Al registrarte e iniciar sesión en <b>Innova Mujer</b>, automáticamente se crea una cuenta única,
+                        confidencial y personalizada para ti, la cual te brinda más beneficios y te habilita el acceso a
+                        nuevos servicios.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block body_script_section %}
+
+
+<script>
+
+    // Función para validar los campos de inicio de sesión
+function validarInicioSesion(emailInput,passwordInput) {
+
+
+    if (emailInput === "") {
+        mostrarError("Correo electrónico es obligatorio.");
+        return false;
+    }
+
+    // Validar el formato del correo electrónico utilizando una expresión regular
+    var emailFormatoValido = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(emailInput);
+    if (!emailFormatoValido) {
+        mostrarError("Correo electrónico no válido.");
+        return false;
+    }
+
+    if (passwordInput === "") {
+        mostrarError("Contraseña es obligatoria.");
+        return false;
+    }
+
+    // Si todos los campos son válidos, puedes continuar con la acción deseada
+    // Por ejemplo, iniciar sesión o enviar el formulario
+    return true;
+}
+
+// Función para mostrar mensajes de error utilizando SweetAlert
+function mostrarError(mensaje) {
+    const Swal = swcms.returnSwal()
+    Swal.fire(
+        'Error',
+        mensaje,
+        'warning'
+    );
+}
+
+// Evento para validar los campos antes de continuar
+document.getElementById("formulario-inicio-sesion").addEventListener("submit", function () {
+    var emailInput = document.getElementById("txt_mail").value.trim();;
+    var passwordInput = document.getElementById("txt_password").value.trim();;
+    if(validarInicioSesion(emailInput,passwordInput)){
+        startSesion()
+    }
+
+});
+
+
+    function initSesion()
+    {
+        const Swal = swcms.returnSwal()
+        var txt_mail = document.getElementById("txt_mail").value.trim() || null
+        var txt_password = document.getElementById("txt_password").value.trim() || null
+
+        if(txt_mail=="" || txt_password==""){
+            Swal.fire(
+            'Error',
+            'warning'
+            )
+            return false
+        }
+        return false
+        txt_finalizo= txt_finalizo.checked
+        console.log(txt_finalizo)
+        console.log(txt_porcentaje)
+        console.log(txt_servicios)
+        let postData = {
+            "txt_comentario":txt_comentario,
+            "txt_finalizo":txt_finalizo,
+            "txt_finalizo":txt_finalizo,
+            "txt_porcentaje":txt_porcentaje,
+            "txt_servicios":txt_servicios,
+            "txt_fecha":txt_fecha,
+            "txt_url":txt_url
+      };
+      console.log(postData)
+      let apiUrl = '/api/save/action/plan/history/';
+      //document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Plan de Acción creado!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+    }
+</script>
+{% endblock %}

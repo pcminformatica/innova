@@ -432,8 +432,8 @@ def _preStart():
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     return render_template('prelogin.html')
 
-@home.route('/login/')
-def _login():
+@home.route('/login/old')
+def _login_old():
     app.logger.debug('** SWING_CMS ** - Login')
     try:
         # Validate if the user has a Valid Session and Redirects
@@ -726,3 +726,66 @@ def _company_monitoring_list():
         'company_references':company_references
     }
     return render_template('company_monitoring_list.html',**context)
+
+
+@home.route('/login/')
+def _login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home._home'))
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('login_view.html')
+
+from flask_mail import Message
+from . import mail  # Importar la instancia de Flask-Mail desde __init__.py
+
+@home.route('/crear_usuario', methods=['GET'])
+def _crear_usuario():
+    try:
+        txt_email = 'consultorvarela@outlook.com'
+        txt_name =  'Pedro Varela'
+        txt_password = generar_contraseña_temporal()  # Agregar campo de contraseña en el formulario
+
+        # Crea el usuario en Firebase Authentication
+        user = auth.create_user(
+            email=txt_email,
+            display_name=txt_name,
+            password=txt_password,  # Utiliza la contraseña proporcionada por el usuario
+            disabled=False)
+
+
+        # Envía un correo electrónico al usuario con la información de inicio de sesión
+        msg = Message('Bienvenida a la plataforma Innova Mujer Honduras', sender='infoinnova@ciudadmujer.gob.hn', recipients=[txt_email])
+        # Contenido del correo electrónico con formato HTML
+        msg.html = f'''
+            <p>Estimada empresaria,</p>
+            <p>¡Felicitaciones! Ahora tienes tu propio usuario en nuestra plataforma Innova Mujer Honduras.</p>
+            <p>Para acceder a tu cuenta, utiliza la siguiente información:</p>
+            <ul>
+                <li><strong>Correo Electrónico:</strong> {txt_email}</li>
+                <li><strong>Contraseña:</strong> <em>{txt_password}</em></li>
+            </ul>
+            <p>Puedes iniciar sesión en la plataforma Innova Mujer Honduras a través del siguiente enlace:</p>
+            <p><a href="https://innova.ciudadmujer.gob.hn/login/">Iniciar Sesión</a></p>
+            <p>Si no solicitaste un usuario o restablecimiento de contraseña, no dudes en ignorar este correo electrónico con confianza.</p>
+            <p>Gracias por unirte a nosotras y ser parte de Innova Mujer Honduras.</p>
+            <p>Atentamente,</p>
+            <p>Equipo INNOVA MUJER HONDURAS</p>
+        '''
+        mail.send(msg)
+
+        return jsonify({'message': 'Usuario creado y correo electrónico enviado con éxito'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+import secrets
+import string
+
+# Función para generar una contraseña aleatoria y segura
+def generar_contraseña_temporal(tamaño=8):
+    caracteres = string.ascii_letters + string.digits  # Letras mayúsculas, minúsculas y números
+    # También puedes agregar símbolos permitidos, por ejemplo: +*%$#@!&?
+    caracteres += '-+*%$#@!<>?'
+    contraseña = ''.join(secrets.choice(caracteres) for _ in range(tamaño))
+    return contraseña
+
+# Ejemplo de uso
