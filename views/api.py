@@ -1307,7 +1307,6 @@ def _diagnosis_monitoring_lisst():
                     user_extra.acceptterms = True
                     user_extra.company_id = txt_company_id
                     db.session.add(user_extra)
-                    db.session.commit()
                     db.session.refresh(user)
 
 
