@@ -261,12 +261,26 @@ let apiUrl = '/create/company/user';
 //document.getElementById('submitSaveButton').disabled = true;
 
 swcms.postFetch(apiUrl, postData).then((data) => {
+  if (data.status=='200'){
     Swal.fire(
     'Éxito',
     'Usuario creado creado!',
     'success'
     )
     window.setTimeout(() => { window.location.reload(); }, 1500);
+  }else if (data.status=='201'){
+    Swal.fire(
+    'Correo ya existe',
+    'Usuario no creado creado!',
+    'error'
+    )
+  }else{
+    Swal.fire(
+    'Error de conexión',
+    data.msg,
+    'error'
+    )
+  }
 
 }).catch((error) => {
     Swal.fire(

@@ -1247,11 +1247,20 @@ def _diagnosis_monitoring_lisst():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
         if request.method == 'POST':
-            txt_email = request.json['txt_email']
-            txt_name = request.json['txt_name']
+            txt_email = request.json['txt_email'].strip()
+            txt_name = request.json['txt_name'].strip()
             txt_company_id = request.json['txt_company_id'] 
             txt_password = generar_contraseña_temporal()  # Agregar campo de contraseña en el formulario
+            # Verificar si el correo ya existe
 
+            try:
+                existing_user = auth.get_user_by_email(txt_email)
+            except Exception as e:
+                existing_user = False
+            existing_email = User.query.filter_by(email = txt_email).first()
+            # Si el correo existe, retorna un JSON con un mensaje de error
+            if existing_user or existing_email:
+                return jsonify({'status': 201, 'msg': 'Correo ya existe'})
             # Crea el usuario en Firebase Authentication
             fibaUser = auth.create_user(
                 email=txt_email,
@@ -1314,7 +1323,7 @@ def _diagnosis_monitoring_lisst():
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
-        return jsonify({ 'status': 'error', 'msg': e })
+        return jsonify({ 'status': 'error', 'msg': str(e) })
 
 import secrets
 import string
