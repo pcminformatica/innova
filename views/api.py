@@ -1323,6 +1323,48 @@ def _diagnosis_monitoring_lisst():
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': str(e) })
 
+@api.route('/update/company/user',methods=['GET', 'POST'])
+def _update_monitoring_lisst():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    try:
+        if request.method == 'POST':
+            txt_user = request.json['txt_user'].strip()
+            txt_password = generar_contraseña_temporal()  # Agregar campo de contraseña en el formulario
+            # Verificar si el correo ya existe
+            user = User.query.filter_by(id = txt_user).first()
+            if user:
+                # Crea el usuario en Firebase Authentication
+                uid = user.uid
+                user = auth.update_user(
+                uid,
+                password=txt_password,
+                )
+
+                # Envía un correo electrónico al usuario con la información de inicio de sesión
+                msg = Message('Bienvenida a la plataforma Innova Mujer Honduras', sender='infoinnova@ciudadmujer.gob.hn', recipients=[user.email])
+                # Contenido del correo electrónico con formato HTML
+                msg.html = f'''
+                    <p>Estimada empresaria,</p>
+                    <p>¡Felicitaciones! Ahora tienes tu propio usuario en nuestra plataforma Innova Mujer Honduras.</p>
+                    <p>Para acceder a tu cuenta, utiliza la siguiente información:</p>
+                    <ul>
+                        <li><strong>Correo Electrónico:</strong> {user.email}</li>
+                        <li><strong>Contraseña:</strong> <em>{txt_password}</em></li>
+                    </ul>
+                    <p>Puedes iniciar sesión en la plataforma Innova Mujer Honduras a través del siguiente enlace:</p>
+                    <p><a href="https://innova.ciudadmujer.gob.hn/login/">Iniciar Sesión</a></p>
+                    <p>Si no solicitaste un usuario o restablecimiento de contraseña, no dudes en ignorar este correo electrónico con confianza.</p>
+                    <p>Gracias por unirte a nosotras y ser parte de Innova Mujer Honduras.</p>
+                    <p>Atentamente,</p>
+                    <p>Equipo INNOVA MUJER HONDURAS</p>
+                '''
+                
+                mail.send(msg)
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': str(e) })
+
 import secrets
 import string
 
