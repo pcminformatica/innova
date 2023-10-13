@@ -1317,7 +1317,6 @@ def _diagnosis_monitoring_lisst():
                 user_userxrole.user_id = user.id
                 user_userxrole.user_role_id = 1
                 db.session.add(user_userxrole)
-                db.session.refresh(user)
                 db.session.commit()
                 mail.send(msg)
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
