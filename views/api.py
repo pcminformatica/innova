@@ -909,7 +909,7 @@ def _d_save_ActionPlan():
                     company.date_first_service_action_plan = first_action_plan.date_scheduled_start
                     action_plans = ActionPlan.query.filter(
                         ActionPlan.company_id == company.id,
-                        ActionPlan.fase != 0,
+                        ActionPlan.fase == 1,
                         ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
                     ).all()
                     # Calcular la suma de progreso y la cantidad de ActionPlan
@@ -1035,7 +1035,7 @@ def _d_save_ActionPlanHistory():
             company = Company.query.filter_by(id = plan.company_id).first()
             action_plans = ActionPlan.query.filter(
                 ActionPlan.company_id == company.id,
-                ActionPlan.fase != 0,
+                ActionPlan.fase == 1,
                 ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
             ).all()
 
@@ -1150,7 +1150,7 @@ def _d_save_ActionPlanHistory_update():
             company = Company.query.filter_by(id = plan.company_id).first()
             action_plans = ActionPlan.query.filter(
                 ActionPlan.company_id == company.id,
-                ActionPlan.fase != 0,
+                ActionPlan.fase == 1,
                 ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
             ).all()
 
