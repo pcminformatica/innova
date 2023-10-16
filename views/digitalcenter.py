@@ -1330,6 +1330,8 @@ def _company_monitoring_list():
         company = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True).all()
         allowed_status_short_names = [1, 2, 3, 6]
+        # Definir un alias para la relación con ActionPlan
+        action_plan_alias = aliased(ActionPlan)
 
         # Consultar empresas que cumplan con las condiciones
         companies = db.session.query(Company)\
@@ -1338,6 +1340,9 @@ def _company_monitoring_list():
                 Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
                 Company.action_plan_progress != None  # Agregar condición para action_plan_progress
             )\
+            .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
+            .filter(action_plan_alias.fase == 1)\
+            .distinct()\
             .all()
         data = []
     
@@ -1394,14 +1399,22 @@ def _company_monitoring_list():
     else:
         company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
         allowed_status_short_names = [1, 2, 3, 6]
+        # Definir un alias para la relación con ActionPlan
+        action_plan_alias = aliased(ActionPlan)
 
         # Consultar empresas que cumplan con las condiciones
         companies = db.session.query(Company)\
             .filter(
+                
                 Company.enabled == True,
+                or_(Company.created_by == current_user.id,Company.id.in_(lista)),
                 Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
                 Company.action_plan_progress != None  # Agregar condición para action_plan_progress
             )\
+            .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
+            .join(User, User.id==Company.created_by)\
+            .filter(action_plan_alias.fase == 1)\
+            .distinct()\
             .all()
         data = []
             
