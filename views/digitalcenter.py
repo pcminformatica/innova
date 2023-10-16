@@ -1322,14 +1322,140 @@ def _company_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
     lista = []
+    data = []
+    categories = db.session.query(catalogCategory).all()
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
     if current_user.id == 3 or current_user.id == 24:
         company = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True).all()
-   
+        allowed_status_short_names = [1, 2, 3, 6]
+
+        # Consultar empresas que cumplan con las condiciones
+        companies = db.session.query(Company)\
+            .filter(
+                Company.enabled == True,
+                Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
+                Company.action_plan_progress != None  # Agregar condición para action_plan_progress
+            )\
+            .all()
+        data = []
+    
+
+
+
+        for company_data in companies:  # Cambio el nombre de la variable a company_data
+            if company_data.created_by_data:
+                asignada = company_data.created_by_data.name
+            else:
+                asignada = ''
+            if company_data.inscripcion:
+                name = company_data.inscripcion.name
+            else:
+                name = ''
+            company_info = {
+                'company_id': company_data.id,  # Cambiado de company.id a company_data.id
+                'company_name': company_data.name,  # Cambiado de company.name a company_data.name
+                'date_action_plan': company_data.date_action_plan,
+                'action_plan_progress': company_data.action_plan_progress,
+                'days_since_action_plan': None,  # Inicialmente se establece en None
+                'categories': {},
+                'asignada':asignada,
+                'name':name
+                
+            }
+
+            if company_data.date_action_plan:
+                # Calcular los días transcurridos desde date_action_plan hasta la fecha actual
+                current_date = datetime.now()
+                days_since_action_plan = (current_date - company_data.date_action_plan).days
+                company_info['days_since_action_plan'] = days_since_action_plan
+
+            for category in categories:
+                action_plans = ActionPlan.query\
+                    .filter(ActionPlan.company_id == company_data.id, ActionPlan.cancelled != True, ActionPlan.fase == 1)\
+                    .join(CatalogServices, ActionPlan.services_id == CatalogServices.id)\
+                    .filter(CatalogServices.catalog_category == category.id)\
+                    .all()
+
+                category_action_plans = []
+                for action_plan in action_plans:
+                    category_action_plans.append({
+                        'action_plan_id': action_plan.id,
+                        'description': action_plan.descripcion,
+                        'progress': action_plan.progress,
+                        'service_name': action_plan.services.name,
+                        'service_name_short': action_plan.services.name_short
+                    })
+
+                company_info['categories'][category.name] = category_action_plans
+
+            data.append(company_info)
     else:
         company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+        allowed_status_short_names = [1, 2, 3, 6]
+
+        # Consultar empresas que cumplan con las condiciones
+        companies = db.session.query(Company)\
+            .filter(
+                Company.enabled == True,
+                Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
+                Company.action_plan_progress != None  # Agregar condición para action_plan_progress
+            )\
+            .all()
+        data = []
+            
+
+        # Obtener todas las categorías
+        categories = db.session.query(catalogCategory).all()
+
+        for company_data in companies:  # Cambio el nombre de la variable a company_data
+            if company_data.created_by_data:
+                asignada = company_data.created_by_data.name
+            else:
+                asignada = ''
+            if company_data.inscripcion:
+                name = company_data.inscripcion.name
+            else:
+                name = ''
+            company_info = {
+                'company_id': company_data.id,  # Cambiado de company.id a company_data.id
+                'company_name': company_data.name,  # Cambiado de company.name a company_data.name
+                'date_action_plan': company_data.date_action_plan,
+                'action_plan_progress': company_data.action_plan_progress,
+                'days_since_action_plan': None,  # Inicialmente se establece en None
+                'categories': {},
+                'asignada':asignada,
+                'name':name
+                
+            }
+
+            if company_data.date_action_plan:
+                # Calcular los días transcurridos desde date_action_plan hasta la fecha actual
+                current_date = datetime.now()
+                days_since_action_plan = (current_date - company_data.date_action_plan).days
+                company_info['days_since_action_plan'] = days_since_action_plan
+
+            for category in categories:
+                action_plans = ActionPlan.query\
+                    .filter(ActionPlan.company_id == company_data.id, ActionPlan.cancelled != True, ActionPlan.fase == 1)\
+                    .join(CatalogServices, ActionPlan.services_id == CatalogServices.id)\
+                    .filter(CatalogServices.catalog_category == category.id)\
+                    .all()
+
+                category_action_plans = []
+                for action_plan in action_plans:
+                    category_action_plans.append({
+                        'action_plan_id': action_plan.id,
+                        'description': action_plan.descripcion,
+                        'progress': action_plan.progress,
+                        'service_name': action_plan.services.name,
+                        'service_name_short': action_plan.services.name_short
+                    })
+
+                company_info['categories'][category.name] = category_action_plans
+
+            data.append(company_info)  
     references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
     lista = []
     for reference in references:
@@ -1337,7 +1463,9 @@ def _company_monitoring_list():
     company_references = Company.query.filter(Company.id.in_(lista)).all()
     context = {
         'apis': company,
-        'company_references':company_references
+        'company_references':company_references,
+        'data':data,
+        'categories':categories,
     }
     return render_template('company_monitoring_list.html',**context)
 
