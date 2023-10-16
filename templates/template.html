@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies with Action Plans</title>
+    <style>
+    /* Estilos para filas verdes (menos de 180 días) */
+    .green-row {
+        background-color: #DFF0D8; /* Verde suave */
+    }
+
+    /* Estilos para filas naranjas (entre 180 y 365 días) */
+    .orange-row {
+        background-color: #FFD699; /* Naranja suave */
+    }
+
+    /* Estilos para filas rojas (más de 365 días) */
+    .red-row {
+        background-color: #FFB2B2; /* Rojo suave */
+    }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Date Action Plan</th>
+                <th>Action Plan Progress</th>
+                <td>days_since_action_plan</td>  <!-- Agregar days_since_action_plan -->
+                {% for category in categories %}
+                    <th>{{ category.name }}</th>
+                {% endfor %}
+             
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in data %}
+            <tr class="{% if entry.days_since_action_plan is not none %}
+            {% if entry.days_since_action_plan < 180 %}green-row{% elif 180 <= entry.days_since_action_plan <= 365 %}orange-row{% else %}red-row{% endif %}
+         {% endif %}">
+                <td>{{ entry.company_name }}</td>
+                <td>{{ entry.date_action_plan }}</td>
+                <td>{{ entry.action_plan_progress }}</td>
+                <td>{{ entry.days_since_action_plan }}</td>  <!-- Agregar days_since_action_plan -->
+                {% for category in categories %}
+                    <td>
+                        {% for action_plan in entry.categories[category.name] %}
+                        <p>
+                            <b>Servicio:</b>
+                            {{action_plan.service_name}}
+                            <br>
+                            <b>Progreso:</b>
+                            {{action_plan.progress}}
+                        </p>
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+               
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        
+   
+</body>
+</html>

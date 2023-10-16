@@ -913,8 +913,8 @@ def _d_save_ActionPlan():
                         ActionPlan.cancelled != True  # Filtrar registros donde 'cancelled' no sea verdadero
                     ).all()
                     # Calcular la suma de progreso y la cantidad de ActionPlan
-                    total_progress = sum(action_plan.progress for action_plan in action_plans)
-                    num_action_plans = len(action_plans)
+                    total_progress = sum(action_plan.progress for action_plan in action_plans)  + 200
+                    num_action_plans = len(action_plans) + 2
 
                     # Calcular el promedio de avance total y redondearlo a dos decimales máximo
                     average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
@@ -1040,8 +1040,8 @@ def _d_save_ActionPlanHistory():
             ).all()
 
             # Calcular la suma de progreso y la cantidad de ActionPlan
-            total_progress = sum(action_plan.progress for action_plan in action_plans)
-            num_action_plans = len(action_plans)
+            total_progress = sum(action_plan.progress for action_plan in action_plans) + 200
+            num_action_plans = len(action_plans) + 2
 
             # Calcular el promedio de avance total y redondearlo a dos decimales máximo
             average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
@@ -1155,8 +1155,8 @@ def _d_save_ActionPlanHistory_update():
             ).all()
 
             # Calcular la suma de progreso y la cantidad de ActionPlan
-            total_progress = sum(action_plan.progress for action_plan in action_plans)
-            num_action_plans = len(action_plans)
+            total_progress = sum(action_plan.progress for action_plan in action_plans) + 200
+            num_action_plans = len(action_plans) + 2
 
             # Calcular el promedio de avance total y redondearlo a dos decimales máximo
             average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
