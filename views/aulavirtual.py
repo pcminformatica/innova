@@ -4,7 +4,7 @@ from babel.dates import format_date, format_datetime, format_time
 from datetime import datetime as dt
 from datetime import timedelta as td
 from datetime import timezone as tz
-from sqlalchemy import not_,or_
+from sqlalchemy import not_,or_,subquery,select
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
 
@@ -179,3 +179,77 @@ def _curso_enroll_list_inscritas_capacitadas():
         'api': inscripciones
     }
     return render_template('digitalcenter/registro_elegibles_list.html',**context)
+
+
+@app.route('/companies_with_tt1', methods=['GET'])
+def get_companies_with_tt1():
+    # Crear una subconsulta para obtener las compañías que cumplen con el criterio
+    subq_tt1 = select([Company.id]).where(
+        Company.id == EnrollmentRecord.company_id,
+        EnrollmentRecord.id_course == Courses.id,
+        Courses.id_training_type == TrainingType.id,
+        TrainingType.name_short == 'TT1'
+    )
+
+    # Filtrar las compañías que tienen created_by == 3 y las que no tienen TrainingType.name_short == 'TT1'
+    companies_with_training_type = Company.query.filter(
+        Company.created_by == 3,
+        Company.id.in_(subq_tt1)
+    ).all()
+
+    companies_created_by_not_tt1 = Company.query.filter(
+        Company.created_by == 3,
+        ~Company.id.in_(subq_tt1)
+    ).all()
+
+    # Crear una estructura JSON que incluye ambas listas
+    result = {
+        'companies_with_training_type': [
+            {
+                'id': company.id,
+                'name': company.name,
+                'description': company.description,
+                # Agrega más campos según tus necesidades
+            }
+            for company in companies_with_training_type
+        ],
+        'companies_created_by_not_tt1': [
+            {
+                'id': company.id,
+                'name': company.name,
+                'description': company.description,
+                # Agrega más campos según tus necesidades
+            }
+            for company in companies_created_by_not_tt1
+        ]
+    }
+
+    return jsonify(result)
+
+@aulavirtual.route('/cursos/companies_with_tt1',methods = ['GET', 'POST'])
+def _get_companies_with_tt1():
+    app.logger.debug('** SWING_CMS ** - AcercaDe')
+    # Crear una subconsulta para obtener las compañías que cumplen con el criterio
+    subq_tt1 = select([Company.id]).where(
+        Company.id == EnrollmentRecord.company_id,
+        EnrollmentRecord.id_course == Courses.id,
+        Courses.id_training_type == TrainingType.id,
+        TrainingType.name_short == 'TT1'
+    )
+
+    # Filtrar las compañías que tienen created_by == 3 y las que no tienen TrainingType.name_short == 'TT1'
+    companies_with_training_type = Company.query.filter(
+        Company.created_by == current_user.id,
+        Company.id.in_(subq_tt1)
+    ).all()
+
+    companies_created_by_not_tt1 = Company.query.filter(
+        Company.created_by == current_user.id,
+        ~Company.id.in_(subq_tt1)
+    ).all()
+
+    context = {
+        'companies_training': companies_with_training_type,
+        'companies_not_training':companies_created_by_not_tt1
+    }
+    return render_template('aulavirtual/cursos_companies_with_tt1.html',**context)
