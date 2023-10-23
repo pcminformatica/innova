@@ -64,16 +64,17 @@
                               <div class="mdc-layout-grid">
                                   <div class="mdc-layout-grid__inner">
                                       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                        <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                        <table class="mdl-data-table_normal data_table_buttons" aria-label="Dessert calories">
                                             <thead>
                                             <tr class="mdc-data-table__header-row">
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Días </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referencias</th>
+                                            
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
                                                 <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
@@ -106,33 +107,16 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.company.inscripcion.name}}
                                                     </th>
-                                                    
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.days_since_action_plan}}
+                                                    </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.services.name}}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.services.catalog_catego.name}}
                                                     </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.employe_assigned %}
-                                                            YA ASIGNADO A  {{ action.employe_assigned_user.name }}
-                                                        {% else %}
-                                                        <select id="txt_user_{{action.id}}">
-                                                            <option value="0">--</option>
-                                                            {% for user in users %}
-                                                            <option value="{{ user.id }}">
-                                                                {{ user.extra_info.names }}
-                                                                {{ user.extra_info.last_names}}
-                                                                
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                        <button onclick="referirEmpresaria('{{action.id}}')">
-                                                            Referir
-                                                        </button>
-                                                        {% endif %}
-                                                        
-                                                    </th>
+                                                
                                                     <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
                                                         {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
         
@@ -171,6 +155,7 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Días </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
                           
@@ -206,9 +191,11 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.action_plan.company.inscripcion.name}}
                                                     </th>
-                                                    
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.action_plan.services.name}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{action.days_since_action_plan}}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.action_plan.services.catalog_catego.name}}
