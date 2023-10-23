@@ -1950,7 +1950,7 @@ def _asesoria_colectivas_service_search(service_id):
     actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in actions:
-        if action.date_scheduled_start:
+        if action.company.date_action_plan:
             days_since_action_plan = (current_date - action.company.date_action_plan).days
             action.days_since_action_plan = days_since_action_plan
         else:
@@ -1965,7 +1965,7 @@ def _asesoria_colectivas_service_search(service_id):
     ).all()    
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in action_plan_references:
-        if action.date_scheduled_start:
+        if action.action_plan.company.date_action_plan:
             days_since_action_plan = (current_date - action.action_plan.company.date_action_plan).days
             action.days_since_action_plan = days_since_action_plan
         else:
