@@ -1952,6 +1952,7 @@ def _d_save_enroll():
         if request.method == 'POST':
             txt_curso = request.json['txt_curso']
             txt_company = request.json['txt_company']  
+            txt_lugar = request.json['txt_lugar']  
             inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_company).first()
             company =  Company.query.filter(Company.dni == inscripcion.dni).first()
             status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 1).first()
@@ -1979,6 +1980,7 @@ def _d_save_enroll():
                 courses.id_course = txt_curso
                 courses.company_id = company.id
                 courses.created_by = current_user.id
+                courses.lugar = txt_lugar
                 db.session.add(courses)         
                 db.session.commit()
 
@@ -2348,3 +2350,26 @@ def _d_company_dash_search():
         print(e)
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error','s':company.id, 'msg': str(e) })
+
+
+
+@api.route('/api/update/enroll/', methods = ['POST'])
+# @login_required
+def _d_update_enroll():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            lugar = request.json['lugar']
+            enroll_id = request.json['id']  
+                        
+            enroll = EnrollmentRecord.query.filter_by(id = enroll_id).first()
+            enroll.lugar = lugar
+            db.session.add(enroll)    
+
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

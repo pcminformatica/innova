@@ -1011,6 +1011,7 @@ class EnrollmentRecord(db.Model):
     date_end = db.Column(db.DateTime, nullable=True)
     complete = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    lugar = db.Column(db.String(300), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
     def __repr__(self):
         return jsonify(

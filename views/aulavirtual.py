@@ -55,9 +55,11 @@ def _curso_list():
    
     }
     return render_template('aulavirtual/curso_list.html',**context)
+
 import os
 import pandas as pd
 import hashlib
+
 @aulavirtual.route('/cursos/list/<int:courses_id>/',methods = ['GET', 'POST'])
 def _curso_enroll_list(courses_id):
     app.logger.debug('** SWING_CMS ** - AcercaDe')
