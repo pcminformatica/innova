@@ -1966,7 +1966,7 @@ def _asesoria_colectivas_service_search(service_id):
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in action_plan_references:
         if action.date_scheduled_start:
-            days_since_action_plan = (current_date - action.company.date_action_plan).days
+            days_since_action_plan = (current_date - action.action_plan.company.date_action_plan).days
             action.days_since_action_plan = days_since_action_plan
         else:
             # Si date_scheduled_start es None, puedes establecer days_since_action_plan en None o un valor predeterminado
