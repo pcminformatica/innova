@@ -1943,6 +1943,12 @@ def _asesoria_colectivas_service_list():
 
 @digitalcenter.route('/sde/service/<int:service_id>/search',methods=['GET', 'POST'])
 def _asesoria_colectivas_service_search(service_id):
+    filtro = False
+    if request.method == 'POST':
+        txt_start_date = int(request.form.get('txt_start_date') )
+        txt_end_date = int(request.form.get('txt_end_date') )
+        filtro = True
+
     current_date = datetime.now()
     app.logger.debug('** SWING_CMS ** -  appointments_create') 
     services = CatalogServices.query.filter_by(id = service_id).first()
@@ -1952,11 +1958,21 @@ def _asesoria_colectivas_service_search(service_id):
     for action in actions:
         if action.company.date_action_plan:
             days_since_action_plan = (current_date - action.company.date_action_plan).days
+            
             action.days_since_action_plan = days_since_action_plan
         else:
             # Si date_scheduled_start es None, puedes establecer days_since_action_plan en None o un valor predeterminado
             action.days_since_action_plan = None  # Otra opción: action.days_since_action_plan = 0
     # Realizar la consulta
+    if filtro:
+        filtered_actions = []
+
+        for action in actions:
+            if action.days_since_action_plan > txt_start_date and action.days_since_action_plan < txt_end_date:
+                print('xxxxxxxxxxxx')
+                print(action.days_since_action_plan)
+                filtered_actions.append(action)
+        actions = filtered_actions
     action_plan_references = ActionPlanReferences.query.join(
         ActionPlan, ActionPlanReferences.action_plan_id == ActionPlan.id
     ).filter(
@@ -1971,6 +1987,14 @@ def _asesoria_colectivas_service_search(service_id):
         else:
             # Si date_scheduled_start es None, puedes establecer days_since_action_plan en None o un valor predeterminado
             action.days_since_action_plan = None  # Otra opción: action.days_since_action_plan = 0
+    if filtro:
+        filtered_actions_2 = []
+
+        for action in action_plan_references:
+            if action.days_since_action_plan > txt_start_date and action.days_since_action_plan < txt_end_date:
+                print('xxxxxxxxxxxx')
+                filtered_actions.append(action)
+        action_plan_references=filtered_actions_2
     context = {'actions':actions,'action_plan_references':action_plan_references}  
     return render_template('digitalcenter/asesoria_colectivas_service_search.html',**context)
 

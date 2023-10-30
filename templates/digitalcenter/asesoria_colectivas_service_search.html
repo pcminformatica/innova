@@ -1,6 +1,9 @@
 {% extends 'layout_main_drawer_table.html' %}
 {% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
 {% block page_title %}Innova Mujer Home{% endblock %}
+{% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+{% endblock %}
 {% block css_script_section %}
 <style>
     .alignleft {
@@ -25,7 +28,42 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container">
             <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet 
+                            mdc-layout-grid__cell--align-top">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+ 
+                            <div class="mdc-card__content">
+         
+                               
+                                    <form id="searchForm"  method="POST" >
+                                        <label>
+                                            Día de inicio
+                                        </label>
+                                        <br>
+                                        <input type="number" name="txt_start_date" id="txt_start_date">
+                                        <br>
+                                        <label>
+                                            Día de fin
+                                        </label>
+                                        <br>
+                                        <input type="number" name="txt_end_date" id="txt_end_date">
+                                        <br>
+                                        <button onclick="sendValor()" type="button" id="exportExcelButton" class="mdc-button mdc-button--raised button-stats-export--excel"
+                                        aria-label="Export to Excel" alt="Export to Excel">
+                                            <div class="mdc-button__ripple"></div>
+                                            <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
+                                            <span class="mdc-button__label">Buscar</span>
+                                        </button>
+                                    </form>
+                       
+                            </div>
+                       
 
+
+                        </div>
+                    </div>
+                </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
@@ -240,4 +278,66 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/stats.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+<script>
+function sendValor() {
+    // Obtener los valores ingresados en los campos
+    var start_date = document.getElementById("txt_start_date").value;
+    var end_date = document.getElementById("txt_end_date").value;
+
+    // Validar que los valores sean números positivos
+    if (isPositiveNumber(start_date) && isPositiveNumber(end_date)) {
+        // Los valores son números positivos, puedes continuar con tu lógica de búsqueda
+        // Aquí puedes agregar la lógica de búsqueda o cualquier otra acción que desees realizar
+        if (start_date > end_date){
+            alert("Día de inicio no puede ser mayor que  Día de fin ");
+            return false
+        }else{
+            document.getElementById("searchForm").submit();
+        }
+        
+       
+    } else {
+        // Mostrar un mensaje de error si los valores no son números positivos
+        alert("Por favor, ingrese números positivos en los campos.");
+        return false
+    }
+
+
+    
+}
+
+
+function isPositiveNumber(value) {
+    // Función para verificar si un valor es un número positivo
+    return !isNaN(value) && parseFloat(value) > 0;
+}
+</script>
+
+
+<script>
+    function valor(){
+      
+        let cadenaFechas = document.getElementById('f-filter-date-input').value
+        console.log(cadenaFechas)
+        // Separar la cadena en dos fechas
+        var fechasSeparadas = cadenaFechas.split(" - ");
+
+        // Obtener las fechas por separado
+        var fechaInicio = new Date(fechasSeparadas[0]);
+        var fechaFin = new Date(fechasSeparadas[1]);
+
+        // Imprimir las fechas obtenidas
+        console.log("Fecha de inicio: ", fechaInicio.toISOString().slice(0, 10));
+        console.log("Fecha de fin: ", fechaFin.toISOString().slice(0, 10));
+        fechaInicio = fechaInicio.toISOString().slice(0, 10)
+        fechaFin = fechaFin.toISOString().slice(0, 10)
+
+        document.getElementById("txt_start_date").value = fechaInicio
+        document.getElementById("txt_end_date").value = fechaFin
+        
+    }
+</script>
 {% endblock %}
