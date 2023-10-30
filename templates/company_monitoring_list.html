@@ -127,7 +127,7 @@
                                           </th>
                                             <td class="mdc-data-table__cell">
 
-                                               
+                                                {% if current_user.id not in (144,) %}
                                                 <a href="{{ url_for('digitalcenter._company_dashboard',user_uid=api.id) }}" class="mdc-button mdc-button--fullwidth mdc-button--raised  mdc-button--small">
                                                     <span class="mdc-button__ripple"></span>
                                                     
@@ -138,7 +138,13 @@
                                                     
                                                     <span class="mdc-button__label">Dashboard</span>
                                                 </a>
-                                   
+                                                {% else %}
+                                                <a href="{{ url_for('home._company_dashboard_view',company_id=api.id) }}" class="mdc-button mdc-button--fullwidth mdc-button--raised  mdc-button--small mdc-button--color-secondary">
+                                                    
+                                                    <span class="mdc-button__label">Dashboard</span>
+                                                </a>
+                                    
+                                                {% endif %}
                                             </td>
                                             <td class="mdc-data-table__cell" style="width: 80px;">
                                                 {{ api.dni }}
