@@ -1953,7 +1953,10 @@ def _asesoria_colectivas_service_search(service_id):
     app.logger.debug('** SWING_CMS ** -  appointments_create') 
     services = CatalogServices.query.filter_by(id = service_id).first()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
-    actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    if current_user.id == 3 or current_user.id == 24:
+        actions = ActionPlan.query.filter(ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    else:
+        actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in actions:
         if action.company.date_action_plan:
