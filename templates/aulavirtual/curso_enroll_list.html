@@ -279,6 +279,8 @@
                                                         </th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresaria</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresa</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+                                                        
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
@@ -302,6 +304,11 @@
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{curso.company.name}}
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {% if curso.company.social_networks %}
+                                                                {{curso.company.social_networks.email}}
+                                                            {% endif %}
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{curso.company.inscripcion.phone}}
