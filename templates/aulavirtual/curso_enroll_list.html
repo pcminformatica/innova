@@ -277,6 +277,7 @@
                                                         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
                                                             #
                                                         </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresaria</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresa</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
@@ -298,6 +299,10 @@
                                                     <tr data-row-id="u0" class="mdc-data-table__row">
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{loop.index}}
+                                                        </td>
+                                                        
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            {{curso.company.dni}}
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             {{curso.company.inscripcion.name}}
