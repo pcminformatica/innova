@@ -155,7 +155,7 @@
                                     <div class="mdc-tab-scroller">
                                     <div class="mdc-tab-scroller__scroll-area">
                                         <div class="mdc-tab-scroller__scroll-content">
-                                            {% if current_user.id not in (144,) %}
+                                            {% if current_user.id not in (144,152) %}
                                         <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                             <span class="mdc-tab__content">
                                             <span class="mdc-tab__text-label">Herramientas</span>
@@ -241,7 +241,7 @@
                                     </div>
                                 </div>
                                                         <!-- one  -->
-                {% if current_user.id not in (144,) %}
+                {% if current_user.id not in (144,152) %}
                         <div class="content content--active">
                             <div class="container-dashboard--messages">
             
@@ -322,7 +322,7 @@
                                                     <img src="../static/images/dash2.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles 5 Cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                                 </span>
                                             </a>
@@ -334,7 +334,7 @@
                                                     <img src="../static/images/dash2.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">No elegibles 5 Cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">No elegibles </span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                                 </span>
                                             </a>
@@ -609,7 +609,7 @@
                                                     <img src="../static/images/dash1.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Listado de empresas 5 cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">Listado de empresas inscripción</span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de empresas que llenaron el formulario de inscripción en la quinta cohorte </span>
                                                 </span>
                                             </a>
@@ -752,6 +752,7 @@
                         </div>
                         <!-- Monitoreo -->
                 {% endif %}
+                
                         <div class="content {% if current_user.id in (144,) %}content--active{% else %}content{%endif%}" >
                             <div class="container-dashboard--messages">
             
@@ -767,7 +768,7 @@
                                                     <img src="../static/images/dash2.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles 5 Cohorte</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                                 </span>
                                             </a>
@@ -787,6 +788,44 @@
                                         </li>
 
                                         {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content {% if current_user.id in (152,) %}content--active{% else %}content{%endif%}" >
+                            <div class="container-dashboard--messages">
+            
+                                <div class="mdc-card__content container-dashboard--messages-msg">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                       
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_no_elegibles_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">No elegibles </span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    
                                     </ul>
                                 </div>
                             </div>
