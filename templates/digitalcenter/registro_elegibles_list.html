@@ -78,18 +78,21 @@
                                               {{loop.index}}
                                             </th>
                                             <td >
-
+                                              {% if current_user.id not in (152,) %}
                                               <a href="{{ url_for('digitalcenter._registro_elegibles_panel',inscribe_id=api.id) }}" class="mdc-button mdc-button--raised mdc-button--leading">
                                                 
                                                   <span class="mdc-button__ripple"></span>
                                                   <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                                                   <span class="mdc-button__label">Ver</span>
                                               </a>
-            
+                                              {% endif %}
                                             </td>
                                             <th >
-                                                
+                                              {% if current_user.id not in (152,) %}
                                                 <a href="{{ url_for('digitalcenter._registro_elegibles_panel',inscribe_id=api.id) }}"> {{ api.dni }}</a>
+                                              {% else %}
+                                                {{ api.dni }}
+                                              {% endif %}
                                             </th>
                                             
                                             <td >
