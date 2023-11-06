@@ -155,7 +155,7 @@ def _curso_enroll_list_inscritas():
     context = {
         'api': inscripciones
     }
-    return render_template('digitalcenter/registro_elegibles_list.html',**context)
+    return render_template('digitalcenter/curso_enroll_list_inscritas.html',**context)
 
 @aulavirtual.route('/cursos/list/inscritas/capacitadas',methods = ['GET', 'POST'])
 def _curso_enroll_list_inscritas_capacitadas():
