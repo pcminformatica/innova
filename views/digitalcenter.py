@@ -1328,7 +1328,9 @@ def _company_monitoring_list():
     #    lista.append(diagnosi.company_id)
     if current_user.id == 3 or current_user.id == 24:
         company = Company.query.join(User, User.id==Company.created_by)\
-            .filter(Company.enabled==True).all()
+            .filter(Company.enabled==True)\
+            .order_by(asc(Company.date_created))\
+            .all()
         allowed_status_short_names = [1, 2, 3, 6]
         # Definir un alias para la relación con ActionPlan
         action_plan_alias = aliased(ActionPlan)
@@ -1397,7 +1399,7 @@ def _company_monitoring_list():
 
             data.append(company_info)
     else:
-        company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+        company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).order_by(asc(Company.date_created)).all()
         allowed_status_short_names = [1, 2, 3, 6]
         # Definir un alias para la relación con ActionPlan
         action_plan_alias = aliased(ActionPlan)

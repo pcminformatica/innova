@@ -289,9 +289,11 @@ function sendValor() {
 
     // Validar que los valores sean números positivos
     if (isPositiveNumber(start_date) && isPositiveNumber(end_date)) {
+        console.log(start_date)
+        console.log(end_date)
         // Los valores son números positivos, puedes continuar con tu lógica de búsqueda
         // Aquí puedes agregar la lógica de búsqueda o cualquier otra acción que desees realizar
-        if (start_date > end_date){
+        if (parseFloat(start_date) > parseFloat(end_date)){
             alert("Día de inicio no puede ser mayor que  Día de fin ");
             return false
         }else{
