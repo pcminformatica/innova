@@ -70,7 +70,7 @@
                                
             
                                 <div class="s-mdc-menu mdc-menu-surface--anchor" data-action-fn="moreOptionsSelection" data-action-fn-ri>
-          
+                                    {% if current_user.id not in (144,152) %}
                                     <button  id="moreOptionsButton"   class="mdc-button mdc-button--raised mdc-button--leading s-mdc-menu__button" style="margin-left: 10px;">
                                         <span class="mdc-button__ripple"></span>
                                         <i class="material-icons mdc-button__icon" aria-hidden="true"
@@ -78,6 +78,7 @@
                                         >
                                         <span class="mdc-button__label">opciones</span>
                                     </button>
+                                    {% endif %}
                                     <div id="moreOptionsMenu" class="s-mdc-menu__list mdc-menu mdc-menu-surface" tabindex="-1">
                                         <ul class="mdc-deprecated-list mdc-menu__items" role="menu" aria-hidden="true">
                                             <li onclick="showRedirect('/form/sde/profile')" id="transferUserOption" class="mdc-deprecated-list-item" role="menuitem"
@@ -800,19 +801,6 @@
                                        
                                         <li role="separator" class="mdc-deprecated-list-divider"></li>
                                         <li class="mdc-deprecated-list-item">
-                                            <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
-                                                <span class="mdc-deprecated-list-item__ripple"></span>
-                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
-                                                </span>
-                                                <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
-                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                        <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('digitalcenter._registro_no_elegibles_list') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
                                                 <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
@@ -832,7 +820,7 @@
                                                     <img src="../static/images/dash4.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitación inicial</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitación inicial (Convocar)</span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas que no han registrado capacitación inicial.</span>
                                                 </span>
                                             </a>
@@ -844,7 +832,7 @@
                                                     <img src="../static/images/dash4.svg" alt="Foto Usuario" />
                                                 </span>
                                                 <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Mujeres con capacitación inicial</span>
+                                                    <span class="mdc-deprecated-list-item__primary-text">Capacitación inicial (Capacitadas)</span>
                                                     <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas han registrado capacitación inicial.</span>
                                                 </span>
                                             </a>
