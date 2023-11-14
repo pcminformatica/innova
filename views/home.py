@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -315,7 +315,23 @@ def _home():
             else:
                 #
                 company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
-                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+                satisfaccion = False
+                if company.action_plan_progress == 100:
+                    encuesta = surveys_sde.query.filter_by(company_id=company.id).first()
+                    if not encuesta:
+                        satisfaccion = True
+
+                diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.id)).first()
+                diagnos_final = (
+                DiagnosisCompany.query
+                .filter_by(company_id=company.id)
+                .order_by(desc(DiagnosisCompany.id))
+                .first()
+                )
+                if diagnos_final:
+                    diagnos_final = diagnos_final.resultados
+                else:
+                    diagnostico = False
                 #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
                 actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
                 catalog = catalogCategory.query.all()
@@ -336,6 +352,7 @@ def _home():
                     diagnostico = diagnos.resultados
                 else:
                     diagnostico = False
+                
                 #buscamos la carta de compromiso DOC2
                 carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
                 carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
@@ -343,6 +360,7 @@ def _home():
                 ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
                 ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
                 enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
+
                 context = {
                     "enrolls":enrolls,
                     "deposits":deposits,
@@ -357,7 +375,9 @@ def _home():
                     "diagnostico":diagnostico,
                     "actions":actions,
                     "diagnosis":diagnos,
-                    "plan_action":plan_action
+                    "plan_action":plan_action,
+                    "satisfaccion":satisfaccion,
+                    'diagnos_final':diagnos_final
                 }
                 return render_template('home_dashboard.html',**context)
         else:
@@ -676,6 +696,12 @@ def _empresarias():
 def _FORMULARIO_MADUREZ_DIGITAL():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/FORMULARIO_MADUREZ_DIGITAL.html')
+
+
+@home.route('/test/encuestas/satisfaccion')
+def _formulario_encuestas_satisfaccion():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('evaluaciones/encuestas_satisfaccion.html')
 
 
 @home.route('/test/madurez/list')

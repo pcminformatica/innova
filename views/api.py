@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -2174,8 +2174,7 @@ def _save_test_madurez():
             evaluation.dni = txt_identidad
             evaluation.respuestas =txt_preguntas
             evaluation.result = total
-            db.session.add(evaluation)
-            db.session.commit()
+     
 
             return jsonify({ 'status': 200, 'msg': 'Cita creada' })
     except Exception as e:
@@ -2373,3 +2372,29 @@ def _d_update_enroll():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/save/catalog/surveys', methods = ['POST'])
+# @login_required
+def save_catalog_surveys_SDE():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_preguntas = request.json['txt_preguntas']
+            txt_company = request.json['txt_company']  
+            company = Company.query.filter_by(id = txt_company).first()
+
+            surveys = surveys_sde()
+            surveys.company_id = company.id
+            surveys.catalog_surveys_id = 1
+            surveys.respuestas = txt_preguntas
+            db.session.add(surveys)    
+
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+

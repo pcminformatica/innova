@@ -1029,3 +1029,21 @@ class Evaluations(db.Model):
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     result = db.Column(db.FLOAT, unique=False, nullable=True, default=0.00)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+
+
+class surveys_sde(db.Model):
+    _tablename__ = 'surveys_sde'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
+    respuestas = db.Column(db.JSON, unique=False, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    catalog_surveys_id = db.Column(db.Integer, db.ForeignKey("catalog_surveys_sde.id"),nullable=True)
+    catalog_surveys = db.relationship("catalog_surveys_sde")
+
+class catalog_surveys_sde(db.Model):
+    _tablename__ = 'catalog_surveys_sde'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    name_short = db.Column(db.String(6), unique=True, nullable=True)

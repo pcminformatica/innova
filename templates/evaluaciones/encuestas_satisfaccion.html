@@ -1,0 +1,616 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block body %}
+{% block css_script_section %}
+
+<style>
+
+@media screen and (max-width: 850px) {
+
+
+.mdc-deprecated-list-item__text{
+  font-size: 14px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 650px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 5px 0 4px;
+  padding-bottom: 10px;
+padding-top: 10px;
+
+}
+
+.mdc-deprecated-list-item__text{
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 10px;
+}
+
+.mdc-radio {
+  margin-right: 0px;
+}
+}
+
+@media screen and (max-width: 340px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 7px;
+}
+
+.mdc-radio {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  will-change: opacity,transform,border-color,color;
+}
+}
+
+
+</style>
+{% endblock %}
+
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+
+                            <div class="mdc-card__content container-dashboard--messages-cnt">
+                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                    ENCUESTA DE SATISFACCIÓN
+                                </div>
+
+
+                          
+                              
+                               
+                                
+                                <div id="step-1" class="container-dashboard--messages-list-empty ">
+                                    <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                    <div class="mdc-layout-grid">
+                               
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                <p>
+                                                    Por favor proporcione la información solicitada, la información es confidencial y es de uso exclusivo para el proyecto INNOVAMUJER HONURAS.
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                   
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                            <input id="txt_company"  type="hidden" value="{{ current_user.extra_info.company.id }}">
+                                              <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>1</b> Nombre de la empresaria:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresaria" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.1 Nombre Completo"  >Escribe tu nombre</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>2.</b> Nombre de la empresa:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresa" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Nombre de la empresa" >Escribe tu identidad</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                            
+                                                    >
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <br>
+                                        <div class="mdc-layout-grid__inner">
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>3.</b> ¿La atención del equipo de especialistas fue atenta y eficiente? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="equipo_especialistas">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="equipo_especialistas">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>4.</b> ¿Considera que los tiempos en la entrega de los productos o la asesoría son adecuados? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="tiempos_entrega" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="tiempos_entrega">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="tiempos_entrega">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="tiempos_entrega">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>5.</b> ¿Los servicios de desarrollo empresarial brindados cumple con sus expectativas y necesidades? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="servicios_desarrollo" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="servicios_desarrollo">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="servicios_desarrollo">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="servicios_desarrollo">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>6.</b> ¿Considera que los conocimientos técnicos aplicados por las personas especialistas son adecuados para el apoyo a su empresa? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="considera_conocimientos" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="considera_conocimientos">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="considera_conocimientos">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="considera_conocimientos">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>7.</b> ¿En el proceso de sus asesorías se utilizó un lenguaje claro y entendible?  
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="proceso_asesorias" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="proceso_asesorias">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="proceso_asesorias">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="proceso_asesorias">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>8.</b> ¿Las personas especialistas han mostrado empatía ante su situación personal y de la empresa? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="especialistas_mostrado" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="especialistas_mostrado">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="especialistas_mostrado">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="especialistas_mostrado">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>9.</b> Como considera la experiencia vivida en el uso de la plataforma INNOVA 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="experiencia_vivida" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Excelente</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="experiencia_vivida">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Bueno </label>
+                                                  </div>
+    
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Regular"  name="experiencia_vivida">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">C)  Regular </label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Malo"  name="experiencia_vivida">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">D)  Malo </label>
+                                                  </div>
+                                            </div>
+                                    
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                  <div class="mdc-typography--body1">
+                                                      <b>10.</b> Comentarios y sugerencias:
+                                                  </div>
+                                                  <label class="mdc-text-field mdc-text-field--filled" id="txt_company_description" data-assigned-var>
+                                                      <span class="mdc-text-field__ripple"></span>
+                                                      <span class="mdc-floating-label" id="my-label-id" hiddenlabel="10 Comentarios y sugerencias">Comentarios y sugerencias</span>
+                                                      <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                      <span lass="mdc-line-ripple"></span>
+                                                  </label>
+                                                </div>
+                                            
+
+                                       
+                                        </div>
+
+                                      
+                                        
+                                    </div>
+
+                          <!-- fin -->
+                                </div>
+                                <div id="step-2" class="container-dashboard--messages-list-empty ">
+                                  <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                  <div class="mdc-layout-grid">
+                             
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-typography--body1">
+                                      
+                                              <center>
+                                                <br>
+                                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                                  Resultado <span id="lbl_resultado"></span>
+                                                </div>
+                                              </center>
+                                            </div>
+                                          </div>
+                                        </div>
+                                 
+                                    
+
+                                    
+                                      
+                                  </div>
+
+                        <!-- fin -->
+                              </div>
+                            </div>
+  
+                            <div class="mdc-card__actions" style="margin: auto">
+                                <div class="mdc-card__action-buttons">
+                                <center>
+
+                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_satifacion_save()">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">Aceptar  </span>
+                      
+                                  </button>
+                                  <!--
+                                  <button class="mdc-button mdc-button--outlined">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <span class="mdc-button__label">Continuar después  </span>
+                                  </button>-->
+                                </center>
+                                </div>
+
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+
+
+<script  src="{{ url_for('static', filename='js/evaluacion.js') }}?z=2"></script>
+
+<script>
+document.getElementById("step-2").style.display = "none"; 
+
+
+</script>
+
+{% endblock %}
