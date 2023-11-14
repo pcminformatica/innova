@@ -1337,16 +1337,17 @@ def _company_monitoring_list():
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
     if current_user.id == 3 or current_user.id == 24 or current_user.id == 144 :
-        company = Company.query.join(User, User.id==Company.created_by)\
-            .filter(Company.enabled==True)\
-            .order_by(asc(Company.date_created))\
-            .all()
-        allowed_status_short_names = [1, 2, 3, 6]
-        # Definir un alias para la relación con ActionPlan
-        action_plan_alias = aliased(ActionPlan)
+
 
         # Consultar empresas que cumplan con las condiciones
         if current_user.id == 144:
+            company = Company.query.join(User, User.id==Company.created_by)\
+                .filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_([6])),Company.stage.has(CompanyStage.name_short.in_(['E2'])),)\
+                .order_by(asc(Company.date_created))\
+                .all()
+            allowed_status_short_names = [1, 2, 3, 6]
+            # Definir un alias para la relación con ActionPlan
+            action_plan_alias = aliased(ActionPlan)
             companies = db.session.query(Company)\
                 .filter(
                     Company.enabled == True,
@@ -1360,6 +1361,13 @@ def _company_monitoring_list():
                 .all()
             data = []
         else:
+            company = Company.query.join(User, User.id==Company.created_by)\
+                .filter(Company.enabled==True)\
+                .order_by(asc(Company.date_created))\
+                .all()
+            allowed_status_short_names = [1, 2, 3, 6]
+            # Definir un alias para la relación con ActionPlan
+            action_plan_alias = aliased(ActionPlan)
             companies = db.session.query(Company)\
                 .filter(
                     Company.enabled == True,
