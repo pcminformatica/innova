@@ -247,6 +247,10 @@ def _home_view():
         userRi = User.query.filter_by(id = 6).first()
     else:
         userRi = User.query.filter_by(id = 3).first()
+    if User.query.filter_by(id = 30).first():
+        userAna = User.query.filter_by(id = 30).first()
+    else:
+        userAna = User.query.filter_by(id = 3).first()
     if User.query.filter_by(id = 15).first():
         userSPS = User.query.filter_by(id = 15).first()
     else:
@@ -275,6 +279,12 @@ def _home_view():
         userJefe = User.query.filter_by(id = 24).first()
     else:
         userJefe = User.query.filter_by(id = 3).first()
+
+    if User.query.filter_by(id = 66).first():
+        userAngie = User.query.filter_by(id = 66).first()
+    else:
+        userAngie = User.query.filter_by(id = 3).first()
+        
     app.logger.debug('** varela')   
     app.logger.debug(x)
     app.logger.debug('** iiiiiiiiiiii varela')   
@@ -282,7 +292,7 @@ def _home_view():
     app.logger.debug(new_userlist)    
     app.logger.debug('** xxxxxxxxxxxxx varela')    
     app.logger.debug('** SWING_CMS ** - Welcome2')
-    context = {'userJefe':userJefe, 'userRu':userRu,'userRi':userRi,'userLCB':userLCB,'userSPS':userSPS,'userCholo':userCholo,'userCholu':userCholu}
+    context = {'userAngie':userAngie, 'userJefe':userJefe,'userAna':userAna, 'userRu':userRu,'userRi':userRi,'userLCB':userLCB,'userSPS':userSPS,'userCholo':userCholo,'userCholu':userCholu}
     return render_template('digitalcenter/home_view.html',**context)
 
 @digitalcenter.route('/digitalcenter/chat/')
