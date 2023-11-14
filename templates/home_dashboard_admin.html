@@ -760,20 +760,6 @@
                                 <div class="mdc-card__content container-dashboard--messages-msg">
                                     <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                         {% if current_user.id in (3,24,144,) %}
-
-                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                        <li class="mdc-deprecated-list-item">
-                                            <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
-                                                <span class="mdc-deprecated-list-item__ripple"></span>
-                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
-                                                </span>
-                                                <span class="mdc-deprecated-list-item__text">
-                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
-                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
-                                                </span>
-                                            </a>
-                                        </li>
                                         <li role="separator" class="mdc-deprecated-list-divider"></li>
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
@@ -787,7 +773,46 @@
                                                 </span>
                                             </a>
                                         </li>
-
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                </span>
+                                            </a>
+                                        </li>
+     
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitación inicial (Convocar)</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas que no han registrado capacitación inicial.</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas_capacitadas') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Capacitación inicial (Capacitadas)</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas han registrado capacitación inicial.</span>
+                                                </span>
+                                            </a>
+                                        </li>
                                         {% endif %}
                                     </ul>
                                 </div>

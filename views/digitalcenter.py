@@ -1336,7 +1336,7 @@ def _company_monitoring_list():
     categories = db.session.query(catalogCategory).all()
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
-    if current_user.id == 3 or current_user.id == 24:
+    if current_user.id == 3 or current_user.id == 24 or current_user.id == 144 :
         company = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True)\
             .order_by(asc(Company.date_created))\
@@ -1346,17 +1346,31 @@ def _company_monitoring_list():
         action_plan_alias = aliased(ActionPlan)
 
         # Consultar empresas que cumplan con las condiciones
-        companies = db.session.query(Company)\
-            .filter(
-                Company.enabled == True,
-                Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
-                Company.action_plan_progress != None  # Agregar condición para action_plan_progress
-            )\
-            .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
-            .filter(action_plan_alias.fase == 1)\
-            .distinct()\
-            .all()
-        data = []
+        if current_user.id == 144:
+            companies = db.session.query(Company)\
+                .filter(
+                    Company.enabled == True,
+                    Company.status.has(CompanyStatus.name_short.in_([6])),
+                    Company.stage.has(CompanyStage.name_short.in_(['E2'])),
+                    Company.action_plan_progress != None  # Agregar condición para action_plan_progress
+                )\
+                .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
+                .filter(action_plan_alias.fase == 1)\
+                .distinct()\
+                .all()
+            data = []
+        else:
+            companies = db.session.query(Company)\
+                .filter(
+                    Company.enabled == True,
+                    Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
+                    Company.action_plan_progress != None  # Agregar condición para action_plan_progress
+                )\
+                .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
+                .filter(action_plan_alias.fase == 1)\
+                .distinct()\
+                .all()
+            data = []
     
 
 
