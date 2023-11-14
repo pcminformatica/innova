@@ -781,6 +781,68 @@ ul,li{
                         </div>
                     </div>
                 </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Resultados</div>
+                                <br>
+                                <div class="mdc-data-table__table-container">
+                                    <table class="mdc-data-table__table_normal" aria-label="Dessert calories">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área </th>
+                                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Puntaje total del área</th>
+                                            
+
+                                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Ideales</th>
+                                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Resultados</th>
+                                        </tr>
+                                        
+                                        
+                                        
+
+
+
+
+                                        </thead>
+                                        <tbody class="mdc-data-table__content">
+                                        {% for resultado in diagnos_final %}                              
+                                        <tr class="mdc-data-table__row">
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{loop.index}}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{ resultado.area }}
+                                            </th>
+                                            <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                {{ resultado.putaje_area }}
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                {{ resultado.ideales }}
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                {{ resultado.resultados }}  
+                                            </td>     
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
                     <div class="container-dashboard--card-info">
@@ -809,8 +871,51 @@ ul,li{
                             <div class="mdc-card__content">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">Resultados por categoría</div>
                                 <br>
+                                <div id="curve_chart_2" ></div>
+
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Resultados por categoría</div>
+                                <br>
                     
                                 <div id="donutchart"></div>
+
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Resultados por categoría</div>
+                                <br>
+                    
+                                <div id="donutchart_2"></div>
 
                             </div>
                             <div class="mdc-card__actions">
@@ -881,12 +986,71 @@ ul,li{
                         </div>
                     </div>
                 </div>
+
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Resultado del diagnóstico</div>
+                                <br>
+                                <div class="mdc-data-table__table-container">
+                                    <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TIPO EMPRESA </th>
+                                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">RESULTADO</th>
+                                        </tr>
+                                        
+                                        
+                                        
+                                        </thead>
+                                        <tbody class="mdc-data-table__content">
+                                                                                
+
+                                        <tr class="mdc-data-table__row">
+                                            {% for resultado in diagnos_final %}    
+                                            {% if resultado.id_area == 0  %}
+            
+                                            <th class="mdc-data-table__cell" scope="row">
+                                            1
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{resultado.descripcion }}
+                                            </th>
+                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                            
+                                                {{resultado.resultados}} 
+                                            </th>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
 </main> 
 {% endif %}
+
+
 {% endblock %}
 {% block body_script_section %}
 
@@ -933,12 +1097,74 @@ ul,li{
     
                 var chart_li = new google.visualization.LineChart(document.getElementById('curve_chart'));
                 chart_li.draw(data_li, options_li);
+
+
+                var data_li = google.visualization.arrayToDataTable([
+                    ['AREA', 'IDEALES', 'RESULTADOS'],
+                    {% for resultado in diagnos_final %}    
+                        {% if resultado.id_area != 0  %}
+                        ['{{resultado.area}}', {{resultado.ideales}}, {{resultado.resultados}}],
+                        {% endif %}
+                    {% endfor %}
+                ]);
+    
+                var options_li = {
+                    title: 'RESULTADOS POR CATEGORIA',
+                    curveType: 'function',
+                    legend: { position: 'top' },
+                    hAxis: {
+                        textStyle: {
+                            fontSize: 8, // Tamaño de fuente del eje x
+                        },
+                        slantedText: true, // Rotar el texto
+                        slantedTextAngle: 45, // Ángulo de rotación (en grados)
+                    },
+                    height: 400 // Ajusta la altura del gráfico aquí
+                };
+    
+                var chart_li = new google.visualization.LineChart(document.getElementById('curve_chart_2'));
+                chart_li.draw(data_li, options_li);
+                
             }
     
             google.charts.load("current", { packages: ["corechart"] });
             google.charts.setOnLoadCallback(drawChart);
     
             function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['AREA', 'RESULTADOS'],
+                    {% for resultado in diagnos_final %}    
+                        {% if resultado.id_area != 0  %}
+                        ['{{resultado.area}}', {{resultado.resultados}}],
+                        {% endif %}
+                    {% endfor %}
+                ]);
+    
+                var options = {
+                    title: 'RESULTADOS POR CATEGORIA',
+                    pieHole: 0.4,
+                };
+    
+                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                chart.draw(data, options);
+    
+                // Agrega un evento de redimensionamiento para actualizar el gráfico cuando cambie el tamaño de la ventana
+                window.addEventListener('resize', resizeChart);
+    
+                // Función para ajustar el tamaño del gráfico
+                function resizeChart() {
+                    if (data && options) {
+                        var chartContainer = document.getElementById('donutchart');
+                        var chartWrapperWidth = chartContainer.offsetWidth;
+                        var chartWrapperHeight = chartContainer.offsetHeight;
+                        chart.draw(data, {
+                            ...options,
+                            width: chartWrapperWidth,
+                            height: chartWrapperHeight
+                        });
+                    }
+                }
+
                 var data = google.visualization.arrayToDataTable([
                     ['AREA', 'RESULTADOS'],
                     {% for resultado in diagnostico %}    
@@ -953,7 +1179,7 @@ ul,li{
                     pieHole: 0.4,
                 };
     
-                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                var chart = new google.visualization.PieChart(document.getElementById('donutchart_2'));
                 chart.draw(data, options);
     
                 // Agrega un evento de redimensionamiento para actualizar el gráfico cuando cambie el tamaño de la ventana

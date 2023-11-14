@@ -380,7 +380,13 @@ def _home():
 def _company_dashboard_view(company_id):
     app.logger.debug('** SWING_CMS ** - ------------------')
     company = Company.query.filter_by(id=company_id).first()
-    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.id)).first()
+    diagnos_final = (
+    DiagnosisCompany.query
+    .filter_by(company_id=company.id)
+    .order_by(desc(DiagnosisCompany.id))
+    .first()
+    )
     #actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
     actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
     catalog = catalogCategory.query.all()
@@ -401,6 +407,11 @@ def _company_dashboard_view(company_id):
         diagnostico = diagnos.resultados
     else:
         diagnostico = False
+    if diagnos_final:
+        diagnos_final = diagnos_final.resultados
+    else:
+        diagnostico = False
+
     #buscamos la carta de compromiso DOC2
     carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
     carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
@@ -409,6 +420,7 @@ def _company_dashboard_view(company_id):
     ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
     enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
     context = {
+        "diagnos_final":diagnos_final,
         "enrolls":enrolls,
         "deposits":deposits,
         "deposits_total":deposits_total,
