@@ -264,8 +264,8 @@ margin: 0 0 47px 0;
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
                 <div class="indicador-panel">
-                    <h4 class="indicadores-innova">
-                        1,801
+                    <h4 id="inscritas"class="indicadores-innova">
+                        3,012
                     </h4>
 
                     <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
@@ -278,9 +278,10 @@ margin: 0 0 47px 0;
              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
                 <div class="indicador-panel">
-                    <h4 class="indicadores-innova">
-                        964
+                    <h4 id="elegibles" class="indicadores-innova">
+                        1,973
                     </h4>
+               
 
                     <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
                         data-action-val="#onduras.pdf">
@@ -292,8 +293,8 @@ margin: 0 0 47px 0;
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
                 <div class="indicador-panel">
-                    <h4 class="indicadores-innova">
-                        291
+                    <h4 id="capacitacitadas" class="indicadores-innova">
+                        1,029
                     </h4>
 
                     <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
@@ -307,8 +308,8 @@ margin: 0 0 47px 0;
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
             <div class="indicador-panel">
-                <h4 class="indicadores-innova">
-                    141
+                <h4 id="recibiendo" class="indicadores-innova">
+                    623
                 </h4>
         
                 <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
@@ -375,6 +376,51 @@ function slideShowAutoLast2() {
     });
     
 }
+
+i = 1500;
+
+var inv = setInterval(function() {     
+    if(i < 3012){
+        i = i + 10;
+        document.getElementById("inscritas").innerHTML = i;}
+    else{
+        clearInterval(inv)}
+
+}, 5);
+
+
+i= 1600;
+
+var inv = setInterval(function() {     
+    if(i < 1973)
+        document.getElementById("elegibles").innerHTML = ++i;
+    else
+        clearInterval(inv);
+}, 5);
+
+
+i = 1;
+
+var inv = setInterval(function() {     
+    if(i < 1029)
+        document.getElementById("capacitacitadas").innerHTML = ++i;
+    else
+        clearInterval(inv);
+}, 5);
+
+i = -550;
+
+var inv = setInterval(function() {     
+    if(i < 623)
+        document.getElementById("recibiendo").innerHTML = ++i;
+    else
+        clearInterval(inv);
+}, 1);
+
+
+
+
+
 
 </script>
 {% endblock %}
