@@ -630,7 +630,8 @@ def _indicadores_perfil_asesor(user_uid):
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
     datos =  []
-    
+    txt_start_date = ""
+    txt_end_date = ""
     cod_usuario = user.id
     if request.method == 'POST':
         txt_start_date = request.form.get('txt_start_date') 
@@ -849,16 +850,18 @@ def _indicadores_perfil_asesor(user_uid):
         'asesorias':asesorias,
         'companys_etapa1':companys_etapa1,
         'companys_etapa2':companys_etapa2,
-"companys_etapa1_inactivas":companys_etapa1_inactivas,
-"companys_etapa1_activas":companys_etapa1_activas,
-"companys_etapa2_inactivas":companys_etapa2_inactivas,
-"companys_etapa2_activas":companys_etapa2_activas,
-"asesorias_presencial":asesorias_presencial,
-"asesorias_virtual":asesorias_virtual,
-"plan_services_total":plan_services_total,
+        "companys_etapa1_inactivas":companys_etapa1_inactivas,
+        "companys_etapa1_activas":companys_etapa1_activas,
+        "companys_etapa2_inactivas":companys_etapa2_inactivas,
+        "companys_etapa2_activas":companys_etapa2_activas,
+        "asesorias_presencial":asesorias_presencial,
+        "asesorias_virtual":asesorias_virtual,
+        "plan_services_total":plan_services_total,
         'referidos_servicios':len(referidos_servicios),
         'referidos_serviciosproceso':len(referidos_servicios) -len(referidos_serviciosfin),
         'referidos_serviciosfin':len(referidos_serviciosfin),
+        'txt_start_date':txt_start_date,
+        'txt_end_date':txt_end_date
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
 

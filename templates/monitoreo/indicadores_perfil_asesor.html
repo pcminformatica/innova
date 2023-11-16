@@ -254,12 +254,15 @@
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                         
-
+                                            <div class="mdc-typography--headline5 s-font-color-secondary">
+                                                Productividad
+                                            </div>
+                                        {% if txt_start_date %}
                                         <div class="mdc-typography--headline5 s-font-color-secondary">
-                                            Productividad
+                                            Reporte: generado desde {{ txt_start_date }} hasta  {{ txt_end_date }}
                                         </div>
                                                                                 
-
+                                        {% endif %}
 
                                        
                                       
