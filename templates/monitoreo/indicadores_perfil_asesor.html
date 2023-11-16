@@ -259,7 +259,7 @@
                                             </div>
                                         {% if txt_start_date %}
                                         <div class="mdc-typography--headline5 s-font-color-secondary">
-                                            Reporte: generado desde {{ txt_start_date }} hasta  {{ txt_end_date }}
+                                            Reporte: generado desde {{ txt_start_date.strftime('%d-%m-%Y') }} hasta  {{ txt_end_date.strftime('%d-%m-%Y') }}
                                         </div>
                                                                                 
                                         {% endif %}

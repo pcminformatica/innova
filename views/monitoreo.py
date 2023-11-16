@@ -630,8 +630,8 @@ def _indicadores_perfil_asesor(user_uid):
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
     datos =  []
-    txt_start_date = ""
-    txt_end_date = ""
+    range1 = ""
+    range2 = ""
     cod_usuario = user.id
     if request.method == 'POST':
         txt_start_date = request.form.get('txt_start_date') 
@@ -860,8 +860,8 @@ def _indicadores_perfil_asesor(user_uid):
         'referidos_servicios':len(referidos_servicios),
         'referidos_serviciosproceso':len(referidos_servicios) -len(referidos_serviciosfin),
         'referidos_serviciosfin':len(referidos_serviciosfin),
-        'txt_start_date':txt_start_date,
-        'txt_end_date':txt_end_date
+        'txt_start_date':range1,
+        'txt_end_date':range2
         }
     return render_template('monitoreo/indicadores_perfil_asesor.html',**context)
 
