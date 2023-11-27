@@ -179,6 +179,51 @@
                                                     
                        
                                                 </div>
+                                                <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter14')" >
+                                                    
+                                                    <span class="mdc-deprecated-list-item__ripple"></span>
+                                                    <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">swipe_vertical</span>
+                                                    <span class="mdc-deprecated-list-item__text">
+                                                        <span class="mdc-deprecated-list-item__primary-text">Estados</span>
+                                                        
+                                                    </span>
+                                           
+                                                    <span id="icon-filter14"  class="mdc-deprecated-list-item__meta  material-icons" role="grid">
+                                                        add
+                                                    </span>
+                                                    
+                                    
+                                                </li>
+                                                <div id="filter14" class="checkbox-container" style="display: none;">
+                                                    {% for status in status %}
+                                                    <div class="mdc-form-field">
+                                                        <div class="mdc-checkbox" id="txt_x_description" data-assigned-var>
+                                                        <input type="checkbox"
+                                                                class="mdc-checkbox__native-control"
+                                                                name="cheack-status"
+                                                        
+                                                                value="{{ status.name }}"
+                                                                />
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark"
+                                                                viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                    fill="none"
+                                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                        <div class="mdc-checkbox__focus-ring"></div>
+                                                        </div>
+                                                        <label for="checkbox-public">
+                                                            {{ status.name }}
+                                                        </label>
+                                                    </div>
+                                                    {% endfor %}
+                                                    
+                       
+                                                </div>
                                                 <li class="mdc-deprecated-list-item"  onclick="toggleCheckboxDiv('filter0')" >
                                                     
                                                     <span class="mdc-deprecated-list-item__ripple"></span>
@@ -1685,6 +1730,16 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
         console.log(filtro)
         filteredData =  jsonData.records
         // Filtrar los registros que tienen los valores en "servicesToFilter"
+        nombre = 'cheack-status'
+        statusToFilter = getCheckValues(nombre)
+        console.log(statusToFilter)
+        if (statusToFilter.length !=0){
+            // Filtrar los registros filtrados por "services" por los departamentos en "nivelEmpresaToFilter"
+            filteredData = filteredData.filter(record => {
+            return statusToFilter.includes(record.company_status);
+            
+            });
+        } 
 
         nombre = 'checkbox-sevicios'
         servicesCompanyToFilter = getCheckValues(nombre)

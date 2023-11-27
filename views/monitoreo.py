@@ -946,5 +946,8 @@ def _monitoring_dashboard():
     ]
     services = CatalogServices.query.filter_by().all()
     categorys = catalogCategory.query.filter_by().all()
-    context = {"departamentos_honduras":departamentos_honduras,'services':services,'categorys':categorys}
+    status = CompanyStatus.query.filter(~CompanyStatus.name_short.in_(['1', ])).all()
+
+    
+    context = {"departamentos_honduras":departamentos_honduras,'services':services,'categorys':categorys,'status':status}
     return render_template('monitoreo/monitoring_dashboard.html',**context)
