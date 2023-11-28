@@ -2398,3 +2398,35 @@ def save_catalog_surveys_SDE():
         return jsonify({ 'status': 'error', 'msg': e })
 
 
+@api.route('/api/save/info/', methods = ['POST'])
+# @login_required
+def _d_save_info_company():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+
+            txt_company = request.json['txt_company']
+            companyName = request.json['companyName']
+            dni = request.json['dni']
+            email = request.json['email']
+            phone = request.json['phone']
+            company = Company.query.filter_by(id = txt_company).first()
+            company.dni = dni
+            company.name = companyName
+            jsonPhone = JsonPhone()
+            jsonPhone.phone = phone
+            jsonSocial= JsonSocial()
+            jsonSocial.email = email
+            if company.inscripcion:
+                company.inscripcion.phone = phone
+                company.inscripcion.correo = email
+            company.phones = jsonPhone.jsonFormat()
+            db.session.add(company)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+

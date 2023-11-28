@@ -2207,6 +2207,21 @@ def _company_change_form(company_id):
     }
     return render_template('company_change_form.html',**context)
 
+@digitalcenter.route('/formulario/edit/<int:company_id>/form/',methods = ['GET', 'POST'])
+def _company_edit__form(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id))
+    status = CompanyStage.query.all()
+    context = {
+        "company": company,
+        'status':status,
+
+    }
+    return render_template('company_edit__form.html',**context)
+
 @digitalcenter.route('/blueberry/',methods=['GET', 'POST'])
 def _company_blueberry_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
