@@ -59,23 +59,24 @@ function test_madurez_save(){
     })
 
 
-
+    
+    
      
-    property = 'txt_name_empresaria' 
+    property = 'txt_name' 
     if (mdcAssignedVars[property].value === '' ){   
         showMSJ('Por favor responda la pregunta:','1 Nombre Completo','info')
         return false
     }else{
-        preguntas.push({"id":"txt_name_empresaria","pregunta":"1 Nombre Completo","respuesta":mdcAssignedVars[property].value,"valor":0})
+        preguntas.push({"id":"txt_name","pregunta":"1 Nombre Completo","respuesta":mdcAssignedVars[property].value,"valor":0})
     }
 
     //1.2 N. Identidad:
-    property = 'txt_name_empresa'
+    property = 'txt_identidad'
     if (mdcAssignedVars[property].value === '' ){   
         showMSJ('Por favor responda la pregunta:','2. Nombre de la empresa','info')
         return false
     }else{
-        preguntas.push({"id":"txt_name_empresa","pregunta":"2 Nombre de la empresa","respuesta":mdcAssignedVars[property].value,"valor":0})
+        preguntas.push({"id":"txt_identidad","pregunta":"2 identidad","respuesta":mdcAssignedVars[property].value,"valor":0})
     }
     
     const cuenta_con_equipo =  getCheckValues('cuenta_con_equipo');
