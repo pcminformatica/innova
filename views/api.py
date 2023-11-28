@@ -2174,7 +2174,8 @@ def _save_test_madurez():
             evaluation.dni = txt_identidad
             evaluation.respuestas =txt_preguntas
             evaluation.result = total
-     
+            db.session.add(evaluation)
+            db.session.commit()
 
             return jsonify({ 'status': 200, 'msg': 'Cita creada' })
     except Exception as e:
