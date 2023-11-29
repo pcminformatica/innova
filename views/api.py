@@ -2144,10 +2144,16 @@ def _d_save_depto_company():
             txt_company = request.json['txt_company']
             txt_departamentousuaria = request.json['txt_departamentousuaria']
             txt_municipiousuaria = request.json['txt_municipiousuaria']
+            txt_aldeusuaria = request.json['txt_aldeusuaria']
+            txt_direccion = request.json['txt_direccion']
+
+
             company = Company.query.filter_by(id = txt_company).first()
             company.inscripcion.departamento = txt_departamentousuaria
             company.inscripcion.municipio = txt_municipiousuaria
-
+            company.inscripcion.aldea = txt_aldeusuaria
+            company.address = txt_direccion
+          
             db.session.add(company)
             db.session.commit()
 

@@ -805,6 +805,7 @@ class Inscripciones(db.Model):
     company_name = db.Column(db.String(300), unique=False, nullable=True)
     departamento = db.Column(db.Text, unique=False, nullable=True)
     municipio = db.Column(db.String(400), unique=False, nullable=True)
+    aldea = db.Column(db.String(400), unique=False, nullable=True)
     correo = db.Column(db.String(50), unique=False, nullable=True)
     phone = db.Column(db.String(50), unique=False, nullable=True)
     elegible = db.Column(db.Boolean, unique=False, nullable=True, default=False)

@@ -35,11 +35,13 @@
                                         <p><b>Nombre de empresa:</b> {{company.name}} </p>
                                         <p><b>Nombre de empresaria:</b> {{company.inscripcion.name}} </p>
                                         <p><b>Teléfono:</b> {{company.inscripcion.phone}} </p>
+                                        <p><b>Correo:</b> {{company.inscripcion.correo}} </p>
                                     </div>
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
                                         <p><b>Departamento:</b> {{company.inscripcion.departamento}} </p>
                                         <p><b>Municipio:</b> {{company.inscripcion.municipio}} </p>
-                                        <p><b>Correo:</b> {{company.inscripcion.correo}} </p>
+                                        <p><b>Aldea:</b> {{company.inscripcion.aldea}} </p>
+                                        <p><b>Direccion:</b> {{company.address}} </p>
                                     </div>
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet s-font-align-center">
                                
@@ -205,7 +207,24 @@
                               <option>Aldea 1</option>
                             </select><br> <br>
                           </div>
-                          
+                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                             
+                            <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_company_description" data-assigned-var> 
+                              <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                  <span class="mdc-floating-label" id="my-label-id">Dirección</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                              </span>
+                              <span class="mdc-text-field__resizer">
+                                <textarea id="txt_direccion" required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="4" cols="40" maxlength="140"></textarea>
+                                <span class="mdc-text-field-character-counter">0 / 140</span>
+                              </span>
+                            </label>
+                            <br> <br>
+                          </div>
+                         
                           <button onclick="actualizarEtapa()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
                                             
                             <span class="mdc-button__ripple"></span>
@@ -412,13 +431,24 @@ function lugarMum(){
 function actualizarEtapa(){
 
     const Swal = swcms.returnSwal()
-
+    
     let txt_departamentousuaria = $('#txt_departamentousuaria').find(":selected").text();
     let txt_municipiousuaria = $('#txt_municipiousuaria').find(":selected").text();
+    let txt_aldeusuaria = $('#txt_aldeusuaria').find(":selected").text();
+    let txt_direccion = document.getElementById("txt_direccion").value.trim() || null
+
+    if(txt_departamentousuaria=='Seleccione...' || txt_municipiousuaria=='Seleccione...' || txt_departamentousuaria === '' || txt_municipiousuaria === '' ){
+        alert('Seleccione Departameno y Municipio')
+        return false
+    }
+   
+ 
 let postData = {
     "txt_company":'{{company.id}}',
     "txt_departamentousuaria":txt_departamentousuaria,
-    "txt_municipiousuaria":txt_municipiousuaria
+    "txt_municipiousuaria":txt_municipiousuaria,
+    "txt_aldeusuaria":txt_aldeusuaria,
+    "txt_direccion":txt_direccion
 };
 
 console.log(postData)
@@ -440,7 +470,7 @@ swcms.postFetch(apiUrl, postData).then((data) => {
     'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
     'error'
     )
-    document.getElementById('btn_generar_ficha').disabled = false;
+   
 });
 return false
 }
