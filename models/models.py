@@ -868,6 +868,8 @@ class ActionPlan(db.Model):
     descripcion = db.Column(db.Text, nullable=True)
     # Define si es una asesoria es puntual
     espuntal = db.Column(db.Boolean, nullable=True, default=False)
+    puntuacion = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
+    nota = db.Column(db.Text, nullable=True)
 
 class ActionPlanReferences(db.Model):
     __tablename__ = 'action_plan_references'

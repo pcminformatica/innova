@@ -1,0 +1,312 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block body %}
+{% block css_script_section %}
+
+<style>
+
+@media screen and (max-width: 850px) {
+
+
+.mdc-deprecated-list-item__text{
+  font-size: 14px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 650px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 5px 0 4px;
+  padding-bottom: 10px;
+padding-top: 10px;
+
+}
+
+.mdc-deprecated-list-item__text{
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 10px;
+}
+
+.mdc-radio {
+  margin-right: 0px;
+}
+}
+
+@media screen and (max-width: 340px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 7px;
+}
+
+.mdc-radio {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  will-change: opacity,transform,border-color,color;
+}
+}
+
+<style>
+        .rating {
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        
+        .rating label {
+            color: #fff;
+            background-color: #cdd8ef;
+            transition: color 0.5s, border-color 0.5s;
+            display: inline-block;
+            border: 1px solid #cdd8ef; /* Borde gris */
+            border-radius: 5px; /* Bordes redondeados */
+            margin-right: 5px; /* Espaciado entre estrellas */
+            font-size: 28px;
+  padding: 10px;
+        }
+
+        .rating input:checked ~ label {
+            color: #f39c12;
+        }
+
+        .rating label:hover,
+        .rating input:checked ~ label:hover,
+        .rating input:checked ~ label:hover ~ label {
+            color: #f39c12;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+       
+    </style>
+</style>
+{% endblock %}
+
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+
+                            <div class="mdc-card__content container-dashboard--messages-cnt">
+                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                    Encuesta de Evaluación de Asesoría.
+                                </div>
+
+
+                          
+                              
+                               
+                                
+                                <div id="step-1" class="container-dashboard--messages-list-empty ">
+                                    <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                    <div class="mdc-layout-grid">
+                               
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                <p>
+                                                    Por favor proporcione la información solicitada, la información es confidencial y es de uso exclusivo para el proyecto INNOVAMUJER HONURAS.
+                                                </p>
+                                                <div class="mdc-typography--body1">
+                                                    <b>1. </b> ¿Cómo evalúa la calidad de la atención recibida durante la asesoría proporcionada por la o el especialista?
+                                                </div>
+                                                
+
+                                                <div class="rating">
+                                                    <input type="radio" id="star1" name="rating" value="1" />
+                                                    <label for="star1">★</label>
+                                                    <input type="radio" id="star2" name="rating" value="2" />
+                                                    <label for="star2">★</label>
+                                                    <input type="radio" id="star3" name="rating" value="3" />
+                                                    <label for="star3">★</label>
+                                                    <input type="radio" id="star4" name="rating" value="4" />
+                                                    <label for="star4">★</label>
+                                                    <input type="radio" id="star5" name="rating" value="5" />
+                                                    <label for="star5">★</label>
+                                                    
+                                                </div>
+                                                <p class="selected-rating">Usted está seleccionando una puntuación de <span id="selected-value">5</span></p>
+                                                
+                                              </div>
+                                            </div>
+                                          </div>
+                                   
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                            <input id="txt_company"  type="hidden" value="{{ current_user.extra_info.company.id }}">
+                                              <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-typography--body1">
+                                                        <b>2.</b> Comentarios y sugerencias:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_company_description" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="10 Comentarios y sugerencias">Comentarios y sugerencias</span>
+                                                        <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                  </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <br>
+                                     
+
+                                      
+                                        
+                                    </div>
+
+                          <!-- fin -->
+                                </div>
+                                <div id="step-2" class="container-dashboard--messages-list-empty ">
+                                  <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                  <div class="mdc-layout-grid">
+                             
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-typography--body1">
+                                      
+                                              <center>
+                                                <br>
+                                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                                  Resultado <span id="lbl_resultado"></span>
+                                                </div>
+                                              </center>
+                                            </div>
+                                          </div>
+                                        </div>
+                                 
+                                    
+
+                                    
+                                      
+                                  </div>
+
+                        <!-- fin -->
+                              </div>
+                            </div>
+  
+                            <div class="mdc-card__actions" style="margin: auto">
+                                <div class="mdc-card__action-buttons">
+                                <center>
+
+                                  <a id="submitSaveButton" href="/home/" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_satifacion_save()">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">Aceptar  </span>
+                      
+                                  </a>
+                                  <!--
+                                  <button class="mdc-button mdc-button--outlined">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <span class="mdc-button__label">Continuar después  </span>
+                                  </button>-->
+                                </center>
+                                </div>
+
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+
+
+<script  src="{{ url_for('static', filename='js/evaluacion.js') }}?z=2"></script>
+
+<script>
+document.getElementById("step-2").style.display = "none"; 
+
+
+</script>
+
+<script>
+    const rating = document.querySelector('.rating');
+    const selectedValue = document.getElementById('selected-value');
+
+    rating.addEventListener('change', (event) => {
+        const clickedRating = event.target.value;
+        selectedValue.textContent = clickedRating;
+
+        // Marcar estrellas anteriores
+        const labels = document.querySelectorAll('.rating label');
+        labels.forEach((label) => {
+            const input = label.previousElementSibling;
+            if (input.value <= clickedRating) {
+                label.style.color = '#f39c12';
+            } else {
+                label.style.color = '#fff';
+            }
+        });
+    });
+
+    rating.addEventListener('mouseover', (event) => {
+        const hoveredRating = event.target.previousElementSibling.value;
+        selectedValue.textContent = hoveredRating;
+
+        // Marcar estrellas anteriores al pasar el ratón
+        const labels = document.querySelectorAll('.rating label');
+        labels.forEach((label) => {
+            const input = label.previousElementSibling;
+            if (input.value <= hoveredRating) {
+                label.style.color = '#f39c12';
+            } else {
+                label.style.color = '#fff';
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+

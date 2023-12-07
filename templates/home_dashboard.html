@@ -571,10 +571,10 @@ ul,li{
                                                 <center>
                                                     <br>
                                                     {% if action.progress == 100 %}
-                                                        <a onclick="alert('En construcción')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
+                                                        <a href="/test/encuestas/sde/{{ action.id }}/sed"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
                                                             <span class="mdc-button__ripple"></span>
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
-                                                            <span class="mdc-button__label">Evaluar servicio</span>
+                                                            <span class="mdc-button__label">Evaluar servicio </span>
                                                         </a>
                                                     {% elif action.progress == 0 %}
                                                     {% else %}

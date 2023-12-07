@@ -704,6 +704,16 @@ def _formulario_encuestas_satisfaccion():
     return render_template('evaluaciones/encuestas_satisfaccion.html')
 
 
+@home.route('/test/encuestas/sde/<int:plan_id>/sed')
+def _formulario_encuesta_SDE(plan_id):
+    actions = ActionPlan.query.filter_by(id=plan_id).first()    
+    context = {
+        'actions': actions,
+    }
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('evaluaciones/encuesta_SDE.html',**context)
+
+
 @home.route('/test/madurez/list')
 def _evaluations_list():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
