@@ -1,0 +1,620 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block body %}
+{% block css_script_section %}
+
+<style>
+
+@media screen and (max-width: 850px) {
+
+
+.mdc-deprecated-list-item__text{
+  font-size: 14px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 650px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 5px 0 4px;
+  padding-bottom: 10px;
+padding-top: 10px;
+
+}
+
+.mdc-deprecated-list-item__text{
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 10px;
+}
+
+.mdc-radio {
+  margin-right: 0px;
+}
+}
+
+@media screen and (max-width: 340px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 7px;
+}
+
+.mdc-radio {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  will-change: opacity,transform,border-color,color;
+}
+}
+
+
+</style>
+{% endblock %}
+
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+
+                            <div class="mdc-card__content container-dashboard--messages-cnt">
+                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                    ENCUESTA DE SATISFACCIÓN
+                                </div>
+
+
+                          
+                              
+                               
+                                
+                                <div id="step-1" class="container-dashboard--messages-list-empty ">
+                                    <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                    <div class="mdc-layout-grid">
+                               
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                <p>
+                                                    Por favor proporcione la información solicitada, la información es confidencial y es de uso exclusivo para el proyecto INNOVAMUJER HONURAS.
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                   
+                                          <div class="mdc-layout-grid__inner">
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                            <input id="txt_company"  type="hidden" value="">
+                                              <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>1</b> Nombre de la empresaria:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresaria" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.1 Nombre Completo"  >Nombre de la empresaria</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>2.</b> Nombre de la empresa:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresa" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Nombre de la empresa" >Nombre de la empresa</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                            
+                                                    >
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <br>
+                                        <div class="mdc-layout-grid__inner">
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>3.</b> ¿Ha mejorado sus habilidades tecnológicas con el uso de la plataforma? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Si</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  No </label>
+                                                  </div>
+    
+                                            
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>4.</b> Cuanto es el número del personal que se ha generado durante los Servicios de Desarrollo Empresarial 
+                                                </div>
+                                                <div class="mdc-data-table">
+                                                    <div class="mdc-data-table__table-container">
+                                                      <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                                        <thead>
+                                                          <tr class="mdc-data-table__header-row">
+                                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TIPO</th>
+                                                            <th class="mdc-data-table__header-cell " role="columnheader" scope="col">Mujeres</th>
+                                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Hombres</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody class="mdc-data-table__content" style="background-color: white;">
+                                                          <tr class="mdc-data-table__row">
+                                                            <th class="mdc-data-table__cell" scope="row"> A. Personal  Generados </th>
+                                                            <td class="mdc-data-table__cell">
+                                                                <div class="mdc-form-field">
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_total_mujer" data-assigned-var>
+                                                                        <span class="mdc-text-field__ripple"></span>
+                                                                        
+                                                                        <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
+                                                                        <span class="mdc-line-ripple"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="mdc-data-table__cell">
+                                                                <div class="mdc-form-field">
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_total_hombre" data-assigned-var>
+                                                                        <span class="mdc-text-field__ripple"></span>
+                                                                        
+                                                                        <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
+                                                                        <span class="mdc-line-ripple"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+    
+                                                          </tr>
+                                     
+                                                          <tr class="mdc-data-table__row">
+                                                            <th class="mdc-data-table__cell" scope="row"> B. Personal Retenidos  </th>
+                                                            <td class="mdc-data-table__cell">
+                                                                <div class="mdc-form-field">
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_mujer" data-assigned-var>
+                                                                        <span class="mdc-text-field__ripple"></span>
+                                                                        
+                                                                        <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
+                                                                        <span class="mdc-line-ripple"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="mdc-data-table__cell">
+                                                                <div class="mdc-form-field">
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_hombre" data-assigned-var>
+                                                                        <span class="mdc-text-field__ripple"></span>
+                                                                        
+                                                                        <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number"  value="0" aria-labelledby="my-label-id">
+                                                                        <span class="mdc-line-ripple"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+    
+                                                          </tr>
+                                     
+                                                        
+                                  
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>5.</b>Ventas Anuales 
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Ventas Anuales </span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="number" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>    
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>6.</b> ¿Periodo ( Año )
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">¿Periodo ( Año )</span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="number" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>    
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>7.</b> Cuantos servicios de desarrollo empresarial ha recibido 
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa"> Cuantos servicios de desarrollo empresarial ha recibido </span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="number" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>    
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>8.</b> Introdujo su empresas nuevos productos: 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="tiempos_entrega" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Si</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="tiempos_entrega">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  No </label>
+                                                  </div>
+
+                                                  <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Cuales</span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>9</b> ¿Obtuvo préstamo Financiero? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="servicios_desarrollo" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Si</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="servicios_desarrollo">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  No </label>
+                                                  </div>
+    
+                                        
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>10.</b> ¿Origen del préstamo  Financiero? que obtuvo? 
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="servicios_desarrollo" checked>
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">A)  Publico</label>
+                                                  </div>
+                                                  <div class="mdc-form-field">
+                                                    <div class="mdc-radio">
+                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="servicios_desarrollo">
+                                                      <div class="mdc-radio__background">
+                                                        <div class="mdc-radio__outer-circle"></div>
+                                                        <div class="mdc-radio__inner-circle"></div>
+                                                      </div>
+                                                      <div class="mdc-radio__ripple"></div>
+                                                    </div>
+                                                    <label for="radio-1">B)  Privado </label>
+                                                  </div>
+    
+                                        
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>11.</b> Monto del prestamo Obtenido
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Monto del prestamo Obtenido</span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>12.</b> Fecha de Préstamo Obtenido
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Fecha de Préstamo Obtenido</span>
+                                                    <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)"  type="date" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>13. </b> Destino del Préstamo :<span class="required">*</span>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="mercado_producto"
+                                                            id="checkbox-public" 
+                                                            value="Local"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        A. Inversión                  
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="mercado_producto"
+                                                            id="checkbox-public" 
+                                                            value="Regional"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        B. Capital de Trabajo   
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="mercado_producto"
+                                                            id="checkbox-public" 
+                                                            value="Nacional"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        C. Otro 
+                                                    </label>
+                                                </div>
+                                            
+                                            </div>
+  
+                                    
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>14.</b> Ventas generadas por vinculacion a eventos 
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Ventas generadas por vinculacion a eventos </span>
+                                                    <input required class="mdc-text-field__input"   type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>15.</b> Ventas Realizadas en Eventos:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa"> Ventas Realizadas en Eventos</span>
+                                                    <input required class="mdc-text-field__input"  type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>16.</b> Vinculaciones Comerciales Insituciones o empresas
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Vinculaciones Comerciales Insituciones o empresas</span>
+                                                    <input required class="mdc-text-field__input"   type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <b>17.</b> Vinculaciones Financieras Institucion:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fundation_company" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="3.11 Años de fundación de la empresa">Vinculaciones Financieras Institucion:</span>
+                                                    <input required class="mdc-text-field__input"   type="text" aria-labelledby="my-label-id" min="0" max="100">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div> 
+
+                                       
+                                        </div>
+
+                                      
+                                        
+                                    </div>
+
+                          <!-- fin -->
+                                </div>
+                                <div id="step-2" class="container-dashboard--messages-list-empty ">
+                                  <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                  <div class="mdc-layout-grid">
+                             
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-typography--body1">
+                                      
+                                              <center>
+                                                <br>
+                                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                                  Resultado <span id="lbl_resultado"></span>
+                                                </div>
+                                              </center>
+                                            </div>
+                                          </div>
+                                        </div>
+                                 
+                                    
+
+                                    
+                                      
+                                  </div>
+
+                        <!-- fin -->
+                              </div>
+                            </div>
+  
+                            <div class="mdc-card__actions" style="margin: auto">
+                                <div class="mdc-card__action-buttons">
+                                <center>
+
+                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_satifacion_save()">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">Aceptar  </span>
+                      
+                                  </button>
+                                  <!--
+                                  <button class="mdc-button mdc-button--outlined">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <span class="mdc-button__label">Continuar después  </span>
+                                  </button>-->
+                                </center>
+                                </div>
+
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+
+
+<script  src="{{ url_for('static', filename='js/evaluacion.js') }}?z=2"></script>
+
+<script>
+document.getElementById("step-2").style.display = "none"; 
+
+
+</script>
+
+{% endblock %}

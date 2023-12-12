@@ -703,6 +703,11 @@ def _formulario_encuestas_satisfaccion():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/encuestas_satisfaccion.html')
 
+@home.route('/test/encuestas/impacto')
+def _formulario_encuestas_impacto():
+    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    return render_template('evaluaciones/encuestas_impacto.html')
+
 
 @home.route('/test/encuestas/sde/<int:plan_id>/sed')
 def _formulario_encuesta_SDE(plan_id):
