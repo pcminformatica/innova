@@ -97,7 +97,7 @@ padding-top: 10px;
                                             >
                                               <div class="mdc-typography--body1">
                                                 <p>
-                                                    Por favor proporcione la información solicitada, la información es confidencial y es de uso exclusivo para el proyecto INNOVAMUJER HONURAS.
+                                                    Por favor proporcione la información solicitada, la información es confidencial y de uso exclusivo para el proyecto INNOVAMUJER HONURAS.
                                                 </p>
                                               </div>
                                             </div>
@@ -107,14 +107,14 @@ padding-top: 10px;
 
                                         <br>
                                         <div class="mdc-layout-grid__inner">
-                                            
+                                          <input id="txt_company"  type="hidden" value="{{ current_user.extra_info.company.id }}">
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b> 1. </b>¿Recibió la capacitación inicial?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                      <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                      <input class="mdc-radio__native-control" type="radio" value="Si"  name="recibio_capacitacion" checked>
                                                       <div class="mdc-radio__background">
                                                         <div class="mdc-radio__outer-circle"></div>
                                                         <div class="mdc-radio__inner-circle"></div>
@@ -125,7 +125,7 @@ padding-top: 10px;
                                                   </div>
                                                   <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                      <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                      <input class="mdc-radio__native-control" type="radio" value="No"   name="recibio_capacitacion">
                                                       <div class="mdc-radio__background">
                                                         <div class="mdc-radio__outer-circle"></div>
                                                         <div class="mdc-radio__inner-circle"></div>
@@ -142,10 +142,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                   <b>2. </b> ¿Cuántos servicios de desarrollo empresarial ha recibido? 
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresaria" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_cuantos_SDE" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Ingresè cantidad de servicios"  >Ingresè cantidad de servicios</span>
-                                                  <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id">
+                                                  <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Ingresè cantidad de servicios"  >Ingresé cantidad de servicios</span>
+                                                  <input required class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" onkeypress="return isNumberKey(event)" min="0">
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -155,7 +155,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                    <input class="mdc-radio__native-control" type="radio" value="Si"  name="mejorado_habilidades" checked>
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -166,7 +166,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="No"   name="mejorado_habilidades">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -178,7 +178,7 @@ padding-top: 10px;
   
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="Regular"   name="mejorado_habilidades">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -195,7 +195,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                    <input class="mdc-radio__native-control" type="radio" value="Si"  name="mejorado_habilidades_tec" checked>
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -206,7 +206,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="No"   name="mejorado_habilidades_tec">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -218,7 +218,7 @@ padding-top: 10px;
   
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="Regular"   name="mejorado_habilidades_tec">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -235,7 +235,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"  name="habilidades_digitales" checked>
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -246,7 +246,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="Regular"   name="habilidades_digitales">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -258,7 +258,7 @@ padding-top: 10px;
   
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input class="mdc-radio__native-control" type="radio" value="Excelente"   name="habilidades_digitales">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -286,7 +286,7 @@ padding-top: 10px;
                                                         </thead>
                                                         <tbody class="mdc-data-table__content" style="background-color: white;">
                                                           <tr class="mdc-data-table__row">
-                                                            <th class="mdc-data-table__cell" scope="row"> A. Incluyéndola a usted, ¿Cuántos empleos a tiempo completos han tenido su empresa en los últimos tres meses?  </th>
+                                                            <th class="mdc-data-table__cell" scope="row"> A. Incluyéndola a usted, ¿Cuántos empleos a tiempo completo han tenido su empresa en los últimos tres meses?  </th>
                                                             <td class="mdc-data-table__cell">
                                                                 <div class="mdc-form-field">
                                                                     <label class="mdc-text-field mdc-text-field--filled" id="txt_u_total_mujer" data-assigned-var>
@@ -311,10 +311,10 @@ padding-top: 10px;
                                                           </tr>
                                      
                                                           <tr class="mdc-data-table__row">
-                                                            <th class="mdc-data-table__cell" scope="row"> B. ¿Cuántos empleos temporales han tenido su empresa en los últimos tres meses?   </th>
+                                                            <th class="mdc-data-table__cell" scope="row"> B. ¿Cuántos empleos temporales ha tenido su empresa en los últimos tres meses?   </th>
                                                             <td class="mdc-data-table__cell">
                                                                 <div class="mdc-form-field">
-                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_mujer" data-assigned-var>
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_temp_mujer" data-assigned-var>
                                                                         <span class="mdc-text-field__ripple"></span>
                                                                         
                                                                         <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number" value="0" aria-labelledby="my-label-id">
@@ -324,7 +324,7 @@ padding-top: 10px;
                                                             </td>
                                                             <td class="mdc-data-table__cell">
                                                                 <div class="mdc-form-field">
-                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_remunerados_hombre" data-assigned-var>
+                                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_u_temp_hombre" data-assigned-var>
                                                                         <span class="mdc-text-field__ripple"></span>
                                                                         
                                                                         <input required class="mdc-text-field__input" onkeypress="return isNumberKey(event)" min="0" type="number"  value="0" aria-labelledby="my-label-id">
@@ -345,11 +345,11 @@ padding-top: 10px;
 
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                               <div class="mdc-typography--body1">
-                                                  <b>7. </b>¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros  
+                                                  <b>7. </b>¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros?
                                               </div>
                                               <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Excelente"  name="equipo_especialistas" checked>
+                                                    <input  onclick="isCuales('block')" class="mdc-radio__native-control" type="radio" value="Si"  name="vinculaciones_financieros" checked>
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -360,7 +360,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Bueno"   name="equipo_especialistas">
+                                                    <input  onclick="isCuales('none')" class="mdc-radio__native-control" type="radio" value="No"   name="vinculaciones_financieros">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -373,7 +373,7 @@ padding-top: 10px;
 
   
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="block-cuales" class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                               <div class="mdc-typography--body1">
                                                   <b>7.1</b> Cuales:
                                               </div>
@@ -381,8 +381,9 @@ padding-top: 10px;
                                                   <div class="mdc-checkbox">
                                                   <input type="checkbox"
                                                           class="mdc-checkbox__native-control"
-                                                          name="txt_dispositivos"
+                                                          name="txt_cuales"
                                                           value="Apertura de cuenta bancaria"
+                                                         
                                                           />
                                                   <div class="mdc-checkbox__background">
                                                       <svg class="mdc-checkbox__checkmark"
@@ -404,7 +405,7 @@ padding-top: 10px;
                                                   <div class="mdc-checkbox">
                                                   <input type="checkbox"
                                                           class="mdc-checkbox__native-control"
-                                                          name="txt_dispositivos"
+                                                          name="txt_cuales"
                                                           value="Instituciones financieras "
                                           
                                                           />
@@ -428,7 +429,7 @@ padding-top: 10px;
                                                   <div class="mdc-checkbox">
                                                   <input type="checkbox"
                                                           class="mdc-checkbox__native-control"
-                                                          name="txt_dispositivos"
+                                                          name="txt_cuales"
                                                           value="Acceder a ciertos productos financiero"
                                           
                                                           />
@@ -452,8 +453,8 @@ padding-top: 10px;
                                                   <div class="mdc-checkbox">
                                                   <input type="checkbox"
                                                           class="mdc-checkbox__native-control"
-                                                          name="txt_dispositivos"
-                                                          value="Gestiòn en Sistema de punto de venta (POS)"
+                                                          name="txt_cuales"
+                                                          value="Gestión en Sistema de punto de venta (POS)"
                                           
                                                           />
                                                   <div class="mdc-checkbox__background">
@@ -469,14 +470,14 @@ padding-top: 10px;
                                                   <div class="mdc-checkbox__focus-ring"></div>
                                                   </div>
                                                   <label for="checkbox-public">
-                                                      d) Gestiòn en Sistema de punto de venta (POS)
+                                                      d) Gestión en sistema de punto de venta (POS)
                                                   </label>
                                               </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="txt_dispositivos"
+                                                        name="txt_cuales"
                                                         value="Vinculación para la solicitud de tarjetas de débito o crédito para la empresa"
                                         
                                                         />
@@ -500,11 +501,11 @@ padding-top: 10px;
                                           </div>
                                           <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                <b>8. </b>¿Cuál fue el rango de ventas de su empresa en el último semestre?
+                                                <b>8. </b>¿Cuál fue el rango de ventas de su empresa en los últimos 12 meses?
                                             </div>
                                             <div class="mdc-form-field">
                                                 <div class="mdc-radio">
-                                                  <input class="mdc-radio__native-control" type="radio" value="Menor a L500,000.00"  name="equipo_especialistas" checked>
+                                                  <input class="mdc-radio__native-control" type="radio" value="Menor a L500,000.00"  name="rango_ventas" checked>
                                                   <div class="mdc-radio__background">
                                                     <div class="mdc-radio__outer-circle"></div>
                                                     <div class="mdc-radio__inner-circle"></div>
@@ -515,7 +516,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
-                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.500,000.00 y menor a L.1,300,000.00"   name="equipo_especialistas">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.500,000.00 y menor a L.1,300,000.00"   name="rango_ventas">
                                                   <div class="mdc-radio__background">
                                                     <div class="mdc-radio__outer-circle"></div>
                                                     <div class="mdc-radio__inner-circle"></div>
@@ -526,7 +527,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
-                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.1,300,000.00 y menor a L.2,500,000.00"   name="equipo_especialistas">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.1,300,000.00 y menor a L.2,500,000.00"   name="rango_ventas">
                                                   <div class="mdc-radio__background">
                                                     <div class="mdc-radio__outer-circle"></div>
                                                     <div class="mdc-radio__inner-circle"></div>
@@ -537,7 +538,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
-                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.1,300,000.00 y menor a L.2,500,000.00"   name="equipo_especialistas">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Mayor o igual L.1,300,000.00 y menor a L.2,500,000.00"   name="rango_ventas">
                                                   <div class="mdc-radio__background">
                                                     <div class="mdc-radio__outer-circle"></div>
                                                     <div class="mdc-radio__inner-circle"></div>
@@ -548,7 +549,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                 <div class="mdc-radio">
-                                                  <input class="mdc-radio__native-control" type="radio" value="Más de L. 360,000.000.00"   name="equipo_especialistas">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Más de L. 360,000.000.00"   name="rango_ventas">
                                                   <div class="mdc-radio__background">
                                                     <div class="mdc-radio__outer-circle"></div>
                                                     <div class="mdc-radio__inner-circle"></div>
@@ -566,8 +567,8 @@ padding-top: 10px;
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="txt_dispositivos"
-                                                        value="Vinculacion a lo servicios del Centro Ciudad Mujer "
+                                                        name="otros_beneficios"
+                                                        value="Vinculación a los servicios del Centro Ciudad Mujer"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -582,14 +583,14 @@ padding-top: 10px;
                                                 <div class="mdc-checkbox__focus-ring"></div>
                                                 </div>
                                                 <label for="checkbox-public">
-                                                    a) Vinculacion a lo servicios del Centro Ciudad Mujer 
+                                                    a) Vinculación a los servicios del Centro Ciudad Mujer 
                                                 </label>
                                             </div>
                                             <div class="mdc-form-field">
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="txt_dispositivos"
+                                                        name="otros_beneficios"
                                                         value="Vinculaciones comerciales"
                                         
                                                         />
@@ -613,8 +614,8 @@ padding-top: 10px;
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="txt_dispositivos"
-                                                        value="Vinculaciones insituciones o empresariales"
+                                                        name="otros_beneficios"
+                                                        value="Vinculaciones institucionales o empresariales"
                                         
                                                         />
                                                 <div class="mdc-checkbox__background">
@@ -630,14 +631,14 @@ padding-top: 10px;
                                                 <div class="mdc-checkbox__focus-ring"></div>
                                                 </div>
                                                 <label for="checkbox-public">
-                                                    c) Vinculaciones insituciones o empresariales 
+                                                    c) Vinculaciones institucionales o empresariales 
                                                 </label>
                                             </div>
                                             <div class="mdc-form-field">
                                                 <div class="mdc-checkbox">
                                                 <input type="checkbox"
                                                         class="mdc-checkbox__native-control"
-                                                        name="txt_dispositivos"
+                                                        name="otros_beneficios"
                                                         value="Vinculaciones financieras"
                                         
                                                         />
@@ -661,7 +662,7 @@ padding-top: 10px;
                                               <div class="mdc-checkbox">
                                               <input type="checkbox"
                                                       class="mdc-checkbox__native-control"
-                                                      name="txt_dispositivos"
+                                                      name="otros_beneficios"
                                                       value="Vinculación a ferias"
                                       
                                                       />
@@ -681,7 +682,30 @@ padding-top: 10px;
                                                   e) Vinculación a ferias
                                               </label>
                                           </div>
-                                            
+                                          <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                            <input type="checkbox"
+                                                    class="mdc-checkbox__native-control"
+                                                    name="otros_beneficios"
+                                                    value="Vinculación con empresaria del proyecto"
+                                    
+                                                    />
+                                            <div class="mdc-checkbox__background">
+                                                <svg class="mdc-checkbox__checkmark"
+                                                    viewBox="0 0 24 24">
+                                                <path class="mdc-checkbox__checkmark-path"
+                                                        fill="none"
+                                                        d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                </svg>
+                                                <div class="mdc-checkbox__mixedmark"></div>
+                                            </div>
+                                            <div class="mdc-checkbox__ripple"></div>
+                                            <div class="mdc-checkbox__focus-ring"></div>
+                                            </div>
+                                            <label for="checkbox-public">
+                                                e) Vinculación con empresaria del proyecto
+                                            </label>
+                                        </div>
                                         </div>
                                        
                                         </div>
@@ -729,7 +753,7 @@ padding-top: 10px;
                                 <div class="mdc-card__action-buttons">
                                 <center>
 
-                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_satifacion_save()">
+                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_inpacto_save()">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__focus-ring"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true"

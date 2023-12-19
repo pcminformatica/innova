@@ -203,6 +203,25 @@ ul,li{
                                     
                                     </a>
                                     {% endif %}
+                                    {% if impacto %}
+                                    <a href="{{ url_for('home._formulario_encuestas_impacto') }}" >
+                                        <li class="mdc-deprecated-list-item" tabindex="0">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">
+                                                    ENCUESTA DE IMPACTO</span>
+                                         
+                                                <span class="mdc-deprecated-list-item__secondary-text">INNOVA MUJER HONDURAS</span>
+                                           
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                        </li>
+                                    
+                                    </a>
+                                    {% endif %}
                                 {% if  carta.signed_innova %}
                                     {% if not carta.signed %}
                                     <a href="{{ url_for('digitalcenter._company_document_user',document_id=carta.id) }}" >

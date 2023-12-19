@@ -118,7 +118,7 @@ padding-top: 10px;
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresaria" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
                                                     <span class="mdc-floating-label" id="my-label-id" hiddenlabel="1.1 Nombre Completo"  >Escribe tu nombre</span>
-                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                                                    <input disabled value="{{ current_user.extra_info.names }} {{ current_user.extra_info.last_names }}" required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
                                                     <span lass="mdc-line-ripple"></span>
                                                 </label>
                                               </div>
@@ -138,7 +138,7 @@ padding-top: 10px;
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_name_empresa" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
                                                     <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Nombre de la empresa" >Escribe tu identidad</span>
-                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
+                                                    <input disabled value="{{ current_user.extra_info.company.name }}" required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" 
                                             
                                                     >
                                                     <span lass="mdc-line-ripple"></span>

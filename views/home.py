@@ -316,11 +316,14 @@ def _home():
                 #
                 company = Company.query.filter_by(id=current_user.extra_info.company_id).first()
                 satisfaccion = False
+                impacto = False
                 if company.action_plan_progress == 100:
-                    encuesta = surveys_sde.query.filter_by(company_id=company.id).first()
+                    encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=1).first()
                     if not encuesta:
                         satisfaccion = True
-
+                    encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=2).first()
+                    if not encuesta:
+                        impacto = True
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.id)).first()
                 diagnos_final = (
                 DiagnosisCompany.query
@@ -377,7 +380,8 @@ def _home():
                     "diagnosis":diagnos,
                     "plan_action":plan_action,
                     "satisfaccion":satisfaccion,
-                    'diagnos_final':diagnos_final
+                    'diagnos_final':diagnos_final,
+                    'impacto':impacto
                 }
                 return render_template('home_dashboard.html',**context)
         else:

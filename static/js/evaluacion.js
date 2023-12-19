@@ -364,3 +364,217 @@ function test_madurez_save(){
         
       })
   }
+
+
+
+  function encuestas_inpacto_save(){
+
+
+
+    let preguntas = []
+    const Swal = swcms.returnSwal()
+    swcms.mdcSelects.forEach((sel) => {
+      if (sel.assignedVar)
+          mdcAssignedVars[sel.assignedVar] = sel;
+    });
+    swcms.mdcTextInputs.forEach((txt) => {
+      if (txt.assignedVar)
+          mdcAssignedVars[txt.assignedVar] = txt;
+    });
+
+    swcms.mdcCheckbox.forEach((sel) => {
+        if (sel.assignedVar)
+            mdcAssignedVars[sel.assignedVar] = sel;
+    })
+
+    //1 Nombre Completo
+    const recibio_capacitacion =  getCheckValues('recibio_capacitacion');
+
+    if (recibio_capacitacion.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','1. ¿Recibió la capacitación inicial?','info')
+      return false
+    }else{
+      preguntas.push({"id":"EI_1", "pregunta":"1. ¿Recibió la capacitación inicial?","respuesta":recibio_capacitacion[0],"valor":0})
+    }
+
+
+    //2.¿Cuántos servicios de desarrollo empresarial ha recibido? 
+    property = 'txt_cuantos_SDE'
+    if (mdcAssignedVars[property].value === '' ){   
+        showMSJ('Por favor responda la pregunta:','2. ¿Cuántos servicios de desarrollo empresarial ha recibido? ','info')
+        return false
+    }else{
+        preguntas.push({"id":"EI_2","pregunta":"2. ¿Cuántos servicios de desarrollo empresarial ha recibido?","respuesta":mdcAssignedVars[property].value,"valor":0})
+    }
+
+    //1 Nombre Completo
+    const mejorado_habilidades =  getCheckValues('mejorado_habilidades');
+
+    if (mejorado_habilidades.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','3. Considera que ha mejorado sus habilidades gerenciales ','info')
+      return false
+    }else{
+      preguntas.push({"id":"EI_3", "pregunta":"3. Considera que ha mejorado sus habilidades gerenciales ","respuesta":mejorado_habilidades[0],"valor":0})
+    }
+    //1 Nombre Completo
+    const mejorado_habilidades_tec =  getCheckValues('mejorado_habilidades_tec');
+
+    if (mejorado_habilidades_tec.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','4. ¿Ha mejorado sus habilidades tecnológicas con el uso de la plataforma?','info')
+      return false
+    }else{
+      preguntas.push({"id":"EI_4", "pregunta":"4. ¿Ha mejorado sus habilidades tecnológicas con el uso de la plataforma?","respuesta":mejorado_habilidades_tec[0],"valor":0})
+    }
+    //1 Nombre Completo
+    const habilidades_digitales =  getCheckValues('habilidades_digitales');
+
+    if (habilidades_digitales.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','5. ¿Durante el proceso de participacion en el proyecto INNOVA cómo calificaría su nivel de habilidades digitales?','info')
+      return false
+    }else{
+      preguntas.push({"id":"EI_5", "pregunta":"5. ¿Durante el proceso de participacion en el proyecto INNOVA cómo calificaría su nivel de habilidades digitales?  ","respuesta":habilidades_digitales[0],"valor":0})
+    }
+
+
+    //Pregunta 6
+    property = 'txt_u_total_mujer'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',"6. Datos de los empleos durante los Servicios de Desarrollo Empresarial",'info')
+      return false
+    } 
+    const u_total_mujer = mdcAssignedVars[property].value  
+
+    property = 'txt_u_total_hombre'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',"6. Datos de los empleos durante los Servicios de Desarrollo Empresarial",'info')
+      return false
+    }
+    const u_total_hombre = mdcAssignedVars[property].value
+
+    property = 'txt_u_temp_mujer'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',"6. Datos de los empleos durante los Servicios de Desarrollo Empresarial",'info')
+      return false
+    }
+    const u_remunerados_mujer = mdcAssignedVars[property].value
+    
+
+    property = 'txt_u_temp_hombre'
+    if (mdcAssignedVars[property].value === '' ){   
+      showMSJ('Por favor responda la pregunta:',"6. Datos de los empleos durante los Servicios de Desarrollo Empresarial",'info')
+      return false
+    }
+    const u_remunerados_hombre = mdcAssignedVars[property].value
+    
+
+
+    const total_empleados = parseInt(u_total_mujer) + parseInt(u_total_hombre) 
+    const temporales_empleados =  parseInt(u_remunerados_mujer) + parseInt(u_remunerados_hombre)
+
+    console.log(total_empleados)
+    if (total_empleados == 0 ){   
+      showMSJ('Por favor responda la pregunta:','6. Datos de los empleos durante los Servicios de Desarrollo Empresarial','info')
+      return false
+    }else{
+      const empleado_ultimo = {
+        "Total Mujeres":u_total_mujer,
+        "Total Hombres":u_total_hombre,total_empleados,
+        "Total Empleados Permanentes":total_empleados,
+        "Temporales Mujeres":u_remunerados_mujer,
+        "Temporales Hombres":u_remunerados_hombre,
+        "Total Empleados Temporales":temporales_empleados,
+      }
+      preguntas.push({"id":"EI_6","pregunta":"6. Datos de los empleos durante los Servicios de Desarrollo Empresarial","respuesta":empleado_ultimo})
+    }
+   
+
+    //1 Nombre Completo
+    const vinculaciones_financieros =  getCheckValues('vinculaciones_financieros');
+
+    if (vinculaciones_financieros.length == 0 ){   
+      showMSJ('Por favor responda la pregunta:','7. ¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros?','info')
+      return false
+    }else{
+      preguntas.push({"id":"EI_7", "pregunta":"7. ¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros?","respuesta":vinculaciones_financieros[0],"valor":0})
+    }
+
+      //1 Nombre Completo
+      const cuales =  getCheckValues('txt_cuales');
+
+      if (vinculaciones_financieros.length == 0 ){   
+        showMSJ('Por favor responda la pregunta:','7. ¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros?','info')
+        return false
+      }else{
+        preguntas.push({"id":"EI_7_1", "pregunta":"7. ¿Desde el proyecto INNOVA obtuvo vinculaciones a productos financieros? cuales","respuesta":cuales,"valor":0})
+      }
+
+      //1 Nombre Completo
+      const rango_ventas =  getCheckValues('rango_ventas');
+
+      if (rango_ventas.length == 0 ){   
+        showMSJ('Por favor responda la pregunta:','8. ¿Cuál fue el rango de ventas de su empresa en los últimos 12 meses?','info')
+        return false
+      }else{
+        preguntas.push({"id":"EI_8", "pregunta":"8. ¿Cuál fue el rango de ventas de su empresa en los últimos 12 meses?","respuesta":rango_ventas[0],"valor":0})
+      }
+
+      //1 Nombre Completo
+      const otros_beneficios =  getCheckValues('otros_beneficios');
+      preguntas.push({"id":"EI_9", "pregunta":"9. Que otros beneficios ha obtenido del proyecto INNOVA","respuesta":otros_beneficios,"valor":0})
+
+
+
+
+   
+   
+      let postData = {
+        'txt_preguntas': preguntas,
+        'txt_company':document.getElementById('txt_company').value
+        
+      };
+  
+
+      console.log(preguntas)
+      
+      console.log(postData)
+  
+      let apiUrl = '/api/save/surveys/impacto';
+      document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Gracias',
+          'Encuesta enviada a INNOVA MUJER!',
+          'success'
+        )
+        
+        window.location.href = '/home/'
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor intento de nuevo o revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        document.getElementById('submitSaveButton').disabled = false;
+        
+      })
+  }
+
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }  
+
+
+  function isCuales(state){
+    document.getElementById("block-cuales").style.display = state; 
+        // Seleccionar todos los checkboxes con el mismo nombre
+        var checkboxes = document.querySelectorAll('input[name="txt_dispositivos"]');
+
+        // Iterar sobre los checkboxes y desmarcarlos
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+  }  
