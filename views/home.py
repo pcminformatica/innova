@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 
 from flask_login import logout_user, current_user, login_required
-from models.models import surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import CompanyStage,surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -846,3 +846,19 @@ def generar_contraseña_temporal(tamaño=8):
     return contraseña
 
 # Ejemplo de uso
+@home.route('/scrip/comparativo',methods=['GET', 'POST'])
+def _scrip_monitoring_list():
+    app.logger.debug('** SWING_CMS ** - ------------------')
+    companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True).all()
+    for company in companys:
+        if company.action_plan_progress == 100.0:
+            company = Company.query.filter_by(id=company.id).first()
+            stage = CompanyStage.query.filter_by(name_short='E3').first()
+            company.stage_id = stage.id
+            db.session.add(company)
+            db.session.commit()
+            print("etapa 3")
+            print("etapa 3")
+            print("etapa 3")
+            print("etapa ,........")
+    return jsonify({ 'status': 200, 'msg': 'Cita creada' })

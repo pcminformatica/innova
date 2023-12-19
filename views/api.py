@@ -919,6 +919,9 @@ def _d_save_ActionPlan():
                     # Calcular el promedio de avance total y redondearlo a dos decimales máximo
                     average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
                     company.action_plan_progress = average_progress
+                    if average_progress == 100.0:
+                        stage = CompanyStage.query.filter_by(name_short='E3').first()
+                        company.stage_id = stage.id
                     db.session.add(company)
                     db.session.commit()
             actualizar = _update_wallet(company.id)
@@ -1046,6 +1049,9 @@ def _d_save_ActionPlanHistory():
             # Calcular el promedio de avance total y redondearlo a dos decimales máximo
             average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
             company.action_plan_progress = average_progress
+            if average_progress == 100.0:
+                stage = CompanyStage.query.filter_by(name_short='E3').first()
+                company.stage_id = stage.id
             db.session.add(company)
             db.session.commit()
 
@@ -1161,6 +1167,10 @@ def _d_save_ActionPlanHistory_update():
             # Calcular el promedio de avance total y redondearlo a dos decimales máximo
             average_progress = round(total_progress / num_action_plans, 2) if num_action_plans > 0 else 0
             company.action_plan_progress = average_progress
+            if average_progress == 100.0:
+                stage = CompanyStage.query.filter_by(name_short='E3').first()
+                company.stage_id = stage.id
+
             db.session.add(company)
             db.session.commit()
             if txt_finalizo == True and porcentaje == 100:
