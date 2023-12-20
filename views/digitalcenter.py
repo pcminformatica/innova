@@ -1340,7 +1340,7 @@ def _company_monitoring_list():
 
 
         # Consultar empresas que cumplan con las condiciones
-        if current_user.id == 144:
+        if current_user.id == 1445555:
             company = Company.query.join(User, User.id==Company.created_by)\
                 .filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_([6])),Company.stage.has(CompanyStage.name_short.in_(['E2'])),)\
                 .order_by(asc(Company.date_created))\
