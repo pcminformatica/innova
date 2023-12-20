@@ -2203,7 +2203,7 @@ def _d_company_dash_search():
     app.logger.debug('** SWING_CMS ** - API Appointment Detail')
     try:
         lista = []
-        companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True).all()
+
         if current_user.id == 3 or current_user.id == 24:
             companies = Company.query.join(User, User.id==Company.created_by)\
                 .filter(Company.enabled==True).all()

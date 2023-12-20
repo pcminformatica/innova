@@ -107,7 +107,10 @@ padding-top: 10px;
 
                                         <br>
                                         <div class="mdc-layout-grid__inner">
+                                          {% if current_user.extra_info %}
                                           <input id="txt_company"  type="hidden" value="{{ current_user.extra_info.company.id }}">
+                                          {% else %}
+                                          {% endif %}
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b> 1. </b>¿Recibió la capacitación inicial?

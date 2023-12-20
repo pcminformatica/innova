@@ -2365,3 +2365,47 @@ def companies_with_non_zero_phase():
 
     # Convierte la lista de diccionarios en formato JSON y la devuelve como respuesta
     return jsonify(data)
+
+
+from datetime import datetime, timedelta
+from sqlalchemy.orm import aliased
+
+@digitalcenter.route('/empresas/en/pausa/',methods=['GET', 'POST'])
+def _company_pausa_list():
+    # Obtener la fecha actual y la fecha hace 60 días
+    fecha_actual = datetime.now()
+    fecha_limite = fecha_actual - timedelta(days=60)
+    lista  = []
+    listado = []
+    allowed_status_short_names = [6]
+    allowed_stage_short_names = ['E3']
+    if current_user.id == 3 or current_user.id == 24:
+        companies = Company.query.join(User, User.id==Company.created_by)\
+            .filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),Company.stage.has(CompanyStage.name_short.in_(allowed_stage_short_names))).all()
+    else:
+        companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)), or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
+        companies = Company.query.join(User, User.id==Company.created_by)\
+            .filter(Company.stage.has(CompanyStage.name_short.in_(allowed_stage_short_names)),Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),).all()
+    for company in companies:
+        action_plan_history_records = (
+        db.session.query(ActionPlanHistory)
+        .join(ActionPlan, ActionPlanHistory.action_plan_id == ActionPlan.id)
+        
+        .filter(ActionPlan.company_id == company.id)
+        
+        .order_by(desc(ActionPlanHistory.date_created)).first()
+        )
+
+        if action_plan_history_records:
+            fecha_ultima = action_plan_history_records.date_created
+            if fecha_limite < fecha_ultima:
+                listado.append(company.id)
+    company = Company.query.filter(Company.id.in_(listado)).order_by(Company.id).all()
+    categories = db.session.query(catalogCategory).all()
+    context = {
+        'apis': company,
+        'company_references':company,
+        'data':[],
+        'categories':categories,
+    }
+    return render_template('company_pausa_list.html',**context)
