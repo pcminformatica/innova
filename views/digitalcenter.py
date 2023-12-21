@@ -2383,9 +2383,7 @@ def _company_pausa_list():
         companies = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),Company.stage.has(CompanyStage.name_short.in_(allowed_stage_short_names))).all()
     else:
-        companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)), or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
-        companies = Company.query.join(User, User.id==Company.created_by)\
-            .filter(Company.stage.has(CompanyStage.name_short.in_(allowed_stage_short_names)),Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),).all()
+        companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
     for company in companies:
         action_plan_history_records = (
         db.session.query(ActionPlanHistory)
