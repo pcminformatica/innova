@@ -951,3 +951,114 @@ def _monitoring_dashboard():
     
     context = {"departamentos_honduras":departamentos_honduras,'services':services,'categorys':categorys,'status':status}
     return render_template('monitoreo/monitoring_dashboard.html',**context)
+
+
+
+import json
+from zoomus import ZoomClient
+
+from flask import session
+import requests
+import json
+from base64 import b64encode
+# Configuración de Zoom
+CLIENT_ID = '7FR6ZEkcQ2OOHRmEgRh_pg'
+CLIENT_SECRET = 'ZeyyZ4MyPGbg1HmUgcKKBD73YsXTnsJ5'
+REDIRECT_URI = 'http://localhost:8000/callback'  # Actualiza con tu URL de redirección autorizada en Zoom
+AUTH_URL = 'https://zoom.us/oauth/authorize'
+TOKEN_URL = 'https://zoom.us/oauth/token'
+
+
+@monitoreo.route('/monitoring/dashboard11',methods=['GET', 'POST'])
+def _monitoring1_dashboard():
+    print('*********************')
+    client = ZoomClient('kHEENm_MQJ23JPZYVHcCaw', 'ZeyyZ4MyPGbg1HmUgcKKBD73YsXTnsJ5', 'kHEENm_MQJ23JPZYVHcCaw')
+    user_list_response = client.meeting.list
+    print(user_list_response)
+    user_list = json.loads(user_list_response.content)
+    print(user_list)
+    print('*********************')
+    return render_template('doc.html')
+
+
+@app.route('/login')
+def login():
+    return redirect(f'{AUTH_URL}?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}')
+
+@app.route('/callback')
+def callback():
+    code = request.args.get('code')
+    token_data = {
+        'grant_type': 'authorization_code',
+        'code': code,
+        'redirect_uri': REDIRECT_URI
+    }
+    headers = {
+        'Authorization': f'Basic {b64encode(f"{CLIENT_ID}:{CLIENT_SECRET}".encode()).decode()}'
+    }
+
+    response = requests.post(TOKEN_URL, data=token_data, headers=headers)
+    access_token = json.loads(response.text).get('access_token')
+
+    # Almacena el token en la sesión (o en una base de datos segura)
+    session['access_token'] = access_token
+
+    return 'Autenticado con éxito con Zoom. Ahora puedes crear y ver reuniones.'
+
+@app.route('/create_meeting')
+def create_meeting():
+    # Asegúrate de que el usuario esté autenticado
+    if 'access_token' not in session:
+        return redirect(url_for('login'))
+
+    # Crea una reunión utilizando la API de Zoom con el token de acceso
+    headers = {'Authorization': f'Bearer {session["access_token"]}'}
+    create_meeting_url = 'https://api.zoom.us/v2/users/me/meetings'
+    data = {'topic': 'Reunión de prueba', 'type': 2}  # Puedes personalizar según tus necesidades
+
+    response = requests.post(create_meeting_url, json=data, headers=headers)
+    meeting_info = json.loads(response.text)
+
+    return f'Reunión creada. ID de reunión: {meeting_info["id"]}'
+import requests
+import json
+
+@monitoreo.route('/monitoring/dashboard22',methods=['GET', 'POST'])
+def _1monitoring1_dashboard():
+    client_id = "7FR6ZEkcQ2OOHRmEgRh_pg"
+    client_secret = "ZeyyZ4MyPGbg1HmUgcKKBD73YsXTnsJ5"
+
+    meeting_id = "MEETING_ID"
+
+    data = {
+        "grant_type": "account_credentials",
+        "client_id": client_id,
+        "client_secret": client_secret
+    }
+    response = requests.post("https://zoom.us/oauth/token", data=data)
+    print('**************')
+    print(response.json())
+    print(response.json())
+    print('**************')
+    access_token = response.json()["access_token"]
+
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    return render_template('doc.html')
+
+@app.route('/meetings')
+def get_meetings():
+    # Asegúrate de que el usuario esté autenticado
+    if 'access_token' not in session:
+        return redirect(url_for('login'))
+
+    # Obtiene todas las reuniones utilizando la API de Zoom con el token de acceso
+    headers = {'Authorization': f'Bearer {session["access_token"]}'}
+    get_meetings_url = 'https://api.zoom.us/v2/users/me/meetings'
+
+    response = requests.get(get_meetings_url, headers=headers)
+    meetings = json.loads(response.text).get('meetings', [])
+
+    # Renderiza una plantilla HTML con la información de las reuniones
+    return render_template('meetings.html', meetings=meetings)
