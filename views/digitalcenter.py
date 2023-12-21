@@ -2378,7 +2378,7 @@ def _company_pausa_list():
     lista  = []
     listado = []
     allowed_status_short_names = [6]
-    allowed_stage_short_names = ['E3']
+    allowed_stage_short_names = ['E2']
     if current_user.id == 3 or current_user.id == 24:
         companies = Company.query.join(User, User.id==Company.created_by)\
             .filter(Company.enabled==True,Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),Company.stage.has(CompanyStage.name_short.in_(allowed_stage_short_names))).all()
@@ -2398,7 +2398,7 @@ def _company_pausa_list():
 
         if action_plan_history_records:
             fecha_ultima = action_plan_history_records.date_created
-            if fecha_limite < fecha_ultima:
+            if fecha_limite > fecha_ultima:
                 listado.append(company.id)
     company = Company.query.filter(Company.id.in_(listado)).order_by(Company.id).all()
     categories = db.session.query(catalogCategory).all()

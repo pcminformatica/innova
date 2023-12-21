@@ -127,6 +127,11 @@ margin: 0 0 47px 0;
     .owl-nav .owl-next:hover {
         background-color: gray;
     }
+    .bg-1{
+       
+        background-image:   url("../static/images/bac1.png"); 
+        background-size: cover;
+    }
 </style>
 </head>
 
@@ -143,17 +148,19 @@ margin: 0 0 47px 0;
 </div>
 
 
+<section class="bg-1">
+    <br> <br> 
 
-<div class="container-color-on-primary">
+<div >
     <div class="mdc-layout-grid container-size-s">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
-                        <div class="" style="font-size: 1.4em;">
-                            Socios principales:
+                        <div  style="font-size: 2em;">
                             <br>
+                            ETAPAS DEL PROYECTO
                             <br>
-                            <br>
+               
                         </div>
  
           
@@ -163,7 +170,7 @@ margin: 0 0 47px 0;
         
         </div>
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell box box1">
+            <div class="mdc-layout-grid__cell box box1 ">
                 <h1 class="lbl_font">1</h1>
                 <p class="lbl_font-2">CAPACITACIÓN INICIAL</p>
                 <p class="lbl_font-2">Para 3,500 mujeres por
@@ -192,12 +199,16 @@ margin: 0 0 47px 0;
         </div>
     </div>
 </div>
+
 <div class="container-color-on-primary">
     <div class="mdc-layout-grid container-size-s">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
-                        <div class="" style="font-size: 1.4em;">
+                        <div class=""  style="font-size: 2em;">
+                            <br>
+                            <br>
+                            <br>
                             Socios principales:
                             <br>
                             <br>
@@ -216,12 +227,13 @@ margin: 0 0 47px 0;
       
     </div>
 </div>
+</section>
 <main class="s-main-content">
 
      
     
 
-    
+    <!--
   
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-m">
@@ -272,7 +284,7 @@ margin: 0 0 47px 0;
             </div>
         </div>
     </div>
-
+-->
 
     <div class="container-color-indicador">
 
@@ -285,23 +297,11 @@ margin: 0 0 47px 0;
                             </h4>
 
                         </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
-                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
-                <div class="indicador-panel">
-                    <h4 id="counter" class="indicadores-innova">
-                        3,012
-                    </h4>
 
-                    <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
-                        data-action-val="#onduras.pdf">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Inscritas</span>
-                    </button>
-                </div>
-            </div>
-             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
                 <div class="indicador-panel">
+                    <img class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/elegibles.png') }}">
                     <h4 class="indicadores-innova">
                         964
                     </h4>
@@ -313,9 +313,10 @@ margin: 0 0 47px 0;
                     </button>
                 </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
                 <div class="indicador-panel">
+                    <img  class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/capacitadas.png') }}">
                     <h4 class="indicadores-innova">
                         291
                     </h4>
@@ -328,9 +329,10 @@ margin: 0 0 47px 0;
                 </div>
             </div>
 
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet
             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle mdc-layout-grid--align">
             <div class="indicador-panel">
+                <img  class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/sde.png') }}">
                 <h4 class="indicadores-innova">
                     141
                 </h4>
@@ -338,7 +340,7 @@ margin: 0 0 47px 0;
                 <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
                         data-action-val="#onduras.pdf">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">RECIBIENDO SDE</span>
+                        <span class="mdc-button__label">RECIBIENDO SDE s</span>
                 </button>
                 </div>
             </div>  
