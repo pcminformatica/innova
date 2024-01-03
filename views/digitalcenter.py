@@ -2407,3 +2407,46 @@ def _company_pausa_list():
         'categories':categories,
     }
     return render_template('company_pausa_list.html',**context)
+
+@digitalcenter.route('/empresas/rango/',methods=['GET', 'POST'])
+def _company_rango_list():
+    # Obtener la fecha actual y la fecha hace 60 días
+
+    # POST: Save Appointment
+    if request.method == 'POST':
+        fecha_actual_str = request.form['txt_startDate']
+        fecha_limite_str = request.form['txt_endDate']
+        # Convertir las cadenas a objetos datetime
+        fecha_a = datetime.strptime(fecha_actual_str, '%Y-%m-%d')
+        fecha_b = datetime.strptime(fecha_limite_str, '%Y-%m-%d')
+
+    else:
+        fecha_a = datetime.now()
+        fecha_b = fecha_a - timedelta(days=60)
+
+
+    # Consulta para obtener las compañías con historial de planes de acción entre las fechas A y B
+    company = (
+        db.session.query(Company)
+        .join(ActionPlan)
+        .join(ActionPlanHistory)
+        .filter(
+            ActionPlanHistory.date_created.between(fecha_a, fecha_b)
+        )
+        .all()
+    )
+    categories = db.session.query(catalogCategory).all()
+    context = {
+        'apis': company,
+        'company_references':company,
+        'data':[],
+        'categories':categories,
+        'fecha_a':fecha_a,
+        'fecha_b':fecha_b,
+    }
+    return render_template('monitoreo/company_rango_list.html',**context)
+
+# Define el filtro personalizado para formatear fechas
+@app.template_filter('datetimeformat')
+def datetimeformat(value, format='%Y-%m-%d'):
+    return value.strftime(format) if value else ''
