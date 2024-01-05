@@ -918,6 +918,10 @@ class CompanyMonitoring(db.Model):
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     id_service_channel =db.Column(db.Integer, db.ForeignKey('service_channel.id'),nullable=True)
     service_channel = db.relationship("ServiceChannel")
+    document_local = db.Column(db.String(250), unique=False, nullable=True)
+    date = db.Column(db.Date, nullable=True)
+    hour = db.Column(db.Time, nullable=True)
+
 
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):

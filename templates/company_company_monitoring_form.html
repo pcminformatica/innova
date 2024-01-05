@@ -73,94 +73,139 @@
                                     Formulario de edición de etapa
                                 </h2>
     
-                                    <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
-                                    <input type="hidden" id="txt_company_id" name="txt_company_id"  value="{{company.id}}">
-                    
-                                    <input type="hidden"  name="txt_document_version" value="1">
-                                    <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
-                                           
-
-                                      <div class="mdc-typography--body1">
-                                        Medio de atención por el cual contacto a la empresaria :
-                                      </div>
-                                      <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_channel" data-assigned-var>
-                                          <div class="mdc-select__anchor"
-                                               role="button"
-                                               aria-haspopup="listbox"
-                                               aria-expanded="false"
-                                               aria-labelledby="demo-label demo-selected-text">
-                                            <span class="mdc-select__ripple"></span>
-                                            <span id="demo-label" class="mdc-floating-label">Medio de atención </span>
-                                            <span class="mdc-select__selected-text-container">
-                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                            </span>
-                                            <span class="mdc-select__dropdown-icon">
-                                              <svg
-                                                  class="mdc-select__dropdown-icon-graphic"
-                                                  viewBox="7 10 10 5" focusable="false">
-                                                <polygon
-                                                    class="mdc-select__dropdown-icon-inactive"
-                                                    stroke="none"
-                                                    fill-rule="evenodd"
-                                                    points="7 10 12 15 17 10">
-                                                </polygon>
-                                                <polygon
-                                                    class="mdc-select__dropdown-icon-active"
-                                                    stroke="none"
-                                                    fill-rule="evenodd"
-                                                    points="7 15 12 10 17 15">
-                                                </polygon>
-                                              </svg>
-                                            </span>
-                                            <span class="mdc-line-ripple"></span>
-                                          </div>
+                                    <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data" onsubmit="return validarFormulario()">
+                                        <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <span class="mdc-text-field__ripple"></span>
+                                            <span class="mdc-floating-label" id="my-label-id">Fecha</span>
+                                            <input required class="mdc-text-field__input" type="date"  name="txt_date" aria-labelledby="my-label-id" 
                                         
-                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                    {% for channel in channel %}
-                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ channel.name_short }}" role="option">
-                                                          <span class="mdc-deprecated-list-item__ripple"></span>
-                                                          <span class="mdc-deprecated-list-item__text">
-                                                          {{ channel.name }}
-                                                          </span>
-                                                      </li>
-                                                    {% endfor %}
-                                       
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <br> <br>
+                                            >
+                                            <span lass="mdc-line-ripple"></span>
+                                        </label>
+                                        <br><br>
+                                        <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <span class="mdc-text-field__ripple"></span>
+                                            <span class="mdc-floating-label" id="my-label-id">Hora</span>
+                                            <input required class="mdc-text-field__input" type="time" name="txt_hours"  aria-labelledby="my-label-id" 
+                                        
+                                            >
+                                            <span lass="mdc-line-ripple"></span>
+                                        </label>
+                                        <br>
+                                        <br>
+                                        <input type="hidden" name="selected_channel" id="selected_channel" value="">
+                                        <input type="hidden" id="txt_company_id" name="txt_company_id"  value="{{company.id}}">
+                    
+                                        <input type="hidden"  name="txt_document_version" value="1">
+                                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                            
+                                            <label htmlFor="upload-photo" style="margin: auto">
+                                                <input
+                                                    style="display:none"
+                                                    id="upload-photo"
+                                                    name="upload-carta"
+                                                    type="file"
+                                                   
+                                                />
+                                                
+                                                <Fab
+                                                <button id="submitSaveButtonPIC" style="background-color: gray;"  class="mdc-button  mdc-button--raised mdc-button--leading">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                        >add</i
+                                                    >
+                                                    <span class="mdc-button__label">Seleccione documento</span>
+                                                    </button>
+                                                </Fab>
+                                                <br />
+                                                <br />
+                                                
+                                                <Fab color="primary" size="small" component="span" aria-label="add">
+                                                    <AddIcon />
+                                                </Fab>
+                                                </label>
+                                            <br>
                                         <div class="mdc-typography--body1">
-                                            Descripción actividad:
-                                          </div>
-                                        <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
-                                            <span class="mdc-notched-outline">
-                                              <span class="mdc-notched-outline__leading"></span>
-                                              <span class="mdc-notched-outline__notch">
-                                                <span class="mdc-floating-label" id="my-label-id">Descripción de la actividad</span>
-                                              </span>
-                                              <span class="mdc-notched-outline__trailing"></span>
-                                            </span>
-                                            <span class="mdc-text-field__resizer">
-                                              <textarea id="txt_description" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="500"></textarea>
-                                              <span class="mdc-text-field-character-counter">0 / 500</span>
-                                            </span>
-                                          </label>
-                                    </div>
+                                            Medio de atención por el cual contacto a la empresaria :
+                                        </div>
+                                        <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_channel" data-assigned-var>
+                                            <div class="mdc-select__anchor"
+                                                role="button"
+                                                aria-haspopup="listbox"
+                                                aria-expanded="false"
+                                                aria-labelledby="demo-label demo-selected-text">
+                                                <span class="mdc-select__ripple"></span>
+                                                <span id="demo-label" class="mdc-floating-label">Medio de atención </span>
+                                                <span class="mdc-select__selected-text-container">
+                                                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                </span>
+                                                <span class="mdc-select__dropdown-icon">
+                                                <svg
+                                                    class="mdc-select__dropdown-icon-graphic"
+                                                    viewBox="7 10 10 5" focusable="false">
+                                                    <polygon
+                                                        class="mdc-select__dropdown-icon-inactive"
+                                                        stroke="none"
+                                                        fill-rule="evenodd"
+                                                        points="7 10 12 15 17 10">
+                                                    </polygon>
+                                                    <polygon
+                                                        class="mdc-select__dropdown-icon-active"
+                                                        stroke="none"
+                                                        fill-rule="evenodd"
+                                                        points="7 15 12 10 17 15">
+                                                    </polygon>
+                                                </svg>
+                                                </span>
+                                                <span class="mdc-line-ripple"></span>
+                                            </div>
+                                            
+                                            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                        {% for channel in channel %}
+                                                        <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ channel.name_short }}" role="option">
+                                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                                            <span class="mdc-deprecated-list-item__text">
+                                                            {{ channel.name }}
+                                                            </span>
+                                                        </li>        
+                                                        {% endfor %}
+                                        
+                                                </ul>
+                                            </div>
+                                            </div>
+                                            <br> <br>
+                                            <div class="mdc-typography--body1">
+                                                Descripción actividad:
+                                            </div>
+                                            <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
+                                                <span class="mdc-notched-outline">
+                                                <span class="mdc-notched-outline__leading"></span>
+                                                <span class="mdc-notched-outline__notch">
+                                                    <span class="mdc-floating-label" id="my-label-id">Descripción de la actividad</span>
+                                                </span>
+                                                <span class="mdc-notched-outline__trailing"></span>
+                                                </span>
+                                                <span class="mdc-text-field__resizer">
+                                                <textarea id="txt_description" name="txt_description" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="500"></textarea>
+                                                <span class="mdc-text-field-character-counter">0 / 500</span>
+                                                </span>
+                                            </label>
+                                        </div>
                               
-                                    <br><br><br>
+                                        <br><br><br>
                                     
                                     
             
 
-                                    <div class="s-font-align-center">
-                                        <button onclick="actualizarMonitoreo()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
-                                            
-                                            <span class="mdc-button__ripple"></span>
-                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                            <span class="mdc-button__label">Guardar seguimiento</span>
-                                        </button>
-                                    </div>
+                                        <div class="s-font-align-center">
+                                            <button type="submit" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                
+                                                <span class="mdc-button__ripple"></span>
+                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                <span class="mdc-button__label">Guardar seguimiento</span>
+                                            </button>
+                                        </div>
                                     </form>    
                                     
   
@@ -211,6 +256,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha </th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Medio de atención</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Documento</th>
                             
                                       </tr>
                                       </thead>
@@ -223,7 +269,7 @@
                                       </th>
       
                                         <td class="mdc-data-table__cell" style="width: 80px;">
-                                            {{ record.date_created }}
+                                            {{ record.date }} - {{ record.hour }}
                                             
                                         </td>
                                         <th class="mdc-data-table__cell" scope="row">
@@ -235,7 +281,10 @@
                                
                                         </th>
 
-                                        
+                                        <th class="mdc-data-table__cell" scope="row">
+                                           
+                                          <a target="_blank" href="{{ url_for('static', filename='upload/') }}{{record.document_local}}">Ver</a>
+                                        </th>
                                       </tr>
                                       {% endfor %}
                                       </tbody>
@@ -245,6 +294,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha </th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Medio de atención</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Documento</th>
                                         </tr>
                                     </tfoot>
                                       </table>
@@ -324,5 +374,20 @@ swcms.postFetch(apiUrl, postData).then((data) => {
 });
 
 }
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById('txt_channel');
+    var hiddenInput = document.getElementById('selected_channel');
+
+    // Agrega un evento de cambio al elemento select
+    selectElement.addEventListener('change', function () {
+      // Obtiene el valor seleccionado y lo asigna al input oculto
+      var selectedValue = selectElement.querySelector('.mdc-select__selected-text').textContent;
+      hiddenInput.value = selectedValue;
+    });
+  });
+
 </script>
 {% endblock %}

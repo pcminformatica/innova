@@ -427,3 +427,23 @@ function actualizarMonitoreo(){
   
   
 }
+
+function validarFormulario(){
+ 
+  const Swal = swcms.returnSwal()
+  const company_id = document.getElementById('txt_company_id').value ;
+  const txt_description = document.getElementById('txt_description').value ;
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  let postData = {
+    'txt_channel': mdcAssignedVars['txt_channel'].value.trim() || null,
+    'txt_company': company_id,
+    'txt_description':txt_description,
+  };
+  document.getElementById('selected_channel').value  = mdcAssignedVars['txt_channel'].value.trim();
+
+ 
+  
+}

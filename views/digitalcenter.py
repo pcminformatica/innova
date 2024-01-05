@@ -2424,7 +2424,35 @@ def _company_company_monitoring_form(company_id):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'upload-carta' not in request.files:
-            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id))
+            return redirect(url_for('digitalcenter._company_company_monitoring_form',company_id=company.id))
+        file = request.files['upload-carta']
+        txt_date = request.form.get('txt_date') 
+        txt_hours= request.form.get('txt_hours')
+        selected_channel = request.form.get('selected_channel')
+        txt_company_id = request.form.get('txt_company_id')
+        txt_description =  request.form.get('txt_description')
+        service_channel = ServiceChannel.query.filter_by(name_short=selected_channel).first()
+ 
+        history = CompanyMonitoring()
+        history.company_id = company.id
+        history.created_by = current_user.id 
+        history.id_service_channel = service_channel.id
+        history.description = txt_description
+        n = 1
+
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            documentoName = str(company.dni) + ' ' +  str(txt_date) + '-' + str(n)
+            filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        history.document_local = filename
+        history.date = txt_date
+        history.hour = txt_hours
+        db.session.add(history)
+        db.session.commit()
+
     channel = ServiceChannel.query.all()
     records = CompanyMonitoring.query.filter_by(company_id=company.id).all()
     context = {
