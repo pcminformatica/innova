@@ -903,7 +903,22 @@ class ActionPlanHistory(db.Model):
     advisory_time = db.Column(db.Time, nullable=True)
     id_modality_type =db.Column(db.Integer, db.ForeignKey('modality_type.id'),nullable=True)
     modality_type = db.relationship("ModalityType")
-    
+
+
+# Services Supplement Class
+class CompanyMonitoring(db.Model):
+    __tablename__ = 'company_monitoring'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    description = db.Column(db.Text, nullable=True)
+    url = db.Column(db.Text, nullable=True)
+    cancelled = db.Column(db.Boolean, nullable=True, default=False)
+    date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    id_service_channel =db.Column(db.Integer, db.ForeignKey('service_channel.id'),nullable=True)
+    service_channel = db.relationship("ServiceChannel")
+
 # User's Employees Assigned Class
 class UserXEmployeeAssigned(db.Model):
     __tablename__ = 'user_x_employees_assigned'
@@ -966,6 +981,18 @@ class ModalityType(db.Model):
             name = self.name,
         )
 
+class ServiceChannel(db.Model):
+    __tablename__ = 'service_channel'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150), unique=True, nullable=False)
+    name_short = db.Column(db.String(10), unique=True, nullable=True)
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+        )
+    
 # Catalog - ID Document Type Class
 class CourseManagers(db.Model):
     __tablename__ = 'course_managers'

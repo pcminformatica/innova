@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import AttentionLog,WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import CompanyStage,EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import CompanyMonitoring,ServiceChannel,CompanyStage,EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
@@ -2412,6 +2412,23 @@ def _company_change_form(company_id):
 
     }
     return render_template('company_change_form.html',**context)
+
+@digitalcenter.route('/formulario/company/monitoring/<int:company_id>/form/',methods = ['GET', 'POST'])
+def _company_company_monitoring_form(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id))
+    channel = ServiceChannel.query.all()
+    records = CompanyMonitoring.query.filter_by(company_id=company.id).all()
+    context = {
+        "company": company,
+        "channel":channel,
+        "records":records
+
+    }
+    return render_template('company_company_monitoring_form.html',**context)
 
 @digitalcenter.route('/formulario/edit/<int:company_id>/form/',methods = ['GET', 'POST'])
 def _company_edit__form(company_id):

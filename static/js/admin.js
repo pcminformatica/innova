@@ -391,3 +391,39 @@ function actualizarEtapa(){
   
   
 }
+
+function actualizarMonitoreo(){
+  const Swal = swcms.returnSwal()
+  const company_id = document.getElementById('txt_company_id').value ;
+  const txt_description = document.getElementById('txt_description').value ;
+  swcms.mdcSelects.forEach((sel) => {
+    if (sel.assignedVar)
+        mdcAssignedVars[sel.assignedVar] = sel;
+  });
+  let postData = {
+    'txt_channel': mdcAssignedVars['txt_channel'].value.trim() || null,
+    'txt_company': company_id,
+    'txt_description':txt_description,
+  };
+  let aUrl = '/company/view/'+company_id+'/';
+  let apiUrl = '/api/save/channel/'
+  
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+    'Éxito',
+    'Historial Guardado',
+    'success'
+    )
+    window.setTimeout(() => { window.location.replace(aUrl);}, 1500);
+  
+  }).catch((error) => {
+    Swal.fire(
+    'Error de conexión',
+    'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+    'error'
+    )
+    document.getElementById('btn_generar_carta').disabled = false;
+  });
+  
+  
+}

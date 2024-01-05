@@ -6,7 +6,7 @@ from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
 from models.models import ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
-from models.models import surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
+from models.models import CompanyMonitoring,ServiceChannel,surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
 from sqlalchemy import or_,desc,asc
@@ -2141,7 +2141,33 @@ def _d_save_stage_company():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
-    
+
+@api.route('/api/save/channel/', methods = ['POST'])
+# @login_required
+def _d_save_service_channel():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_channel = request.json['txt_channel']
+            txt_company = request.json['txt_company']
+            txt_description = request.json['txt_description']
+            
+
+            service_channel = ServiceChannel.query.filter_by(name_short=txt_channel).first()
+            company = Company.query.filter_by(id = txt_company).first()
+            history = CompanyMonitoring()
+            history.company_id = company.id
+            history.created_by = current_user.id 
+            history.id_service_channel = service_channel.id
+            history.description = txt_description
+            db.session.add(history)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
 
 @api.route('/api/save/depto/', methods = ['POST'])
 # @login_required
