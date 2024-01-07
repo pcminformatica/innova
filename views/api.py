@@ -2000,6 +2000,24 @@ def _d_save_enroll():
         return jsonify({ 'status': 'error', 'msg': e })
 
 
+@api.route('/api/delete/enroll/', methods = ['POST'])
+# @login_required
+def _d_delete_enroll():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_curso = request.json['txt_curso']
+            txt_company = request.json['txt_company']  
+            document = EnrollmentRecord.query.filter_by(id = txt_company).delete()
+            db.session.commit()
+            
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+
 @api.route('/api/company/search/', methods = ['GET','POST'])
 # @login_required
 def _d_company_search():

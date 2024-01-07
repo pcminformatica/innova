@@ -379,7 +379,13 @@
                                                         </td>
                                                         <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                                             Finalizada
-                                                        </td>
+                                                            
+                                                            <button type="submit" onclick="deletCompany('{{ curso.id }}')" class="mdc-button mdc-button--raised mdc-button--leading" >
+                                              
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">cancel</i>
+                                                                <span class="mdc-button__label">Eliminar</span>
+                                                            </button>
                                                     </tr>
                                                         {% endfor %}
                                                     </tbody>
@@ -640,6 +646,42 @@
         //document.getElementById('submitSaveButton').disabled = false;
       });
     }
+    
+    function deletCompany(data){
+        const Swal = swcms.returnSwal()
+
+        const txt_curso = '{{ cursos.id }}'
+    
+        let postData = {
+              "txt_curso": txt_curso,
+              "txt_company":data,
+              };
+
+        console.log(postData)
+
+        let apiUrl = '/api/delete/enroll/';
+        //document.getElementById('submitSaveButton').disabled = true; 
+  
+        swcms.postFetch(apiUrl, postData).then((data) => {
+          Swal.fire(
+            'Éxito',
+            'Empresa registrada!',
+            'success'
+          )
+          window.setTimeout(() => { window.location.reload(); }, 1500);
+         // window.location.replace("/empresas/");
+        }).catch((error) => {
+          Swal.fire(
+            'Error de conexión',
+            'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+            'error'
+          )
+          //document.getElementById('submitSaveButton').disabled = false;
+        });
+      }
+      
+      
+    
     function deleteRow() {
    
       var td = event.target.parentNode; 
