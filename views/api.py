@@ -2711,7 +2711,7 @@ def get_companies_info():
             data = {
                 'dni': company.dni,
                 'company_name': company.name,
-                'created_by': company.created_by_data.name,
+                'created_by': company.created_by_data.name if company.created_by_data else '',
                 'inscripcion': company.inscripcion_id,  # Ajusta según la relación real
                 'status': company_status ,  # Ajusta según la relación real
                 'have_action_plan': company.have_action_plan,
