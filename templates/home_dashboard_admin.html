@@ -438,7 +438,18 @@
                                         </li>
 
                                         {% if current_user.id in (3,24,25) %}
-
+                                        <li class="mdc-deprecated-list-item">
+                                            <a href="{{ url_for('aulavirtual._curso_list') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Administracion de cursos</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Crea, edita y observa la estadística de cada curso o capacitación y administrar asistencia.</span>
+                                                </span>
+                                            </a>
+                                        </li>
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
