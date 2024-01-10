@@ -2610,7 +2610,7 @@ def get_combined_data():
                 'id': inscripcion.id,
                 'dni': inscripcion.dni,
                 'name': inscripcion.name,
-                'company_name': inscripcion.company_name,
+                'company': inscripcion.company_name,
                 'departamento': inscripcion.departamento,
                 'municipio': inscripcion.municipio,
                 'cohorte':inscripcion.cohorte,
