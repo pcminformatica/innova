@@ -2602,9 +2602,7 @@ def get_companies():
 def get_combined_data():
     try:
         # Consulta la base de datos para obtener Inscripciones con elegible igual a True y dni distinto
-        #inscripciones = Inscripciones.query.filter_by(elegible=True).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).distinct(Inscripciones.dni).all()
-        #inscripciones = Inscripciones.query.filter(Inscripciones.elegible == True, Inscripciones.cohorte==5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).order_by(Inscripciones.id.desc())
-        inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()        
+        inscripciones = Inscripciones.query.filter_by(elegible=True).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).distinct(Inscripciones.dni).all()
         # Crea una lista de diccionarios con los campos requeridos
         result = []
         for inscripcion in inscripciones:
@@ -2632,9 +2630,6 @@ def get_combined_data():
                 data['company_name']= '',
                 data['course_name']='',
                 data['course_manager_name']= ''
-
-            result.append(data)
-
 
             result.append(data)
 
