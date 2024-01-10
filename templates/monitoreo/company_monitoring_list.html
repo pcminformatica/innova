@@ -213,38 +213,25 @@
                                     <div class="mdc-data-table" style="background-color: white;width: 100%;" >
                                     <div class="mdc-data-table__table-container">
                                       
-                                    <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
+                                    <table id="etapa_3" class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
                                     <thead>
                                     <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
-                                        <th>Nombre</th>
-                                        <th>Empresa</th>
-                                        <th>Fecha de inicio</th>
-                                        <th>Avance</th>
-                                        <td>Dias</td>  <!-- Agregar days_since_action_plan -->
-                                        <td>Asignada</td>  <!-- Agregar days_since_action_plan -->
-                                
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI </th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Especialista</th>
                                     </tr>
                                     </thead>
                                     
-                                    <tbody class="mdc-data-table__content">
+                                    <tbody id="tableBody_3" class="mdc-data-table__content">
 
 
                             
                                     </tbody>
-                                    <tfoot>
-                                        <tr class="mdc-data-table__header-row">
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
-                                        <th>Nombre</th>
-                                        <th>Empresa</th>
-                                        <th>Fecha de inicio</th>
-                                        <th>Avance</th>
-                                        <td>Dias</td>  <!-- Agregar days_since_action_plan -->
-                                        <td>Asignada</td>  <!-- Agregar days_since_action_plan -->
-                                        </tr>
-                                    </tfoot>
+
                                     </table>
                                     </div>
                                     <div class="mdc-data-table__progress-indicator">
@@ -437,6 +424,98 @@
                 console.log('s1')
 
                 var table = $('#etapa_2').DataTable(
+            
+                {
+                    
+                autoWidth: false,
+                dom: 'PBflrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            ,
+                columnDefs: [
+                    {
+                        targets: ['_all'],
+                        className: 'mdc-data-table__cell',
+                    },
+                ],
+                language: {
+                url: "{{ url_for('static', filename='js/vendor/datatable/es-ES.json') }}",
+            },
+
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+    
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+    
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>');
+                            });
+                    });
+            }
+        });
+        int_etapa_3()
+    }
+
+
+    function int_etapa_3(){
+        let apiUrl = `/api/companies_info/e3`;
+        let headers = new Headers();
+        let requestOptions = {
+            method: 'GET',
+            headers: headers,
+            redirect: 'follow'
+        };
+
+        swcms.getFetch(apiUrl, 'loadCompany_3', requestOptions).then((data) => {
+
+        });
+    }
+
+    function loadCompany_3(data){
+        $('#etapa_3').DataTable().clear();;
+        $('#etapa_3').DataTable().destroy();
+        setJson(data)
+        console.log(jsonData)
+        console.log('jsonData_2')
+        const tableBody = document.getElementById("tableBody_3");
+        let secuencia = 1
+
+        jsonData.forEach(record => { 
+        const row = document.createElement("tr");
+        
+            let ids = document.createElement("td");
+            ids.textContent = secuencia;
+            row.appendChild(ids);
+            secuencia = secuencia + 1
+            // Create and append table cells
+
+            const fields = ["dni", "name", "company_name", "departamento", "municipio","created_by"];
+
+            fields.forEach(field => {
+                const cell = document.createElement("td");
+                cell.textContent = record[field];
+                row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            }) ;
+
+                console.log('s1')
+
+                var table = $('#etapa_3').DataTable(
             
                 {
                     

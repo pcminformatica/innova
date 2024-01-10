@@ -2729,3 +2729,47 @@ def get_companies_info():
         return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)})
+
+@app.route('/api/companies_info/e3', methods=['GET'])
+def get_companies_info_e3():
+    try:
+        # Obtiene el estado específico por nombre corto
+        status = CompanyStage.query.filter_by(name_short='E3').first()
+
+        # Consulta las empresas con las condiciones especificadas
+        companies = (
+            Company.query
+            .filter(
+                Company.enabled == True,
+                Company.stage_id == status.id
+            )
+            .all()
+        )
+
+        # Crea una lista de diccionarios con los campos requeridos
+        result = []
+        for company in companies:
+
+
+            # Agrega los campos al diccionario
+            data = {
+                'dni': company.dni,
+                'company_name': company.name,
+                'created_by': company.created_by_data.name if company.created_by_data else '',
+                'inscripcion': company.inscripcion_id,  # Ajusta según la relación real
+                'status': company.status.name ,  # Ajusta según la relación real
+                'have_action_plan': company.have_action_plan,
+                'date_action_plan': company.date_action_plan,
+                'date_first_service_action_plan': company.date_first_service_action_plan,
+                'action_plan_progress': company.action_plan_progress if company.action_plan_progress is not None else 'No tiene plan de acción' ,
+                'name': company.inscripcion.name if company.inscripcion else '',
+                'departamento': company.inscripcion.departamento if company.inscripcion else '',
+                'municipio': company.inscripcion.municipio if company.inscripcion else '',
+         
+             
+            }
+            result.append(data)
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
