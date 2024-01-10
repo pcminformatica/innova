@@ -2697,7 +2697,7 @@ def get_companies_info():
                     category_start = int(company.action_plan_progress // 20) * 20
                     category = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
                 else:
-                    category = "No tiene plan de acción"
+                    category = "0 de 20"
             else:
                 category = "No tiene plan de acción"
              # Ajusta el campo status
