@@ -2670,3 +2670,62 @@ def get_enrollment_record_data(company):
             }
     except Exception as e:
         return {'error': str(e)}
+
+
+@app.route('/api/companies_info', methods=['GET'])
+def get_companies_info():
+    try:
+        # Obtiene el estado específico por nombre corto
+        status = CompanyStage.query.filter_by(name_short='E2').first()
+
+        # Consulta las empresas con las condiciones especificadas
+        companies = (
+            Company.query
+            .filter(
+                Company.enabled == True,
+                Company.stage_id == status.id
+            )
+            .all()
+        )
+
+        # Crea una lista de diccionarios con los campos requeridos
+        result = []
+        for company in companies:
+            if company.action_plan_progress is not None:
+            # Calcula la categoría según el valor de action_plan_progress
+                if company.action_plan_progress:
+                    category_start = int(company.action_plan_progress // 20) * 20
+                    category = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                else:
+                    category = "No tiene plan de acción"
+            else:
+                category = "No tiene plan de acción"
+             # Ajusta el campo status
+            if company.status and company.status.name_short in ['1', '2', '3', '6']:
+                company_status = "Activa"
+            else:
+                company_status = company.status.name
+
+
+            # Agrega los campos al diccionario
+            data = {
+                'dni': company.dni,
+                'company_name': company.name,
+                'created_by': company.created_by_data.name,
+                'inscripcion': company.inscripcion_id,  # Ajusta según la relación real
+                'status': company_status ,  # Ajusta según la relación real
+                'have_action_plan': company.have_action_plan,
+                'date_action_plan': company.date_action_plan,
+                'date_first_service_action_plan': company.date_first_service_action_plan,
+                'action_plan_progress': company.action_plan_progress if company.action_plan_progress is not None else 'No tiene plan de acción' ,
+                'name': company.inscripcion.name if company.inscripcion else '',
+                'departamento': company.inscripcion.departamento if company.inscripcion else '',
+                'municipio': company.inscripcion.municipio if company.inscripcion else '',
+                'category':category
+             
+            }
+            result.append(data)
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
