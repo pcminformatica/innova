@@ -954,3 +954,8 @@ def _monitoring_dashboard():
 
 
 
+@monitoreo.route('/monitoreo/empresas/',methods=['GET', 'POST'])
+def _admin_company_monitoring_list():
+    context = {"departamentos_honduras":''}
+    return render_template('monitoreo/company_monitoring_list.html',**context)
+

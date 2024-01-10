@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import CourseManagers,TrainingType,ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import CompanyMonitoring,ServiceChannel,surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
@@ -2546,3 +2546,130 @@ def _d_save_rating_actions():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+
+@api.route('/api/etapa/1', methods = ['GET','POST'])
+def InscripcionesResource():
+    # Consulta la base de datos para obtener Inscripciones con elegible igual a True y dni distinto
+    inscripciones = Inscripciones.query.filter_by(elegible=True).distinct(Inscripciones.dni).all()
+
+    # Crea una lista de diccionarios con los campos requeridos
+    result = [
+        {
+            'id': inscripcion.id,
+            'dni': inscripcion.dni,
+            'name': inscripcion.name,
+            'company_name': inscripcion.company_name,
+            'departamento': inscripcion.departamento,
+            'municipio': inscripcion.municipio,
+            'atendida': inscripcion.user.name if inscripcion.user else 'no atendida'
+        }
+        for inscripcion in inscripciones
+    ]
+
+    return jsonify(result)
+
+
+@app.route('/api/companies', methods=['GET'])
+def get_companies():
+    try:
+       # Consulta la base de datos para obtener las Company registradas en EnrollmentRecord con Courses en TrainingType TT1
+        enrollment_records = (
+            EnrollmentRecord.query
+            .join(Courses, EnrollmentRecord.id_course == Courses.id)
+            .join(TrainingType, Courses.id_training_type == TrainingType.id)
+            .join(Company, EnrollmentRecord.company_id == Company.id)
+            .join(CourseManagers, Courses.id_course_managers == CourseManagers.id)
+            .filter(TrainingType.name_short == 'TT1')
+            .all()
+        )
+
+        # Procesar los resultados para obtener la información deseada
+        result = [
+            {
+                'company_dni': record.company.dni,
+                'company_name': record.company.name,
+                'course_name': record.course.name,
+                'course_manager_name': record.course.course_managers.name
+            }
+            for record in enrollment_records
+        ]
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+@app.route('/api/combined_data', methods=['GET'])
+def get_combined_data():
+    try:
+        # Consulta la base de datos para obtener Inscripciones con elegible igual a True y dni distinto
+        inscripciones = Inscripciones.query.filter_by(elegible=True).distinct(Inscripciones.dni).all()
+
+        # Crea una lista de diccionarios con los campos requeridos
+        result = []
+        for inscripcion in inscripciones:
+            data = {
+                'id': inscripcion.id,
+                'dni': inscripcion.dni,
+                'name': inscripcion.name,
+                'company_name': inscripcion.company_name,
+                'departamento': inscripcion.departamento,
+                'municipio': inscripcion.municipio,
+                'atendida': inscripcion.user.name if inscripcion.user else 'no atendida'
+            }
+
+            # Si hay una Company asociada a la inscripción, incluir datos de enrollment_records
+            # Verificar si la inscripción pertenece a una empresa y obtener datos de la empresa si es así
+            company = Company.query.filter_by(inscripcion_id=inscripcion.id).first()
+            if company:
+                
+                enrollment_record_data = get_enrollment_record_data(company)
+                data.update(enrollment_record_data)
+            else:
+                data['estado'] = 'Elegible'
+                data['company_dni'] ='',
+                data['company_name']= '',
+                data['course_name']='',
+                data['course_manager_name']= ''
+
+            result.append(data)
+
+
+            result.append(data)
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+def get_enrollment_record_data(company):
+    try:
+        # Consulta la base de datos para obtener datos de enrollment_records
+        enrollment_record = (
+            EnrollmentRecord.query
+            .join(Courses, EnrollmentRecord.id_course == Courses.id)
+            .join(TrainingType, Courses.id_training_type == TrainingType.id)
+            .join(Company, EnrollmentRecord.company_id == Company.id)
+            .join(CourseManagers, Courses.id_course_managers == CourseManagers.id)
+            .filter(Company.id == company.id, TrainingType.name_short == 'TT1')
+            .first()
+        )
+
+        if enrollment_record:
+            return {
+                'estado': 'Capacitada',
+                'company_dni': company.dni,
+                'company_dni': company.dni,
+                'company_name': company.name,
+                'course_name': enrollment_record.course.name,
+                'course_manager_name': enrollment_record.course.course_managers.name
+            }
+        else:
+            # Si no hay enrollment_record asociado, retornar diccionario vacío
+            return {
+                'estado': 'Elegible',
+                'company_dni': '',
+                'company_name': '',
+                'course_name': '',
+                'course_manager_name': ''
+            }
+    except Exception as e:
+        return {'error': str(e)}
