@@ -2602,7 +2602,7 @@ def get_companies():
 def get_combined_data():
     try:
         # Consulta la base de datos para obtener Inscripciones con elegible igual a True y dni distinto
-        inscripciones = Inscripciones.query.filter_by(elegible=True,status=1).distinct(Inscripciones.dni).all()
+        inscripciones = Inscripciones.query.filter_by(elegible=True).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).distinct(Inscripciones.dni).all()
 
         # Crea una lista de diccionarios con los campos requeridos
         result = []
