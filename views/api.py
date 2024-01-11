@@ -2675,6 +2675,8 @@ def get_enrollment_record_data(company):
 @app.route('/api/companies_info', methods=['GET'])
 def get_companies_info():
     try:
+        fecha_actual = datetime.now()
+        fecha_limite = fecha_actual - timedelta(days=60)
         # Obtiene el estado específico por nombre corto
         status = CompanyStage.query.filter_by(name_short='E2').first()
 
@@ -2706,7 +2708,20 @@ def get_companies_info():
             else:
                 company_status = company.status.name
 
+            action_plan_history_records = (
+            db.session.query(ActionPlanHistory)
+            .join(ActionPlan, ActionPlanHistory.action_plan_id == ActionPlan.id)
+            
+            .filter(ActionPlan.company_id == company.id)
+            
+            .order_by(desc(ActionPlanHistory.date_created)).first()
+            )
 
+            if action_plan_history_records:
+                fecha_ultima = action_plan_history_records.date_created
+                if fecha_limite > fecha_ultima:
+                    if company_status == "Activa":
+                        company_status = "En Pausa"
             # Agrega los campos al diccionario
             data = {
                 'dni': company.dni,
