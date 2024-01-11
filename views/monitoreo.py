@@ -956,6 +956,46 @@ def _monitoring_dashboard():
 
 @monitoreo.route('/monitoreo/empresas/',methods=['GET', 'POST'])
 def _admin_company_monitoring_list():
-    context = {"departamentos_honduras":''}
+    url = app.config.get('KOBOTOOLBOX_ALL')
+    headers=app.config.get('KOBOTOOLBOX_TOKEN')
+    resp = requests.get(url,headers=headers)
+    api = json.loads(resp.content)
+    diagnosticos = []
+    for e in api['results']:
+        if 'estado' in e:
+            if e['estado'] !=0:
+                diagnosticos.append(e)
+        else:
+            diagnosticos.append(e)
+    companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True).all()
+    planes = 0
+    serviciosTotal = 0
+    serviciosNoinciados = 0
+    serviciosEnProceso = 0
+    serviciosFinalizados = 0
+    for company in companys:
+        plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
+        if plan:
+            planes = planes + 1
+            actionPlan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).all()
+            for plane in actionPlan:
+                serviciosTotal = serviciosTotal + 1
+                if plane.progress == 0:
+                    serviciosNoinciados = serviciosNoinciados + 1
+                elif plane.progress == 100:
+                    serviciosFinalizados= serviciosFinalizados + 1
+                else:
+                    serviciosEnProceso =serviciosEnProceso+1
+            
+    context = {
+
+        'diagnosticos':len(diagnosticos),
+        'planes':planes,
+        'serviciosTotal':serviciosTotal,
+        'serviciosNoinciados':serviciosNoinciados,
+        'serviciosEnProceso':serviciosEnProceso,
+        'serviciosFinalizados':serviciosFinalizados,
+    }
+
     return render_template('monitoreo/company_monitoring_list.html',**context)
 
