@@ -2671,7 +2671,7 @@ def get_enrollment_record_data(company):
     except Exception as e:
         return {'error': str(e)}
 
-
+from datetime import datetime, timedelta
 @app.route('/api/companies_info', methods=['GET'])
 def get_companies_info():
     try:
