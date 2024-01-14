@@ -384,16 +384,29 @@ def _home():
                     'impacto':impacto
                 }
                 return render_template('home_dashboard.html',**context)
+        elif current_user.is_user_role(['ofe']):
+
+            today = dt.today()
+    
+            appointments = Appointments.query.filter(Appointments.date_scheduled > today).all()
+            appointments = Appointments.query.join(UserXEmployeeAssigned).filter(
+            Appointments.date_scheduled > today,
+            UserXEmployeeAssigned.user_id == Appointments.created_for,
+            UserXEmployeeAssigned.employee_id == current_user.id,
+            Appointments.cancelled == False
+            ).order_by(Appointments.date_scheduled.asc()).all()
+            context = {'appointments':appointments}
+            return render_template('home_dashboard_sde.html',**context)
         else:
             today = dt.today()
     
             appointments = Appointments.query.filter(Appointments.date_scheduled > today).all()
             appointments = Appointments.query.join(UserXEmployeeAssigned).filter(
-        Appointments.date_scheduled > today,
-        UserXEmployeeAssigned.user_id == Appointments.created_for,
-        UserXEmployeeAssigned.employee_id == current_user.id,
-        Appointments.cancelled == False
-        ).order_by(Appointments.date_scheduled.asc()).all()
+            Appointments.date_scheduled > today,
+            UserXEmployeeAssigned.user_id == Appointments.created_for,
+            UserXEmployeeAssigned.employee_id == current_user.id,
+            Appointments.cancelled == False
+            ).order_by(Appointments.date_scheduled.asc()).all()
             context = {'appointments':appointments}
             return render_template('home_dashboard_admin.html',**context)
     else:
