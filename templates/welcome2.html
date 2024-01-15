@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 <style>
+    .owl-stage-outer{
+        height: 80vh !important;
+    }
     .container-color-landingpage{
         background: rgb(134,44,134);
 background: linear-gradient(92deg, rgba(134,44,134,1) 33%, rgba(252,252,252,1) 94%);
@@ -101,6 +104,14 @@ margin: 0 0 47px 0;
     </style>
 </style>
 <style>
+    .s-drawer-app-content {
+        background-color: #ffffff;
+    }
+    .mdc-drawer-app-content{
+        background-color: #ffffff;
+
+    }
+
     .owl-carousel {
         position: relative;
     }
@@ -218,7 +229,8 @@ margin: 0 0 47px 0;
                         </div>
                 <div  >
                     <img class="resize-image-2fit-70"  src="../static/images/SOCIOS.svg" alt="Logo BID" />
-           
+                    <br>
+                    <br>
                 </div>
           
               
@@ -305,7 +317,7 @@ margin: 0 0 47px 0;
                 <div class="indicador-panel">
                     <img class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/elegibles.png') }}">
                     <h4 class="indicadores-innova">
-                        964
+                        2,318
                     </h4>
 
                     <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
@@ -320,7 +332,7 @@ margin: 0 0 47px 0;
                 <div class="indicador-panel">
                     <img  class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/capacitadas.png') }}">
                     <h4 class="indicadores-innova">
-                        291
+                        973
                     </h4>
 
                     <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
@@ -336,13 +348,13 @@ margin: 0 0 47px 0;
             <div class="indicador-panel">
                 <img  class="resize-image-2fit-70"  src="{{ url_for('static', filename='images/sde.png') }}">
                 <h4 class="indicadores-innova">
-                    141
+                    747
                 </h4>
         
                 <button class="mdc-button mdc-button--raised" aria-label="Ver Folleto" alt="Ver Folleto" data-action-type="redirect" 
                         data-action-val="#onduras.pdf">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">RECIBIENDO SDE s</span>
+                        <span class="mdc-button__label">RECIBIENDO SDE</span>
                 </button>
                 </div>
             </div>  
