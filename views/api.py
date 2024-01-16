@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import CourseManagers,TrainingType,ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import AttentionLog,CourseManagers,TrainingType,ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import CompanyMonitoring,ServiceChannel,surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
@@ -1393,8 +1393,10 @@ def _initial_attention_companies():
     try:
         if request.method == 'POST':
             txt_inscripcion_id = request.json['txt_id']
+            txt_user = request.json.get('txt_user', None)
+            user = User.query.get(txt_user) if txt_user else None
             inscripcion =  Inscripciones.query.filter(Inscripciones.id == txt_inscripcion_id).first()
-            dni= inscripcion.dni.replace("-", "")
+            dni= inscripcion.dni.replace("-", "").replace(" ", "").replace("_", "")
             company =  Company.query.filter(Company.dni == dni).first()
             status  =   CompanyStatus.query.filter(CompanyStatus.name_short == 2).first()
             #creamos la empresa
@@ -1410,16 +1412,47 @@ def _initial_attention_companies():
                 jsonSocial.email = inscripcion.correo.strip()
                 company.phones = jsonPhone.jsonFormat()
                 company.social_networks = jsonSocial.jsonFormat()
-                company.created_by = current_user.id
+                company.created_by = user.id if user else current_user.id
                 company.inscripcion_id = inscripcion.id
                 company.status_id = status.id
                 db.session.add(company)
+                db.session.commit()
+                log = AttentionLog()
+                log.codigo = 1
+                log.company_id = company.id
+                log.created_by = current_user.id
+                log.date_attention = dt.now(tz.utc)
+                db.session.add(log)
                 db.session.commit()
             else:
                 company.status_id = status.id
                 company.inscripcion_id = inscripcion.id
                 if not company.created_by:
-                    company.created_by = current_user.id
+                    company.created_by = user.id if user else current_user.id
+                    log = AttentionLog()
+                    log.codigo = 1
+                    log.company_id = company.id
+                    log.created_by = current_user.id
+                    log.date_attention = dt.now(tz.utc)
+                    db.session.add(log)
+                    db.session.commit()
+                else:
+                    if user:
+                        log = AttentionLog()
+                        log.codigo = 2
+                        log.company_id = company.id
+                        log.created_by = company.created_by
+                        log.date_attention = dt.now(tz.utc)
+                        db.session.add(log)
+                        db.session.commit()
+                        company.created_by = user.id
+                        log = AttentionLog()
+                        log.codigo = 7
+                        log.company_id = company.id
+                        log.created_by = current_user.id
+                        log.date_attention = dt.now(tz.utc)
+                        db.session.add(log)
+                        db.session.commit()
                 db.session.add(company)
                 db.session.commit()
                 db.session.refresh(company)
@@ -1431,13 +1464,13 @@ def _initial_attention_companies():
                 actionplan.company_id = company.id
                 actionplan.company = company
                 actionplan.services_id = service.id
-                actionplan.created_by = current_user.id
+                actionplan.created_by = user.id if user else current_user.id
                 actionplan.fase = 0
                 db.session.add(actionplan)
                 db.session.commit()
             #actulizamos la inscripcion a ya atendida 
             inscripcion.attended = True
-            inscripcion.attended_user = current_user.id
+            inscripcion.attended_user = user.id if user else current_user.id
             inscripcion.attention_date = dt.now(tz.utc)
             db.session.add(inscripcion)
             db.session.commit()
@@ -1446,6 +1479,7 @@ def _initial_attention_companies():
     except Exception as e:
         app.logger.error('** SWING_CMS1 ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
 
 import os
 from werkzeug.utils import secure_filename

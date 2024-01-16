@@ -43,9 +43,184 @@
     .red-row {
         background-color: #FFB2B2; /* Rojo suave */
     }
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 60vh;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 </style>
 {% endblock %}
 {% block body %}
+
+
+<div id="modal1_sde" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <!-- Contenido específico para modal1 -->
+                <!-- Tu contenido aquí -->
+        <div class="mdc-layout-grid container">
+            <!-- ... (tu código HTML) ... -->
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">SDE</div>
+                                <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
+                                    <input type="hidden" id="txt_company_dni" name="txt_company_dni"  value="">
+                                    <input type="hidden" id="txt_company_id" name="txt_company_id"  value="">
+                              
+                                    <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                      <div class="mdc-typography--body1">
+                                        Asignar ha:
+                                      </div>
+                                      <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_user" data-assigned-var>
+                                          <div class="mdc-select__anchor"
+                                               role="button"
+                                               aria-haspopup="listbox"
+                                               aria-expanded="false"
+                                               aria-labelledby="demo-label demo-selected-text">
+                                            <span class="mdc-select__ripple"></span>
+                                            <span id="demo-label" class="mdc-floating-label">Especialista:</span>
+                                            <span class="mdc-select__selected-text-container">
+                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                            </span>
+                                            <span class="mdc-select__dropdown-icon">
+                                              <svg
+                                                  class="mdc-select__dropdown-icon-graphic"
+                                                  viewBox="7 10 10 5" focusable="false">
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-inactive"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 10 12 15 17 10">
+                                                </polygon>
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-active"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 15 12 10 17 15">
+                                                </polygon>
+                                              </svg>
+                                            </span>
+                                            <span class="mdc-line-ripple"></span>
+                                          </div>
+                                        
+                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    {% for user in users %}
+                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ user.id }}" role="option">
+                                                          <span class="mdc-deprecated-list-item__ripple"></span>
+                                                          <span class="mdc-deprecated-list-item__text">
+                                                          {{ user.name }}
+                                                          </span>
+                                                      </li>
+                                                    {% endfor %}
+                                       
+                                            </ul>
+                                          </div>
+                                        </div>
+                                    </div>
+                              
+                                    <br><br><br>
+                                    
+                                    
+            
+
+                                    <div class="s-font-align-center">
+                                        <button id="submitSaveButton" onclick="sendCompany()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                            
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                            <span class="mdc-button__label">Actualizar</span>
+                                        </button>
+                                    </div>
+                                    </form>    
+                     
+                             
+                            </div>
+                            <div class="mdc-card__actions">
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <!-- Contenido específico para modal2 -->
+        <!-- Tu contenido aquí -->
+        <div class="mdc-layout-grid container">
+            <!-- ... (tu código HTML) ... -->
+        </div>
+    </div>
+</div>
+
+
 <main class="s-main-content">
     <div class="container-color-background">
         <div class="mdc-layout-grid container">
@@ -55,6 +230,7 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__content">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">SDE</div>
+                               
                                 <div class="mdc-layout-grid container-stats">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet
@@ -211,7 +387,7 @@
                                           <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                        
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresaria </th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresa</th>
@@ -417,10 +593,11 @@
 
         const fields = ["dni", "name", "company", "departamento", "municipio","cohorte","estado","course_name","course_manager_name","atendida"];
         
-
+        row.appendChild(createButton(record["id"], record["dni"]));
 
         fields.forEach(field => {
             const cell = document.createElement("td");
+        
             cell.textContent = record[field];
             row.appendChild(cell);
         });
@@ -429,7 +606,7 @@
         }) ;
 
         console.log('s1')
-
+/*
     var table = $('#etapa_1').DataTable(
         
             {
@@ -474,8 +651,8 @@
         }
         });
 
-
-        int_etapa_2()
+*/
+        //int_etapa_2()
 
 
 
@@ -667,5 +844,117 @@
         });
 
     }
+
+
+    function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Cierra el modal si el usuario hace clic fuera de él
+window.addEventListener('click', (event) => {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
+});
+
+// Cierra el modal si el usuario presiona la tecla Escape
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+            closeModal(modal.id);
+        });
+    }
+});
+
+
+function actualizarEtapa(id, code) {
+    // Lógica para la función actualizarEtapa con los parámetros id y code
+    console.log("ID:", id);
+    console.log("Code:", code);
+    setCompany(code,id)
+}
+
+function createButton(id, code) {
+    // Crear el botón
+    let button = document.createElement("button");
+    button.onclick = function() {
+        // Al hacer clic, llamar a la función actualizarEtapa con los valores deseados
+        actualizarEtapa(id, code);
+    };
+    button.type = "button";
+    button.className = "mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary";
+    button.innerHTML = `
+    
+        <span class="mdc-button__label">Asignar</span>
+    `;
+
+    // Crear la celda y añadir el botón a la celda
+    let btntd = document.createElement("td");
+    btntd.appendChild(button);
+
+    return btntd;
+}
+let dni,idcode;
+function setCompany(vdni,vidcode){
+    dni = vdni;
+    idcode = vidcode;
+    openModal('modal1_sde')
+}
+const mdcAssignedVars = {};
+function sendCompany(){
+    console.log('dni')
+    console.log(dni)
+    console.log(idcode)
+    const Swal = swcms.returnSwal()
+
+  
+    swcms.mdcSelects.forEach((sel) => {
+        if (sel.assignedVar)
+            mdcAssignedVars[sel.assignedVar] = sel;
+    });
+  let postData = {
+    'txt_user': mdcAssignedVars['txt_user'].value.trim() || null,
+    'dni':dni,
+    'txt_id':idcode,
+  };
+
+  console.log(postData)
+
+  let apiUrl = '/initial/attention/companies';
+      document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Gracias',
+          'Empresa asignada y creada en INNOVA MUJER!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        document.getElementById('submitSaveButton').disabled = false;
+      });
+
+  console.log('---dni---')
+}
 </script>
 {% endblock %}

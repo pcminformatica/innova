@@ -755,7 +755,7 @@ class CompanyStage(db.Model):
 class AttentionLog(db.Model):
     _tablename__ = 'attentionlog'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    # 0 none , 1 create , 2 update, 3 delete, 4 diagnosis, 5 action plan, 6 bitacora
+    # 0 none , 1 create , 2 update, 3 delete, 4 diagnosis, 5 action plan, 6 bitacora, 7 asignada
     codigo = db.Column(db.Integer, unique=False, nullable=True, default=0)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
