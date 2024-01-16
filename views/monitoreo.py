@@ -93,7 +93,7 @@ def _indicadores_productividad():
 @monitoreo.route('/indicadores/sde/productividad/',methods = ['GET', 'POST'])
 def _indicadores_productividad_sde():
     #lista de usuarios a evaluar
-    list_user = [173,174]
+    list_user = [173,176]
     users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
     #consultamos en KOBO la cantidad de diagnosticos
     url = app.config.get('KOBOTOOLBOX_ALL')
