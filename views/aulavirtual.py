@@ -46,13 +46,20 @@ def _curso_enroll(company_id):
     }
     return render_template('aulavirtual/curso_enroll.html',**context)
 
+from sqlalchemy import extract
 @aulavirtual.route('/cursos/list/')
 def _curso_list():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     cursos = Courses.query.filter_by(enabled=True).all()
+    cursos  = Courses.query.join(TrainingType, Courses.id_training_type == TrainingType.id).filter(TrainingType.name_short == 'TT1').all()
+    # Obtén todos los cursos con fecha de inicio en el año 2023
+    cursos_2023 = Courses.query.join(TrainingType, Courses.id_training_type == TrainingType.id).filter(TrainingType.name_short == 'TT2').filter(extract('year', Courses.date_scheduled_start) == 2023).all()
+    # Obtén todos los cursos con fecha de inicio en el año 2023
+    cursos_2024 = Courses.query.join(TrainingType, Courses.id_training_type == TrainingType.id).filter(TrainingType.name_short == 'TT2').filter(extract('year', Courses.date_scheduled_start) == 2024).all()
     context = {
         'cursos':cursos,
-   
+        'cursos_2023': cursos_2023,
+        'cursos_2024': cursos_2024,
     }
     return render_template('aulavirtual/curso_list.html',**context)
 
