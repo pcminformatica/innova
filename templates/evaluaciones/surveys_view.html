@@ -46,27 +46,25 @@
                                         <thead>
                                           <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Id</th>
+                                          
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Pregunta</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Respuesta</th>
                                           </tr>
                                         </thead>
                                         <tbody class="mdc-data-table__content">
-                                            {% for api in api.respuestas %}
+                                            {% for survey in surveys.respuestas %}
                                           <tr class="mdc-data-table__row">
                                             <th class="mdc-data-table__cell" scope="row">
                                               {{loop.index}}
                                             </th>
                         
                                             
-                                            <td class="mdc-data-table__cell" style="width: 80px;">
-                                                {{ api.id }}
-                                            </td>
+                                
                                             <th class="mdc-data-table__cell" scope="row">
-                                              {{ api.pregunta }}
+                                              {{ survey.pregunta }}
                                             </th>
                                             <th class="mdc-data-table__cell" scope="row">
-                                              {{ api.respuesta }}
+                                              {{ survey.respuesta }}
                                             </th>
      
                                           </tr>
@@ -116,35 +114,5 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/superadmin.js') }}"></script>
-<script>
-  function atenderEmpresaria(){
-    const Swal = swcms.returnSwal()
-    const txt_id = '{{api.id}}';
-    const apiUrl = '/initial/attention/companies';
-    let postData = {
-          "txt_id": txt_id,
-      };
-      console.log(postData)
 
-    //document.getElementById('submitSaveButton').disabled = true;
-
-    swcms.postFetch(apiUrl, postData).then((data) => {
-        Swal.fire(
-        'Éxito',
-        'Atención inicial creada!',
-        'success'
-        )
-        window.setTimeout(() => { window.location.reload(); }, 1500);
-
-    }).catch((error) => {
-        Swal.fire(
-        'Error de conexión',
-        'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
-        'error'
-        )
-        //document.getElementById('submitSaveButton').disabled = false;
-    });
-
-  }
-</script>
 {% endblock %}

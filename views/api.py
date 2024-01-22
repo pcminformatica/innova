@@ -2758,6 +2758,7 @@ def get_companies_info():
                         company_status = "En Pausa"
             # Agrega los campos al diccionario
             data = {
+                'id': company.id,
                 'dni': company.dni,
                 'company_name': company.name,
                 'created_by': company.created_by_data.name if company.created_by_data else '',
@@ -2802,6 +2803,7 @@ def get_companies_info_e3():
 
             # Agrega los campos al diccionario
             data = {
+                'id': company.id,
                 'dni': company.dni,
                 'company_name': company.name,
                 'created_by': company.created_by_data.name if company.created_by_data else '',

@@ -875,3 +875,20 @@ def _scrip_monitoring_list():
             print("etapa 3")
             print("etapa ,........")
     return jsonify({ 'status': 200, 'msg': 'Cita creada' })
+
+
+@home.route('/catalog_surveys_view')
+def _catalog_surveys_view():
+    catalog_surveys = catalog_surveys_sde.query.all()
+    return render_template('evaluaciones/catalog_surveys_view.html', catalog_surveys=catalog_surveys)
+
+@home.route('/surveys_with_catalog_surveys/<int:catalog_surveys_id>/sde',methods=['GET', 'POST'])
+def _surveys_with_catalog_surveys(catalog_surveys_id):
+    surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=catalog_surveys_id).all()
+    return render_template('evaluaciones/surveys_with_catalog_surveys_view.html', surveys_data=surveys_data)
+
+@home.route('/surveys/view/<int:surveys_id>/sde',methods=['GET', 'POST'])
+def _surveys_view(surveys_id):
+
+    surveys =  surveys_sde.query.filter_by(id=surveys_id).first()
+    return render_template('evaluaciones/surveys_view.html', surveys=surveys)
