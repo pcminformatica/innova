@@ -2827,3 +2827,144 @@ def get_companies_info_e3():
         return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)})
+
+
+@app.route('/api/companies_info2/2', methods=['GET'])
+def get_companies_info_2():
+    try:
+        fecha_actual = datetime.now()
+        fecha_limite = fecha_actual - timedelta(days=60)
+        # Obtiene el estado específico por nombre corto
+        status = CompanyStage.query.filter_by(name_short='E2').first()
+
+        # Consulta las empresas con las condiciones especificadas
+        companies = (
+            Company.query
+            .filter(
+                Company.enabled == True,
+                Company.stage_id == status.id
+            )
+            .all()
+        )
+
+        # Crea una lista de diccionarios con los campos requeridos
+        result = []
+        for company in companies:
+            if company.action_plan_progress is not None:
+            # Calcula la categoría según el valor de action_plan_progress
+                if company.action_plan_progress:
+                    category_start = int(company.action_plan_progress // 20) * 20
+                    category = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                else:
+                    category = "0 de 20"
+            else:
+                category = "No tiene plan de acción"
+             # Ajusta el campo status
+            if company.status and company.status.name_short in ['1', '2', '3', '6']:
+                company_status = "Activa"
+            else:
+                company_status = company.status.name
+            rubro = ""
+            facebook = ""
+            otrared = ""
+            phones = ""
+            if company.inscripcion:
+                respuestas = company.inscripcion.respuestas
+                phones = company.inscripcion.phone
+                if isinstance(respuestas, list):
+                    for item in respuestas:
+                        if item['id'] == '3_12':
+                            rubro = str(item['respuesta'])
+                            break
+                    for item in respuestas:
+                        if item['id'] == '1_9':
+                            facebook = str(item['respuesta'])
+                            break
+                    for item in respuestas:
+                        if item['id'] == '1_10':
+                            otrared = str(item['respuesta'])
+                            break
+            action_plan_history_records = (
+            db.session.query(ActionPlanHistory)
+            .join(ActionPlan, ActionPlanHistory.action_plan_id == ActionPlan.id)
+            
+            .filter(ActionPlan.company_id == company.id)
+            
+            .order_by(desc(ActionPlanHistory.date_created)).first()
+            )
+
+            if action_plan_history_records:
+                fecha_ultima = action_plan_history_records.date_created
+                if fecha_limite > fecha_ultima:
+                    if company_status == "Activa":
+                        company_status = "En Pausa"
+            # Agrega los campos al diccionario
+            diagnoses = DiagnosisCompany.query.filter(DiagnosisCompany.company_id==company.id).order_by(DiagnosisCompany.date_created.asc()).first()
+            ids = ''
+            status = ''
+            respuestas = ''
+            resultados = ''
+            diagnoses_submission_time = ''
+            constituida = ''
+            agropecuario = ''
+            comercio = ''
+            industria = ''
+            sevicios = ''
+            if diagnoses:
+                respuestas = diagnoses.respuestas
+                if 'Agropecuario' in respuestas:
+                    agropecuario = respuestas['Agropecuario']
+                if 'Comercio' in respuestas:
+                    comercio = respuestas['Comercio']
+                if 'Industria' in respuestas:
+                    industria = respuestas['Industria']
+                if 'Sevicios' in respuestas:
+                    sevicios = respuestas['Sevicios']
+                resultados = diagnoses.resultados 
+            data = ''
+            descripcion = ''
+            if agropecuario != "":
+                data =   "Agropecuario: " + agropecuario + " "
+            if comercio != "":
+                data =   "comercio: " + comercio + " "
+            if industria != "":
+                data =   "industria: " + industria + " "
+            if sevicios != "":
+                data =   "sevicios: " + sevicios + " "
+            redes = ''
+            if facebook != "":
+                redes =   "facebook: " + facebook + " "
+            if otrared != "":
+                redes =   "otrared: " + otrared + " "
+
+              
+  
+            data = {
+                'id': company.id,
+                'dni': company.dni,
+                'company_name': company.name,
+                'created_by': company.created_by_data.name if company.created_by_data else '',
+                'inscripcion': company.inscripcion_id,  # Ajusta según la relación real
+                'status': company_status ,  # Ajusta según la relación real
+                'have_action_plan': company.have_action_plan,
+                'date_action_plan': company.date_action_plan,
+                'date_first_service_action_plan': company.date_first_service_action_plan,
+                'action_plan_progress': company.action_plan_progress if company.action_plan_progress is not None else 'No tiene plan de acción' ,
+                'name': company.inscripcion.name if company.inscripcion else '',
+                'departamento': company.inscripcion.departamento if company.inscripcion else '',
+                'municipio': company.inscripcion.municipio if company.inscripcion else '',
+                'category':category,
+                'rubro':rubro,
+                'data':data,
+                'resultados':resultados,
+                'respuestas':respuestas,
+                'descripcion':descripcion,
+                'phones':phones,
+                'redes':redes
+             
+            }
+            result.append(data)
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
