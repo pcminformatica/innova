@@ -2570,8 +2570,11 @@ def _d_save_rating_actions():
             txt_id = request.json['txt_id']
 
             actions = ActionPlan.query.filter_by(id=txt_id).first()
-            actions.puntuacion = selectedValue
-            actions.nota = txt_comentario
+            actions.rating_date_created = dt.now(default_timezone)
+            actions.rating_given_by = current_user.id
+            actions.rating_value = selectedValue
+            actions.rating_comment = txt_comentario
+            
             db.session.add(actions)
             db.session.commit()
 

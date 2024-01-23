@@ -870,6 +870,11 @@ class ActionPlan(db.Model):
     espuntal = db.Column(db.Boolean, nullable=True, default=False)
     puntuacion = db.Column(db.FLOAT, unique=False, nullable=True, default=0)
     nota = db.Column(db.Text, nullable=True)
+    rating_date_created = db.Column(db.DateTime, nullable=True)
+    rating_given_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    rating_given_by_user = db.relationship('User', foreign_keys=[rating_given_by])
+    rating_value = db.Column(db.Float, nullable=True, default=0)
+    rating_comment = db.Column(db.Text, nullable=True)
 
 class ActionPlanReferences(db.Model):
     __tablename__ = 'action_plan_references'
