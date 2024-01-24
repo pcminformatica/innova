@@ -2536,6 +2536,7 @@ def _d_save_info_company():
             companyName = request.json['companyName']
             dni = request.json['dni']
             email = request.json['email']
+            company_description = request.json['txt_company_description']
             phone = request.json['phone']
             company = Company.query.filter_by(id = txt_company).first()
             company.dni = dni
@@ -2545,9 +2546,12 @@ def _d_save_info_company():
             jsonSocial= JsonSocial()
             jsonSocial.email = email
             if company.inscripcion:
+                txt_company_emp = request.json['txt_company_emp']
                 company.inscripcion.phone = phone
                 company.inscripcion.correo = email
+                company.inscripcion.name = txt_company_emp
             company.phones = jsonPhone.jsonFormat()
+            company.description = company_description
             db.session.add(company)
             db.session.commit()
 

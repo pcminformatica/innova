@@ -94,6 +94,17 @@
                                                 </label>
                                                 </div>
                                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-typography--body1">
+                                                        Nombre de la empresaria:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name_emp" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                        
+                                                        <input id="txt_company_emp" value="{% if company.inscripcion %}{{ company.inscripcion.name }}{% endif %}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                    </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     DNI (SIN GUIONES):
                                                 </div>
@@ -131,7 +142,25 @@
                                                 
                                             </div>
                                             </div>
-                                    
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Descripción de los productos o servicio:
+                                                </div>
+                                                <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_comp_description" data-assigned-var> 
+                                                  <span class="mdc-notched-outline">
+                                                    <span class="mdc-notched-outline__leading"></span>
+                                                    <span class="mdc-notched-outline__notch">
+                                                      <span class="mdc-floating-label" id="my-label-id">Descripción de los productos o servicio</span>
+                                                    </span>
+                                                    <span class="mdc-notched-outline__trailing"></span>
+                                                  </span>
+                                                  <span class="mdc-text-field__resizer">
+                                                    <textarea id="txt_company_description" required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="4" cols="40" maxlength="500">{%if company.description != 'None'%}{{ company.description }}{% endif %}</textarea>
+                                                    <span class="mdc-text-field-character-counter">0 / 500</span>
+                                                  </span>
+                                                </label>
+                                                <br> <br>
+                                              </div>
                                             <br><br><br>
                                             
                                             
@@ -209,7 +238,7 @@
                           </div>
                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
                              
-                            <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_company_description" data-assigned-var> 
+                            <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_company_addres" data-assigned-var> 
                               <span class="mdc-notched-outline">
                                 <span class="mdc-notched-outline__leading"></span>
                                 <span class="mdc-notched-outline__notch">
@@ -263,6 +292,8 @@
         var dni = document.getElementById('txt_dni').value.trim();
         var email = document.getElementById('txt_email').value.trim();
         var phone = document.getElementById('txt_phone').value.trim();
+        var txt_company_description = document.getElementById('txt_company_description').value.trim();
+        var txt_company_emp = document.getElementById('txt_company_emp').value.trim();
 
         // Validar que no estén vacíos
         if (companyName === '' || dni === '' || email === '' || phone === '') {
@@ -281,7 +312,9 @@
             "companyName":companyName,
             "dni":dni,
             "email":email,
-            "phone":phone
+            "phone":phone,
+            "txt_company_description":txt_company_emp,
+            "txt_company_emp":txt_company_emp
         };
 
         console.log(postData)
@@ -306,38 +339,7 @@
         });
 
     }
-  function actualizarEtapa1(){
 
-const Swal = swcms.returnSwal()
-
-
-let postData = {
-  "txt_documente_id":"{{ company.id }}"
-};
-
-console.log(postData)
-
-let apiUrl = '/api/aprobar/documento/';
-
-
-swcms.postFetch(apiUrl, postData).then((data) => {
-  Swal.fire(
-  'Éxito',
-  'Documento aprobado',
-  'success'
-  )
-  window.setTimeout(() => { window.location.reload(); }, 1500);
-
-}).catch((error) => {
-  Swal.fire(
-  'Error de conexión',
-  'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
-  'error'
-  )
-  document.getElementById('btn_generar_carta').disabled = false;
-});
-
-}
 </script>
 
 
