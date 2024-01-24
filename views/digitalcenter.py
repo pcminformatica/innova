@@ -182,7 +182,36 @@ def __form_perfil_emp2():
         return redirect(url_for('home._home'))
     if request.method == 'GET':
         return 'hola'
-    
+
+@digitalcenter.route('/save/logo',methods = ['GET', 'POST'])
+def __form_perfil_logo_emp2():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-photo' not in request.files:
+            return redirect(request.url)
+        file = request.files['upload-photo']
+        txt_company_id = request.form['txt_company_id']
+        company = Company.query.filter_by(id = txt_company_id).first()
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            # initializing string
+            str2hash =  dt.now(tz.utc)
+            # encoding GeeksforGeeks using encode()
+            # then sending to md5()
+            result = hashlib.md5(str(str2hash).encode())
+            filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        company.avatar = filename
+        db.session.add(company)
+        db.session.commit()
+        db.session.refresh(company)
+        return redirect(url_for('digitalcenter._company_edit__form',company_id=txt_company_id))
+    if request.method == 'GET':
+        return 'hola'
 
 @app.route('/uploads/<name>')
 def download_file(name):

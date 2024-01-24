@@ -11,9 +11,10 @@ class JsonPhone():
 class JsonSocial():
     facebook = ''
     email = ''
-    instagram = ''    
+    instagram = '' 
+    web = ''    
     def jsonFormat(self):
-        return {"facebook": self.facebook, "email": self.email,"instagram": self.instagram}
+        return {"facebook": self.facebook, "email": self.email,"instagram": self.instagram,"web": self.web}
 
 class JsonConfigProfile():
     kobotoolbox_access = []

@@ -31,21 +31,68 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__content">
                                 <div class="mdc-layout-grid__inner">
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet">
+                                        <div class="mdc-card__primary-action" tabindex="0">
+                                            <div class="mdc-card__media">
+                                                {% if company.avatar %}
+                                                <img style="max-height:110px" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{company.avatar}}" alt="Border Perfil" />
+            
+                                                {% else %}
+                                                <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                                <img class="profile-pic" src="../../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                                {% endif %}
+                                            </div>
+                                            <div class="mdc-card__ripple"></div>
+                                            <img id="output"/>
+                                        </div>                   
+                                        <form id="formPIC"  action = "/save/logo" method="POST" enctype = "multipart/form-data">
+                                            <input
+                                               
+                                                id="txt_company_id"
+                                                name="txt_company_id"
+                                                type="hidden"
+                                                value="{{company.id}}"
+                                              />
+                                            <label htmlFor="upload-photo" style="margin: auto">
+                                                <input
+                                                  style="display:none"
+                                                  id="upload-photo"
+                                                  name="upload-photo"
+                                                  type="file"
+                                                  onchange="loadFile(event)"
+                                                />
+                                                <Fab
+                                                <button id="submitSaveButtonPIC"  class="mdc-button mdc-button--raised mdc-button--leading">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >add</i
+                                                    >
+                                                    <span class="mdc-button__label">Modificar logo de la empresa </span>
+                                                  </button>
+                                                </Fab>
+                                                <br />
+                                                <br />
+                                              
+                                                <Fab color="primary" size="small" component="span" aria-label="add">
+                                                  <AddIcon />
+                                                </Fab>
+                                              </label>
+                                        </form>   
+                                        
+                                    </div>
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet">
                                         <p><b>Nombre de empresa:</b> {{company.name}} </p>
                                         <p><b>Nombre de empresaria:</b> {{company.inscripcion.name}} </p>
                                         <p><b>Teléfono:</b> {{company.inscripcion.phone}} </p>
                                         <p><b>Correo:</b> {{company.inscripcion.correo}} </p>
                                     </div>
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet">
                                         <p><b>Departamento:</b> {{company.inscripcion.departamento}} </p>
                                         <p><b>Municipio:</b> {{company.inscripcion.municipio}} </p>
                                         <p><b>Aldea:</b> {{company.inscripcion.aldea}} </p>
                                         <p><b>Direccion:</b> {{company.address}} </p>
                                     </div>
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet s-font-align-center">
-                               
-                                    </div>
+                          
                                 </div>
                             </div>
     
@@ -148,7 +195,17 @@
                                                         <span lass="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                                
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-typography--body1">
+                                                        Pagina web:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                        
+                                                        <input id="txt_web"  value="{{ company.social_networks.web }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
                                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     TELEFONO:
@@ -183,10 +240,33 @@
                                                   </span>
                                                 </label>
                                                 <br> <br>
-                                              </div>
+                                            </div>
                                             <br><br><br>
                                             
-                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                      <input type="checkbox"
+                                                             class="mdc-checkbox__native-control"
+                                                            name="cxb_accept"
+                                                             id="checkbox-1"  {% if company.public %}checked{% endif %}/>
+                                                      <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                             viewBox="0 0 24 24">
+                                                          <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                      </div>
+                                                      <div class="mdc-checkbox__ripple"></div>
+                                                      <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-1">
+                                                        La empresa puede ser publicada en conexion INNOVA
+                                                    </label>
+                                                </div>
+                                            </div>
                     
                                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
                                             mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
@@ -317,9 +397,20 @@
         var phone = document.getElementById('txt_phone').value.trim();
         var txt_instagram = document.getElementById('txt_instagram').value.trim();
         var txt_facebook = document.getElementById('txt_facebook').value.trim();
+        var txt_web = document.getElementById('txt_web').value.trim();
         var txt_company_description = document.getElementById('txt_company_description').value.trim();
         var txt_company_emp = document.getElementById('txt_company_emp').value.trim();
+        var checkboxes = document.getElementsByName('cxb_accept');
+        // loop over them all
+        let accept = 1;
+        for (var i=0; i<checkboxes.length; i++) {
+        // And stick the checked ones onto an array...
+        if (!checkboxes[i].checked) {
+            accept = 0
+        }
+        }
 
+ 
         // Validar que no estén vacíos
         if (companyName === '' || dni === '' || email === '' || phone === '') {
             alert('Todos los campos son obligatorios');
@@ -341,7 +432,9 @@
             "txt_company_description":txt_company_description,
             "txt_company_emp":txt_company_emp,
             "txt_instagram":txt_instagram,
-            "txt_facebook":txt_facebook
+            "txt_facebook":txt_facebook,
+            "txt_web":txt_web,
+            "accept":accept
         };
 
         console.log(postData)
