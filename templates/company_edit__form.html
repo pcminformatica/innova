@@ -127,6 +127,29 @@
                                                 </label>
                                                 </div>
                                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-typography--body1">
+                                                        Facebook:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                        
+                                                        <input id="txt_facebook"  value="{{ company.social_networks.facebook }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                    <div class="mdc-typography--body1">
+                                                        Instagram:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                        
+                                                        <input id="txt_instagram"  value="{{ company.social_networks.instagram }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                                
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     TELEFONO:
                                                 </div>
@@ -292,6 +315,8 @@
         var dni = document.getElementById('txt_dni').value.trim();
         var email = document.getElementById('txt_email').value.trim();
         var phone = document.getElementById('txt_phone').value.trim();
+        var txt_instagram = document.getElementById('txt_instagram').value.trim();
+        var txt_facebook = document.getElementById('txt_facebook').value.trim();
         var txt_company_description = document.getElementById('txt_company_description').value.trim();
         var txt_company_emp = document.getElementById('txt_company_emp').value.trim();
 
@@ -313,8 +338,10 @@
             "dni":dni,
             "email":email,
             "phone":phone,
-            "txt_company_description":txt_company_emp,
-            "txt_company_emp":txt_company_emp
+            "txt_company_description":txt_company_description,
+            "txt_company_emp":txt_company_emp,
+            "txt_instagram":txt_instagram,
+            "txt_facebook":txt_facebook
         };
 
         console.log(postData)
@@ -324,7 +351,7 @@
         swcms.postFetch(apiUrl, postData).then((data) => {
         Swal.fire(
         'Éxito',
-        'Documento aprobado',
+        'Información actulizada',
         'success'
         )
         window.setTimeout(() => { window.location.reload(); }, 1500);

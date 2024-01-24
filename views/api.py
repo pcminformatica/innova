@@ -2538,6 +2538,8 @@ def _d_save_info_company():
             email = request.json['email']
             company_description = request.json['txt_company_description']
             phone = request.json['phone']
+            instagram = request.json['txt_instagram']
+            facebook = request.json['txt_facebook']
             company = Company.query.filter_by(id = txt_company).first()
             company.dni = dni
             company.name = companyName
@@ -2545,11 +2547,14 @@ def _d_save_info_company():
             jsonPhone.phone = phone
             jsonSocial= JsonSocial()
             jsonSocial.email = email
+            jsonSocial.facebook = instagram
+            jsonSocial.instagram = facebook
             if company.inscripcion:
                 txt_company_emp = request.json['txt_company_emp']
                 company.inscripcion.phone = phone
                 company.inscripcion.correo = email
                 company.inscripcion.name = txt_company_emp
+            company.social_networks = jsonSocial.jsonFormat()
             company.phones = jsonPhone.jsonFormat()
             company.description = company_description
             db.session.add(company)
