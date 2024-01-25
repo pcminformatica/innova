@@ -763,7 +763,18 @@ class AttentionLog(db.Model):
     description = db.Column(db.Text, unique=False, nullable=True)
     date_attention = db.Column(db.DateTime, nullable=True)
     date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
-        
+
+# Attention Log
+class ContactCenter(db.Model):
+    _tablename__ = 'contactcenter'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    name = db.Column(db.String(300), unique=False, nullable=True)
+    phone = db.Column(db.String(300), unique=False, nullable=True)
+    message = db.Column(db.Text, unique=False, nullable=True)
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
+
 # Company
 class Company(db.Model):
     _tablename__ = 'company'

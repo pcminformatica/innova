@@ -6,6 +6,11 @@ from datetime import timedelta as td
 from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
+@app.template_filter('custom_slice')
+def custom_slice(value, length):
+    return value[:length]
+
+app.jinja_env.filters['custom_slice'] = custom_slice
 
 from flask_login import logout_user, current_user, login_required
 from models.models import CompanyStage,surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
@@ -593,7 +598,9 @@ def _logoutuser():
 @home.route('/conexioninnova/')
 def _conexioninnova():
     app.logger.debug('** SWING_CMS ** - Marketplace')
-    return render_template('conexioninnova.html')
+    companies = Company.query.filter(Company.enabled == True,Company.public == True).all()
+    return render_template('conexioninnova.html',companies=companies)
+
 
 
 @home.route('/offline/')

@@ -1078,6 +1078,6 @@ def _admin_company_monitoring_list():
     return render_template('monitoreo/company_monitoring_list.html',**context)
 
 @monitoreo.route('/directorio/empresas/',methods=['GET', 'POST'])
-def _catalogo_company():
+def _directorio_company():
     return render_template('monitoreo/directorio_company.html')
 

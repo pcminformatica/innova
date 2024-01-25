@@ -5,7 +5,7 @@ from datetime import timezone as tz
 from flask import Blueprint, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import current_user, login_required
-from models.models import AttentionLog,CourseManagers,TrainingType,ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
+from models.models import ContactCenter,AttentionLog,CourseManagers,TrainingType,ActionPlanReferences,WalletTransaction,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Appointments, CatalogIDDocumentTypes, CatalogUserRoles, CatalogServices
 from models.models import CompanyMonitoring,ServiceChannel,surveys_sde,catalog_surveys_sde,Evaluations,ModalityType,CompanyStage,EnrollmentRecord,Courses,CompanyStatus,User, UserExtraInfo, UserXEmployeeAssigned, UserXRole,Company
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 from models.diagnostico import Diagnosticos
@@ -2982,3 +2982,28 @@ def get_companies_info_2():
         return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)})
+
+@api.route('/api/save/message/', methods = ['POST'])
+def _d_save_message():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+
+            txt_company_name = request.json['txt_company_name']
+            txt_company_phone = request.json['txt_company_phone']
+            txt_company_mensaje = request.json['txt_company_mensaje']
+            txt_company_id = request.json['txt_company_id']
+            message = ContactCenter()
+            message.name =txt_company_name
+            message.company_id = txt_company_id
+            message.phone = txt_company_phone
+            message.message = txt_company_mensaje
+            
+            db.session.add(message)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })

@@ -1,6 +1,139 @@
 {% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
 {% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
 {% block page_title %}Marketplace - Innova{% endblock %}
+{% block css_script_section %}
+<meta http-equiv="Cache-Control" content="no-store">
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+
+.mdc-button--small {
+        font-size: 10px; /* Ajusta el tamaño de la fuente según tus necesidades */
+    }
+
+    .mdc-button--fullwidth{
+        width: 100%;
+    }
+
+</style>
+<style>
+     /* Estilos para filas verdes (menos de 180 días) */
+     .green-row {
+        background-color: #DFF0D8; /* Verde suave */
+    }
+
+    /* Estilos para filas naranjas (entre 180 y 365 días) */
+    .orange-row {
+        background-color: #FFD699; /* Naranja suave */
+    }
+
+    /* Estilos para filas rojas (más de 365 días) */
+    .red-row {
+        background-color: #FFB2B2; /* Rojo suave */
+    }
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 60vh;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.profile-container {
+    text-align: center;
+}
+
+.profile-image {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #3498db; /* Color de fondo del avatar */
+    color: #fff; /* Color del texto (iniciales) */
+    font-size: 24px;
+    width: 180px;
+    height: 180px;
+    cursor: pointer;
+}
+
+.profile-image input {
+    display: none;
+}
+
+.initials {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+</style>
+{% endblock %}
 {% block body %}
 <style>
     .mdc-card__media--square::before {
@@ -9,6 +142,7 @@
 </style>
 <main class="s-main-content">
     <div class="container-color-background container-size-m">
+      <!--
         <header class="container-marketplace--topappbar mdc-top-app-bar">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -70,7 +204,8 @@
                 </a>
                 </div>
             </div>
-        </aside>
+        </aside>-->
+        {% for company in companies %}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
@@ -83,32 +218,51 @@
                                   <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-phone">
                                     <div class="mdc-card__primary-action" tabindex="0">
                                         <div class="mdc-card__media">
-                                            <img class="profile-background" src="{{ url_for('static', filename='images/calzadovarela.png') }}" alt="Border Perfil" />
-                                            
+                                            {% if company.avatar %}
+                                              <div class="profile-container">
+                                                <img style="max-height: 200px;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{company.avatar}}" alt="Border Perfil" />
+                                              </div>  
+                                            {% else %}
+                                              <div class="profile-container">
+                                                <label for="fileInput" class="profile-image">
+                                                    <input type="file" id="fileInput" accept="image/*">
+                                                    <span class="initials">{{ company.name|custom_slice(2)|upper  }}</span>
+                                                </label>
+                                              </div>
+                                            {% endif %}
                                         </div>
+                                        
                                         <div class="mdc-card__ripple"></div>
+                                        {% if company.social_networks.email %}
+                                        <div >
+                                          Correo:
+                                          {{ company.social_networks.email}}
+                                        </div>
+                                        {% endif %}
+                                        {% if company.inscripcion %}
+                                            <div>
+                                                <i class="material-icons s-font-color-secondary">place</i>
+                                                
+                                                  {{company.inscripcion.departamento}}, {{company.inscripcion.municipio}}.
+                                              
+                                            </div>
+                                        {% endif %}
                                     </div>
 
-                                    <div >
-                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                        Lun-Vie, 8am-5pm.
-                                    </div>
-                                    <div>
-                                        <i class="material-icons s-font-color-secondary">place</i>
-                                        Tegucigalpa, Honduras.
-                                    </div>
+                   
                                   </div>
                                   <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-1-phone">
 
                                     <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
-                                        Calzado Varela
+                                      {% if company.name %}
+                                        {{company.name}}
+                                      {% endif %}
                                     </div>
-                                    <div class="search-result--service mdc-typography--headline6">
-                                        Fabricar y comercializar calzado de cuero
-                                    </div>
+
                                     <div class="search-result--description mdc-typography--body1">
-                                        Somos productores y comercializadores de calzado para damas, caballeros y niños cuya materia principal es el cuero. Nos avalan más de 50 años de experiencia en la industria del calzado
-                                        <br>
+                                      {% if company.description %}
+                                        {{company.description}}
+                                      {% endif %}
 
                                     </div>
                                   </div>
@@ -121,6 +275,7 @@
                       <div class="mdc-card__ripple"></div>
                     </div>
                     <div class="mdc-card__actions">
+                      <!-- Whatsapp Button 
                       <div class="mdc-card__action-buttons">
                         <a target="_blank" href="https://wa.me/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
                                    
@@ -128,100 +283,386 @@
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label" style="margin-left: 10px;"> Whatsapp Business</span>
                         </a>
-                      </div>
-                      <div class="mdc-card__action-icons">
-                        <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
-                            <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">compatir Perfil</span>
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
-                          </a>
-
-     
-                      </div>
+                      </div>-->
+                          <!-- Facebook Button -->
+                          {% if company.social_networks.facebook %}
+                          <div class="mdc-card__action-buttons">
+                              <a target="_blank" href="{{ company.social_networks.facebook }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #1877F2; margin-left: 10px;">
+                                <span class="fa fa-facebook" aria-hidden="true"></span>
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__label" style="margin-left: 10px;"> Facebook</span>
+                            </a>
+                          </div>
+                          {% endif %}
+                          {% if company.social_networks.instagram %}
+                          <!-- Instagram Button -->
+                          <div class="mdc-card__action-buttons">
+                            <a target="_blank" href="{{ company.social_networks.instagram }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #E4405F; margin-left: 10px;">
+                                <span class="fa fa-instagram" aria-hidden="true"></span>
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__label" style="margin-left: 10px;"> Instagram</span>
+                            </a>
+                          </div>
+                          {% endif %}
+                          {% if company.social_networks.web %}
+                          <!-- Página web personalizada -->
+                          <div class="mdc-card__action-buttons">
+                            <a target="_blank" href="{{ company.social_networks.instagram }}" class="mdc-button mdc-button--raised mdc-button--leading" style=" margin-left: 10px;">
+                              <span class="fa fa-laptop" aria-hidden="true"></span>
+                              <span class="mdc-button__ripple"></span>
+                              <span class="mdc-button__label" style="margin-left: 10px;"> Visitar Mi Sitio Web</span>
+                            </a>
+                          </div>
+                          {% endif %}
+                          
+                          <!-- Página web personalizada -->
+                          <div class="mdc-card__action-buttons">
+                            <a  href="#" onclick="contactCompany('{{ company.id }}')" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style=" margin-left: 10px;">
+                              <span class="fa fa-mouse-pointer" aria-hidden="true"></span>
+                              <span class="mdc-button__ripple"></span>
+                              <span class="mdc-button__label" style="margin-left: 10px;"> Contactar empresa</span>
+                            </a>
+                          </div>
+                      
+                 
                     </div>
                   </div>
               </div>
             </div>
-            
-          </div>
-          <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
-                <div class="mdc-card  mdc-card--color-on-primary">
-                    <div class="mdc-card__primary-action" >
-                      <div class="mdc-card__media mdc-card__media--square">
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid">
-                                <div class="mdc-layout-grid__inner">
-                                  <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-phone">
-                                    <div class="mdc-card__primary-action" tabindex="0">
-                                        <div class="mdc-card__media">
-                                            <img class="profile-background" src="{{ url_for('static', filename='images/mabel.png') }}" alt="Border Perfil" />
-                                            
-                                        </div>
-                                        <div class="mdc-card__ripple"></div>
-                                    </div>
-
-                                    <div >
-                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                        Lun-Vie, 8am-5pm.
-                                    </div>
-                                    <div>
-                                        <i class="material-icons s-font-color-secondary">place</i>
-                                        Tegucigalpa, Honduras.
-                                    </div>
+        </div>
+        {% endfor %}
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+              <div class="mdc-card  mdc-card--color-on-primary">
+                  <div class="mdc-card__primary-action" >
+                    <div class="mdc-card__media mdc-card__media--square">
+                      <div class="mdc-layout-grid">
+                          <div class="mdc-layout-grid">
+                              <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-phone">
+                                  <div class="mdc-card__primary-action" tabindex="0">
+                                      <div class="mdc-card__media">
+                                          <img class="profile-background" src="{{ url_for('static', filename='images/calzadovarela.png') }}" alt="Border Perfil" />
+                                          
+                                      </div>
+                                      <div class="mdc-card__ripple"></div>
                                   </div>
-                                  <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-1-phone">
 
-                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
-                                        Mabel's Studio
-                                    </div>
-                                    <div class="search-result--service mdc-typography--headline6">
-                                        Como se refleja tu rostro en un espejo, se refleja tu corazón en tu rostro. 
-                                    </div>
-                                    <div class="search-result--description mdc-typography--body1">
-                                        Mabel's Studio Maquillaje para toda ocasión, con servicio a domicilio dentro del casco de la ciudad.
-                                    </div>
+                                  <div >
+                                      <i class="material-icons s-font-color-secondary">schedule</i>
+                                      Lun-Vie, 8am-5pm.
                                   </div>
-                                 
+                                  <div>
+                                      <i class="material-icons s-font-color-secondary">place</i>
+                                      Tegucigalpa, Honduras.
+                                  </div>
                                 </div>
-                              </div>
-                        </div>
-                      </div>
-                      <!-- ... additional primary action content ... -->
-                      <div class="mdc-card__ripple"></div>
-                    </div>
-                    <div class="mdc-card__actions">
-                      <div class="mdc-card__action-buttons">
-                        <a target="_blank" href="https://wa.me/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
-                                   
-                            <span class="mdc-fab__icon fa fa-whatsapp" aria-hidden="true"></span>
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label" style="margin-left: 10px;"> Whatsapp Business</span>
-                        </a>
-                      </div>
-                      <div class="mdc-card__action-icons">
-                        <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
-                            <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">compatir Perfil</span>
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
-                          </a>
+                                <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-1-phone">
 
-     
+                                  <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                                      Calzado Varela
+                                  </div>
+                                  <div class="search-result--service mdc-typography--headline6">
+                                      Fabricar y comercializar calzado de cuero
+                                  </div>
+                                  <div class="search-result--description mdc-typography--body1">
+                                      Somos productores y comercializadores de calzado para damas, caballeros y niños cuya materia principal es el cuero. Nos avalan más de 50 años de experiencia en la industria del calzado
+                                      <br>
+
+                                  </div>
+                                </div>
+                               
+                              </div>
+                            </div>
                       </div>
+                    </div>
+                    <!-- ... additional primary action content ... -->
+                    <div class="mdc-card__ripple"></div>
+                  </div>
+                  <div class="mdc-card__actions">
+                    <div class="mdc-card__action-buttons">
+                      <a target="_blank" href="https://wa.me/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                 
+                          <span class="mdc-fab__icon fa fa-whatsapp" aria-hidden="true"></span>
+                          <span class="mdc-button__ripple"></span>
+                          <span class="mdc-button__label" style="margin-left: 10px;"> Whatsapp Business</span>
+                      </a>
+                    </div>
+                    <div class="mdc-card__action-icons">
+                      <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+                          <div class="mdc-button__ripple"></div>
+                          <span class="mdc-button__label">compatir Perfil</span>
+                          <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
+                        </a>
+
+   
                     </div>
                   </div>
-              </div>
+                </div>
             </div>
-            
           </div>
+          
+        </div>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+              <div class="mdc-card  mdc-card--color-on-primary">
+                  <div class="mdc-card__primary-action" >
+                    <div class="mdc-card__media mdc-card__media--square">
+                      <div class="mdc-layout-grid">
+                          <div class="mdc-layout-grid">
+                              <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell--order-1 mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-phone">
+                                  <div class="mdc-card__primary-action" tabindex="0">
+                                      <div class="mdc-card__media">
+                                          <img class="profile-background" src="{{ url_for('static', filename='images/mabel.png') }}" alt="Border Perfil" />
+                                          
+                                      </div>
+                                      <div class="mdc-card__ripple"></div>
+                                  </div>
+
+                                  <div >
+                                      <i class="material-icons s-font-color-secondary">schedule</i>
+                                      Lun-Vie, 8am-5pm.
+                                  </div>
+                                  <div>
+                                      <i class="material-icons s-font-color-secondary">place</i>
+                                      Tegucigalpa, Honduras.
+                                  </div>
+                                </div>
+                                <div class="mdc-layout-grid__cell--order-2 mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-1-phone">
+
+                                  <div class="search-result--name mdc-typography--headline5 s-font-color-secondary">
+                                      Mabel's Studio
+                                  </div>
+                                  <div class="search-result--service mdc-typography--headline6">
+                                      Como se refleja tu rostro en un espejo, se refleja tu corazón en tu rostro. 
+                                  </div>
+                                  <div class="search-result--description mdc-typography--body1">
+                                      Mabel's Studio Maquillaje para toda ocasión, con servicio a domicilio dentro del casco de la ciudad.
+                                  </div>
+                                </div>
+                               
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                    <!-- ... additional primary action content ... -->
+                    <div class="mdc-card__ripple"></div>
+                  </div>
+                  <div class="mdc-card__actions">
+                    <div class="mdc-card__action-buttons">
+                      <a target="_blank" href="https://wa.me/" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                 
+                          <span class="mdc-fab__icon fa fa-whatsapp" aria-hidden="true"></span>
+                          <span class="mdc-button__ripple"></span>
+                          <span class="mdc-button__label" style="margin-left: 10px;"> Whatsapp Business</span>
+                      </a>
+                    </div>
+                    <div class="mdc-card__action-icons">
+                      <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+                          <div class="mdc-button__ripple"></div>
+                          <span class="mdc-button__label">compatir Perfil</span>
+                          <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
+                        </a>
+
+   
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          
+        </div>
         <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
 
             
         </div>
     </div>
 </main>
+
+<div id="modal1_sde" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal1')">&times;</span>
+      <!-- Contenido específico para modal1 -->
+              <!-- Tu contenido aquí -->
+      <div class="mdc-layout-grid container">
+          <!-- ... (tu código HTML) ... -->
+          <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                  <div class="container-dashboard--card-info">
+                      <div class="mdc-card mdc-card--color-on-primary">
+                          <div class="mdc-card__content">
+                              <div class="mdc-typography--headline5 s-font-color-secondary">Contactar</div>
+                              <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
+         
+                                  <input type="hidden" id="txt_company_id" name="txt_company_id"  value="">
+                            
+                                  <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                    <div class="mdc-typography--body1">
+                                        Nombre completo:
+                                    </div>
+                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                        <span class="mdc-text-field__ripple"></span>
+                                        
+                                        <input id="txt_company_name" value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                        <span lass="mdc-line-ripple"></span>
+                                    </label>
+                                  </div>
+                                  <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                    <div class="mdc-typography--body1">
+                                        Telefono:
+                                    </div>
+                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                        <span class="mdc-text-field__ripple"></span>
+                                        
+                                        <input id="txt_company_phone" value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                        <span lass="mdc-line-ripple"></span>
+                                    </label>
+                                  </div>
+                                  <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                    <div class="mdc-typography--body1">
+                                      Mensaje:
+                                    </div>
+                                    <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_comp_description" data-assigned-var> 
+                                      <span class="mdc-notched-outline">
+                                        <span class="mdc-notched-outline__leading"></span>
+                                        <span class="mdc-notched-outline__notch">
+                                          <span class="mdc-floating-label" id="my-label-id">Mensaje </span>
+                                        </span>
+                                        <span class="mdc-notched-outline__trailing"></span>
+                                      </span>
+                                      <span class="mdc-text-field__resizer">
+                                        <textarea id="txt_company_mensaje" required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="4" cols="40" maxlength="500"></textarea>
+                                        <span class="mdc-text-field-character-counter">0 / 500</span>
+                                      </span>
+                                    </label>
+                                    <br> <br>
+                                </div>
+                                  <br><br><br>
+                                  
+                                  
+          
+
+                                  <div class="s-font-align-center">
+                                      <button id="submitSaveButton" onclick="sendMessage()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                          
+                                          <span class="mdc-button__ripple"></span>
+                                          <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                          <span class="mdc-button__label">Enviar</span>
+                                      </button>
+                                  </div>
+                                  </form>    
+                   
+                           
+                          </div>
+                          <div class="mdc-card__actions">
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+
+<script>
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Cierra el modal si el usuario hace clic fuera de él
+window.addEventListener('click', (event) => {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
+});
+
+// Cierra el modal si el usuario presiona la tecla Escape
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+            closeModal(modal.id);
+        });
+    }
+});
+
+function contactCompany(id){
+    openModal('modal1_sde')
+    document.getElementById("txt_company_id").value = id
+
+}
+
+
+function sendMessage(){
+
+    const Swal = swcms.returnSwal()
+        
+    let txt_company_name = document.getElementById("txt_company_name").value.trim() || null
+    let txt_company_phone = document.getElementById("txt_company_phone").value.trim() || null
+    let txt_company_mensaje = document.getElementById("txt_company_mensaje").value.trim() || null
+    let txt_company_id = document.getElementById("txt_company_id").value.trim() || null
+
+    if(txt_company_name==null || txt_company_phone==null || txt_company_mensaje == null || txt_company_id == null ){
+      Swal.fire(
+        'Llena todos los campos del formulario',
+        '',
+        'error'
+        )
+        return false
+    }
+      
+    
+    let postData = {
+        "txt_company_name":txt_company_name,
+        "txt_company_phone":txt_company_phone,
+        "txt_company_mensaje":txt_company_mensaje,
+        "txt_company_id":txt_company_id,
+    };
+
+    console.log(postData)
+ 
+
+    let apiUrl = '/api/save/message/';
+
+
+    swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+        'Éxito',
+        'Mensaje enviado',
+        'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+
+    }).catch((error) => {
+        Swal.fire(
+        'Error de conexión',
+        'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+        'error'
+        )
+      
+    });
+    return false
+}
+</script>
 {% endblock %}
