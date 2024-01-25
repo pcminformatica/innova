@@ -271,8 +271,13 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estados</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Redes</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">email</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">instagram</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">facebook</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">web</th>
+                                            
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">description</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Rubro</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Rubro diagnostico</th>
                             
@@ -393,7 +398,12 @@
             ids.appendChild(container);
             // Agregar los enlaces al DOM (suponiendo que tienes una tabla con id "myTable")
             row.appendChild(ids);
-            const fields = ["dni", "name", "company_name", "departamento", "municipio","status","redes","phones","rubro","data"];
+            
+
+
+
+
+            const fields = ["dni", "name", "company_name", "departamento", "municipio","status","phones","email","instagram","facebook","web","description","rubro","data"];
 
             fields.forEach(field => {
                 const cell = document.createElement("td");

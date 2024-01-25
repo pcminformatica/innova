@@ -2950,9 +2950,29 @@ def get_companies_info_2():
                 redes =   "facebook: " + facebook + " "
             if otrared != "":
                 redes =   "otrared: " + otrared + " "
+            email = ""
+            instagram= ""
+            facebook= ""
+            web= ""
 
-              
-  
+            if company.social_networks:
+                existe = company.social_networks.get('email')
+                if existe:
+                    email = company.social_networks['email'] 
+
+                existe = company.social_networks.get('instagram')
+                if existe:
+                    instagram = company.social_networks['instagram']
+                
+                existe = company.social_networks.get('email')
+                if existe:
+                    facebook = company.social_networks['facebook']
+                
+                existe = company.social_networks.get('web')
+                if existe:
+                    web = company.social_networks['web'] 
+            description = ''
+      
             data = {
                 'id': company.id,
                 'dni': company.dni,
@@ -2974,7 +2994,12 @@ def get_companies_info_2():
                 'respuestas':respuestas,
                 'descripcion':descripcion,
                 'phones':phones,
-                'redes':redes
+                'redes':redes,
+                'email':email,
+                'instagram':instagram,
+                'facebook':facebook,
+                'web':web,
+                "description":description,
              
             }
             result.append(data)

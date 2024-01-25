@@ -13,7 +13,8 @@ def custom_slice(value, length):
 app.jinja_env.filters['custom_slice'] = custom_slice
 
 from flask_login import logout_user, current_user, login_required
-from models.models import CompanyStage,surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+
+from models.models import ContactCenter,CompanyStage,surveys_sde,catalog_surveys_sde,EnrollmentRecord,ActionPlanReferences,Evaluations,WalletTransaction,catalogCategory,DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
 # Creates Timestamps without UTC for JavaScript handling:
@@ -368,7 +369,11 @@ def _home():
                 ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
                 ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
                 enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
-
+                contact = ContactCenter.query.filter_by(company_id=company.id).all()
+                print(contact)
+                print(contact)
+                print(contact)
+                print(contact)
                 context = {
                     "enrolls":enrolls,
                     "deposits":deposits,
@@ -386,7 +391,8 @@ def _home():
                     "plan_action":plan_action,
                     "satisfaccion":satisfaccion,
                     'diagnos_final':diagnos_final,
-                    'impacto':impacto
+                    'impacto':impacto,
+                    "contact":contact
                 }
                 return render_template('home_dashboard.html',**context)
         elif current_user.is_user_role(['ofe']):

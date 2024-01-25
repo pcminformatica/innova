@@ -184,6 +184,7 @@ ul,li{
 
     
                                 <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+
                                     {% if satisfaccion %}
                                     <a href="{{ url_for('home._formulario_encuestas_satisfaccion') }}" >
                                         <li class="mdc-deprecated-list-item" tabindex="0">
@@ -246,6 +247,43 @@ ul,li{
                                     {% endif %}
                                 {% endif %}
                                 </ul>
+                                {% if contact %}
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Mensajes de contacto</div>
+                                    <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Mensaje</th>
+                                        </tr>
+                                        
+                                        
+                                        
+                                        </thead>
+                                        <tbody class="mdc-data-table__content">
+                                            {% for contact in contact %}            
+                                        <tr class="mdc-data-table__row">
+                                          
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{loop.index}}
+                                            </th>
+                                            <th class="mdc-data-table__cell" scope="row">
+                                                {{ contact.name }}
+                                            </th>
+                                            <td class="mdc-data-table__cell " scope="row">
+                                                {{ contact.phone }}
+                                            </td>
+                                            <td class="mdc-data-table__cell " scope="row">
+                                                {{ contact.message }}
+                                            </td>
+                                           
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                {% endif %}
                                 <!--
                                 <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                     <li class="mdc-deprecated-list-item" tabindex="0">
