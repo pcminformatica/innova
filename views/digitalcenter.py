@@ -11,7 +11,7 @@ from models.models import AttentionLog,WalletTransaction,ActionPlanReferences,Do
 from models.models import CompanyMonitoring,ServiceChannel,CompanyStage,EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
-from sqlalchemy import or_
+from sqlalchemy import or_,not_
 import pytz
 from views.wallet import _update_wallet
 
@@ -1344,7 +1344,8 @@ def _plan_action_dashboard(user_uid):
         diagnostico = diagnos.resultados
     else:
         diagnostico = False
-    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(or_(UserXRole.user_role_id == 3, UserXRole.user_role_id == 4)).all()
+    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(or_(UserXRole.user_role_id == 3, UserXRole.user_role_id == 4)).\
+            filter(not_(User.id.in_([152, 144]))).all()
     context = {
         'users':users,
         'company': company,
