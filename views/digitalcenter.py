@@ -1344,7 +1344,7 @@ def _plan_action_dashboard(user_uid):
         diagnostico = diagnos.resultados
     else:
         diagnostico = False
-    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(UserXRole.user_role_id == 3).all()
+    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(or_(UserXRole.user_role_id == 3, UserXRole.user_role_id == 4)).all()
     context = {
         'users':users,
         'company': company,
