@@ -2421,6 +2421,30 @@ def _d_company_dash_search():
                 date_action_plan = ''
                 if company.date_action_plan:
                     date_action_plan = company.date_action_plan.strftime('%Y-%m-%d')
+                email = ""
+
+
+                if company.social_networks:
+                    existe = company.social_networks.get('email')
+                    if existe:
+                        email = company.social_networks['email'] 
+
+                    existe = company.social_networks.get('instagram')
+                    if existe:
+                        instagram = company.social_networks['instagram']
+                    
+                    existe = company.social_networks.get('email')
+                    if existe:
+                        facebook = company.social_networks['facebook']
+                    
+                    existe = company.social_networks.get('web')
+                    if existe:
+                        web = company.social_networks['web'] 
+                created_by  = company.created_by_data.name if company.created_by_data else '',
+                phone = ''
+                if company.inscripcion:
+                    phone =  company.inscripcion.phone
+                   
                 response['records'].append({
                     'company_id': company.id,
                     "dni":dni,
@@ -2443,6 +2467,10 @@ def _d_company_dash_search():
                     'totalempleados':totalempleados,
                     'constituida':constituida,
                     'edad':edad,
+                    'email':email,
+                    'user':created_by,
+                    'phone':phone
+
 
                 })
             return jsonify(response)
