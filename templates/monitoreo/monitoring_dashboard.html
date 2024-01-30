@@ -1621,7 +1621,9 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
-                                        
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asesora</th>
                                         
                                         
                                         
@@ -1643,6 +1645,9 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asesora</th>
                                         </tr>
                                     </tfoot>
                                       </table>
@@ -1962,7 +1967,7 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
     row.appendChild(ids);
     secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress"];
+        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress","telefono","correo","asesora"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -2042,7 +2047,7 @@ let secuencia = 1
     secuencia = secuencia + 1
   // Create and append table cells
 
-  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress"];
+  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress","telefono","correo","asesora"];
 
   fields.forEach(field => {
     const cell = document.createElement("td");
