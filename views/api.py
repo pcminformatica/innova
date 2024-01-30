@@ -2999,7 +2999,7 @@ def get_companies_info_2():
                 existe = company.social_networks.get('web')
                 if existe:
                     web = company.social_networks['web'] 
-            description = ''
+            description = company.description
       
             data = {
                 'id': company.id,
