@@ -2,11 +2,22 @@
 {% block page_description %}Innova, Innova Mujer, Welcome, Home, Inicio, Bienvenida{% endblock %}
 {% block page_title %}Welcome - Innova{% endblock %}
 {% block body %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }} ">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }} ">
 <style>
+    .owl-next {
+        padding: 15 !important;
+    }
+
     .owl-stage-outer{
-        height: 80vh !important;
+        height: 75vh !important;
+    }
+  
+    .owl-carousel .owl-nav button.owl-next{
+        padding: 1 !important;
+    }
+    .owl-carousel .owl-item img {
+        height: 75vh !important;
     }
     .container-color-landingpage{
         background: rgb(134,44,134);
@@ -131,7 +142,7 @@ margin: 0 0 47px 0;
         color: white;
         background-color: black;
         border: none;
-        padding: 15px;
+        padding: 15px!important;;
         cursor: pointer;
        
     }
@@ -171,8 +182,10 @@ margin: 0 0 47px 0;
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
                         <div  style="font-size: 2em;">
                             <br>
-                            ETAPAS DEL PROYECTO
+                            Etapas del proyectos
                             <br>
+                            <br>
+                   
                
                         </div>
  
@@ -219,8 +232,8 @@ margin: 0 0 47px 0;
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
                         mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
                         <div class=""  style="font-size: 2em;">
-                            <br>
-                            <br>
+
+                        
                             <br>
                             Socios principales:
                             <br>
