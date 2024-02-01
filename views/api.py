@@ -2880,14 +2880,13 @@ def get_companies_info_2():
         status = CompanyStage.query.filter_by(name_short='E2').first()
 
         # Consulta las empresas con las condiciones especificadas
-        companies = (
-            Company.query
-            .filter(
-                Company.enabled == True,
-                Company.stage_id == status.id
-            )
-            .all()
-        )
+        lista = []
+
+        if current_user.id == 3 or current_user.id == 24 or current_user.id == 144:
+            companies = Company.query.join(User, User.id==Company.created_by)\
+                .filter(Company.enabled==True,  Company.stage_id == status.id).all()
+        else:
+            companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True,  Company.stage_id == status.id, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
 
         # Crea una lista de diccionarios con los campos requeridos
         result = []
