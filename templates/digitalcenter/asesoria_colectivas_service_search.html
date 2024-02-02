@@ -110,6 +110,7 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado en PA</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Días </th>
@@ -154,13 +155,22 @@
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.status_id %}
-                                                            {{ action.company.status.name }}
+                                                        {% if action.progress == '0' %}
+                                                            Pendiente
+                                                        {% else if action.progress == '100' %}
+                                                            Finalizado
+                                                        {% else %}
+                                                            En Proceso
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.status_id %}
                                                             {{ action.company.status.name }}
+                                                        {% endif %}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {% if action.company.stage_id %}
+                                                            {{ action.company.stage.name }}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
@@ -212,6 +222,7 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado en PA</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Días </th>
@@ -253,6 +264,15 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.action_plan.company.inscripcion %}
                                                             {{action.action_plan.company.inscripcion.phone}}
+                                                        {% endif %}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {% if action.action_plan.progress == '0' %}
+                                                            Pendiente
+                                                        {% else if action.action_plan.progress == '100' %}
+                                                            Finalizado
+                                                        {% else %}
+                                                            En Proceso
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
