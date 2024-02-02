@@ -2577,8 +2577,8 @@ def _d_save_info_company():
             jsonPhone.phone = phone
             jsonSocial= JsonSocial()
             jsonSocial.email = email
-            jsonSocial.facebook = instagram
-            jsonSocial.instagram = facebook
+            jsonSocial.facebook = facebook
+            jsonSocial.instagram = instagram 
             jsonSocial.web = web
             if company.inscripcion:
                 txt_company_emp = request.json['txt_company_emp']
