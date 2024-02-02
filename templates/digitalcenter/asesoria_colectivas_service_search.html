@@ -251,18 +251,18 @@
                                                         {{action.action_plan.company.inscripcion.name}}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.inscripcion %}
-                                                            {{action.company.inscripcion.phone}}
+                                                        {% if action.action_plan.company.inscripcion %}
+                                                            {{action.action_plan.company.inscripcion.phone}}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.status_id %}
-                                                            {{ action.company.status.name }}
+                                                            {{ action.action_plan.company.status.name }}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.stage_id %}
-                                                            {{ action.company.stage.name }}
+                                                        {% if action.action_plan.company.stage_id %}
+                                                            {{ action.action_plan.company.stage.name }}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">

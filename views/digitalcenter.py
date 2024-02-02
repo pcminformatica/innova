@@ -2203,7 +2203,7 @@ def _asesoria_colectivas_service_list():
     return render_template('digitalcenter/asesoria_colectivas_service_list.html',**context)
 
 
-@digitalcenter.route('/sde/service/<int:service_id>/search',methods=['GET', 'POST'])
+@digitalcenter.route('/sde/service/s/<int:service_id>/search',methods=['GET', 'POST'])
 def _asesoria_colectivas_service_search(service_id):
     filtro = False
     if request.method == 'POST':
