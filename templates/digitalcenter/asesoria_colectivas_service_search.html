@@ -157,7 +157,7 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.progress == '0' %}
                                                             Pendiente
-                                                        {% else if action.progress == '100' %}
+                                                        {% elif action.progress == '100' %}
                                                             Finalizado
                                                         {% else %}
                                                             En Proceso
@@ -269,7 +269,7 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.action_plan.progress == '0' %}
                                                             Pendiente
-                                                        {% else if action.action_plan.progress == '100' %}
+                                                        {% elif action.action_plan.progress == '100' %}
                                                             Finalizado
                                                         {% else %}
                                                             En Proceso
