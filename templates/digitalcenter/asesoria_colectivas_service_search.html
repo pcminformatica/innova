@@ -149,7 +149,9 @@
                                                         {{action.company.inscripcion.name}}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {{action.company.inscripcion.phone}}
+                                                        {% if action.company.inscripcion %}
+                                                            {{action.company.inscripcion.phone}}
+                                                        {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.status_id %}
@@ -157,8 +159,8 @@
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.stage %}
-                                                            {{ action.company.stage.name }}
+                                                        {% if action.company.status_id %}
+                                                            {{ action.company.status.name }}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
@@ -249,7 +251,9 @@
                                                         {{action.action_plan.company.inscripcion.name}}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {{action.company.inscripcion.phone}}
+                                                        {% if action.company.inscripcion %}
+                                                            {{action.company.inscripcion.phone}}
+                                                        {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.status_id %}
@@ -257,7 +261,7 @@
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.stage %}
+                                                        {% if action.company.stage_id %}
                                                             {{ action.company.stage.name }}
                                                         {% endif %}
                                                     </th>
