@@ -2736,3 +2736,12 @@ def _company_rango_list():
 @app.template_filter('datetimeformat')
 def datetimeformat(value, format='%Y-%m-%d'):
     return value.strftime(format) if value else ''
+
+
+@digitalcenter.route('/empresas/diagnostico/',methods=['GET', 'POST'])
+def _company_diagnostic():
+    company = 0
+    context = {
+        'apis': company,
+    }
+    return render_template('digitalcenter/company_diagnostic.html',**context)
