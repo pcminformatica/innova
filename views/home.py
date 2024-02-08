@@ -604,7 +604,7 @@ def _logoutuser():
 @home.route('/conexioninnova/')
 def _conexioninnova():
     app.logger.debug('** SWING_CMS ** - Marketplace')
-    companies = Company.query.filter(Company.enabled == True,Company.public == True).order_by(Company.date_created.asc()).all()
+    companies = Company.query.filter(Company.enabled == True,Company.public == True).order_by(Company.date_created.desc()).all()
     return render_template('conexioninnova.html',companies=companies)
 
 
