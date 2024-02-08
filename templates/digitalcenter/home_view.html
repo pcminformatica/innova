@@ -10,23 +10,16 @@
 .content--active {
   display: block;
 }
+
+.mdc-card__content{
+    min-height: 630px;
+}
 </style>
 {% endblock %}
 
 {% block body %}
 <main class="s-main-content">
-    <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-xs">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
-                            mdc-layout-grid__cell--align-middle">
-                    <div class="mdc-typography--headline3">
-                        Atención empresarial
-                    </div>
-                </div>
-            </div>
-        </div>
-    </di>
+
 
 
     
@@ -34,13 +27,13 @@
         <div class="mdc-layout-grid container-size-xs">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet
-                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle">
-                    <div class="mdc-typography--headline4 s-font-color-support">
+                            mdc-layout-grid__cell--span-4-phone ">
+                    <div class="mdc-typography--headline4 s-font-color-secondary">
                         Asesorate con nuestros expertos
                     </div>
                     <p class="mdc-typography--body1">
-                        Habla con nuestros expertos para que podamos asesorarte sobre como potenciar tu negocio. Tu nos cuentas
-                        tus necesidades y nosotros te proveemos una solución que a la medida para ti. 
+                        Habla con nuestros expertos para que podamos asesorarte sobre como potenciar tu negocio. Tu nos comentas 
+                        tus necesidades y nosotros tras te proveemos una solución que a la medida. 
                     </p>
                     <button class="mdc-button mdc-button--raised" aria-label="Chat" alt="Chat"
                             data-action-type="redirect" data-action-val="/digitalcenter/chat/">
@@ -82,678 +75,698 @@
                     </p>
                 </div>
         
+<!---
+-->
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+mdc-layout-grid__cell--align-middle">
+    <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+        <div class="mdc-tab-scroller">
+        <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content">
+            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                <span class="mdc-tab__text-label">Especialistas en administración de Empresas</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+            </button>
+            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                <span class="mdc-tab__text-label">Especialistas INNOVA</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+            </button>
+            <!--
+            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                <span class="mdc-tab__text-label">Especialista en informática</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+            </button>
 
+            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                <span class="mdc-tab__text-label">Especialista en Pedagogía</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+            </button>
+            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                <span class="mdc-tab__text-label">Especialista en producción industrial</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+            </button>-->
+
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- one  -->
+    <div class="content content--active">
+     
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userSPS %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userSPS.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userSPS.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userSPS.extra_info.names }} {{ userSPS.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userSPS.extra_info.profession %}
+                                            {{ userSPS.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userSPS.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userSPS.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userSPS.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        San Pedro Sula, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons" style="justify-content:center">
+                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userSPS.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                        
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                          >person</i
+                                        >
+                                        <span class="mdc-button__label">Ver Perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userLCB %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userLCB.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userLCB.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userLCB.extra_info.names }} {{ userLCB.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userLCB.extra_info.profession %}
+                                            {{ userLCB.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userLCB.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userLCB.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userLCB.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        La Ceiba, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons" style="justify-content:center">
+                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userLCB.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                        
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                          >person</i
+                                        >
+                                        <span class="mdc-button__label">Ver Perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+             
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userCholo %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userCholo.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userCholo.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userCholo.extra_info.names }} {{ userCholo.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userCholo.extra_info.profession %}
+                                            {{ userCholo.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userCholo.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userCholo.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userCholo.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Choloma, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons" style="justify-content:center">
+                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userCholo.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                        
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                          >person</i
+                                        >
+                                        <span class="mdc-button__label">Ver Perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userCholu %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userCholu.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userCholu.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userCholu.extra_info.names }} {{ userCholu.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userCholu.extra_info.profession %}
+                                            {{ userCholu.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userCholu.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userCholu.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userCholu.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Choluteca, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__action-icons" style="justify-content:center">
+                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userCholu.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                        
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                          >person</i
+                                        >
+                                        <span class="mdc-button__label">Ver Perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            
+            </div>
+            
+        </div>
+
+    </div>
+    <!-- two -->
+    <div class="content content">
+     
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userJefe %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userJefe.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userJefe.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userJefe.extra_info.names }} {{ userJefe.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userJefe.extra_info.profession %}
+                                            {{ userJefe.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userJefe.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userJefe.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userJefe.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+ 
+                        </div>
+                        
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userJefe.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                    
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >person</i
+                                    >
+                                    <span class="mdc-button__label">Ver Perfil</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userRi %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userRi.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userRi.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userRi.extra_info.names }} {{ userRi.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userRi.extra_info.profession %}
+                                            {{ userRi.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userRi.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userRi.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userRi.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+ 
+                        </div>
+                        
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userRi.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                    
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >person</i
+                                    >
+                                    <span class="mdc-button__label">Ver Perfil</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userRu %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userRu.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userRu.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userRu.extra_info.names }} {{ userRu.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userRu.extra_info.profession %}
+                                            {{ userRu.extra_info.profession.name }}
+                                         {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userRu.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userRu.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userRu.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+ 
+                        </div>
+                        
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userRu.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                    
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >person</i
+                                    >
+                                    <span class="mdc-button__label">Ver Perfil</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>  
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userAna %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userAna.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userAna.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userAna.extra_info.names }} {{ userAna.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userAna.extra_info.profession %}
+                                            {{ userAna.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userAna.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userAna.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userAna.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+ 
+                        </div>
+                        
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userAna.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                    
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >person</i
+                                    >
+                                    <span class="mdc-button__label">Ver Perfil</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>  
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
+                        {% if userAngie %}
+                        <div class="mdc-card__content">
+                            
+                            <p class="mdc-typography--body2">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="search-result--profile mdc-card__media s-font-align-center">
+                                        {% if userAngie.extra_info.avatar %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userAngie.extra_info.avatar}}" alt="Border Perfil" />
+                                        {% else %}
+                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
+                                        {% endif %}
+                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
+                                    </div>
+                                    <div class="search-result--rating s-font-align-center">
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star</i>
+                                        <i class="material-icons s-font-color-satisfied">star_half</i>
+                                    </div>
+                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
+                                        {{ userAngie.extra_info.names }} {{ userAngie.extra_info.last_names }}
+                                    </div>
+                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
+                                        {% if userAngie.extra_info.profession %}
+                                            {{ userAngie.extra_info.profession.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
+                                        {%if userAngie.extra_info.biography.description %}
+                                        {% autoescape false %}
+                                            {{userAngie.extra_info.biography.description|replace("\n", "<br/>")}}
+                                        {% endautoescape %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="search-result--hours mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">schedule</i>
+                                        {{ userAngie.extra_info.biography.office_hours }}
+                                    </div>
+                                    <div class="search-result--location mdc-typography--subtitle2">
+                                        <i class="material-icons s-font-color-secondary">place</i>
+                                        Tegucigalpa, Honduras.
+                                    </div>
+           
+                                    <div class="mdc-card__ripple"></div>
+                                </div>
+                            </p>
+ 
+                        </div>
+                        
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons" style="justify-content:center">
+                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userAngie.id) }}" class="mdc-button mdc-button--icon-leading" >
+                                    
+                                    <span class="mdc-button__ripple"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >person</i
+                                    >
+                                    <span class="mdc-button__label">Ver Perfil</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>  
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
 
                 
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
-                mdc-layout-grid__cell--align-middle">
-                    <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
-                        <div class="mdc-tab-scroller">
-                        <div class="mdc-tab-scroller__scroll-area">
-                            <div class="mdc-tab-scroller__scroll-content">
-                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-                                <span class="mdc-tab__content">
-                                <span class="mdc-tab__text-label">Especialistas en administración de Empresas</span>
-                                </span>
-                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>
-                            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                <span class="mdc-tab__content">
-                                <span class="mdc-tab__text-label">Especialistas INNOVA</span>
-                                </span>
-                                <span class="mdc-tab-indicator mdc-tab-indicator">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>
-                            <!--
-                            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                <span class="mdc-tab__content">
-                                <span class="mdc-tab__text-label">Especialista en informática</span>
-                                </span>
-                                <span class="mdc-tab-indicator mdc-tab-indicator">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>
-
-                            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                <span class="mdc-tab__content">
-                                <span class="mdc-tab__text-label">Especialista en Pedagogía</span>
-                                </span>
-                                <span class="mdc-tab-indicator mdc-tab-indicator">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>
-                            <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                <span class="mdc-tab__content">
-                                <span class="mdc-tab__text-label">Especialista en producción industrial</span>
-                                </span>
-                                <span class="mdc-tab-indicator mdc-tab-indicator">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>-->
-
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <!-- one  -->
-                    <div class="content content--active">
-                     
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userSPS %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userSPS.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userSPS.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userSPS.extra_info.names }} {{ userSPS.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userSPS.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userSPS.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userSPS.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userSPS.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        San Pedro Sula, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <div class="mdc-card__actions">
-                                                <div class="mdc-card__action-icons" style="justify-content:center">
-                                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userSPS.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                        
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                          >person</i
-                                                        >
-                                                        <span class="mdc-button__label">Ver Perfil</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userLCB %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userLCB.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userLCB.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userLCB.extra_info.names }} {{ userLCB.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userLCB.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userLCB.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userLCB.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userLCB.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        La Ceiba, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <div class="mdc-card__actions">
-                                                <div class="mdc-card__action-icons" style="justify-content:center">
-                                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userLCB.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                        
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                          >person</i
-                                                        >
-                                                        <span class="mdc-button__label">Ver Perfil</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                             
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userCholo %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userCholo.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userCholo.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userCholo.extra_info.names }} {{ userCholo.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userCholo.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userCholo.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userCholo.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userCholo.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Choloma, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <div class="mdc-card__actions">
-                                                <div class="mdc-card__action-icons" style="justify-content:center">
-                                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userCholo.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                        
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                          >person</i
-                                                        >
-                                                        <span class="mdc-button__label">Ver Perfil</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userCholu %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userCholu.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userCholu.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userCholu.extra_info.names }} {{ userCholu.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userCholu.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userCholu.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userCholu.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userCholu.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Choluteca, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                                            <div class="mdc-card__actions">
-                                                <div class="mdc-card__action-icons" style="justify-content:center">
-                                                    <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userCholu.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                        
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                          >person</i
-                                                        >
-                                                        <span class="mdc-button__label">Ver Perfil</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-                            
-                            </div>
-                            
-                        </div>
-             
-                    </div>
-                    <!-- two -->
-                    <div class="content content">
-                     
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userJefe %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userJefe.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userJefe.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userJefe.extra_info.names }} {{ userJefe.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userJefe.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userJefe.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userJefe.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userJefe.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                 
-                                        </div>
-                                        
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userJefe.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userRi %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userRi.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userRi.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userRi.extra_info.names }} {{ userRi.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userRi.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userRi.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userRi.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userRi.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                 
-                                        </div>
-                                        
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userRi.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userRu %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userRu.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userRu.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userRu.extra_info.names }} {{ userRu.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userRu.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userRu.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userRu.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userRu.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                 
-                                        </div>
-                                        
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userRu.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>  
-                                </div>
-
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userAna %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userAna.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userAna.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userAna.extra_info.names }} {{ userAna.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userAna.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userAna.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userAna.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userAna.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                 
-                                        </div>
-                                        
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userAna.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>  
-                                </div>
-
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <div style="width: 90%;border-radius: 2.5rem 0.5rem;" id="serv-f--social" class="mdc-card container-elevation-s">
-                                        {% if userAngie %}
-                                        <div class="mdc-card__content">
-                                            
-                                            <p class="mdc-typography--body2">
-                                                <div class="mdc-card__primary-action" tabindex="0">
-                                                    <div class="search-result--profile mdc-card__media s-font-align-center">
-                                                        {% if userAngie.extra_info.avatar %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='upload/') }}{{userAngie.extra_info.avatar}}" alt="Border Perfil" />
-                                                        {% else %}
-                                                            <img style="height: 200px;border-radius: 2.5rem 0.5rem;" class="profile-background" src="{{ url_for('static', filename='images/manifest/innova_perfil.svg') }}" alt="Border Perfil" />
-                                                        {% endif %}
-                                                        <!-- <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" /> -->
-                                                    </div>
-                                                    <div class="search-result--rating s-font-align-center">
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star</i>
-                                                        <i class="material-icons s-font-color-satisfied">star_half</i>
-                                                    </div>
-                                                    <div class="search-result--name mdc-typography--headline5 s-font-color-secondary s-font-align-center">
-                                                        {{ userAngie.extra_info.names }} {{ userAngie.extra_info.last_names }}
-                                                    </div>
-                                                    <div class="search-result--service mdc-typography--headline6 s-font-align-center">
-                                                        {{ userAngie.extra_info.profession.name }}
-                                                    </div>
-                                                    <div class="search-result--description mdc-typography--body1 s-font-align-left">
-                                                        {%if userAngie.extra_info.biography.description %}
-                                                        {% autoescape false %}
-                                                            {{userAngie.extra_info.biography.description|replace("\n", "<br/>")}}
-                                                        {% endautoescape %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="search-result--hours mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">schedule</i>
-                                                        {{ userAngie.extra_info.biography.office_hours }}
-                                                    </div>
-                                                    <div class="search-result--location mdc-typography--subtitle2">
-                                                        <i class="material-icons s-font-color-secondary">place</i>
-                                                        Tegucigalpa, Honduras.
-                                                    </div>
-                           
-                                                    <div class="mdc-card__ripple"></div>
-                                                </div>
-                                            </p>
-                 
-                                        </div>
-                                        
-                                        <div class="mdc-card__actions">
-                                            <div class="mdc-card__action-icons" style="justify-content:center">
-                                                <a href="{{ url_for('digitalcenter._sdeProfileA',user_id=userAngie.id) }}" class="mdc-button mdc-button--icon-leading" >
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                      >person</i
-                                                    >
-                                                    <span class="mdc-button__label">Ver Perfil</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>  
-                                </div>
-                            </div>
-                            
-                        </div>
-             
-                    </div>
-                </div>
+            
             </div>
         </div>
     </div>
