@@ -814,10 +814,11 @@
             secuencia = secuencia + 1
             // Create and append table cells
             let container = document.createElement("spam");
+            let apiId = record['id'];  // Reemplaza esto con el valor adecuado
             {% if current_user.id not in (144,) %}
             // Create and append table cells
             
-            let apiId = record['id'];  // Reemplaza esto con el valor adecuado
+   
             let manageLink = createLink(
                 "/company/view/16/".replace(16,apiId),
                 "Administrar",
