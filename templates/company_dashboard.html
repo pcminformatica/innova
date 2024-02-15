@@ -474,7 +474,22 @@
                                         {% if diagnostico %}
                                         
                                             {% if diagnostico %} 
-                                         
+                                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                                           
+                                                       
+                                                            <div class="mdc-typography--headline5 s-font-color-secondary">DIAGNOSTICO INICIAL</div>
+                                                            <br>
+                                            
+                                                            <p>
+                                                                <b>Creado por: </b> {{diagnos.user.name }}
+                                                            </p>
+                                                            <p>
+                                                                <b>Fecha: </b> {{diagnos.date_created }}
+                                                            </p>
+                                                     
+                                                         
+                                                     
+                                                </div>
 
                                                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                                                                 <div class="container-dashboard--card-info">

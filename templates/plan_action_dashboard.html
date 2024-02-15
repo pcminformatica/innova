@@ -100,6 +100,7 @@
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Acciones </th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Creado por </th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referencias</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
@@ -125,6 +126,9 @@
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             Diagnóstico
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                            
@@ -162,6 +166,9 @@
                                                            
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
                                                             N/A
                                                         </th>
                                                         <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
@@ -192,6 +199,9 @@
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{action.services.name}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.created_by_user.name}} a las {{ action.date_created }}
                                                         </th>
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{action.services.catalog_catego.name}}

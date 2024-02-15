@@ -1795,6 +1795,7 @@ def _company_dashboard(user_uid):
         'company': company,
         'actions':actions,
         "diagnostico":diagnostico,
+        "diagnos":diagnos
     }
  
     return render_template('company_dashboard.html',**context)

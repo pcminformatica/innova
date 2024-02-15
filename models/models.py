@@ -844,8 +844,10 @@ class DiagnosisCompany(db.Model):
     date_created = db.Column(db.DateTime, nullable=False, default=dt.now(default_timezone))
     status = db.Column(db.Boolean, nullable=False, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship("User")
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
+    
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     resultados = db.Column(db.JSON, unique=False, nullable=True)
 
@@ -858,6 +860,8 @@ class ActionPlan(db.Model):
     date_scheduled_start = db.Column(db.DateTime, nullable=True)
     date_scheduled_end = db.Column(db.DateTime, nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # Define la relación con la clase User para employe_assigned
+    created_by_user = db.relationship('User', foreign_keys=[created_by])
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
     services_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=True)

@@ -80,7 +80,7 @@ function setDepartamentos(respuesta){
           }
 
           
-          mdcAssignedVars['txt_depto'].layoutOptions();
+          mdcAssignedVars['txt_departamento'].layoutOptions();
 
       }else{
           console.log(respuesta)
@@ -91,7 +91,7 @@ function setDepartamentos(respuesta){
 //funciones lugar de nacimiento
 function nacDepto(ff){
 
-  console.log(mdcAssignedVars['txt_depto'].value)
+  console.log(mdcAssignedVars['txt_departamento'].value)
   var listContainer = document.querySelector('#list-muni');
   listContainer.innerHTML = ''
   listContainer.appendChild(crearNuevaOpcion('', ''))
@@ -125,6 +125,7 @@ function nacMum(ff){
       }
   }
   mdcAssignedVars['txt_aldea'].layoutOptions();
+  mdcAssignedVars['txt_aldea'].selectedIndex = -1;
 }
 
 // Obtiene el botón por su ID
@@ -133,7 +134,7 @@ const submitButton = document.getElementById('submitSaveButton');
 // Agrega un listener para el evento 'click'
 submitButton.addEventListener('click', function() {
     // Acciones a realizar cuando se hace clic en el botón
-    console.log('¡El botón fue clickeado!');
+    console.log('¡El botón fue clickead2o!');
     // Aquí puedes agregar cualquier otra lógica que desees
     let preguntas = []
     const Swal = swcms.returnSwal()
@@ -168,6 +169,7 @@ submitButton.addEventListener('click', function() {
     }
 
     console.log(preguntas)
+    console.log('¡2El botón fue clickead2o!');
 });
 
 
