@@ -333,7 +333,7 @@
             
                                 <div class="mdc-card__content container-dashboard--messages-msg">
                                     <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                        {% if current_user.id not in (25,) %}
+                                        {% if current_user.id  in (25,) %}
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('monitoreo._indicadores_productividad') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>
