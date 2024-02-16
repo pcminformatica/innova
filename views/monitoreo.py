@@ -698,7 +698,7 @@ def _indicadores_inscritas_4():
 from views.digitalcenter import convertir_a_datetime
 @monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
 def _indicadores_perfil_asesor(user_uid):
-    if current_user.id in [3,24]:
+    if current_user.id in [3,24,25]:
         user = User.query.filter(User.id==user_uid).first()
     else:
         user = User.query.filter(User.id==current_user.id).first()
