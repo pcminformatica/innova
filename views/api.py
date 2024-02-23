@@ -2282,7 +2282,7 @@ def _d_company_dash_search():
     try:
         lista = []
 
-        if current_user.id == 3 or current_user.id == 24 or current_user.id == 144:
+        if current_user.id == 3 or current_user.id == 24 or current_user.id == 144  or current_user.id == 25 :
             companies = Company.query.join(User, User.id==Company.created_by)\
                 .filter(Company.enabled==True).all()
         else:

@@ -6,6 +6,30 @@
     .mdc-card__media--square::before {
   margin-top: 0px !important;
 }
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.material-design-file {
+    display: inline-block;
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.material-design-file:hover {
+    background-color: #1976D2;
+}
+
 </style>
 <main class="s-main-content">
     <div class="container-color-background container-size-m">
@@ -113,7 +137,10 @@
                                 <span lass="mdc-line-ripple"></span>
                             </label>
                         </div>
-                        <br>
+                                         
+                        <p>
+                            URL (opcional):
+                        </p>
                           <label class="mdc-text-field mdc-text-field--outlined">
                             <span class="mdc-notched-outline">
                               <span class="mdc-notched-outline__leading"></span>
@@ -125,8 +152,19 @@
                             <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="">
                           </label>
                           <br>
+                          <p>
+                            Archivo (opcional):
+                          </p>
+                          <input type="file" id="fileInput" name="fileInput" class="inputfile" onchange="updateFileName()">
+                          <label for="fileInput" class="material-design-file">
+                              <i class="fas fa-plus"></i>
+                              <span id="fileName">Seleccionar archivo</span>
+                          </label>
                           
-                          <br>
+                          
+                          
+                         
+                          <br><br>
                           <label class="mdc-text-field mdc-text-field--outlined">
                             <span class="mdc-notched-outline">
                               <span class="mdc-notched-outline__leading"></span>
@@ -320,6 +358,7 @@
         var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
         var txt_url = document.getElementById("txt_url").value.trim() || null
         var txt_hora = document.getElementById("txt_hora").value.trim() || null
+        const fileInput = document.getElementById('fileInput').files[0];
 
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
@@ -347,6 +386,7 @@
             "txt_fecha":txt_fecha,
             "txt_url":txt_url,
             "txt_hora":txt_hora,
+            "fileInput":fileInput,
             'txt_modality': mdcAssignedVars['txt_modality'].value.trim() || null,
       };
       console.log(postData)
@@ -381,5 +421,15 @@
         //document.getElementById('submitSaveButton').disabled = false;
       });
     }
+
+    function updateFileName() {
+    const input = document.getElementById('fileInput');
+    const label = document.getElementById('fileName');
+    if (input.files.length > 0) {
+        label.textContent = input.files[0].name;
+    } else {
+        label.textContent = 'Seleccionar archivo';
+    }
+}
 </script>
 {% endblock %}
