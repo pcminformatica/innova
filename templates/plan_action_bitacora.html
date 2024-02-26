@@ -152,7 +152,6 @@
                             <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="">
                           </label>
                           <br>
-                          <!--
                           <p>
                             Archivo (opcional):
                           </p>
@@ -161,12 +160,11 @@
                               <i class="fas fa-plus"></i>
                               <span id="fileName">Seleccionar archivo</span>
                           </label>
-                           <br><br>
-                          -->
                           
                           
-                          <br><br>
+                          
                          
+                          <br><br>
                           <label class="mdc-text-field mdc-text-field--outlined">
                             <span class="mdc-notched-outline">
                               <span class="mdc-notched-outline__leading"></span>
@@ -302,11 +300,19 @@
                                               
                                       <span class="mdc-button__ripple"></span>
                                       <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                      <span class="mdc-button__label">Ver documento</span>
+                                      <span class="mdc-button__label">Ver URL</span>
                                     </a>
                                     {% endif %}
                                    
+                                    {% if apix.documento  %}
                                     
+                                    <a target="_blank" href="{{ url_for('static', filename='upload/') }}{{ apix.documento }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: gray;">
+                                              
+                                      <span class="mdc-button__ripple"></span>
+                                      <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                      <span class="mdc-button__label">Ver documento</span>
+                                    </a>
+                                    {% endif %}
                                   </td>
                                   <td class="mdc-data-table__cell no-print">
                                   <a target="_blank" href="{{ url_for('digitalcenter._plan_action_bitacora_update',user_uid=apix.id) }}" class="mdc-button mdc-button--color-secondary" >
@@ -360,7 +366,7 @@
         var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
         var txt_url = document.getElementById("txt_url").value.trim() || null
         var txt_hora = document.getElementById("txt_hora").value.trim() || null
-        const fileInput = 'fileInput';
+        const fileInput = document.getElementById('fileInput').files[0];
 
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
         var txt_servicios = "{{ action.id }}"
@@ -376,52 +382,44 @@
         }
   
         txt_finalizo= txt_finalizo.checked
-        console.log(txt_finalizo)
-        console.log(txt_porcentaje)
-        console.log(txt_servicios)
-        let postData = {
-            "txt_comentario":txt_comentario,
-            "txt_finalizo":txt_finalizo,
-            "txt_finalizo":txt_finalizo,
-            "txt_porcentaje":txt_porcentaje,
-            "txt_servicios":txt_servicios,
-            "txt_fecha":txt_fecha,
-            "txt_url":txt_url,
-            "txt_hora":txt_hora,
-            "fileInput":fileInput,
-            'txt_modality': mdcAssignedVars['txt_modality'].value.trim() || null,
-      };
-      console.log(postData)
+   
+        const formData = new FormData();
+        formData.append('txt_comentario', txt_comentario);
+        formData.append('txt_finalizo', txt_finalizo);
+        formData.append('txt_porcentaje', txt_porcentaje);
+        formData.append('txt_servicios', txt_servicios);
+        formData.append('txt_fecha', txt_fecha);
+        formData.append('txt_url', txt_url);
+        formData.append('txt_hora', txt_hora);
+        formData.append('txt_modality', mdcAssignedVars['txt_modality'].value.trim() || null);
+        formData.append('fileInput', fileInput);
+
+        
+      console.log(formData)
 
       let apiUrl = '/api/save/action/plan/history/';
       //document.getElementById('submitSaveButton').disabled = true;
 
-      swcms.postFetch(apiUrl, postData).then((data) => {
-
-        if (data.status == 200){
-          Swal.fire(
-          'Éxito',
-          'Plan de Acción creado!',
-          'success'
-        )
-        window.setTimeout(() => { window.location.reload(); }, 1500);
-        }else if (data.status == 201){
-            Swal.fire(
-            'Error',
-            'Plan de Acción porcentaje de avance no puede ser mayor que 100',
-            'error'
-          )
-        }
-  
-    
-      }).catch((error) => {
-        Swal.fire(
-          'Error de conexión',
-          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
-          'error'
-        )
-        //document.getElementById('submitSaveButton').disabled = false;
-      });
+        fetch(apiUrl, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+            if (data.status == 200){
+                Swal.fire(
+                    'Éxito',
+                    'Historial de plan de acción!',
+                    'success'
+                  )
+                  window.setTimeout(() => { window.location.reload(); }, 1500);
+            }
+        })
+        .catch(error => {
+            console.error('Error al enviar los datos:', error);
+        });
     }
 
     function updateFileName() {

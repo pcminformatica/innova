@@ -982,7 +982,7 @@ def _d_save_DiagnosisCompany():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
-
+import hashlib
 @api.route('/api/save/action/plan/history/', methods = ['POST'])
 @login_required
 def _d_save_ActionPlanHistory():
@@ -990,14 +990,20 @@ def _d_save_ActionPlanHistory():
     try:
         # POST: Save Appointment
         if request.method == 'POST':
-            txt_comentario = request.json['txt_comentario']
-            txt_porcentaje = request.json['txt_porcentaje']
-            txt_finalizo = request.json['txt_finalizo']
-            txt_servicios = request.json['txt_servicios']
-            txt_fecha = request.json['txt_fecha']
-            txt_url = request.json['txt_url']
-            txt_hora = request.json['txt_hora']
-            txt_modality = request.json['txt_modality'] 
+
+            txt_comentario = request.form['txt_comentario']
+            txt_porcentaje = request.form['txt_porcentaje']
+            txt_finalizo = request.form['txt_finalizo']
+            if txt_finalizo == 'false':
+                txt_finalizo = 0
+            else:
+                txt_finalizo = 1
+            txt_servicios = request.form['txt_servicios']
+            txt_fecha = request.form['txt_fecha']
+            txt_url = request.form['txt_url']
+            txt_hora = request.form['txt_hora']
+            txt_modality = request.form['txt_modality'] 
+            app.logger.error('** ooooooooooooooooooooooooooooooooooooooooo: {}'.format('e'))
             if int(txt_porcentaje) > 100:
                 return jsonify({ 'status': 201, 'msg': 'Perfil actulizado con' })
             plan = ActionPlan.query.filter_by(id = txt_servicios).first()
@@ -1024,7 +1030,20 @@ def _d_save_ActionPlanHistory():
             if txt_modality:
                 modality = ModalityType.query.filter_by(name_short=txt_modality).first()
                 history.id_modality_type = modality.id
-                
+            app.logger.error('*11111111111111111111* ooooooooooooooooooooooooooooooooooooooooo: {}'.format('e'))
+            if 'fileInput' in request.files:
+                file = request.files['fileInput']
+                # If the user does not select a file, the browser submits an
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    # initializing string
+                    str2hash =  dt.now(tz.utc)
+                    # then sending to md5()
+                    result = hashlib.md5(str(str2hash).encode())
+                    filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    history.documento = filename
+            app.logger.error('*22222222222* ooooooooooooooooooooooooooooooooooooooooo: {}'.format('e'))
             db.session.add(history)
             db.session.commit()
            

@@ -911,6 +911,7 @@ class ActionPlanReferences(db.Model):
 class ActionPlanHistory(db.Model):
     __tablename__ = 'action_plan_history'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    documento = db.Column(db.String(50), unique=False, nullable=True)
     action_plan_id = db.Column(db.Integer, db.ForeignKey('action_plan.id'), nullable=False)
     action_plan = db.relationship("ActionPlan")
     description = db.Column(db.Text, nullable=True)
