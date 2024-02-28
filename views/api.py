@@ -2302,8 +2302,7 @@ def _d_company_dash_search():
         lista = []
 
         if current_user.id == 3 or current_user.id == 24 or current_user.id == 144  or current_user.id == 25 :
-            companies = Company.query.join(User, User.id==Company.created_by)\
-                .filter(Company.enabled==True).all()
+            companies = Company.query.join(User, User.id==Company.created_by).filter(Company.id==17).all()[:1]
         else:
             companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
 
@@ -2312,7 +2311,7 @@ def _d_company_dash_search():
 
         # Consulta los diagnósticos para las compañías en la lista de ids
         diagnoses = DiagnosisCompany.query.filter(DiagnosisCompany.company_id.in_(company_ids)).order_by(DiagnosisCompany.date_created.asc()).all()
-        actions = ActionPlan.query.filter(ActionPlan.company_id.in_(company_ids)).order_by(ActionPlan.date_created.asc()).all()
+        actions = ActionPlan.query.filter(ActionPlan.company_id.in_(company_ids),ActionPlan.cancelled==0,ActionPlan.fase==1).order_by(ActionPlan.date_created.asc()).all()
         total = len(companies)
         response = {
             'r_filter': 'company',
@@ -2340,6 +2339,10 @@ def _d_company_dash_search():
                     company_status = company.status.name
                 else:
                     company_status = ''
+                if company.stage:
+                    company_stage = company.stage.name
+                else:
+                    company_stage = ''
                 totalempleados = ''
                 edad = ''
                 if company.inscripcion:
@@ -2437,6 +2440,14 @@ def _d_company_dash_search():
                     resultados = filtered_diagnoses[0].resultados
                 #filtered_diagnoses = [diagnosis.titulo for diagnosis in diagnoses if diagnosis.id == 10]
                 actions_diagnoses = [action.services_id  for action in actions if action.company_id == company.id]
+                n_services = len(actions_diagnoses)
+                print(n_services)
+                print(n_services)
+                print(n_services)
+                enroll =EnrollmentRecord.query.join(Courses, EnrollmentRecord.id_course == Courses.id).join(TrainingType, Courses.id_training_type == TrainingType.id).join(Company, EnrollmentRecord.company_id == Company.id).join(CourseManagers, Courses.id_course_managers == CourseManagers.id).filter(TrainingType.name_short == 'TT1').first()
+                managers_enroll = ''
+                if enroll:
+                    managers_enroll = enroll.course.course_managers.name
                 date_action_plan = ''
                 if company.date_action_plan:
                     date_action_plan = company.date_action_plan.strftime('%Y-%m-%d')
@@ -2488,7 +2499,10 @@ def _d_company_dash_search():
                     'edad':edad,
                     'email':email,
                     'user':created_by,
-                    'phone':phone
+                    'phone':phone,
+                    'company_stage':company_stage,
+                    'n_services':n_services,
+                    'managers_enroll':managers_enroll
 
 
                 })

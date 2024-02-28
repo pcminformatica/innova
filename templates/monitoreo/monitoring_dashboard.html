@@ -65,7 +65,7 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone ">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-3-phone ">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -1582,7 +1582,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-8-phone ">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-9-tablet mdc-layout-grid__cell--span-9-phone ">
                     <div class="container-dashboard--messages">
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
@@ -1616,14 +1616,18 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresa</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Capacitada</th>
+                                        
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de servicios</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asesora</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
                                         
                                         
                                         
@@ -1640,14 +1644,17 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre Empresa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Capacitada</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de servicios</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asesora</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
                                             
 
 
@@ -1970,7 +1977,7 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
     row.appendChild(ids);
     secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress","email","user","phone"];
+        const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan",'n_services',"action_plan_progress","email","user","phone"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -2040,7 +2047,7 @@ function getCheckValues(name){
     setJson(data)
     console.log(jsonData)
     const tableBody = document.getElementById("tableBody");
-let secuencia = 1
+    let secuencia = 1
     jsonData.records.forEach(record => { 
   const row = document.createElement("tr");
   
@@ -2050,7 +2057,7 @@ let secuencia = 1
     secuencia = secuencia + 1
   // Create and append table cells
 
-  const fields = ["dni", "name", "company_name", "company_status", "departamento", "municipio","diagnoses_submission_time","date_action_plan","action_plan_progress","email","user","phone"];
+  const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan","n_services","action_plan_progress","email","user","phone"];
 
   fields.forEach(field => {
     const cell = document.createElement("td");
