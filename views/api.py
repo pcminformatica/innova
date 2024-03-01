@@ -1506,7 +1506,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'rar', 'csv', 'mp4', 'mp3', 'wav', 'avi', 'mov', 'ai', 'psd'}
+
 @api.route('/api/create/carta/compromio', methods = ['POST'])
 @login_required
 def _d_create_carta_compromiso():
