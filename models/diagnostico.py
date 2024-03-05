@@ -90,7 +90,57 @@ class Diagnosticos():
         self.total_resultado.append(totales)
         return( self.total_resultado)
                 
+    def calcular_area2(self,datos):
 
+        self.total_resultado = []
+        for categoria in self.categorias:
+            codigo_categoria = categoria['id']
+            totales  =  totalesDiagnostico()
+            totales.id_area =codigo_categoria
+            totales.area =  categoria['area']
+            totales.ideales = categoria['ideales']
+            #recojemos las preguntas de categoria
+            preguntas_arr = list(e for e in self.preguntas if e['id_categoria']  == codigo_categoria) 
+            cantidad_preguntas = len(preguntas_arr)
+            for pregunta in preguntas_arr:
+                clave = pregunta['id']
+
+                #si existe la clave en los datos
+                # Buscar el elemento con id 
+                elemento_encontrado = next((respuesta for respuesta in datos if respuesta['id'] == clave), None)
+                # Verificar si se encontró el elemento
+                if elemento_encontrado:
+                    respuesta = int(elemento_encontrado['respuesta'])
+                    if respuesta == 0:
+                        cantidad_preguntas = cantidad_preguntas - 1
+                    totales.putaje_area = totales.putaje_area + int(elemento_encontrado['respuesta'])
+
+                else:
+                    totales.putaje_area = totales.putaje_area + 0
+            if cantidad_preguntas == 0:
+                totales.resultados =  round(totales.ideales *100,2)
+            else:
+                totales.resultados =  round( totales.putaje_area/(cantidad_preguntas*3) * totales.ideales *100,2)
+            totales.ideales = totales.ideales*100
+            self.total_resultado.append(totales)
+        totales  =  totalesDiagnostico()
+        totales.area = "Total"
+        for total1  in  self.total_resultado:
+            totales.putaje_area = totales.putaje_area + total1.putaje_area
+            totales.ideales = totales.ideales + total1.ideales
+            totales.resultados = round(totales.resultados + total1.resultados,2)
+        tipo_empresa = "EMPRESA D"
+        if totales.resultados <= 60:
+            totales.descripcion = "EMPRESA D"
+        elif totales.resultados <= 70:
+            totales.descripcion = "EMPRESA C"
+        elif totales.resultados <= 90:
+            totales.descripcion = "EMPRESA B"
+        elif totales.resultados <= 100:
+            totales.descripcion = "EMPRESA A"
+        self.total_resultado.append(totales)
+        return( self.total_resultado)
+                
                 
 
 
@@ -117,30 +167,30 @@ class Diagnosticos():
             {"id": "_1_4", "Pregunta":"1.4 ¿Tiene definidas las estrategias, objetivos, metas y acciones de su empresa?","id_categoria":1},
             {"id": "_1_5", "Pregunta":"1.5 ¿Planifica las actividades empresariales de corto, mediano y largo plazo","id_categoria":1},
             {"id": "_1_6", "Pregunta":"1.6 ¿Su empresa es familiar","id_categoria":1},
-            {"id": "_1_7", "Pregunta":"1.7 ¿Si su empresa es familiar tiene algún plan de sucesión?","id_categoria":1},
+            {"id": "_1_7", "Pregunta":"1.7 Si su empresa es familiar, ¿Cuenta con plan de sucesion?","id_categoria":1},
             {"id": "_1_8", "Pregunta":"1.8 ¿El personal es tomado en cuenta en el diseño de las estrategias de su empresa?","id_categoria":1},
             {"id": "_1_9", "Pregunta":"1.9 ¿El personal es parte fundamental de las estrategias de su empresa?","id_categoria":1},
-            {"id": "_1_10", "Pregunta":"1.10 ¿Conoce las ventajas competitivas de su competencia respecto a su empresa?","id_categoria":1},
-            {"id": "_1_11", "Pregunta":"1.11  ¿Conoce cuáles son las tendencias de mercado para los productos y/o servicios que su empresa ofrece?","id_categoria":1},
+            {"id": "_1_10", "Pregunta":"1.10 ¿Conoce las ventajas competitivas de su empresa?","id_categoria":1},
+            {"id": "_1_11", "Pregunta":"1.11 ¿Conoce cuales son las tendencias de mercado para los productos y/o servicios que su empresa ofrece?","id_categoria":1},
             {"id": "_2_1", "Pregunta":"2.1 ¿Tiene definidas sus metas de crecimiento en ventas?","id_categoria":2},
             {"id": "_2_2", "Pregunta":"2.2 ¿Poseen sus productos o servicios una marca?","id_categoria":2},
             {"id": "_2_3", "Pregunta":"2.3 ¿Su marca está registrada?","id_categoria":2},
-            {"id": "_2_4", "Pregunta":"2.4 ¿Está su marca diseñada e insertada en todos los elementos de publicidad gráfica y electrónica (brochures, hojas volantes, página web, etc)?","id_categoria":2},
+            {"id": "_2_4", "Pregunta":"2.4 ¿Está su marca diseñada e insertada en algunos elementos de publicidad gráfica y electrónica (redes sociales, página web, papeleria, etc)?","id_categoria":2},
             {"id": "_2_5", "Pregunta":"2.5 ¿Su producto o servicio ha sido diseñado de acuerdo con estudios para conocer la demanda de los clientes?","id_categoria":2},
             {"id": "_2_6", "Pregunta":"2.6 ¿Sondea los gustos y preferencias de sus clientes para mantener su producto o servicio vigente?","id_categoria":2},
             {"id": "_2_7", "Pregunta":"2.7 ¿Posee su producto o servicio una imagen comercial de acuerdo con el segmento de mercado que atiende?","id_categoria":2},
             {"id": "_2_8", "Pregunta":"2.8 ¿Su producto o servicio cuenta con los permisos necesarios para ser comercializado?","id_categoria":2},
             {"id": "_2_9", "Pregunta":"2.9 ¿Utiliza internet para ver las tendencias y nuevos diseños de productos o servicios?","id_categoria":2},
             {"id": "_2_10", "Pregunta":"2.10 ¿Conoce en detalle quién es su cliente meta?","id_categoria":2},
-            {"id": "_2_11", "Pregunta":"2.11 ¿Tiene una base de datos con la información de todos sus clientes?","id_categoria":2},
+            {"id": "_2_11", "Pregunta":"2.11 ¿Tiene una agenda de contactos sobre todos sus clientes?","id_categoria":2},
             {"id": "_2_12", "Pregunta":"2.12 ¿Conoce el nivel de satisfacción de sus clientes con el servicio y/o producto que recibe de usted?","id_categoria":2},
-            {"id": "_2_13", "Pregunta":"2.13 ¿Cuenta con estrategias efectivas para la captación de nuevos clientes?","id_categoria":2},
+            {"id": "_2_13", "Pregunta":"2.13 ¿Cuenta con estratégias efectivas para la captación de nuevos clientes?","id_categoria":2},
             {"id": "_2_14", "Pregunta":"2.14 ¿Tiene definido el canal o los canales de distribución para llegar a sus clientes?","id_categoria":2},
-            {"id": "_2_15", "Pregunta":"2.15 ¿Conoce el nivel de rentabilidad de su canal de distribución actual?","id_categoria":2},
-            {"id": "_2_16", "Pregunta":"2.16 ¿Conoce el costo de distribución de su producto o servicios?","id_categoria":2},
-            {"id": "_2_17", "Pregunta":"2.17 ¿Tiene registros de las ventas de su canal de distribución?","id_categoria":2},
-            {"id": "_2_18", "Pregunta":"2.18 ¿Dispone de medios efectivos para promover sus productos o servicios?","id_categoria":2},
-            {"id": "_2_19", "Pregunta":"2.19 ¿Utiliza los boletines electrónicos para fidelizar clientes?","id_categoria":2},
+            {"id": "_2_15", "Pregunta":"2.15 ¿Conoce el costo y/o nivel de rentabilidad de su canal de distribución actual o intermediario?","id_categoria":2},
+            {"id": "_2_16", "Pregunta":"2.16 ¿Utiliza los medios o pasarelas de pago digitales?","id_categoria":2},
+            {"id": "_2_17", "Pregunta":"2.17 ¿Tiene registros de las ventas de su canal de distribución o intermediario?","id_categoria":2},
+            {"id": "_2_18", "Pregunta":"2.18 ¿Dispone de medios efectivos para promover sus productos?","id_categoria":2},
+            {"id": "_2_19", "Pregunta":"2.19 ¿Crea contenido de valor para fidelizar sus clientes?","id_categoria":2},
             {"id": "_2_20", "Pregunta":"2.20 ¿Usa correo electrónico para comunicarse con los clientes?","id_categoria":2},
             {"id": "_2_21", "Pregunta":"2.21 ¿Dispone de página web para posicionar su marca y dar a conocer sus productos?","id_categoria":2},
             {"id": "_2_22", "Pregunta":"2.22 ¿Realiza un uso efectivo de redes sociales?","id_categoria":2},
@@ -155,36 +205,36 @@ class Diagnosticos():
             {"id": "_3_5", "Pregunta":"3.5 Dispone de servicio de conexión a internet","id_categoria":3},
             {"id": "_3_6", "Pregunta":"3.6 Dispone de dispositivos externos de almacenamiento (Memorias, Discos duros)","id_categoria":3},
             {"id": "_3_7", "Pregunta":"3.7 Cuentan con antivirus en las computadoras","id_categoria":3},
-            {"id": "_3_8", "Pregunta":"3.8 Poseen Hosting o Dominio Web (Alojamiento en servidores web)","id_categoria":3},
+            {"id": "_3_8", "Pregunta":"3.8 Posee Dominio Web)","id_categoria":3},
             {"id": "_3_9", "Pregunta":"3.9 Tienen portal web o redes sociales de la empresa","id_categoria":3},
             {"id": "_3_10", "Pregunta":"3.10 Tienen licencias de los programas que utilizan","id_categoria":3},
             {"id": "_3_11", "Pregunta":"3.11 Tienen un plan de mantenimiento para las computadoras","id_categoria":3},
             {"id": "_4_1", "Pregunta":"4.1 ¿Conoce la rentabilidad de su negocio?","id_categoria":4},
-            {"id": "_4_2", "Pregunta":"4.2 ¿Tiene el detalle del valor de los bienes materiales de su negocio?","id_categoria":4},
+            {"id": "_4_2", "Pregunta":"4.2 ¿Lleva registro del valor de los bienes materiales de su negocio?","id_categoria":4},
             {"id": "_4_3", "Pregunta":"4.3 ¿Conoce el valor de sus inventarios? (Si es de servicio elegir regular)","id_categoria":4},
             {"id": "_4_4", "Pregunta":"4.4 ¿Lleva un control de las obligaciones financieras de su empresa?","id_categoria":4},
-            {"id": "_4_5", "Pregunta":"4.5 ¿Tiene detallado el registro de sus ingresos?","id_categoria":4},
-            {"id": "_4_6", "Pregunta":"4.6 ¿Tiene detallado el registro de sus costos?","id_categoria":4},
-            {"id": "_4_7", "Pregunta":"4.7 ¿Lleva el control detallado de sus gastos?","id_categoria":4},
+            {"id": "_4_5", "Pregunta":"4.5 ¿Lleva el registro de sus ingresos?","id_categoria":4},
+            {"id": "_4_6", "Pregunta":"4.6 ¿Realiza análisis de sus costos?","id_categoria":4},
+            {"id": "_4_7", "Pregunta":"4.7 ¿LLleva registro detallado de sus gastos?","id_categoria":4},
             {"id": "_4_8", "Pregunta":"4.8 ¿Maneja su empresa contabilidad formal?","id_categoria":4},
             {"id": "_4_9", "Pregunta":"4.9 ¿Conoce las obligaciones fiscales aplicadas a su empresa?","id_categoria":4},
-            {"id": "_4_10", "Pregunta":"4.10 ¿Lleva un control de las cuentas por cobrar que tiene su empresa?","id_categoria":4},
+            {"id": "_4_10", "Pregunta":"4.10 ¿Lleva registro de las cuentas por cobrar que tiene su empresa?","id_categoria":4},
             {"id": "_4_11", "Pregunta":"4.11 ¿Sigue algún procedimiento para recuperar sus cuentas por cobrar?","id_categoria":4},
             {"id": "_4_12", "Pregunta":"4.12 ¿Maneja estados financieros de forma mensual?","id_categoria":4},
             {"id": "_4_13", "Pregunta":"4.13 ¿Calcula índices financieros?","id_categoria":4},
-            {"id": "_4_14", "Pregunta":"4.14 ¿Tiene alguna planificación del uso de su efectivo para funcionar como empresa?","id_categoria":4},
+            {"id": "_4_14", "Pregunta":"4.14 ¿Tiene alguna planificación del uso de su efectivo para el funcionamiento de la empresa?","id_categoria":4},
             {"id": "_4_15", "Pregunta":"4.15 ¿Maneja alguna política para la gestión de caja chica?","id_categoria":4},
-            {"id": "_4_16", "Pregunta":"4.16 ¿Está su empresa solvente de pagos?","id_categoria":4},
+            {"id": "_4_16", "Pregunta":"4.16 ¿Está su empresa solvente con sus obligaciones financieras y fiscales?","id_categoria":4},
             {"id": "_4_17", "Pregunta":"4.17 ¿Tiene la empresa la capacidad de ser autosostenible financieramente?","id_categoria":4},
-            {"id": "_4_18", "Pregunta":"4.18 ¿Conoce el nivel de ventas con el cuál cubriría sus costos variables y fijos?","id_categoria":4},
+            {"id": "_4_18", "Pregunta":"4.18 ¿Conoce el nivel de ventas con el cuál cubriría sus costos variables y fijos","id_categoria":4},
             {"id": "_4_19", "Pregunta":"4.19 ¿Tiene usted un sueldo asignado por las actividades que realiza para su empresa?","id_categoria":4},
             {"id": "_4_20", "Pregunta":"4.20 ¿Mantiene un sistema de pagos con sus proveedores?","id_categoria":4},
             {"id": "_4_21", "Pregunta":"4.21 ¿Incluye la depreciación de sus equipos en la determinación de sus costos?","id_categoria":4},
             {"id": "_5_1", "Pregunta":"5.1 ¿Conoce la capacidad de producción de su empresa?","id_categoria":5},
-            {"id": "_5_2", "Pregunta":"5.2 ¿La fórmula de sus productos esta estandarizada? (Si es de servicio elegir regular)","id_categoria":5},
-            {"id": "_5_3", "Pregunta":"5.3 ¿Cuenta con una base de proveedores calificada?","id_categoria":5},
-            {"id": "_5_4", "Pegunta":"5.4 ¿conoce los costos de adquisición y transporte de las materias primas y otros materiales?","id_categoria":5},
-            {"id": "_5_5", "Pregunta":"5.5 ¿Conoce la normativa que rige la elaboración de los productos o la prestación de los servicios que su empresa ofrece?","id_categoria":5},
+            {"id": "_5_2", "Pregunta":"5.2 ¿El proceso de elaboración sus productos esta estandarizada? (Si es de servicio elegir regular)","id_categoria":5},
+            {"id": "_5_3", "Pregunta":"5.3 ¿Cuenta con una agenda de contacto de sus proveedores?","id_categoria":5},
+            {"id": "_5_4", "Pegunta":"5.4  ¿Conoce los precios de compra y traslados de las materias primas y otros materiales?","id_categoria":5},
+            {"id": "_5_5", "Pregunta":"5.5 ¿Conoce la normativa que rige la elaboración de los productos que su empresa ofrece?","id_categoria":5},
             {"id": "_5_6", "Pregunta":"5.6 ¿Sus productos o servicios se elaboran considerando las normativas existentes?","id_categoria":5},
             {"id": "_5_7", "Pregunta":"5.7 ¿Las instalaciones cumplen con las normativas respectivas para su funcionamiento?","id_categoria":5},
             {"id": "_5_8", "Pregunta":"5.8 ¿Implementa buenas prácticas en sus procesos de producción o prestación de servicios?","id_categoria":5},
@@ -195,8 +245,8 @@ class Diagnosticos():
             {"id": "_5_13", "Pregunta":"5.13 ¿Tiene desperdicios en la producción?","id_categoria":5},
             {"id": "_5_14", "Pregunta":"5.14 ¿Reutiliza los desperdicios que genera su proceso de producción?","id_categoria":5},
             {"id": "_5_15", "Pregunta":"5.15 ¿Ha determinado el periodo de caducidad de su producto?","id_categoria":5},
-            {"id": "_5_16", "Pregunta":"5.16 ¿La mano de obra o su equipo de colaboradores conoce sus funciones dentro del proceso?","id_categoria":5},
-            {"id": "_5_17", "Pregunta":"5.17 ¿La mano de obra o su equipo de colaboradores posee las competencias técnicas requeridas?","id_categoria":5},
+            {"id": "_5_16", "Pregunta":"5.16 ¿La mano de obra conoce sus funciones dentro del proceso?","id_categoria":5},
+            {"id": "_5_17", "Pregunta":"5.17 ¿La mano de obra posee las competencias técnicas requeridas?","id_categoria":5},
             {"id": "_5_18", "Pregunta":"5.18 ¿El trabajo del operario se realiza de acuerdo a una programación?","id_categoria":5},
             {"id": "_5_19", "Pregunta":"5.19 ¿Conoce el costo del desperdicio?","id_categoria":5},
             {"id": "_5_20", "Pregunta":"5.20 ¿Aprovecha los subproductos o partes que se desperdician?","id_categoria":5},
@@ -205,21 +255,21 @@ class Diagnosticos():
             {"id": "_5_23", "Pregunta":"5.23 ¿Toma en cuenta los niveles de ventas para planificar la producción?","id_categoria":5},
             {"id": "_5_24", "Pregunta":"5.24 ¿Aplica un procedimiento de costeo?","id_categoria":5},
             {"id": "_6_1", "Pregunta":"6.1 ¿Cuenta su empresa con puestos definidos de trabajo?","id_categoria":6},
-            {"id": "_6_2", "Pregunta":"6.2 ¿Planea las necesidades de personal a contratar en su empresa?","id_categoria":6},
+            {"id": "_6_2", "Pregunta":"6.2 ¿Planifica las necesidades de personal a contratar en su empresa?","id_categoria":6},
             {"id": "_6_3", "Pregunta":"6.3 ¿Realiza proceso de reclutamiento y selección de personal para su empresa?","id_categoria":6},
             {"id": "_6_4", "Pregunta":"6.4 ¿Cuentan los empleados con contratos individuales de trabajo, según las especificaciones del código de trabajo?","id_categoria":6},
             {"id": "_6_5", "Pregunta":"6.5 ¿Desarrolla y aplica programas de inducción y capacitación para sus empleados?","id_categoria":6},
             {"id": "_6_6", "Pregunta":"6.6 ¿Evalúa el desempeño de su personal?","id_categoria":6},
             {"id": "_6_7", "Pregunta":"6.7 ¿Cuenta con un manual de funciones para los empleados en sus puestos de trabajo?","id_categoria":6},
-            {"id": "_6_8", "Pregunta":"6.8 ¿Cuenta su empresa con un organigrama publicado en un lugar visible para sus trabajadores?","id_categoria":6},
-            {"id": "_6_9", "Pregunta":"6.9 ¿Cuenta la empresa con un reglamento interno de trabajo aprobado y publicado en un lugar visible para el trabajador?","id_categoria":6},
-            {"id": "_6_10", "Pregunta":"6.10 ¿Asegura el cumplimiento de las normas de seguridad?","id_categoria":6},
+            {"id": "_6_8", "Pregunta":"6.8 ¿Cuenta su empresa con un organigrama?","id_categoria":6},
+            {"id": "_6_9", "Pregunta":"6.9 ¿Cuenta la empresa con un reglamento interno de trabajo aprobado?","id_categoria":6},
+            {"id": "_6_10", "Pregunta":"6.10 ¿Asegura el cumplimiento del reglamiento interno de la empresa?","id_categoria":6},
             {"id": "_6_11","Pregunta":"6.11 ¿Asegura el cumplimiento de las normas salud ocupacional?","id_categoria":6},
-            {"id": "_6_12", "Pregunta":"6.12 Cuentan sus empleados con prestaciones sociales de ley?","id_categoria":6},
-            {"id": "_6_13", "Pregunta":"6.13 Ubica a los empleados en los puestos adecuados en base a sus capacidades?","id_categoria":6},
-            {"id": "_6_14", "Pregunta":"6.14 Estimula la motivación y sana competencia de los empleados?","id_categoria":6},
-            {"id": "_6_15", "Pregunta":"6.15 Tiene un plan de crecimiento para sus empleados en el mediano y largo plazo?","id_categoria":6},
-            {"id": "_6_16", "Pregunta":"6.16 ¿Propicia condiciones que mejoran el entorno laboral? Por ejemplo: La comunicación, inclusión, ¿motivación?","id_categoria":6},
+            {"id": "_6_12", "Pregunta":"6.12 ¿Cuentan sus empleados con prestaciones sociales de ley?","id_categoria":6},
+            {"id": "_6_13", "Pregunta":"6.13 ¿Ubica a los empleados en los puestos adecuados en base a sus capacidades?","id_categoria":6},
+            {"id": "_6_14", "Pregunta":"6.14 ¿Estimula la motivación y sana competencia de los empleados?","id_categoria":6},
+            {"id": "_6_15", "Pregunta":"6.15 ¿Tiene un plan de crecimiento para sus empleados en el mediano y largo plazo?","id_categoria":6},
+            {"id": "_6_16", "Pregunta":"6.16 ¿Propicia condiciones que mejoran el entorno laboral? Por ejemplo: La comunicación, inclusión, motivación","id_categoria":6},
             {"id": "_6_17", "Pregunta":"6.17 ¿Administra sueldos y salarios para el pago de los empleados?","id_categoria":6},
             {"id": "_7_1", "Pregunta":"7.1 ¿Tiene(n) el/los empresario(s)/ socios de la empresa/ organización/ cooperativa/ RTN de Persona Natural?","id_categoria":7},
             {"id": "_7_2", "Pregunta":"7.2 ¿Está constituida legalmente la empresa/ organización/ cooperativa?","id_categoria":7},
@@ -238,7 +288,7 @@ class Diagnosticos():
             {"id": "_7_15", "Pregunta": "7.15 ¿Posee registro de marca para productos y/o servicio? (Marca: Aplica para nombres comerciales para productos y servicios para uso exclusivo).","id_categoria":7},
             {"id": "_7_16", "Pregunta": "7.16 ¿Posee patente para las invenciones de su empresa? (Patente: aplica para invenciones que pueden ser declarada con exclusividad para su explotación por el inventor).","id_categoria":7},
             {"id": "_7_17", "Pregunta": "7.17 ¿Su(s) producto(s) poseen código de barras? (Aplica para todos productos tangibles susceptibles de venta al por mayor y menor y que son inventariarles y son dispuestos al consumidor mediante envolturas, recipientes (plástico, vidrio, cartón, otros).","id_categoria":7},
-            {"id": "_7_18", "Pregunta": "7.18 Posee la empresa certificado fito zoosanitario para acreditar inocuidad del producto con fines de exportación? (Aplica para productos y sub productos con fines de exportación, siempre y cuando sean de origen vegetal y animal, para control de plagas y enfermedades que puedan afectar la salud humana).","id_categoria":7},
+            {"id": "_7_18", "Pregunta": "7.18 ¿Posee la empresa certificado fito zoosanitario para acreditar inocuidad del producto con fines de exportación? (Aplica para productos y sub productos con fines de exportación, siempre y cuando sean de origen vegetal y animal, para control de plagas y enfermedades que puedan afectar la salud humana).","id_categoria":7},
         ]
         return preguntas
     

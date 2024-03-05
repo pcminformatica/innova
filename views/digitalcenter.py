@@ -1291,6 +1291,21 @@ def _diagnosis_dashboard(user_uid):
     }
     return render_template('diagnosis_dashboard.html',**context)
 
+@digitalcenter.route('/diagnosticos/view/<int:diagnosis_id>',methods=['GET', 'POST'])
+def _diagnosis_view_dashboard(diagnosis_id):
+    app.logger.debug('** SWING_CMSx ** - ------------------')
+    diagnosis = DiagnosisCompany.query.filter(DiagnosisCompany.id == diagnosis_id).first()
+    company =  Company.query.filter(Company.id == diagnosis.company_id).first()
+
+    context = {
+        "api":"api",
+        "diagnostico":diagnosis.resultados,
+        "user_uid":"user_uid",
+        "company":company,
+        "diagnosis":diagnosis,
+    }
+    return render_template('diagnosis_dashboard.html',**context)
+
 @digitalcenter.route('/elegibles/5',methods=['GET', 'POST'])
 def _registro_elegibles_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
@@ -2741,8 +2756,25 @@ def datetimeformat(value, format='%Y-%m-%d'):
 
 @digitalcenter.route('/empresas/diagnostico/',methods=['GET', 'POST'])
 def _company_diagnostic():
-    company = 0
+    company = Company.query.filter_by(id = 16).first()
+    diagnostico = Diagnosticos()
+
+    direccion = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 1]
+    mercadeo = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 2]
+    madurez = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 3]
+    financiera = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 4]
+    produccion = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 5]
+    organizacion = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 6]
+    legalizacion = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 7]
+
     context = {
-        'apis': company,
+        'company': company,
+        'direccion':direccion,
+        'mercadeo':mercadeo,
+        'madurez':madurez,
+        'financiera':financiera,
+        'produccion':produccion,
+        'organizacion':organizacion,
+        'legalizacion':legalizacion
     }
     return render_template('digitalcenter/company_diagnostic.html',**context)

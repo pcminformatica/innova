@@ -135,7 +135,8 @@ const submitButton = document.getElementById('submitSaveButton');
 submitButton.addEventListener('click', function() {
     // Acciones a realizar cuando se hace clic en el botón
     console.log('¡El botón fue clickead2o!');
-    // Aquí puedes agregar cualquier otra lógica que desees
+    
+    // Asignación de elementos a mdcAssignedVars
     let preguntas = []
     const Swal = swcms.returnSwal()
     swcms.mdcSelects.forEach((sel) => {
@@ -151,13 +152,131 @@ submitButton.addEventListener('click', function() {
         if (sel.assignedVar)
             mdcAssignedVars[sel.assignedVar] = sel;
     })
-    property = 'txt_company_name' 
-    if (mdcAssignedVars[property].value === '' ){   
-        showMSJ('Por favor responda la pregunta:','1 Nombre Completo','info')
+    const txt_comercio =  getCheckValues('txt_comercio');
+    const txt_industria =  getCheckValues('txt_industria');
+    const txt_sevicios =  getCheckValues('txt_sevicios');
+    const txt_agropecuario =  getCheckValues('txt_agropecuario');
+    console.log(txt_comercio.length)
+    console.log(txt_industria.length)
+    console.log(txt_sevicios.length)
+    console.log(txt_agropecuario.length)
+
+
+      if (txt_comercio.length == 0 && txt_comercio.length == 0 && txt_sevicios.length == 0 && txt_agropecuario.length == 0){
+        alert('no puede ser en blanco')
         return false
-    }else{
-        preguntas.push({"id":"txt_name","pregunta":"1 Nombre Completo","respuesta":mdcAssignedVars[property].value,"valor":0})
+      }
+      var respuesta ;
+      var respuestas = [];
+      // Obtener todos los elementos input con la clase mdc-text-field__input
+      var inputs = document.querySelectorAll('.mdc-text-field__input');
+
+      // Iterar sobre los elementos input
+      for (var i = 0; i < inputs.length; i++) {
+          var input = inputs[i];
+          // Obtener el atributo hiddenlabel del elemento padre
+          var hiddenLabel = input.parentElement.querySelector('.mdc-floating-label').getAttribute('hiddenlabel');
+          var idLabel = input.parentElement.querySelector('.mdc-floating-label').getAttribute('id');
+          // Verificar si el valor del input está en blanco
+          if (input.value.trim() === '') {
+              // Mostrar un mensaje alert con la pregunta que hace falta
+              alert('Por favor, complete la pregunta: ' + hiddenLabel);
+              // Detener el proceso
+              break;
+          }
+          
+          respuesta = {
+            "id": idLabel,
+            "pregunta": hiddenLabel,
+            "respuesta": input.value,
+            "valor": "" 
+          };
+          respuestas.push(respuesta);
+
+          console.log(respuestas); 
+
+      }
+      
+      var xpreguntas = document.querySelectorAll('.diagnostico_pregunta');
+      for (var i = 0; i < xpreguntas.length; i++) {
+          var radios = xpreguntas[i].querySelectorAll('input[type="radio"]');
+          var respondida = false;
+          var radioName = '';
+          var respuestaSeleccionada = '';
+          for (var j = 0; j < radios.length; j++) {
+              textoPregunta = xpreguntas[i].querySelector('.mdc-typography--body1').innerText;
+              if (radios[j].checked) {
+                  respondida = true;
+                  respuestaSeleccionada = radios[j].value;
+                  radioName = radios[j].getAttribute('name'); // Aquí obtenemos el nombre (name) del radio
+                  respuesta = {
+                    "id": radioName,
+                    "pregunta": textoPregunta,
+                    "respuesta": respuestaSeleccionada,
+                    "valor": "" 
+                  };
+                  respuestas.push(respuesta);
+                  break;
+              }
+              
+            
+          }
+          if (!respondida) {
+              var textoPregunta = xpreguntas[i].querySelector('.mdc-typography--body1').innerText;
+              alert('Por favor responda a la pregunta: ' + textoPregunta);
+              return false;
+          }
+        
+      }
+      console.log(respuestas); 
+      console.log(respuestas); 
+
+
+      let postData = {
+        'respuestas': respuestas
+      }
+  console.log(postData)
+  let apiUrl = '/api/diagnostico/';
+
+  swcms.postFetch(apiUrl, postData).then((data) => {
+    Swal.fire(
+      'Gracias por inscribirte en INNOVA MUJER HONDURAS',
+      'En breve estarás recibiendo un correo electrónico ',
+      'success'
+    )
+    window.location.href = "/diagnosticos/view/"+data.id;
+    //window.setTimeout(() => { window.location.assign('/registros/im'); 
+ // }, 3000);
+
+  }).catch((error) => {
+    console.log(error)
+    Swal.fire(
+      'Error de conexión',
+      'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+      'error'
+    )
+    document.getElementById('submitSaveButton').disabled = false;
+  });
+showMSJ('Éxito','Soliciud enviada con exito','success')
+  
+  return true;
+  return false
+
+    // Validación del campo de texto txt_company_name
+    const property = 'txt_company_name'; 
+    if (mdcAssignedVars[property].value === '') {   
+        showMSJ('Por favor responda la pregunta:', '1 Nombre Completo', 'info');
+        return false;
+    } else {
+        preguntas.push({
+            "id": "txt_company_name",
+            "pregunta": "1 Nombre Completo",
+            "respuesta": mdcAssignedVars[property].value,
+            "valor": 0
+        });
     }
+
+    // Continuar con más validaciones o acciones si es necesar
 
     const txt_2_6 =  getCheckValues('txt_2_6');
 

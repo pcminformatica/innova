@@ -3094,3 +3094,27 @@ def _d_save_message():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/diagnostico/', methods = ['POST'])
+# @login_required
+def _d_diagnosticorespuestas():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            respuestas = request.json['respuestas']
+            company = Company.query.filter_by(id = 37).first()
+            diagnostico = Diagnosticos()
+            resultados  = diagnostico.calcular_area2(respuestas)
+            diagnosis =  DiagnosisCompany()
+            diagnosis.company_id = company.id
+            diagnosis.respuestas = respuestas
+            diagnosis.resultados =  json.loads( str(resultados))
+            diagnosis.created_by = current_user.id
+            db.session.add(diagnosis)
+            db.session.commit()
+            print(resultados)
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con','id':diagnosis.id })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
