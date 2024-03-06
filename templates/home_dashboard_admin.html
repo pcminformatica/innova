@@ -765,6 +765,19 @@
   
 
                                         {% if current_user.id in (3,5,24) %}
+                                        <li class="mdc-deprecated-list-item" tabindex="0">
+                                            <a  href="{{ url_for('mae._mae_home') }}">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                    <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__text">
+                                                    <span class="mdc-deprecated-list-item__primary-text">Perfil MAE</span>
+                                                    <span class="mdc-deprecated-list-item__secondary-text">Recepción de usuarias derivadas del PRI.</span>
+                                                </span>
+                                                <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                            </a>
+                                        </li>
                                         <li class="mdc-deprecated-list-item">
                                             <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
                                                 <span class="mdc-deprecated-list-item__ripple"></span>

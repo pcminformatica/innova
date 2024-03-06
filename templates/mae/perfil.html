@@ -1,0 +1,1016 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                </div>
+                                <div class="mdc-card__ripple"></div>
+                            </div>
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Karla Varela </div>
+                                <div class="mdc-typography--subtitle1"> </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">verified_user</i>
+                                    USUARIA
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">business</i>
+                                    EMPRENDEDORA
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-secondary">place</i>
+                                    Tegucigalpa, Honduras.
+                                </div>
+  
+                           
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <a href="/form/perfil" class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        edit
+                                    </a>
+                                    
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Informacion</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+                                            <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Citas</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-card__content">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <div class="mdc-typography--headline5 s-font-color-secondary">INFORMACION GENERAL </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <p><b>Nombre :</b> Karla Varela </p>
+                                            <p><b>DNI:</b> 0501-1993-12345 </p>
+                                            <p><b>Teléfono:</b> 2313-2125 </p>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <p><b>Departamento:</b> Francisco Morazan </p>
+                                            <p><b>Municipio:</b> Distrito Central </p>
+                                            <p><b>Correo:</b> karlavarela@yahoo.copm </p>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <div class="mdc-typography--headline5 s-font-color-secondary">ESTADO CIVIL </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <p><b>Estado Civil :</b> Casada </p>
+                                            <p><b>Conyugue:</b> Pedro Castro</p>
+                                            <p><b>Teléfono:</b> 2313-2125 </p>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <p><b>Hijos:</b> 2 </p>
+                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
+                                <div class="container-dashboard--messages-list-empty">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">library_books</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como contactar a un especialista.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+      
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Entrevista inicial </div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija una opción</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1', 'div2','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div1'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">Empleabilidad / orientación y derivación.</span>
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1', 'div2','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div2'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
+                                        <span class="mdc-deprecated-list-item__text">Servicios de Desarrollo Empresarial.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div1" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Empleabilidad / orientación y derivación.</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija una opción a derivar</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">Formación Técnica - Profesional.</span>
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
+                                        <span class="mdc-deprecated-list-item__text">Habilidad blanda - para la vida.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div2" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Servicios de Desarrollo Empresarial.</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija el perfil</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div3'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">EMPRENDEDORA.</span>
+                                        
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div4'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">EMPRENDIMIENTO COLECTIVO.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div5'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">verified_user</span>
+                                        <span class="mdc-deprecated-list-item__text">MIPYME.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div1','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'],['div6'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">group</span>
+                                        <span class="mdc-deprecated-list-item__text">ESSE (MIPYME ASOCIATIVA).</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div3" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">EMPRENDEDORA.</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija el perfil</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div10'],['div9'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">PRE INCUBACIÓN.</span>
+                                        
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div9'],['div10'])">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">INCUBACIÓN.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="div4" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">EMPRENDIMIENTO COLECTIVO.</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija el perfil</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div10'],['div9'])"">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">PRE INCUBACIÓN.</span>
+                                        
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0" onclick="gestionarVisibilidadDivs(['div10'],['div9'])"">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">INCUBACIÓN.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="div5" id="div1" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">MIPYME.</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija el perfil</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">POST INCUBACIÓN.</span>
+                                        
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">ACELERACIÓN.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div6" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">ESSE (MIPYME ASOCIATIVA).</div>
+                                <span class="mdc-deprecated-list-item__secondary-text">Elija el perfil</span>
+                                <ul class="mdc-deprecated-list mdc-list--avatar-list">
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">local_activity</span>
+                                        <span class="mdc-deprecated-list-item__text">POST INCUBACIÓN.</span>
+                                        
+                                    </li>
+                 
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons s-font-color-secondary" aria-hidden="true">account_balance_wallet</span>
+                                        <span class="mdc-deprecated-list-item__text">ACELERACIÓN.</span>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+
+                                </ul>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div7" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Plan de mejora</div>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 1</p>
+                                        <p class="alignright">10 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.10);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.10);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 2</p>
+                                        <p class="alignright">80 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.80);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.80);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                                <br>
+                                <p class="mdc-deprecated-list-divider"></p>
+                                <div class="demo-linear-progress-indicator">
+                                    
+                                    <div id="textbox">
+                                        <p style="font-weight: bold" class="alignleft">Área de mejora 3</p>
+                                        <p class="alignright">100 / 100</p>
+                                    </div>
+                                    <div role="progressbar" class="mdc-linear-progress "><div class="mdc-linear-progress__buffering-dots"></div>
+                                    <div class="mdc-linear-progress__buffer" style="transform: scaleX(100);"></div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(100);">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div><div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span></div></div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+      
+                <div id="div8" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<main class="s-main-content" id="div1">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div id="div9" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                        <div class="container-dashboard--messages">
+                            <div class="mdc-card mdc-card--color-on-primary">
+                                <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                    <div class="mdc-tab-scroller">
+                                        <div class="mdc-tab-scroller__scroll-area">
+                                            <div class="mdc-tab-scroller__scroll-content">
+                                                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                    <span class="mdc-tab__content">
+                                                        <span class="mdc-tab__text-label">EMPRENDEDORA (PRE-INCUBACIÓN) tiempo de atención : 1 mes</span>
+                                                    </span>
+                                                    <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                    </span>
+                                                    <span class="mdc-tab__ripple"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mdc-card__content container-dashboard--messages-msg">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                    
+                                            <br>
+                                
+                                            <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                                <thead>
+                                                <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FORMACIÓN </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HORAS </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HERRAMIENTAS </th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">FORMULARIOS</th>
+                                                </tr>
+                                                
+                                                
+                                                
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                                         
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        1.                                                                                                         
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Citar</span>
+                                                        </a>
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Añadir bitacora</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Taller de auto conocimiento      
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        2 
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Plan de vida    
+
+                                                    </th>
+                                                    <th>
+                                                        Formulario 103                                                                 
+                                                    </th>
+                            
+                                                </tr>
+
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        2.                                                                                                         
+                                                    </th>
+                                                                                                                                                                  
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Citar</span>
+                                                        </a>
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Añadir bitacora</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Mentalidad y cultura emprendedora     
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        2 
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Test de CEP's   
+
+                                                    </th>
+                                                    <th>
+                                                        Formulario 104                                                                  
+                                                    </th>
+                            
+                                                </tr>
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        3.                                                                                                         
+                                                    </th>                                                                                                              
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Citar</span>
+                                                        </a>
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Añadir bitacora</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        CANVAS exploratorio (Innovación y modelos de negocios 
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        3 
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Lienzo canvas exploratorio 
+
+                                                    </th>
+                                                    <th>
+                                                        F.Complementario 01                                                            
+                                                    </th>
+                            
+                                                </tr>
+                                                <tr class="mdc-data-table__row">
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        4.                                                                                                         
+                                                    </th>                                                                                                              
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Citar</span>
+                                                        </a>
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Añadir bitacora</span>
+                                                        </a>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        CANVAS en base al segmento de mercado
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        3 
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Modelo de negocio-CANVAS
+
+                                                    </th>
+                                                    <th>
+                                                        F.Complementario 02                                                  
+                                                    </th>
+                            
+                                                </tr>
+
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+                                        
+                                    </div>
+        
+                                </div>
+                
+                                    
+                                
+
+
+                                <div class="mdc-card__actions">
+                                    <div class="mdc-card__actions-buttons">
+                                    </div>
+                                    <div class="mdc-card__action-icons">
+                                        <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                            <div class="mdc-icon-button__ripple"></div>
+                                            more_vert
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                            
+                        </div>
+                        </div>
+                </div>
+                <div id="div10" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">EMPRENDEDORA (INCUBACIÓN) tiempo de atención : 3 meses</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                
+                                        <br>
+                            
+                                        <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                            <thead>
+                                                <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FORMACIÓN </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HORAS </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HERRAMIENTAS </th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">FORMULARIOS</th>
+                                                </tr>
+                                                
+                                                
+                                                
+                                                </thead>
+                                            <tbody class="mdc-data-table__content">
+                                                <tbody class="mdc-data-table__content">
+                                                                         
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            1.                                                                                                         
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Citar</span>
+                                                            </a>
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir bitacora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Organización Filosofía de la empresa 
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            1
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Plan de acompañamiento
+    
+                                                        </th>
+                                                        <th>
+                                                            Formulario 105                                                               
+                                                        </th>
+                                
+                                                    </tr>
+    
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            2.                                                                                                         
+                                                        </th>
+                                                                                                                                                                      
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Citar</span>
+                                                            </a>
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir bitacora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Formalización empresarial Legalización y permisos
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            2 
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Plan de formación  
+    
+                                                        </th>
+                                                        <th>
+                                                            Formulario 104                                                                  
+                                                        </th>
+                                
+                                                    </tr>
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            3.                                                                                                         
+                                                        </th>                                                                                                              
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Citar</span>
+                                                            </a>
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir bitacora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Mercados Análisis de MKT
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            2 
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Perfil del emprendimiento
+    
+                                                        </th>
+                                                        <th>
+                                                            F.Complementario 04                                                         
+                                                        </th>
+                                
+                                                    </tr>
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            4.                                                                                                         
+                                                        </th>                                                                                                              
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Citar</span>
+                                                            </a>
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir bitacora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Producción Plan industrial
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            2
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Perfil del emprendimiento
+    
+                                                        </th>
+                                                        <th>
+                                                                                                       
+                                                        </th>
+                                
+                                                    </tr>
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            5.                                                                                                         
+                                                        </th>                                                                                                              
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Citar</span>
+                                                            </a>
+                                                            <a href="" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir bitacora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Finanzas Plan de inversión Precios y costos
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            3
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Perfil del emprendimiento
+    
+                                                        </th>
+                                                        <th>
+                                                                                                        
+                                                        </th>
+                                
+                                                    </tr>
+                                                    
+                                                    </tbody>
+        
+                                            </tbody>
+                                        </table>
+                                    </div>
+    
+                                    
+                                </div>
+    
+                            </div>
+            
+                                
+                            
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+    
+
+   
+
+            </div>
+        </div>
+    </div>
+ 
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    init()
+    function init(){
+        
+// Ejemplo de uso:
+var divsAocultar = ['div1', 'div2','div3', 'div4','div5', 'div6','div7', 'div8','div9', 'div10'];
+var divsAmostrar = [];
+gestionarVisibilidadDivs(divsAocultar,divsAmostrar)
+    }
+    function gestionarVisibilidadDivs(divsAocultar, divsAmostrar) {
+    // Ocultar los divs especificados en la lista divsAocultar
+    divsAocultar.forEach(function(divId) {
+        var div = document.getElementById(divId);
+        if (div) {
+            div.style.display = 'none';
+        }
+    });
+
+    // Mostrar los divs especificados en la lista divsAmostrar
+    divsAmostrar.forEach(function(divId) {
+        var div = document.getElementById(divId);
+        if (div) {
+            div.style.display = 'block';
+        }
+    });
+}
+
+</script>
+{% endblock %}

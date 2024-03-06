@@ -1,0 +1,265 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <div class="container-dashboard--profile">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                </div>
+                                <div class="mdc-card__ripple"></div>
+                            </div>
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Maria Perez </div>
+                                <div class="mdc-typography--subtitle1"> </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">verified_user</i>
+                                    CASE MANAGER 
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-primary">business</i>
+                                    SEMPRENDE
+                                </div>
+                                <div class="mdc-typography--subtitle1">
+                                    <i class="material-icons s-font-color-secondary">place</i>
+                                    CCM Tegucigalpa, Honduras.
+                                </div>
+  
+                           
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons"></div>
+                                <div class="mdc-card__action-icons">
+                                    <a href="/form/perfil" class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        edit
+                                    </a>
+                                    
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Opciones</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+                                            <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Caja Herramientas</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <a  href="{{ url_for('mae._mae_list') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Atención a usuarias</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Recepción de usuarias derivadas del PRI.</span>
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item">
+                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                        <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
+                                        <span class="mdc-deprecated-list-item__text">
+                                            <span class="mdc-deprecated-list-item__primary-text">Seguimiento de servicios de desarrollo empresarial:</span>
+                                            <span class="mdc-deprecated-list-item__secondary-text">Seguimiento a Pre-Incubación, Incubación, POST INCUBACIÓN, aceleración.</span>
+                                        </span>
+                                    </li>
+
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                </ul>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-cnt container--hidden">
+                                <div class="container-dashboard--messages-list-empty">
+                                    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">library_books</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como llenar el formulario de inscripción.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+                                        <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                        <li class="mdc-deprecated-list-item">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">play_arrow</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Como contactar a un especialista.</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Admin Innova</span>
+                                            </span>
+                                        </li>
+      
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">
+                                    Tu productividad 
+                                </div>
+                                <div class="mdc-layout-grid container-stats">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                                                    mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                            <div class="mdc-card__primary-action" tabindex="0">
+                                                <div class="s-mdc-card__stats-title">
+                                                    <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                                    <div class="mdc-typography--subtitle2">
+                                                        EMPRENDIMIENTOS
+                                                    </div>
+                                                </div>
+                                                <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                                    3
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                                        mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                            <div class="mdc-card__primary-action" tabindex="0">
+                                                <div class="s-mdc-card__stats-title">
+                                                    <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                                    <div class="mdc-typography--subtitle2">
+                                                        EMPRENDIMIENTO COLECTIVO.
+                                                    </div>
+                                                </div>
+                                                <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                                    2
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                                        mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                            <div class="mdc-card__primary-action" tabindex="0">
+                                                <div class="s-mdc-card__stats-title">
+                                                    <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                                    <div class="mdc-typography--subtitle2">
+                                                        MIPYME.
+                                                    </div>
+                                                </div>
+                                                <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                                    561
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
+                                        mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
+                                            <div class="mdc-card__primary-action" tabindex="0">
+                                                <div class="s-mdc-card__stats-title">
+                                                    <i class="material-icons s-font-color-very-satisfied">signal_wifi_4_bar</i>
+                                                    <div class="mdc-typography--subtitle2">
+                                                        ESSE (MIPYME ASOCIATIVA).
+                                                    </div>
+                                                </div>
+                                                <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
+                                                    111
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                     
+                             
+                            </div>
+                            <div class="mdc-card__actions">
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/home-dashboard.min.js') }}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+{% endblock %}
