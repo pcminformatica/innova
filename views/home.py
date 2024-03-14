@@ -651,16 +651,19 @@ def _base():
 
 
 @home.route('/empresaria/')
+@login_required
 def _perfil_empresaria():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('empresaria.html')
 
 @home.route('/resumen/')
+@login_required
 def _resumen():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('resumen.html')
 
 @home.route('/empresarias/')
+@login_required
 def _empresarias():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     user = User.query.filter_by(id=current_user.id)
@@ -729,17 +732,20 @@ def _FORMULARIO_MADUREZ_DIGITAL():
 
 
 @home.route('/test/encuestas/satisfaccion')
+@login_required
 def _formulario_encuestas_satisfaccion():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/encuestas_satisfaccion.html')
 
 @home.route('/test/encuestas/impacto')
+@login_required
 def _formulario_encuestas_impacto():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/encuestas_impacto.html')
 
 
 @home.route('/test/encuestas/sde/<int:plan_id>/sed')
+@login_required
 def _formulario_encuesta_SDE(plan_id):
     actions = ActionPlan.query.filter_by(id=plan_id).first()    
     context = {
@@ -750,6 +756,7 @@ def _formulario_encuesta_SDE(plan_id):
 
 
 @home.route('/test/madurez/list')
+@login_required
 def _evaluations_list():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     evaluations = Evaluations.query.filter_by().all()
@@ -760,6 +767,7 @@ def _evaluations_list():
 
 
 @home.route('/list/evaluations/')
+@login_required
 def _evaluations_admin():
     app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
     return render_template('evaluaciones/evaluations_admin.html')
@@ -768,6 +776,7 @@ def _evaluations_admin():
 
 
 @home.route('/view/evaluations/5/<int:evaluations_id>',methods=['GET', 'POST'])
+@login_required
 def _evaluaciones_describe(evaluations_id):
     app.logger.debug('** SWING_CMS ** - ------------------')
     evaluation = Evaluations.query.filter_by(id = evaluations_id).first()
@@ -779,6 +788,7 @@ def _evaluaciones_describe(evaluations_id):
 
 
 @home.route('/empresas/comparativo',methods=['GET', 'POST'])
+@login_required
 def _company_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -891,16 +901,19 @@ def _scrip_monitoring_list():
 
 
 @home.route('/catalog_surveys_view')
+@login_required
 def _catalog_surveys_view():
     catalog_surveys = catalog_surveys_sde.query.all()
     return render_template('evaluaciones/catalog_surveys_view.html', catalog_surveys=catalog_surveys)
 
 @home.route('/surveys_with_catalog_surveys/<int:catalog_surveys_id>/sde',methods=['GET', 'POST'])
+@login_required
 def _surveys_with_catalog_surveys(catalog_surveys_id):
     surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=catalog_surveys_id).all()
     return render_template('evaluaciones/surveys_with_catalog_surveys_view.html', surveys_data=surveys_data)
 
 @home.route('/surveys/view/<int:surveys_id>/sde',methods=['GET', 'POST'])
+@login_required
 def _surveys_view(surveys_id):
 
     surveys =  surveys_sde.query.filter_by(id=surveys_id).first()

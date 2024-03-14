@@ -23,6 +23,7 @@ import json
 
 
 @aulavirtual.route('/formulario/')
+@login_required
 def _curso_created():
     training = TrainingType.query.filter_by(enabled=True).all()
    
@@ -35,7 +36,8 @@ def _curso_created():
     }
     return render_template('aulavirtual/curso_created.html',**context)
 
-@aulavirtual.route('/enroll/<int:company_id>//')
+@aulavirtual.route('/enroll/<int:company_id>/')
+@login_required
 def _curso_enroll(company_id):
     company = Company.query.filter_by(id=company_id).first()
     app.logger.debug('** SWING_CMS ** - AcercaDe')
@@ -48,6 +50,7 @@ def _curso_enroll(company_id):
 
 from sqlalchemy import extract
 @aulavirtual.route('/cursos/list/')
+@login_required
 def _curso_list():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     cursos = Courses.query.filter_by(enabled=True).all()
@@ -68,6 +71,7 @@ import pandas as pd
 import hashlib
 
 @aulavirtual.route('/cursos/list/<int:courses_id>/',methods = ['GET', 'POST'])
+@login_required
 def _curso_enroll_list(courses_id):
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     cursos = Courses.query.filter_by(id=courses_id).first()
@@ -138,6 +142,7 @@ def _curso_enroll_list(courses_id):
 
 
 @aulavirtual.route('/cursos/list/inscritas/',methods = ['GET', 'POST'])
+@login_required
 def _curso_enroll_list_inscritas():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     companies = EnrollmentRecord.query.join(
@@ -165,6 +170,7 @@ def _curso_enroll_list_inscritas():
     return render_template('digitalcenter/curso_enroll_list_inscritas.html',**context)
 
 @aulavirtual.route('/cursos/list/inscritas/capacitadas',methods = ['GET', 'POST'])
+@login_required
 def _curso_enroll_list_inscritas_capacitadas():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     companies = EnrollmentRecord.query.join(
@@ -191,6 +197,7 @@ def _curso_enroll_list_inscritas_capacitadas():
 
 
 @app.route('/companies_with_tt1', methods=['GET'])
+@login_required
 def get_companies_with_tt1():
     # Crear una subconsulta para obtener las compañías que cumplen con el criterio
     subq_tt1 = select([Company.id]).where(
@@ -236,6 +243,7 @@ def get_companies_with_tt1():
     return jsonify(result)
 
 @aulavirtual.route('/cursos/companies_with_tt1',methods = ['GET', 'POST'])
+@login_required
 def _get_companies_with_tt1():
     app.logger.debug('** SWING_CMS ** - AcercaDe')
     # Crear una subconsulta para obtener las compañías que cumplen con el criterio

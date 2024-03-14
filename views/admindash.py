@@ -18,6 +18,7 @@ admindash = Blueprint('admindash', __name__, template_folder='templates', static
 from sqlalchemy import desc,asc
 
 @admindash.route('/demanda/v1/11',methods=['GET', 'POST'])
+@login_required
 def _datos_describe_v1():
 
     servicios = []
@@ -143,6 +144,7 @@ def _admin_form_company(user_id):
 
 from sqlalchemy import desc
 @admindash.route('/servi/',methods=['GET', 'POST'])
+@login_required
 def _servi():
     services = CatalogServices.query.filter_by(enabled = 1).order_by(desc(CatalogServices.name_short)).all()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
@@ -150,6 +152,7 @@ def _servi():
     return render_template('admindash/service_list.html',**context)
 
 @admindash.route('/servi/<int:user_uid>',methods=['GET', 'POST'])
+@login_required
 def _servi_detalle(user_uid):
     services = catalogCategory.query.all()
     service = CatalogServices.query.filter_by(id = user_uid).first()
@@ -158,6 +161,7 @@ def _servi_detalle(user_uid):
     return render_template('admindash/service_form.html',**context)
 
 @admindash.route('/servi/delete/<int:service_id>',methods=['GET', 'POST'])
+@login_required
 def _servi_detalle_delete(service_id):
     service = CatalogServices.query.filter_by(id = service_id).delete()
     db.session.commit()
@@ -271,6 +275,7 @@ def _admin_inscription_edit(inscription_id):
     documents = DocumentCompany.query.filter_by(company_id=company.id).all()
 
 @admindash.route('/document/delete/<int:document_id>/<int:company_id>',methods=['GET', 'POST'])
+@login_required
 def _document_delete(document_id,company_id):
     document = DocumentCompany.query.filter_by(id = document_id).delete()
     db.session.commit()
@@ -278,6 +283,7 @@ def _document_delete(document_id,company_id):
     return redirect(url_for('admindash._admin_company_view',company_id=company_id))
 
 @admindash.route('/plan/delete/<int:actionplan_id>/<int:company_id>',methods=['GET', 'POST'])
+@login_required
 def _actionplan_delete(actionplan_id,company_id):
     actionplan = ActionPlan.query.filter_by(id = actionplan_id).delete()
     db.session.commit()
@@ -285,6 +291,7 @@ def _actionplan_delete(actionplan_id,company_id):
     return redirect(url_for('admindash._admin_company_view',company_id=company_id))
 
 @admindash.route('/diagnosis/delete/<int:diagnosis_id>/<int:company_id>',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_delete(diagnosis_id,company_id):
     diagnosis = DiagnosisCompany.query.filter_by(id = diagnosis_id).delete()
     db.session.commit()

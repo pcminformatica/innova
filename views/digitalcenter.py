@@ -476,6 +476,7 @@ from sqlalchemy import desc
 import requests
 import json 
 @digitalcenter.route('/diagnosticos/',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
@@ -493,6 +494,7 @@ def _diagnosis_monitoring_list():
         return render_template('404.html')
 
 @digitalcenter.route('/diagnosticos/comparativo',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_monitoring_1_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
@@ -520,6 +522,7 @@ def _diagnosis_monitoring_1_list():
         return render_template('404.html')
 
 @digitalcenter.route('/cartas/comparativo',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_monitoring_2_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
@@ -547,6 +550,7 @@ def _diagnosis_monitoring_2_list():
         return render_template('404.html')
     
 @digitalcenter.route('/planes/add/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_create(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     
@@ -600,6 +604,7 @@ def _plan_action_create(user_uid):
     return render_template('plan_action_create.html',**context)
 
 @digitalcenter.route('/planes/add/asesorias/<int:company_uid>/',methods=['GET', 'POST'])
+@login_required
 def _asesorias_puntuales(company_uid):
     company = Company.query.filter_by(id=company_uid).first()
     categoria = catalogCategory.query.filter_by().all()
@@ -608,6 +613,7 @@ def _asesorias_puntuales(company_uid):
     return render_template('asesorias_puntuales.html',**context)
 
 @digitalcenter.route('/activar/diagnostico/<int:company_uid>/plan/<servicio_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_dianostico_plan(company_uid,servicio_uid):
     company = Company.query.filter_by(id=company_uid).first()
                 #buscar si el diagnostico esta en plan de accion
@@ -639,6 +645,7 @@ def _plan_action_dianostico_plan(company_uid,servicio_uid):
     return render_template('plan_action_dianostico_plan.html',**context)
 
 @digitalcenter.route('/admin/servicios',methods=['GET', 'POST'])
+@login_required
 def _admin_servicios():
     app.logger.debug('** SWING_CMS ** -  appointments_create') 
     services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains("_6_2")).all()
@@ -661,6 +668,7 @@ def _admin_servicios():
 
 
 @digitalcenter.route('/update/innova',methods=['GET', 'POST'])
+@login_required
 def _valorar_servicios():
     servicios = CatalogServices.query.filter().all()
     for servicio in servicios:
@@ -670,6 +678,7 @@ def _valorar_servicios():
     return 'Listo'
 
 @digitalcenter.route('/update/status',methods=['GET', 'POST'])
+@login_required
 def _init_status_company():
     companys = Company.query.filter_by(enabled=True).all()[0:200]
     for company in companys:
@@ -691,6 +700,7 @@ def _init_status_company():
     return 'listo'
 
 @digitalcenter.route('/update/status/1',methods=['GET', 'POST'])
+@login_required
 def _init_status_company_2():
     companys = Company.query.filter_by(enabled=True).all()[200:400]
     for company in companys:
@@ -712,6 +722,7 @@ def _init_status_company_2():
     return 'listo'
 
 @digitalcenter.route('/update/status/2',methods=['GET', 'POST'])
+@login_required
 def _init_status_company_3():
     companys = Company.query.filter_by(enabled=True).all()[400:600]
     for company in companys:
@@ -733,6 +744,7 @@ def _init_status_company_3():
     return 'listo'
 
 @digitalcenter.route('/update/wallet',methods=['GET', 'POST'])
+@login_required
 def _init_wallet():
     companys = Company.query.filter_by(enabled=True).all()
     for company in companys:
@@ -855,6 +867,7 @@ def _init_wallet():
 
 
 @digitalcenter.route('/creditos/innova',methods=['GET', 'POST'])
+@login_required
 def _init_services_creditos():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = CatalogServices(name='Beca INNOVA', name_short='c1',cost_innova=4000,cost=4000, service_user_role=staff_it_role.id)
@@ -867,6 +880,7 @@ def _init_services_creditos():
 
 #----
 @digitalcenter.route('/init/cursos',methods=['GET', 'POST'])
+@login_required
 def _init_cursos():
     #tipo de formacion
     TT1 = TrainingType(name='Formación Inicial', name_short='TT1')
@@ -898,6 +912,7 @@ def _init_cursos():
     return 'Listo'
 
 @digitalcenter.route('/init/activas',methods=['GET', 'POST'])
+@login_required
 def _init_activas():
     CS6 = CompanyStatus(name='Activa', name_short='6')
     db.session.add(CS6)
@@ -905,6 +920,7 @@ def _init_activas():
     return 'Listo'
 
 @digitalcenter.route('/insert/chat',methods=['GET', 'POST'])
+@login_required
 def _re1():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = CatalogServices(catalog_category=1,name='Asesoria para la formalizacion legal de la empresa', name_short='s1', service_user_role=staff_it_role.id,diagnostic_questions=[])
@@ -956,6 +972,7 @@ def _re1():
 
 
 @digitalcenter.route('/insert/chat/2',methods=['GET', 'POST'])
+@login_required
 def _re2():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = CatalogServices(catalog_category=3,name='Asesoría en desarrollo de nuevos productos o mejora de los actuales y empaque.', name_short='s17', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_6"},{"id": "_5_2"},{"id": "_5_8"},{"id": "_5_9"}])
@@ -985,6 +1002,7 @@ def _re2():
     return render_template('404.html')
 
 @digitalcenter.route('/insert/chat/3',methods=['GET', 'POST'])
+@login_required
 def _re3():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = CatalogServices(catalog_category=5,name='Elaboracion del plan de mercadeo para promocion e incremento de ventas.', name_short='s25', service_user_role=staff_it_role.id,diagnostic_questions=[{"id": "_2_1"},{"id": "_5_23"}])
@@ -1038,6 +1056,7 @@ def _re3():
     return render_template('404.html')
 
 @digitalcenter.route('/insert/servicios/inciales',methods=['GET', 'POST'])
+@login_required
 def _re1_inicial():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = CatalogServices(name='Atención inicial', name_short='a1', service_user_role=staff_it_role.id,diagnostic_questions=[])
@@ -1052,6 +1071,7 @@ def _re1_inicial():
     return render_template('404.html')
 
 @digitalcenter.route('/insert/catalogo/documentos',methods=['GET', 'POST'])
+@login_required
 def _re1_inicial_inicial():
     DOC1 = CatalogIDDocumentTypes(name='Ficha de inscripción', name_short='DOC1')
     db.session.add(DOC1)
@@ -1064,6 +1084,7 @@ def _re1_inicial_inicial():
 
 
 @digitalcenter.route('/insert/categias/',methods=['GET', 'POST'])
+@login_required
 def _re_categias():
     staff_it_role = CatalogUserRoles.query.filter_by(name_short='itc').first()
     websites = catalogCategory(name='LEGALIZACIÓN')
@@ -1085,6 +1106,7 @@ def _re_categias():
 
 
 @digitalcenter.route('/demanda/',methods=['GET', 'POST'])
+@login_required
 def _datos_describe_12():
     servicios = []
     app.logger.debug('** SWING_CMS ** - ------------------')
@@ -1193,6 +1215,7 @@ def _datos_describe_12():
 
 
 @digitalcenter.route('/demanda/v1',methods=['GET', 'POST'])
+@login_required
 def _datos_describe_v1():
 
     servicios = []
@@ -1269,6 +1292,7 @@ def _registros_im():
     return render_template('registro_im.html')
 
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     url = app.config.get('KOBOTOOLBOX_VIEW').format(user_uid)
@@ -1292,6 +1316,7 @@ def _diagnosis_dashboard(user_uid):
     return render_template('diagnosis_dashboard.html',**context)
 
 @digitalcenter.route('/diagnosticos/view/<int:diagnosis_id>',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_view_dashboard(diagnosis_id):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     diagnosis = DiagnosisCompany.query.filter(DiagnosisCompany.id == diagnosis_id).first()
@@ -1307,6 +1332,7 @@ def _diagnosis_view_dashboard(diagnosis_id):
     return render_template('diagnosis_dashboard.html',**context)
 
 @digitalcenter.route('/elegibles/5',methods=['GET', 'POST'])
+@login_required
 def _registro_elegibles_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
@@ -1316,6 +1342,7 @@ def _registro_elegibles_list():
     return render_template('digitalcenter/registro_elegibles_list.html',**context)
 
 @digitalcenter.route('/view/si/5/<int:inscribe_id>',methods=['GET', 'POST'])
+@login_required
 def _registro_elegibles_panel(inscribe_id):
     app.logger.debug('** SWING_CMS ** - ------------------')
     inscripciones = Inscripciones.query.filter_by(id = inscribe_id).first()
@@ -1325,6 +1352,7 @@ def _registro_elegibles_panel(inscribe_id):
     return render_template('digitalcenter/registro_elegibles_panel.html',**context)
 
 @digitalcenter.route('/elegibles/no/5',methods=['GET', 'POST'])
+@login_required
 def _registro_no_elegibles_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     inscripciones = Inscripciones.query.filter_by(elegible = False,cohorte=5).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
@@ -1334,6 +1362,7 @@ def _registro_no_elegibles_list():
     return render_template('digitalcenter/registro_no_elegibles_list.html',**context)
 
 @digitalcenter.route('/view/no/5/<int:inscribe_id>',methods=['GET', 'POST'])
+@login_required
 def _registro_no_eleibles_panel(inscribe_id):
     app.logger.debug('** SWING_CMS ** - ------------------')
     inscripciones = Inscripciones.query.filter_by(id = inscribe_id).first()
@@ -1347,6 +1376,7 @@ def _registro_no_eleibles_panel(inscribe_id):
 
 from sqlalchemy import desc,asc
 @digitalcenter.route('/empresas/view/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
 
@@ -1373,6 +1403,7 @@ def _plan_action_dashboard(user_uid):
 
 
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
+@login_required
 def _company_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -1563,6 +1594,7 @@ def _company_monitoring_list():
 
 
 @digitalcenter.route('/empresas/proceso',methods=['GET', 'POST'])
+@login_required
 def _company_monitoring_proceso_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -1760,6 +1792,7 @@ def _company_monitoring_proceso_list():
 
 
 @digitalcenter.route('/empresas/dn',methods=['GET', 'POST'])
+@login_required
 def _company_monitoring_list_id():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -1784,6 +1817,7 @@ def _company_monitoring_list_id():
     return render_template('company_monitoring_list_id.html',**context)
 
 @digitalcenter.route('/company/view/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _company_dashboard(user_uid):
     app.logger.debug('** _company_dashboard ** - ------------------')
 
@@ -1816,6 +1850,7 @@ def _company_dashboard(user_uid):
     return render_template('company_dashboard.html',**context)
 
 @digitalcenter.route('/company/reference/view/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _company_dashboard_action_plan_references(user_uid):
     app.logger.debug('** _company_dashboard_action_plan_references ** - ------------------')
 
@@ -1846,6 +1881,7 @@ def _company_dashboard_action_plan_references(user_uid):
     return render_template('company_dashboard_action_plan_references.html',**context)
 
 @digitalcenter.route('/empresas/resumen/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_bitacora(user_uid):
     action = ActionPlan.query.filter_by(id=user_uid).first()
     history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
@@ -1860,6 +1896,7 @@ def _plan_action_bitacora(user_uid):
 
 
 @digitalcenter.route('/empresas/resumen/update/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_bitacora_update(user_uid):
     action = ActionPlanHistory.query.filter_by(id=user_uid).first()
     lista = ['MT1','MT2']
@@ -1873,6 +1910,7 @@ def _plan_action_bitacora_update(user_uid):
 
 
 @digitalcenter.route('/empresas/resumen/bitecora/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _plan_action_bitacora_atenciones(user_uid):
     history = ActionPlanHistory.query.filter_by(id=user_uid).first()
     context = {
@@ -1883,6 +1921,7 @@ def _plan_action_bitacora_atenciones(user_uid):
 
 
 @digitalcenter.route('/empresas/view/user/<int:company_id>/',methods=['GET', 'POST'])
+@login_required
 def _company_user_list(company_id):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     company = Company.query.filter_by(id=company_id).first()
@@ -1986,6 +2025,7 @@ def _form_carta_innova():
 
 
 @digitalcenter.route('/formulario/documentos/<int:document_id>/inno',methods = ['GET', 'POST'])
+@login_required
 def _company_document_form(document_id):
     document = DocumentCompany.query.filter_by(id=document_id).first()
     context = {
@@ -1994,6 +2034,7 @@ def _company_document_form(document_id):
     return render_template('company_document_form.html',**context)
 
 @digitalcenter.route('/formulario/documentos/<int:company_id>/add/<int:document_id>/',methods = ['GET', 'POST'])
+@login_required
 def _company_document_form_add(company_id,document_id):
     company = Company.query.filter_by(id=company_id).first()
     document_type = CatalogIDDocumentTypes.query.filter_by(id=document_id).first()
@@ -2044,6 +2085,7 @@ def _company_document_form_add(company_id,document_id):
 
 
 @digitalcenter.route('/formulario/documentos/user/<int:document_id>/inno',methods = ['GET', 'POST'])
+@login_required
 def _company_document_user(document_id):
     document = DocumentCompany.query.filter_by(id=document_id).first()
     context = {
@@ -2052,12 +2094,14 @@ def _company_document_user(document_id):
     return render_template('company_document_user.html',**context)
 
 @digitalcenter.route('/registros/inno/',methods = ['GET', 'POST'])
+@login_required
 def _registro_api_dashboard():
     return render_template('digitalcenter/registro_api_dashboard.html')
 
 
 
 @digitalcenter.route('/diagnostico/update',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_monitoring_1s_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     try:
@@ -2104,6 +2148,7 @@ def convertir_a_datetime(fecha_string):
     
 
 @digitalcenter.route('/update/l/1',methods=['GET', 'POST'])
+@login_required
 def _init1_status_company():
     companys = Company.query.filter_by(enabled=True).all()[0:200]
     for company in companys:
@@ -2139,6 +2184,7 @@ def _init1_status_company():
     return 'listo'
 
 @digitalcenter.route('/update/l/2',methods=['GET', 'POST'])
+@login_required
 def _init2_status_company():
     companys = Company.query.filter_by(enabled=True).all()[200:400]
     for company in companys:
@@ -2174,6 +2220,7 @@ def _init2_status_company():
     return 'listo'
 
 @digitalcenter.route('/update/l/3',methods=['GET', 'POST'])
+@login_required
 def _init3_status_company():
     companys = Company.query.filter_by(enabled=True).all()[400:700]
     for company in companys:
@@ -2208,6 +2255,7 @@ def _init3_status_company():
     return 'listo'
 
 @digitalcenter.route('/sde/service/',methods=['GET', 'POST'])
+@login_required
 def _asesoria_colectivas_service_list():
     app.logger.debug('** SWING_CMS ** -  appointments_create') 
     services = CatalogServices.query.filter_by(enabled=1).filter(
@@ -2220,6 +2268,7 @@ def _asesoria_colectivas_service_list():
 
 
 @digitalcenter.route('/sde/service/s/<int:service_id>/search',methods=['GET', 'POST'])
+@login_required
 def _asesoria_colectivas_service_search(service_id):
     filtro = False
     if request.method == 'POST':
@@ -2282,6 +2331,7 @@ def _asesoria_colectivas_service_search(service_id):
 
 
 @digitalcenter.route('/init/log/1',methods=['GET', 'POST'])
+@login_required
 def _init1_logs_company():
     companys = Company.query.filter_by(enabled=True).all()[0:200]
     for company in companys:
@@ -2298,6 +2348,7 @@ def _init1_logs_company():
     return 'listo'
 
 @digitalcenter.route('/init/log/2',methods=['GET', 'POST'])
+@login_required
 def _init2_logs_company():
     companys = Company.query.filter_by(enabled=True).all()[200:400]
     for company in companys:
@@ -2314,6 +2365,7 @@ def _init2_logs_company():
     return 'listo'
 
 @digitalcenter.route('/init/log/3',methods=['GET', 'POST'])
+@login_required
 def _init3_logs_company():
     companys = Company.query.filter_by(enabled=True).all()[400:700]
     for company in companys:
@@ -2331,6 +2383,7 @@ def _init3_logs_company():
 
 
 @digitalcenter.route('/init/log/4',methods=['GET', 'POST'])
+@login_required
 def _init4_logs_company():
     companys = Company.query.filter_by(enabled=True).all()[400:700]
     dato = []
@@ -2340,6 +2393,7 @@ def _init4_logs_company():
     return str(dato)
 
 @digitalcenter.route('/documentos/list',methods=['GET', 'POST'])
+@login_required
 def _company_document_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -2374,6 +2428,7 @@ def _company_document_list():
 
 
 @digitalcenter.route('/update/stage/',methods=['GET', 'POST'])
+@login_required
 def _init_stage_company():
 
     companys = (
@@ -2403,6 +2458,7 @@ def _init_stage_company():
     return 'listo'
 
 @digitalcenter.route('/update/stage/2',methods=['GET', 'POST'])
+@login_required
 def _init_stage_company_2():
     status = CompanyStage.query.filter_by(name_short='E1').first()
     companys = (
@@ -2429,6 +2485,7 @@ def _init_stage_company_2():
     return 'listo'
 
 @digitalcenter.route('/update/stage/3',methods=['GET', 'POST'])
+@login_required
 def _init_stage_3_company():
     companys = Company.query.filter_by(enabled=True).all()[420:670]
     for company in companys:
@@ -2450,6 +2507,7 @@ def _init_stage_3_company():
     return 'listo'
 
 @digitalcenter.route('/formulario/change/<int:company_id>/form/',methods = ['GET', 'POST'])
+@login_required
 def _company_change_form(company_id):
     company = Company.query.filter_by(id=company_id).first()
     if request.method == 'POST':
@@ -2465,6 +2523,7 @@ def _company_change_form(company_id):
     return render_template('company_change_form.html',**context)
 
 @digitalcenter.route('/formulario/company/monitoring/<int:company_id>/form/',methods = ['GET', 'POST'])
+@login_required
 def _company_company_monitoring_form(company_id):
     company = Company.query.filter_by(id=company_id).first()
     if request.method == 'POST':
@@ -2510,6 +2569,7 @@ def _company_company_monitoring_form(company_id):
     return render_template('company_company_monitoring_form.html',**context)
 
 @digitalcenter.route('/formulario/edit/<int:company_id>/form/',methods = ['GET', 'POST'])
+@login_required
 def _company_edit__form(company_id):
     company = Company.query.filter_by(id=company_id).first()
     if request.method == 'POST':
@@ -2525,6 +2585,7 @@ def _company_edit__form(company_id):
     return render_template('company_edit__form.html',**context)
 
 @digitalcenter.route('/blueberry/',methods=['GET', 'POST'])
+@login_required
 def _company_blueberry_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     company = Company.query.filter(Company.enabled==True).all()
@@ -2534,6 +2595,7 @@ def _company_blueberry_list():
     return render_template('company_list.html',**context)
 
 @digitalcenter.route('/blueberry/<int:company_id>/',methods=['GET', 'POST'])
+@login_required
 def _company_blueberry_view(company_id):
     app.logger.debug('** SWING_CMS ** - ------------------')
     company = Company.query.filter_by(id=company_id).first()
@@ -2553,6 +2615,7 @@ from sqlalchemy import func, and_
 from sqlalchemy.orm import aliased
 
 @digitalcenter.route('/get_action_plans', methods=['GET'])
+@login_required
 def get_action_plans():
     # Subconsulta para obtener el ID mínimo para cada company_id
     subquery = db.session.query(
@@ -2585,6 +2648,7 @@ def get_action_plans():
     return jsonify(action_plans_data)
 
 @digitalcenter.route('/first_records_by_company', methods=['GET'])
+@login_required
 def first_records_by_company():
     # Realiza una subconsulta para obtener el primer registro creado por cada company_id
                 
@@ -2617,6 +2681,7 @@ def first_records_by_company():
 
 
 @digitalcenter.route('/get_companies', methods=['GET'])
+@login_required
 def get_companies():
     # Subconsulta para obtener el ID mínimo para cada company_id
     subquery = db.session.query(
@@ -2650,6 +2715,7 @@ def get_companies():
 
 # Ruta para la vista que retorna las empresas con ActionPlan no en fase 0
 @digitalcenter.route('/companies_with_non_zero_phase', methods=['GET'])
+@login_required
 def companies_with_non_zero_phase():
     # Realiza una consulta que filtre las empresas en función de ActionPlan con fase no igual a 0
     companies = db.session.query(Company).\
@@ -2673,6 +2739,7 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import aliased
 
 @digitalcenter.route('/empresas/en/pausa/',methods=['GET', 'POST'])
+@login_required
 def _company_pausa_list():
     # Obtener la fecha actual y la fecha hace 60 días
     fecha_actual = datetime.now()
@@ -2711,6 +2778,7 @@ def _company_pausa_list():
     return render_template('company_pausa_list.html',**context)
 
 @digitalcenter.route('/empresas/rango/',methods=['GET', 'POST'])
+@login_required
 def _company_rango_list():
     # Obtener la fecha actual y la fecha hace 60 días
 
@@ -2755,6 +2823,7 @@ def datetimeformat(value, format='%Y-%m-%d'):
 
 
 @digitalcenter.route('/empresas/diagnostico/',methods=['GET', 'POST'])
+@login_required
 def _company_diagnostic():
     company = Company.query.filter_by(id = 16).first()
     diagnostico = Diagnosticos()

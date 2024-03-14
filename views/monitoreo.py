@@ -17,6 +17,7 @@ from sqlalchemy import desc
 import requests
 import json 
 @monitoreo.route('/indicadores/productividad/',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_productividad():
     #lista de usuarios a evaluar
     list_user = [3,5,6,15,16,17,18,20,21,25,24,30,66]
@@ -91,6 +92,7 @@ def _indicadores_productividad():
     return render_template('monitoreo/indicadores_productividad.html',**context)
 
 @monitoreo.route('/indicadores/sde/productividad/',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_productividad_sde():
     #lista de usuarios a evaluar
     list_user = [173,176]
@@ -168,6 +170,7 @@ def _indicadores_productividad_sde():
 
 from sqlalchemy import or_
 @monitoreo.route('/indicadores/servicios/',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_servicios():
     #inscritas
     inscritas_cohorte1 = 585
@@ -240,6 +243,7 @@ def _indicadores_servicios():
 
 from collections import Counter
 @monitoreo.route('/indicadores/inscritas/1',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_inscritas_1():
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[0:150]
     repite = []
@@ -352,6 +356,7 @@ def _indicadores_inscritas_1():
 
 
 @monitoreo.route('/indicadores/inscritas/2',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_inscritas_2():
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[151:300]
     repite = []
@@ -471,6 +476,7 @@ def _indicadores_inscritas_2():
 
 
 @monitoreo.route('/indicadores/inscritas/3',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_inscritas_3():
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[301:450]
     repite = []
@@ -584,6 +590,7 @@ def _indicadores_inscritas_3():
 
 
 @monitoreo.route('/indicadores/inscritas/4',methods = ['GET', 'POST'])
+@login_required
 def _indicadores_inscritas_4():
     query = Inscripciones.query.filter(Inscripciones.cohorte==5).order_by(Inscripciones.id.desc())[451:600]
     repite = []
@@ -697,6 +704,7 @@ def _indicadores_inscritas_4():
 
 from views.digitalcenter import convertir_a_datetime
 @monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
+@login_required
 def _indicadores_perfil_asesor(user_uid):
     if current_user.id in [3,24,25]:
         user = User.query.filter(User.id==user_uid).first()
@@ -945,6 +953,7 @@ def _indicadores_perfil_asesor(user_uid):
 
 from sqlalchemy import desc,asc,func
 @monitoreo.route('/diagnostico/publico/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
 def _diagnosis_dashboard(user_uid):
     app.logger.debug('** SWING_CMSx ** - ------------------')
     company =  Company.query.filter(Company.id == user_uid).first()
@@ -990,16 +999,19 @@ def _diagnosis_dashboard(user_uid):
 
 
 @monitoreo.route('/doc/',methods=['GET', 'POST'])
+@login_required
 def _doc_dashboard():
     return render_template('doc.html')
 
 
 @monitoreo.route('/guia/',methods=['GET', 'POST'])
+@login_required
 def _guia_dashboard():
     return render_template('guia.html')
 
 
 @monitoreo.route('/monitoring/dashboard',methods=['GET', 'POST'])
+@login_required
 def _monitoring_dashboard():
     departamentos_honduras = [
         {"titulo": "Atlántida", "codigo": "01"},
@@ -1032,6 +1044,7 @@ def _monitoring_dashboard():
 
 
 @monitoreo.route('/monitoreo/empresas/',methods=['GET', 'POST'])
+@login_required
 def _admin_company_monitoring_list():
     url = app.config.get('KOBOTOOLBOX_ALL')
     headers=app.config.get('KOBOTOOLBOX_TOKEN')
