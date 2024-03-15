@@ -2304,7 +2304,7 @@ def _d_company_dash_search():
 
         if current_user.id == 3 or current_user.id == 24 or current_user.id == 144  or current_user.id == 25 :
             companies = Company.query.join(User, User.id==Company.created_by)\
-                .filter(Company.enabled==True).all()[:1]
+                .filter(Company.enabled==True).all()
         else:
             companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
 
