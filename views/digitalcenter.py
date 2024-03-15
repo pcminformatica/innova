@@ -1441,6 +1441,7 @@ def _company_monitoring_list():
                 .filter(Company.enabled==True)\
                 .order_by(asc(Company.date_created))\
                 .all()
+
             allowed_status_short_names = [1, 2, 3, 6]
             # Definir un alias para la relación con ActionPlan
             action_plan_alias = aliased(ActionPlan)

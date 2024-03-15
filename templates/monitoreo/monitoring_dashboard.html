@@ -1608,7 +1608,7 @@
                             <div class="mdc-card__content container-dashboard--messages-msg">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">EMPRESAS</div>
                                 <div class="mdc-data-table__table-container">
-                                    <table class="mdl-data-table_normal data_table_buttons11 data_table_buttons_sign1" width="100%" cellspacing="0" style="white-space: normal;">
+                                    <table class="mdl-data-table_normal data_table_buttons11 data_table_buttons_sign1" cellspacing="0" style="white-space: normal;">
                                       <thead>
                                       <tr class="mdc-data-table__header-row">
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -1625,6 +1625,7 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de servicios</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Rango plan de acción</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asesora</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
@@ -1650,6 +1651,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Capacitada</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha de Plan de Acción</th>
+                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Rango plan de acción</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de servicios</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
@@ -1977,7 +1979,7 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
     row.appendChild(ids);
     secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan",'n_services',"action_plan_progress","email","user","phone"];
+        const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan",'n_services',"action_plan_progress","category_p","email","user","phone"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -2057,7 +2059,7 @@ function getCheckValues(name){
     secuencia = secuencia + 1
   // Create and append table cells
 
-  const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan","n_services","action_plan_progress","email","user","phone"];
+  const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan","n_services","action_plan_progress","category_p","email","user","phone"];
 
   fields.forEach(field => {
     const cell = document.createElement("td");

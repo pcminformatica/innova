@@ -2304,7 +2304,7 @@ def _d_company_dash_search():
 
         if current_user.id == 3 or current_user.id == 24 or current_user.id == 144  or current_user.id == 25 :
             companies = Company.query.join(User, User.id==Company.created_by)\
-                .filter(Company.enabled==True).all()
+                .filter(Company.enabled==True).all()[:1]
         else:
             companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
 
@@ -2455,7 +2455,15 @@ def _d_company_dash_search():
                     date_action_plan = company.date_action_plan.strftime('%Y-%m-%d')
                 email = ""
 
-
+                if company.action_plan_progress is not None:
+                # Calcula la categoría según el valor de action_plan_progress
+                    if company.action_plan_progress:
+                        category_start = int(company.action_plan_progress // 20) * 20
+                        category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                    else:
+                        category_p = "0 de 20"
+                else:
+                    category_p = "No tiene plan de acción"
                 if company.social_networks:
                     existe = company.social_networks.get('email')
                     if existe:
@@ -2504,7 +2512,8 @@ def _d_company_dash_search():
                     'phone':phone,
                     'company_stage':company_stage,
                     'n_services':n_services,
-                    'managers_enroll':managers_enroll
+                    'managers_enroll':managers_enroll,
+                    'category_p':category_p
 
 
                 })
