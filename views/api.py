@@ -2211,6 +2211,29 @@ def _d_save_stage_company():
 
             return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
+        print(e)
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
+@api.route('/api/save/status/', methods = ['POST'])
+# @login_required
+def _d_save_status_company():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_status = request.json['txt_status']
+            txt_company = request.json['txt_company']
+
+            status = CompanyStatus.query.filter_by(name_short=txt_status).first()
+
+            company = Company.query.filter_by(id = txt_company).first()
+            company.status_id = status.id
+            db.session.add(company)
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
@@ -2443,9 +2466,7 @@ def _d_company_dash_search():
                 #filtered_diagnoses = [diagnosis.titulo for diagnosis in diagnoses if diagnosis.id == 10]
                 actions_diagnoses = [action.services_id  for action in actions if action.company_id == company.id]
                 n_services = len(actions_diagnoses)
-                print(n_services)
-                print(n_services)
-                print(n_services)
+
                 enroll =EnrollmentRecord.query.join(Courses, EnrollmentRecord.id_course == Courses.id).join(TrainingType, Courses.id_training_type == TrainingType.id).join(Company, EnrollmentRecord.company_id == Company.id).join(CourseManagers, Courses.id_course_managers == CourseManagers.id).filter(TrainingType.name_short == 'TT1').first()
                 managers_enroll = ''
                 if enroll:

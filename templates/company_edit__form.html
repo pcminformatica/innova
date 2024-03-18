@@ -112,7 +112,7 @@
             <div class="mdc-layout-grid__inner">
      
 
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-phone">
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-6-phone">
                     <div class="mdc-card  mdc-card--color-on-primary">
                         <div class="mdc-card__primary-action" >
                             <div class="mdc-card__media mdc-card__media--square">
@@ -120,8 +120,7 @@
                                     <div class="mdc-layout-grid">
                                         <div class="mdc-layout-grid__inner">
 
-                                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
-                                        mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
+                                            <div class="vmdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
 
                                             
                                             <h2>
@@ -380,8 +379,8 @@
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+
+
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 
 <script>
@@ -466,7 +465,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    consumirDatos()
+
+window.addEventListener('load', function() {
+    // Aquí colocas la llamada a tu función consumirDatos()
+
+    consumirDatos();
+});
      function consumirDatos(){
 
     fetch("{{ url_for('static', filename='js/datahn.json') }}")
@@ -489,8 +493,6 @@
                 departamentos=respuesta.departamentos
                 municipios=respuesta.municipios
                 aldeas=respuesta.aldeas
-
-                console.log('hola',iniciativas)
                 //datos de nacimiento
                 $('#txt_departamentousuaria').empty()
                 $('#txt_departamentousuaria').append(new Option('Seleccione...', 0))

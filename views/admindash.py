@@ -8,7 +8,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, jsonif
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import ActionPlanReferences,CompanyStatus,Inscripciones,catalogCategory,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import DocumentCompany,ActionPlan,DiagnosisCompany,Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import CompanyStage,CompanyStatus, DocumentCompany,ActionPlan,DiagnosisCompany,Company,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from werkzeug.utils import secure_filename
 from models.formatjson import JsonPhone, JsonSocial,JsonConfigProfile
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -305,3 +305,37 @@ def _admin_reference_inscription():
     refereces = ActionPlanReferences.query.join(User, ActionPlanReferences.employe_assigned==User.id).all()
     cxt = {'refereces':refereces}
     return render_template('/admindash/refereces_list.html',**cxt)
+
+
+@admindash.route('/admin/list/companys/data', methods = ['GET'])
+@login_required
+def _admin_companys_list():
+    companies = Company.query.join(User, User.id==Company.created_by)\
+        .filter(Company.enabled==True)\
+        .order_by(asc(Company.date_created))\
+        .all()
+    for company_data in companies:
+        if company_data.action_plan_progress is not None:
+        # Calcula la categoría según el valor de action_plan_progress
+            if company_data.action_plan_progress:
+                category_start = int(company_data.action_plan_progress // 20) * 20
+                category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+            else:
+                category_p = "0 de 20"
+        else:
+            category_p = "No tiene plan de acción"
+    cxt = {'companies':companies}
+    return render_template('/admindash/companys_list.html',**cxt)
+
+@admindash.route('/admin/company/<int:company_id>/managemet/all', methods = ['GET'])
+@login_required
+def _admin_company_management(company_id):
+    company = Company.query.filter_by(id = company_id).first()
+    diagnosis=  DiagnosisCompany.query.filter_by(company_id=company.id).all()
+    actionplan = ActionPlan.query.filter_by(company_id=company.id).all()
+    documents = DocumentCompany.query.filter_by(company_id=company.id).all()
+    status = CompanyStatus.query.all()
+    stage = CompanyStage.query.all()
+
+    cxt = {'company':company,'documents':documents,'diagnosis':diagnosis,'actionplan':actionplan,'status':status,'stage':stage}
+    return render_template('/admindash/company_management.html',**cxt)

@@ -1441,7 +1441,17 @@ def _company_monitoring_list():
                 .filter(Company.enabled==True)\
                 .order_by(asc(Company.date_created))\
                 .all()
-
+            for company_data in company:
+                if company_data.action_plan_progress is not None:
+                # Calcula la categoría según el valor de action_plan_progress
+                    if company_data.action_plan_progress:
+                        category_start = int(company_data.action_plan_progress // 20) * 20
+                        category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                    else:
+                        category_p = "0 de 20"
+                else:
+                    category_p = "No tiene plan de acción"
+                company_data.category_progress = category_p
             allowed_status_short_names = [1, 2, 3, 6]
             # Definir un alias para la relación con ActionPlan
             action_plan_alias = aliased(ActionPlan)
@@ -2519,7 +2529,6 @@ def _company_change_form(company_id):
     context = {
         "company": company,
         'status':status,
-
     }
     return render_template('company_change_form.html',**context)
 
