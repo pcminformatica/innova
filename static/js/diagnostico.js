@@ -152,25 +152,12 @@ submitButton.addEventListener('click', function() {
         if (sel.assignedVar)
             mdcAssignedVars[sel.assignedVar] = sel;
     })
-    const txt_comercio =  getCheckValues('txt_comercio');
-    const txt_industria =  getCheckValues('txt_industria');
-    const txt_sevicios =  getCheckValues('txt_sevicios');
-    const txt_agropecuario =  getCheckValues('txt_agropecuario');
-    console.log(txt_comercio.length)
-    console.log(txt_industria.length)
-    console.log(txt_sevicios.length)
-    console.log(txt_agropecuario.length)
 
-
-      if (txt_comercio.length == 0 && txt_comercio.length == 0 && txt_sevicios.length == 0 && txt_agropecuario.length == 0){
-        alert('no puede ser en blanco')
-        return false
-      }
       var respuesta ;
       var respuestas = [];
       // Obtener todos los elementos input con la clase mdc-text-field__input
       var inputs = document.querySelectorAll('.mdc-text-field__input');
-
+      
       // Iterar sobre los elementos input
       for (var i = 0; i < inputs.length; i++) {
           var input = inputs[i];
@@ -180,9 +167,13 @@ submitButton.addEventListener('click', function() {
           // Verificar si el valor del input está en blanco
           if (input.value.trim() === '') {
               // Mostrar un mensaje alert con la pregunta que hace falta
-              alert('Por favor, complete la pregunta: ' + hiddenLabel);
+              //alert('Por favor, complete la pregunta: ' + hiddenLabel);
               // Detener el proceso
-              break;
+              Swal.fire(
+                'Revisa lo siguiente:',
+                hiddenLabel
+              )
+              return false;
           }
           
           respuesta = {
@@ -192,11 +183,27 @@ submitButton.addEventListener('click', function() {
             "valor": "" 
           };
           respuestas.push(respuesta);
-
           console.log(respuestas); 
-
       }
-      
+
+      const txt_comercio =  getCheckValues('txt_comercio');
+      const txt_industria =  getCheckValues('txt_industria');
+      const txt_sevicios =  getCheckValues('txt_sevicios');
+      const txt_agropecuario =  getCheckValues('txt_agropecuario');
+      console.log(txt_comercio.length)
+      console.log(txt_industria.length)
+      console.log(txt_sevicios.length)
+      console.log(txt_agropecuario.length)
+  
+  
+        if (txt_comercio.length == 0 && txt_comercio.length == 0 && txt_sevicios.length == 0 && txt_agropecuario.length == 0){
+  
+          Swal.fire(
+            'Revisa lo siguiente:',
+            'Por favor seleccione un sector',
+          )
+          return false
+        }
       var xpreguntas = document.querySelectorAll('.diagnostico_pregunta');
       for (var i = 0; i < xpreguntas.length; i++) {
           var radios = xpreguntas[i].querySelectorAll('input[type="radio"]');
@@ -216,7 +223,7 @@ submitButton.addEventListener('click', function() {
                     "valor": "" 
                   };
                   respuestas.push(respuesta);
-                  break;
+                 
               }
               
             
@@ -230,9 +237,10 @@ submitButton.addEventListener('click', function() {
       }
       console.log(respuestas); 
       console.log(respuestas); 
-
+      let txt_company_id = document.getElementById('txt_company_id').value
 
       let postData = {
+        'txt_company_id':txt_company_id,
         'respuestas': respuestas
       }
   console.log(postData)

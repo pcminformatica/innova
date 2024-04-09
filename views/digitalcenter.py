@@ -559,13 +559,28 @@ def _plan_action_create(user_uid):
     plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     api = diagnosis.respuestas
     servicios = []
-    for resp in api:
-        if api[resp] == '1' or api[resp] == '2':
-            print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
-            services = CatalogServices.query.filter(CatalogServices.diagnostic_questions.contains(resp)).all()
-            for servicesx in services:
-                if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
-                    servicios.append({'id':servicesx.id,'tiempo_asesoria':servicesx.advisory_time,'tiempo_ejecucion':servicesx.execution_time,'costo':servicesx.cost,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
+    if diagnosis.origin == 2:
+        for resp in api:
+            if resp['respuesta']  == '1' or resp['respuesta'] == '2':
+                #print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
+                services = CatalogServices.query.filter(
+                (CatalogServices.enabled == True) & 
+                    CatalogServices.diagnostic_questions.contains(resp['id'])
+                ).order_by(desc(CatalogServices.id)).all()
+                for servicesx in services:
+                    if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
+                        servicios.append({'id':servicesx.id,'tiempo_asesoria':servicesx.advisory_time,'tiempo_ejecucion':servicesx.execution_time,'costo':servicesx.cost,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
+    else:
+        for resp in api:
+            if api[resp] == '1' or api[resp] == '2':
+                print("Pregunta: {} respuesta: {}".format(resp,api[resp]))
+                services = CatalogServices.query.filter(
+                (CatalogServices.enabled == True) & 
+                    CatalogServices.diagnostic_questions.contains(resp)
+                ).order_by(desc(CatalogServices.id)).all()
+                for servicesx in services:
+                    if len(list(e for e in servicios if e['id']  == servicesx.id)) == 0:
+                        servicios.append({'id':servicesx.id,'tiempo_asesoria':servicesx.advisory_time,'tiempo_ejecucion':servicesx.execution_time,'costo':servicesx.cost,'titulo':servicesx.name,'categoria':servicesx.catalog_category})
     legalizacion = []
     administracion = []
     produccion = []
@@ -2832,10 +2847,10 @@ def datetimeformat(value, format='%Y-%m-%d'):
     return value.strftime(format) if value else ''
 
 
-@digitalcenter.route('/empresas/diagnostico/',methods=['GET', 'POST'])
+@digitalcenter.route('/empresas/diagnostico/<int:company_id>/',methods=['GET', 'POST'])
 @login_required
-def _company_diagnostic():
-    company = Company.query.filter_by(id = 16).first()
+def _company_diagnostic(company_id):
+    company = Company.query.filter_by(id = company_id).first()
     diagnostico = Diagnosticos()
 
     direccion = [pregunta for pregunta in diagnostico.preguntas if pregunta['id_categoria'] == 1]

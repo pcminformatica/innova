@@ -108,9 +108,10 @@ padding-top: 10px;
                                                 INFORMACIÓN DE LA EMPRESA
                                               </div>
                                             </div>
+                                            <input  type="hidden" id="txt_company_id" value="{{ company.id }}" disabled>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>A.</b> Nombre Empresa:
+                                                    Nombre Empresa:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_company_name" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -121,7 +122,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>B.</b> RTN Empresa:
+                                                    RTN Empresa:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -132,7 +133,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>C.</b> Fecha de Inicio:
+                                                    Fecha de Inicio:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_inicio" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -143,7 +144,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>D.</b> Años de operación:
+                                                    Años de operación:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_ano_operacion" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -154,7 +155,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>E.</b> Inversión inicial:
+                                                    Inversión inicial:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_inversion_inicial" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -165,7 +166,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>F.</b> Nivel Anual de Ventas:
+                                                    Nivel Anual de Ventas:
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_nivel_anual" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -176,7 +177,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>G.</b> Departamento:*
+                                                    Departamento:*
                                                 </div>
                                                 <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacDepto" id="txt_departamento"  data-assigned-var>
                                                   <div class="mdc-select__anchor" aria-required="true"
@@ -226,7 +227,7 @@ padding-top: 10px;
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>H.</b> Municipio:*
+                                                    Municipio:*
                                                 </div>
                                                 <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacMum" id="txt_municipio" data-assigned-var>
                                                   <div class="mdc-select__anchor" aria-required="true"
@@ -272,7 +273,7 @@ padding-top: 10px;
 
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                               <div class="mdc-typography--body1">
-                                                  <b>H.</b> Aldea:*
+                                                  Aldea:*
                                               </div>
                                               <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_aldea" data-assigned-var>
                                                 
@@ -321,7 +322,7 @@ padding-top: 10px;
                                           </div>                                            
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>I.</b> Dirección:*
+                                                    Dirección:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_direccion" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -342,7 +343,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>J.</b> Nombre Empresaria:*
+                                                    Nombre Empresaria:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_nombre_empresaria" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -354,7 +355,7 @@ padding-top: 10px;
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>K.</b> Identidad:*
+                                                    Identidad:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_identidad" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -366,7 +367,7 @@ padding-top: 10px;
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>L.</b> RTN:*
+                                                     RTN:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_rtn" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -378,31 +379,31 @@ padding-top: 10px;
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>M.</b> Teléfono:*
+                                                    Teléfono:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_telefono" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
                                                     <span class="mdc-floating-label" id="lbl_telefono" hiddenlabel="Teléfono">Escribe el teléfono</span>
-                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_telefono" value="{{ company.inscripcion.phone}}" disabled>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_telefono" value="{{ company.inscripcion.phone}}">
                                                     <span class="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>N.</b> Email:*
+                                                    Email:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_email" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
                                                     <span class="mdc-floating-label" id="lbl_email" hiddenlabel="Email">Escribe el email</span>
-                                                    <input required class="mdc-text-field__input" type="email" aria-labelledby="lbl_email"  value="{{ company.inscripcion.correo}}" disabled>
+                                                    <input required class="mdc-text-field__input" type="email" aria-labelledby="lbl_email"  value="{{ company.inscripcion.correo}}" >
                                                     <span class="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
                                             
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>Ñ.</b> Nivel de escolaridad:*
+                                                    Nivel de escolaridad:*
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled" id="txt_escolaridad" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
@@ -418,7 +419,7 @@ padding-top: 10px;
                                             "
                                             >
                                               <div class="mdc-typography--body1">
-                                                <b>O.</b> SECTORES
+                                                SECTORES
                                               </div>
                                             </div>
 
@@ -905,7 +906,7 @@ padding-top: 10px;
 
                                           <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                <b>P.</b> TIPO DE EMPRESA 
+                                                 TIPO DE EMPRESA 
                                             </div>
                                             <div class="mdc-form-field">
                                                 <div class="mdc-radio">
@@ -1430,7 +1431,7 @@ padding-top: 10px;
                                                 <span class="mdc-notched-outline__trailing"></span>
                                               </span>
                                               <span class="mdc-text-field__resizer">
-                                                <span class="mdc-floating-label" id="my-label-id"  hiddenlabel="3.8 Dirección">Comentarios</span>
+                                                <span class="mdc-floating-label" id="my-label-id"  hiddenlabel="Comentarios">Comentarios</span>
                                                 <textarea required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
                                                 <span class="mdc-text-field-character-counter">0 / 140</span>
                                               </span>
@@ -1442,11 +1443,11 @@ padding-top: 10px;
                                     </div>
 
 
-                          <!-- fin -->
+                          <!-- fin style="position: fixed;"-->
                           </div>
                             </div>
   
-                            <div class="mdc-card__actions" style="position: fixed;" >
+                            <div class="mdc-card__actions"  >
                                 <div class="mdc-card__action-buttons">
                                 <center>
 
@@ -1496,7 +1497,7 @@ padding-top: 10px;
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/diagnostico.js') }}"></script>
+<script src="{{ url_for('static', filename='js/diagnostico.js') }}?v=1"></script>
 <script>
 
    window.addEventListener('load', function() {

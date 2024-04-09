@@ -962,6 +962,7 @@ def _d_save_DiagnosisCompany():
                 diagnosis.respuestas = api
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
+                diagnosis.origin = 1
                 fecha_datetime = convertir_a_datetime(fecha_string)
                 if fecha_datetime:
                     diagnosis.date_created = fecha_datetime
@@ -1030,7 +1031,6 @@ def _d_save_ActionPlanHistory():
             if txt_modality:
                 modality = ModalityType.query.filter_by(name_short=txt_modality).first()
                 history.id_modality_type = modality.id
-            app.logger.error('*11111111111111111111* ooooooooooooooooooooooooooooooooooooooooo: {}'.format('e'))
             if 'fileInput' in request.files:
                 file = request.files['fileInput']
                 # If the user does not select a file, the browser submits an
@@ -1043,7 +1043,6 @@ def _d_save_ActionPlanHistory():
                     filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     history.documento = filename
-            app.logger.error('*22222222222* ooooooooooooooooooooooooooooooooooooooooo: {}'.format('e'))
             db.session.add(history)
             db.session.commit()
            
@@ -1091,21 +1090,36 @@ def _d_save_ActionPlanHistory():
                     db.session.add(wallet)
                     db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
-                areas_mejoras = plan.services.diagnostic_questions
+                if isinstance(plan.services.diagnostic_questions, str):
+                    # Si es una cadena, la evaluamos con eval()
+                    areas_mejoras = eval(plan.services.diagnostic_questions)
+                else:
+                    # Si no es una cadena, asumimos que ya es un objeto Python y lo utilizamos directamente
+                    areas_mejoras = plan.services.diagnostic_questions
+
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
+                # nuevo diagnosticos activado    
+                diagnostico = Diagnosticos()                
                 api = diagnos.respuestas
-                for area_mejora in areas_mejoras:
-                    clave = area_mejora['id'] 
-                    if clave in api:
-                        api[clave] = 3
-                # nuevo diagnosticos activado
-                diagnostico = Diagnosticos()
-                resultados  = diagnostico.calcular_area(api)
+                if diagnos.origin == 2:
+                    for area_mejora in areas_mejoras:
+                        clave = area_mejora['id'] 
+                        # Modificar la respuesta del elemento con la clave a "3"
+                        modificar_respuesta(api, clave, "3")
+                    resultados  = diagnostico.calcular_area2(api)
+                else:
+                    for area_mejora in areas_mejoras:
+                        clave = area_mejora['id'] 
+                        if clave in api:
+                            api[clave] = 3
+                    resultados  = diagnostico.calcular_area(api)
+
                 diagnosis =  DiagnosisCompany()
                 diagnosis.company_id = company.id
                 diagnosis.respuestas = api
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
+                diagnosis.origin = diagnos.origin
                 db.session.add(diagnosis)
                 db.session.commit()
                 # anterior diagnosticos desactivado
@@ -1210,22 +1224,35 @@ def _d_save_ActionPlanHistory_update():
                     db.session.commit()
                 actualizar = _update_wallet(plan.company_id)
   
+                if isinstance(plan.services.diagnostic_questions, str):
+                    # Si es una cadena, la evaluamos con eval()
+                    areas_mejoras = eval(plan.services.diagnostic_questions)
+                else:
+                    # Si no es una cadena, asumimos que ya es un objeto Python y lo utilizamos directamente
+                    areas_mejoras = plan.services.diagnostic_questions
 
-                areas_mejoras = plan.services.diagnostic_questions
                 diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(desc(DiagnosisCompany.date_created)).first()
                 api = diagnos.respuestas
-                for area_mejora in areas_mejoras:
-                    clave = area_mejora['id'] 
-                    if clave in api:
-                        api[clave] = 3
-                # nuevo diagnosticos activado
                 diagnostico = Diagnosticos()
-                resultados  = diagnostico.calcular_area(api)
+                if diagnos.origin == 2:
+                    for area_mejora in areas_mejoras:
+                        clave = area_mejora['id'] 
+                        # Modificar la respuesta del elemento con la clave a "3"
+                        modificar_respuesta(api, clave, "3")
+                    resultados  = diagnostico.calcular_area2(api)
+                else:
+                    for area_mejora in areas_mejoras:
+                        clave = area_mejora['id'] 
+                        if clave in api:
+                            api[clave] = 3
+                    resultados  = diagnostico.calcular_area(api)
+                # nuevo diagnosticos activado
                 diagnosis =  DiagnosisCompany()
                 diagnosis.company_id = company.id
                 diagnosis.respuestas = api
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
+                diagnosis.origin = diagnos.origin
                 db.session.add(diagnosis)
                 db.session.commit()
                 # anterior diagnosticos desactivado
@@ -1238,13 +1265,16 @@ def _d_save_ActionPlanHistory_update():
         return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
     except Exception as e:
         print(e)
-        print(e)
-        print(e)
         app.logger.error('** SWING_CMS ** - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
 
-
+# Función para modificar la respuesta de un elemento con un id específico
+def modificar_respuesta(lista, id_elemento, nueva_respuesta):
+    for elemento in lista:
+        if elemento["id"] == id_elemento:
+            elemento["respuesta"] = nueva_respuesta
+            
 @api.route('/api/save/user/company/admin', methods = ['POST'])
 @login_required
 def _d_save_admin_company():
@@ -3133,7 +3163,8 @@ def _d_diagnosticorespuestas():
         # POST: Save Appointment
         if request.method == 'POST':
             respuestas = request.json['respuestas']
-            company = Company.query.filter_by(id = 37).first()
+            txt_company_id = request.json['txt_company_id']
+            company = Company.query.filter_by(id = txt_company_id).first()
             diagnostico = Diagnosticos()
             resultados  = diagnostico.calcular_area2(respuestas)
             diagnosis =  DiagnosisCompany()
@@ -3141,6 +3172,7 @@ def _d_diagnosticorespuestas():
             diagnosis.respuestas = respuestas
             diagnosis.resultados =  json.loads( str(resultados))
             diagnosis.created_by = current_user.id
+            diagnosis.origin = 2
             db.session.add(diagnosis)
             db.session.commit()
             print(resultados)

@@ -39,28 +39,29 @@
                         </div>
                         <div class="mdc-card__content container-dashboard--messages-msg">
                             <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-layout-grid__cell--span-6-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                   <div class="mdc-typography--body1">
                                       Nombre de la empresa:
                                   </div>
                                   <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                       <span class="mdc-text-field__ripple"></span>
                                      
-                                      <input id="txt_company_name" value="{{ api.NOMBRE_EMPRESA }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
+                                      <input id="txt_company_name" value="{{ company.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
                                       <span lass="mdc-line-ripple"></span>
                                   </label>
                                 </div>
-                                <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                <div class="mdc-layout-grid__cell--span-6-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                   <div class="mdc-typography--body1">
-                                      RTN:
+                                      DNI:
                                   </div>
                                   <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                       <span class="mdc-text-field__ripple"></span>
     
-                                      <input id="txt_company_rtn" value="{{ api.RTN }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly >
+                                      <input id="txt_company_rtn" value="{{ company.dni }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly >
                                       <span lass="mdc-line-ripple"></span>
                                   </label>
                                 </div>
+                                <!--
                                 <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                   <div class="mdc-typography--body1">
                                       EMAIL:
@@ -68,7 +69,7 @@
                                   <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                       <span class="mdc-text-field__ripple"></span>
     
-                                      <input value="{{ api.EMAIL }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                      <input value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                       <span lass="mdc-line-ripple"></span>
                                   </label>
                                 </div>
@@ -79,7 +80,7 @@
                                   <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                       <span class="mdc-text-field__ripple"></span>
     
-                                      <input value="{{ api.TELEFONO }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                      <input value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                       <span lass="mdc-line-ripple"></span>
                                   </label>
                                 </div>
@@ -91,49 +92,46 @@
                                   <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                       <span class="mdc-text-field__ripple"></span>
                                       
-                                      <input value="{{ api.DIRECCION }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                      <input value="" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                       <span lass="mdc-line-ripple"></span>
                                   </label>
-                                </div>
+                                </div>-->
                                 
                               </div>
                               <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                    <br><br>
-                                    {% if diagnosis %}
-                                    <center>
-                                        <p>
-                                            Diagnostico ya fue enviado
-                                        </p>
-                                    </center>
-                                    {% else %}
-                                    <center>
-                                    <button  onclick="saveDiagnostico()" class="mdc-button mdc-button--raised mdc-button--leading no-print" style="text-align: center">
-                                            
-                                        <span class="mdc-button__ripple"></span>
-                                        <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
-                                        <span class="mdc-button__label">Enviar diagnostico</span>
-                                      </button>
-                                    </center>
-                                    {% endif %}
+                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone" style="text-align: center">
+                                        <br>
+                                     
+                                        <a href="" class="mdc-button mdc-button--raised mdc-button--color-secondary  mdc-button--leading no-print" >
+                                                
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                                            <span class="mdc-button__label">Ir al Dashboard de {{ company.name }}</span>
+                                        </a>
+                                        <br>
+                                        {% if diagnosis %}
+                                
+                                            <p>
+                                                Diagnostico ya fue enviado
+                                            </p>
+                        
+                                        {% else %}
+                                    
+                                        <button  onclick="saveDiagnostico()" class="mdc-button mdc-button--raised mdc-button--leading no-print" >
+                                                
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                                            <span class="mdc-button__label">Enviar diagnostico</span>
+                                        </button>
+                                    
+                                        {% endif %}
+ 
                                   </div>
                               </div>
                         </div>
           
                             
-                         
 
-
-                        <div class="mdc-card__actions">
-                            <div class="mdc-card__actions-buttons">
-                            </div>
-                            <div class="mdc-card__action-icons">
-                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
-                                    <div class="mdc-icon-button__ripple"></div>
-                                    more_vert
-                                </button>
-                            </div>
-                        </div>
                     
                     
                 </div>

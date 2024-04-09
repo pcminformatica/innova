@@ -847,7 +847,8 @@ class DiagnosisCompany(db.Model):
     user = db.relationship("User")
     company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
     company = db.relationship("Company")
-    
+    # (1) KOBOTOOLBOX, (2) INOOVA
+    origin = db.Column(db.Integer, unique=False, nullable=True, default=1)
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     resultados = db.Column(db.JSON, unique=False, nullable=True)
 
