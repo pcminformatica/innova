@@ -20,6 +20,14 @@ import os
 
 mae = Blueprint('mae', __name__, template_folder='templates', static_folder='static')
 
+#entry
+
+
+@mae.route('/mae/create')
+def _create_company():
+    return render_template('/mae/create_company.html')
+
+#process
 @mae.route('/mae/home')
 def _mae_home():
     return render_template('/mae/home.html')
@@ -29,6 +37,7 @@ def _mae_list():
     return render_template('/mae/mae_list.html')
 #    return render_template('/digitalcenter/form_profile_sde.html')
 
+#output
 @mae.route('/mae/perfil')
 def _mae_perfil():
     return render_template('/mae/perfil.html')

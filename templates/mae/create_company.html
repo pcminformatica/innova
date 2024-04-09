@@ -1,0 +1,1517 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block body %}
+{% block css_script_section %}
+
+<style>
+
+@media screen and (max-width: 850px) {
+
+
+.mdc-deprecated-list-item__text{
+  font-size: 14px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 650px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 5px 0 4px;
+  padding-bottom: 10px;
+padding-top: 10px;
+
+}
+
+.mdc-deprecated-list-item__text{
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 10px;
+}
+
+.mdc-radio {
+  margin-right: 0px;
+}
+}
+
+@media screen and (max-width: 340px) {
+  .mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0px;
+  font-size: 7px;
+}
+
+.mdc-radio {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  will-change: opacity,transform,border-color,color;
+}
+
+}
+
+#step-2{
+  display: none;
+}
+
+.mdc-typography--body1{
+  font-size: 1.2em;
+}
+</style>
+{% endblock %}
+
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+
+                <div id="step-1" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+
+                            <div class="mdc-card__content container-dashboard--messages-cnt">
+                                <div class="mdc-typography--headline4 s-font-color-secondary">
+                                    DIAGNOSTICO EMPRESARIAL INNOVA
+                                </div>
+
+
+                          
+                                <p>
+                                  Es una herramienta aplicada a siete areas del negocio para conocer el estado de ellas y asi obtener un resultado que nos apoyara a identificar las oportunidades de mejoras que requiere su empresa.
+                                </p>
+
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                    <div class="mdc-layout-grid">
+   
+                                        <div class="mdc-layout-grid__inner">
+
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                INFORMACIÓN DE LA EMPRESA
+                                              </div>
+                                            </div>
+                                            <input  type="hidden" id="txt_company_id" value="" disabled>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Nombre Empresa:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_company_name" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_company_name" hiddenlabel="Nombre Empresa"  >Escribe el nombre de la empresa</span>
+                                                    <input required class="mdc-text-field__input"  type="text" aria-labelledby="lbl_company_name" value="" disabled>
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    RTN Empresa:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Escribe el RTN de la empresa</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Fecha de Inicio:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_inicio" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_fecha_inicio" hiddenlabel="Fecha de Inicio"  >Escribe la fecha de inicio</span>
+                                                    <input required class="mdc-text-field__input" type="date" aria-labelledby="lbl_fecha_inicio">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Años de operación:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_ano_operacion" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_ano_operacion" hiddenlabel="Años de operación"  >Escribe los años de operación</span>
+                                                    <input required class="mdc-text-field__input" type="number" aria-labelledby="lbl_ano_operacion">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Inversión inicial:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_inversion_inicial" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_inversion_inicial" hiddenlabel="Inversión inicial"  >Escribe la inversión inicial</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_inversion_inicial">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Nivel Anual de Ventas:
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_nivel_anual" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_nivel_anual" hiddenlabel="Nivel Anual de Ventas"  >Escribe el nivel anual de ventas</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_nivel_anual">
+                                                    <span lass="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Departamento:*
+                                                </div>
+                                                <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacDepto" id="txt_departamento"  data-assigned-var>
+                                                  <div class="mdc-select__anchor" aria-required="true"
+                                                       role="button"
+                                                       aria-haspopup="listbox"
+                                                       aria-expanded="false"
+                                                       aria-labelledby="demo-label demo-selected-text">
+                                                    <span class="mdc-select__ripple"></span>
+                                                    <span id="demo-label" class="mdc-floating-label" hiddenlabel="Departamento">Seleccione departamento</span>
+                                                    <span class="mdc-select__selected-text-container">
+                                                      <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                    </span>
+                                                    <span class="mdc-select__dropdown-icon">
+                                                      <svg
+                                                          class="mdc-select__dropdown-icon-graphic"
+                                                          viewBox="7 10 10 5" focusable="false">
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-inactive"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 10 12 15 17 10">
+                                                        </polygon>
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-active"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 15 12 10 17 15">
+                                                        </polygon>
+                                                      </svg>
+                                                    </span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                  </div>
+                                                  
+
+
+                                                  <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
+                                                    <ul id="list-depto" class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                      </li>
+
+
+                                                    </ul>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Municipio:*
+                                                </div>
+                                                <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacMum" id="txt_municipio" data-assigned-var>
+                                                  <div class="mdc-select__anchor" aria-required="true"
+                                                       role="button"
+                                                       aria-haspopup="listbox"
+                                                       aria-expanded="false"
+                                                       aria-labelledby="demo-label demo-selected-text">
+                                                    <span class="mdc-select__ripple"></span>
+                                                    <span id="demo-label" class="mdc-floating-label" hiddenlabel="Municipio">Seleccione municipio</span>
+                                                    <span class="mdc-select__selected-text-container">
+                                                      <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                    </span>
+                                                    <span class="mdc-select__dropdown-icon">
+                                                      <svg
+                                                          class="mdc-select__dropdown-icon-graphic"
+                                                          viewBox="7 10 10 5" focusable="false">
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-inactive"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 10 12 15 17 10">
+                                                        </polygon>
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-active"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 15 12 10 17 15">
+                                                        </polygon>
+                                                      </svg>
+                                                    </span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                  </div>
+                                                
+                                                  <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
+                                                    <ul id="list-muni"  class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                      </li>
+                                                    </ul>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                              <div class="mdc-typography--body1">
+                                                  Aldea:*
+                                              </div>
+                                              <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_aldea" data-assigned-var>
+                                                
+                                                <div class="mdc-select__anchor" aria-required="true"
+                                                     role="button"
+                                                     aria-haspopup="listbox"
+                                                     aria-expanded="false"
+                                                     aria-labelledby="demo-label demo-selected-text">
+                                                  <span class="mdc-select__ripple"></span>
+                                                  <span id="demo-label" class="mdc-floating-label" hiddenlabel="Aldea">Seleccione aldea</span>
+                                                  <span class="mdc-select__selected-text-container">
+                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                  </span>
+                                                  <span class="mdc-select__dropdown-icon">
+                                                    <svg
+                                                        class="mdc-select__dropdown-icon-graphic"
+                                                        viewBox="7 10 10 5" focusable="false">
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-inactive"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 10 12 15 17 10">
+                                                      </polygon>
+                                                      <polygon
+                                                          class="mdc-select__dropdown-icon-active"
+                                                          stroke="none"
+                                                          fill-rule="evenodd"
+                                                          points="7 15 12 10 17 15">
+                                                      </polygon>
+                                                    </svg>
+                                                  </span>
+                                                  <span class="mdc-line-ripple"></span>
+                                                </div>
+                                              
+                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
+                                                  <ul id="list-aldea"  class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+                                                      <span class="mdc-deprecated-list-item__ripple"></span>
+                                                    </li>
+
+                                                      
+                        
+                                                  </ul>
+                                                </div>
+                                            </div>
+                                          </div>                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Dirección:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_direccion" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_direccion" hiddenlabel="Dirección">Escribe la dirección</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_direccion">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                DATOS DE CONTACTO
+                                              </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Nombre Empresaria:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_nombre_empresaria" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_nombre_empresaria" hiddenlabel="Nombre Empresaria">Escribe el nombre de la empresaria</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_nombre_empresaria" value="" disabled>
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Identidad:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_identidad" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="txt_identidad" hiddenlabel="Identidad">Escribe la identidad</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="txt_identidad"  value="" disabled>
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                     RTN:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_rtn" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_rtn" hiddenlabel="RTN">Escribe el RTN</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_rtn"  value="" >
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Teléfono:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_telefono" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_telefono" hiddenlabel="Teléfono">Escribe el teléfono</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_telefono" value="">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Email:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_email" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_email" hiddenlabel="Email">Escribe el email</span>
+                                                    <input required class="mdc-text-field__input" type="email" aria-labelledby="lbl_email"  value="" >
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Nivel de escolaridad:*
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_escolaridad" data-assigned-var>
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <span class="mdc-floating-label" id="lbl_escolaridad" hiddenlabel="Nivel de escolaridad">Escribe el nivel de escolaridad</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_escolaridad">
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div class="
+                                            mdc-layout-grid__cell--span-12-desktop
+                                            mdc-layout-grid__cell--span-12-tablet
+                                            mdc-layout-grid__cell--span-12-phone
+                                            "
+                                            >
+                                              <div class="mdc-typography--body1">
+                                                SECTORES
+                                              </div>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Comercio
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_comercio_check" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_comercio"
+                                                            id="sr_1" 
+                                                            value="Al detalle"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        A) Al detalle
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_comercio"
+                                                            id="sr_2" 
+                                                            value="Mayorista"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        B) Mayorista
+
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_comercio"
+                                                            id="sr_3" 
+                                                            value="Comisionistas"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        C) Comisionistas
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Industria
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_industria_cheack" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_industria"
+                                                            id="sr_1" 
+                                                            value="Manufactura"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        A) Manufactura
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_industria"
+                                                            id="sr_2" 
+                                                            value="Procesamiento de alimentos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        B) Procesamiento de alimentos
+
+                                                    </label>
+                                                </div>
+                                 
+
+
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Sevicios
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_sevicios_cheack" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_1" 
+                                                            value="Hotelería"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        A) Hotelería
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Educativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        B) Educativos
+
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Financieros"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        C) Financieros
+
+                                                    </label>
+                                                </div>                 
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Turisticos y recreativos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        D) Turisticos y recreativos
+
+                                                    </label>
+                                                </div>                    
+
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Técnologicos"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        F) Técnologicos
+
+                                                    </label>
+                                                </div> 
+                                                
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Comunicación"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        G) Comunicación
+
+                                                    </label>
+                                                </div> 
+
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Salud y belleza"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        J) Salud y belleza
+
+                                                    </label>
+                                                </div> 
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Gastronomía"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        K) Gastronomía
+
+                                                    </label>
+                                                </div> 
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Comercial"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        M) Comercial
+
+                                                    </label>
+                                                </div> 
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Manufactura"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        N) Manufactura
+
+                                                    </label>
+                                                </div> 
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_sevicios"
+                                                            id="sr_2" 
+                                                            value="Otro"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        O) Otro
+
+                                                    </label>
+                                                </div> 
+
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    Agropecuario
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" id="txt_agropecuario_cheack" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_agropecuario"
+                                                            id="sr_1" 
+                                                            value="Producción agrícola"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        A) Producción agrícola
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox" data-assigned-var>
+                                                    <input type="checkbox"
+                                                            class="mdc-checkbox__native-control"
+                                                            name="txt_agropecuario"
+                                                            id="sr_2" 
+                                                            value="Producción pecuaría"
+                                                            />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                            viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                                fill="none"
+                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                    <div class="mdc-checkbox__focus-ring"></div>
+                                                    </div>
+                                                    <label for="checkbox-public">
+                                                        B) Producción pecuaría
+
+                                                    </label>
+                                                </div>
+                                 
+
+
+                                            </div>
+
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                 TIPO DE EMPRESA 
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Nivel 1: Nuevos emprendimientos" name="tipo_empresa" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">A)  Nivel 1: Nuevos emprendimientos</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Nivel 2: Microempresa pequeña"  name="tipo_empresa">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">B)  Nivel 2: Microempresa pequeña </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Nivel 3: Microempresa mediana"  name="tipo_empresa">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">C)  Nivel 3: Microempresa mediana </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Nivel 4: Pequeña empresa"  name="tipo_empresa">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  Nivel 4: Pequeña empresa </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="Nivel 5: Mediana empresa"  name="tipo_empresa">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">F)  Nivel 5: Mediana empresa </label>
+                                              </div>
+                                          </div>
+
+
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                1. Dirección Estratégica (10% si la pregunta no aplica seleccionar N/A ) 
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra en la formulación, implementación y evaluación de estrategias que guíen a la organización hacia sus metas y objetivos empresariales. 
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {% for pregunta in direccion %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+                                          
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                2. Mercadeo y ventas (20% Si la pregunta no aplica seleccionar N/A ) 
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra en el desarrollo y éxito de la empresa al ser responsable de crear estrategias efectivas para promover los productos o servicios y cerrar vinculaciones comerciales. 
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          {% for pregunta in mercadeo %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+                                  
+
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                3. Madurez Digital (10% Si la pregunta no aplica seleccionar N/A )
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra  en la capacidad de la empresa para aprovechar y adaptarse a las tecnologías digitales de manera efectiva. 
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {% for pregunta in madurez %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+
+
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                4. Gestión Financiera (20% Si la pregunta no aplica seleccionar N/A) 
+
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra en la administración de los recursos financieros de la empresa de manera eficiente y que contribuyan al crecimiento y la rentabilidad sostenible. 
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {% for pregunta in financiera %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+
+                                          
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                5. Gestión de la producción (20% Si la pregunta no aplica seleccionar N/A) 
+
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra de planificar, coordinar y supervisar los procesos relacionados con la fabricación y entrega de productos o la prestación de servicios. 
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {% for pregunta in produccion %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}     
+
+
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                6. Organización y Gestión del talento humano (5% Si la pregunta no aplica seleccionar N/A) 
+
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra en diseñar e implementar estrategias para atraer, desarrollar y retener el talento necesario para el logro de los objetivos empresariales. 
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          {% for pregunta in organizacion %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+
+                                          <div class=" mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="cuadrito" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px; background-color: rgba(226, 226, 226, 0.8); border-radius: 20px;">
+                                              <div class="mdc-typography--headline6 s-font-color-secondary" style="font-weight: bold;">
+                                                7. Legalización (15% Si la pregunta no aplica seleccionar N/A)  
+
+                                              </div>
+                                              <div class="mdc-typography--body1">
+                                                Esta área se centra en la gestión de todos los aspectos legales y regulatorios relacionados con la creación, operación y expansión de la organización.  Garantiza que la empresa cumpla con todas las leyes y regulaciones aplicables 
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          {% for pregunta in legalizacion %}
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone diagnostico_pregunta">
+                                            <div class="mdc-typography--body1">
+                                                {{ pregunta.Pregunta}}
+                                            </div>
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="3" name="{{ pregunta.id}}" >
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">SI</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="2"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">REGULAR </label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="1"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">NO</label>
+                                              </div>
+                                              <div class="mdc-form-field">
+                                                <div class="mdc-radio">
+                                                  <input class="mdc-radio__native-control" type="radio" value="0"  name="{{ pregunta.id}}">
+                                                  <div class="mdc-radio__background">
+                                                    <div class="mdc-radio__outer-circle"></div>
+                                                    <div class="mdc-radio__inner-circle"></div>
+                                                  </div>
+                                                  <div class="mdc-radio__ripple"></div>
+                                                </div>
+                                                <label for="radio-1">D)  N/A </label>
+                                              </div>
+
+                                          </div>
+                                          {% endfor %}
+                                          
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                <b></b> Comentarios * 
+                                            </div>
+                                            <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_company_address" data-assigned-var> 
+                                              <span class="mdc-notched-outline">
+                                                <span class="mdc-notched-outline__leading"></span>
+                                                <span class="mdc-notched-outline__notch">
+                                                  
+                                                </span>
+                                                <span class="mdc-notched-outline__trailing"></span>
+                                              </span>
+                                              <span class="mdc-text-field__resizer">
+                                                <span class="mdc-floating-label" id="my-label-id"  hiddenlabel="Comentarios">Comentarios</span>
+                                                <textarea required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
+                                                <span class="mdc-text-field-character-counter">0 / 140</span>
+                                              </span>
+                                            </label>
+                                          </div>
+
+                                        </div>
+                                        
+                                    </div>
+
+
+                          <!-- fin style="position: fixed;"-->
+                          </div>
+                            </div>
+  
+                            <div class="mdc-card__actions"  >
+                                <div class="mdc-card__action-buttons">
+                                <center>
+
+                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" >
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                      >bookmark</i
+                                    >
+                                    <span class="mdc-button__label">Enviar  </span>
+                      
+                                  </button>
+                                  <!--
+                                  <button class="mdc-button mdc-button--outlined">
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__focus-ring"></span>
+                                    <span class="mdc-button__label">Continuar después  </span>
+                                  </button>-->
+                                </center>
+                                </div>
+
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+
+                <div id="step-2" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                  <div class="container-dashboard--messages">
+                    <div class="mdc-card mdc-card--color-on-primary">
+
+                      <div class="mdc-card__content container-dashboard--messages-cnt">
+
+                        <p>Gracias por inscribirte en INNOVA MUJER HONDURAS</p>
+
+                        <p>En breve estarás recibiendo un correo electrónico a tu cuenta"<spam id="corre_empresaria" style="font-weight: bold;" >ma@yahoo.com</spam>" con la que te has registrado, con la información necesaria para continuar con tu proceso de formación empresarial.
+                        </p>
+                        <p>Saludos</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/diagnostico.js') }}?v=1"></script>
+<script>
+
+   window.addEventListener('load', function() {
+    // Esta función se ejecutará una vez que se haya cargado todo el DOM
+
+
+    init();
+  
+});
+
+
+
+
+</script>
+
+
+{% endblock %}
