@@ -3101,7 +3101,10 @@ def get_companies_info_2():
                 ids = diagnoses.id
                 status = diagnoses.status
                 respuestas = diagnoses.respuestas
-                antiguendad = diagnoses.respuestas.A_OS_DE_OPERACI_N
+
+                if 'A_OS_DE_OPERACI_N' in respuestas:
+                    antiguendad = respuestas['A_OS_DE_OPERACI_N']
+                    
                 if '_submission_time' in respuestas:
                     # Convertir el valor de cadena a un objeto datetime
                     submission_time = datetime.strptime(respuestas['_submission_time'], '%Y-%m-%dT%H:%M:%S')
