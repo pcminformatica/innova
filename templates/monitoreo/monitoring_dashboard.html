@@ -1617,8 +1617,6 @@
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresa</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de empleados</th>
-                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Legalizada</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
@@ -1648,8 +1646,6 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre Empresa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de empleados</th>
-                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Legalizadas</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Diagnóstico</th>
@@ -1983,7 +1979,7 @@ href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"
     row.appendChild(ids);
     secuencia = secuencia + 1
         // Crear y agregar celdas de la tabla
-        const fields = ["dni", "name", "company_name", "company_status","company_stage","totalempleados","constituida", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan",'n_services',"action_plan_progress","category_p","email","user","phone"];
+        const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan",'n_services',"action_plan_progress","category_p","email","user","phone"];
 
         fields.forEach(field => {
             const cell = document.createElement("td");
@@ -2063,7 +2059,7 @@ function getCheckValues(name){
     secuencia = secuencia + 1
   // Create and append table cells
 
-  const fields = ["dni", "name", "company_name", "company_status","company_stage","totalempleados","constituida", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan","n_services","action_plan_progress","category_p","email","user","phone"];
+  const fields = ["dni", "name", "company_name", "company_status","company_stage", "departamento", "municipio","diagnoses_submission_time","managers_enroll","date_action_plan","n_services","action_plan_progress","category_p","email","user","phone"];
 
   fields.forEach(field => {
     const cell = document.createElement("td");

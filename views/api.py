@@ -3106,6 +3106,10 @@ def get_companies_info_2():
                     
                 if '_7_2' in respuestas:
                     constituida = respuestas['_7_2']
+                if constituida == "3":
+                    constituida =  "SI"
+                else:
+                    constituida = "NO"
             totalempleados = 5
             if '""' not in preguntas:
                 if preguntas:
