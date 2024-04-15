@@ -260,7 +260,7 @@
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
                                       <div class="mdc-data-table" style="background-color: white;" >
                                         <div class="mdc-data-table__table-container">
-                                        <table id="etapa_2" class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                            <table class="mdl-data-table_normal data_table_buttons11 data_table_buttons_sign1" cellspacing="0" style="white-space: normal;">
                                         <thead>
                                         <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
@@ -269,6 +269,7 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cantidad de empleados</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Años de antiguedad</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Legalizada</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
@@ -404,7 +405,7 @@
 
 
 
-            const fields = ["dni", "name", "company_name","totalempleados","constituida", "departamento", "municipio","status","phones","email","instagram","facebook","web","description","rubro","data"];
+            const fields = ["dni", "name", "company_name","totalempleados","antiguendad","constituida", "departamento", "municipio","status","phones","email","instagram","facebook","web","description","rubro","data"];
 
             fields.forEach(field => {
                 const cell = document.createElement("td");

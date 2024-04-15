@@ -2979,7 +2979,7 @@ def get_companies_info_2():
 
         if current_user.id == 3 or current_user.id == 24 or current_user.id == 144:
             companies = Company.query.join(User, User.id==Company.created_by)\
-                .filter(Company.enabled==True,  Company.stage_id == status.id).all()
+                .filter(Company.enabled==True,  Company.stage_id == status.id).all()[0:1]
         else:
             companies = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True,  Company.stage_id == status.id, or_(Company.created_by == current_user.id,Company.id.in_(lista))).all()
 
@@ -3096,10 +3096,12 @@ def get_companies_info_2():
             description = company.description
             preguntas = company.inscripcion.respuestas
             constituida = ''
+            antiguendad = 1
             if diagnoses:
                 ids = diagnoses.id
                 status = diagnoses.status
                 respuestas = diagnoses.respuestas
+                antiguendad = diagnoses.respuestas.A_OS_DE_OPERACI_N
                 if '_submission_time' in respuestas:
                     # Convertir el valor de cadena a un objeto datetime
                     submission_time = datetime.strptime(respuestas['_submission_time'], '%Y-%m-%dT%H:%M:%S')
@@ -3184,7 +3186,8 @@ def get_companies_info_2():
                 'web':web,
                 "description":description,
                 "totalempleados":totalempleados,
-                "constituida":constituida
+                "constituida":constituida,
+                "antiguendad":antiguendad,
              
             }
             result.append(data)
