@@ -268,6 +268,8 @@
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI </th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">totalempleados</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">constituida</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estados</th>
@@ -402,7 +404,7 @@
 
 
 
-            const fields = ["dni", "name", "company_name", "departamento", "municipio","status","phones","email","instagram","facebook","web","description","rubro","data"];
+            const fields = ["dni", "name", "company_name","totalempleados","constituida", "departamento", "municipio","status","phones","email","instagram","facebook","web","description","rubro","data"];
 
             fields.forEach(field => {
                 const cell = document.createElement("td");

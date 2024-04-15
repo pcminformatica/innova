@@ -3094,7 +3094,64 @@ def get_companies_info_2():
                 if existe:
                     web = company.social_networks['web'] 
             description = company.description
-      
+            preguntas = company.inscripcion.respuestas
+            constituida = ''
+            if diagnoses:
+                ids = diagnoses.id
+                status = diagnoses.status
+                respuestas = diagnoses.respuestas
+                if '_submission_time' in respuestas:
+                    # Convertir el valor de cadena a un objeto datetime
+                    submission_time = datetime.strptime(respuestas['_submission_time'], '%Y-%m-%dT%H:%M:%S')
+                    
+                if '_7_2' in respuestas:
+                    constituida = respuestas['_7_2']
+            totalempleados = 5
+            if '""' not in preguntas:
+                if preguntas:
+                    if company.inscripcion.cohorte <= 4:
+
+                        print('3_17-1')
+                        print(company.id)
+                        print(company.id)
+                        data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                        # Buscar y extraer los números usando expresiones regulares
+                        numbers = re.findall(r'\d+', data)
+
+                        total_general = int(numbers[2])
+                        total_no_remunerados = int(numbers[8])
+                        totalEmpleadosPermanentes = total_general 
+                        data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                        # Buscar y extraer los números usando expresiones regulares
+                        numbers = re.findall(r'\d+', data)
+
+                        # Sumar los totales
+                        totalEmpleadosTemporales = total_general 
+                        totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                    else:
+                        if company.inscripcion.externa == 0 or not company.inscripcion.externa:
+                            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+                            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                        else:
+                            print('3_17-1')
+                            print(company.id)
+                            print(company.id)
+                            data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                            # Buscar y extraer los números usando expresiones regulares
+                            numbers = re.findall(r'\d+', data)
+
+                            total_general = int(numbers[2])
+                            total_no_remunerados = int(numbers[8])
+                            totalEmpleadosPermanentes = total_general 
+                            data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                            # Buscar y extraer los números usando expresiones regulares
+                            numbers = re.findall(r'\d+', data)
+
+                            # Sumar los totales
+                            totalEmpleadosTemporales = total_general 
+                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+            
             data = {
                 'id': company.id,
                 'dni': company.dni,
@@ -3122,6 +3179,8 @@ def get_companies_info_2():
                 'facebook':facebook,
                 'web':web,
                 "description":description,
+                "totalempleados":totalempleados,
+                "constituida":constituida
              
             }
             result.append(data)
