@@ -3057,16 +3057,16 @@ def get_companies_info_2():
                 if 'Sevicios' in respuestas:
                     sevicios = respuestas['Sevicios']
                 resultados = diagnoses.resultados 
-            data = ''
+            datas = ''
             descripcion = ''
             if agropecuario != "":
-                data =   "Agropecuario: " + agropecuario + " "
+                datas =   "Agropecuario: " + agropecuario + " "
             if comercio != "":
-                data =   "comercio: " + comercio + " "
+                datas =   "comercio: " + comercio + " "
             if industria != "":
-                data =   "industria: " + industria + " "
+                datas =   "industria: " + industria + " "
             if sevicios != "":
-                data =   "sevicios: " + sevicios + " "
+                datas =   "sevicios: " + sevicios + " "
             redes = ''
             if facebook != "":
                 redes =   "facebook: " + facebook + " "
@@ -3177,7 +3177,7 @@ def get_companies_info_2():
                 'municipio': company.inscripcion.municipio if company.inscripcion else '',
                 'category':category,
                 'rubro':rubro,
-                'data':data,
+                'data':datas,
                 'resultados':resultados,
                 'respuestas':respuestas,
                 'descripcion':descripcion,
