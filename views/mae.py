@@ -23,9 +23,42 @@ mae = Blueprint('mae', __name__, template_folder='templates', static_folder='sta
 #entry
 
 
+
 @mae.route('/mae/create')
 def _create_company():
     return render_template('/mae/create_company.html')
+
+@mae.route('/mae/workshops')
+def _workshops_dashboard():
+    return render_template('/mae/workshops_dashboard.html')
+
+@mae.route('/mae/workshops/creation')
+def _workshops_creation():
+    training = TrainingType.query.filter_by(enabled=True).all()
+   
+    modality = ModalityType.query.filter_by(enabled=True).all()
+    manager = CourseManagers.query.filter_by(enabled=True).all()
+    context = {
+        'training':training,
+        'modality':modality,
+        'manager':manager,
+    }
+
+    return render_template('/mae/workshops_creation.html',**context)
+
+@mae.route('/mae/workshops/attendance')
+def _workshops_attendance():
+    training = TrainingType.query.filter_by(enabled=True).all()
+   
+    modality = ModalityType.query.filter_by(enabled=True).all()
+    manager = CourseManagers.query.filter_by(enabled=True).all()
+    context = {
+        'training':training,
+        'modality':modality,
+        'manager':manager,
+    }
+
+    return render_template('/mae/workshops_attendance.html',**context)
 
 #process
 @mae.route('/mae/home')
@@ -35,9 +68,15 @@ def _mae_home():
 @mae.route('/mae/list')
 def _mae_list():
     return render_template('/mae/mae_list.html')
+
+@mae.route('/mae/workshops/list')
+def _workshops_list():
+    return render_template('/mae/workshops_list.html')
+
 #    return render_template('/digitalcenter/form_profile_sde.html')
 
 #output
 @mae.route('/mae/perfil')
 def _mae_perfil():
     return render_template('/mae/perfil.html')
+

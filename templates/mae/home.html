@@ -98,12 +98,13 @@
                                                 <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
                                             </span>
                                             <span class="mdc-deprecated-list-item__text">
-                                                <span class="mdc-deprecated-list-item__primary-text">Crear empresas</span>
+                                                <span class="mdc-deprecated-list-item__primary-text">Crear perfil de empresas</span>
                                                 <span class="mdc-deprecated-list-item__secondary-text">Crear nuevo perfil.</span>
                                             </span>
                                             <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
                                         </a>
                                     </li>
+                                    
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item" tabindex="0">
                                         <a  href="{{ url_for('mae._mae_list') }}">
@@ -119,13 +120,29 @@
                                         </a>
                                     </li>
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                    <li class="mdc-deprecated-list-item" tabindex="0">
+                                        <a  href="{{ url_for('mae._workshops_dashboard') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Administar Talleres</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Crear nuevos talleres.</span>
+                                            </span>
+                                            <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="mdc-deprecated-list-divider"></li>
                                     <li class="mdc-deprecated-list-item">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            <span class="mdc-deprecated-list-item__primary-text">Seguimiento de servicios de desarrollo empresarial:</span>
-                                            <span class="mdc-deprecated-list-item__secondary-text">Seguimiento a Pre-Incubación, Incubación, POST INCUBACIÓN, aceleración.</span>
-                                        </span>
+                                        <a  href="{{ url_for('mae._workshops_list') }}">
+                                            <span class="mdc-deprecated-list-item__ripple"></span>
+                                            <span class="mdc-deprecated-list-item__graphic material-icons" aria-hidden="true">notifications</span>
+                                            <span class="mdc-deprecated-list-item__text">
+                                                <span class="mdc-deprecated-list-item__primary-text">Seguimiento de servicios de desarrollo empresarial:</span>
+                                                <span class="mdc-deprecated-list-item__secondary-text">Seguimiento a Pre-Incubación, Incubación, POST INCUBACIÓN, aceleración.</span>
+                                            </span>
+                                        </a>
                                     </li>
 
                                     <li role="separator" class="mdc-deprecated-list-divider"></li>

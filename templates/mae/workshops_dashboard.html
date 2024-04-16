@@ -1,0 +1,211 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+    .content {
+    display: none;
+  }
+  
+  .content--active {
+    display: block;
+  }
+  .mdc-deprecated-list .mdc-deprecated-list-item__graphic {
+    display: inline-flex;
+    margin-top: 16px;
+}
+
+.mdc-deprecated-list-item__secondary-text{
+    white-space: break-spaces;
+    
+}
+  </style>
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid ">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages" style="min-height:auto">
+                        <div class="mdc-card mdc-card--color-on-primary" style="min-height:auto">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">TALLERES</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content ">
+                                
+                    
+                                <br>
+                                {% if current_user.id in (3,24,25) %}
+                                <center>
+                                    <a href="{{ url_for('mae._workshops_creation') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                          >bookmark</i
+                                        >
+                                        <span class="mdc-button__label">Crear nuevo taller</span>
+                                    </a>
+                                </center>
+                                {% endif %}
+                                <br>
+                                
+                            
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages" style="min-height:auto">
+                        <div class="mdc-card mdc-card--color-on-primary" style="min-height:auto">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">TALLERES</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content ">
+                                
+                    
+                                <div class="mdc-data-table" style="width: 100%;">
+                                    <div class="mdc-data-table__table-container" style="width: 100%;">
+                                    <table class="mdc-data-table__table" aria-label="Dessert calories">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
+                                                #
+                                            </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la formación</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tipo de formación</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tipo de modalidad</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Responsable</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicial </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                     
+                                        </tr>
+                                        
+                                        
+                                        
+
+                                        </thead>
+                                        <tbody class="mdc-data-table__content">
+                                          
+                                        <tr data-row-id="u0" class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                               1
+                                            </td>   
+                                            <th class="mdc-data-table__cell" scope="row" id="u0">
+                                                Mercados Análisis de MKT 
+                                            </th>
+                                            <td class="mdc-data-table__cell"> PRE INCUBACIÓN.</td>
+                                            <td class="mdc-data-table__cell"> Presencial</td>
+                                            <td class="mdc-data-table__cell"> CCM-TGU</td>
+                                            <td class="mdc-data-table__cell"> 14-04-2024</td>
+                                            <td class="mdc-data-table__cell"> 14-04-2024</td>
+                                            <td class="mdc-data-table__cell">
+                                                <a class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #0e76a8">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >bookmark</i
+                                                    >
+                                                    <span class="mdc-button__label">Reporte</span>
+                                                </a>
+                                                <a  href="" id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                                      >touch_app</i
+                                                    >
+                                                    <span class="mdc-button__label">Control Asistencia</span>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                        
+                                        </tbody>
+                                    </table>
+                                
+                            
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+{% endblock %}

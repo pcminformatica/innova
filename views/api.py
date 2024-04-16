@@ -3116,34 +3116,15 @@ def get_companies_info_2():
                 else:
                     constituida = "NO"
             totalempleados = 5
+            edad = "25-34 años"
+            
             if '""' not in preguntas:
                 if preguntas:
-                    if company.inscripcion.cohorte <= 4:
+                    edad = list(e for e in preguntas if e['id']  == '1_6')[0]['respuesta']
+                    try:
+                        if company.inscripcion.cohorte <= 4:
 
-                        print('3_17-1')
-                        print(company.id)
-                        print(company.id)
-                        data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
-                        # Buscar y extraer los números usando expresiones regulares
-                        numbers = re.findall(r'\d+', data)
-
-                        total_general = int(numbers[2])
-                        total_no_remunerados = int(numbers[8])
-                        totalEmpleadosPermanentes = total_general 
-                        data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
-                        # Buscar y extraer los números usando expresiones regulares
-                        numbers = re.findall(r'\d+', data)
-
-                        # Sumar los totales
-                        totalEmpleadosTemporales = total_general 
-                        totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
-                    else:
-                        if company.inscripcion.externa == 0 or not company.inscripcion.externa:
-                            totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
-                            totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
-                            totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
-                        else:
-                            print('3_17-1')
+                            print('3_17-11')
                             print(company.id)
                             print(company.id)
                             data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
@@ -3160,7 +3141,33 @@ def get_companies_info_2():
                             # Sumar los totales
                             totalEmpleadosTemporales = total_general 
                             totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
-            
+                        else:
+                            if company.inscripcion.externa == 0 or not company.inscripcion.externa:
+                                totalEmpleadosPermanentes = int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']['u_total_hombre'])
+                                totalEmpleadosTemporales =  int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_mujer']) + int(list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']['temp_total_hombre'])
+                                totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                            else:
+                                print('3_17-1')
+                                print(company.id)
+                                print(company.id)
+                                data = list(e for e in preguntas if e['id']  == '3_17')[0]['respuesta']
+                                # Buscar y extraer los números usando expresiones regulares
+                                numbers = re.findall(r'\d+', data)
+
+                                total_general = int(numbers[2])
+                                total_no_remunerados = int(numbers[8])
+                                totalEmpleadosPermanentes = total_general 
+                                data = list(e for e in preguntas if e['id']  == '3_18')[0]['respuesta']
+                                # Buscar y extraer los números usando expresiones regulares
+                                numbers = re.findall(r'\d+', data)
+
+                                # Sumar los totales
+                                totalEmpleadosTemporales = total_general 
+                                totalempleados = totalEmpleadosPermanentes + totalEmpleadosTemporales
+                    except Exception as e:
+                        print(e)
+            if totalempleados < 4:
+                totalempleados = 4 
             data = {
                 'id': company.id,
                 'dni': company.dni,
@@ -3191,6 +3198,7 @@ def get_companies_info_2():
                 "totalempleados":totalempleados,
                 "constituida":constituida,
                 "antiguendad":antiguendad,
+                "edad":edad
              
             }
             result.append(data)

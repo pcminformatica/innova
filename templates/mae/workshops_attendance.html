@@ -1,0 +1,625 @@
+{% extends 'layout_main_drawer_table.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<style>
+    .alignleft {
+        float: left;
+    }
+    .alignright {
+        float: right;
+    }
+
+
+    .file-upload {
+        margin: 0 10px 0 25px;
+    }
+    .file-upload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 10;
+        font-size: 20px;
+        cursor: pointer;
+        height: 36px;
+        opacity: 0;
+        filter: alpha(opacity=0); }
+
+    #fileuploadurl{
+    border: none;
+    font-size: 12px;
+    padding-left: 0;
+  width: 250px; }
+</style>
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+
+        <div class="mdc-layout-grid ">
+            <div class="mdc-layout-grid__inner">
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-tab-bar" role="tablist" data-action-fn="showMessagesContracts">
+                                <div class="mdc-tab-scroller">
+                                    <div class="mdc-tab-scroller__scroll-area">
+                                        <div class="mdc-tab-scroller__scroll-content">
+                                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                                <span class="mdc-tab__content">
+                                                    <span class="mdc-tab__text-label">Empresas Matriculadas En El Taller</span>
+                                                </span>
+                                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                                </span>
+                                                <span class="mdc-tab__ripple"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__content container-dashboard--messages-msg">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Lista de empresas matriculadas</div>
+                                <div class="container-dashboard--messages-list-empty ">
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                Lista de empresas CANVAS exploratorio (Innovación y modelos de negocios) 
+                                            </div>
+                                          </div>
+                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+
+                                            <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                                <div class="mdc-data-table__table-container">
+                                                    <table class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
+                                                    <thead>
+                                                    <tr class="mdc-data-table__header-row">
+                                                        <th class="mdc-data-table__header-cell " role="columnheader" scope="col">
+                                                            #
+                                                        </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre empresaria</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la empresa</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+                                                        
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Teléfono</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                        
+                                                 
+                                                    </tr>
+                                                    
+                                                    
+                                                    
+                                                    </thead>
+                                                    <tbody class="mdc-data-table__content">
+                                                      
+                                                    <tr data-row-id="u0" class="mdc-data-table__row">
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox" style="text-align: center;">
+                                                            
+                                                            <input type="checkbox"> 
+                                                        </td>
+                                                        
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            0801-1993-20147
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            Google.com
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            Maria Perez
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                           mperes@gmail.com
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            +504 9596-2211
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                           (Incompleto) 2 de 3 horas
+                                                         </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            <button type="submit" onclick="bitacoraCompany('')" class="mdc-button mdc-button--raised mdc-button--leading" >
+                                              
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">app_registration</i>
+                                                                <span class="mdc-button__label">Bitácora</span>
+                                                            </button>
+                                                            
+                                                            <button type="submit" onclick="deletCompany('')" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                              
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">cancel</i>
+                                                                <span class="mdc-button__label">Eliminar</span>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr data-row-id="u0" class="mdc-data-table__row">
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox" style="text-align: center;">
+                                                            
+                                                            <input type="checkbox"> 
+                                                        </td>
+                                                        
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            0801-1994-20147
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            facebook.com
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            Paola Castro
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                           pcastro@gmail.com
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            +504 9596-2211
+                                                        </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                           (Completo) 3 de 3 horas
+                                                         </td>
+                                                        <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                                            
+                                                            <button type="submit" onclick="bitacoraCompany('')" class="mdc-button mdc-button--raised mdc-button--leading" >
+                                              
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">cancel</i>
+                                                                <span class="mdc-button__label">Bitácora</span>
+                                                            </button>
+                                                            <button type="submit" onclick="deletCompany('')" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                              
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">cancel</i>
+                                                                <span class="mdc-button__label">Eliminar</span>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+     
+                                    </div>
+
+                               
+                                </div>
+                            </div>
+              
+                                
+                             
+
+
+                            <div class="mdc-card__actions">
+                                <div class="mdc-card__actions-buttons">
+                                </div>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon">
+                                        <div class="mdc-icon-button__ripple"></div>
+                                        more_vert
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+            </div>
+        </div>
+    
+    </div>
+    
+</main>
+<div id="modal1_sde" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1_sde')">&times;</span>
+        <!-- Contenido específico para modal1 -->
+                <!-- Tu contenido aquí -->
+        <div class="mdc-layout-grid container">
+            <!-- ... (tu código HTML) ... -->
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Bitácora del Taller</div>
+                                <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
+           
+                                    <input type="hidden" id="txt_company_id" name="txt_company_id"  value="">
+                              
+                                    <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                      <div class="mdc-typography--body1">
+                                          Horas impartidas:
+                                      </div>
+                                      <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                          <span class="mdc-text-field__ripple"></span>
+                                          
+                                          <input id="txt_company_name" value="0" min="0"  class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" >
+                                          <span lass="mdc-line-ripple"></span>
+                                      </label>
+                                    </div>
+
+                                    <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                                      <div class="mdc-typography--body1">
+                                        Observaciones:
+                                      </div>
+                                      <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_comp_description" data-assigned-var> 
+                                        <span class="mdc-notched-outline">
+                                          <span class="mdc-notched-outline__leading"></span>
+                                          <span class="mdc-notched-outline__notch">
+                                            <span class="mdc-floating-label" id="my-label-id">Observaciones </span>
+                                          </span>
+                                          <span class="mdc-notched-outline__trailing"></span>
+                                        </span>
+                                        <span class="mdc-text-field__resizer">
+                                          <textarea id="txt_company_mensaje" required class="mdc-text-field__input" aria-labelledby="my-label-id" rows="4" cols="40" maxlength="500"></textarea>
+                                          <span class="mdc-text-field-character-counter">0 / 500</span>
+                                        </span>
+                                      </label>
+                                      <br> <br>
+                                  </div>
+                                    <br><br><br>
+                                    
+                                    
+            
+  
+                                    <div class="s-font-align-center">
+                                        <button id="submitSaveButton" onclick="deletCompany('')" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                            
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                            <span class="mdc-button__label">Guardar</span>
+                                        </button>
+                                    </div>
+                                    </form>    
+                     
+                             
+                            </div>
+                            <div class="mdc-card__actions">
+  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/superadmin.js') }}?v=1"></script>
+<script>
+    function agregar(){
+      var txt_busqueda = document.getElementById("txt_busqueda").value;
+
+      const Swal = swcms.returnSwal()
+        var data_result;
+        let postData = {
+            "txt_busqueda": txt_busqueda,
+        
+            };
+            console.log(postData)
+            let apiUrl = '/api/company/search/';
+            //document.getElementById('submitSaveButton').disabled = true;
+
+            swcms.postFetch(apiUrl, postData).then((data) => {
+            
+                console.log(data)
+                if(data.r_total != '0'){
+               
+                   createTable(data.records)
+                }else{
+                    alert('Datos no encontrados')
+                }
+                
+            
+            }).catch((error) => {
+                Swal.fire(
+                'Error de conexión',
+                'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                'error'
+                )
+                //document.getElementById('submitSaveButton').disabled = false;
+            });
+       
+    return false
+    }
+                // Supongamos que tienes una variable con las opciones
+                var opciones = [
+                "San Pedro Sula - Grupo 1", "San Pedro Sula - Grupo 2", "SPS - El Progreso - Grupo 1","SPS - El Progreso - Grupo 2",
+                "CH - Choloma ", "CH - Yoro","CH - Omoa y Puerto Cortés","LC - La Ceiba - Grupo 1",
+                "LC - La Ceiba - Grupo 2", "SUR - Choluteca","SUR - Marcala y démas","TGU - Tegucigalpa - Grupo 1",
+                "TGU - Tegucigalpa - Grupo 2", "OLANCHO - Juticalpa 1","Virtual Choloma","Virtual Varios 1",
+                "Virtual Varios 1", "Virtual Varios 2","Virtual Varios 3","Virtual Varios 4",
+                "Virtual Varios 5", "TGU - Tegucigalpa - Grupo 3","San Pedro Sula - Grupo 3","OLANCHO - Juticalpa 2",
+                "OLANCHO - Catacamas 1", "TGU - Tegucigalpa - Grupo 4","San Pedro Sula - Grupo 4","Choloma 2",
+                "Choluteca 2", "Pespire 1","Nacaome 1","Namasigüe 1",
+                "Capucas 1", "Gracias 1","El Paraíso 1","Villanueva 1",
+                "Tela 1", "San Nicolás","N/A"
+
+            ];
+            //el arreglo 'opciones' está ordenado con "N/A" en la parte superior
+            opciones.sort(function(a, b) {
+            // Si 'a' es "N/A", colócala en la parte superior
+            if (a === "N/A") return -1;
+            // Si 'b' es "N/A", colócala en la parte superior
+            if (b === "N/A") return 1;
+            // Ordena alfabéticamente las otras opciones
+            return a.localeCompare(b);
+            });
+
+
+    function createTable(data){
+    
+   
+        let id,dni,name,company_name,departamento,municipio,correo,phone,cohorte
+
+        let secuencia = 0;
+        Tbl = document.getElementById("tablaPlan_1");
+        Tbl.innerHTML = ''
+        for (key in data){
+          
+            secuencia++
+            
+            context = {
+            'id': data[key].company_id,
+            'dni': data[key].company_dni.trim(),
+            'name': data[key].empresarea_name.trim(),
+            'company_name': data[key].company_name.trim(),
+            'departamento': data[key].company_departamento.trim(),
+            'municipio':  data[key].company_municipio.trim(),
+            'correo':  data[key].company_mail.trim(),
+            'phone': data[key].company_phone.trim(),
+            'cohorte':  data[key].company_cohorte,
+            }
+            console.log(context)
+
+
+
+            // El elemento donde deseas agregar el menú desplegable
+            var celda_lugar = document.getElementById('tu-elemento');
+
+            // Crear el elemento <select>
+            var select = document.createElement('select');
+            select.id = "lugar-" + JSON.stringify(data[key].company_id);
+            select.className = "mdl-textfield__input";
+
+            // Agregar las opciones al menú desplegable
+            for (var i = 0; i < opciones.length; i++) {
+            var option = document.createElement('option');
+            option.value = opciones[i]; // Valor de la opción
+            option.text = opciones[i]; // Texto de la opción
+            select.appendChild(option);
+            }
+            // Crear el contenedor del menú desplegable con Material Design
+            var divContainer = document.createElement('div');
+            divContainer.className = "mdl-textfield ";
+            divContainer.appendChild(select);
+
+
+            var hilera = document.createElement("tr");
+            var celda_secuencia = document.createElement("td");
+
+            var celda_dni = document.createElement("td");
+            var celda_name = document.createElement("td");
+            var celda_company_name = document.createElement("td");
+            var celda_departamento = document.createElement("td");
+            var celda_municipio = document.createElement("td");
+            var celda_correo = document.createElement("td");
+            var celda_cohorte = document.createElement("td");
+            var celda_lugar = document.createElement("td");
+            var celda_opciones = document.createElement("td");
+
+            var text_dni = document.createTextNode(context.dni);
+            var text_name = document.createTextNode(context.name);
+            var text_company_name = document.createTextNode(context.company_name);
+            var text_departamento = document.createTextNode(context.departamento);
+            var text_municipio = document.createTextNode(context.municipio);
+            var text_correo = document.createTextNode(context.correo);
+            var text_cohorte = document.createTextNode(context.cohorte);
+            
+            celda_secuencia.className = 'mdc-data-table__cell'
+            celda_dni.className = 'mdc-data-table__cell'
+            celda_name.className = 'mdc-data-table__cell'
+            celda_company_name.className = 'mdc-data-table__cell'
+            celda_departamento.className = 'mdc-data-table__cell'
+            celda_municipio.className = 'mdc-data-table__cell'
+            celda_correo.className = 'mdc-data-table__cell'
+            celda_cohorte.className = 'mdc-data-table__cell'
+            celda_lugar.className = 'mdc-data-table__cell'
+            celda_opciones.className = 'mdc-data-table__cell'
+            hilera.className = 'mdc-data-table__row'
+
+
+            celda_dni.appendChild(text_dni)
+            celda_name.appendChild(text_name)
+            celda_company_name.appendChild(text_company_name)
+            celda_departamento.appendChild(text_departamento)
+            celda_municipio.appendChild(text_municipio)
+           /* celda_correo.appendChild(text_correo) */
+            celda_cohorte.appendChild(text_cohorte)
+            celda_secuencia.innerHTML = secuencia
+            celda_lugar.appendChild(divContainer);
+            celda_opciones.innerHTML = `
+     
+            <button onclick='createCompany(${JSON.stringify(context.id)})' 
+                    class="mdc-button mdc-button--raised mdc-button--leading" >                        
+                    <span class="mdc-button__ripple"></span>
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                    <span class="mdc-button__label">Agregar asistencia</span>
+            </button>
+            
+            `
+            hilera.appendChild(celda_secuencia);
+            hilera.appendChild(celda_dni);
+            hilera.appendChild(celda_name);
+            hilera.appendChild(celda_company_name);
+            hilera.appendChild(celda_departamento);
+            hilera.appendChild(celda_municipio);
+           /*   hilera.appendChild(celda_correo);*/
+            hilera.appendChild(celda_cohorte);
+            hilera.appendChild(celda_lugar);
+            hilera.appendChild(celda_opciones);
+            
+            hilera.id =    1                     
+            Tbl.appendChild(hilera);
+        }
+    }
+        
+    
+    function createCompany(data){
+        
+      const Swal = swcms.returnSwal()
+
+      const txt_curso = ''
+      const lugar_id = 'lugar-' +data
+      const lugar = document.getElementById(lugar_id).value
+  
+      let postData = {
+            "txt_curso": txt_curso,
+            "txt_company":data,
+            "txt_lugar":lugar
+        
+            };
+      let apiUrl = '/api/save/enroll/';
+      //document.getElementById('submitSaveButton').disabled = true; 
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Empresa registrada!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+       // window.location.replace("/empresas/");
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+    }
+    
+    function deletCompany(data){
+        const Swal = swcms.returnSwal()
+
+        const txt_curso = ''
+    
+        let postData = {
+              "txt_curso": txt_curso,
+              "txt_company":data,
+              };
+
+        console.log(postData)
+        Swal.fire(
+            'Éxito',
+            'Empresa registrada!',
+            'success'
+          )
+          window.setTimeout(() => { window.location.reload(); }, 1500);
+        return false
+        let apiUrl = '/api/delete/enroll/';
+        //document.getElementById('submitSaveButton').disabled = true; 
+  
+        swcms.postFetch(apiUrl, postData).then((data) => {
+          Swal.fire(
+            'Éxito',
+            'Empresa registrada!',
+            'success'
+          )
+          window.setTimeout(() => { window.location.reload(); }, 1500);
+         // window.location.replace("/empresas/");
+        }).catch((error) => {
+          Swal.fire(
+            'Error de conexión',
+            'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+            'error'
+          )
+          //document.getElementById('submitSaveButton').disabled = false;
+        });
+      }
+      
+      
+    
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+    function deleteRow() {
+   
+      var td = event.target.parentNode; 
+      var tr = td.parentNode.parentNode; // the row to be removed
+      tr.remove()
+    }
+
+
+    function printPlan(){
+      window.print()
+    }
+
+    function formatDate(date) {
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join('/');
+}
+
+
+document.getElementById("FileAttachment").onchange = function () {
+    document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');
+};
+
+function saveLugar(id){
+    const Swal = swcms.returnSwal()
+    const lugar_id = 'lugar' +id
+    console.log(lugar_id)
+    const lugar = document.getElementById(lugar_id).value
+    console.log(lugar)
+    let postData = {
+            "id": id,
+            "lugar":lugar,
+        
+            };
+      let apiUrl = '/api/update/enroll/';
+      //document.getElementById('submitSaveButton').disabled = true; 
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Éxito',
+          'Empresa registrada!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.reload(); }, 1500);
+       // window.location.replace("/empresas/");
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        //document.getElementById('submitSaveButton').disabled = false;
+      });
+}
+
+function bitacoraCompany(){
+    openModal('modal1_sde')
+}
+</script>
+{% endblock %}
