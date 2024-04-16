@@ -733,7 +733,7 @@ def _indicadores_perfil_asesor(user_uid):
 
 
         # Filtrar registros en el rango de fechas y con las condiciones de origen, creado por y company_id especificadas
-        resultados = DiagnosisCompany.query.filter(
+        diagnosticos_innova = DiagnosisCompany.query.filter(
             DiagnosisCompany.date_created.between(range1, range2),
             DiagnosisCompany.origin == 2,
             DiagnosisCompany.created_by == user.id,
