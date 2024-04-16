@@ -3117,10 +3117,11 @@ def get_companies_info_2():
                     constituida = "NO"
             totalempleados = 5
             edad = "25-34 años"
-            
+            ventas = "Menos de L 1,300,000"
             if '""' not in preguntas:
                 if preguntas:
                     edad = list(e for e in preguntas if e['id']  == '1_6')[0]['respuesta']
+                    ventas = list(e for e in preguntas if e['id']  == '3_22')[0]['respuesta']
                     try:
                         if company.inscripcion.cohorte <= 4:
 
@@ -3168,6 +3169,8 @@ def get_companies_info_2():
                         print(e)
             if totalempleados < 4:
                 totalempleados = 4 
+            if ventas == "":
+                ventas = "Menos de L 1,300,000"
             data = {
                 'id': company.id,
                 'dni': company.dni,
@@ -3198,7 +3201,8 @@ def get_companies_info_2():
                 "totalempleados":totalempleados,
                 "constituida":constituida,
                 "antiguendad":antiguendad,
-                "edad":edad
+                "edad":edad,
+                "ventas":ventas,
              
             }
             result.append(data)
