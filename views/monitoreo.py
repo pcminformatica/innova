@@ -726,11 +726,19 @@ def _indicadores_perfil_asesor(user_uid):
         range2 = dt.strptime(txt_end_date, '%Y-%m-%d')
         #contamos los diagnosticos
         diagnosticos = 0
+        diagnosticos_innova = []
         if user.extra_info.kobotoolbox:
             api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
             diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] and range1 <= convertir_a_datetime(e['_submission_time']) <= range2  )
-            print(diagnosticos)
-            print(len(diagnosticos))
+
+
+        # Filtrar registros en el rango de fechas y con las condiciones de origen, creado por y company_id especificadas
+        resultados = DiagnosisCompany.query.filter(
+            DiagnosisCompany.date_created.between(range1, range2),
+            DiagnosisCompany.origin == 2,
+            DiagnosisCompany.created_by == user.id,
+            DiagnosisCompany.status == True
+        ).distinct(DiagnosisCompany.company_id).all()
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
         companys1 = Company.query.join(User, User.id == Company.created_by).join(CompanyStatus, Company.status_id == CompanyStatus.id).filter(
             or_(
@@ -829,10 +837,17 @@ def _indicadores_perfil_asesor(user_uid):
 
         #contamos los diagnosticos
         diagnosticos = 0
+        diagnosticos_innova = []
         if user.extra_info.kobotoolbox:
             api['results'] = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] )
             diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access']  )
-    
+
+        # Filtrar registros en el rango de fechas y con las condiciones de origen, creado por y company_id especificadas
+        diagnosticos_innova = DiagnosisCompany.query.filter(
+            DiagnosisCompany.origin == 2,
+            DiagnosisCompany.created_by == user.id,
+            DiagnosisCompany.status == True
+        ).distinct(DiagnosisCompany.company_id).all()
         #companys = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, Company.created_by == user.id).all()
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
         inactivas = ['4','5']
@@ -922,7 +937,8 @@ def _indicadores_perfil_asesor(user_uid):
         'cod_usuario':cod_usuario,
         'nombre':full_name,
         'profesion':profesion,
-        'diagnosticos':diagnosticos,
+        'diagnosticos':diagnosticos, 
+        'diagnosticos_innova':diagnosticos_innova,
         'company':companys,
         'company_references':company_references,
         'company_references_accepted':len(company_references_accepted),

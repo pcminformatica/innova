@@ -431,7 +431,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="mdc-typography--headline2 s-font-color-primary s-mdc-card__stats-result">
-                                                                {{ diagnosticos|length }}
+                                                                {{ diagnosticos|length + diagnosticos_innova |length}}
                                                             </div>
                                 
                                                         </div>
@@ -894,7 +894,54 @@
                                                     </td>
                                                   </tr>
                                                   {% endfor %}
-                                           
+
+                                                    {% if diagnosticos %}
+                                                  {% for api in diagnosticos_innova %}
+                                                  <tr style="white-space: normal;">
+                                                    <th class="mdc-data-table__cell" scope="col">
+                                                      {{loop.index}}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell">
+        
+                                                        <a href="" class="mdc-button mdc-button--raised mdc-button--leading" >
+                                                      
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Ver</span>
+                                                          </a>
+                                                    </th>
+                                            
+                                                    <td class="mdc-data-table__cell" scope="col">
+                                                      {{ api.company.inscripcion.name }}
+                                                    </td>
+                                                    <td class="mdc-data-table__cell" scope="col">
+                                                        {{ api.company.dni }}
+                                                    </td>
+        
+                                                    <th class="mdc-data-table__cell" scope="col">
+                                                        {{ api.company.name }}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="col">
+                                                        {{ api.company.inscripcion.phone }}
+                                                    </th>
+                                                    <th style="white-space: normal;">
+                                                      <p style="line-break: anywhere;">
+                                                        {{ api.company.inscripcion.correo }}
+                                                    </p>
+                                                    </th>
+                                                    <td class="mdc-data-table__cell" scope="col">
+                                                      {{ api.user.name }}
+                                                    </td>
+                                                    <td class="mdc-data-table__cell" scope="col">
+                                                      {{ api.date_created }}
+                                                    </td>
+                                                    <td class="mdc-data-table__cell" scope="col">
+                                                      {{ api.date_created }}
+                                                    </td>
+                                                  </tr>
+                                                  {% endfor %}
+                                                  {% endif %}
+
                                                 </tbody>
                                               </table>
                                         </div>
