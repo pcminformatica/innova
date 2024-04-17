@@ -10,8 +10,8 @@ from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
 from models.models import DocumentCompany,Company, DiagnosisCompany,ActionPlan, Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 monitoreo = Blueprint('monitoreo', __name__, template_folder='templates/', static_folder='static')
-from models.models import CompanyStage,WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
-from models.models import ModalityType,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
+from models.models import Courses,CompanyStage,WalletTransaction,CompanyStatus,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import EnrollmentRecord,TrainingType, ModalityType,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from sqlalchemy import desc
 import requests
@@ -103,6 +103,7 @@ def _indicadores_productividad_sde():
     resp = requests.get(url,headers=headers)
     api = json.loads(resp.content)
     datos =  []
+
     for user in users:
         cod_usuario = user.id
         #contamos los diagnosticos
@@ -227,7 +228,15 @@ def _indicadores_servicios():
                     serviciosFinalizados= serviciosFinalizados + 1
                 else:
                     serviciosEnProceso =serviciosEnProceso+1
-            
+    capacitadasx = EnrollmentRecord.query.join(
+        Courses, Courses.id==EnrollmentRecord.id_course).join(
+        TrainingType, Courses.id_training_type==TrainingType.id).join(
+        Company,Company.id == EnrollmentRecord.company_id).join(
+        Inscripciones,Inscripciones.id == Company.inscripcion_id
+        ).filter(
+                TrainingType.name_short == 'TT1'
+        ).all()
+    capacitadas = len(capacitadasx)      
     context = {
         'total_inscritas': total_inscritas,
         'total_elegibles':total_elegibles,
@@ -237,6 +246,7 @@ def _indicadores_servicios():
         'serviciosNoinciados':serviciosNoinciados,
         'serviciosEnProceso':serviciosEnProceso,
         'serviciosFinalizados':serviciosFinalizados,
+        'capacitadas':capacitadas
     }
 
     return render_template('monitoreo/indicadores_servicios.html',**context)
