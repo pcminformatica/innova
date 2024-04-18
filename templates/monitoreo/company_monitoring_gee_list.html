@@ -432,15 +432,14 @@
             // Create and append table cells
             
 
-            let manageLink = createLink(
-                "/company/view/16/".replace(16,apiId),
-                "Administrar",
-                "mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small"
+            let dashboardLink = createLink(
+                "/dashboard/company/16/view".replace(16,apiId),
+                "Dashboard",
+                "mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small mdc-button--color-secondary"
             );
 
-
             // Agregar los enlaces y el elemento de secuencia al contenedor
-            container.appendChild(manageLink);
+            container.appendChild(dashboardLink);
             {% endif %}
 
 
@@ -546,15 +545,15 @@
             // Create and append table cells
             
    
-            let manageLink = createLink(
-                "/company/view/16/".replace(16,apiId),
-                "Administrar",
-                "mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small"
+            let dashboardLink = createLink(
+                "/dashboard/company/16/view".replace(16,apiId),
+                "Dashboard",
+                "mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small mdc-button--color-secondary"
             );
 
 
             // Agregar los enlaces y el elemento de secuencia al contenedor
-            container.appendChild(manageLink);
+            container.appendChild(dashboardLink);
             {% endif %}
 
 
