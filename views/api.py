@@ -2771,6 +2771,33 @@ def get_companies():
         return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+@app.route('/api/combined_datax1', methods=['GET'])
+def exclude_e3_e2_companies():
+    try:
+        # Obtener empresas en la etapa E3
+        companies_e3_response = get_companies_info_e3()
+        companies_e3_data = companies_e3_response.json
+        # Obtener empresas en la etapa E2
+        companies_e2_response = get_companies_info()
+        companies_e2_data = companies_e2_response.json
+        # Obtener todas las empresas combinadas con inscripciones
+        all_companies_response = get_combined_data()
+        all_companies = all_companies_response.json
+        # Identificar las empresas en las etapas E3 y E2
+
+        e3_ids = {company['dni'] for company in companies_e3_data}
+        e2_ids = {company['dni'] for company in companies_e2_data}
+
+        # Excluir empresas en las etapas E3 y E2 de la lista combinada
+        filtered_companies = [company for company in all_companies if company['dni'] not in e3_ids and company['dni'] not in e2_ids]
+
+        # Convertir la lista filtrada en una respuesta JSON
+        return jsonify(filtered_companies)
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': str(e)})
+
 
 @app.route('/api/combined_data', methods=['GET'])
 def get_combined_data():
