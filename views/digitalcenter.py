@@ -2456,17 +2456,19 @@ def _company_document_list():
 @digitalcenter.route('/update/stage/',methods=['GET', 'POST'])
 @login_required
 def _init_stage_company():
-
+    print("hola")
+    status = CompanyStage.query.filter_by(name_short='E1').first()
     companys = (
         db.session.query(Company)
         .filter(
-            or_(Company.stage_id == None, Company.stage_id == ''),
-            Company.enabled == True  # Agrega esta condición
+            or_(Company.stage_id == None, Company.stage_id == ''),Company.enabled == True 
         )
         .all()
     )
 
     for company in companys:
+        print("hola")
+        print(company.id)
         update =  Company.query.filter(Company.id == company.id).first()
         ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
         ficha_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
@@ -2474,11 +2476,154 @@ def _init_stage_company():
         carta_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
         diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
         if diagnostico or ficha_doc or carta_doc:
-                status = CompanyStage.query.filter_by(name_short='E2').first()
-                update.stage_id = status.id
-        else:
-            status = CompanyStage.query.filter_by(name_short='E1').first()
+            status = CompanyStage.query.filter_by(name_short='E2').first()
             update.stage_id = status.id
+            if company.status:
+                if company.status.name_short in ['4', '5']:
+                    sumas = 2 +2
+                else:
+                    status = CompanyStatus.query.filter_by(name_short='6').first()
+                    company.status_id = status.id                
+            else:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+                company.status_id = status.id
+
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+
+
+@digitalcenter.route('/update/stage/x1',methods=['GET', 'POST'])
+@login_required
+def _init_stage_company32():
+    print("hola")
+    status = CompanyStage.query.filter_by(name_short='E1').first()
+    # Realiza la unión entre Company y CompanyStatus
+    companys = (
+        db.session.query(Company)
+        .join(Company.status)  # Realiza una unión con la relación "status" en Company
+        .filter(
+            Company.stage_id == status.id,
+            Company.enabled == True,
+            CompanyStatus.name_short.in_(['1', '2', '3'])  # Accede al atributo name_short de CompanyStatus
+        )
+        .all()
+    )
+
+
+    for company in companys:
+        print("hola")
+        print(company.id)
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+        carta_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
+        diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+        if diagnostico or ficha_doc or carta_doc:
+            status = CompanyStage.query.filter_by(name_short='E2').first()
+            update.stage_id = status.id
+            if company.status:
+                if company.status.name_short in ['4', '5']:
+                    sumas = 2 +2
+                else:
+                    status = CompanyStatus.query.filter_by(name_short='6').first()
+                    company.status_id = status.id                
+            else:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+                company.status_id = status.id
+
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+
+@digitalcenter.route('/update/stage/x2',methods=['GET', 'POST'])
+@login_required
+def _init_stage_company3():
+    print("hola")
+    status = CompanyStage.query.filter_by(name_short='E2').first()
+    # Realiza la unión entre Company y CompanyStatus
+    companys = (
+        db.session.query(Company)
+        .join(Company.status)  # Realiza una unión con la relación "status" en Company
+        .filter(
+            Company.stage_id == status.id,
+            Company.enabled == True,
+            CompanyStatus.name_short.in_(['1', '2', '3'])  # Accede al atributo name_short de CompanyStatus
+        )
+        .all()
+    )
+
+
+    for company in companys:
+        print("hola")
+        print(company.id)
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+        carta_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
+        diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+        if diagnostico or ficha_doc or carta_doc:
+            status = CompanyStage.query.filter_by(name_short='E2').first()
+            update.stage_id = status.id
+            if company.status:
+                if company.status.name_short in ['4', '5']:
+                    sumas = 2 +2
+                else:
+                    status = CompanyStatus.query.filter_by(name_short='6').first()
+                    company.status_id = status.id                
+            else:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+                company.status_id = status.id
+
+        db.session.add(update)
+        db.session.commit()
+    return 'listo'
+
+
+@digitalcenter.route('/update/stage/x3',methods=['GET', 'POST'])
+@login_required
+def _init_stage_company4():
+    print("hola")
+    status = CompanyStage.query.filter_by(name_short='E3').first()
+    # Realiza la unión entre Company y CompanyStatus
+    companys = (
+        db.session.query(Company)
+        .join(Company.status)  # Realiza una unión con la relación "status" en Company
+        .filter(
+            Company.stage_id == status.id,
+            Company.enabled == True,
+            CompanyStatus.name_short.in_(['1', '2', '3'])  # Accede al atributo name_short de CompanyStatus
+        )
+        .all()
+    )
+
+
+    for company in companys:
+        print("hola")
+        print(company.id)
+        update =  Company.query.filter(Company.id == company.id).first()
+        ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+        ficha_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id).first()
+        carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+        carta_doc =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id).first()
+        diagnostico = DiagnosisCompany.query.filter_by(company_id=company.id).order_by(asc(DiagnosisCompany.date_created)).first()
+        if diagnostico or ficha_doc or carta_doc:
+            status = CompanyStage.query.filter_by(name_short='E2').first()
+            update.stage_id = status.id
+            if company.status:
+                if company.status.name_short in ['4', '5']:
+                    sumas = 2 +2
+                else:
+                    status = CompanyStatus.query.filter_by(name_short='6').first()
+                    company.status_id = status.id                
+            else:
+                status = CompanyStatus.query.filter_by(name_short='6').first()
+                company.status_id = status.id
+
         db.session.add(update)
         db.session.commit()
     return 'listo'
