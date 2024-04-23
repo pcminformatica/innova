@@ -370,10 +370,7 @@ def _home():
                 ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(desc(DocumentCompany.date_created)).first()
                 enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
                 contact = ContactCenter.query.filter_by(company_id=company.id).all()
-                print(contact)
-                print(contact)
-                print(contact)
-                print(contact)
+
                 context = {
                     "enrolls":enrolls,
                     "deposits":deposits,
@@ -431,7 +428,7 @@ def _home():
             Appointments.cancelled == False
             ).order_by(Appointments.date_scheduled.asc()).all()
             context = {'appointments':appointments}
-            return render_template('home_dashboard_admin.html',**context)
+            return render_template('home_dashboard_admin_1.html',**context)
     else:
         return redirect(url_for('home._login'))
 

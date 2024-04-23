@@ -95,7 +95,7 @@ def _indicadores_productividad():
 @login_required
 def _indicadores_productividad_sde():
     #lista de usuarios a evaluar
-    list_user = [173,176]
+    list_user = [173,176,215,216,217]
     users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
     #consultamos en KOBO la cantidad de diagnosticos
     url = app.config.get('KOBOTOOLBOX_ALL')
