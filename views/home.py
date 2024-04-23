@@ -428,7 +428,7 @@ def _home():
             Appointments.cancelled == False
             ).order_by(Appointments.date_scheduled.asc()).all()
             context = {'appointments':appointments}
-            return render_template('home_dashboard_admin_1.html',**context)
+            return render_template('home_dashboard_admin.html',**context)
     else:
         return redirect(url_for('home._login'))
 
