@@ -444,6 +444,7 @@
                                         <tr class="mdc-data-table__header-row">
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignacion</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI </th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
                                             <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
@@ -716,6 +717,7 @@
                 "mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small mdc-button--color-secondary"
             );
             // Crear un contenedor para agrupar los enlaces y el elemento de secuencia
+            row.appendChild(createButton(record["inscripcion"], record["dni"]));
 
             container.appendChild(dashboardLink);
             ids = document.createElement("td");
