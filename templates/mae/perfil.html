@@ -22,13 +22,13 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__primary-action" tabindex="0">
                                 <div class="mdc-card__media">
-                                    <img class="profile-background" src="../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                                    <img class="profile-pic" src="../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                    <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
+                                    <img class="profile-pic" src="../../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
                                 </div>
                                 <div class="mdc-card__ripple"></div>
                             </div>
                             <div class="mdc-card__content">
-                                <div class="mdc-typography--headline5 s-font-color-secondary">Karla Varela </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">{{ company.inscripcion.name  }} </div>
                                 <div class="mdc-typography--subtitle1"> </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-primary">verified_user</i>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="mdc-typography--subtitle1">
                                     <i class="material-icons s-font-color-secondary">place</i>
-                                    Tegucigalpa, Honduras.
+                                    {{company.inscripcion.departamento}}, {{company.inscripcion.municipio}}.
                                 </div>
   
                            
@@ -96,27 +96,16 @@
                                             <div class="mdc-typography--headline5 s-font-color-secondary">INFORMACION GENERAL </div>
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <p><b>Nombre :</b> Karla Varela </p>
-                                            <p><b>DNI:</b> 0501-1993-12345 </p>
-                                            <p><b>Teléfono:</b> 2313-2125 </p>
+                                            <p><b>Nombre :</b> {{ company.inscripcion.name  }} </p>
+                                            <p><b>DNI:</b> {{ company.dni }} </p>
+                                            <p><b>Teléfono:</b>{{ company.inscripcion.phone  }} </p>
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <p><b>Departamento:</b> Francisco Morazan </p>
-                                            <p><b>Municipio:</b> Distrito Central </p>
-                                            <p><b>Correo:</b> karlavarela@yahoo.copm </p>
+                                            <p><b>Departamento:</b>  {{ company.inscripcion.departamento  }}</p>
+                                            <p><b>Municipio:</b>  {{ company.inscripcion.municipio  }} </p>
+                                            <p><b>Correo:</b>  {{ company.inscripcion.correo }} </p>
                                         </div>
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <div class="mdc-typography--headline5 s-font-color-secondary">ESTADO CIVIL </div>
-                                        </div>
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <p><b>Estado Civil :</b> Casada </p>
-                                            <p><b>Conyugue:</b> Pedro Castro</p>
-                                            <p><b>Teléfono:</b> 2313-2125 </p>
-                                        </div>
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <p><b>Hijos:</b> 2 </p>
-                                    
-                                        </div>
+    
                                     </div>
                                 </div>
                             </div>
@@ -661,10 +650,12 @@
                                                 <tr class="mdc-data-table__header-row">
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES </th>
+
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FORMACIÓN </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESTADO </th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HORAS </th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">HERRAMIENTAS </th>
-                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">FORMULARIOS</th>
+                                                    <th class="mdc-data-table__header-cell " role="columnheader" scope="col">FORMULARIOS</th>
                                                 </tr>
                                                 
                                                 
@@ -694,20 +685,23 @@
                                                         Taller de auto conocimiento      
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
+                                                        NO INICIADO <i class="material-icons s-font-color-chat-offline">event_busy</i>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         2 
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         Plan de vida    
 
-                                    <i class="material-icons s-font-color-green-confirm">event_available</i>
+
+                                    <!--                                    <i class="material-icons s-font-color-green-confirm">event_available</i>
                                     <i class="material-icons s-font-color-chat-offline">event_busy</i>
                                     <i class="material-icons s-font-color-satisfied">event_note</i>
-                                    <!--
                                     <i class="material-icons s-font-color-green-confirm">verified_user</i>-->
                                     
                                 
                                                     </th>
-                                                    <th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         Formulario 103                                                                 
                                                     </th>
                             
@@ -736,13 +730,16 @@
                                                         Mentalidad y cultura emprendedora     
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
+                                                        NO INICIADO <i class="material-icons s-font-color-chat-offline">event_busy</i>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         2 
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         Test de CEP's   
 
                                                     </th>
-                                                    <th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         Formulario 104                                                                  
                                                     </th>
                             
@@ -766,7 +763,10 @@
                                                         </a>
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        CANVAS exploratorio (Innovación y modelos de negocios 
+                                                        CANVAS exploratorio (Innovación y modelos de negocios)
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        NO INICIADO <i class="material-icons s-font-color-chat-offline">event_busy</i>
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         3 
@@ -775,7 +775,7 @@
                                                         Lienzo canvas exploratorio 
 
                                                     </th>
-                                                    <th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         F.Complementario 01                                                            
                                                     </th>
                             
@@ -802,13 +802,15 @@
                                                         CANVAS en base al segmento de mercado
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
+                                                        NO INICIADO <i class="material-icons s-font-color-chat-offline">event_busy</i>
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         3 
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         Modelo de negocio-CANVAS
-
                                                     </th>
-                                                    <th>
+                                                    <th class="mdc-data-table__cell" scope="row">
                                                         F.Complementario 02                                                  
                                                     </th>
                             

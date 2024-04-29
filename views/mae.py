@@ -67,7 +67,16 @@ def _mae_home():
 
 @mae.route('/mae/list')
 def _mae_list():
-    return render_template('/mae/mae_list.html')
+    # Consulta para traer las Company con inscripción cohorte igual a 10
+
+    # Consulta para traer las Company con inscripción cohorte igual a 10
+    companies = Company.query.join(Inscripciones).filter(Inscripciones.cohorte == 10).all()
+
+    context = {
+        'companies':companies
+    }
+
+    return render_template('/mae/mae_list.html',**context)
 
 @mae.route('/mae/workshops/list')
 def _workshops_list():
@@ -76,7 +85,11 @@ def _workshops_list():
 #    return render_template('/digitalcenter/form_profile_sde.html')
 
 #output
-@mae.route('/mae/perfil')
-def _mae_perfil():
-    return render_template('/mae/perfil.html')
+@mae.route('/mae/perfil/<int:company_id>')
+def _mae_perfil(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+    context = {
+        'company':company
+    }
+    return render_template('/mae/perfil.html',**context)
 

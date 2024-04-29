@@ -155,7 +155,7 @@ padding-top: 10px;
                                               </div>
                                               <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="3" name="conoce_servicio" >
+                                                    <input class="mdc-radio__native-control" type="radio" value="1" name="conoce_servicio" >
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -177,7 +177,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                   <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="1"  name="conoce_servicio">
+                                                    <input class="mdc-radio__native-control" type="radio" value="0"  name="conoce_servicio">
                                                     <div class="mdc-radio__background">
                                                       <div class="mdc-radio__outer-circle"></div>
                                                       <div class="mdc-radio__inner-circle"></div>
@@ -199,7 +199,7 @@ padding-top: 10px;
                                                           class="mdc-checkbox__native-control"
                                                           name="txt_comercio"
                                                           id="sr_1" 
-                                                          value="Al detalle"
+                                                          value="Asistencia Técnica"
                                                           />
                                                   <div class="mdc-checkbox__background">
                                                       <svg class="mdc-checkbox__checkmark"
@@ -223,7 +223,7 @@ padding-top: 10px;
                                                           class="mdc-checkbox__native-control"
                                                           name="txt_comercio"
                                                           id="sr_2" 
-                                                          value="Mayorista"
+                                                          value="Formalización Empresarial"
                                                           />
                                                   <div class="mdc-checkbox__background">
                                                       <svg class="mdc-checkbox__checkmark"
@@ -248,7 +248,7 @@ padding-top: 10px;
                                                           class="mdc-checkbox__native-control"
                                                           name="txt_comercio"
                                                           id="sr_3" 
-                                                          value="Comisionistas"
+                                                          value="Gestión Financiera"
                                                           />
                                                   <div class="mdc-checkbox__background">
                                                       <svg class="mdc-checkbox__checkmark"
@@ -273,7 +273,7 @@ padding-top: 10px;
                                                         class="mdc-checkbox__native-control"
                                                         name="txt_comercio"
                                                         id="sr_3" 
-                                                        value="Comisionistas"
+                                                        value="Acceso a Mercados Potenciales"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -298,7 +298,7 @@ padding-top: 10px;
                                                         class="mdc-checkbox__native-control"
                                                         name="txt_comercio"
                                                         id="sr_3" 
-                                                        value="Comisionistas"
+                                                        value="Participar en feria comercial y Espacios de Promoción"
                                                         />
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark"
@@ -321,7 +321,7 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                   <b></b> ¿Porqué considera que requiere esos servicios? * 
                                               </div>
-                                              <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_company_address" data-assigned-var> 
+                                              <label class="mdc-text-field  mdc-text-field--outlined  mdc-text-field--filled mdc-text-field--textarea mdc-text-field--with-internal-counter" id="txt_porque_considera" data-assigned-var> 
                                                 <span class="mdc-notched-outline">
                                                   <span class="mdc-notched-outline__leading"></span>
                                                   <span class="mdc-notched-outline__notch">
@@ -353,10 +353,10 @@ padding-top: 10px;
                                                 <div class="mdc-typography--body1">
                                                     Nombres
                                                 </div>
-                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_company_name" data-assigned-var>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
-                                                    <span class="mdc-floating-label" id="lbl_company_name" hiddenlabel="Nombre Empresa"  >Nombres</span>
-                                                    <input required class="mdc-text-field__input"  type="text" aria-labelledby="lbl_company_name" value="" disabled>
+                                                    <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Nombres"  >Nombres</span>
+                                                    <input required class="mdc-text-field__input"  type="text" aria-labelledby="lbl_name" value="" >
                                                     <span lass="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
@@ -364,10 +364,10 @@ padding-top: 10px;
                                                 <div class="mdc-typography--body1">
                                                     Apellidos:
                                                 </div>
-                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                                <label class="mdc-text-field mdc-text-field--filled" id="txt_apellidos" data-assigned-var>
                                                     <span class="mdc-text-field__ripple"></span>
-                                                    <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Apellidos</span>
-                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                    <span class="mdc-floating-label" id="lbl_apellidos" hiddenlabel="Apellidos"  >Apellidos</span>
+                                                    <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_apellidos" value="" >
                                                     <span lass="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
@@ -375,10 +375,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Nacionalidad:
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_inicio" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_nacionalidad" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_fecha_inicio" hiddenlabel="Fecha de Inicio"  >Nacionalidad</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_fecha_inicio">
+                                                  <span class="mdc-floating-label" id="lbl_nacionalidad" hiddenlabel="Nacionalidad"  >Nacionalidad</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_nacionalidad">
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -386,10 +386,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 No. De identidad:
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_identidad" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >No. De identidad</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_identidad" hiddenlabel="Identidad"  >No. De identidad</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_identidad" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -398,10 +398,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Teléfono celular: 
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_celular" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Teléfono celular</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_celular" hiddenlabel="Teléfono celular"  >Teléfono celular</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_celular" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -409,10 +409,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Otro teléfono: 
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_telefono" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Otro teléfono</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_otro_telefono" hiddenlabel="Otro teléfono"  >Otro teléfono</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_otro_telefono" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -420,10 +420,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Correo electrónico:
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_correo_electronico" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Correo electrónico</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_correo" hiddenlabel="Correo electrónico"  >Correo electrónico</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_correo" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -431,10 +431,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Redes sociales 
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_redes_sociales" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Redes sociales </span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_redes_sociales" hiddenlabel="Redes sociales"  >Redes sociales </span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_redes_sociales" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -587,10 +587,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Ciudad:
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_ciudad" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Ciudad</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_company_ciudad" hiddenlabel="Ciudad"  >Ciudad</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_ciudad" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -598,10 +598,10 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Dirección exacta:
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_direccion_exacta" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Dirección exacta</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_direccion_exacta" hiddenlabel="Dirección exacta"  >Dirección exacta</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_direccion_exacta" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
@@ -1178,171 +1178,15 @@ padding-top: 10px;
                                               <div class="mdc-typography--body1">
                                                 Nombre del emprendimiento  (Si lo tiene)
                                               </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_name" data-assigned-var>
                                                   <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  > Nombre del emprendimiento  (Si lo tiene)</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
+                                                  <span class="mdc-floating-label" id="lbl_company_name" hiddenlabel="Nombre del emprendimiento"  > Nombre del emprendimiento  (Si lo tiene)</span>
+                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_name" value="" >
                                                   <span lass="mdc-line-ripple"></span>
                                               </label>
                                             </div>
 
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                              <div class="mdc-typography--body1">
-                                                  Departamento:*
-                                              </div>
-                                              <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacDepto" id="txt_departamento"  data-assigned-var>
-                                                <div class="mdc-select__anchor" aria-required="true"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label" hiddenlabel="Departamento">Seleccione departamento</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
-                                                </div>
-                                                
-
-
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
-                                                  <ul id="list-depto" class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                    </li>
-
-
-                                                  </ul>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                              <div class="mdc-typography--body1">
-                                                  Municipio:*
-                                              </div>
-                                              <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class" data-action-fn="nacMum" id="txt_municipio" data-assigned-var>
-                                                <div class="mdc-select__anchor" aria-required="true"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label" hiddenlabel="Municipio">Seleccione municipio</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
-                                                </div>
-                                              
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
-                                                  <ul id="list-muni"  class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                                      <span class="mdc-deprecated-list-item__ripple"></span>
-                                                    </li>
-                                                  </ul>
-                                                </div>
-                                            </div>
-                                          </div>
-
-                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                            <div class="mdc-typography--body1">
-                                                Aldea:*
-                                            </div>
-                                            <div class="mdc-select mdc-select--filled mdc-select--required demo-width-class"  id="txt_aldea" data-assigned-var>
-                                              
-                                              <div class="mdc-select__anchor" aria-required="true"
-                                                   role="button"
-                                                   aria-haspopup="listbox"
-                                                   aria-expanded="false"
-                                                   aria-labelledby="demo-label demo-selected-text">
-                                                <span class="mdc-select__ripple"></span>
-                                                <span id="demo-label" class="mdc-floating-label" hiddenlabel="Aldea">Seleccione aldea</span>
-                                                <span class="mdc-select__selected-text-container">
-                                                  <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                </span>
-                                                <span class="mdc-select__dropdown-icon">
-                                                  <svg
-                                                      class="mdc-select__dropdown-icon-graphic"
-                                                      viewBox="7 10 10 5" focusable="false">
-                                                    <polygon
-                                                        class="mdc-select__dropdown-icon-inactive"
-                                                        stroke="none"
-                                                        fill-rule="evenodd"
-                                                        points="7 10 12 15 17 10">
-                                                    </polygon>
-                                                    <polygon
-                                                        class="mdc-select__dropdown-icon-active"
-                                                        stroke="none"
-                                                        fill-rule="evenodd"
-                                                        points="7 15 12 10 17 15">
-                                                    </polygon>
-                                                  </svg>
-                                                </span>
-                                                <span class="mdc-line-ripple"></span>
-                                              </div>
-                                            
-                                              <div class="mdc-select__menu mdc-menu mdc-menu-surface  mdc-menu-surface--fullwidth">
-                                                <ul id="list-aldea"  class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                  <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
-                                                    <span class="mdc-deprecated-list-item__ripple"></span>
-                                                  </li>
-
-                                                    
-                      
-                                                </ul>
-                                              </div>
-                                          </div>
-                                          </div>  
-                                            <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                              <div class="mdc-typography--body1">
-                                                Ciudad:
-                                              </div>
-                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_rtn" data-assigned-var>
-                                                  <span class="mdc-text-field__ripple"></span>
-                                                  <span class="mdc-floating-label" id="lbl_company_rtn" hiddenlabel="RTN Empresa"  >Ciudad</span>
-                                                  <input required class="mdc-text-field__input" type="text" aria-labelledby="lbl_company_rtn" value="" >
-                                                  <span lass="mdc-line-ripple"></span>
-                                              </label>
-                                            </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                               <div class="mdc-typography--body1">
                                                 Dirección exacta:
@@ -1834,7 +1678,7 @@ padding-top: 10px;
 </main>
 {% endblock %}
 {% block body_script_section %}
-<script src="{{ url_for('static', filename='js/diagnostico.js') }}?v=1"></script>
+<script src="{{ url_for('static', filename='js/form101.js') }}?v=1"></script>
 <script>
 
    window.addEventListener('load', function() {

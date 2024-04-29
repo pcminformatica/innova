@@ -27,6 +27,7 @@ with app.app_context():
     from views.monitoreo import monitoreo as monitoreo_view
     from views.aulavirtual import aulavirtual as aulavirtual_view
     from views.mae import mae as mae_view
+    from views.maeapi import maeapi as mae_api_view
     # from views.siortc import siortc as siortc_view
 
     # API Fetchs
@@ -49,6 +50,8 @@ with app.app_context():
     app.register_blueprint(aulavirtual_view)
     #
     app.register_blueprint(mae_view)
+    #
+    app.register_blueprint(mae_api_view)
     # Register the Service Worker
     @app.route('/sw.js', methods=['GET'])
     def _serviceworker():
