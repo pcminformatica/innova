@@ -1105,7 +1105,7 @@ def _admin_company_monitoring_list():
                     serviciosFinalizados= serviciosFinalizados + 1
                 else:
                     serviciosEnProceso =serviciosEnProceso+1
-    list_user = [3,5,6,15,16,17,18,20,21,25,24,30,66,173,176]
+    list_user = [3,5,6,15,16,17,18,20,21,25,24,30,66,173,176,215,216,217]
     users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
     context = {
         'users':users,
