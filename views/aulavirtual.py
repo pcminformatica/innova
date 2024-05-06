@@ -155,14 +155,14 @@ def _curso_enroll_list_inscritas():
         ).all()
     print(len(companies))
     # Accede a las Inscripciones.id a través de la relación en EnrollmentRecord
-    inscripciones_ids_distintas = [company.company.inscripcion.id for company in companies]
+    inscripciones_ids_distintas = [company.company.inscripcion.dni for company in companies]
     # Realiza la consulta para obtener las Inscripciones que no están en la lista
     inscripciones_no_en_lista = Inscripciones.query.filter(
-        not_(Inscripciones.id.in_(inscripciones_ids_distintas))
+        not_(Inscripciones.dni.in_(inscripciones_ids_distintas))
     ).all()
     app.logger.debug('** SWING_CMS ** - ------------------')
     inscripciones = Inscripciones.query.filter_by(elegible = True,cohorte=5).filter(
-    not_(Inscripciones.id.in_(inscripciones_ids_distintas))
+    not_(Inscripciones.dni.in_(inscripciones_ids_distintas))
     ).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
     context = {
         'api': inscripciones
