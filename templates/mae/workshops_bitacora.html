@@ -94,7 +94,7 @@
                                         <div class="mdc-tab-scroller__scroll-content">
                                             <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content">
-                                                    <span class="mdc-tab__text-label">INSCRIPCIÒN TALLERES INNOVA</span>
+                                                    <span class="mdc-tab__text-label">Bitacora {{ enrolls.workshop.course.name }}</span>
                                                 </span>
                                                 <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                                     <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -106,30 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mdc-card__content container-dashboard--messages-msg">
-                              <div class="mdc-card__content">
-                                  <div class="mdc-layout-grid__inner">
-                                    
-                                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-6-tablet">
 
-                                        <div class="mdc-typography--headline5 s-font-color-secondary">Inscripción en el taller de: {{ courses.name }} </div>
-                                        <br>  
-                                        <div class="mdc-typography--headline5 s-font-color-secondary">INFORMACION GENERAL </div>
-                                      </div>
-                                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                          <p><b>Nombre :</b> {{ company.inscripcion.name  }} </p>
-                                          <p><b>DNI:</b> {{ company.dni }} </p>
-                                          <p><b>Teléfono:</b>{{ company.inscripcion.phone  }} </p>
-                                      </div>
-                                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
-                                          <p><b>Departamento:</b>  {{ company.inscripcion.departamento  }}</p>
-                                          <p><b>Municipio:</b>  {{ company.inscripcion.municipio  }} </p>
-                                          <p><b>Correo:</b>  {{ company.inscripcion.correo }} </p>
-                                      </div>
-  
-                                  </div>
-                              </div>
-                          </div>
                             <div class="mdc-card__content container-dashboard--messages-msg">
 
                                 
@@ -138,69 +115,45 @@
                                         <div class="mdc-layout-grid__inner">
                                           <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Datos del taller
+                                                Datos del la jornada
                                             </div>
   
                                           </div>
                                           
                                           <input type="hidden" aria-labelledby="my-label-id" id="txt_id" value="">
-
-
-                                          <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
-                                           
-
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Secciones Disponible:
+                                                Fecha 
                                             </div>
-                                            <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_formacion" data-assigned-var>
-                                                <div class="mdc-select__anchor"
-                                                     role="button"
-                                                     aria-haspopup="listbox"
-                                                     aria-expanded="false"
-                                                     aria-labelledby="demo-label demo-selected-text">
-                                                  <span class="mdc-select__ripple"></span>
-                                                  <span id="demo-label" class="mdc-floating-label">Secciones Disponible</span>
-                                                  <span class="mdc-select__selected-text-container">
-                                                    <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-                                                  </span>
-                                                  <span class="mdc-select__dropdown-icon">
-                                                    <svg
-                                                        class="mdc-select__dropdown-icon-graphic"
-                                                        viewBox="7 10 10 5" focusable="false">
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-inactive"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 10 12 15 17 10">
-                                                      </polygon>
-                                                      <polygon
-                                                          class="mdc-select__dropdown-icon-active"
-                                                          stroke="none"
-                                                          fill-rule="evenodd"
-                                                          points="7 15 12 10 17 15">
-                                                      </polygon>
-                                                    </svg>
-                                                  </span>
-                                                  <span class="mdc-line-ripple"></span>
-                                                </div>
-                                              
-                                                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                                                  <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
-                                                        {% for workshop in workshops %}
-                                                              <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ workshop.id }}" role="option">
-                                                                  <span class="mdc-deprecated-list-item__ripple"></span>
-                                                                  <span class="mdc-deprecated-list-item__text">
-                                                                    Lugar: {{ workshop.lugar }} - Fecha inicio: {{ workshop.date_start.strftime('%Y-%m-%d') }}
-                                                                  </span>
-                                                              </li>
-                                                        {% endfor %}
-                                                           
-                                                   
-                                                  </ul>
-                                                </div>
-                                              </div>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                <span class="mdc-text-field__ripple"></span>
+                                                <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Fecha inicio"  >Fecha inicio</span>
+                                                <input required class="mdc-text-field__input"  type="date" aria-labelledby="lbl_name" value="" >
+                                                <span lass="mdc-line-ripple"></span>
+                                            </label>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                        <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
+                                            <span class="mdc-notched-outline">
+                                              <span class="mdc-notched-outline__leading"></span>
+                                              <span class="mdc-notched-outline__notch">
+                                                <span class="mdc-floating-label" id="my-label-id">Comentario</span>
+                                              </span>
+                                              <span class="mdc-notched-outline__trailing"></span>
+                                            </span>
+                                            <span class="mdc-text-field__resizer">
+                                              <textarea class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="140"></textarea>
+                                              <span class="mdc-text-field-character-counter">0 / 140</span>
+                                            </span>
+                                          </label>
                                           </div>
-
+                                          <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div class="mdc-typography--body1">
+                                                 
+                                            </div>
+                                            Finalizo completamente el servicio: <input id="chx_finalizo" name="chx_finalizo"  type="checkbox" >
+                     
+                                        </div>
                              
 
                                           <br>
@@ -286,16 +239,24 @@ window.addEventListener('load', function() {
     function generarFicha1(){
 
       const Swal = swcms.returnSwal()
-      let property = 'txt_formacion'
+        // Obtener el checkbox
+        var checkbox = document.getElementById("chx_finalizo");
 
-      let postData = {
-          "txt_company_id":"{{ company.id }}",
-          "txt_formacion":mdcAssignedVars[property].value
-      };
+        // Verificar si está seleccionado
+        if (checkbox.checked) {
+            chx_finalizo = true
+        } else {
+            chx_finalizo = false
+        }
+
+        let postData = {
+            "txt_enrolls":"{{ enrolls.id }}",
+            "chx_finalizo":chx_finalizo
+        };
 
         console.log(postData)
-
-      let apiUrl = '/api/mae/save/workshops/';
+    
+      let apiUrl = '/api/mae/saves/workshops/finalizo';
 
 
       swcms.postFetch(apiUrl, postData).then((data) => {
@@ -304,7 +265,7 @@ window.addEventListener('load', function() {
           'Carta de compromiso creada!',
           'success'
           )
-          window.setTimeout(() => { window.location.href = '/mae/perfil/'+"{{ company.id }}" }, 1500);
+          window.setTimeout(() => { window.location.href = '/mae/perfil/'+"{{ enrolls.company.id }}" }, 1500);
 
       }).catch((error) => {
           Swal.fire(

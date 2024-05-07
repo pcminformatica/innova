@@ -205,7 +205,7 @@ submitButton.addEventListener('click', function() {
               'INNOVA MUJER HONDURAS',
               'success'
             )
-            window.location.href = "/mae/home/";
+            window.location.href = "/mae/perfil/"+data.code;
             //window.setTimeout(() => { window.location.assign('/registros/im'); 
          // }, 3000);
         

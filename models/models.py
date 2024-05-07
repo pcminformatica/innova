@@ -1036,6 +1036,7 @@ class CourseManagers(db.Model):
 class Courses(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    code = db.Column(db.String(200), unique=False, nullable=True)
     name = db.Column(db.String(200), unique=False, nullable=False)
     id_training_type =db.Column(db.Integer, db.ForeignKey('training_type.id'), nullable=False)
     training_type = db.relationship("TrainingType")
@@ -1048,6 +1049,7 @@ class Courses(db.Model):
     time_scheduled_start = db.Column(db.Time, nullable=True)
     time_scheduled_end = db.Column(db.Time, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+    isworkshop  = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     description = db.Column(db.Text, unique=False, nullable=True)
     def __repr__(self):
@@ -1055,7 +1057,41 @@ class Courses(db.Model):
             id = self.id,
             name = self.name,
         )
+class Workshops(db.Model):
+    __tablename__ = 'workshops'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_course =db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+    course = db.relationship("Courses")
+    date_start = db.Column(db.DateTime, nullable=True)
+    date_end = db.Column(db.DateTime, nullable=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    lugar = db.Column(db.String(300), unique=False, nullable=True)
+    description = db.Column(db.Text, unique=False, nullable=True)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.description
+        )
 
+class EnrollmenWorkshops(db.Model):
+    __tablename__ = 'enrollmenworkshops'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_workshop =db.Column(db.Integer, db.ForeignKey('workshops.id'), nullable=False)
+    workshop = db.relationship("Workshops")
+    company_id = db.Column(db.Integer, db.ForeignKey("company.id"),nullable=True)
+    company = db.relationship("Company")
+    date_start = db.Column(db.DateTime, nullable=True)
+    date_end = db.Column(db.DateTime, nullable=True)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    lugar = db.Column(db.String(300), unique=False, nullable=True)
+    description = db.Column(db.Text, unique=False, nullable=True)
+    complete = db.Column(db.Boolean, nullable=True, default=False)
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.description
+        )
+    
 class EnrollmentRecord(db.Model):
     __tablename__ = 'enrollment_record'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
