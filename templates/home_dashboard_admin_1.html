@@ -276,7 +276,15 @@
                                                 </i>
                                                 <span class="mdc-deprecated-list-item__text">Capacitaciones</span>
                                             </li>
-             
+                                            <li onclick="showDiv('monitoreo')" class="mdc-deprecated-list-item" role="menuitem"
+                                                tabindex="0">
+                                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                                <i class="s-font-color-secondary material-icons mdc-deprecated-list-item__graphic"
+                                                    aria-hidden="true">
+                                                    send
+                                                </i>
+                                                <span class="mdc-deprecated-list-item__text">Monitoreo</span>
+                                            </li>
 
                                         </ul>
                                     </div>
@@ -301,20 +309,43 @@
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="https://ee.kobotoolbox.org/x/gG31mMNd">
+                                                    <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_12') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Diagnóstico </span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Formulario web del diagnóstico empresarial en KoboToolbox.</span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Total de servicios solicitados en los diagnósticos empresariales elaborados en kobotoolbox </span>
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    
+                                                    <a target="_blank"  href="{{ url_for('admindash._datos_describe_v1') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Reporte de demanda segun plan de acción</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Total de servicios solicitados en los diagnósticos empresariales elaborados segun plan de acción </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                        </span>
+                                                    </a>
+                                                </li>      
                                                 <li class="mdc-deprecated-list-item">
                                                     <a href="{{ url_for('digitalcenter._diagnosis_monitoring_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
@@ -322,101 +353,72 @@
                                                             <img src="../static/images/dash4.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Demanda</span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Control de diagnosticos</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
+                                                        </span>
+                                                    </a>
+                                                </li>      
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="#" onclick="alert('En construccion')">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">DB Inscrita</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="#" onclick="alert('En construccion')">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">DB Elegibles</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="#" onclick="alert('En construccion')">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">DB Capacitadas</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('digitalcenter._diagnosis_monitoring_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">DB Atendidas</span>
                                                             <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                    <a href="#"  onclick="alert('En construccion')">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Demanda segun plan de accion</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos Inscritas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Control de diagnostico</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos elegibles</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos capacitadas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos atendidas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos graduadas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">DB Graduadas</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
                                                         </span>
                                                     </a>
                                                 </li>
 
-
-
-            
         
                                             </ul>
                                         </div>
@@ -430,110 +432,92 @@
                                             <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
+                                                    <a href="{{ url_for('monitoreo._admin_company_monitoring_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                             <img src="../static/images/dash3.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Empresas por etapa </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas por etapas </span>
                                                             <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="https://ee.kobotoolbox.org/x/gG31mMNd">
+                                                    <a href="{{ url_for('digitalcenter._company_monitoring_proceso_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                             <img src="../static/images/dash3.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Empresas un proceso </span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Formulario web del diagnóstico empresarial en KoboToolbox.</span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Empresas en proceso</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Empresas en proceso</span>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('digitalcenter._diagnosis_monitoring_list') }}">
+                                                    <a href="{{ url_for('digitalcenter._company_pausa_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
                                                             <span class="mdc-deprecated-list-item__primary-text">Empresas en pausa</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Envio de diagnostico empresarial inicial </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Empresas con 60 dias sin recibir asesorías </span>
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                    <a target="_blank"  href="{{ url_for('home._tipos_empresa') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                             <img src="../static/images/dash1.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Empresa por categoria</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Cuantas empresarias son de tipo EMPRESA A, B, C, D según el diagnóstico empresarial.</span>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                    <a target="_blank"  href="{{ url_for('digitalcenter._datos_describe_2_v2') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
                                                             <img src="../static/images/dash1.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Directorio comercial</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Reporte de categoría de empresas EXCEL</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Cuantas empresarias son de tipo EMPRESA A, B, C, D según el diagnóstico empresarial con la función de importar a Excel.</span>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                    <a href="{{ url_for('monitoreo._directorio_company') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos Capacitadas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Directorio comercial de empresas </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Directorio de empresas</span>
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                <li class="mdc-deprecated-list-item" tabindex="0">
+                                                    <a  href="{{ url_for('admindash._admin_companys_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/manifest/user_f.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos Atendidas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Administración de empresas</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Administración de información de todas la empresas.</span>
                                                         </span>
+                                                        <span class="mdc-deprecated-list-item__meta material-icons s-font-color-secondary" aria-hidden="true">new_releases</span>
                                                     </a>
                                                 </li>
-                                                <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
-                                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
-                                                        </span>
-                                                        <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Base de datos Graduadas</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
-
-        
- 
-            
-        
                                             </ul>
                                         </div>
                                     </div>
@@ -543,33 +527,70 @@
                     
                                         <div class="mdc-card__content container-dashboard--messages-msg">
                                             <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
-                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
+                                                    <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash2.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitacion inicial</span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
-                                                    <a href="https://ee.kobotoolbox.org/x/gG31mMNd">
+                                                    <a href="{{ url_for('digitalcenter._registro_no_elegibles_list') }}">
                                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                                         <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
-                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                            <img src="../static/images/dash2.svg" alt="Foto Usuario" />
                                                         </span>
                                                         <span class="mdc-deprecated-list-item__text">
-                                                            <span class="mdc-deprecated-list-item__primary-text">Mujeres con capacitacion inicial </span>
-                                                            <span class="mdc-deprecated-list-item__secondary-text">Formulario web del diagnóstico empresarial en KoboToolbox.</span>
+                                                            <span class="mdc-deprecated-list-item__primary-text">No elegibles </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
                                                         </span>
                                                     </a>
                                                 </li>
-
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                               
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitación inicial (Convocar)</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas que no han registrado capacitación inicial.</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas_capacitadas') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Capacitación inicial (Capacitadas)</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas han registrado capacitación inicial.</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('home._evaluations_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Resultados del test de MADUREZ DIGITAL INNOVA MUJER </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas han registrado el TEST MADUREZ DIGITAL INNOVA MUJER</span>
+                                                        </span>
+                                                    </a>
+                                                </li> 
                                                 <li role="separator" class="mdc-deprecated-list-divider"></li>
                                                 <li class="mdc-deprecated-list-item">
                                                     <a href="https://ee.kobotoolbox.org/x/gG31mMNd">
@@ -591,7 +612,113 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="monitoreo" class="content content">
+                                    <div class="container-dashboard--messages">
+                    
+                                        <div class="mdc-card__content container-dashboard--messages-msg">
+                                            <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-list--avatar-list">
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('digitalcenter._company_monitoring_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('monitoreo._admin_company_monitoring_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash3.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Seguimiento a empresas por etapas </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Documentación, creación de usuario, Construir plan de acción, y bitacoras</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('monitoreo._monitoring_dashboard') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Monitoreo dashboard</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+        
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('digitalcenter._company_rango_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash1.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Reporte de atenciones</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Realiza busqueda de empresas por Filtros de fechas </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('digitalcenter._registro_elegibles_list') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash2.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Elegibles </span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de empresaria inscritas</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+             
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Mujeres que necesitan capacitación inicial (Convocar)</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas que no han registrado capacitación inicial.</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li role="separator" class="mdc-deprecated-list-divider"></li>
+                                                <li class="mdc-deprecated-list-item">
+                                                    <a href="{{ url_for('aulavirtual._curso_enroll_list_inscritas_capacitadas') }}">
+                                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                                                        <span class="mdc-deprecated-list-item__graphic" aria-hidden="true">
+                                                            <img src="../static/images/dash4.svg" alt="Foto Usuario" />
+                                                        </span>
+                                                        <span class="mdc-deprecated-list-item__text">
+                                                            <span class="mdc-deprecated-list-item__primary-text">Capacitación inicial (Capacitadas)</span>
+                                                            <span class="mdc-deprecated-list-item__secondary-text">Listado de mujeres inscritas han registrado capacitación inicial.</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+        
  
+            
+        
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                           </div>
                           <!-- ... additional primary action content ... -->
