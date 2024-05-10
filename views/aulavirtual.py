@@ -181,6 +181,9 @@ def upload_filex():
                             courses.id_course = cursos.id
                             courses.company_id = company.id
                             courses.created_by = current_user.id
+                            courses.date_start = row['Fecha Inicio']
+                            courses.date_end = row['Fecha Final']
+                            courses.lugar = row['GRUPO']
                             db.session.add(courses)         
                             db.session.commit()
                     else:
