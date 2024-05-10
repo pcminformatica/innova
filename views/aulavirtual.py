@@ -139,6 +139,62 @@ def _curso_enroll_list(courses_id):
    
     }
     return render_template('aulavirtual/curso_enroll_list.html',**context)
+from io import BytesIO
+from datetime import datetime
+from flask import Flask, request, render_template, redirect, url_for, flash
+@aulavirtual.route('/upload/x',methods=['POST','GET'])
+def upload_filex():
+    if request.method == 'POST':
+        file = request.files['excel_file']
+        
+        # Leer el archivo Excel directamente desde el objeto de archivo en memoria
+        df = pd.read_excel(BytesIO(file.read()), usecols=['DNI', 'Fecha Inicio', 'Fecha Final', 'GRUPO','PROMO'])
+        
+        
+        data  =[]
+        # Recorrer cada fila y mostrar los datos en la consola
+        for index, row in df.iterrows():
+            print(row)
+            print(f"DNI: {row['DNI']}, Fecha Inicio: {row['Fecha Inicio']}, Fecha Final: {row['Fecha Final']}, GRUPO: {row['GRUPO']}, PROMO: {row['PROMO']}")
+            identity = str(row['DNI'])
+            idd =  str(row['PROMO'])
+         
+            dni = identity.strip().replace("-", "").replace(" ", "")
+            cursos = False
+            if row['PROMO'] == 'QUINTA':
+                cursos = Courses.query.filter_by(code='c1').first()
+            elif row['PROMO'] == 'SEXTA':
+                cursos = Courses.query.filter_by(code='c2').first()
+            elif row['PROMO'] == 'SEPTIMA':
+                cursos = Courses.query.filter_by(code='c3').first()
+            if cursos:
+                inscripcion =  Inscripciones.query.filter(Inscripciones.dni == dni).first()
+
+                if inscripcion:
+                    company =  Company.query.filter(Company.dni == inscripcion.dni).first()
+                    #creamos la empresa
+                        #creamos la empresa
+                    if company:                       
+                        enroll = EnrollmentRecord.query.filter_by(id_course = cursos.id,company_id=company.id).first()
+                        if not enroll:
+                            courses = EnrollmentRecord()
+                            courses.id_course = cursos.id
+                            courses.company_id = company.id
+                            courses.created_by = current_user.id
+                            db.session.add(courses)         
+                            db.session.commit()
+                    else:
+                        data.append({'linea':index+2, 'dni': dni,'des':'company','promo':row['PROMO']})
+                else:
+                    data.append({'linea':index+1, 'dni': dni,'des':'inscripcion','promo':row['PROMO']})
+            else:
+                data.append({'linea':index+1, 'dni': dni,'des':'cursos','promo':row['PROMO']})
+    else:
+        data =[]  
+    context = {
+        'data': data
+    }
+    return render_template('upload.html',**context)
 
 
 @aulavirtual.route('/cursos/list/inscritas/',methods = ['GET', 'POST'])

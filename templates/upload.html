@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cargar Archivo Excel</title>
+</head>
+<body>
+    <h1>Cargar Archivo de Excel</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="excel_file" required>
+        <button type="submit">Subir Archivo</button>
+    </form>
+    {% for data in data %}
+    <p>{{ data.linea }} - {{ data.dni }} - {{ data.des }} - {{ data.promo }}</p>
+    {% endfor %}
+</body>
+</html>
