@@ -2309,7 +2309,12 @@ def _asesoria_colectivas_service_search(service_id):
     if current_user.id == 3 or current_user.id == 24:
         actions = ActionPlan.query.filter(ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     else:
-        actions = ActionPlan.query.filter(ActionPlan.created_by==current_user.id,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+        actions = ActionPlan.query.join(Company).filter(
+            or_(ActionPlan.created_by == current_user.id, Company.created_by == current_user.id),
+            ActionPlan.services_id == services.id,
+            ActionPlan.fase != 0,
+            ActionPlan.cancelled == False
+        ).all()
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in actions:
         if action.company.date_action_plan:
