@@ -895,6 +895,18 @@ def _indicadores_perfil_asesor(user_uid):
         lista = []
 
         for company in companys:
+            category = "No tiene plan de acción"
+            if company.action_plan_progress is not None:
+            # Calcula la categoría según el valor de action_plan_progress
+            
+                if company.action_plan_progress:
+                    category_start = int(company.action_plan_progress // 20) * 20
+                    category = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                else:
+                    category = "0 de 20"
+            company.avancepa = category
+                
+
             #plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.created_by == user.id,ActionPlan.fase!=0).first()
             plan = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id,).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0).first()
             if plan:
