@@ -110,16 +110,19 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono </th>
+                                                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado en PA</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado </th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa </th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Días </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento </th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio </th>
+                                                
+                                                
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Área</th>
                                             
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
-                                                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Progreso</th>
+                                                
                                             </tr>
                                             
                                             
@@ -154,28 +157,30 @@
                                                             {{action.company.inscripcion.phone}}
                                                         {% endif %}
                                                     </th>
+                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                        {{action.progress}}
+        
+                                                    </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.progress == 0 %}
-                                                            Pendiente
-                                                        {% elif action.progress == 100 %}
-                                                            Finalizado
-                                                        {% else %}
-                                                            En Proceso
-                                                        {% endif %}
+                                                        {{ action.company.avancepa }}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.status_id %}
                                                             {{ action.company.status.name }}
                                                         {% endif %}
                                                     </th>
+       
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {% if action.company.stage_id %}
-                                                            {{ action.company.stage.name }}
+                                                        {% if action.company.inscripcion %}
+                                                            {{ action.company.inscripcion.departamento }}
                                                         {% endif %}
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                        {{action.days_since_action_plan}}
+                                                        {% if action.company.inscripcion %}
+                                                            {{ action.company.inscripcion.municipio }}
+                                                        {% endif %}
                                                     </th>
+        
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.services.name}}
                                                     </th>
@@ -191,10 +196,7 @@
                                                         {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
         
                                                     </th>
-                                                    <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                                        {{action.progress}}
-        
-                                                    </th>
+
                             
                                                 </tr>
                                                 {% endfor %}

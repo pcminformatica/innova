@@ -2307,7 +2307,7 @@ def _asesoria_colectivas_service_search(service_id):
     services = CatalogServices.query.filter_by(id = service_id).first()
     app.logger.debug('** SWING_CMS ** - Home Dashboard')
     if current_user.id == 3 or current_user.id == 24:
-        actions = ActionPlan.query.filter(ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+        actions = ActionPlan.query.join(Company).filter(Company.enabled ==True,ActionPlan.services_id==services.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
     else:
         actions = ActionPlan.query.join(Company).filter(
             or_(ActionPlan.created_by == current_user.id, Company.created_by == current_user.id),
@@ -2317,6 +2317,16 @@ def _asesoria_colectivas_service_search(service_id):
         ).all()
     # Suponiendo que tienes definidas las clases ActionPlan y ActionPlanReferences
     for action in actions:
+        category = "No tiene plan de acción"
+        if action.company.action_plan_progress is not None:
+        # Calcula la categoría según el valor de action_plan_progress
+        
+            if action.company.action_plan_progress:
+                category_start = int(action.company.action_plan_progress // 20) * 20
+                category = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+            else:
+                category = "0 de 20"
+        action.company.avancepa = category
         if action.company.date_action_plan:
             days_since_action_plan = (current_date - action.company.date_action_plan).days
             
