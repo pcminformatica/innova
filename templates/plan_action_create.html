@@ -78,21 +78,22 @@
                               <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                   <span class="mdc-text-field__ripple"></span>
                                  
-                                  <input id="txt_company_name" value="{{ api.NOMBRE_EMPRESA }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
+                                  <input id="txt_company_name" value="{{ company.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
                                   <span lass="mdc-line-ripple"></span>
                               </label>
                             </div>
                             <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               <div class="mdc-typography--body1">
-                                  RTN:
+                                  DNI:
                               </div>
                               <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                   <span class="mdc-text-field__ripple"></span>
 
-                                  <input id="txt_company_rtn" value="{{ api.RTN }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly >
+                                  <input id="txt_company_rtn" value="{{ company.dni }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly >
                                   <span lass="mdc-line-ripple"></span>
                               </label>
                             </div>
+                            {% if company.inscripcion %}
                             <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               <div class="mdc-typography--body1">
                                   EMAIL:
@@ -100,10 +101,12 @@
                               <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                   <span class="mdc-text-field__ripple"></span>
 
-                                  <input value="{{ api.EMAIL }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                  <input value="{{ company.inscripcion.correo }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                   <span lass="mdc-line-ripple"></span>
                               </label>
                             </div>
+                            {% endif %}
+                            {% if company.inscripcion %}
                             <div class="mdc-layout-grid__cell--span-4-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               <div class="mdc-typography--body1">
                                   TELEFONO:
@@ -111,22 +114,24 @@
                               <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                   <span class="mdc-text-field__ripple"></span>
 
-                                  <input value="{{ api.TELEFONO }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                  <input value="{{ company.inscripcion.phone  }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                   <span lass="mdc-line-ripple"></span>
                               </label>
                             </div>
-
+                            {% endif %}
+                            {% if company.inscripcion %}
                             <div class="mdc-layout-grid__cell--span-8-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                               <div class="mdc-typography--body1">
                                   DIRECCION:
                               </div>
                               <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
                                   <span class="mdc-text-field__ripple"></span>
-                                  <span class="mdc-floating-label" id="my-label-id">Escribe tu nombre</span>
-                                  <input value="{{ api.DIRECCION }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
+                                  <span class="mdc-floating-label" id="my-label-id">Escribe tu dirección</span>
+                                  <input value="{{ company.inscripcion.municipio }} , {{ company.inscripcion.departamento }} " class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                   <span lass="mdc-line-ripple"></span>
                               </label>
                             </div>
+                            {% endif %}
                             
                           </div>
                         </div>
