@@ -1427,7 +1427,7 @@ def _company_monitoring_list():
     categories = db.session.query(catalogCategory).all()
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
-    if current_user.id == 3 or current_user.id == 24 or current_user.id == 144 :
+    if current_user.id == 24 or current_user.id == 144 :
 
 
         # Consultar empresas que cumplan con las condiciones
@@ -1534,6 +1534,17 @@ def _company_monitoring_list():
             data.append(company_info)
     else:
         company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).order_by(asc(Company.date_created)).all()
+        for company_data in company:
+            if company_data.action_plan_progress is not None:
+            # Calcula la categoría según el valor de action_plan_progress
+                if company_data.action_plan_progress:
+                    category_start = int(company_data.action_plan_progress // 20) * 20
+                    category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
+                else:
+                    category_p = "0 de 20"
+            else:
+                category_p = "No tiene plan de acción"
+            company_data.category_progress = category_p
         allowed_status_short_names = [1, 2, 3, 6]
         # Definir un alias para la relación con ActionPlan
         action_plan_alias = aliased(ActionPlan)
