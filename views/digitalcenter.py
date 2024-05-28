@@ -1427,7 +1427,7 @@ def _company_monitoring_list():
     categories = db.session.query(catalogCategory).all()
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
-    if current_user.id == 24 or current_user.id == 144 :
+    if current_user.id == 3 or current_user.id == 24 or current_user.id == 144 :
 
 
         # Consultar empresas que cumplan con las condiciones
