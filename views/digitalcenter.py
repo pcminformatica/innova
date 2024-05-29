@@ -7,7 +7,7 @@ from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response,send_from_directory
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import AttentionLog,WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
+from models.models import surveys_sde,AttentionLog,WalletTransaction,ActionPlanReferences,DocumentCompany,ActionPlanHistory,DiagnosisCompany,Inscripciones,ActionPlan,Company,Professions,Appointments, CatalogIDDocumentTypes, CatalogServices, CatalogUserRoles, User, UserXRole, UserXEmployeeAssigned
 from models.models import CompanyMonitoring,ServiceChannel,CompanyStage,EnrollmentRecord,CompanyStatus,TrainingType,ModalityType,CourseManagers,Courses,catalogCategory,CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User,UserExtraInfo
 from models.diagnostico import Diagnosticos
 from werkzeug.utils import secure_filename
@@ -1874,6 +1874,16 @@ def _company_dashboard(user_uid):
     else:
         diagnostico = False
     enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
+    satisfaccion = False
+    impacto = False
+    if company.action_plan_progress == 100:
+        encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=1).first()
+        if not encuesta:
+            satisfaccion = True
+        encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=2).first()
+        if not encuesta:
+            impacto = True
+    actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
     context = {
         'enrolls':enrolls,
         'carta':carta,
@@ -1881,7 +1891,10 @@ def _company_dashboard(user_uid):
         'company': company,
         'actions':actions,
         "diagnostico":diagnostico,
-        "diagnos":diagnos
+        "diagnos":diagnos,
+        "satisfaccion":satisfaccion,
+        "impacto":impacto
+
     }
  
     return render_template('company_dashboard.html',**context)

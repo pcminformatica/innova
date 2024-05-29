@@ -3,7 +3,13 @@
 {% block page_title %}Innova Mujer Home{% endblock %}
 {% block body %}
 {% block css_script_section %}
+<style>
+  .error-message {
+      color: red;
+      display: none;
+  }
 
+</style>
 <style>
 
 @media screen and (max-width: 850px) {
@@ -114,12 +120,69 @@ padding-top: 10px;
                                 <div class="mdc-typography--headline4 s-font-color-secondary">
                                     Encuesta de Evaluación de Asesoría.
                                 </div>
+                                <div id="step-0" class="container-dashboard--messages-list-empty ">
+                                  <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
+                                  <div class="mdc-layout-grid">
+                             
+                                        <div class="mdc-layout-grid__inner">
+                                          <div class="
+                                          mdc-layout-grid__cell--span-12-desktop
+                                          mdc-layout-grid__cell--span-12-tablet
+                                          mdc-layout-grid__cell--span-12-phone
+                                          "
+                                          >
+                                            <div class="mdc-typography--body1">
+                                              <p><b>
+                                                Estimada empresaria</b>
+                                              </p>
+                                              <div class="mdc-typography--body1">
+                                                Nos gustaría conocer su opinión acerca del servicio <b>“{{ actions.services.name }}”</b> que ha recibido. Su retroalimentación es muy valiosa para el proyecto Innova Mujer Honduras y nos ayudará a seguir mejorando.
+                                              </div>
+                                              
+                                              <div>
+                                                Antes de comenzar, nos gustaría que confirmaras tu identidad. Por favor, ingresa tu número de identidad con el que se registró en Innova Mujer.
+                                              </div>
+                                              <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                  Identidad (sin guiones): 
+                                              </div>
+                                              <label class="mdc-text-field mdc-text-field--filled" id="txt_company_description" data-assigned-var>
+                                                  <span class="mdc-text-field__ripple"></span>
+                                                  <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Identidad">Identidad</span>
+                                                  <input required id="txt_identidad" class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" maxlength="13" oninput="validateInput()">
+                                                  <span class="mdc-line-ripple"></span>
+                                              </label>
+                                              <div id="error-message" class="error-message">El número de identidad debe tener exactamente 13 dígitos.</div>
+                                              </div>
+
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                 
+                                    
+                                      <br>
+                                      <center>
+        
+                                        <button id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="continuarEncuesta()">
+                                          <span class="mdc-button__ripple"></span>
+                                          <span class="mdc-button__focus-ring"></span>
+                                          <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                            >bookmark</i
+                                          >
+                                          <span class="mdc-button__label">Continuar  </span>
+                            
+                                        </button>
+                                 
+                            
+                                      </center>
 
 
-                          
-                              
-                               
-                                
+                                      
+                                  </div>
+
+                        <!-- fin -->
+                                </div>
                                 <div id="step-1" class="container-dashboard--messages-list-empty ">
                                     <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
                                     <div class="mdc-layout-grid">
@@ -140,7 +203,7 @@ padding-top: 10px;
                                                 </div>
                                                 
 
-                                                <div class="rating">
+                                                <div class="rating" style="display: inline;">
                                                     <input type="radio" id="star1" name="rating" value="1" />
                                                     <label for="star1">★</label>
                                                     <input type="radio" id="star2" name="rating" value="2" />
@@ -157,6 +220,7 @@ padding-top: 10px;
                                                 
                                               </div>
                                             </div>
+                                                                          
                                           </div>
                                    
                                           <div class="mdc-layout-grid__inner">
@@ -185,66 +249,32 @@ padding-top: 10px;
                                           </div>
                                         <br>
                                      
+                                        <center>
 
+                                          <button id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_save()">
+                                            <span class="mdc-button__ripple"></span>
+                                            <span class="mdc-button__focus-ring"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                              >bookmark</i
+                                            >
+                                            <span class="mdc-button__label">Enviar  </span>
+                              
+                                          </button>
+
+                                        </center>
                                       
                                         
                                     </div>
 
                           <!-- fin -->
                                 </div>
-                                <div id="step-2" class="container-dashboard--messages-list-empty ">
-                                  <!-- DATOS DE CONTACTO DE LA EMPRESARIA/PROPIETARIA  -->
-                                  <div class="mdc-layout-grid">
-                             
-                                        <div class="mdc-layout-grid__inner">
-                                          <div class="
-                                          mdc-layout-grid__cell--span-12-desktop
-                                          mdc-layout-grid__cell--span-12-tablet
-                                          mdc-layout-grid__cell--span-12-phone
-                                          "
-                                          >
-                                            <div class="mdc-typography--body1">
-                                      
-                                              <center>
-                                                <br>
-                                                <div class="mdc-typography--headline4 s-font-color-secondary">
-                                                  Resultado <span id="lbl_resultado"></span>
-                                                </div>
-                                              </center>
-                                            </div>
-                                          </div>
-                                        </div>
-                                 
-                                    
 
-                                    
-                                      
-                                  </div>
-
-                        <!-- fin -->
-                              </div>
+                                
                             </div>
   
                             <div class="mdc-card__actions" style="margin: auto">
                                 <div class="mdc-card__action-buttons">
-                                <center>
 
-                                  <button id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="encuestas_save()">
-                                    <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__focus-ring"></span>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                      >bookmark</i
-                                    >
-                                    <span class="mdc-button__label">Aceptar  </span>
-                      
-                                  </button>
-                                  <!--
-                                  <button class="mdc-button mdc-button--outlined">
-                                    <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__focus-ring"></span>
-                                    <span class="mdc-button__label">Continuar después  </span>
-                                  </button>-->
-                                </center>
                                 </div>
 
                             </div>
@@ -266,12 +296,21 @@ padding-top: 10px;
 <script  src="{{ url_for('static', filename='js/evaluacion.js') }}?z=2"></script>
 
 <script>
-document.getElementById("step-2").style.display = "none"; 
+//document.getElementById("step-1").style.display = "none"; 
 
 
 </script>
 
 <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            var radios = document.querySelectorAll('input[name="rating"]');
+            radios.forEach(function(radio) {
+                radio.checked = false;
+            });
+            
+            var div = document.getElementById('step-1');
+            div.style.display = 'none';
+        });
     const rating = document.querySelector('.rating');
     const selectedValue = document.getElementById('selected-value');
 
@@ -306,7 +345,7 @@ document.getElementById("step-2").style.display = "none";
                 label.style.color = '#fff';
             }
         });
-    });
+    });/**/
 
 
     function encuestas_save(){
@@ -324,7 +363,7 @@ document.getElementById("step-2").style.display = "none";
             "txt_id":'{{ actions.id }}'
       };
       console.log(postData)
-
+      
       let apiUrl = '/api/save/rating/';
       //document.getElementById('submitSaveButton').disabled = true;
 
@@ -348,6 +387,55 @@ document.getElementById("step-2").style.display = "none";
         //document.getElementById('submitSaveButton').disabled = false;
       });
     }
+
+
+      function validateInput() {
+        const input = document.getElementById('txt_identidad');
+            const errorMessage = document.getElementById('error-message');
+            let value = input.value;
+
+            // Remove non-numeric characters
+            value = value.replace(/\D/g, '');
+
+            // Ensure the length does not exceed 13 characters
+            if (value.length > 13) {
+                value = value.slice(0, 13);
+            }
+
+            // Set the cleaned numeric value back to the input
+            input.value = value;
+
+            if (value.length === 13) {
+                errorMessage.style.display = 'none';
+                input.setCustomValidity('');
+            } else {
+                errorMessage.style.display = 'block';
+                input.setCustomValidity('El número de identidad debe tener exactamente 13 dígitos y solo números positivos.');
+            }
+        }
+       function continuarEncuesta(){
+       
+        const Swal = swcms.returnSwal()
+          const identidad = document.getElementById('txt_identidad');
+          const empresa_id = '{{ actions.company.dni }}'
+
+          if (identidad.value==empresa_id){
+            var div = document.getElementById('step-0');
+              div.style.display = 'none';
+              var div = document.getElementById('step-1');
+              div.style.display = 'block';
+
+          }else{
+            Swal.fire(
+              'Identidad no encontrada',
+              'Por favor contacta a su especialista',
+              'error'
+            )
+          }
+      
+       }
+
+     
 </script>
 
 {% endblock %}
