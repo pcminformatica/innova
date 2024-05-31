@@ -757,7 +757,6 @@ def _formulario_encuestas_impacto():
 
 
 @home.route('/test/encuestas/sde/<int:plan_id>/sed')
-@login_required
 def _formulario_encuesta_SDE(plan_id):
     actions = ActionPlan.query.filter_by(id=plan_id).first()    
     context = {
