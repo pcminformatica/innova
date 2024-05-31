@@ -762,7 +762,7 @@ def _formulario_encuesta_SDE(plan_id):
     context = {
         'actions': actions,
     }
-    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+
     return render_template('evaluaciones/encuesta_SDE.html',**context)
 
 

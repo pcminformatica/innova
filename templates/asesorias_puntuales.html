@@ -160,6 +160,12 @@
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label" style="margin-left: 10px;"> Enviar</span>
                         </a>
+                        <a  href="/company/view/{{ company.id }}/"  class="mdc-button  mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                   
+                          <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                          <span class="mdc-button__ripple"></span>
+                          <span class="mdc-button__label" style="margin-left: 10px;"> Regresar al perfil de la empresaria</span>
+                      </a>
                       </div>
 
                     </div>
@@ -225,7 +231,7 @@ const mdcAssignedVars = {};
           'success'
         )
         window.setTimeout(() => { 
-          window.location.replace("/empresas/view/{{ company.id }}/");
+          window.location.replace("/company/view/{{ company.id }}/");
          
         
         }, 1500);

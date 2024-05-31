@@ -65,6 +65,12 @@
                                         <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
                                         <span class="mdc-button__label">Editar Datos</span>
                                     </a>
+                                    <a href="{{ url_for('digitalcenter._company_user_list',company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #67c5d7;" >
+                                                    
+                                        <span class="mdc-button__ripple"></span>
+                                        <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
+                                        <span class="mdc-button__label">Administrar Usuarios</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +95,7 @@
                                     <div class="mdc-tab-scroller__scroll-content">
                                     <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
-                                        <span class="mdc-tab__text-label">Carta de compromiso</span>
+                                        <span class="mdc-tab__text-label">Documentación</span>
                                         </span>
                                         <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                         <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -97,15 +103,7 @@
                                         <span class="mdc-tab__ripple"></span>
                                     </button>
                                     
-                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                        <span class="mdc-tab__content">
-                                        <span class="mdc-tab__text-label">Ficha de inscripción </span>
-                                        </span>
-                                        <span class="mdc-tab-indicator mdc-tab-indicator">
-                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                        </span>
-                                        <span class="mdc-tab__ripple"></span>
-                                    </button>
+                        
                                     <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
                                         <span class="mdc-tab__text-label">Formaciones</span>
@@ -115,15 +113,7 @@
                                         </span>
                                         <span class="mdc-tab__ripple"></span>
                                     </button>
-                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
-                                        <span class="mdc-tab__content">
-                                        <span class="mdc-tab__text-label">Gestión de usuarios</span>
-                                        </span>
-                                        <span class="mdc-tab-indicator mdc-tab-indicator">
-                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                        </span>
-                                        <span class="mdc-tab__ripple"></span>
-                                    </button>
+   
                                     <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
                                         <span class="mdc-tab__text-label">Diagnóstico Inicial</span>
@@ -136,6 +126,24 @@
                                     <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
                                         <span class="mdc-tab__content">
                                         <span class="mdc-tab__text-label">Plan de acción </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Bitácora </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator">
+                                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                        <span class="mdc-tab__text-label">Asesorías puntuales </span>
                                         </span>
                                         <span class="mdc-tab-indicator mdc-tab-indicator">
                                         <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -163,14 +171,14 @@
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            {% if carta %}
+                                            <p>DOCUMENTACIÓN INICIAL</p>
                                             <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
                                                 <thead>
                                                   <tr class="mdc-data-table__header-row">
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DOCUMENTO</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIRMADO ASESORA</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIRMADO POR LA ASESORA</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIRMADO POR LA EMPRESA</th>
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESTADO</th>
                                                   </tr>
@@ -185,6 +193,7 @@
                                                        1
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
+                                                        {% if carta %}
                                                         <a href="{{ url_for('digitalcenter._company_document_form',document_id=carta.id) }}"  class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                     
                                                             <span class="mdc-button__ripple"></span>
@@ -197,9 +206,23 @@
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                                                             <span class="mdc-button__label">Cargar nueva</span>
                                                         </a>
+                                                        {% else %}
+                                                        <a id="btn_generar_carta"  href="#" onclick="generarCartaCompromiso()" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Generar carta de compromiso</span>
+                                                        </a>
+                                                        <a href="{{ url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=5) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                                
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Cargar carta de compromiso ya firmada</span>
+                                                        </a>
+                                                        {% endif %}
                                                     </th>
                                                     <td class="mdc-data-table__cell " scope="row">
-                                                        carta de compromiso
+                                                        CARTA DE COMPROMISO
                                                     </td>
                                                     <td class="mdc-data-table__cell " scope="row">
                                                         {% if carta.signed_innova %}
@@ -226,75 +249,12 @@
                                                         
                                                     </td>
                                                   </tr>
-            
-            
-                                                </tbody>
-                                            </table>
-                                            {% else %}
-                                            <h2>Carta de compromiso no encontrada</h2>
-                                            <p>
-                                                ¿Deseas generar la carta de compromiso?, por favor haz clic en el botón"Generar carta de compromiso".
-                                            </p>
-                                            <div class="s-font-align-center">
-                                                <a id="btn_generar_carta"  href="#" onclick="generarCartaCompromiso()" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Generar carta de compromiso</span>
-                                                </a>
-                                            </div>
-                                                <br>
-                                           
-                                                <p>
-                                                    O puedes cargar la carta de compromiso <b>ya firmada por la empresaria</b>  dando clic en con el botón "Cargar carta de compromiso".
-                                                </p>
-                                                <div class="s-font-align-center">
-                                                    <a href="{{ url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=5) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
-                                                                
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                        <span class="mdc-button__label">Cargar carta de compromiso</span>
-                                                    </a>
-                                                </div>
-
-                                                
-                                              
-                                            {% endif %}
-                                        </div>
-
-                                    </div>                            
-                                </div>
-                    
-                            </div>
-                            <!-- Lista de usuarios  -->
-                            <div class="content content">
-                            
-                                <div class="mdc-layout-grid">
-                                    <div class="mdc-layout-grid__inner">
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            {% if ficha %}
-                                            
-                                            <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
-                                                <thead>
-                                                  <tr class="mdc-data-table__header-row">
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DOCUMENTO</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIRMADO ASESORA</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FIRMADO POR LA EMPRESA</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ESTADO</th>
-                                                  </tr>
-                                                  
-                                                  
-                                                  
-                                                </thead>
-                                                <tbody class="mdc-data-table__content">
-                                                                                         
                                                   <tr class="mdc-data-table__row">
                                                     <th class="mdc-data-table__cell" scope="row">
-                                                       1
+                                                       2
                                                     </th>
                                                     <th class="mdc-data-table__cell" scope="row">
+                                                        {% if ficha %}
                                                         <a href="{{ url_for('digitalcenter._company_document_form',document_id=ficha.id) }}"  class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
                                                     
                                                             <span class="mdc-button__ripple"></span>
@@ -307,9 +267,23 @@
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                                                             <span class="mdc-button__label">Cargar nueva</span>
                                                         </a>
+                                                        {% else %}
+                                                        <a  id="btn_generar_ficha"  href="#" onclick="generarFicha()" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Generar Ficha de inscripción</span>
+                                                        </a>
+                                                        <a href="{{ url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=4) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                                
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Cargar ficha de inscripción ya firmada</span>
+                                                        </a>
+                                                        {% endif %}
                                                     </th>
                                                     <td class="mdc-data-table__cell " scope="row">
-                                                        Ficha de inscripcion
+                                                        FICHA DE INSCRIPCIÓN
                                                     </td>
                                                     <td class="mdc-data-table__cell " scope="row">
                                                         {% if carta.signed_innova %}
@@ -336,84 +310,97 @@
                                                         
                                                     </td>
                                                   </tr>
-            
-            
+                                            
                                                 </tbody>
                                             </table>
-                                            {% else %}
-                                            <h2>Ficha de inscripción no encontrada</h2>
-                                            <p>
-                                                ¿Deseas generar la Ficha de inscripción?, por favor haz clic en el botón "Ficha de inscripción".
-                                            </p>
-                                            <div class="s-font-align-center">
-                                                <a  id="btn_generar_ficha"  href="#" onclick="generarFicha()" class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                                    
+                                            <p>OTRA DOCUMENTACIÓN</p>
+                                            <center>
+                                                <a href="{{ url_for('digitalcenter._company_document_others_add',company_id=company.id) }}"  class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
                                                     <span class="mdc-button__ripple"></span>
                                                     <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Generar Ficha de inscripción</span>
+                                                    <span class="mdc-button__label">Subir otra documentación</span>
                                                 </a>
-                                            </div>
-                                                <br>
-                                           
-                                                <p>
-                                                    O puedes cargar la ficha de inscripción<b> ya firmada por la empresaria</b> da clic en con el botón "Cargar ficha de inscripción".
-                                                </p>
-                                                <div class="s-font-align-center">
-                                                    <a href="{{ url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=4) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
-                                                                
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                        <span class="mdc-button__label">Cargar ficha de inscripción</span>
-                                                    </a>
-                                                </div>
-                                            
-                                                
+                                            </center>
+                                            <br><br>
+                                            <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                                <thead>
+                                                  <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DOCUMENTO</th>
 
-                                                
-                                              
-                                            {% endif %}
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA</th>
+                                                  </tr>
+                                                  
+                                                  
+                                                  
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                    {% for document in documents %}    
+                                                  <tr class="mdc-data-table__row">
+                                                   
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {{ loop.counter }}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        <a href=" {{ url_for('static', filename='upload/') }}{{document.document_local}}" target="_blank"  class="s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Ver documento</span>
+                                                        </a>
+                                                        <a href="#" onclick="alert('en construccion')"  class="mdc-button--color-secondary s-font-align-center mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                            <span class="mdc-button__ripple"></span>
+                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                            <span class="mdc-button__label">Eliminar</span>
+                                                        </a>
+                                                  
+                                                    </th>
+                                                    <td class="mdc-data-table__cell " scope="row">
+                                                        {{ document.documente_type.name  }}
+                                                    </td>
+                                                    <td class="mdc-data-table__cell " scope="row">
+                                                        {{ document.date_created  }}
+                                                        
+                                                    </td>
+                                                   
+                                                  </tr>
+                                                  {% endfor %}
+                                            
+                                                </tbody>
+                                            </table>
                                         </div>
-                                       
-                                    </div>
-                                    
+
+                                    </div>                            
                                 </div>
                     
                             </div>
-                            <!-- Lista de usuarios  -->
+ 
+                            <!-- Lista de Formación  -->
                             <div class="content content">
                             
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            <h2>Formación</h2>
-                                            <p>
-                                                Para matricular a la empresaria en cursos o talleres da clic en "Matricular"
-                                            </p>
-                                            <center>
-                                          
-                                        
-                         
-                                                    <a href="{{ url_for('aulavirtual._curso_enroll',company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
-                                                                
-                                                        <span class="mdc-button__ripple"></span>
-                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                        <span class="mdc-button__label">Matricular</span>
-                                                    </a>
-                                                </center>
-                                            <h2>Lista de cursos</h2>
+                                            <h2>FORMACIÓN</h2>
+
+  
+                                            <h2>LISTA DE CURSOS</h2>
                                             <table class="mdc-data-table__table" aria-label="Dessert calories">
                                                 <thead>
                                                 <tr class="mdc-data-table__header-row">
                                                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
                                                         #
                                                     </th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Nombre de la formación</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tipo de formación</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"> Tipo de modalidad</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Responsable</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicial </th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">NOMBRE DE LA FORMACIÓN</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TIPO DE FORMACIÓN</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">TIPO DE MODALIDAD</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">RESPONSABLE</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA INICIAL </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA FINAL</th>
+                                                
                                              
                                                 </tr>
                                                 
@@ -434,17 +421,7 @@
                                                     <td class="mdc-data-table__cell"> {{ curso.course.course_managers.name }}</td>
                                                     <td class="mdc-data-table__cell"> {{ curso.course.date_scheduled_start.strftime('%Y-%m-%d') }}</td>
                                                     <td class="mdc-data-table__cell"> {{ curso.course.date_scheduled_end.strftime('%Y-%m-%d') }}</td>
-                                                    <td class="mdc-data-table__cell">
-                                            
-                                                        <button id="submitSaveButton"  class="mdc-button mdc-button--raised mdc-button--leading" style="margin-left: 10px;">
-                                                            <span class="mdc-button__ripple"></span>
-                                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
-                                                              >touch_app</i
-                                                            >
-                                                            <span class="mdc-button__label">Agregar fin de curso</span>
-                                                        </button>
 
-                                                    </td>
                                                 </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -455,28 +432,7 @@
                                 </div>
                     
                             </div>
-                            <!-- Lista de usuarios  -->
-                            <div class="content content">
-                            
-                                <div class="mdc-layout-grid">
-                                    <div class="mdc-layout-grid__inner">
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            <h2>Administrar Accesos</h2>
-                                            <p>Para administrar los accesos a la plataforma para esta empresa da clic en el botón </p>
-                                            <div class="s-font-align-center">
-                                                <a href="{{ url_for('digitalcenter._company_user_list',company_id=company.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
-                                                    
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Administrar Usuarios</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                    
-                            </div>
+
                             <!-- Diagnóstico Inicial  -->
                             <div class="content content">
                             
@@ -573,9 +529,7 @@
                                                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                                                                 <div id="curve_chart" style="width: 100%;"></div>
 
-                                                                <div style="width: 100%; background-color: blue;">
-                                                                    rede
-                                                                </div>
+                                                         
                                                             </div>
                                                           
                                             
@@ -599,18 +553,23 @@
                                                                                 </thead>
                                                                                 <tbody class="mdc-data-table__content">
                                                                                                                          
-                                                                                  <tr class="mdc-data-table__row">
-                                                                                    <th class="mdc-data-table__cell" scope="row">
-                                                                                       1
-                                                                                    </th>
-                                                                                    <th class="mdc-data-table__cell" scope="row">
-                                                                                        {{tipo_empresa}}
-                                                                                    </th>
-                                                                                    <td class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
-                                                                                        {{ totaldiagnostico }}
-                                                                                    </td>
-                                                            
-                                                                                  </tr>
+                                                                                    <tr class="mdc-data-table__row">
+                                                                                        {% for resultado in diagnostico %}    
+                                                                                        {% if resultado.id_area == 0  %}
+                                                        
+                                                                                        <th class="mdc-data-table__cell" scope="row">
+                                                                                        1
+                                                                                        </th>
+                                                                                        <th class="mdc-data-table__cell" scope="row">
+                                                                                            {{resultado.descripcion }}
+                                                                                        </th>
+                                                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                                                        
+                                                                                            {{resultado.resultados}} 
+                                                                                        </th>
+                                                                                        {% endif %}
+                                                                                        {% endfor %}
+                                                                                    </tr>
                                             
                                             
                                                                                 </tbody>
@@ -636,7 +595,7 @@
                                         {% else %}
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                                         <div class="s-font-align-center">
-                                            <h2>Diagnóstico empresarial no ha sido encontrado</h2>
+                                            <h2>Diagnóstico empresarial no encontrado</h2>
 
                                             <a style="min-width: 250px;" href="{{ url_for('digitalcenter._company_diagnostic',company_id=company.id) }}" class="s-font-align-center mdc-button--color-secondary  mdc-button mdc-button--raised mdc-button--leading" >
                                                 
@@ -667,26 +626,495 @@
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
-                                            <h2>Plan de acción</h2>
+                                            <h2>PLAN DE ACCIÓN</h2>
                                             <p>
-                                                Crea y administra el plan de acción de la empresaria.
+                                                CREA Y ADMINISTRA EL PLAN DE ACCIÓN DE LA EMPRESARIA.
                                             </p>
-                                            <div class="s-font-align-center">
+                                            {% if diagnostico %} 
+                                            <table class="mdc-data-table__table_normal data_table_buttons_spam"  aria-label="Dessert calories">
+                                                <thead>
+                                                <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CREADO POR  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ÁREA</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">REFERENCIAS</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA INICIO</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA FINAL</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">PROGRESO</th>
+                                                </tr>
                                                 
-
-                                                <a href="{{ url_for('digitalcenter._plan_action_dashboard',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                
+                                                
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="#" onclick="alert('En construcción ')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir comentario</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Diagnóstico
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            N/A
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                
+                                                    </tr>
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="#" onclick="alert('En construcción')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir comentario</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Plan de acción
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            N/A
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                          
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+    
+                                                        </th>
+                                
+                                                    </tr>
+                                                    {% for action in actions %}                                   
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{loop.index}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="#" onclick="alert('En construcción')" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Añadir comentario</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.services.name}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.created_by_user.name}} a las {{ action.date_created }}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.services.catalog_catego.name}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {% if action.employe_assigned %}
+                                                                YA ASIGNADO A  {{ action.employe_assigned_user.name }}
+                                                            {% else %}
+                                                            <select id="txt_user_{{action.id}}">
+                                                                <option value="0">--</option>
+                                                                {% for user in users %}
+                                                                <option value="{{ user.id }}">
+                                                                    {{ user.extra_info.names }}
+                                                                    {{ user.extra_info.last_names}}
+                                                                    
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            <button onclick="referirEmpresaria('{{action.id}}')">
+                                                                Referir
+                                                            </button>
+                                                            {% endif %}
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.progress}}
+    
+                                                        </th>
+                                
+                                                    </tr>
+                                                    {% endfor %}
+            
+                                                </tbody>
+                                            </table>
+                                                {% if actions %}
+                                                <center>
+                                                    <br>
+                                                    <a href="{{ url_for('digitalcenter._plan_action_create',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary">
+                                                        <span class="mdc-button__ripple"></span>
+                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
+                                                        <span class="mdc-button__label">Editar plan de accion</span>
+                                                    </a>
+                                                    <br>
+                                                    <br>
+                                                </center>
                                                     
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                                    <span class="mdc-button__label">Ir al plan de acción</span>
-                                                </a>
+                                                {% else %}
+                                                <div class="s-font-align-center">
+                                                    <h2>Plan de acción no encontrado</h2>
+                                                    <br>
+                                                    <a href="{{ url_for('digitalcenter._plan_action_create',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                        <span class="mdc-button__ripple"></span>
+                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                        <span class="mdc-button__label">Crear plan de acción</span>
+                                                    </a>
+                                                </div>
+                                                {% endif %}
+                                            {% else %}
+                                            <div class="s-font-align-center">
+                                                <h2>Plan de acción no encontrado</h2>
+    
+                                                
                                             </div>
+    
+                                            {% endif %}
                                     </div>
                                     </div>
                                     
                                 </div>
                     
                             </div>
+                           <!-- Lista de bitacoras  -->
+                           <div class="content content">
+                            
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                            <h2>BITÁCORA</h2>
+                                            <p>
+                                                BITÁCORA DE SERVICIOS
+                                            </p>
+                                            {% if diagnostico %} 
+                                            <table class="mdc-data-table__table_normal data_table_buttons_spam"  aria-label="Dessert calories">
+                                                <thead>
+                                                <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">CREADO POR  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ÁREA</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">REFERENCIAS</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA INICIO</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA FINAL</th>
+                                                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">PROGRESO</th>
+                                                </tr>
+                                                
+                                                
+                                                
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="{{ url_for('digitalcenter._plan_action_dianostico_plan',company_uid=company.id,servicio_uid='a2') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Bitácora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Diagnóstico
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            N/A
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+                                                        </th>
+                                
+                                                    </tr>
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="{{ url_for('digitalcenter._plan_action_dianostico_plan',company_uid=company.id,servicio_uid='a3') }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Bitácora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            Plan de acción
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                           
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            N/A
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                          
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                           
+    
+                                                        </th>
+                                
+                                                    </tr>
+                                                    {% for action in actions %}                                   
+                                                    <tr class="mdc-data-table__row">
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{loop.index}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            <a href="{{ url_for('digitalcenter._plan_action_bitacora',user_uid=action.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                <span class="mdc-button__label">Bitácora</span>
+                                                            </a>
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.services.name}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.created_by_user.name}} a las {{ action.date_created }}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {{action.services.catalog_catego.name}}
+                                                        </th>
+                                                        <th class="mdc-data-table__cell" scope="row">
+                                                            {% if action.employe_assigned %}
+                                                                YA ASIGNADO A  {{ action.employe_assigned_user.name }}
+                                                            {% else %}
+                                                            <select id="txt_user_{{action.id}}">
+                                                                <option value="0">--</option>
+                                                                {% for user in users %}
+                                                                <option value="{{ user.id }}">
+                                                                    {{ user.extra_info.names }}
+                                                                    {{ user.extra_info.last_names}}
+                                                                    
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            <button onclick="referirEmpresaria('{{action.id}}')">
+                                                                Referir
+                                                            </button>
+                                                            {% endif %}
+                                                            
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
+    
+                                                        </th>
+                                                        <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                            {{action.progress}}
+    
+                                                        </th>
+                                
+                                                    </tr>
+                                                    {% endfor %}
+            
+                                                </tbody>
+                                            </table>
+                                                {% if actions %}
+                                                <center>
+                                                    <br>
+                                                    <a href="{{ url_for('digitalcenter._plan_action_create',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary">
+                                                        <span class="mdc-button__ripple"></span>
+                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">person</i>
+                                                        <span class="mdc-button__label">Editar plan de accion</span>
+                                                    </a>
+                                                    <br>
+                                                    <br>
+                                                </center>
+                                                    
+                                                {% else %}
+                                                <div class="s-font-align-center">
+                                                    <h2>Plan de acción no encontrado</h2>
+                                                    <br>
+                                                    <a href="{{ url_for('digitalcenter._plan_action_create',user_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                        
+                                                        <span class="mdc-button__ripple"></span>
+                                                        <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                        <span class="mdc-button__label">Crear plan de acción</span>
+                                                    </a>
+                                                </div>
+                                                {% endif %}
+                                            {% else %}
+                                            <div class="s-font-align-center">
+                                                <h2>Bitácora no encontrado</h2>
+    
+                                            </div>
+    
+                                            {% endif %}
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                
+                            </div>
+                             <!-- Lista asesorias puntuales  -->
+                           <div class="content content">
+                            
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                        <h2>ASESORÍAS PUNTUALES</h2>
+                                        <p>
+                                            PUEDES BRINDARLES ASESORÍAS PUNTUALES A LA EMPRESARIA, ESTE CONJUNTO DE ASESORÍAS REPRESENTA UN VALOR DE 500 DOLORES, PARA HABILITAR ESTE SERVICIO, DA CLIC EN "HABILITAR ASESORÍAS PUNTUALES".
+                                            <br>
+                                            <div class="s-font-align-center">
+                                                <a href="{{ url_for('digitalcenter._asesorias_puntuales',company_uid=company.id ) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                    
+                                                    <span class="mdc-button__ripple"></span>
+                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                    <span class="mdc-button__label">Habilitar Asesorías puntuales</span>
+                                                </a>
+                                            </div>
+                                            <br>
+
+                                            <center>
+                                                <table class="mdc-data-table__table_normal" style="width: 100%" aria-label="Dessert calories">
+                                                    <thead>
+                                                    <tr class="mdc-data-table__header-row">
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ACCIONES </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">NOMBRE DE LA ASESORIA  </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO  </th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ÁREA</th>
+                                                      
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA INICIO</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">FECHA FINAL</th>
+                                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">PROGRESO</th>
+                                                    </tr>
+                                                    
+                                                    
+                                                    
+                                                    </thead>
+                                                    <tbody class="mdc-data-table__content">
+                                                        <tr class="mdc-data-table__row">
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                                
+                                                            </th>
+      
+                                                        {% for action in actions_asesorias %}                                   
+                                                        <tr class="mdc-data-table__row">
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                                {{loop.index}}
+                                                            </th>
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                                <a href="{{ url_for('digitalcenter._plan_action_bitacora',user_uid=action.id) }}" class="mdc-button mdc-button--raised mdc-button--leading" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                                            
+                                                                    <span class="mdc-button__ripple"></span>
+                                                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                                                    <span class="mdc-button__label">Añadir historial</span>
+                                                                </a>
+                                                            </th>
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                              
+                                                              
+                                                                {{action.descripcion}}
+                                                            </th>
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                              
+                                                                {{action.services.name}}
+                                                             
+                                                            </th>
+                                                            <th class="mdc-data-table__cell" scope="row">
+                                                                {{action.services.catalog_catego.name}}
+                                                            </th>
+    
+                                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                                {{action.date_scheduled_start.strftime('%Y-%m-%d') }}
+        
+                                                            </th>
+                                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                                {{action.date_scheduled_end.strftime('%Y-%m-%d') }}
+        
+                                                            </th>
+                                                            <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
+                                                                {{action.progress}}
+        
+                                                            </th>
+                                    
+                                                        </tr>
+                                                        {% endfor %}
+                
+                                                    </tbody>
+                                                </table>    
+                                            </center>
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+            
+                        </div>
                             <!-- Encuestas   -->
                             <div class="content content">
                             
@@ -751,15 +1179,15 @@
 
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <h2>Encuestas de las asesorías </h2>
+                                            <h2>ENCUESTAS DE LAS ASESORÍAS </h2>
 
                                             <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
                                                 <thead>
                                                   <tr class="mdc-data-table__header-row">
                                                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Evaluacion</th>
-                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">SERVICIO  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">EVALUACIÓN</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
                                                   </tr>
                                                   
                                                   
@@ -846,16 +1274,47 @@
     
         var options = {
         title: 'RESULTADOS POR CATEGORIA',
-        curveType: 'function',
-        width: '1200',
-        width_units: '%',
-      height: '500',
-      responsive: true,
-        };
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        width: 1200,
+        height: 500,
+        responsive: true,
+        pointSize: 5,
+        dataOpacity: 0.8,
+        titleTextStyle: {
+            fontSize: 18  // Tamaño de la letra para el título del gráfico
+        },
+        hAxis: {
+            title: 'Áreas',
+            textStyle: {
+                fontSize: 10  // Tamaño de la letra para las etiquetas del eje horizontal
+            },
+            titleTextStyle: {
+                fontSize: 14  // Tamaño de la letra para el título del eje horizontal
+            },            slantedText: true,  // Permitir texto inclinado
+            slantedTextAngle: 45  // Ángulo de inclinación del texto
+            
+        },
+        vAxis: {
+            title: 'Valores',
+            textStyle: {
+                fontSize: 12  // Tamaño de la letra para las etiquetas del eje vertical
+            },
+            titleTextStyle: {
+                fontSize: 14  // Tamaño de la letra para el título del eje vertical
+            },
+            viewWindow: {
+                min: 0  // Ajusta el valor mínimo del eje Y
+            }
+        },
+        legend: {
+            textStyle: {
+                fontSize: 12  // Tamaño de la letra para la leyenda
+            }
+        }
+    };
 
-        chart.draw(data, options);
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+    chart.draw(data, options);
     }
     </script>
 

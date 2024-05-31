@@ -1868,7 +1868,7 @@ def _company_dashboard(user_uid):
     ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
     ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
     diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
-    actions = ActionPlan.query.filter_by(company_id=company.id,cancelled=False).all()
+
     if diagnos:
         diagnostico = diagnos.resultados
     else:
@@ -1883,7 +1883,23 @@ def _company_dashboard(user_uid):
         encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=2).first()
         if not encuesta:
             impacto = True
-    actions = ActionPlan.query.join(CatalogServices, ActionPlan.services_id==CatalogServices.id).filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).order_by(asc(ActionPlan.date_scheduled_start)).all()
+    actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    actions_asesorias = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.espuntal==True).all()
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(or_(UserXRole.user_role_id == 3, UserXRole.user_role_id == 4)).\
+            filter(not_(User.id.in_([152, 144]))).all()
+    # Lista de identificadores cortos de tipo de documento
+    document_type_ids = [1, 2, 3, 4]
+
+    # Consulta para obtener los DocumentCompany que coinciden con los criterios
+    documents = DocumentCompany.query.join(CatalogIDDocumentTypes).filter(
+        DocumentCompany.company_id == company.id,
+        CatalogIDDocumentTypes.name_short.in_(document_type_ids),
+        DocumentCompany.enabled == True
+    ).order_by(CatalogIDDocumentTypes.name_short.asc()).all()
     context = {
         'enrolls':enrolls,
         'carta':carta,
@@ -1893,7 +1909,10 @@ def _company_dashboard(user_uid):
         "diagnostico":diagnostico,
         "diagnos":diagnos,
         "satisfaccion":satisfaccion,
-        "impacto":impacto
+        "impacto":impacto,
+        "actions_asesorias":actions_asesorias,
+        "users":users,
+        "documents":documents
 
     }
  
@@ -3056,3 +3075,58 @@ def _company_diagnostic(company_id):
         'legalizacion':legalizacion
     }
     return render_template('digitalcenter/company_diagnostic.html',**context)
+
+
+@digitalcenter.route('/formulario/documentos/<int:company_id>/add/other/',methods = ['GET', 'POST'])
+@login_required
+def _company_document_others_add(company_id):
+    company = Company.query.filter_by(id=company_id).first()
+
+    document_type = document_type = CatalogIDDocumentTypes.query.filter(
+                            CatalogIDDocumentTypes.name_short.in_([1, 2, 3, 4])
+                        ).order_by(CatalogIDDocumentTypes.name_short.asc()).all()
+
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'upload-carta' not in request.files:
+            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id,document_id=document_type.id))
+        
+        file = request.files['upload-carta']
+        txt_document_id = request.form['txt_document_id']
+
+        #buscamos el tipo de documento
+        document_type = CatalogIDDocumentTypes.query.filter_by(id=txt_document_id).first() 
+        document = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=document_type.id,enabled = True).first()
+
+        n = 1
+        if document:
+            document.enabled = False
+            n = document.id
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            documentoName = str(company.dni) + ' ' + str(document_type.name) + '-' + str(n)
+            filename =  documentoName.replace(" ", "_") +'.'+ filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            carta = DocumentCompany()
+            carta.company_id = company.id
+            carta.documente_type_id = document_type.id
+            carta.complete = True
+            carta.signed = True
+            carta.signed_innova = True
+            carta.enabled = True
+            carta.document_local = filename
+            carta.created_by = current_user.id
+            if document:
+                db.session.add(document)
+            db.session.add(carta)
+            db.session.commit()
+            return redirect(url_for('digitalcenter._company_dashboard',user_uid=company.id))
+
+    context = {
+        "company": company,
+        "document_type":document_type
+    }
+    return render_template('company_document_others_add.html',**context)
+

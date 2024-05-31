@@ -290,7 +290,7 @@ class CatalogIDDocumentTypes(db.Model):
     name_short = db.Column(db.String(6), unique=True, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     length = db.Column(db.Integer, unique=False, nullable=True)
-
+    date_created = db.Column(db.DateTime, nullable=True, default=dt.now(default_timezone))
     def __repr__(self):
         return jsonify(
             id = self.id,
