@@ -882,6 +882,9 @@ class ActionPlan(db.Model):
     fase = db.Column(db.Integer, unique=False, nullable=True, default=0)
     version = db.Column(db.Integer, unique=False, nullable=True, default=0)
     descripcion = db.Column(db.Text, nullable=True)
+    comment = db.Column(db.Text, nullable=True)
+    comment_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    comment_by_user = db.relationship('User', foreign_keys=[comment_by])
     # Define si es una asesoria es puntual
     espuntal = db.Column(db.Boolean, nullable=True, default=False)
     puntuacion = db.Column(db.FLOAT, unique=False, nullable=True, default=0)

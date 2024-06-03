@@ -2003,7 +2003,25 @@ def _d_delete_ActionPlan():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
-
+@api.route('/api/save/action/add/comment', methods = ['POST'])
+@login_required
+def _d_comment_ActionPlan():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            actionPlan = request.json['actionPlan']
+            comment = request.json['comment']  
+            actionplan = ActionPlan.query.filter_by(id = actionPlan).first()
+            actionplan.comment_by = current_user.id
+            actionplan.comment = comment
+            db.session.add(actionplan)
+            db.session.commit()
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+    
 @api.route('/api/save/courses/', methods = ['POST'])
 # @login_required
 def _d_save_curso():

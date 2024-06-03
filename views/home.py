@@ -428,7 +428,7 @@ def _home():
             Appointments.cancelled == False
             ).order_by(Appointments.date_scheduled.asc()).all()
             context = {'appointments':appointments}
-            if current_user.id in (3, 24):
+            if current_user.id in (3, 24,25):
                 return render_template('home_dashboard_admin_1.html',**context)
             else:
                 return render_template('home_dashboard_admin.html',**context)
