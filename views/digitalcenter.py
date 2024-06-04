@@ -1956,6 +1956,7 @@ def _plan_action_bitacora(user_uid):
     history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
     lista = ['MT1','MT2']
     modalidad = ModalityType.query.filter(ModalityType.name_short.in_(lista)).all()
+
     context = {
         'action': action,
         'history':history,
@@ -3129,4 +3130,63 @@ def _company_document_others_add(company_id):
         "document_type":document_type
     }
     return render_template('company_document_others_add.html',**context)
+
+
+@digitalcenter.route('/gpeg/search/attentions',methods=['GET', 'POST'])
+@login_required
+def _gpeg_search_attentions():
+    filtro = False
+    if request.method == 'POST':
+        start_date = request.form.get('txt_start_date')
+        end_date = request.form.get('txt_end_date')
+
+        filtro = True
+    else:
+        # Definir las fechas de inicio y fin
+        start_date = datetime.now() - timedelta(days=30)
+        end_date =datetime.now()
+        current_date = datetime.now()
+    app.logger.debug('** SWING_CMS ** -  appointments_create') 
+
+    app.logger.debug('** SWING_CMS ** - Home Dashboard')
+ 
+    actions = ActionPlan.query.join(Company).filter(Company.enabled ==False,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+
+
+
+    # Execute the three queries and store results in sets
+    companies_history_set = set(
+        company for company in Company.query.join(ActionPlan, ActionPlan.company_id == Company.id)
+                            .join(ActionPlanHistory, ActionPlanHistory.action_plan_id == ActionPlan.id)
+                            .filter(ActionPlanHistory.date_created >= start_date,
+                                    ActionPlanHistory.date_created < end_date)
+                            .distinct()
+    )
+
+    companies_action_plan_set = set(
+        company for company in Company.query.filter(Company.date_action_plan >= start_date,
+                                                    Company.date_action_plan < end_date)
+    )
+
+    companies_diagnosis_set = set(
+        company for company in Company.query.join(DiagnosisCompany)
+                            .filter(DiagnosisCompany.date_created >= start_date,
+                                    DiagnosisCompany.date_created < end_date)
+                            .distinct()
+    )
+
+    # Combine the results using set union
+    all_companies_set = companies_history_set.union(companies_action_plan_set).union(companies_diagnosis_set)
+
+    # Apply distinct to eliminate duplicates even when present in multiple sets
+    all_companies_set = all_companies_set.union({company for company in all_companies_set if company not in all_companies_set})
+
+    # Option 2: Iterate directly over the set if you only need to access the companies
+    for company in all_companies_set:
+        print(company.name)  # Or access other company attributes
+
+
+    context = {'all_companies_set':all_companies_set, 'start_date':start_date,'end_date':end_date}  
+    return render_template('gpeg_search_attentions.html',**context)
+
 
