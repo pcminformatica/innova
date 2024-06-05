@@ -1415,10 +1415,20 @@ def _plan_action_dashboard(user_uid):
     }
  
     return render_template('plan_action_dashboard.html',**context)
-
-
+from functools import wraps
+from flask import make_response
+def nocache(view):
+    @wraps(view)
+    def no_cache(*args, **kwargs):
+        response = make_response(view(*args, **kwargs))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+    return no_cache
 @digitalcenter.route('/empresas/',methods=['GET', 'POST'])
 @login_required
+@nocache
 def _company_monitoring_list():
     app.logger.debug('** SWING_CMS ** - ------------------')
     #diagnosis = DiagnosisCompany.query.filter_by(created_by=current_user.id)
@@ -1457,9 +1467,11 @@ def _company_monitoring_list():
                 .order_by(asc(Company.date_created))\
                 .all()
             for company_data in company:
-                if company_data.action_plan_progress is not None:
+                actions = ActionPlan.query.filter(ActionPlan.company_id==company_data.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+                if company_data.action_plan_progress is not None and actions:
                 # Calcula la categoría según el valor de action_plan_progress
-                    if company_data.action_plan_progress:
+                    
+                    if company_data.action_plan_progress :
                         category_start = int(company_data.action_plan_progress // 20) * 20
                         category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
                     else:
@@ -1537,7 +1549,9 @@ def _company_monitoring_list():
         for company_data in company:
             if company_data.action_plan_progress is not None:
             # Calcula la categoría según el valor de action_plan_progress
-                if company_data.action_plan_progress:
+                actions = ActionPlan.query.filter(ActionPlan.company_id==company_data.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+                if company_data.action_plan_progress and actions:
+
                     category_start = int(company_data.action_plan_progress // 20) * 20
                     category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
                 else:
@@ -2546,6 +2560,9 @@ def _init_stage_company():
             else:
                 status = CompanyStatus.query.filter_by(name_short='6').first()
                 company.status_id = status.id
+        else:
+            status = CompanyStage.query.filter_by(name_short='E1').first()
+            update.stage_id = status.id
 
         db.session.add(update)
         db.session.commit()
@@ -2565,7 +2582,7 @@ def _init_stage_company32():
         .filter(
             Company.stage_id == status.id,
             Company.enabled == True,
-            CompanyStatus.name_short.in_(['1', '2', '3'])  # Accede al atributo name_short de CompanyStatus
+            CompanyStatus.name_short.in_(['1', '2', '3','6'])  # Accede al atributo name_short de CompanyStatus
         )
         .all()
     )
@@ -2610,7 +2627,7 @@ def _init_stage_company3():
         .filter(
             Company.stage_id == status.id,
             Company.enabled == True,
-            CompanyStatus.name_short.in_(['1', '2', '3'])  # Accede al atributo name_short de CompanyStatus
+            CompanyStatus.name_short.in_(['1', '2', '3','6'])  # Accede al atributo name_short de CompanyStatus
         )
         .all()
     )
