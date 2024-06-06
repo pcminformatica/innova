@@ -112,7 +112,7 @@
 
 <div id="modal1_sde" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <span class="close" onclick="closeModal('modal1_sde')">&times;</span>
         <!-- Contenido específico para modal1 -->
                 <!-- Tu contenido aquí -->
         <div class="mdc-layout-grid container">
@@ -912,10 +912,12 @@
 }
 
 function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
 }
 
 // Cierra el modal si el usuario hace clic fuera de él
