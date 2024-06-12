@@ -1,0 +1,469 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+.hidden {
+    display: none;
+}
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.material-design-file {
+    display: inline-block;
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.material-design-file:hover {
+    background-color: #1976D2;
+}
+
+</style>
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+
+
+                        
+                  
+                
+                        <br><br>
+                       
+                            <center>
+                              <a id="nonebitacora"  href="#" onclick="nonebitacora()" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                        
+                                <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__label" style="margin-left: 10px;"> Ocultar formulario</span>
+                             </a>
+
+                              <a  href="{{ url_for('digitalcenter._company_dashboard',user_uid=action.company_id) }}" onclick="" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: purple;margin-left: 10px;">
+                                        
+                                <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__label" style="margin-left: 10px;"> Regresar al perfil de empresaria</span>
+                              </a>
+                            </center>
+                            <br><br>
+                          <div id="formbitacora">
+                            <div class="mdc-card__primary-action" >
+                              <div class="mdc-card__media mdc-card__media--square">
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+      
+                                          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
+                                          mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
+                                          <h2>
+                                            Bitácora
+                                          </h2>
+                                                <div class="mdc-typography--body1">
+                                                    Servicio:
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                        
+                                                    <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                    
+                                                        <input id="txt_company_name" value="{{ action.services.name }}" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" readonly>
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="mdc-typography--body1">
+                                                  Modalidad:
+                                                </div>
+                                                <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_modality" data-assigned-var>
+                                                  <div class="mdc-select__anchor"
+                                                      role="button"
+                                                      aria-haspopup="listbox"
+                                                      aria-expanded="false"
+                                                      aria-labelledby="demo-label demo-selected-text">
+                                                    <span class="mdc-select__ripple"></span>
+                                                    <span id="demo-label" class="mdc-floating-label">Modalidad</span>
+                                                    <span class="mdc-select__selected-text-container">
+                                                      <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                                    </span>
+                                                    <span class="mdc-select__dropdown-icon">
+                                                      <svg
+                                                          class="mdc-select__dropdown-icon-graphic"
+                                                          viewBox="7 10 10 5" focusable="false">
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-inactive"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 10 12 15 17 10">
+                                                        </polygon>
+                                                        <polygon
+                                                            class="mdc-select__dropdown-icon-active"
+                                                            stroke="none"
+                                                            fill-rule="evenodd"
+                                                            points="7 15 12 10 17 15">
+                                                        </polygon>
+                                                      </svg>
+                                                    </span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                  </div>
+                                                
+                                                  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                                    <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                            {% for modalidad in modalidad %}
+                                                              <li class="mdc-deprecated-list-item " aria-selected="false" data-value="{{ modalidad.name_short }}" role="option">
+                                                                  <span class="mdc-deprecated-list-item__ripple"></span>
+                                                                  <span class="mdc-deprecated-list-item__text">
+                                                                  {{ modalidad.name }}
+                                                                  </span>
+                                                              </li>
+                                                            {% endfor %}
+                                              
+                                                    </ul>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-typography--body1">
+                                                  Fecha:
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                        
+                                                    <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                    
+                                                        <input id="txt_fecha"  class="mdc-text-field__input" type="date" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <div class="mdc-typography--body1">
+                                                    Horas de asesoría:
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                        
+                                                    <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                    
+                                                        <input id="txt_hora"  class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" >
+                                                        <span lass="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                                
+                                                <p>
+                                                    URL (opcional):
+                                                </p>
+                                                <label class="mdc-text-field mdc-text-field--outlined">
+                                                  <span class="mdc-notched-outline">
+                                                    <span class="mdc-notched-outline__leading"></span>
+                                                    <span class="mdc-notched-outline__notch">
+                                                      <span class="mdc-floating-label" id="my-label-id">URL (opcional)</span>
+                                                    </span>
+                                                    <span class="mdc-notched-outline__trailing"></span>
+                                                  </span>
+                                                  <input id="txt_url" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="">
+                                                </label>
+                                                <br>
+                                                <p>
+                                                  Archivo (opcional):
+                                                </p>
+                                                <input type="file" id="fileInput" name="fileInput" class="inputfile" onchange="updateFileName()">
+                                                <label for="fileInput" class="material-design-file">
+                                                    <i class="fas fa-plus"></i>
+                                                    <span id="fileName">Seleccionar archivo</span>
+                                                </label>
+                                  
+                                  
+                                  
+                                
+                                                <br><br>
+                                                <label class="mdc-text-field mdc-text-field--outlined">
+                                                  <span class="mdc-notched-outline">
+                                                    <span class="mdc-notched-outline__leading"></span>
+                                                    <span class="mdc-notched-outline__notch">
+                                                      <span class="mdc-floating-label" id="my-label-id">Porcentaje de avance</span>
+                                                    </span>
+                                                    <span class="mdc-notched-outline__trailing"></span>
+                                                  </span>
+                                                  <input id="txt_porcentaje" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" min="0" max="100" value="0">
+                                                </label>
+                                                <br><br>
+                                                <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--with-internal-counter">
+                                                  <span class="mdc-notched-outline">
+                                                    <span class="mdc-notched-outline__leading"></span>
+                                                    <span class="mdc-notched-outline__notch">
+                                                      <span class="mdc-floating-label" id="my-label-id">Comentario</span>
+                                                    </span>
+                                                    <span class="mdc-notched-outline__trailing"></span>
+                                                  </span>
+                                                  <span class="mdc-text-field__resizer">
+                                                    <textarea id="txt_comentario" class="mdc-text-field__input" aria-labelledby="my-label-id" rows="8" cols="40" maxlength="500"></textarea>
+                                                    <span class="mdc-text-field-character-counter">0 / 500</span>
+                                                  </span>
+                                                </label>
+                                                <br><br>
+                                                <div class="mdc-form-field">
+                                                  <div class="mdc-checkbox">
+                                                    <input type="checkbox"
+                                                          class="mdc-checkbox__native-control"
+                                                          id="checkbox-Finalizo"/>
+                                                    <div class="mdc-checkbox__background">
+                                                      <svg class="mdc-checkbox__checkmark"
+                                                          viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                      </svg>
+                                                      <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                    <div class="mdc-checkbox__ripple"></div>
+                                                  </div>
+                                                  <label for="checkbox-1">Finalizo completamente</label>
+                                                </div>
+                                  
+      
+                                          </div>
+                                        
+                                        </div>
+                                      </div>
+                                </div>
+                              </div>
+                                <!-- ... additional primary action content ... -->
+                              <div class="mdc-card__ripple"></div>
+                              </div>
+                         
+                                  <center>
+                                  <a  href="#" onclick="saveResumenAtencion()" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: #25D366;margin-left: 10px;">
+                                            
+                                      <span class="mdc-fab__icon fa fa-check" aria-hidden="true"></span>
+                                      <span class="mdc-button__ripple"></span>
+                                      <span class="mdc-button__label" style="margin-left: 10px;"> Enviar</span>
+                                  </a>
+                                </center>
+                                <br>
+                          </div>
+                  </div>
+              </div>
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+
+                        
+                        <br>
+                        <div  class="mdc-data-table" style="background-color: white;width: 100%;" >
+                          <center>
+                            <div class="mdc-typography--headline5 s-font-color-secondary">Historial de bitácora</div>
+                            <br>
+                            <div class="mdc-data-table__table-container">
+                              <table id="tbl_plan_1" class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                <thead>
+                                  <tr class="mdc-data-table__header-row">
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">N.</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Horas de asesoría</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Modalidad</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">URL</th>
+                                   
+                                    
+
+
+                                  </tr>
+                                  
+                                  
+                                  
+                                </thead>
+                                <tbody id="tablaPlan_1" class="mdc-data-table__content">
+                                  {% if history %}
+                                  {% for apix in history %}
+                                
+                                  
+        
+                                    <tr class="mdc-data-table__row">
+                                      <th class="mdc-data-table__cell" scope="row">
+                                          {{loop.index}}
+                                      </th>
+                                      <th class="mdc-data-table__cell" scope="row">
+                                        <p>
+                                          {{ apix.description }}
+                                        </p>
+                                      </th>
+
+                                  
+                                      <td class="mdc-data-table__cell no-print">
+                                        Porcentaje de avance: {{ apix.progress  }}%
+                                      </td>
+                                      <td class="mdc-data-table__cell no-print">
+                                        {{ apix.date_created.strftime('%Y-%m-%d')  }}
+                                      </td>
+                                      <td class="mdc-data-table__cell no-print">
+                                        {{ apix.advisory_time  }}
+                                      </td>
+                                      <td class="mdc-data-table__cell no-print">
+                                        {% if apix.modality_type  %}
+                                        {{ apix.modality_type.name  }}
+                                        {% endif %}
+                                      </td>
+                                      <td class="mdc-data-table__cell no-print">
+                                        {% if apix.url  %}
+                                        <a target="_blank" href="{{ apix.url }}" class="mdc-button mdc-button--raised mdc-button--leading" >
+                                                  
+                                          <span class="mdc-button__ripple"></span>
+                                          <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                          <span class="mdc-button__label">Ver URL</span>
+                                        </a>
+                                        {% endif %}
+                                      
+                                        {% if apix.documento  %}
+                                        
+                                        <a target="_blank" href="{{ url_for('static', filename='upload/') }}{{ apix.documento }}" class="mdc-button mdc-button--raised mdc-button--leading" style="background-color: gray;">
+                                                  
+                                          <span class="mdc-button__ripple"></span>
+                                          <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                          <span class="mdc-button__label">Ver documento</span>
+                                        </a>
+                                        {% endif %}
+                                      </td>
+
+                                    </tr>
+                                  
+                                  {% endfor %}
+                                  {% endif %}
+                                </tbody>
+                              </table>
+                            </div>
+                          </center>
+        
+
+                
+                          
+                        </div>
+
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+     
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/miperfil.js') }}"></script>
+
+<script>
+  const mdcAssignedVars = {};
+
+  document.getElementById("formbitacora").classList.add("hidden");
+  document.getElementById("nonebitacora").classList.add("hidden");
+    function addbitacora(){
+
+      document.getElementById("formbitacora").classList.remove("hidden");
+      document.getElementById("nonebitacora").classList.remove("hidden");
+      document.getElementById("addbitacora").classList.add("hidden");
+    }
+    function nonebitacora(){
+
+      document.getElementById("formbitacora").classList.add("hidden");
+      document.getElementById("nonebitacora").classList.add("hidden");
+      document.getElementById("addbitacora").classList.remove("hidden");
+    }
+    function saveResumenAtencion()
+    {
+        const Swal = swcms.returnSwal()
+        swcms.mdcSelects.forEach((sel) => {
+          if (sel.assignedVar)
+              mdcAssignedVars[sel.assignedVar] = sel;
+        });
+        var txt_porcentaje = document.getElementById("txt_porcentaje").value.trim() || null
+        var txt_comentario = document.getElementById("txt_comentario").value.trim() || null
+        var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
+        var txt_url = document.getElementById("txt_url").value.trim() || null
+        var txt_hora = document.getElementById("txt_hora").value.trim() || null
+        const fileInput = document.getElementById('fileInput').files[0];
+
+        var txt_finalizo =  document.getElementById('checkbox-Finalizo')
+        var txt_servicios = "{{ action.id }}"
+        if(txt_porcentaje<=0 || txt_porcentaje>=101){
+            alert("Por favor elija un porcentaje de avance correcto")
+            return false
+        }else if (txt_comentario=="") {
+            alert("Por favor escriba un comentario")
+            return false
+        }else if(txt_fecha==null){
+          alert("Seleccione la fecha")
+          return false
+        }
+  
+        txt_finalizo= txt_finalizo.checked
+   
+        const formData = new FormData();
+        formData.append('txt_comentario', txt_comentario);
+        formData.append('txt_finalizo', txt_finalizo);
+        formData.append('txt_porcentaje', txt_porcentaje);
+        formData.append('txt_servicios', txt_servicios);
+        formData.append('txt_fecha', txt_fecha);
+        formData.append('txt_url', txt_url);
+        formData.append('txt_hora', txt_hora);
+        formData.append('txt_modality', mdcAssignedVars['txt_modality'].value.trim() || null);
+        formData.append('fileInput', fileInput);
+
+        
+      console.log(formData)
+
+      let apiUrl = '/api/save/action/plan/history/';
+      //document.getElementById('submitSaveButton').disabled = true;
+
+        fetch(apiUrl, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+            if (data.status == 200){
+                Swal.fire(
+                    'Éxito',
+                    'Historial de plan de acción!',
+                    'success'
+                  )
+                  window.setTimeout(() => { window.location.reload(); }, 1500);
+            }
+        })
+        .catch(error => {
+            console.error('Error al enviar los datos:', error);
+        });
+    }
+
+    function updateFileName() {
+    const input = document.getElementById('fileInput');
+    const label = document.getElementById('fileName');
+    if (input.files.length > 0) {
+        label.textContent = input.files[0].name;
+    } else {
+        label.textContent = 'Seleccionar archivo';
+    }
+}
+</script>
+{% endblock %}

@@ -1932,6 +1932,73 @@ def _company_dashboard(user_uid):
  
     return render_template('company_dashboard.html',**context)
 
+
+@digitalcenter.route('/companys/views/<int:user_uid>/gee/',methods=['GET', 'POST'])
+@login_required
+def _company_dashboard_gee(user_uid):
+    app.logger.debug('** _company_dashboard ** - ------------------')
+
+    company = Company.query.filter_by(id=user_uid).first()
+    
+
+    #buscamos la carta de compromiso DOC2
+    carta = CatalogIDDocumentTypes.query.filter_by(name_short='DOC2').first()
+    carta = DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=carta.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
+    #buscamos la ficha de inscripcion DOC1
+    ficha = CatalogIDDocumentTypes.query.filter_by(name_short='DOC1').first()
+    ficha =  DocumentCompany.query.filter_by(company_id=company.id,documente_type_id=ficha.id,enabled=True).order_by(DocumentCompany.id.desc()).first()
+    diagnos = DiagnosisCompany.query.filter_by(company_id=company.id,status=True).order_by(asc(DiagnosisCompany.date_created)).first()
+
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    enrolls = EnrollmentRecord.query.filter_by(company_id=company.id).all()
+    satisfaccion = False
+    impacto = False
+    if company.action_plan_progress == 100:
+        encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=1).first()
+        if not encuesta:
+            satisfaccion = True
+        encuesta = surveys_sde.query.filter_by(company_id=company.id,catalog_surveys_id=2).first()
+        if not encuesta:
+            impacto = True
+    actions = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+    actions_asesorias = ActionPlan.query.filter(ActionPlan.company_id==company.id,ActionPlan.espuntal==True).all()
+    if diagnos:
+        diagnostico = diagnos.resultados
+    else:
+        diagnostico = False
+    users = User.query.join(UserXRole, User.id==UserXRole.user_id).filter(or_(UserXRole.user_role_id == 3, UserXRole.user_role_id == 4)).\
+            filter(not_(User.id.in_([152, 144]))).all()
+    # Lista de identificadores cortos de tipo de documento
+    document_type_ids = [1, 2, 3, 4]
+
+    # Consulta para obtener los DocumentCompany que coinciden con los criterios
+    documents = DocumentCompany.query.join(CatalogIDDocumentTypes).filter(
+        DocumentCompany.company_id == company.id,
+        CatalogIDDocumentTypes.name_short.in_(document_type_ids),
+        DocumentCompany.enabled == True
+    ).order_by(CatalogIDDocumentTypes.name_short.asc()).all()
+    context = {
+        'enrolls':enrolls,
+        'carta':carta,
+        'ficha':ficha,
+        'company': company,
+        'actions':actions,
+        "diagnostico":diagnostico,
+        "diagnos":diagnos,
+        "satisfaccion":satisfaccion,
+        "impacto":impacto,
+        "actions_asesorias":actions_asesorias,
+        "users":users,
+        "documents":documents
+
+    }
+ 
+    return render_template('company_dashboard_gee.html',**context)
+
+
 @digitalcenter.route('/company/reference/view/<int:user_uid>/',methods=['GET', 'POST'])
 @login_required
 def _company_dashboard_action_plan_references(user_uid):
@@ -1978,6 +2045,20 @@ def _plan_action_bitacora(user_uid):
     }
     return render_template('plan_action_bitacora.html',**context)
 
+@digitalcenter.route('/empresas/bitacora/view/<int:user_uid>/',methods=['GET', 'POST'])
+@login_required
+def _plan_action_bitacora_view(user_uid):
+    action = ActionPlan.query.filter_by(id=user_uid).first()
+    history = ActionPlanHistory.query.filter_by(action_plan_id=action.id)
+    lista = ['MT1','MT2']
+    modalidad = ModalityType.query.filter(ModalityType.name_short.in_(lista)).all()
+
+    context = {
+        'action': action,
+        'history':history,
+        'modalidad':modalidad
+    }
+    return render_template('plan_action_bitacora_view.html',**context)
 
 @digitalcenter.route('/empresas/resumen/update/<int:user_uid>/',methods=['GET', 'POST'])
 @login_required
