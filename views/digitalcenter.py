@@ -1306,6 +1306,10 @@ def _datos_describe_v1():
 def _registros_im():
     return render_template('registro_im.html')
 
+@digitalcenter.route('/encuesta/im/v1',methods=['GET', 'POST'])
+def _encuesta_verificacion():
+    return render_template('encuesta_verificacion.html')
+
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
 @login_required
 def _diagnosis_dashboard(user_uid):
