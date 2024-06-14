@@ -636,7 +636,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body-2">
-                                                    B. 1 RESULTADOS DE IMPACTO ECONÓMICO
+                                                    B.1 RESULTADOS DE IMPACTO ECONÓMICO
                                                 </div>
                                             </div>
 
@@ -666,7 +666,9 @@ padding-top: 10px;
                                                     </div>
                                                     <label for="tecnologia_no">NO</label>
                                                 </div>
-
+                                                <div class="mdc-typography--body1">
+                                                    Si es no pasar a la pregunta 4
+                                                </div>
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
@@ -857,7 +859,42 @@ padding-top: 10px;
                                                     </div>
                                                     <label for="herramientas_7">G) WhatsApp</label>
                                                 </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Página web" name="chk_herramientas" id="herramientas_8">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                    </div>
+                                                    <label for="herramientas_8">H) Página web</label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Otros" name="chk_herramientas" id="herramientas_9" onclick="toggleEspecifiqueInput()">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                    </div>
+                                                    <label for="herramientas_9">I) Otros:</label>
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone" id="especifique_herramientas" style="display: none;">
+                                                    <label class="mdc-text-field mdc-text-field--filled">
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_herramientas" id="txt_otros_herramientas" placeholder="Especifique otras herramientas">
+                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
+                                                        <span class="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
                                             </div>
+                                            
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>4.</b> ¿Por qué considera que NO ha aumentado el uso de tecnología en su empresa?
@@ -909,7 +946,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>5.</b> ¿Su empresa ha generado nuevos empleos permanentes (formales) en los últimos seis (6) meses?
+                                                    <b>5.</b> ¿Su empresa ha generado nuevos <b>EMPLEOS PERMANENTES</b> (formales) en los últimos seis (6) meses?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
@@ -972,73 +1009,86 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+
+                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>7.</b> ¿Por qué razón NO ha generado nuevos empleos permanentes (formales) en los últimos seis (6) meses?
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Baja demanda de los productos o servicios que ofrece la empresa." name="txt_no_empleos" id="no_empleos_1">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Baja demanda de los productos o servicios que ofrece la empresa." name="chk_no_empleos" id="no_empleos_1">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_1">A) Baja demanda de los productos o servicios que ofrece la empresa.</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Maximizar la eficiencia y productividad del personal actual" name="txt_no_empleos" id="no_empleos_2">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Prefiero maximizar la eficiencia y productividad del personal actual" name="chk_no_empleos" id="no_empleos_2">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
-                                                    <label for="no_empleos_2">B) Maximizar la eficiencia y productividad del personal actual</label>
+                                                    <label for="no_empleos_2">B) Prefiero maximizar la eficiencia y productividad del personal actual</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="La incertidumbre económica en el país" name="txt_no_empleos" id="no_empleos_3">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="La incertidumbre económica en el país" name="chk_no_empleos" id="no_empleos_3">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_3">C) La incertidumbre económica en el país</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Falta de seguridad ciudadana en el lugar donde funciona el negocio." name="txt_no_empleos" id="no_empleos_4">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Falta de seguridad ciudadana en el lugar donde funciona el negocio." name="chk_no_empleos" id="no_empleos_4">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_4">D) Falta de seguridad ciudadana en el lugar donde funciona el negocio.</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Ha contratado los servicios externos" name="txt_no_empleos" id="no_empleos_5">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Ha contratado los servicios externos" name="chk_no_empleos" id="no_empleos_5">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_5">E) Ha contratado los servicios externos</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_no_empleos" id="no_empleos_6" onclick="showOtrosNoEmpleos()">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Otros" name="chk_no_empleos" id="no_empleos_6" onclick="toggleOtrosNoEmpleos()">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_6">F) Otros:</label>
                                                 </div>
@@ -1048,15 +1098,15 @@ padding-top: 10px;
                                                     </div>
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_no_empleos" placeholder="Especifique">
+                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_no_empleos" id="txt_otros_no_empleos" placeholder="Especifique">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                            </div>   
+                                            </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>8.</b> ¿Su empresa ha generado nuevos empleos temporales (no formales) en los últimos seis (6) meses?
+                                                    <b>8.</b> ¿Su empresa ha generado nuevos <b> EMPLEOS TEMPORALES</b> (no formales) en los últimos seis (6) meses?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
@@ -1121,71 +1171,83 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>10.</b>  ¿Por qué considera que NO ha generado nuevos empleos temporales (no formales) en los últimos seis (6) meses?
+                                                    <b>10.</b> ¿Por qué considera que NO ha generado nuevos empleos temporales (no formales) en los últimos seis (6) meses? 
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Baja demanda de los productos o servicios que ofrece la empresa." name="txt_no_empleos_temporales" id="no_empleos_temporales_1">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Baja demanda de los productos o servicios que ofrece la empresa." name="chk_no_empleos_temporales" id="no_empleos_temporales_1">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_temporales_1">A) Baja demanda de los productos o servicios que ofrece la empresa.</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Maximizar la eficiencia y productividad del personal actual" name="txt_no_empleos_temporales" id="no_empleos_temporales_2">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Prefiero maximizar la eficiencia y productividad del personal actual" name="chk_no_empleos_temporales" id="no_empleos_temporales_2">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
-                                                    <label for="no_empleos_temporales_2">B) Maximizar la eficiencia y productividad del personal actual</label>
+                                                    <label for="no_empleos_temporales_2">B) Prefiero maximizar la eficiencia y productividad del personal actual</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="La incertidumbre económica en el país" name="txt_no_empleos_temporales" id="no_empleos_temporales_3">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="La incertidumbre económica en el país" name="chk_no_empleos_temporales" id="no_empleos_temporales_3">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_temporales_3">C) La incertidumbre económica en el país</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Falta de seguridad ciudadana en el lugar donde funciona el negocio." name="txt_no_empleos_temporales" id="no_empleos_temporales_4">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Falta de seguridad ciudadana en el lugar donde funciona el negocio." name="chk_no_empleos_temporales" id="no_empleos_temporales_4">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_temporales_4">D) Falta de seguridad ciudadana en el lugar donde funciona el negocio.</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Ha contratado los servicios externos" name="txt_no_empleos_temporales" id="no_empleos_temporales_5">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Ha contratado los servicios externos" name="chk_no_empleos_temporales" id="no_empleos_temporales_5">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_temporales_5">E) Ha contratado los servicios externos</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_no_empleos_temporales" id="no_empleos_temporales_6" onclick="showOtrosNoEmpleosTemporales()">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Otros" name="chk_no_empleos_temporales" id="no_empleos_temporales_6" onclick="toggleOtrosNoEmpleosTemporales()">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="no_empleos_temporales_6">F) Otros:</label>
                                                 </div>
@@ -1195,12 +1257,12 @@ padding-top: 10px;
                                                     </div>
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_no_empleos_temporales" placeholder="Especifique">
+                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_no_empleos_temporales" id="txt_otros_no_empleos_temporales" placeholder="Especifique">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                            </div>       
+                                            </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>11.</b> ¿Desde el proyecto Innova Mujer le vincularon a productos y/o servicios financieros?
@@ -1306,7 +1368,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>13.</b> ¿Indique qué tipo productos y/o servicios financieros logró obtener?
+                                                    <b>13.</b> ¿Indique qué tipo de productos y/o servicios financieros logró obtener?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
@@ -1323,7 +1385,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
-                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Créditos o préstamos" name="chk_servicios_financieros" id="servicios_financieros_2" onclick="toggleFinancierosInput()">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Créditos o préstamos" name="chk_servicios_financieros" id="servicios_financieros_2" onclick="toggleFinancierosInput('financieros_especificacion')">
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                                                 <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
@@ -1332,12 +1394,12 @@ padding-top: 10px;
                                                         </div>
                                                         <div class="mdc-checkbox__ripple"></div>
                                                     </div>
-                                                    <label for="servicios_financieros_2">B) Créditos o préstamos. Especifique con cual institución Financiera:</label>
+                                                    <label for="servicios_financieros_2">B) Créditos o préstamos. Especifique con cuál institución financiera:</label>
                                                 </div>
                                                 <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone" id="financieros_especificacion" style="display: none;">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="text" name="txt_institucion_financiera" placeholder="Especifique la institución financiera">
+                                                        <input class="mdc-text-field__input" type="text" name="txt_institucion_financiera" id="txt_institucion_financiera" placeholder="Especifique la institución financiera">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -1394,76 +1456,123 @@ padding-top: 10px;
                                                     </div>
                                                     <label for="servicios_financieros_6">F) Ninguno</label>
                                                 </div>
-                                            </div>         
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Otros" name="chk_servicios_financieros" id="servicios_financieros_7" onclick="toggleFinancierosInput('otros_especificacion')">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                    </div>
+                                                    <label for="servicios_financieros_7">G) Otros:</label>
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone" id="otros_especificacion" style="display: none;">
+                                                    <label class="mdc-text-field mdc-text-field--filled">
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                        <input class="mdc-text-field__input" type="text" name="txt_otros_financieros" id="txt_otros_financieros" placeholder="Especifique otros productos/servicios financieros">
+                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
+                                                        <span class="mdc-line-ripple"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                                
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    <b>14.</b> Si su respuesta es Ninguno, ¿por qué no obtuvo ningún producto y/o servicios financieros?
+                                                    <b>14.</b> Si su respuesta es Ninguno, ¿por qué no obtuvo ningún producto y/o servicios financieros? 
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Requisitos difíciles de cumplir" name="txt_razones_no_financieros" id="razones_no_financieros_1">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Requisitos difíciles de cumplir" name="chk_razones_no_financieros" id="razones_no_financieros_1">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_1">A) Requisitos difíciles de cumplir</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Falta de interés de mi parte en las opciones disponibles" name="txt_razones_no_financieros" id="razones_no_financieros_2">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Falta de interés de mi parte en las opciones disponibles" name="chk_razones_no_financieros" id="razones_no_financieros_2">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_2">B) Falta de interés de mi parte en las opciones disponibles</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="No calificó para las opciones de financiamiento" name="txt_razones_no_financieros" id="razones_no_financieros_3">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="No calificó para las opciones de financiamiento" name="chk_razones_no_financieros" id="razones_no_financieros_3">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_3">C) No calificó para las opciones de financiamiento</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Falta de capacidad de pago" name="txt_razones_no_financieros" id="razones_no_financieros_4">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Falta de capacidad de pago" name="chk_razones_no_financieros" id="razones_no_financieros_4">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_4">D) Falta de capacidad de pago</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Proceso de solicitud complejo y confuso" name="txt_razones_no_financieros" id="razones_no_financieros_5">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Proceso de solicitud complejo y confuso" name="chk_razones_no_financieros" id="razones_no_financieros_5">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_5">E) Proceso de solicitud complejo y confuso</label>
                                                 </div>
                                                 <div class="mdc-form-field">
-                                                    <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="No cuenta con garantías hipotecarias" name="txt_razones_no_financieros" id="razones_no_financieros_6">
-                                                        <div class="mdc-radio__background">
-                                                            <div class="mdc-radio__outer-circle"></div>
-                                                            <div class="mdc-radio__inner-circle"></div>
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="No cuenta con garantías hipotecarias" name="chk_razones_no_financieros" id="razones_no_financieros_6">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
                                                         </div>
-                                                        <div class="mdc-radio__ripple"></div>
+                                                        <div class="mdc-checkbox__ripple"></div>
                                                     </div>
                                                     <label for="razones_no_financieros_6">F) No cuenta con garantías hipotecarias</label>
+                                                </div>
+                                                <div class="mdc-form-field">
+                                                    <div class="mdc-checkbox">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Desconozco el motivo" name="chk_razones_no_financieros" id="razones_no_financieros_7">
+                                                        <div class="mdc-checkbox__background">
+                                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                                <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                                            </svg>
+                                                            <div class="mdc-checkbox__mixedmark"></div>
+                                                        </div>
+                                                        <div class="mdc-checkbox__ripple"></div>
+                                                    </div>
+                                                    <label for="razones_no_financieros_7">G) Desconozco el motivo</label>
                                                 </div>
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
@@ -1735,7 +1844,7 @@ padding-top: 10px;
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body-2">
-                                                    B.1 RESULTADOS DE IMPACTO A NIVEL PERSONAL
+                                                    B.2 RESULTADOS DE IMPACTO A NIVEL PERSONAL
                                                 </div>
                                             </div>
 
@@ -1745,7 +1854,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
-                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Motivación y guía y guiar a su equipo de trabajo para alcanzar los objetivos de la empresa." name="chk_habilidades" id="habilidades_1">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Motivación y guía a su equipo de trabajo para alcanzar los objetivos de la empresa." name="chk_habilidades" id="habilidades_1">
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                                                 <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
@@ -1754,7 +1863,7 @@ padding-top: 10px;
                                                         </div>
                                                         <div class="mdc-checkbox__ripple"></div>
                                                     </div>
-                                                    <label for="habilidades_1">A) Motivación y guía y guiar a su equipo de trabajo para alcanzar los objetivos de la empresa.</label>
+                                                    <label for="habilidades_1">A) Motivación y guía  a su equipo de trabajo para alcanzar los objetivos de la empresa.</label>
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
@@ -1854,7 +1963,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="SI" name="txt_oportunidades" id="oportunidades_si" onclick="handleOportunidadesChange('SI')">
+                                                        <input class="mdc-radio__native-control" type="radio" value="SI" name="txt_oportunidades" id="oportunidades_si" onclick="handleOportunidadesChange21('SI')">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -1865,7 +1974,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="NO" name="txt_oportunidades" id="oportunidades_no" onclick="handleOportunidadesChange('NO')">
+                                                        <input class="mdc-radio__native-control" type="radio" value="NO" name="txt_oportunidades" id="oportunidades_no" onclick="handleOportunidadesChange21('NO')">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -1873,6 +1982,17 @@ padding-top: 10px;
                                                         <div class="mdc-radio__ripple"></div>
                                                     </div>
                                                     <label for="oportunidades_no">NO</label>
+                                                </div>
+                                                <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone" id="especifique_oportunidades" style="display: none;">
+                                                    <div class="mdc-typography--body1">
+                                                        Especifique:
+                                                    </div>
+                                                    <label class="mdc-text-field mdc-text-field--filled">
+                                                        <span class="mdc-text-field__ripple"></span>
+                                                        <input class="mdc-text-field__input" type="text" name="txt_especifique_oportunidades" id="txt_especifique_oportunidades" placeholder="Especifique">
+                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Especifique</span>
+                                                        <span class="mdc-line-ripple"></span>
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
@@ -2697,10 +2817,15 @@ function handleFinancierosChange(answer) {
     }
 }
 
-function toggleFinancierosInput() {
-    var especificacionField = document.getElementById('financieros_especificacion');
-    var checkbox = document.getElementById('servicios_financieros_2');
-    especificacionField.style.display = checkbox.checked ? 'block' : 'none';
+function toggleFinancierosInput(elementId) {
+    let checkbox = document.getElementById(elementId === 'otros_especificacion' ? 'servicios_financieros_7' : 'servicios_financieros_2');
+    let especificacionCampo = document.getElementById(elementId);
+
+    if (checkbox.checked) {
+        especificacionCampo.style.display = 'block';
+    } else {
+        especificacionCampo.style.display = 'none';
+    }
 }
 function showOtrosNoVinculacion() {
     var otrosField = document.getElementById('otros_no_vinculacion');
@@ -2793,6 +2918,26 @@ function handleCalificacionInclusionChange(value) {
         comentariosField.style.display = 'none';
     }
 }
+function toggleOtrosNoEmpleos() {
+    let checkbox = document.getElementById('no_empleos_6');
+    let otrosCampo = document.getElementById('otros_no_empleos');
+    if (checkbox.checked) {
+        otrosCampo.style.display = 'block';
+    } else {
+        otrosCampo.style.display = 'none';
+    }
+}
+
+function toggleEspecifiqueInput() {
+    let checkbox = document.getElementById('herramientas_9');
+    let especificacionCampo = document.getElementById('especifique_herramientas');
+
+    if (checkbox.checked) {
+        especificacionCampo.style.display = 'block';
+    } else {
+        especificacionCampo.style.display = 'none';
+    }
+}
 
 function guardarRespuestas() {
     let respuestas = [];
@@ -2833,7 +2978,23 @@ function guardarRespuestas() {
     return respuestas;
 }
 
-
+function toggleOtrosNoEmpleosTemporales() {
+    let checkbox = document.getElementById('no_empleos_temporales_6');
+    let otrosCampo = document.getElementById('otros_no_empleos_temporales');
+    if (checkbox.checked) {
+        otrosCampo.style.display = 'block';
+    } else {
+        otrosCampo.style.display = 'none';
+    }
+}
+function handleOportunidadesChange21(value) {
+    let especifiqueCampo = document.getElementById('especifique_oportunidades');
+    if (value === 'NO') {
+        especifiqueCampo.style.display = 'block';
+    } else {
+        especifiqueCampo.style.display = 'none';
+    }
+}
 
 function saveRegisterForms(){
     if (validarFormularioCompleto()) {
