@@ -1136,6 +1136,8 @@ class surveys_sde(db.Model):
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     catalog_surveys_id = db.Column(db.Integer, db.ForeignKey("catalog_surveys_sde.id"),nullable=True)
     catalog_surveys = db.relationship("catalog_surveys_sde")
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    user = db.relationship("User")
 
 class catalog_surveys_sde(db.Model):
     _tablename__ = 'catalog_surveys_sde'

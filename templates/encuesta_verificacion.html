@@ -109,13 +109,21 @@ padding-top: 10px;
                                           </div>
                                         </div>
                                         <div class="mdc-layout-grid__inner">
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div  class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                                <div class="mdc-typography--body1">
+                                                    <p><b>Empresa:</b> {{ company.name }}</p>
+                                                    <p><b>Empresaria:</b> {{ company.inscripcion.name }}</p>
+                                                    <p><b>DNI:</b> {{ company.dni }}</p>
+                                                </div>
+ 
+                                            </div>
+                                            <div id="p1" class="mdc-layout-grid__cell--span-12-desktop nquestion  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     Ciudad
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                    <input class="mdc-radio__native-control" type="radio" value="Tegucigalpa" name="txt_ciudad" checked>
+                                                    <input class="mdc-radio__native-control" type="radio" value="Tegucigalpa" name="txt_ciudad" >
                                                     <div class="mdc-radio__background">
                                                         <div class="mdc-radio__outer-circle"></div>
                                                         <div class="mdc-radio__inner-circle"></div>
@@ -202,7 +210,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="p2" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
                                                 Rango de edad
                                             </div>
@@ -262,7 +270,7 @@ padding-top: 10px;
                                                 <label for="edad_5">E) más de 60 años</label>
                                             </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="p3" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     Nivel Educativo
                                                 </div>
@@ -333,18 +341,21 @@ padding-top: 10px;
                                                     <label for="educativo_6">F) Postgrado</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="p4" class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body-2">
-                                                    Sector Económico al que pertenece la empresa:
+                                                    
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="p5" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
-                                                    COMERCIO
+                                                    Sector Económico al que pertenece la empresa:
                                                 </div>
+                                                <p>
+                                                    COMERCIO
+                                                </p>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Al detalle" name="txt_comercio" id="comercio_1">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Al detalle" name="txt_pertenece" id="comercio_1">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -355,7 +366,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Mayorista" name="txt_comercio" id="comercio_2">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Mayorista" name="txt_pertenece" id="comercio_2">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -366,7 +377,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Comisionista" name="txt_comercio" id="comercio_3">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Comisionista" name="txt_pertenece" id="comercio_3">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -377,7 +388,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_comercio" id="comercio_4" onclick="showotroscomercio()"> 
+                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_pertenece" id="comercio_4" onclick="showotroscomercio()"> 
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -397,14 +408,13 @@ padding-top: 10px;
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                            </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
+                                        
+                                                <p>
                                                     INDUSTRIA
-                                                </div>
+                                                </p>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Manufactura" name="txt_industria" id="industria_1">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Manufactura" name="txt_pertenece" id="industria_1">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -415,7 +425,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Procesamiento de alimentos" name="txt_industria" id="industria_2">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Procesamiento de alimentos" name="txt_pertenece" id="industria_2">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -426,7 +436,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_industria" id="industria_3" onclick="showotrosindustria()">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_pertenece" id="industria_3" onclick="showotrosindustria()">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -446,15 +456,14 @@ padding-top: 10px;
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                            </div>
+                                            
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
+                                                <p>
                                                     SERVICIOS
-                                                </div>
+                                                </p>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Hotelería" name="txt_servicios" id="servicios_1">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Hotelería" name="txt_pertenece" id="servicios_1">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -465,7 +474,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Educativos" name="txt_servicios" id="servicios_2">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Educativos" name="txt_pertenece" id="servicios_2">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -476,7 +485,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Financieros" name="txt_servicios" id="servicios_3">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Financieros" name="txt_pertenece" id="servicios_3">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -487,7 +496,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Tecnológicos" name="txt_servicios" id="servicios_4">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Tecnológicos" name="txt_pertenece" id="servicios_4">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -498,7 +507,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Comunicación" name="txt_servicios" id="servicios_5">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Comunicación" name="txt_pertenece" id="servicios_5">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -509,7 +518,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Salud y belleza" name="txt_servicios" id="servicios_6">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Salud y belleza" name="txt_pertenece" id="servicios_6">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -520,7 +529,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Turísticos y recreativos" name="txt_servicios" id="servicios_7">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Turísticos y recreativos" name="txt_pertenece" id="servicios_7">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -531,7 +540,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Gastronomía" name="txt_servicios" id="servicios_8">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Gastronomía" name="txt_pertenece" id="servicios_8">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -542,7 +551,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Comercial" name="txt_servicios" id="servicios_9">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Comercial" name="txt_pertenece" id="servicios_9">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -553,7 +562,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Manufactura" name="txt_servicios" id="servicios_10">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Manufactura" name="txt_pertenece" id="servicios_10">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -564,7 +573,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_servicios" id="servicios_11" onclick="showotrosservicios()">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_pertenece" id="servicios_11" onclick="showotrosservicios()">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -584,14 +593,13 @@ padding-top: 10px;
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
-                                            </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-                                                <div class="mdc-typography--body1">
+                                        
+                                            <p>
                                                     AGROPECUARIO
-                                                </div>
+                                            </p>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Producción agrícola" name="txt_agropecuario" id="agropecuario_1">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Producción agrícola" name="txt_pertenece" id="agropecuario_1">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -602,7 +610,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Producción pecuaria" name="txt_agropecuario" id="agropecuario_2">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Producción pecuaria" name="txt_pertenece" id="agropecuario_2">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
@@ -613,22 +621,22 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-radio">
-                                                        <input class="mdc-radio__native-control" type="radio" value="Otro" name="txt_agropecuario" id="agropecuario_3" onclick="showotroagropecuario()">
+                                                        <input class="mdc-radio__native-control" type="radio" value="Otros" name="txt_pertenece" id="agropecuario_3" onclick="showotroagropecuario()">
                                                         <div class="mdc-radio__background">
                                                             <div class="mdc-radio__outer-circle"></div>
                                                             <div class="mdc-radio__inner-circle"></div>
                                                         </div>
                                                         <div class="mdc-radio__ripple"></div>
                                                     </div>
-                                                    <label for="agropecuario_3">C) Otro:</label>
+                                                    <label for="agropecuario_3">C) Otros:</label>
                                                 </div>
                                                 <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                     <div class="mdc-typography--body1">
-                                                        Otro:
+                                                        Otros:
                                                     </div>
                                                     <label class="mdc-text-field mdc-text-field--filled" id="txt_otro_agropecuario" data-assigned-var>
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Otro">Otro</span>
+                                                        <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Otros">Otros</span>
                                                         <input required class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -640,7 +648,7 @@ padding-top: 10px;
                                                 </div>
                                             </div>
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q01" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>1.</b> ¿Con su participación en el Proyecto Innova Mujer, ha aumentado el uso de la tecnología en su empresa?
                                                 </div>
@@ -670,7 +678,7 @@ padding-top: 10px;
                                                     Si es no pasar a la pregunta 4
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q02" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>2.</b> ¿Qué tecnologías nuevas está utilizando para su empresa?
                                                 </div>
@@ -764,7 +772,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q03" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>3.</b> ¿Qué herramientas tecnológicas agregó a su negocio a partir de la asistencia del Proyecto?
                                                 </div>
@@ -895,7 +903,7 @@ padding-top: 10px;
                                                 </div>
                                             </div>
                                             
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q04" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>4.</b> ¿Por qué considera que NO ha aumentado el uso de tecnología en su empresa?
                                                 </div>
@@ -944,7 +952,7 @@ padding-top: 10px;
                                                     <label for="no_tecnologia_4">D) No, la empresa ha enfrentado obstáculos económicos que le impiden adquirir nuevas tecnologías.</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q05" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>5.</b> ¿Su empresa ha generado nuevos <b>EMPLEOS PERMANENTES</b> (formales) en los últimos seis (6) meses?
                                                 </div>
@@ -977,14 +985,14 @@ padding-top: 10px;
                                                     Si su respuesta es NO pase a la pregunta 7
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q06" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>6.</b> ¿Cuántos nuevos empleos permanentes (formales) ha generado en los últimos seis (6) meses?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_total_empleos" placeholder="Total">
+                                                        <input id="txt_total_empleos" class="mdc-text-field__input" type="number" name="txt_total_empleos" placeholder="Total" readonly>
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Total">Total</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -995,7 +1003,7 @@ padding-top: 10px;
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_mujeres_empleos" placeholder="Mujeres">
+                                                        <input id="txt_mujeres_empleos" class="mdc-text-field__input" type="number" name="txt_mujeres_empleos" placeholder="Mujeres" min="0" step="1" oninput="validarNumero(this)">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Mujeres">Mujeres</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -1003,14 +1011,14 @@ padding-top: 10px;
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_hombres_empleos" placeholder="Hombres">
+                                                        <input id="txt_hombres_empleos" class="mdc-text-field__input" type="number" name="txt_hombres_empleos" placeholder="Hombres" min="0" step="1" oninput="validarNumero(this)">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Hombres">Hombres</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
                                             </div>
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q07" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>7.</b> ¿Por qué razón NO ha generado nuevos empleos permanentes (formales) en los últimos seis (6) meses?
                                                 </div>
@@ -1104,7 +1112,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q08" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>8.</b> ¿Su empresa ha generado nuevos <b> EMPLEOS TEMPORALES</b> (no formales) en los últimos seis (6) meses?
                                                 </div>
@@ -1137,14 +1145,14 @@ padding-top: 10px;
                                                     Si su respuesta es NO pase a la pregunta 10
                                                 </div>
                                             </div>           
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q09" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>9.</b>  ¿Cuántos nuevos empleos temporales (no formales) ha generado en los últimos seis (6) meses?
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_total_empleos_temporales" placeholder="Total">
+                                                        <input id="txt_total_empleos_temporales" class="mdc-text-field__input" type="number" name="txt_total_empleos_temporales" placeholder="Total" readonly>
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Total">Total</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -1155,7 +1163,7 @@ padding-top: 10px;
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_mujeres_empleos_temporales" placeholder="Mujeres">
+                                                        <input id="txt_mujeres_empleos_temporales" class="mdc-text-field__input" type="number" name="txt_mujeres_empleos_temporales" placeholder="Mujeres" min="0" step="1" oninput="validarNumero(this)">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Mujeres">Mujeres</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
@@ -1163,13 +1171,13 @@ padding-top: 10px;
                                                 <div class="mdc-form-field">
                                                     <label class="mdc-text-field mdc-text-field--filled">
                                                         <span class="mdc-text-field__ripple"></span>
-                                                        <input class="mdc-text-field__input" type="number" name="txt_hombres_empleos_temporales" placeholder="Hombres">
+                                                        <input id="txt_hombres_empleos_temporales" class="mdc-text-field__input" type="number" name="txt_hombres_empleos_temporales" placeholder="Hombres" min="0" step="1" oninput="validarNumero(this)">
                                                         <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Hombres">Hombres</span>
                                                         <span class="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q10" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>10.</b> ¿Por qué considera que NO ha generado nuevos empleos temporales (no formales) en los últimos seis (6) meses? 
                                                 </div>
@@ -1263,7 +1271,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q11" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>11.</b> ¿Desde el proyecto Innova Mujer le vincularon a productos y/o servicios financieros?
                                                 </div>
@@ -1296,7 +1304,7 @@ padding-top: 10px;
                                                     Si su respuesta es NO pase a la pregunta 15
                                                 </div>
                                             </div>           
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q12" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>12.</b>  ¿Con qué tipo de instituciones financieras fue vinculada?
                                                 </div>
@@ -1366,7 +1374,7 @@ padding-top: 10px;
                                                     <label for="instituciones_5">E) Instituciones gubernamentales de crédito</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q13" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>13.</b> ¿Indique qué tipo de productos y/o servicios financieros logró obtener?
                                                 </div>
@@ -1479,7 +1487,7 @@ padding-top: 10px;
                                                 </div>
                                             </div>
                                                 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q14" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>14.</b> Si su respuesta es Ninguno, ¿por qué no obtuvo ningún producto y/o servicios financieros? 
                                                 </div>
@@ -1575,7 +1583,7 @@ padding-top: 10px;
                                                     <label for="razones_no_financieros_7">G) Desconozco el motivo</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q15" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>15.</b> ¿Por qué NO la vincularon a productos y/o servicios financieros?
                                                 </div>
@@ -1621,7 +1629,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>    
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q16" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>16.</b> ¿Cuál ha sido el rango de ventas de su empresa en los últimos seis meses?
                                                 </div>
@@ -1681,7 +1689,7 @@ padding-top: 10px;
                                                     <label for="rango_ventas_5">E) Mayor de L.360,000,000.00</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q17" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>17.</b> ¿Su empresa ha incrementado ventas en los últimos 6 meses?
                                                 </div>
@@ -1714,7 +1722,7 @@ padding-top: 10px;
                                                     Si su respuesta es NO pase a la pregunta 19
                                                 </div>
                                             </div>       
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q18" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>18.</b> ¿En qué porcentaje han incrementado sus ventas en los últimos seis meses?
                                                 </div>
@@ -1764,7 +1772,7 @@ padding-top: 10px;
                                                 </div>
                                             </div>
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q19" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>19.</b> ¿Qué otros beneficios han obtenido del proyecto Innova Mujer?
                                                 </div>
@@ -1842,13 +1850,13 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div  class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body-2">
                                                     B.2 RESULTADOS DE IMPACTO A NIVEL PERSONAL
                                                 </div>
                                             </div>
 
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q20" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>20.</b> ¿Qué habilidades de empoderamiento ha desarrollado con su participación en el programa Innova Mujer?, Puede seleccionar múltiples respuestas.
                                                 </div>
@@ -1957,7 +1965,7 @@ padding-top: 10px;
                                                     <label for="habilidades_8">H) Adaptación al cambio para el éxito empresarial.</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q21" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>21.</b> ¿Haber participado en el proyecto Innova Mujer, le ha dado más oportunidades para crecer y desarrollarse profesionalmente?
                                                 </div>
@@ -1995,7 +2003,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q22" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>22.</b> ¿Cuánto le han ayudado a mejorar sus habilidades administrativas los servicios de desarrollo empresarial?
                                                 </div>
@@ -2082,7 +2090,7 @@ padding-top: 10px;
                                                 </div>
                                             </div>
  
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q23" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>23.</b> ¿Cómo califica su experiencia con el uso de la plataforma Innova Mujer?
                                                 </div>
@@ -2163,7 +2171,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div  id="q24" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>24.</b> ¿Cómo califica la atención del equipo de asesores del proyecto Innova Mujer?
                                                 </div>
@@ -2244,7 +2252,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q25" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>25.</b> ¿La capacitación inicial en la que participó, fue adecuada para mejorar sus conocimientos digitales y habilidades blandas?
                                                 </div>
@@ -2325,7 +2333,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q26" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>26.</b> ¿Cómo califica el proceso de capacitación continua en línea (webinarios, talleres)?
                                                 </div>
@@ -2406,7 +2414,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q27" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>27.</b> ¿Cómo califica el proceso de asesoría brindado desde el proyecto Innova Mujer?
                                                 </div>
@@ -2487,7 +2495,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q28" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>28.</b> ¿Cómo califica el tiempo en la entrega de los productos y servicios de asesoría?
                                                 </div>
@@ -2568,7 +2576,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q29" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>29.</b> ¿Cómo fue el trato que recibió en el proyecto Innova Mujer en términos de inclusión de género? (se sintió respetada y valorada como mujer durante su participación)
                                                 </div>
@@ -2649,7 +2657,7 @@ padding-top: 10px;
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q30" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>30.</b> ¿Usted recomendaría el proyecto Innova Mujer a otras empresarias?
                                                 </div>
@@ -2676,13 +2684,13 @@ padding-top: 10px;
                                                     <label for="recomendar_no">NO</label>
                                                 </div>
                                             </div>
-                                            <div class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                                            <div id="q31" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body1">
                                                     <b>31.</b> ¿Cuáles son sus recomendaciones de mejora para el proyecto?
                                                 </div>
                                                 <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea">
                                                     <span class="mdc-text-field__ripple"></span>
-                                                    <textarea class="mdc-text-field__input" name="txt_recomendaciones" rows="4" placeholder="Escriba sus recomendaciones aquí..."></textarea>
+                                                    <textarea id="txt_recomendaciones" class="mdc-text-field__input" name="txt_recomendaciones" rows="4" placeholder="Escriba sus recomendaciones aquí..."></textarea>
                                                     <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Escriba sus recomendaciones">Escriba sus recomendaciones</span>
                                                     <span class="mdc-line-ripple"></span>
                                                 </label>
@@ -2702,7 +2710,7 @@ padding-top: 10px;
                                 <div class="mdc-card__action-buttons">
                                 <center>
 
-                                  <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="saveRegisterForms()">
+                                  <button id="submitSaveButton" style="position: fixed;top: 20px;"  class="mdc-button mdc-button--raised mdc-button--icon-leading" onclick="saveRegisterForms()">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__focus-ring"></span>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true"
@@ -2754,8 +2762,12 @@ padding-top: 10px;
     function handleTecnologiaChange(answer) {
         if (answer === 'SI') {
             // Code to show question 3
+            document.getElementById("q02").style.display = "block";
+            document.getElementById("q03").style.display = "block";
         } else if (answer === 'NO') {
             // Code to show question 4
+            document.getElementById("q02").style.display = "none";
+            document.getElementById("q03").style.display = "none";
         }
     }
 
@@ -2772,118 +2784,131 @@ padding-top: 10px;
     }
 
     function handleEmpleosChange(answer) {
-    var nextQuestionSi = document.getElementById('next_question_si');
-    var nextQuestionNo = document.getElementById('next_question_no');
-    if (answer === 'SI') {
-        nextQuestionSi.style.display = 'block';
-        nextQuestionNo.style.display = 'none';
-    } else if (answer === 'NO') {
-        nextQuestionSi.style.display = 'none';
-        nextQuestionNo.style.display = 'block';
+        var nextQuestionSi = document.getElementById('next_question_si');
+        var nextQuestionNo = document.getElementById('next_question_no');
+        if (answer === 'SI') {
+            nextQuestionSi.style.display = 'block';
+            nextQuestionNo.style.display = 'none';
+            document.getElementById("q06").style.display = "block";
+    
+        } else if (answer === 'NO') {
+            nextQuestionSi.style.display = 'none';
+            nextQuestionNo.style.display = 'block';
+            document.getElementById("q06").style.display = "none";
+        }
     }
-}
 
-function showOtrosNoEmpleos() {
-    var otrosField = document.getElementById('otros_no_empleos');
-    otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
-}
+    function showOtrosNoEmpleos() {
+        var otrosField = document.getElementById('otros_no_empleos');
+        otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
+    }
 
-function handleEmpleosTemporalesChange(answer) {
-    var nextQuestionSi = document.getElementById('next_question_temporales_si');
-    var nextQuestionNo = document.getElementById('next_question_temporales_no');
-    if (answer === 'SI') {
-        nextQuestionSi.style.display = 'block';
-        nextQuestionNo.style.display = 'none';
-    } else if (answer === 'NO') {
-        nextQuestionSi.style.display = 'none';
-        nextQuestionNo.style.display = 'block';
+    function handleEmpleosTemporalesChange(answer) {
+        var nextQuestionSi = document.getElementById('next_question_temporales_si');
+        var nextQuestionNo = document.getElementById('next_question_temporales_no');
+        if (answer === 'SI') {
+            nextQuestionSi.style.display = 'block';
+            nextQuestionNo.style.display = 'none';
+            document.getElementById("q09").style.display = "block";
+        } else if (answer === 'NO') {
+            nextQuestionSi.style.display = 'none';
+            nextQuestionNo.style.display = 'block';
+            document.getElementById("q09").style.display = "none";
+        }
     }
-}
 
-function showOtrosNoEmpleosTemporales() {
-    var otrosField = document.getElementById('otros_no_empleos_temporales');
-    otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
-}
+    function showOtrosNoEmpleosTemporales() {
+        var otrosField = document.getElementById('otros_no_empleos_temporales');
+        otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
+    }
 
-function handleFinancierosChange(answer) {
-    var nextQuestionSi = document.getElementById('next_question_financieros_si');
-    var nextQuestionNo = document.getElementById('next_question_financieros_no');
-    if (answer === 'SI') {
-        nextQuestionSi.style.display = 'block';
-        nextQuestionNo.style.display = 'none';
-    } else if (answer === 'NO') {
-        nextQuestionSi.style.display = 'none';
-        nextQuestionNo.style.display = 'block';
+    function handleFinancierosChange(answer) {
+        var nextQuestionSi = document.getElementById('next_question_financieros_si');
+        var nextQuestionNo = document.getElementById('next_question_financieros_no');
+        if (answer === 'SI') {
+            nextQuestionSi.style.display = 'block';
+            nextQuestionNo.style.display = 'none';
+            document.getElementById("q12").style.display = "block";
+            document.getElementById("q13").style.display = "block";
+            document.getElementById("q14").style.display = "block";
+        } else if (answer === 'NO') {
+            nextQuestionSi.style.display = 'none';
+            nextQuestionNo.style.display = 'block';
+            document.getElementById("q12").style.display = "none";
+            document.getElementById("q13").style.display = "none";
+            document.getElementById("q14").style.display = "none";
+        }
     }
-}
 
-function toggleFinancierosInput(elementId) {
-    let checkbox = document.getElementById(elementId === 'otros_especificacion' ? 'servicios_financieros_7' : 'servicios_financieros_2');
-    let especificacionCampo = document.getElementById(elementId);
+    function toggleFinancierosInput(elementId) {
+        let checkbox = document.getElementById(elementId === 'otros_especificacion' ? 'servicios_financieros_7' : 'servicios_financieros_2');
+        let especificacionCampo = document.getElementById(elementId);
 
-    if (checkbox.checked) {
-        especificacionCampo.style.display = 'block';
-    } else {
-        especificacionCampo.style.display = 'none';
+        if (checkbox.checked) {
+            especificacionCampo.style.display = 'block';
+        } else {
+            especificacionCampo.style.display = 'none';
+        }
     }
-}
-function showOtrosNoVinculacion() {
-    var otrosField = document.getElementById('otros_no_vinculacion');
-    otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
-}
-function handleIncrementoVentasChange(answer) {
-    var nextQuestionSi = document.getElementById('next_question_incremento_si');
-    var nextQuestionNo = document.getElementById('next_question_incremento_no');
-    if (answer === 'SI') {
-        nextQuestionSi.style.display = 'block';
-        nextQuestionNo.style.display = 'none';
-    } else if (answer === 'NO') {
-        nextQuestionSi.style.display = 'none';
-        nextQuestionNo.style.display = 'block';
+    function showOtrosNoVinculacion() {
+        var otrosField = document.getElementById('otros_no_vinculacion');
+        otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
     }
-}
-function showOtrosBeneficios() {
-    var otrosField = document.getElementById('otros_beneficios');
-    otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
-}
-function handleOportunidadesChange(answer) {
-    // Aquí puedes agregar cualquier lógica adicional que quieras realizar cuando se selecciona una opción
-    console.log("Respuesta seleccionada: " + answer);
-}
-function handleMejoraHabilidadesChange(value) {
-    var comentariosField = document.getElementById('comentarios_mejora_habilidades');
-    if (value === 1 || value === 2) {
-        comentariosField.style.display = 'block';
-    } else {
-        comentariosField.style.display = 'none';
+    function handleIncrementoVentasChange(answer) {
+        var nextQuestionSi = document.getElementById('next_question_incremento_si');
+        var nextQuestionNo = document.getElementById('next_question_incremento_no');
+        if (answer === 'SI') {
+            nextQuestionSi.style.display = 'block';
+            nextQuestionNo.style.display = 'none';
+            document.getElementById("q18").style.display = "block";
+        } else if (answer === 'NO') {
+            nextQuestionSi.style.display = 'none';
+            nextQuestionNo.style.display = 'block';
+            document.getElementById("q18").style.display = "none";
+        }
     }
-}
-function handleCalificacionExperienciaChange(value) {
-    var comentariosField = document.getElementById('comentarios_calificacion_experiencia');
-    if (value === 1 || value === 2) {
-        comentariosField.style.display = 'block';
-    } else {
-        comentariosField.style.display = 'none';
+    function showOtrosBeneficios() {
+        var otrosField = document.getElementById('otros_beneficios');
+        otrosField.style.display = otrosField.style.display === 'none' ? 'block' : 'none';
     }
-}
+    function handleOportunidadesChange(answer) {
+        // Aquí puedes agregar cualquier lógica adicional que quieras realizar cuando se selecciona una opción
+        console.log("Respuesta seleccionada: " + answer);
+    }
+    function handleMejoraHabilidadesChange(value) {
+        var comentariosField = document.getElementById('comentarios_mejora_habilidades');
+        if (value === 1 || value === 2) {
+            comentariosField.style.display = 'block';
+        } else {
+            comentariosField.style.display = 'none';
+        }
+    }
+    function handleCalificacionExperienciaChange(value) {
+        var comentariosField = document.getElementById('comentarios_calificacion_experiencia');
+        if (value === 1 || value === 2) {
+            comentariosField.style.display = 'block';
+        } else {
+            comentariosField.style.display = 'none';
+        }
+    }
 
-function handleCalificacionAtencionChange(value) {
-    var comentariosField = document.getElementById('comentarios_calificacion_atencion');
-    if (value === 1 || value === 2) {
-        comentariosField.style.display = 'block';
-    } else {
-        comentariosField.style.display = 'none';
+    function handleCalificacionAtencionChange(value) {
+        var comentariosField = document.getElementById('comentarios_calificacion_atencion');
+        if (value === 1 || value === 2) {
+            comentariosField.style.display = 'block';
+        } else {
+            comentariosField.style.display = 'none';
+        }
     }
-}
 
-function handleCalificacionCapacitacionChange(value) {
-    var comentariosField = document.getElementById('comentarios_calificacion_capacitacion');
-    if (value === 1 || value === 2) {
-        comentariosField.style.display = 'block';
-    } else {
-        comentariosField.style.display = 'none';
+    function handleCalificacionCapacitacionChange(value) {
+        var comentariosField = document.getElementById('comentarios_calificacion_capacitacion');
+        if (value === 1 || value === 2) {
+            comentariosField.style.display = 'block';
+        } else {
+            comentariosField.style.display = 'none';
+        }
     }
-}
 function handleCalificacionCapacitacionOnlineChange(value) {
     var comentariosField = document.getElementById('comentarios_calificacion_capacitacion_online');
     if (value === 1 || value === 2) {
@@ -2940,43 +2965,198 @@ function toggleEspecifiqueInput() {
 }
 
 function guardarRespuestas() {
+    const Swal = swcms.returnSwal()
     let respuestas = [];
-
+    let salto = true;
+    let saltoq9 = true;
     // Selecciona todas las preguntas
     let preguntas = document.querySelectorAll('.nquestion'); // Ajusta el selector según tu HTML
-
-    preguntas.forEach((pregunta) => {
+    let idsGrupoEspecial = [];
+   
+    for (let pregunta of preguntas) {
         // Obtener el título de la pregunta
         let tituloElement = pregunta.querySelector('.mdc-typography--body1, .mdc-typography--headline4');
-        
+
         // Verificar si el título existe
         if (!tituloElement) {
             console.warn('No se encontró el título de la pregunta:', pregunta);
-            return; // Saltar a la siguiente iteración si el título no existe
+            continue; // Saltar a la siguiente iteración si el título no existe
         }
-        
+
+        let ids = pregunta.id;
         let tituloPregunta = tituloElement.textContent.trim();
 
         // Obtener todas las opciones de respuesta
         let opcionesRespuesta = pregunta.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked, input[type="number"], input[type="text"]');
+        let hayrespuesta = false;
+        let ifotro = false;
 
         let respuestasPregunta = [];
+        console.log(tituloPregunta)
+   
+        if (idsGrupoEspecial.includes(ids)) {
+            hayrespuesta = true
+            respuestasPregunta.push([]);
+        }
         opcionesRespuesta.forEach((opcion) => {
+            console.log('tituloPregunta')
+            console.log(ids,opcion.value)
+            if (idsGrupoEspecial.includes(ids)) {
+                hayrespuesta = true
+                respuestasPregunta.push([]);
+                return 
+            }
             if (opcion.type === 'checkbox' || opcion.type === 'radio') {
-                respuestasPregunta.push(opcion.value);
-            } else if (opcion.type === 'number' || opcion.type === 'text') {
-                respuestasPregunta.push(opcion.value);
+                if (opcion.checked) {
+                    if (ids === 'p01' && opcion.value === 'Otra ciudad') {
+                        ifotro = true;
+                    }else if (ids === 'p05' && opcion.value === 'Otros') {
+                        ifotro = true;
+                    }else if (ids === 'q01' && opcion.value === 'NO') {
+                        idsGrupoEspecial.push('q02','q03')
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }else if (ids === 'q02' && opcion.value.includes('Otros')) {
+                 
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q03' && opcion.value.includes('Otros')) {
+                 
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q05' && opcion.value === 'NO') {
+                        idsGrupoEspecial.push('q06')
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }else if (ids === 'q07' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q08' && opcion.value === 'NO') {
+                        idsGrupoEspecial.push('q09')
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }else if (ids === 'q10' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q10' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q11' && opcion.value === 'NO') {
+                        idsGrupoEspecial.push('q12')
+                        idsGrupoEspecial.push('q13')
+                        idsGrupoEspecial.push('q14')
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }else if (ids === 'q13' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q15' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q17' && opcion.value === 'NO') {
+                        idsGrupoEspecial.push('q18')
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }else if (ids === 'q19' && opcion.value === 'Otros') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q21' && opcion.value === 'NO') {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q23' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q24' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q25' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q26' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q27' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q28' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    }else if (ids === 'q29' && opcion.value === '1' || opcion.value === '2' ) {
+                        respuestasPregunta.push(opcion.value);
+                        ifotro = true;
+                    } else if (!ifotro) {
+                        hayrespuesta = true;
+                        respuestasPregunta.push(opcion.value);
+                    }
+                }
+            } else if (opcion.type === 'number' || opcion.type === 'text' || opcion.type === 'textarea') {
+                if (ifotro && opcion.value.trim() !== "") {
+                    hayrespuesta = true;
+                    respuestasPregunta.push(opcion.value);
+                }else if (ids === 'q06') {
+                   
+                    if (salto==true){
+                        txt_total_empleos = document.getElementById('txt_total_empleos').value;
+                        txt_mujeres_empleos = document.getElementById('txt_mujeres_empleos').value;
+                        txt_hombres_empleos = document.getElementById('txt_hombres_empleos').value;
+                    
+                        if (txt_total_empleos.trim() !== "" && txt_mujeres_empleos.trim() !== "" && txt_hombres_empleos.trim() !== "" ) {
+                            let tx = "Total empleos "  +  txt_total_empleos  + " Mujeres empleos " + txt_mujeres_empleos + " Hombres empleos " + txt_hombres_empleos
+                            respuestasPregunta.push(tx)
+                            console.log(respuestasPregunta)
+                            hayrespuesta = true;
+                        }
+                        salto = false
+                    }
+                }else if (ids === 'q09') {
+             
+                    if (saltoq9==true){
+                        
+                        txt_total_empleos = document.getElementById('txt_total_empleos_temporales').value;
+                        txt_mujeres_empleos = document.getElementById('txt_mujeres_empleos_temporales').value;
+                        txt_hombres_empleos = document.getElementById('txt_hombres_empleos_temporales').value;
+                    
+                        if (txt_total_empleos.trim() !== "" && txt_mujeres_empleos.trim() !== "" && txt_hombres_empleos.trim() !== "" ) {
+                            let tx = "Total empleos "  +  txt_total_empleos  + " Mujeres empleos " + txt_mujeres_empleos + " Hombres empleos " + txt_hombres_empleos
+                            respuestasPregunta.push(tx)
+                            console.log(respuestasPregunta)
+                            hayrespuesta = true;
+                        }
+                        saltoq9 = false
+                    }
+                }
+                
             }
         });
-
-        respuestas.push({
-            titulopregunta: tituloPregunta,
-            Respuestas: respuestasPregunta
-        });
-    });
+         if (ids === 'q31') {
+                    
+            txt_recomendaciones = document.getElementById('txt_recomendaciones').value;
+            if (txt_recomendaciones.trim() !== ""){
+            respuestasPregunta.push(txt_recomendaciones)
+            hayrespuesta = true;}
+        }
+        if (hayrespuesta) {
+            respuestas.push({
+                ids: ids,
+                titulopregunta: tituloPregunta,
+                Respuestas: respuestasPregunta
+            });
+            console.log(respuestas)
+        } else {
+            console.log('Por favor responder la pregunta: ' + tituloPregunta);
+            Swal.fire(
+            'Error',
+            'Por favor responder la pregunta: ' + tituloPregunta,
+            'error'
+            )
+            return false; // Detener la función
+        }
+    }
 
     return respuestas;
 }
+
+
 
 function toggleOtrosNoEmpleosTemporales() {
     let checkbox = document.getElementById('no_empleos_temporales_6');
@@ -2997,29 +3177,68 @@ function handleOportunidadesChange21(value) {
 }
 
 function saveRegisterForms(){
-    if (validarFormularioCompleto()) {
-        let arrayRespuestas = guardarRespuestas();
-        console.log(arrayRespuestas);
-    }
+    const Swal = swcms.returnSwal()
+    let arrayRespuestas = guardarRespuestas();
+    console.log(arrayRespuestas)
+    if(arrayRespuestas){
+            let postData = {
+            "txt_company":'{{company.id}}',
+            "txt_preguntas":arrayRespuestas
+            };
+
+            console.log(postData)
+
+            let apiUrl = '/api/save/catalog/surveys';
+
+
+            swcms.postFetch(apiUrl, postData).then((data) => {
+                Swal.fire(
+                'Éxito',
+                'Encuesta Guardad con Exito',
+                'success'
+                )
+                window.setTimeout(() => { 
+                    window.location.href = '/surveys_with_catalog_surveys/sde/12'; 
+
+                }, 1500);
+
+            }).catch((error) => {
+                Swal.fire(
+                'Error de conexión',
+                'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+                'error'
+                )
+                document.getElementById('btn_generar_ficha').disabled = false;
+            });
+        }
+  //  if (validarFormularioCompleto()) {
+  //      let arrayRespuestas = guardarRespuestas();
+  //      console.log(arrayRespuestas);
+  //  }
 
 }
 function validarFormularioCompleto() {
     let preguntas = document.querySelectorAll('.nquestion');
     let camposIncompletos = [];
-
+    let respuestasx = [];
     preguntas.forEach((pregunta, index) => {
         let tituloElement = pregunta.querySelector('.mdc-typography--body1, .mdc-typography--headline4');
-        let tituloPregunta = tituloElement ? tituloElement.textContent.trim() : `Pregunta ${index + 1}`;
+        let idpregunta = pregunta.id;
 
+
+      
+        let tituloPregunta = tituloElement ? tituloElement.textContent.trim() : `Pregunta ${index + 1}`;
+       
         let opcionesRadioCheckbox = pregunta.querySelectorAll('input[type="radio"], input[type="checkbox"]');
         let opcionesText = pregunta.querySelectorAll('input[type="text"], input[type="number"]');
         let tieneOpciones = opcionesRadioCheckbox.length > 0;
         let tieneTexto = opcionesText.length > 0;
-        
+        console.log()
         let seleccionada = false;
 
         if (tieneOpciones) {
             seleccionada = Array.from(opcionesRadioCheckbox).some(opcion => opcion.checked);
+            console.log()
         }
 
         if (tieneTexto) {
@@ -3030,15 +3249,64 @@ function validarFormularioCompleto() {
             camposIncompletos.push(tituloPregunta);
         }
     });
-
+ 
     if (camposIncompletos.length > 0) {
         alert('Por favor, complete las siguientes preguntas antes de continuar:\n' + camposIncompletos.join('\n'));
         return false;
     }
 
-    return true;
+    return false;
 }
 
+function validarNumero(input) {
+    let value = input.value;
+    // Elimina cualquier carácter que no sea un número y asegúrate de que el valor sea positivo
+    input.value = value.replace(/[^0-9]/g, '');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mujeresInput = document.getElementById('txt_mujeres_empleos');
+    const hombresInput = document.getElementById('txt_hombres_empleos');
+    const totalInput = document.getElementById('txt_total_empleos');
+
+    function actualizarTotal() {
+        const mujeres = parseInt(mujeresInput.value) || 0;
+        const hombres = parseInt(hombresInput.value) || 0;
+        const total = mujeres + hombres;
+        totalInput.value = total;
+    }
+
+    mujeresInput.addEventListener('input', function() {
+        validarNumero(mujeresInput);
+        actualizarTotal();
+    });
+    hombresInput.addEventListener('input', function() {
+        validarNumero(hombresInput);
+        actualizarTotal();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mujeresTemporalesInput = document.getElementById('txt_mujeres_empleos_temporales');
+    const hombresTemporalesInput = document.getElementById('txt_hombres_empleos_temporales');
+    const totalTemporalesInput = document.getElementById('txt_total_empleos_temporales');
+
+    function actualizarTotalTemporales() {
+        const mujeresTemporales = parseInt(mujeresTemporalesInput.value) || 0;
+        const hombresTemporales = parseInt(hombresTemporalesInput.value) || 0;
+        const totalTemporales = mujeresTemporales + hombresTemporales;
+        totalTemporalesInput.value = totalTemporales;
+    }
+
+    mujeresTemporalesInput.addEventListener('input', function() {
+        validarNumero(mujeresTemporalesInput);
+        actualizarTotalTemporales();
+    });
+    hombresTemporalesInput.addEventListener('input', function() {
+        validarNumero(hombresTemporalesInput);
+        actualizarTotalTemporales();
+    });
+});
     </script>
     
 

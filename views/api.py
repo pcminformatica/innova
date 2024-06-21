@@ -2630,6 +2630,7 @@ def save_catalog_surveys_SDE():
             surveys.company_id = company.id
             surveys.catalog_surveys_id = 1
             surveys.respuestas = txt_preguntas
+            surveys.created_by = current_user.id
             db.session.add(surveys)    
 
             db.session.commit()
@@ -3306,3 +3307,30 @@ def _d_diagnosticorespuestas():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
+
+@app.route('/api/companies/sde/en', methods=['GET'])
+def get_companies_sde_1():
+    try:
+        # Consulta para obtener las empresas y sus respuestas, filtrando por catalog_surveys_id = 1
+        companies_surveys = (
+            db.session.query(Company.dni,Inscripciones.name,Company.name, surveys_sde.respuestas)
+            .join(surveys_sde, Company.id == surveys_sde.company_id)
+            .join(Inscripciones, Company.inscripcion_id == Inscripciones.id)
+            .filter(surveys_sde.catalog_surveys_id == 1,surveys_sde.created_by==3)
+            .all()
+        )
+
+        # Procesar los resultados para obtener la información deseada
+        result = [
+            {
+                'company_dni': company_dni,
+                'name': name,
+                'inscripciones_name': company_name,
+                'respuestas': respuestas
+            }
+            for company_dni,name,company_name, respuestas, in companies_surveys
+        ]
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

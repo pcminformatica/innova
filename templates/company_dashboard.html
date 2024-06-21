@@ -1127,8 +1127,9 @@
                             
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
-                                        <div style="display: none;" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-6-tablet">
-                                            <h2>Encuestas de evaluación del proyecto</h2>
+                                        {% if company.action_plan_progress == 100 %}
+                                        <div  class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <p>Encuestas de evaluación del proyecto</p>
         
                                             <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
                                                 <thead>
@@ -1152,39 +1153,23 @@
                                                     </th>
                                                     <td class="mdc-data-table__cell" scope="row">
                               
-                                                        <a  href="#" onclick="encuestas()" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                                        <a  href="/encuesta/im/{{company.id}}/encuestas"  class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
                                                     
                                                             <span class="mdc-button__ripple"></span>
                                                             <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
-                                                            <span class="mdc-button__label">Generar Link</span>
+                                                            <span class="mdc-button__label">Ir a</span>
                                                         </a>
                                                     </td>
                             
                                                   </tr>
             
-                                                  <tr class="mdc-data-table__row">
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                       2
-                                                    </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        ENCUESTA DE IMPACTO
-                                                    </th>
-                                                    <td class="mdc-data-table__cell" scope="row">
-                                     
-                                                        <a href="{{ url_for('home._formulario_encuestas_impacto') }}" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
-                                                    
-                                                            <span class="mdc-button__ripple"></span>
-                                                            <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
-                                                            <span class="mdc-button__label">Generar Link</span>
-                                                        </a>
-                                                    </td>
-                            
-                                                  </tr>
+                
                                                 </tbody>
                                             </table>
                                 
 
                                         </div>
+                                        {% endif %}
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-6-tablet">
                                             <h2>ENCUESTAS DE LAS ASESORÍAS </h2>
 
