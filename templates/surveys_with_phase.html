@@ -1,0 +1,697 @@
+{% extends 'layout_main_drawer_table.html' %}
+{% block page_description %}Innova Mujer Home, Casa, Dashboard, Home{% endblock %}
+{% block page_title %}Innova Mujer Home{% endblock %}
+{% block css_script_section %}
+<meta http-equiv="Cache-Control" content="no-store">
+<style>
+    .alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+  .content {
+  display: none;
+}
+
+.content--active {
+  display: block;
+}
+
+.mdc-button--small {
+        font-size: 10px; /* Ajusta el tamaño de la fuente según tus necesidades */
+    }
+
+    .mdc-button--fullwidth{
+        width: 100%;
+    }
+
+</style>
+<style>
+     /* Estilos para filas verdes (menos de 180 días) */
+     .green-row {
+        background-color: #DFF0D8; /* Verde suave */
+    }
+
+    /* Estilos para filas naranjas (entre 180 y 365 días) */
+    .orange-row {
+        background-color: #FFD699; /* Naranja suave */
+    }
+
+    /* Estilos para filas rojas (más de 365 días) */
+    .red-row {
+        background-color: #FFB2B2; /* Rojo suave */
+    }
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 60vh;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+
+
+<div id="modal1_sde" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1_sde')">&times;</span>
+        <!-- Contenido específico para modal1 -->
+                <!-- Tu contenido aquí -->
+        <div class="mdc-layout-grid container">
+            <!-- ... (tu código HTML) ... -->
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="container-dashboard--card-info">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                            <div class="mdc-card__content">
+                                <div class="mdc-typography--headline5 s-font-color-secondary">SDE</div>
+                                <form id="formPIC"  action = "" method="POST" enctype = "multipart/form-data">
+                                    <input type="hidden" id="txt_company_dni" name="txt_company_dni"  value="">
+                                    <input type="hidden" id="txt_company_id" name="txt_company_id"  value="">
+                              
+                                    <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-phone">
+                                           
+
+                                      <div class="mdc-typography--body1">
+                                        Asignar ha:
+                                      </div>
+                                      <div class="mdc-select mdc-select--filled demo-width-class"  id="txt_user" data-assigned-var>
+                                          <div class="mdc-select__anchor"
+                                               role="button"
+                                               aria-haspopup="listbox"
+                                               aria-expanded="false"
+                                               aria-labelledby="demo-label demo-selected-text">
+                                            <span class="mdc-select__ripple"></span>
+                                            <span id="demo-label" class="mdc-floating-label">Especialista:</span>
+                                            <span class="mdc-select__selected-text-container">
+                                              <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                                            </span>
+                                            <span class="mdc-select__dropdown-icon">
+                                              <svg
+                                                  class="mdc-select__dropdown-icon-graphic"
+                                                  viewBox="7 10 10 5" focusable="false">
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-inactive"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 10 12 15 17 10">
+                                                </polygon>
+                                                <polygon
+                                                    class="mdc-select__dropdown-icon-active"
+                                                    stroke="none"
+                                                    fill-rule="evenodd"
+                                                    points="7 15 12 10 17 15">
+                                                </polygon>
+                                              </svg>
+                                            </span>
+                                            <span class="mdc-line-ripple"></span>
+                                          </div>
+                                        
+                                          <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                                            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+                                                    {% for user in users %}
+                                                      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="false" data-value="{{ user.id }}" role="option">
+                                                          <span class="mdc-deprecated-list-item__ripple"></span>
+                                                          <span class="mdc-deprecated-list-item__text">
+                                                          {{ user.name }}
+                                                          </span>
+                                                      </li>
+                                                    {% endfor %}
+                                       
+                                            </ul>
+                                          </div>
+                                        </div>
+                                    </div>
+                              
+                                    <br><br><br>
+                                    
+                                    
+            
+
+                                    <div class="s-font-align-center">
+                                        <button id="submitSaveButton" onclick="sendCompany()" type="button" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" >
+                                            
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                            <span class="mdc-button__label">Actualizar</span>
+                                        </button>
+                                    </div>
+                                    </form>    
+                     
+                             
+                            </div>
+                            <div class="mdc-card__actions">
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <!-- Contenido específico para modal2 -->
+        <!-- Tu contenido aquí -->
+        <div class="mdc-layout-grid container">
+            <!-- ... (tu código HTML) ... -->
+        </div>
+    </div>
+</div>
+
+
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container">
+            <div class="mdc-layout-grid__inner">
+  
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="container-dashboard--messages">
+                        <div class="mdc-card mdc-card--color-on-primary">
+                          <div id="profiles" class="mdc-tab-bar" role="tablist" data-assigned-var>
+                            <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                    <span class="mdc-tab__content">
+                                    <span class="mdc-tab__text-label">Encuestas realizadas</span>
+                                    </span>
+                                    <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                    </span>
+                                    <span class="mdc-tab__ripple"></span>
+                                </button>
+      
+
+                         
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                            <!-- Inicio  -->
+                            <div class="content content--active">
+                            
+                              <div class="mdc-layout-grid">
+                                  <div class="mdc-layout-grid__inner">
+                                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                        <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                          <div class="mdc-data-table__table-container">
+                                        <table id="etapa_1" class="mdl-data-table_normal data_table_buttons"  cellspacing="0" style="white-space: normal;">
+                                          <thead id="tableHead">
+                                          <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ID</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Título de la Pregunta</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Respuestas </th>
+                
+                               
+                                          </tr>
+                                          </thead>
+                                          
+                                          <tbody id="tableBody" class="mdc-data-table__content">
+                                  
+                                          </tbody>
+
+                                          </table>
+                                          </div>
+                                          <div class="mdc-data-table__progress-indicator">
+                                          <div class="mdc-data-table__scrim"></div>
+                                          <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                          <div class="mdc-linear-progress__buffer">
+                                          <div class="mdc-linear-progress__buffer-bar"></div>
+                                          <div class="mdc-linear-progress__buffer-dots"></div>
+                                          </div>
+                                          <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                          </div>
+                                          <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                          <span class="mdc-linear-progress__bar-inner"></span>
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                          
+                                      </div>
+
+                                  </div>                            
+                              </div>
+                  
+                          </div>
+                          <!-- Lista de usuarios  -->
+                          <div class="content content">
+                          
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                      <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                        <div class="mdc-data-table__table-container">
+                                        <table id="etapa_2" class="mdl-data-table_normal data_table" width="100%" cellspacing="0" style="white-space: normal;">
+                                        <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignacion</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Categoría de avance PA</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Porcentaje de avance PA</th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Especialista</th>
+                            
+                                          
+                                        </tr>
+                                        </thead>
+                                        
+                                        <tbody id="tableBody_2" class="mdc-data-table__content">
+
+                                        </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="mdc-data-table__progress-indicator">
+                                        <div class="mdc-data-table__scrim"></div>
+                                        <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                        <div class="mdc-linear-progress__buffer">
+                                        <div class="mdc-linear-progress__buffer-bar"></div>
+                                        <div class="mdc-linear-progress__buffer-dots"></div>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                        <span class="mdc-linear-progress__bar-inner"></span>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>                            
+                            </div>
+                  
+                          </div>
+              
+                            <!-- Inicio  -->
+                        <div class="content content">
+    
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet">
+                                    <div class="mdc-data-table" style="background-color: white;width: 100%;" >
+                                    <div class="mdc-data-table__table-container">
+                                      
+                                    <table id="etapa_3" class="mdl-data-table_normal data_table_buttons" width="100%" cellspacing="0" style="white-space: normal;">
+                                    <thead>
+                                    <tr class="mdc-data-table__header-row">
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Opciones </th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DNI </th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresa</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Especialista</th>
+                                    </tr>
+                                    </thead>
+                                    
+                                    <tbody id="tableBody_3" class="mdc-data-table__content">
+
+
+                            
+                                    </tbody>
+
+                                    </table>
+                                    </div>
+                                    <div class="mdc-data-table__progress-indicator">
+                                    <div class="mdc-data-table__scrim"></div>
+                                    <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+                                    <div class="mdc-linear-progress__buffer">
+                                    <div class="mdc-linear-progress__buffer-bar"></div>
+                                    <div class="mdc-linear-progress__buffer-dots"></div>
+                                    </div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                                    <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div>
+                                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                                    <span class="mdc-linear-progress__bar-inner"></span>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>                            
+                        </div>
+            
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+
+
+<script>
+    function setJson(data){
+        jsonData =data
+    }
+    window.addEventListener('load', function() {
+
+    int()
+    })
+
+    function int(){
+    let apiUrl = `/api/companies/sde/en`;
+    let headers = new Headers();
+    let requestOptions = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow'
+    };
+
+    swcms.getFetch(apiUrl, 'loadCompany', requestOptions).then((data) => {
+        // La función `loadCompany` se llama automáticamente con los datos recibidos
+    });
+}
+
+function loadCompany(data) {
+            const tableHead = document.querySelector("#tableHead");
+            const tableBody = document.querySelector("#tableBody");
+
+            if (!tableHead || !tableBody) {
+                console.error('Elementos de tabla no encontrados');
+                return;
+            }
+
+            $('#etapa_1').DataTable().clear();
+            $('#etapa_1').DataTable().destroy();
+
+            let preguntas = [];
+
+            // Recopilar preguntas con sus IDs
+            data.forEach(record => {
+                if (Array.isArray(record["respuestas"])) {
+                    record["respuestas"].forEach(respuesta => {
+                        preguntas.push({ id: respuesta.ids, titulo: respuesta.titulopregunta });
+                    });
+                }
+            });
+
+            // Eliminar duplicados y ordenar por ID
+            preguntas = [...new Map(preguntas.map(item => [item.id, item])).values()];
+            preguntas.sort((a, b) => a.id.localeCompare(b.id));
+
+            // Crear la cabecera de la tabla
+            tableHead.innerHTML = ''; 
+            let headerRow = document.createElement("tr");
+
+            let dniHeader = document.createElement("th");
+            dniHeader.textContent = "DNI de la Empresa";
+            headerRow.appendChild(dniHeader);
+
+            let inscripcionesNameHeader = document.createElement("th");
+            inscripcionesNameHeader.textContent = "Nombre de la Empresa";
+            headerRow.appendChild(inscripcionesNameHeader);
+
+            let nameHeader = document.createElement("th");
+            nameHeader.textContent = "Nombre del Encargado";
+            headerRow.appendChild(nameHeader);
+
+            preguntas.forEach(pregunta => {
+                let th = document.createElement("th");
+                th.textContent = pregunta.titulo;
+                headerRow.appendChild(th);
+            });
+            tableHead.appendChild(headerRow);
+
+            // Crear el cuerpo de la tabla
+            tableBody.innerHTML = '';
+
+            data.forEach(record => {
+                const row = document.createElement("tr");
+
+                let dniCell = document.createElement("td");
+                dniCell.textContent = record["company_dni"] || 'Sin DNI';
+                row.appendChild(dniCell);
+
+                let inscripcionesNameCell = document.createElement("td");
+                inscripcionesNameCell.textContent = record["inscripciones_name"] || 'Sin nombre';
+                row.appendChild(inscripcionesNameCell);
+
+                let nameCell = document.createElement("td");
+                nameCell.textContent = record["name"] || 'Sin encargado';
+                row.appendChild(nameCell);
+
+                let respuestasDict = {};
+                if (Array.isArray(record["respuestas"])) {
+                    record["respuestas"].forEach(respuesta => {
+                        respuestasDict[respuesta.ids] = respuesta.Respuestas.join(", ");
+                    });
+                }
+
+                preguntas.forEach(pregunta => {
+                    let cell = document.createElement("td");
+                    cell.textContent = respuestasDict[pregunta.id] || 'Sin respuesta';
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+
+            $('#etapa_1').DataTable({
+                autoWidth: false,
+                dom: 'PBflrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                columnDefs: [
+                    {
+                        targets: ['_all'],
+                        className: 'mdc-data-table__cell',
+                    },
+                ],
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json",
+                },
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                    });
+                }
+            });
+        }
+      
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal(modalId) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
+}
+
+// Cierra el modal si el usuario hace clic fuera de él
+window.addEventListener('click', (event) => {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
+});
+
+// Cierra el modal si el usuario presiona la tecla Escape
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+            closeModal(modal.id);
+        });
+    }
+});
+
+
+function actualizarEtapa(id, code) {
+    // Lógica para la función actualizarEtapa con los parámetros id y code
+    console.log("ID:", id);
+    console.log("Code:", code);
+    setCompany(code,id)
+}
+
+function createButton(id, code) {
+    // Crear el botón
+    let button = document.createElement("button");
+    button.onclick = function() {
+        // Al hacer clic, llamar a la función actualizarEtapa con los valores deseados
+        actualizarEtapa(id, code);
+    };
+    button.type = "button";
+    button.className = "mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary";
+    button.innerHTML = `
+    
+        <span class="mdc-button__label">Asignar</span>
+    `;
+
+    // Crear la celda y añadir el botón a la celda
+    let btntd = document.createElement("td");
+    btntd.appendChild(button);
+
+    return btntd;
+}
+let dni,idcode;
+function setCompany(vdni,vidcode){
+    dni = vdni;
+    idcode = vidcode;
+    openModal('modal1_sde')
+}
+function createLink(url, label, className) {
+    // Crear el enlace
+    let link = document.createElement("a");
+    link.href = url;
+    link.className = className;
+
+    // Crear el contenido del enlace
+    link.innerHTML = `
+        <span class="mdc-button__ripple"></span>
+        <span class="mdc-button__label">${label}</span>
+    `;
+
+
+
+    return link;
+}
+
+const mdcAssignedVars = {};
+function sendCompany(){
+    console.log('dni')
+    console.log(dni)
+    console.log(idcode)
+    const Swal = swcms.returnSwal()
+
+  
+    swcms.mdcSelects.forEach((sel) => {
+        if (sel.assignedVar)
+            mdcAssignedVars[sel.assignedVar] = sel;
+    });
+  let postData = {
+    'txt_user': mdcAssignedVars['txt_user'].value.trim() || null,
+    'dni':dni,
+    'txt_id':idcode,
+  };
+
+  console.log(postData)
+
+  let apiUrl = '/api/companies/sde/en';
+      document.getElementById('submitSaveButton').disabled = true;
+
+      swcms.postFetch(apiUrl, postData).then((data) => {
+        Swal.fire(
+          'Gracias',
+          'Empresa asignada y creada en INNOVA MUJER!',
+          'success'
+        )
+        window.setTimeout(() => { window.location.assign('/home/'); }, 3000);
+    
+      }).catch((error) => {
+        Swal.fire(
+          'Error de conexión',
+          'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+          'error'
+        )
+        document.getElementById('submitSaveButton').disabled = false;
+      });
+
+  console.log('---dni---')
+}
+</script>
+{% endblock %}

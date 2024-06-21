@@ -929,3 +929,15 @@ def _surveys_view(surveys_id):
 
     surveys =  surveys_sde.query.filter_by(id=surveys_id).first()
     return render_template('evaluaciones/surveys_view.html', surveys=surveys)
+
+@home.route('/surveys_with_catalog_surveys/sde/12',methods=['GET', 'POST'])
+@login_required
+def _surveys_with_catalog_surveys1():
+    surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=1,created_by=current_user.id).all()
+    return render_template('evaluaciones/surveys_with_catalog_surveys_view.html', surveys_data=surveys_data)
+
+@home.route('/surveys_with_phase/sde/12',methods=['GET', 'POST'])
+@login_required
+def _surveys_with_phase():
+    surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=1,created_by=current_user.id).all()
+    return render_template('surveys_with_phase.html', surveys_data=surveys_data)
