@@ -187,3 +187,5 @@ migracionall.py
 static/elegibles.json
 static/inscripcion.json
 migracionall1.py
+.DS_Store
+gunicorn_config.py
