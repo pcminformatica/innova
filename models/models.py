@@ -1138,7 +1138,8 @@ class surveys_sde(db.Model):
     catalog_surveys = db.relationship("catalog_surveys_sde")
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship("User")
-
+    document_local = db.Column(db.String(250), unique=False, nullable=True)
+    
 class catalog_surveys_sde(db.Model):
     _tablename__ = 'catalog_surveys_sde'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    

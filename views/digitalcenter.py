@@ -1663,188 +1663,53 @@ def _company_monitoring_list_etapa3():
     categories = db.session.query(catalogCategory).all()
     #for diagnosi in diagnosis:
     #    lista.append(diagnosi.company_id)
-    if 1==1:
-
-
-  
-        company = Company.query.join(User, User.id==Company.created_by)\
-            .filter(Company.enabled==True,Company.action_plan_progress==100)\
-            .order_by(asc(Company.date_created))\
-            .all()
-        for company_data in company:
-            actions = ActionPlan.query.filter(ActionPlan.company_id==company_data.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
-            if company_data.action_plan_progress is not None and actions:
-            # Calcula la categoría según el valor de action_plan_progress
-                
-                if company_data.action_plan_progress :
-                    category_start = int(company_data.action_plan_progress // 20) * 20
-                    category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
-                else:
-                    category_p = "0 de 20"
-            else:
-                category_p = "No tiene plan de acción"
-            company_data.category_progress = category_p
-        allowed_status_short_names = [1, 2, 3, 6]
-        # Definir un alias para la relación con ActionPlan
-        action_plan_alias = aliased(ActionPlan)
-        companies = db.session.query(Company)\
-            .filter(
-                Company.enabled == True,
-                Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
-                Company.action_plan_progress != None  # Agregar condición para action_plan_progress
-            )\
-            .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
-            .filter(action_plan_alias.fase == 1)\
-            .distinct()\
-            .all()
-        data = []
-    
-
-
-
-        for company_data in companies:  # Cambio el nombre de la variable a company_data
-            if company_data.created_by_data:
-                asignada = company_data.created_by_data.name
-            else:
-                asignada = ''
-            if company_data.inscripcion:
-                name = company_data.inscripcion.name
-            else:
-                name = ''
-            company_info = {
-                'company_id': company_data.id,  # Cambiado de company.id a company_data.id
-                'company_name': company_data.name,  # Cambiado de company.name a company_data.name
-                'date_action_plan': company_data.date_action_plan,
-                'action_plan_progress': company_data.action_plan_progress,
-                'days_since_action_plan': None,  # Inicialmente se establece en None
-                'categories': {},
-                'asignada':asignada,
-                'name':name
-                
-            }
-
-            if company_data.date_action_plan:
-                # Calcular los días transcurridos desde date_action_plan hasta la fecha actual
-                current_date = datetime.now()
-                days_since_action_plan = (current_date - company_data.date_action_plan).days
-                company_info['days_since_action_plan'] = days_since_action_plan
-
-            for category in categories:
-                action_plans = ActionPlan.query\
-                    .filter(ActionPlan.company_id == company_data.id, ActionPlan.cancelled != True, ActionPlan.fase == 1)\
-                    .join(CatalogServices, ActionPlan.services_id == CatalogServices.id)\
-                    .filter(CatalogServices.catalog_category == category.id)\
-                    .all()
-
-                category_action_plans = []
-                for action_plan in action_plans:
-                    category_action_plans.append({
-                        'action_plan_id': action_plan.id,
-                        'description': action_plan.descripcion,
-                        'progress': action_plan.progress,
-                        'service_name': action_plan.services.name,
-                        'service_name_short': action_plan.services.name_short
-                    })
-
-                company_info['categories'][category.name] = category_action_plans
-
-            data.append(company_info)
-    else:
-        company = Company.query.join(User, User.id==Company.created_by).filter(Company.enabled==True, or_(Company.created_by == current_user.id,Company.id.in_(lista))).order_by(asc(Company.date_created)).all()
-        for company_data in company:
-            if company_data.action_plan_progress is not None:
-            # Calcula la categoría según el valor de action_plan_progress
-                actions = ActionPlan.query.filter(ActionPlan.company_id==company_data.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
-                if company_data.action_plan_progress and actions:
-
-                    category_start = int(company_data.action_plan_progress // 20) * 20
-                    category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
-                else:
-                    category_p = "0 de 20"
-            else:
-                category_p = "No tiene plan de acción"
-            company_data.category_progress = category_p
-        allowed_status_short_names = [1, 2, 3, 6]
-        # Definir un alias para la relación con ActionPlan
-        action_plan_alias = aliased(ActionPlan)
-
-        # Consultar empresas que cumplan con las condiciones
-        companies = db.session.query(Company)\
-            .filter(
-                
-                Company.enabled == True,
-                or_(Company.created_by == current_user.id,Company.id.in_(lista)),
-                Company.status.has(CompanyStatus.name_short.in_(allowed_status_short_names)),
-                Company.action_plan_progress != None  # Agregar condición para action_plan_progress
-            )\
-            .join(action_plan_alias, action_plan_alias.company_id == Company.id)\
-            .join(User, User.id==Company.created_by)\
-            .filter(action_plan_alias.fase == 1)\
-            .distinct()\
-            .all()
-        data = []
+    company = Company.query.join(User, User.id==Company.created_by)\
+        .filter(Company.enabled==True,Company.action_plan_progress==100)\
+        .order_by(asc(Company.date_created))\
+        .all()
+    for company_data in company:
+        actions = ActionPlan.query.filter(ActionPlan.company_id==company_data.id,ActionPlan.fase!=0,ActionPlan.cancelled ==False).all()
+        if company_data.action_plan_progress is not None and actions:
+        # Calcula la categoría según el valor de action_plan_progress
             
-
-        # Obtener todas las categorías
-        categories = db.session.query(catalogCategory).all()
-
-        for company_data in companies:  # Cambio el nombre de la variable a company_data
-            if company_data.created_by_data:
-                asignada = company_data.created_by_data.name
+            if company_data.action_plan_progress :
+                category_start = int(company_data.action_plan_progress // 20) * 20
+                category_p = f"{category_start} de {category_start + 20}" if category_start < 100 else "80 de 100"
             else:
-                asignada = ''
-            if company_data.inscripcion:
-                name = company_data.inscripcion.name
-            else:
-                name = ''
-            company_info = {
-                'company_id': company_data.id,  # Cambiado de company.id a company_data.id
-                'company_name': company_data.name,  # Cambiado de company.name a company_data.name
-                'date_action_plan': company_data.date_action_plan,
-                'action_plan_progress': company_data.action_plan_progress,
-                'days_since_action_plan': None,  # Inicialmente se establece en None
-                'categories': {},
-                'asignada':asignada,
-                'name':name
-                
-            }
+                category_p = "0 de 20"
+        else:
+            category_p = "No tiene plan de acción"
+        company_data.category_progress = category_p
+        resultados = db.session.query(surveys_sde).filter(surveys_sde.company_id == company_data.id).first()
+        # Define la fecha límite para la comparación
+        date_limit = datetime(2024, 6, 21)
 
-            if company_data.date_action_plan:
-                # Calcular los días transcurridos desde date_action_plan hasta la fecha actual
-                current_date = datetime.now()
-                days_since_action_plan = (current_date - company_data.date_action_plan).days
-                company_info['days_since_action_plan'] = days_since_action_plan
+        # Realiza la consulta
+        encuesta = (
+            surveys_sde.query
+            .filter(
+                surveys_sde.company_id == company_data.id,
+                surveys_sde.catalog_surveys_id == 1,
+                surveys_sde.date_created > date_limit
+            )
+            .first()
+        )
 
-            for category in categories:
-                action_plans = ActionPlan.query\
-                    .filter(ActionPlan.company_id == company_data.id, ActionPlan.cancelled != True, ActionPlan.fase == 1)\
-                    .join(CatalogServices, ActionPlan.services_id == CatalogServices.id)\
-                    .filter(CatalogServices.catalog_category == category.id)\
-                    .all()
+        # Establece la satisfacción en función de si se encontró la encuesta
+        satisfaccion = not encuesta
 
-                category_action_plans = []
-                for action_plan in action_plans:
-                    category_action_plans.append({
-                        'action_plan_id': action_plan.id,
-                        'description': action_plan.descripcion,
-                        'progress': action_plan.progress,
-                        'service_name': action_plan.services.name,
-                        'service_name_short': action_plan.services.name_short
-                    })
-
-                company_info['categories'][category.name] = category_action_plans
-
-            data.append(company_info)  
-    references = ActionPlanReferences.query.filter_by(employe_assigned=current_user.id).order_by(desc(ActionPlanReferences.id)).all()
-    lista = []
-    for reference in references:
-        lista.append(reference.action_plan.company.id)
-    company_references = Company.query.filter(Company.id.in_(lista)).all()
+        # Asigna el resultado a company_data
+        company_data.satisfaccion = satisfaccion
+        if encuesta:
+            company_data.encuesta_id = encuesta.id
+        else:
+            company_data.encuesta_id = ''
+        
     context = {
         'apis': company,
-        'company_references':company_references,
         'data':data,
         'categories':categories,
+
     }
     return render_template('company_monitoring_list_etapa3.html',**context)
 
@@ -3492,17 +3357,38 @@ def _gpeg_search_attentions():
     return render_template('gpeg_search_attentions.html',**context)
 
 
-@digitalcenter.route('/formulario/2/<int:company_id>/form/',methods = ['GET', 'POST'])
-@login_required
-def _company_change_form_form2(company_id):
-    company = Company.query.filter_by(id=company_id).first()
+@digitalcenter.route('/formulario/<int:surveys_sde_id>/surveyssde/document/2',methods = ['GET', 'POST'])
+@login_required 
+
+def _surveys_sde_satisfacion_form(surveys_sde_id):
+    surveys =  surveys_sde.query.filter(surveys_sde.id == surveys_sde_id).first()
+    print(surveys)
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'upload-carta' not in request.files:
-            return redirect(url_for('digitalcenter._company_document_form_add',company_id=company.id))
-    status = CompanyStage.query.all()
+        if 'upload-photo' not in request.files:
+            return redirect(request.url)
+        file = request.files['upload-photo']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            # initializing string
+            str2hash =  dt.now(tz.utc)
+            # encoding GeeksforGeeks using encode()
+            # then sending to md5()
+            result = hashlib.md5(str(str2hash).encode())
+            filename = str(current_user.id)+ '-' + str(result.hexdigest()) +'.'+ filename.rsplit('.', 1)[1].lower()
+            print(1111)
+            print(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            surveys.document_local = filename
+            db.session.add(surveys)
+            db.session.commit()
+    
+        return redirect(url_for('digitalcenter._company_monitoring_list_etapa3'))
     context = {
-        "company": company,
-        'status':status,
+        "surveys": surveys
     }
-    return render_template('company_change_form_2.html',**context)
+    return render_template('surveys_sde_satisfacion_form.html',**context)

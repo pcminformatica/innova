@@ -1,0 +1,148 @@
+{% extends 'layout_main-drawer--dismissible_footer_topbar.html' %}
+{% block page_description %}Innova, Innova Mujer, conexión innova, Servicios, Buscar, Profesional, Mercado, Talento{% endblock %}
+{% block page_title %}Marketplace - Innova{% endblock %}
+{% block body %}
+<style>
+    .mdc-card__media--square::before {
+  margin-top: 0px !important;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+  overflow: hidden;
+  position: relative;
+}
+#output1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<main class="s-main-content">
+    <div class="container-color-background container-size-m">
+
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-phone">
+                <div class="mdc-card  mdc-card--color-on-primary">
+                    <div class="mdc-card__primary-action" >
+                      <div class="mdc-card__media mdc-card__media--square">
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid">
+                                <div class="mdc-layout-grid__inner">
+
+                                  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-4-tablet 
+                                  mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-middle">
+                                  <p>Documento generado:</p>
+                                  <form id="formPIC"  method="POST" enctype = "multipart/form-data">
+  
+                                    <label htmlFor="upload-photo" style="margin: auto">
+                                        <input
+                                          style="display:none"
+                                          id="upload-photo"
+                                          name="upload-photo"
+                                          type="file"
+                                          onchange="loadFile(event)"
+                                        />
+                                        <Fab
+                                        <button id="submitSaveButtonPIC"  class="mdc-button mdc-button--raised mdc-button--leading">
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true"
+                                              >add</i
+                                            >
+                                            <span class="mdc-button__label">Subir encuesta </span>
+                                          </button>
+                                        </Fab>
+                                        <br />
+                                        <br />
+                                      
+                                        <Fab color="primary" size="small" component="span" aria-label="add">
+                                          <AddIcon />
+                                        </Fab>
+                                      </label>
+                                      <div class="s-font-align-center">
+                                        <button type="submit" class="mdc-button mdc-button--raised mdc-button--leading mdc-button--color-secondary" style="--mdc-ripple-fg-size: 75px; --mdc-ripple-fg-scale: 1.8784232240642684; --mdc-ripple-fg-translate-start: 16.41668701171875px, -7.866668701171875px; --mdc-ripple-fg-translate-end: 25.416671752929688px, -19.5px;">
+                                            
+                                            <span class="mdc-button__ripple"></span>
+                                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                            <span class="mdc-button__label">Enviar documento</span>
+                                        </button>
+                                    </div>
+                                </form>  
+                                    
+   
+
+
+            
+                           
+
+                      </div>
+                                 
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <!-- ... additional primary action content ... -->
+                      <div class="mdc-card__ripple"></div>
+                    </div>
+
+
+                    <br>
+                    <br>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+     
+        <div class="container-marketplace--drawer-app-content mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+
+            
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/bundle/marketplace.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dc.js') }}"></script>
+
+<script>
+  function aprobarDocumento(){
+
+const Swal = swcms.returnSwal()
+
+
+let postData = {
+  "txt_documente_id":""
+};
+
+console.log(postData)
+
+let apiUrl = '/api/aprobar/documento/';
+
+
+swcms.postFetch(apiUrl, postData).then((data) => {
+  Swal.fire(
+  'Éxito',
+  'Documento aprobado',
+  'success'
+  )
+  window.setTimeout(() => { window.location.reload(); }, 1500);
+
+}).catch((error) => {
+  Swal.fire(
+  'Error de conexión',
+  'Por favor revisar tu conexión a internet, si el problema persiste contacta al administrador del sistema',
+  'error'
+  )
+  document.getElementById('btn_generar_carta').disabled = false;
+});
+
+}
+</script>
+{% endblock %}
