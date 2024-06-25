@@ -96,11 +96,12 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Plan de acción</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Dirección</th>
-
+                                               
+                                             
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
+
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                               
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
                                          
@@ -174,9 +175,7 @@
                                                 {% endif %}
                                         
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    {{ api.category_progress }}
-                                                </th>
+                                         
                                                 <th class="mdc-data-table__cell" scope="row">
                                                     {% if api.inscripcion %}
                                                         {{ api.inscripcion.correo }}
