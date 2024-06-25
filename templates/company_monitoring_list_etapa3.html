@@ -99,11 +99,11 @@
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Plan de acción</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Dirección</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso del plan de acción</th>
+
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Correo</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Telefono</th>
+                                              
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
-                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
+                                         
                                             </tr>
                                             </thead>
                                             
@@ -166,23 +166,8 @@
                                                         {{ api.stage.name }}
                                                     {% endif %}
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    {% if api.have_action_plan %}
-                                                        {{api.action_plan_progress}} %
-                                                    {% else %}
-                                                        {% if api.stage.name_short == 'E1' %}
-                                                            Empresa en etapa 1
-                                                        {% else %}
-                                                            0.0 %
-                                                        {% endif %}
 
-                                                    {% endif %}
-                                                </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    {% if api.inscripcion %}
-                                                    {{ api.inscripcion.phone }}
-                                                {% endif %}
-                                                </th>
+
                                                 <th class="mdc-data-table__cell" scope="row">
                                                     {% if api.address %}
                                                     {{ api.address }}
@@ -207,11 +192,7 @@
                                                         {{ api.created_by_data.name }}
                                                     {% endif %}
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    {% if api.date_created %}
-                                                        {{ api.date_created.strftime('%Y-%m-%d') }}
-                                                        {% endif %}
-                                                </th>
+                    
                                                 
                                             </tr>
                             
