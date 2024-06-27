@@ -165,7 +165,7 @@
                                                     <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
                                                         <span class="mdc-text-field__ripple"></span>
                                                     
-                                                        <input id="txt_hora"  class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" >
+                                                        <input id="txt_hora"  class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" >
                                                         <span lass="mdc-line-ripple"></span>
                                                     </label>
                                                 </div>
@@ -412,6 +412,7 @@
         var txt_fecha = document.getElementById("txt_fecha").value.trim() || null
         var txt_url = document.getElementById("txt_url").value.trim() || null
         var txt_hora = document.getElementById("txt_hora").value.trim() || null
+
         const fileInput = document.getElementById('fileInput').files[0];
 
         var txt_finalizo =  document.getElementById('checkbox-Finalizo')
