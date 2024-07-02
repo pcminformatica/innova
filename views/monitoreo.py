@@ -716,8 +716,6 @@ def _indicadores_inscritas_4():
 
 
 from views.digitalcenter import convertir_a_datetime
-from sqlalchemy.orm import aliased
-from sqlalchemy import func, and_
 @monitoreo.route('/indicador/perfil/<int:user_uid>/view',methods=['GET', 'POST'])
 @login_required
 def _indicadores_perfil_asesor(user_uid):
@@ -747,31 +745,14 @@ def _indicadores_perfil_asesor(user_uid):
             diagnosticos = list(e for e in api['results'] if e['_submitted_by']  in user.extra_info.kobotoolbox['kobotoolbox_access'] and range1 <= convertir_a_datetime(e['_submission_time']) <= range2  )
 
 
-        # Crear un alias para la tabla DiagnosisCompany para usar en la subconsulta
-        dc_alias = aliased(DiagnosisCompany)
-
-        # Subconsulta para obtener el id de cada grupo de company_id con la fecha más temprana (date_created)
-        subquery = db.session.query(
-            dc_alias.id,
-            dc_alias.company_id,
-            func.row_number().over(
-                partition_by=dc_alias.company_id,
-                order_by=dc_alias.date_created
-            ).label('row_number')
-        ).filter(
-            dc_alias.date_created.between(range1, range2),
-            dc_alias.origin == 2,
-            dc_alias.created_by == user.id
-        ).subquery()
-
-        # Consulta principal que filtra los registros con row_number == 1
-        diagnosticos_innova = db.session.query(DiagnosisCompany).join(
-            subquery,
-            and_(
-                DiagnosisCompany.id == subquery.c.id,
-                subquery.c.row_number == 1
-            )
-        ).all()
+        # Filtrar registros en el rango de fechas y con las condiciones de origen, creado por y company_id especificadas
+        diagnosticos_innova = DiagnosisCompany.query.filter(
+            DiagnosisCompany.date_created.between(range1, range2),
+            DiagnosisCompany.origin == 2,
+            DiagnosisCompany.created_by == user.id,
+            DiagnosisCompany.first == True
+        ).distinct(DiagnosisCompany.company_id).all()
+        
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
         companys1 = Company.query.join(User, User.id == Company.created_by).join(CompanyStatus, Company.status_id == CompanyStatus.id).filter(
             or_(

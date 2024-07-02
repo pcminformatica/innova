@@ -851,7 +851,7 @@ class DiagnosisCompany(db.Model):
     origin = db.Column(db.Integer, unique=False, nullable=True, default=1)
     respuestas = db.Column(db.JSON, unique=False, nullable=True)
     resultados = db.Column(db.JSON, unique=False, nullable=True)
-
+    first = db.Column(db.Boolean, nullable=True, default=False)
 
 # Appointments Class
 class ActionPlan(db.Model):

@@ -2718,8 +2718,6 @@ def _init_stage_company():
         db.session.commit()
     return 'listo'
 
-
-
 @digitalcenter.route('/update/stage/x1',methods=['GET', 'POST'])
 @login_required
 def _init_stage_company32():
@@ -3197,7 +3195,8 @@ def _company_rango_list():
         .join(ActionPlan)
         .join(ActionPlanHistory)
         .filter(
-            ActionPlanHistory.date_created.between(fecha_a, fecha_b)
+            ActionPlanHistory.date_created.between(fecha_a, fecha_b),
+            Company.enabled==True
         )
         .all()
     )
@@ -3326,19 +3325,19 @@ def _gpeg_search_attentions():
         company for company in Company.query.join(ActionPlan, ActionPlan.company_id == Company.id)
                             .join(ActionPlanHistory, ActionPlanHistory.action_plan_id == ActionPlan.id)
                             .filter(ActionPlanHistory.date_created >= start_date,
-                                    ActionPlanHistory.date_created < end_date)
+                                    ActionPlanHistory.date_created < end_date,Company.enabled==True)
                             .distinct()
     )
 
     companies_action_plan_set = set(
         company for company in Company.query.filter(Company.date_action_plan >= start_date,
-                                                    Company.date_action_plan < end_date)
+                                                    Company.date_action_plan < end_date,Company.enabled==True)
     )
 
     companies_diagnosis_set = set(
         company for company in Company.query.join(DiagnosisCompany)
                             .filter(DiagnosisCompany.date_created >= start_date,
-                                    DiagnosisCompany.date_created < end_date)
+                                    DiagnosisCompany.date_created < end_date,Company.enabled==True)
                             .distinct()
     )
 
@@ -3392,3 +3391,35 @@ def _surveys_sde_satisfacion_form(surveys_sde_id):
         "surveys": surveys
     }
     return render_template('surveys_sde_satisfacion_form.html',**context)
+
+@app.route('/update_diagnosis_company', methods=['POST','GET'])
+def update_diagnosis_company():
+    # Subconsulta para obtener el id de cada grupo de company_id con la fecha más temprana (date_created)
+    dc_alias = aliased(DiagnosisCompany)
+    subquery = db.session.query(
+        dc_alias.id,
+        dc_alias.company_id,
+        func.row_number().over(
+            partition_by=dc_alias.company_id,
+            order_by=dc_alias.date_created
+        ).label('row_number')
+    ).filter(
+        dc_alias.origin == 2,
+    ).subquery()
+    
+    # Obtener las instancias correspondientes
+    to_update = db.session.query(DiagnosisCompany).join(
+        subquery,
+        and_(
+            DiagnosisCompany.id == subquery.c.id,
+            subquery.c.row_number == 1
+        )
+    ).all()
+    
+    # Actualizar el campo `first`
+    for item in to_update:
+        item.first = True
+    
+    db.session.commit()
+    
+    return jsonify({"message": "DiagnosisCompany records updated successfully"}), 200

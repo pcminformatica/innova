@@ -3300,6 +3300,7 @@ def _d_diagnosticorespuestas():
             diagnosis.resultados =  json.loads( str(resultados))
             diagnosis.created_by = current_user.id
             diagnosis.origin = 2
+            diagnosis.first = True
             db.session.add(diagnosis)
             db.session.commit()
             print(resultados)

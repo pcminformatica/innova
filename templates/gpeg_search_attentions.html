@@ -104,6 +104,9 @@
                                               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
+                                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
+                                              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso PA</th>
                               
                                               
                                             </tr>
@@ -145,6 +148,22 @@
                                                       {{ api.inscripcion.municipio }}
                                                   {% endif %}
                                               </th>
+                                                <th class="mdc-data-table__cell" scope="row">
+                                                    {% if api.status_id %}
+                                                            {{ api.status.name }}
+                                                    {% endif %}
+                                                </th>
+
+                                                <th class="mdc-data-table__cell" scope="row">
+                                                    {% if api.stage %}
+                                                        {{ api.stage.name }}
+                                                    {% endif %}
+                                                </th>
+                                                <th class="mdc-data-table__cell" scope="row">
+                                                    {% if api.action_plan_progress %}
+                                                        {{ api.action_plan_progress }}
+                                                    {% endif %}
+                                                </th>
   
                                             </tr>
                                             {% endfor %}
@@ -159,7 +178,10 @@
                                                   <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Empresaria</th>
                                                   <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
                                                   <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Municipio</th>
-                                        
+                                                  <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Estado</th>
+                                                  <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Etapa</th>
+                                                  <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso PA</th>
+                                  
                                                       
                                               </tr>
                                           </tfoot>
