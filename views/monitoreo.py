@@ -750,6 +750,7 @@ def _indicadores_perfil_asesor(user_uid):
             DiagnosisCompany.date_created.between(range1, range2),
             DiagnosisCompany.origin == 2,
             DiagnosisCompany.created_by == user.id,
+            DiagnosisCompany.status == True
         ).distinct(DiagnosisCompany.company_id).all()
         companys = Company.query.join(User, User.id==Company.created_by).join(CompanyStatus, Company.status_id==CompanyStatus.id).filter(Company.date_created.between(txt_start_date, txt_end_date), Company.enabled==True, Company.created_by == user.id,CompanyStatus.name_short !=1 ).all()
         companys1 = Company.query.join(User, User.id == Company.created_by).join(CompanyStatus, Company.status_id == CompanyStatus.id).filter(
