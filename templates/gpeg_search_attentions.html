@@ -55,6 +55,7 @@
                                             <i class="mdc-button__icon far fa-file-excel" aria-hidden="true"></i>
                                             <span class="mdc-button__label">Buscar</span>
                                         </button>
+                                        
                                     </form>
                        
                             </div>
@@ -72,6 +73,12 @@
                             <div class="mdc-card__content" style="font-size: 28px;">
                                 <div class="mdc-layout-grid container-stats">
                                     <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet
+                                        mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--align-top ">
+                                            <div class="mdc-typography--subtitle2">
+                                                Reporte de empresas, búsqueda realizada de <b>{{ start_date.strftime('%Y-%m-%d') }}</b> hasta <b>{{ end_date.strftime('%Y-%m-%d') }}</b>
+                                            </div>
+                                        </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet
                                                     mdc-layout-grid__cell--span-3-phone mdc-layout-grid__cell--align-top container-justify-center">
                                             <div class="mdc-card__primary-action" tabindex="0">

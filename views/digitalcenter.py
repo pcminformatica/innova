@@ -3305,7 +3305,8 @@ def _gpeg_search_attentions():
     if request.method == 'POST':
         start_date = request.form.get('txt_start_date')
         end_date = request.form.get('txt_end_date')
-
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
         filtro = True
     else:
         # Definir las fechas de inicio y fin
