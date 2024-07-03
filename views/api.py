@@ -963,6 +963,7 @@ def _d_save_DiagnosisCompany():
                 diagnosis.resultados =  json.loads( str(resultados))
                 diagnosis.created_by = current_user.id
                 diagnosis.origin = 1
+                diagnosis.first = True
                 fecha_datetime = convertir_a_datetime(fecha_string)
                 if fecha_datetime:
                     diagnosis.date_created = fecha_datetime

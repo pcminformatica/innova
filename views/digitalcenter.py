@@ -3337,6 +3337,7 @@ def _gpeg_search_attentions():
     companies_diagnosis_set = set(
         company for company in Company.query.join(DiagnosisCompany)
                             .filter(DiagnosisCompany.date_created >= start_date,
+                                    DiagnosisCompany.first == True,
                                     DiagnosisCompany.date_created < end_date,Company.enabled==True)
                             .distinct()
     )
@@ -3403,8 +3404,6 @@ def update_diagnosis_company():
             partition_by=dc_alias.company_id,
             order_by=dc_alias.date_created
         ).label('row_number')
-    ).filter(
-        dc_alias.origin == 2,
     ).subquery()
     
     # Obtener las instancias correspondientes
