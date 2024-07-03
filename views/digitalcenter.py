@@ -3328,7 +3328,7 @@ def _gpeg_search_attentions():
                                     ActionPlanHistory.date_created < end_date,Company.enabled==True)
                             .distinct()
     )
-
+    companies_history =companies_history_set
     companies_action_plan_set = set(
         company for company in Company.query.filter(Company.date_action_plan >= start_date,
                                                     Company.date_action_plan < end_date,Company.enabled==True)
@@ -3352,7 +3352,7 @@ def _gpeg_search_attentions():
         print(company.name)  # Or access other company attributes
 
 
-    context = {'all_companies_set':all_companies_set, 'start_date':start_date,'end_date':end_date}  
+    context = {'all_companies_set':all_companies_set, 'start_date':start_date,'end_date':end_date,'companies_history':companies_history,'companies_action_plan_set':companies_action_plan_set,'companies_diagnosis_set':companies_diagnosis_set}  
     return render_template('gpeg_search_attentions.html',**context)
 
 
