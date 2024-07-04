@@ -1055,6 +1055,8 @@
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Servicio </th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Categoría </th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Progreso</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Modalidad</th>
+                                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Tiempo de asesoria</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Descripción</th>
                                                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Departamento</th>
@@ -1081,18 +1083,22 @@
                                                         <th class="mdc-data-table__cell" scope="row">
                                                             {{ api.progress }}
                                                          </th>
-                                                  
+                                                         <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.modality_type.name }}
+                                                         </th>
+                                                         <th class="mdc-data-table__cell" scope="row">
+                                                            {{ api.advisory_time }}
+                                                         </th>
+                                                         
                                                         <th class="mdc-data-table__cell" scope="row">
-                                                            
-                                                                {{ api.date_created }}
-                                                
+                                                            {{ api.date_created }}
                                                         </th>
                                                         <td class="mdc-data-table__cell" style="width: 80px;">
                                                             {{ api.description }}
                                                         </td>
                                                         <td class="mdc-data-table__cell" style="width: 80px;">
                                                             {% if api.action_plan.company.inscripcion %}
-                                                            {{ api.action_plan.company.inscripcion.departamento }}
+                                                                {{ api.action_plan.company.inscripcion.departamento }}
                                                             {% endif %}
                                                         </td>   
                                                         <td class="mdc-data-table__cell" style="width: 80px;">
