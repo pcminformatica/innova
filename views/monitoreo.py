@@ -236,14 +236,17 @@ def _indicadores_servicios():
         ).filter(
                 TrainingType.name_short == 'TT1'
         ).all()
-    
+    diagnosticos_innova = DiagnosisCompany.query.filter(
+        DiagnosisCompany.origin == 2,
+        DiagnosisCompany.first == True
+    ).distinct(DiagnosisCompany.company_id).all()
     inscripciones_ids_distintas = [company.company.inscripcion.id for company in capacitadasx]
     inscripciones = Inscripciones.query.filter_by(elegible = True).filter(Inscripciones.id.in_(inscripciones_ids_distintas)).filter(or_(Inscripciones.status != 0, Inscripciones.status == None)).all()
     capacitadas = len(inscripciones)  
     context = {
         'total_inscritas': total_inscritas,
         'total_elegibles':total_elegibles,
-        'diagnosticos':len(diagnosticos),
+        'diagnosticos':len(diagnosticos)+len(diagnosticos_innova),
         'planes':planes,
         'serviciosTotal':serviciosTotal,
         'serviciosNoinciados':serviciosNoinciados,
