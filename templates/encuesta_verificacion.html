@@ -1453,7 +1453,7 @@ padding-top: 10px;
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
-                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Ninguno" name="chk_servicios_financieros" id="servicios_financieros_6">
+                                                        <input class="mdc-checkbox__native-control" type="checkbox" value="Agentes financieros" name="chk_servicios_financieros" id="servicios_financieros_6">
                                                         <div class="mdc-checkbox__background">
                                                             <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                                                 <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
@@ -1462,7 +1462,7 @@ padding-top: 10px;
                                                         </div>
                                                         <div class="mdc-checkbox__ripple"></div>
                                                     </div>
-                                                    <label for="servicios_financieros_6">F) Ninguno</label>
+                                                    <label for="servicios_financieros_6">F) Agentes financieros </label>
                                                 </div>
                                                 <div class="mdc-form-field">
                                                     <div class="mdc-checkbox">
@@ -1852,7 +1852,7 @@ padding-top: 10px;
                                             </div>
                                             <div  class="mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                                 <div class="mdc-typography--body-2">
-                                                    B.2 RESULTADOS DE IMPACTO A NIVEL PERSONAL
+                                                    B.1 RESULTADOS DE IMPACTO A NIVEL PERSONAL
                                                 </div>
                                             </div>
 
@@ -2695,9 +2695,39 @@ padding-top: 10px;
                                                     <span class="mdc-line-ripple"></span>
                                                 </label>
                                             </div>
-                                            
-                       
-                                      
+                                            <div id="q32" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone"  >
+                                                <div class="mdc-typography--body1">
+                                                    <b>32.</b> Fecha y hora de la aplicación
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled">
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <input class="mdc-text-field__input" type="datetime" id="txt_datetime" name="txt_datetime" placeholder="Fecha y hora de la aplicación">
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Fecha y hora de la aplicación">Fecha y hora de la aplicación</span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div id="q33" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone"  >
+                                                <div class="mdc-typography--body1">
+                                                    <b>33.</b> ¿Código que aplica la encuesta?
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled">
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <input class="mdc-text-field__input" id="txt_codigo" type="text" name="txt_codigo" placeholder="Código que aplica la encuesta">
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Código que aplica la encuesta">Código que aplica la encuesta</span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
+                                            <div id="q34" class="mdc-layout-grid__cell--span-12-desktop nquestion mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone"  >
+                                                <div class="mdc-typography--body1">
+                                                    <b>34.</b> Dirección 
+                                                </div>
+                                                <label class="mdc-text-field mdc-text-field--filled">
+                                                    <span class="mdc-text-field__ripple"></span>
+                                                    <input class="mdc-text-field__input" type="text" id="txt_dirrecion" name="txt_dirrecion" placeholder="Dirección">
+                                                    <span class="mdc-floating-label" id="my-label-id" hiddenlabel="Especifique">Dirección</span>
+                                                    <span class="mdc-line-ripple"></span>
+                                                </label>
+                                            </div>
                                         </div>
                                         
                                     </div>
@@ -3133,7 +3163,32 @@ function guardarRespuestas() {
             txt_recomendaciones = document.getElementById('txt_recomendaciones').value;
             if (txt_recomendaciones.trim() !== ""){
             respuestasPregunta.push(txt_recomendaciones)
-            hayrespuesta = true;}
+            hayrespuesta = true;
+            }
+        }
+        if (ids === 'q32') {
+                    
+            txt_datetime = document.getElementById('txt_datetime').value;
+            if (txt_datetime.trim() !== ""){
+            respuestasPregunta.push(txt_datetime)
+            hayrespuesta = true;
+            }
+        }
+        if (ids === 'q33') {
+            
+            txt_codigo = document.getElementById('txt_codigo').value;
+            if (txt_codigo.trim() !== ""){
+            respuestasPregunta.push(txt_codigo)
+            hayrespuesta = true;
+            }
+        }
+        if (ids === 'q34') {
+            
+            txt_dirrecion = document.getElementById('txt_dirrecion').value;
+            if (txt_dirrecion.trim() !== ""){
+            respuestasPregunta.push(txt_dirrecion)
+            hayrespuesta = true;
+            }
         }
         if (hayrespuesta) {
             respuestas.push({
