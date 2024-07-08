@@ -3002,6 +3002,7 @@ function guardarRespuestas() {
     // Selecciona todas las preguntas
     let preguntas = document.querySelectorAll('.nquestion'); // Ajusta el selector según tu HTML
     let idsGrupoEspecial = [];
+    idsGrupoEspecial.push('q04')
    
     for (let pregunta of preguntas) {
         // Obtener el título de la pregunta
@@ -3054,6 +3055,7 @@ function guardarRespuestas() {
                  
                         respuestasPregunta.push(opcion.value);
                         ifotro = true;
+                    
                     }else if (ids === 'q05' && opcion.value === 'NO') {
                         idsGrupoEspecial.push('q06')
                         hayrespuesta = true;
