@@ -1123,9 +1123,13 @@ def _admin_company_monitoring_list():
                     serviciosEnProceso =serviciosEnProceso+1
     list_user = [3,5,6,15,16,17,18,20,21,25,24,30,66,173,176,215,216,217]
     users = User.query.filter(User.id.in_(list_user)).order_by(User.name.asc()).all()
+    diagnosticos_innova = DiagnosisCompany.query.filter(
+        DiagnosisCompany.origin == 2,
+        DiagnosisCompany.first == True
+    ).distinct(DiagnosisCompany.company_id).all()
     context = {
         'users':users,
-        'diagnosticos':len(diagnosticos),
+        'diagnosticos':len(diagnosticos)+len(diagnosticos_innova),
         'planes':planes,
         'serviciosTotal':serviciosTotal,
         'serviciosNoinciados':serviciosNoinciados,
