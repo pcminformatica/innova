@@ -126,10 +126,17 @@
                                                         </a>
                                                         {% else %}
                                                         Encuesta completada
-                                                        <a href="{{ url_for('digitalcenter._surveys_sde_satisfacion_form',surveys_sde_id=api.encuesta_id ) }}" class="mdc-button mdc-button--fullwidth mdc-button--color-secondary mdc-button--raised mdc-button--small mdc-ripple-upgraded">
-                                                            
-                                                            <span class="mdc-button__label">Subir documento</span>
-                                                        </a>
+                                                            {% if api.document_local %}
+                                                            <a href="{{ url_for('static', filename='upload/') }}{{api.document_local}}" class="mdc-button mdc-button--fullwidth mdc-button--color-secondary mdc-button--raised mdc-button--small mdc-ripple-upgraded">
+                                                                
+                                                                <span class="mdc-button__label">Ver documento </span>
+                                                            </a>
+                                                            {% else %}
+                                                            <a href="{{ url_for('digitalcenter._surveys_sde_satisfacion_form',surveys_sde_id=api.encuesta_id ) }}" class="mdc-button mdc-button--fullwidth mdc-button--color-secondary mdc-button--raised mdc-button--small mdc-ripple-upgraded">
+                                                                
+                                                                <span class="mdc-button__label">Subir documento</span>
+                                                            </a>
+                                                            {% endif %}
                                                         {% endif %}
                                                
                                                     </center>

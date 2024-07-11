@@ -1711,6 +1711,7 @@ def _company_monitoring_list_etapa3():
         company_data.satisfaccion = satisfaccion
         if encuesta:
             company_data.encuesta_id = encuesta.id
+            company_data.document_local = encuesta.document_local
         else:
             company_data.encuesta_id = ''
         

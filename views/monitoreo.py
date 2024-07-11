@@ -975,6 +975,8 @@ def _indicadores_perfil_asesor(user_uid):
         'servicios':len(servicios),
         'serviciosproceso':len(servicios) -len(serviciosfin),
         'serviciosfin':len(serviciosfin),
+        'servicios_all':servicios,
+        'servicios_fin_all':serviciosfin,
         'users': user,
         'bitacoras':bitacoras,
         'asesorias':asesorias,
