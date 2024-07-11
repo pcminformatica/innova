@@ -2641,6 +2641,32 @@ def save_catalog_surveys_SDE():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+@api.route('/api/save/catalog/surveys/dis', methods = ['POST'])
+# @login_required
+def save_catalog_surveys_SDEs_dis():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            txt_preguntas = request.json['txt_preguntas']
+            txt_company = request.json['txt_company']  
+            print(txt_preguntas)
+            print(txt_company)
+            company = Company.query.filter_by(id = txt_company).first()
+
+            surveys = surveys_sde()
+            surveys.company_id = company.id
+            surveys.catalog_surveys_id = 3
+            surveys.respuestas = txt_preguntas
+            db.session.add(surveys)    
+
+            db.session.commit()
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+
 
 #Chepe save  ENCUESTA DE IMPACTO
 @api.route('/api/save/surveys/impacto', methods = ['POST'])

@@ -1315,6 +1315,15 @@ def _encuesta_verificacion(company_id):
     }
     return render_template('encuesta_verificacion.html',**context)
 
+@digitalcenter.route('/verificacion/im/<int:company_id>/sdes',methods=['GET', 'POST'])
+def _encuesta_verificacion_CENET(company_id):
+    company =  Company.query.filter(Company.id == company_id).first()
+    context = {
+        "company":company,
+
+    }
+    return render_template('encuesta_verificacion_CENET.html',**context)
+
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
 @login_required
 def _diagnosis_dashboard(user_uid):

@@ -1128,7 +1128,7 @@
                                 <div class="mdc-layout-grid">
                                     <div class="mdc-layout-grid__inner">
                         
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-6-tablet">
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
                                             <h2>ENCUESTAS DE LAS ASESORÍAS </h2>
 
                                             <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
@@ -1184,6 +1184,50 @@
                                 
 
                                         </div>
+                                        {% if current_user.id not in (176,215,216,217,173,3,24,25) %}
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+                                            <h2>ENCUESTA DE SATISFACCIÓN </h2>
+
+                                            <table class="mdc-data-table__table_normal" aria-label="Dessert calories" style="width: 100%;">
+                                                <thead>
+                                                  <tr class="mdc-data-table__header-row">
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">#</th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">NOMBRE  </th>
+                                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">OPCIONES</th>
+                                                  </tr>
+                                                  
+                                                  
+                                                  
+                                                </thead>
+                                                <tbody class="mdc-data-table__content">
+                                                   
+                                                  <tr class="mdc-data-table__row">
+                                                   
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        1
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        Encuesta Satisfacción 
+                                                    </th>
+   
+                                                    <td class="mdc-data-table__cell" scope="row">
+                                                        
+                                                            <a href="#" onclick="showEncuesta('https://innova.ciudadmujer.gob.hn/verificacion/im/{{ company.id }}/sdes')"  class="mdc-button mdc-button--raised mdc-button--icon-leading mdc-button--color-secondary" aria-label="Evaluar" alt="Evaluar">
+                                                                <span class="mdc-button__ripple"></span>
+                                                                <i class="material-icons mdc-button__icon" aria-hidden="true">settings</i>
+                                                                <span class="mdc-button__label">Generar Link</span>
+                                                            </a>
+                                                      
+                                                    </td>
+                            
+                                                  </tr>
+                                              
+                                                </tbody>
+                                            </table>
+                                
+
+                                        </div>
+                                        {% endif%}
                                     </div>
                                     
                                 </div>
