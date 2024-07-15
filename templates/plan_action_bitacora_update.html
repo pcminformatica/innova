@@ -109,7 +109,7 @@
                                         <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
                                             <span class="mdc-text-field__ripple"></span>
                                         
-                                            <input id="txt_hora" value="{{ action.advisory_time }}"  class="mdc-text-field__input" type="time" aria-labelledby="my-label-id" >
+                                            <input id="txt_hora" value="{{ action.advisory_time }}"  class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" >
                                             <span lass="mdc-line-ripple"></span>
                                         </label>
                                     </div>
@@ -297,5 +297,37 @@
         //document.getElementById('submitSaveButton').disabled = false;
       });
     }
+
+    document.getElementById('txt_hora').addEventListener('input', function (e) {
+            var input = e.target.value;
+
+            // Remueve caracteres no numéricos
+            input = input.replace(/[^0-9]/g, '');
+
+            if (input.length > 4) {
+                input = input.substring(0, 4);
+            }
+
+            // Formatea el valor en HH:MM
+            if (input.length >= 2) {
+                input = input.slice(0, 2) + ':' + input.slice(2);
+            }
+
+            e.target.value = input;
+        });
+
+        document.getElementById('txt_hora').addEventListener('blur', function (e) {
+            var input = e.target.value;
+
+            // Añade ceros iniciales si es necesario
+            if (input.length === 4) {
+                input = '0' + input;
+            }
+
+            e.target.value = input;
+        });
+
+   
+
 </script>
 {% endblock %}

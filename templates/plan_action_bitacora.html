@@ -163,10 +163,10 @@
                                                 <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                         
                                                     <label class="mdc-text-field  mdc-text-field--filled" id="txt_fecha_lbl" data-assigned-var>
-                                                        <span class="mdc-text-field__ripple"></span>
+                                                        
                                                     
-                                                        <input id="txt_hora"  class="mdc-text-field__input" type="number" aria-labelledby="my-label-id" >
-                                                        <span lass="mdc-line-ripple"></span>
+                                                        <input id="txt_hora"  class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" placeholder="00:00" >
+                                                      
                                                     </label>
                                                 </div>
                                                 
@@ -478,5 +478,36 @@
         label.textContent = 'Seleccionar archivo';
     }
 }
+
+        document.getElementById('txt_hora').addEventListener('input', function (e) {
+            var input = e.target.value;
+
+            // Remueve caracteres no numéricos
+            input = input.replace(/[^0-9]/g, '');
+
+            if (input.length > 4) {
+                input = input.substring(0, 4);
+            }
+
+            // Formatea el valor en HH:MM
+            if (input.length >= 2) {
+                input = input.slice(0, 2) + ':' + input.slice(2);
+            }
+
+            e.target.value = input;
+        });
+
+        document.getElementById('txt_hora').addEventListener('blur', function (e) {
+            var input = e.target.value;
+
+            // Añade ceros iniciales si es necesario
+            if (input.length === 4) {
+                input = '0' + input;
+            }
+
+            e.target.value = input;
+        });
+
+        document.getElementById('txt_hora').value = '00:00'
 </script>
 {% endblock %}
