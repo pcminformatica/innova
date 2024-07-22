@@ -3391,7 +3391,7 @@ def get_companies_sde_satisfacion_extrenos():
                 .join(surveys_sde, Company.id == surveys_sde.company_id)
                 .join(Inscripciones, Company.inscripcion_id == Inscripciones.id)
                 .join(User, Company.created_by == User.id)
-                .filter(surveys_sde.catalog_surveys_id == 3,surveys_sde.created_by==current_user.id)
+                .filter(surveys_sde.catalog_surveys_id == 3,Company.created_by==current_user.id)
                 .all()
             )
         # Consulta para obtener las empresas y sus respuestas, filtrando por catalog_surveys_id = 1
