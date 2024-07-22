@@ -3372,3 +3372,43 @@ def get_companies_sde_1():
         return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/companies/sde/satisfacion/extrenos', methods=['GET'])
+def get_companies_sde_satisfacion_extrenos():
+    try:
+        if current_user.id == 3 or current_user.id == 24 or current_user.id == 144 :
+            companies_surveys = (
+                db.session.query(Company.dni,Inscripciones.name,Company.name, surveys_sde.respuestas,User.name)
+                .join(surveys_sde, Company.id == surveys_sde.company_id)
+                .join(Inscripciones, Company.inscripcion_id == Inscripciones.id)
+                .join(User, Company.created_by == User.id)
+                .filter(surveys_sde.catalog_surveys_id == 3,surveys_sde.date_created > '2024-06-21')
+                .all()
+            )
+        else:
+            companies_surveys = (
+                db.session.query(Company.dni,Inscripciones.name,Company.name, surveys_sde.respuestas,User.name)
+                .join(surveys_sde, Company.id == surveys_sde.company_id)
+                .join(Inscripciones, Company.inscripcion_id == Inscripciones.id)
+                .join(User, surveys_sde.created_by == User.id)
+                .filter(surveys_sde.catalog_surveys_id == 3,surveys_sde.created_by==current_user.id)
+                .all()
+            )
+        # Consulta para obtener las empresas y sus respuestas, filtrando por catalog_surveys_id = 1
+
+
+        # Procesar los resultados para obtener la información deseada
+        result = [
+            {
+                'company_dni': company_dni,
+                'name': name,
+                'inscripciones_name': company_name,
+                'respuestas': respuestas,
+                'user_name': user_name
+            }
+            for company_dni,name,company_name, respuestas,user_name in companies_surveys
+        ]
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

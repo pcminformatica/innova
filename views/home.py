@@ -941,3 +941,9 @@ def _surveys_with_catalog_surveys1():
 def _surveys_with_phase():
     surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=1,created_by=current_user.id).all()
     return render_template('surveys_with_phase.html', surveys_data=surveys_data)
+
+@home.route('/surveys_with_phase/satisfacion/ext',methods=['GET', 'POST'])
+@login_required
+def _surveys_satisfacion_externos():
+    surveys_data = surveys_sde.query.filter_by(catalog_surveys_id=1,created_by=current_user.id).all()
+    return render_template('surveys_satisfacion_externos.html', surveys_data=surveys_data)

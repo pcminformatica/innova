@@ -1324,6 +1324,7 @@ def _encuesta_verificacion_CENET(company_id):
     }
     return render_template('encuesta_verificacion_CENET.html',**context)
 
+
 @digitalcenter.route('/diagnostico/<int:user_uid>/',methods=['GET', 'POST'])
 @login_required
 def _diagnosis_dashboard(user_uid):
