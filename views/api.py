@@ -3390,7 +3390,7 @@ def get_companies_sde_satisfacion_extrenos():
                 db.session.query(Company.dni,Inscripciones.name,Company.name, surveys_sde.respuestas,User.name)
                 .join(surveys_sde, Company.id == surveys_sde.company_id)
                 .join(Inscripciones, Company.inscripcion_id == Inscripciones.id)
-                .join(User, surveys_sde.created_by == User.id)
+               .join(User, Company.created_by == User.id)
                 .filter(surveys_sde.catalog_surveys_id == 3,surveys_sde.created_by==current_user.id)
                 .all()
             )
