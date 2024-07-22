@@ -9,6 +9,11 @@
 .alignright {
 	float: right;
 }
+.mdc-data-table_link  a{
+    text-decoration: underline;
+    color:#9d1d96;
+}
+
 </style>
 {% endblock %}
 {% block body %}
@@ -707,18 +712,19 @@
                                                         Plan de vida    
 
 
-                                    <!--                                    <i class="material-icons s-font-color-green-confirm">event_available</i>
-                                    <i class="material-icons s-font-color-chat-offline">event_busy</i>
-                                    <i class="material-icons s-font-color-satisfied">event_note</i>
-                                    <i class="material-icons s-font-color-green-confirm">verified_user</i>-->
+                                                        <!--                                    <i class="material-icons s-font-color-green-confirm">event_available</i>
+                                                        <i class="material-icons s-font-color-chat-offline">event_busy</i>
+                                                        <i class="material-icons s-font-color-satisfied">event_note</i>
+                                                        <i class="material-icons s-font-color-green-confirm">verified_user</i>-->
                                     
                                 
                                                     </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_103_Plan_de_vida.docx') }}">
+                                                    <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                    
+                                                        <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_103_Plan_de_vida.docx') }}">
                                                             Formulario 103     
                                                         </a>
-                                                                                                                    
+                                                                                               
                                                     </th>
                             
                                                 </tr>
@@ -765,8 +771,9 @@
                                                         Test de CEP's   
 
                                                     </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_104_Test_de_Caracteristica.docx') }}">
+                                                    <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                        
+                                                        <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_104_Test_de_Caracteristica_Emprendedoras_Personales.docx') }}">
                                                             Formulario 104
                                                         </a>                                                                  
                                                     </th>
@@ -813,8 +820,9 @@
                                                         Lienzo canvas exploratorio 
 
                                                     </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_01_Lienzo_CANVAS.docx') }}">
+                                                    <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                        
+                                                        <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_Complementario_01_Lienzo_CANVAS_exploratorio.docx') }}">
                                                         F.Complementario 01                                                            
                                                         </a>
                                                     </th>
@@ -860,8 +868,9 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         Modelo de negocio-CANVAS
                                                     </th>
-                                                    <th class="mdc-data-table__cell" scope="row">
-                                                        <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_02_Modelo_de_Negocio_CANVAS.docx') }}">
+                                                    <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                        
+                                                        <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_Complementario_02_Modelo_de_Negocio_CANVAS.docx') }}">
                                                             F.Complementario 02                                                  
                                                         </a>
                                                     </th>
@@ -976,8 +985,8 @@
                                                 <th class="mdc-data-table__cell" scope="row">
                                                     Modelo de negocio-CANVAS
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_02_Modelo_de_Negocio_CANVAS.docx') }}">
+                                                <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                    <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_Complementario_02_Modelo_de_Negocio_CANVAS.docx') }}">
                                                     F.Complementario 02                                                  
                                                     </a>
                                                 </th>
@@ -1017,8 +1026,8 @@
                                                 <th class="mdc-data-table__cell" scope="row">
                                                     Plan de acompañamiento
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_105_Plan_de_Acompanamiento.xlsx') }}">
+                                                <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                    <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_105_Plan_de_Acompanamiento.xlsx') }}">
                                                     Formulario 105 
                                                     </a>                                              
                                                 </th>
@@ -1058,8 +1067,9 @@
                                                 <th class="mdc-data-table__cell" scope="row">
                                                     Plan de formación  
                                                 </th>
-                                                <th class="mdc-data-table__cell" scope="row">
-                                                    <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_03_Plan_de_Formacion.docx') }}">
+                                                <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
+                                                    
+                                                    <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_Complementario_03_Plan_de_Formacion.docx') }}">
                                                         F.Complementario 03                                                 
                                                     </a>
                                                 </th>
@@ -1116,8 +1126,8 @@
                                                             Perfil del emprendimiento
     
                                                         </th>
-                                                        <th class="mdc-data-table__cell" scope="row" rowspan="5" style="font-size: 20px;">
-                                                            <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_04_Perfil_del_Emprenimiento.docx') }}">
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row" rowspan="5" style="font-size: 20px;">
+                                                            <a target="_blank" href="{{ url_for('static', filename='/documento/emprendedoras/Formulario_Complementario_04_Perfil_del Emprenimiento.docx') }}">
                                                                 F.Complementario 04     
                                                             </a>
                                                         </th>
@@ -1336,7 +1346,7 @@
                                                             Ficha de inscripción 
     
                                                         </th>
-                                                        <th>
+                                                        <th  class="mdc-data-table__cell mdc-data-table_link" scope="row">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_101_Ficha_de_Inscripcion.xlsx') }}">
                                                                 Formulario 105                                                             
                                                             </a>
@@ -1373,7 +1383,7 @@
                                                             Plan de formación  
     
                                                         </th>
-                                                        <th>
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_102_Carta_de_Compromiso.docx') }}">
                                                             Formulario 102                                                                  
                                                             </a>
@@ -1408,7 +1418,7 @@
                                                             Perfil del emprendimiento
     
                                                         </th>
-                                                        <th class="mdc-data-table__cell" scope="row" rowspan="3" style="font-size: 20px;">
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row" rowspan="3" style="font-size: 20px;">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_04_Perfil_del_Emprenimiento.docx') }}">
                                                                 F.Complementario 04     
                                                             </a>
@@ -1572,7 +1582,7 @@
                                                             Ficha de inscripción 
     
                                                         </th>
-                                                        <th>
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_101_Ficha_de_Inscripcion.xlsx') }}">
                                                                 Formulario 105                                                               
                                                             </a>
@@ -1609,7 +1619,7 @@
                                                             Plan de formación  
     
                                                         </th>
-                                                        <th>
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_102_Carta_de_Compromiso.docx') }}">
                                                             Formulario 102                                                                  
                                                             </a>
@@ -1644,7 +1654,7 @@
                                                             Perfil del emprendimiento
     
                                                         </th>
-                                                        <th class="mdc-data-table__cell" scope="row" rowspan="3" style="font-size: 20px;">
+                                                        <th class="mdc-data-table__cell mdc-data-table_link" scope="row" rowspan="3" style="font-size: 20px;">
                                                             <a target="_blank" href="{{ url_for('static', filename='/documentos/Emprendedoras/Formulario_Complementario_04_Perfil_del_Emprenimiento.docx') }}">
                                                                 F.Complementario 04     
                                                             </a>
