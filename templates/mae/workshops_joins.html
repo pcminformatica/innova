@@ -126,7 +126,7 @@
                                             <div class="mdc-typography--body1">
                                                 Lugar
                                             </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_lugar" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Lugar"  >Lugar</span>
                                                 <input required class="mdc-text-field__input"  type="text" aria-labelledby="lbl_name" value="" >
@@ -137,10 +137,10 @@
                                             <div class="mdc-typography--body1">
                                                 Fecha inicio
                                             </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_inicio" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
                                                 <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Fecha inicio"  >Fecha inicio</span>
-                                                <input required class="mdc-text-field__input"  type="date" aria-labelledby="lbl_name" value="" >
+                                                <input required class="mdc-text-field__input"  type="date" aria-labelledby="Fecha inicio" value="" >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                         </div>
@@ -148,20 +148,20 @@
                                             <div class="mdc-typography--body1">
                                                 Fecha final
                                             </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_fecha_final" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Fecha final"  >Lugar</span>
+                                                <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Fecha final"  >Fecha final</span>
                                                 <input required class="mdc-text-field__input"  type="date" aria-labelledby="lbl_name" value="" >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
                                         </div>
                                         <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
                                             <div class="mdc-typography--body1">
-                                                Descripciòn
+                                                Descripción
                                             </div>
-                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_name" data-assigned-var>
+                                            <label class="mdc-text-field mdc-text-field--filled" id="txt_descripcion" data-assigned-var>
                                                 <span class="mdc-text-field__ripple"></span>
-                                                <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Descripciòn"  >Descripciòn</span>
+                                                <span class="mdc-floating-label" id="lbl_name" hiddenlabel="Descripción"  >Descripción</span>
                                                 <input required class="mdc-text-field__input"  type="text" aria-labelledby="lbl_name" value="" >
                                                 <span lass="mdc-line-ripple"></span>
                                             </label>
@@ -252,25 +252,29 @@ window.addEventListener('load', function() {
     function generarFicha1(){
 
       const Swal = swcms.returnSwal()
-      let property = 'txt_formacion'
-
+  
+      let curso = '{{courses.id}}'      
       let postData = {
           
-          "txt_formacion":mdcAssignedVars[property].value
+          "curso":curso,
+          "txt_lugar" :mdcAssignedVars['txt_lugar'].value,
+          "txt_fecha_inicio"  :mdcAssignedVars['txt_fecha_inicio'].value, 
+          "txt_fecha_final":mdcAssignedVars['txt_fecha_final'].value,
+          "txt_descripcion":mdcAssignedVars['txt_descripcion'].value,
       };
 
         console.log(postData)
 
-      let apiUrl = '/api/mae/save/workshops/';
+      let apiUrl = '/api/mae/save/workshops/create';
 
 
       swcms.postFetch(apiUrl, postData).then((data) => {
           Swal.fire(
           'Éxito',
-          'Carta de compromiso creada!',
+          'Jornada creada!',
           'success'
           )
-          window.setTimeout(() => { window.location.href = '/mae/perfil/'+"" }, 1500);
+          window.setTimeout(() => { window.location.href = '/mae/home'+"" }, 1500);
 
       }).catch((error) => {
           Swal.fire(

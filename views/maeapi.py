@@ -89,6 +89,39 @@ def _api_mae_workshops():
         app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
         return jsonify({ 'status': 'error', 'msg': e })
 
+@maeapi.route('/api/mae/save/workshops/create', methods = ['POST'])
+# @login_required
+def _api_mae_workshops_create():
+    app.logger.debug('** SWING_CMS ** - API Appointment Detail')
+    try:
+        # POST: Save Appointment
+        if request.method == 'POST':
+            courses_id = request.json['curso']
+            txt_lugar = request.json['txt_lugar']
+
+            txt_fecha_inicio = request.json['txt_fecha_inicio']
+            txt_fecha_final = request.json['txt_fecha_final']
+            txt_descripcion = request.json['txt_descripcion']
+
+
+
+            courses  = Courses.query.filter_by(id=courses_id).first()
+            workshop = Workshops()
+            workshop.course = courses
+            workshop.created_by = current_user.id 
+            workshop.date_end =txt_fecha_final
+            workshop.date_start =txt_fecha_inicio
+            workshop.description =txt_descripcion
+            workshop.lugar = txt_lugar
+            db.session.add(workshop)
+            db.session.commit()
+
+
+            return jsonify({ 'status': 200, 'msg': 'Perfil actulizado con' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - API Appointment Detail Error: {}'.format(e))
+        return jsonify({ 'status': 'error', 'msg': e })
+    
 @maeapi.route('/api/mae/saves/workshops/finalizo', methods = ['POST'])
 # @login_required
 def _api_mae_workshops_fin():

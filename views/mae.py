@@ -39,7 +39,12 @@ def _create_company():
 
 @mae.route('/mae/workshops')
 def _workshops_dashboard():
-    return render_template('/mae/workshops_dashboard.html')
+    courses  = Courses.query.filter_by(isworkshop=1).all()
+    context = {
+        'courses':courses,
+
+    }
+    return render_template('/mae/workshops_dashboard.html',**context)
 
 @mae.route('/mae/workshops/creation')
 def _workshops_creation_admin():
