@@ -24,6 +24,30 @@
 {
   overflow-y: auto;
 }
+.container-dashboard--profile .mdc-card .mdc-card__media .profile-pic {
+  align-self: center;
+  background: #d2def6;
+  border-radius: 50%;
+  grid-column-start: gtc;
+  grid-row-start: gtr;
+  justify-self: center;
+  margin-left: -3.5%;
+  margin-top: -18%;
+  max-width: 15rem;
+  width: 50%;
+}
+.container-dashboard--profile .mdc-card .mdc-card__media .profile-pic2 {
+  align-self: center;
+  background: #d2def6;
+  border-radius: 50%;
+  grid-column-start: gtc;
+  grid-row-start: gtr;
+  justify-self: center;
+  margin-left: -3.5%;
+  margin-top: -18%;
+  max-width: 15rem;
+  width: 50%;
+}
   </style>
 {% endblock %}
 {% block body %}
@@ -37,34 +61,20 @@
                         <div class="mdc-card mdc-card--color-on-primary">
                             <div class="mdc-card__primary-action" tabindex="0">
                                 <div class="mdc-card__media">
-                                    {% if current_user.extra_info.avatar %}
-                                    <img class="profile-background" src="{{ url_for('static', filename='upload/') }}{{current_user.extra_info.avatar}}" alt="Border Perfil" />
-
-                                    {% else %}
+                         
                                     <img class="profile-background" src="../../static/images/manifest/innova_perfil.svg" alt="Border Perfil" />
-                                    <img class="profile-pic" src="../../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
-                                    {% endif %}
+                                    <img class="profile-pic2" src="../../static/images/manifest/innova_icon.svg" alt="Foto Perfil" />
+                                  
                                 </div>
                                 <div class="mdc-card__ripple"></div>
                             </div>
                             <div class="mdc-card__content">
                                 <div class="mdc-typography--headline5 s-font-color-secondary">{{ current_user.extra_info.names }} {{ current_user.extra_info.last_names }}</div>
-                                <div class="mdc-typography--subtitle1">{{ current_user.extra_info.biography.occupation }} </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-primary">verified_user</i>
-                                    {{ current_user.extra_info.profession.name }}
-                                </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-primary">schedule</i>
-                                    {{ current_user.extra_info.biography.office_hours }} 
-                                </div>
-                                <div class="mdc-typography--subtitle1">
-                                    <i class="material-icons s-font-color-secondary">place</i>
-                                    {% if current_user.extra_info.country %}
-                                    {{current_user.extra_info.country.title}}, Honduras.
-                                    {% endif %}
-
-                                </div>
+                                {% if current_user.id in (3, 24) %}
+                                    <div class="mdc-typography--subtitle1">Administrador de plataforma </div>
+                                {% else %}
+                                    <div class="mdc-typography--subtitle1">Administradora de plataforma </div>
+                                {% endif %}
                             
                             </div>
                             <div class="mdc-card__actions" style="justify-content:right;" >
