@@ -405,6 +405,8 @@ def _home():
             ).order_by(Appointments.date_scheduled.asc()).all()
             context = {'appointments':appointments}
             return render_template('home_dashboard_sde.html',**context)
+        elif current_user.is_user_role(['sen']):
+            return render_template('/mae/home.html')
         elif current_user.is_user_role(['gee']):
             today = dt.today()
     

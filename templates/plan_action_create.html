@@ -135,6 +135,9 @@
 
 
                             <div class="mdc-layout-grid__cell--span-12-desktop  mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                              {% if current_user.is_user_role(['sen']) %}
+
+                              {% else %}
                               <center>
                                 <a  href="{{ url_for('digitalcenter._company_dashboard',user_uid=company.id) }}" class="mdc-button mdc-button--fullwidth mdc-button--raised mdc-button--small mdc-ripple-upgraded">
                             
@@ -142,6 +145,7 @@
                                     <span class="mdc-button__label">Regresar al perfil de empresaria</span>
                                 </a>
                                 </center>
+                                {% endif %}
                             </div>
                           </div>
                         </div>

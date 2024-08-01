@@ -1449,6 +1449,9 @@ padding-top: 10px;
   
                             <div class="mdc-card__actions"  >
                                 <div class="mdc-card__action-buttons">
+                                  {% if current_user.is_user_role(['sen']) %}
+
+                                  {% else %}
                                 <center>
 
                                   <button id="submitSaveButton" class="mdc-button mdc-button--raised mdc-button--icon-leading" >
@@ -1467,6 +1470,7 @@ padding-top: 10px;
                                     <span class="mdc-button__label">Continuar después  </span>
                                   </button>-->
                                 </center>
+                                {% endif %}
                                 </div>
 
                             </div>
