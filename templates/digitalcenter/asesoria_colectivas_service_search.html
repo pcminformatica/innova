@@ -122,6 +122,8 @@
                                             
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Inicio</th>
                                                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Fecha Final</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Referida</th>
+                                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Asignada</th>
                                                 
                                             </tr>
                                             
@@ -152,11 +154,13 @@
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {{action.company.inscripcion.name}}
                                                     </th>
+                                                    
                                                     <th class="mdc-data-table__cell" scope="row">
                                                         {% if action.company.inscripcion %}
                                                             {{action.company.inscripcion.phone}}
                                                         {% endif %}
                                                     </th>
+                                          
                                                     <th class="mdc-data-table__cell mdc-data-table__header-cell--numeric" scope="row">
                                                         {{action.progress}}
         
@@ -197,7 +201,16 @@
         
                                                     </th>
 
-                            
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {% if action.employe_assigned_user%}
+                                                         {{action.employe_assigned_user.name}} 
+                                                        {% endif%}
+                                                    </th>
+                                                    <th class="mdc-data-table__cell" scope="row">
+                                                        {% if action.company.created_by_data %}
+                                                        {{action.company.created_by_data.name}} 
+                                                        {% endif%}
+                                                    </th>
                                                 </tr>
                                                 {% endfor %}
         
